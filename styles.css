@@ -1,0 +1,93 @@
+/* styles.css */
+
+/* Importing fonts */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+}
+
+h1, h2, h5, .navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+}
+
+.hero {
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1, .hero p {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero .btn {
+  margin-top: 20px;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+}
+
+footer p {
+  margin: 0;
+}
+
+.card {
+  border: none;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.card-text ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
