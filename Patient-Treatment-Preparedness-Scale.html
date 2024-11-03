@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Treatment Preparedness Scale (PTPS)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .question { margin: 20px 0; }
+        .options button { margin: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .options button.selected { background-color: green; color: white; }
+        .options button.default { background-color: red; color: white; }
+        .result { margin-top: 30px; font-weight: bold; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+
+<h1>CPatient Treatment Preparedness Scale (PTPS)</h1>
+<p>Please select the option that best describes your situation for each question. As you select, your total score and readiness interpretation will update automatically.</p>
+
+<!-- Questions -->
+<div id="questions-container">
+    <!-- Physical Function Domain -->
+    <div class="question" data-domain="Physical Function">
+        <p>1. How capable are you of doing everyday tasks on your own (like getting dressed or preparing meals)?</p>
+        <div class="options" data-question-id="1">
+            <button onclick="selectAnswer(1, 0)" class="default">0 - Not at all capable</button>
+            <button onclick="selectAnswer(1, 1)" class="default">1 - Slightly capable</button>
+            <button onclick="selectAnswer(1, 2)" class="default">2 - Moderately capable</button>
+            <button onclick="selectAnswer(1, 3)" class="default">3 - Quite capable</button>
+            <button onclick="selectAnswer(1, 4)" class="default">4 - Very capable</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Physical Function">
+        <p>2. How often do you have enough energy to do things you want to do?</p>
+        <div class="options" data-question-id="2">
+            <button onclick="selectAnswer(2, 0)" class="default">0 - Never</button>
+            <button onclick="selectAnswer(2, 1)" class="default">1 - Rarely</button>
+            <button onclick="selectAnswer(2, 2)" class="default">2 - Sometimes</button>
+            <button onclick="selectAnswer(2, 3)" class="default">3 - Often</button>
+            <button onclick="selectAnswer(2, 4)" class="default">4 - Always</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Physical Function">
+        <p>3. How easily can you move around (e.g., walking, climbing stairs, or going out) without assistance?</p>
+        <div class="options" data-question-id="3">
+            <button onclick="selectAnswer(3, 0)" class="default">0 - Not at all easily</button>
+            <button onclick="selectAnswer(3, 1)" class="default">1 - Slightly easily</button>
+            <button onclick="selectAnswer(3, 2)" class="default">2 - Moderately easily</button>
+            <button onclick="selectAnswer(3, 3)" class="default">3 - Quite easily</button>
+            <button onclick="selectAnswer(3, 4)" class="default">4 - Very easily</button>
+        </div>
+    </div>
+
+    <!-- Comorbidities Domain -->
+    <div class="question" data-domain="Comorbidities">
+        <p>4. How well are you managing other health conditions in a way that doesn't interfere with your daily life?</p>
+        <div class="options" data-question-id="4">
+            <button onclick="selectAnswer(4, 0)" class="default">0 - Not managing well at all</button>
+            <button onclick="selectAnswer(4, 1)" class="default">1 - Slightly managing</button>
+            <button onclick="selectAnswer(4, 2)" class="default">2 - Moderately managing</button>
+            <button onclick="selectAnswer(4, 3)" class="default">3 - Quite well managing</button>
+            <button onclick="selectAnswer(4, 4)" class="default">4 - Very well managing</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Comorbidities">
+        <p>5. How well do you feel your other health conditions are under control while managing your cancer treatment?</p>
+        <div class="options" data-question-id="5">
+            <button onclick="selectAnswer(5, 0)" class="default">0 - Not well controlled at all</button>
+            <button onclick="selectAnswer(5, 1)" class="default">1 - Slightly controlled</button>
+            <button onclick="selectAnswer(5, 2)" class="default">2 - Moderately controlled</button>
+            <button onclick="selectAnswer(5, 3)" class="default">3 - Quite well controlled</button>
+            <button onclick="selectAnswer(5, 4)" class="default">4 - Very well controlled</button>
+        </div>
+    </div>
+
+    <!-- Nutritional Status Domain -->
+    <div class="question" data-domain="Nutritional Status">
+        <p>6. How stable has your weight been recently (no unexpected weight loss)?</p>
+        <div class="options" data-question-id="6">
+            <button onclick="selectAnswer(6, 0)" class="default">0 - Not stable at all</button>
+            <button onclick="selectAnswer(6, 1)" class="default">1 - Slightly stable</button>
+            <button onclick="selectAnswer(6, 2)" class="default">2 - Moderately stable</button>
+            <button onclick="selectAnswer(6, 3)" class="default">3 - Quite stable</button>
+            <button onclick="selectAnswer(6, 4)" class="default">4 - Very stable</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Nutritional Status">
+        <p>7. How well are you eating right now (good appetite and adequate intake)?</p>
+        <div class="options" data-question-id="7">
+            <button onclick="selectAnswer(7, 0)" class="default">0 - Not well at all</button>
+            <button onclick="selectAnswer(7, 1)" class="default">1 - Slightly well</button>
+            <button onclick="selectAnswer(7, 2)" class="default">2 - Moderately well</button>
+            <button onclick="selectAnswer(7, 3)" class="default">3 - Quite well</button>
+            <button onclick="selectAnswer(7, 4)" class="default">4 - Very well</button>
+        </div>
+    </div>
+
+    <!-- Psychological Readiness Domain -->
+    <div class="question" data-domain="Psychological Readiness">
+        <p>8. How prepared do you feel to start or go through treatment?</p>
+        <div class="options" data-question-id="8">
+            <button onclick="selectAnswer(8, 0)" class="default">0 - Not prepared at all</button>
+            <button onclick="selectAnswer(8, 1)" class="default">1 - Slightly prepared</button>
+            <button onclick="selectAnswer(8, 2)" class="default">2 - Moderately prepared</button>
+            <button onclick="selectAnswer(8, 3)" class="default">3 - Quite prepared</button>
+            <button onclick="selectAnswer(8, 4)" class="default">4 - Very prepared</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Psychological Readiness">
+        <p>9. How confident are you that you can handle any worries or stress related to treatment?</p>
+        <div class="options" data-question-id="9">
+            <button onclick="selectAnswer(9, 0)" class="default">0 - Not confident at all</button>
+            <button onclick="selectAnswer(9, 1)" class="default">1 - Slightly confident</button>
+            <button onclick="selectAnswer(9, 2)" class="default">2 - Moderately confident</button>
+            <button onclick="selectAnswer(9, 3)" class="default">3 - Quite confident</button>
+            <button onclick="selectAnswer(9, 4)" class="default">4 - Very confident</button>
+        </div>
+    </div>
+
+    <!-- Social Support Domain -->
+    <div class="question" data-domain="Social Support">
+        <p>10. How much support do you receive from family, friends, or caregivers for your daily needs?</p>
+        <div class="options" data-question-id="10">
+            <button onclick="selectAnswer(10, 0)" class="default">0 - No support at all</button>
+            <button onclick="selectAnswer(10, 1)" class="default">1 - Slight support</button>
+            <button onclick="selectAnswer(10, 2)" class="default">2 - Moderate support</button>
+            <button onclick="selectAnswer(10, 3)" class="default">3 - Quite a bit of support</button>
+            <button onclick="selectAnswer(10, 4)" class="default">4 - Very much support</button>
+        </div>
+    </div>
+
+    <div class="question" data-domain="Social Support">
+        <p>11. How available is someone to accompany you to appointments or assist you during treatment?</p>
+        <div class="options" data-question-id="11">
+            <button onclick="selectAnswer(11, 0)" class="default">0 - Not available at all</button>
+            <button onclick="selectAnswer(11, 1)" class="default">1 - Slightly available</button>
+            <button onclick="selectAnswer(11, 2)" class="default">2 - Moderately available</button>
+            <button onclick="selectAnswer(11, 3)" class="default">3 - Quite available</button>
+            <button onclick="selectAnswer(11, 4)" class="default">4 - Always available</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Result Display -->
+<div class="result">
+    <p>Total Score: <span id="total-score">0</span> / 48</p>
+    <p>Interpretation: <span id="interpretation">Not assessed yet</span></p>
+</div>
+
+<script>
+    // Object to store answers
+    const answers = {};
+
+    // Function to handle answer selection
+    function selectAnswer(questionId, score) {
+        // Save the score
+        answers[questionId] = score;
+
+        // Update button styles
+        const buttons = document.querySelectorAll(`[data-question-id="${questionId}"] button`);
+        buttons.forEach(button => button.classList.remove('selected'));
+        buttons[score].classList.add('selected');
+
+        // Update the score and interpretation
+        calculateScoreAndInterpret();
+    }
+
+    // Function to calculate total score and interpret it
+    function calculateScoreAndInterpret() {
+        // Calculate the total score
+        const totalScore = Object.values(answers).reduce((sum, score) => sum + score, 0);
+        document.getElementById("total-score").textContent = totalScore;
+
+        // Provide interpretation based on score range
+        let interpretation = "";
+        if (totalScore >= 40) {
+            interpretation = "Highly prepared and ready for treatment/surgery.";
+        } else if (totalScore >= 30) {
+            interpretation = "Moderate readiness – may benefit from support in key areas.";
+        } else if (totalScore >= 20) {
+            interpretation = "Low readiness – significant limitations may need support.";
+        } else {
+            interpretation = "Not ready for surgery – alternative or preparatory steps needed.";
+        }
+        document.getElementById("interpretation").textContent = interpretation;
+    }
+</script>
+
+</body>
+</html>
