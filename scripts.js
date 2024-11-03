@@ -1,22 +1,25 @@
-// Countdown to event date
-const eventDate = new Date("May 8, 2025 00:00:00").getTime();
+document.addEventListener("DOMContentLoaded", () => {
+  // Countdown to event date
+  const eventDate = new Date("May 8, 2025 00:00:00").getTime();
 
-const countdownTimer = setInterval(() => {
-  const now = new Date().getTime();
-  const timeLeft = eventDate - now;
+  const countdownTimer = setInterval(() => {
+    const now = new Date().getTime();
+    const timeLeft = eventDate - now;
 
-  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    if (timeLeft <= 0) {
+      clearInterval(countdownTimer);
+      document.getElementById("timer").innerHTML = "The event has started!";
+      return;
+    }
 
-  document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-  if (timeLeft < 0) {
-    clearInterval(countdownTimer);
-    document.getElementById("timer").innerHTML = "The event has started!";
-  }
-}, 1000);
+    document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
