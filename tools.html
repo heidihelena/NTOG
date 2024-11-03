@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision-Making Tool - NTOG</title>
+    <style>
+        body {
+            font-family: Open Sans, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+  
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">NTOG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="guidelines.html">Guidelines</a></li>
+        <li class="nav-item"><a class="nav-link" href="tools.html">Tools</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <h1>Decision-Making Tool</h1>
+    <p>This tool helps evaluate treatment options based on specific criteria that are essential for assessing the overall benefit and cost-effectiveness of treatments. Each criterion has a scoring guideline to facilitate decision-making.</p>
+
+    <h2>Criteria</h2>
+    <table>
+        <tr>
+            <th>Criteria</th>
+            <th>Explanation</th>
+            <th>Metrics and Scoring</th>
+        </tr>
+        <tr>
+            <td>Overall Survival (OS) Benefit</td>
+            <td>Measures the median or mean survival extension provided by a treatment.</td>
+            <td>Report as months gained; categorize as Low (&lt;3m), Moderate (3-6m), High (&gt;6m).</td>
+        </tr>
+        <tr>
+            <td>Hazard Ratio (HR)</td>
+            <td>Indicates the relative risk reduction in death with treatment compared to control.</td>
+            <td>&lt;0.7 (Favorable), 0.7–0.9 (Moderate), &gt;0.9 (Unfavorable)</td>
+        </tr>
+        <tr>
+            <td>Number Needed to Treat (NNT)</td>
+            <td>The number of patients who need to be treated to prevent one adverse outcome.</td>
+            <td>Low (&lt;10), Moderate (10-20), High (&gt;20)</td>
+        </tr>
+        <tr>
+            <td>Number Needed to Harm (NNH)</td>
+            <td>The number of patients who need to be treated for one to experience harm.</td>
+            <td>Low (&lt;10), Moderate (10-20), High (&gt;20); higher NNH preferred.</td>
+        </tr>
+        <tr>
+            <td>Quality-Adjusted Life Years (QALY)</td>
+            <td>Estimates quality and length of life, adjusting for health-related quality of life.</td>
+            <td>Measured as years; categorized as Low (&lt;0.5), Moderate (0.5-1.0), High (&gt;1.0)</td>
+        </tr>
+        <tr>
+            <td>Cost</td>
+            <td>Direct cost of treatment, including associated healthcare utilization costs.</td>
+            <td>Low (&lt;10,000 EUR), Moderate (10,000-50,000 EUR), High (&gt;50,000 EUR)</td>
+        </tr>
+    </table>
+
+    <h2>Sample Tool: Decision Matrix for Treatment Options</h2>
+    <table>
+        <tr>
+            <th>Treatment Option</th>
+            <th>OS Benefit</th>
+            <th>HR</th>
+            <th>NNT</th>
+            <th>NNH</th>
+            <th>QALY</th>
+            <th>Cost</th>
+            <th>Overall Score</th>
+        </tr>
+        <tr>
+            <td>Option A</td>
+            <td>5 months (Moderate)</td>
+            <td>0.68 (Favorable)</td>
+            <td>15 (Moderate)</td>
+            <td>25 (High)</td>
+            <td>0.8 (Moderate)</td>
+            <td>12,000 EUR (Moderate)</td>
+            <td>4.5/5</td>
+        </tr>
+        <tr>
+            <td>Option B</td>
+            <td>8 months (High)</td>
+            <td>0.75 (Moderate)</td>
+            <td>10 (Low)</td>
+            <td>15 (Moderate)</td>
+            <td>1.2 (High)</td>
+            <td>45,000 EUR (Moderate)</td>
+            <td>4/5</td>
+        </tr>
+        <tr>
+            <td>Option C</td>
+            <td>3 months (Low)</td>
+            <td>0.85 (Neutral)</td>
+            <td>20 (High)</td>
+            <td>10 (Low)</td>
+            <td>0.4 (Low)</td>
+            <td>8,000 EUR (Low)</td>
+            <td>2.5/5</td>
+        </tr>
+    </table>
+
+    <h1>Treatment Score Calculator</h1>
+    
+    <form id="calculator">
+        <label>OS Benefit:
+            <select id="osBenefit">
+                <option value="1">Low (<3m)</option>
+                <option value="2">Moderate (3-6m)</option>
+                <option value="3">High (>6m)</option>
+            </select>
+        </label><br><br>
+        
+        <label>Hazard Ratio (HR):
+            <select id="hr">
+                <option value="3">Favorable (<0.7)</option>
+                <option value="2">Moderate (0.7–0.9)</option>
+                <option value="1">Unfavorable (>0.9)</option>
+            </select>
+        </label><br><br>
+        
+        <label>NNT:
+            <select id="nnt">
+                <option value="3">Low (<10)</option>
+                <option value="2">Moderate (10-20)</option>
+                <option value="1">High (>20)</option>
+            </select>
+        </label><br><br>
+        
+        <label>NNH:
+            <select id="nnh">
+                <option value="1">Low (<10)</option>
+                <option value="2">Moderate (10-20)</option>
+                <option value="3">High (>20)</option>
+            </select>
+        </label><br><br>
+        
+        <label>QALY:
+            <select id="qaly">
+                <option value="1">Low (<0.5)</option>
+                <option value="2">Moderate (0.5-1.0)</option>
+                <option value="3">High (>1.0)</option>
+            </select>
+        </label><br><br>
+        
+        <label>Cost:
+            <select id="cost">
+                <option value="3">Low (<10,000 EUR)</option>
+                <option value="2">Moderate (10,000-50,000 EUR)</option>
+                <option value="1">High (>50,000 EUR)</option>
+            </select>
+        </label><br><br>
+        
+        <button type="button" onclick="calculateScore()">Calculate Score</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateScore() {
+            const osBenefit = parseInt(document.getElementById("osBenefit").value);
+            const hr = parseInt(document.getElementById("hr").value);
+            const nnt = parseInt(document.getElementById("nnt").value);
+            const nnh = parseInt(document.getElementById("nnh").value);
+            const qaly = parseInt(document.getElementById("qaly").value);
+            const cost = parseInt(document.getElementById("cost").value);
+            
+            // Calculate the total score
+            const totalScore = osBenefit + hr + nnt + nnh + qaly + cost;
+            
+            // Display the result
+            document.getElementById("result").innerText = "Overall Score: " + totalScore + "/18";
+        }
+    </script>
+
+</body>
+</html>
