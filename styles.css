@@ -91,15 +91,3 @@ footer p {
 .text-primary {
   color: #007bff !important;
 }
-
-#countdown {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #333;
-}
-
-#timer {
-  font-size: 24px;
-  font-weight: bold;
-  color: #007BFF; 
-}
