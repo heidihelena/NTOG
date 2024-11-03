@@ -1,4 +1,4 @@
-# NTOG
+# NTOG -webpage
 
 # Nordic Collaboration for Improving Lung Cancer Research and Care
 
@@ -27,28 +27,3 @@ Build Partnerships: Establish cooperation with other international, national, an
 ## Membership
 Any physician or researcher based in the Nordic countries and involved in thoracic oncology research or clinical care is welcome to join NTOG. Membership is free and can be obtained by contacting a member of the executive group.
 
-# Nordic Lung Cancer Symposium 2025 or Nordic Thoracic Oncology Symposium 2025
-
-Dates: 8th – 10th May 2025
-
-Location: Gothenburg, Sweden
-
-Join us for the biennial Nordic Thoracic Oncology Group (NTOG) meeting, a premier gathering of lung cancer specialists across the Nordic region. 
-This year’s event will focus on advancing collaboration and innovation in thoracic oncology, with a multidisciplinary program designed for researchers, clinicians, and healthcare professionals.
-
-## Program Highlights:
-
-Stage III Non-Small Cell Lung Cancer (NSCLC): In-depth discussions on emerging treatments, case studies, and cross-specialty approaches.
-
-Lung Cancer Screening: Updates on screening research protocols, new insights, and the evolving landscape of early detection.
-
-Nordic Lung Cancer Registries: Collaborative sessions to explore advancements across the Nordic countries.
-
-## Abstract Submissions
-We invite researchers to submit abstracts for the chance to present at our oral presentation session. 
-
-Link to Program and Registation
-
-To view the detailed agenda and secure your spot at the event, please visit our program and registration page.
-
-By strengthening collaboration across the Nordic countries, we aim to make significant strides in lung cancer research and patient care. Together, we can overcome the challenges posed by this devastating disease and improve outcomes for patients throughout the region.
