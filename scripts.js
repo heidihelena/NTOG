@@ -73,3 +73,23 @@ document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("registerButton").addEventListener("click", function () {
   alert("Thank you for registering! A confirmation email has been sent to your address.");
 });
+
+// Function to handle answer selection
+function selectAnswer(questionId, score) {
+    // Save the score
+    answers[questionId] = score;
+
+    // Update button styles
+    const buttons = document.querySelectorAll(`[data-question-id="${questionId}"] button`);
+    buttons.forEach((button, index) => {
+        button.classList.remove('selected');
+        button.classList.add('default');
+        if (index === score) {
+            button.classList.add('selected');
+            button.classList.remove('default');
+        }
+    });
+
+    // Update the score and interpretation
+    calculateScoreAndInterpret();
+}
