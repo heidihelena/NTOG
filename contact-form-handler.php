@@ -1,5 +1,4 @@
 <?php
-$headers = "From: info@ntog.org\r\n";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST['name']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
