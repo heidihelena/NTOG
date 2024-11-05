@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nordic Thoracic Oncology Group</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="Nordic Thoracic Oncology Group (NTOG): Collaborating across Nordic countries to improve lung cancer research and care.">
+  <meta name="keywords" content="lung cancer, oncology, thoracic, research, Nordic countries, NTOG, lung cancer guidelines, nordic lung cancer symposium,lung cancer symposium">
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="Nordic Thoracic Oncology Group (NTOG)">
+  <meta property="og:description" content="Uniting Nordic expertise to advance thoracic oncology and enhance patient outcomes across Denmark, Finland, Iceland, Norway, and Sweden.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/gothenburg.jpg">
+  <meta property="og:url" content="https://ntog.org">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nordic Thoracic Oncology Group (NTOG)">
+  <meta name="twitter:description" content="Collaborating across Nordic countries to improve lung cancer research and care.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/gothenburg.jpg">
+
+  <!-- Additional Resources -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">NTOG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="guidelines.html">Guidelines</a></li>
+        <li class="nav-item"><a class="nav-link" href="tools.html">Tools</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+     
+  </header>
+  <main>
+    <section>
+      <h1>Our History</h1>
+      <p>
+        Lung cancer researchers across the Nordics have collaborated for a long time, primarily through ad-hoc initiatives driven by personal engagement. Over the years, this collaboration has led to several significant academic trials and projects:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Study Name</th>
+            <th>Patient Category</th>
+            <th>Countries</th>
+            <th>Key Citations / Clinical Trials</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Narlal/Narlal2</td>
+            <td>Curative Radiotherapy</td>
+            <td>NO/DK</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/26512597/" target="_blank">PMID: 26512597</a></td>
+          </tr>
+          <tr>
+            <td>TREM</td>
+            <td>EGFR-positive</td>
+            <td>NO/DK/SE/FI</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/32200138/" target="_blank">PMID: 32200138</a></td>
+          </tr>
+          <tr>
+            <td>FIOL</td>
+            <td>EGFR-positive</td>
+            <td>NO/DK/SE</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/35832438/" target="_blank">PMID: 35832438</a></td>
+          </tr>
+          <tr>
+            <td>SOLUCOM</td>
+            <td>KRAS-positive</td>
+            <td>NO/DK/SE</td>
+            <td><a href="https://clinicaltrials.gov/ct2/show/NCT05311709" target="_blank">NCT05311709</a></td>
+          </tr>
+          <tr>
+            <td>Thora</td>
+            <td>SCLC-LS</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/33662285/" target="_blank">PMID: 33662285</a></td>
+          </tr>
+          <tr>
+            <td>TRIPLEX</td>
+            <td>SCLC-LS</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://clinicaltrials.gov/ct2/show/NCT05223647" target="_blank">NCT05223647</a></td>
+          </tr>
+          <tr>
+            <td>Asteroid</td>
+            <td>Curative Radiotherapy</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://clinicaltrials.gov/ct2/show/NCT03446547" target="_blank">NCT03446547</a></td>
+          </tr>
+          <tr>
+            <td>Hilus</td>
+            <td>Curative Radiotherapy</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/33823286/" target="_blank">PMID: 33823286</a></td>
+          </tr>
+          <tr>
+            <td>Space</td>
+            <td>Curative Radiotherapy</td>
+            <td>NO/SE</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/27600155/" target="_blank">PMID: 27600155</a></td>
+          </tr>
+          <tr>
+            <td>ScanLeaf</td>
+            <td>Epidemiology</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/34590017/" target="_blank">PMID: 34590017</a></td>
+          </tr>
+          <tr>
+            <td>TNM-I</td>
+            <td>Translational</td>
+            <td>NO/SE/DK</td>
+            <td><a href="https://pubmed.ncbi.nlm.nih.gov/25680376/" target="_blank">PMID: 25680376</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        These studies exemplify the commitment and collaborative spirit of NTOG in advancing lung cancer research and treatment across the Nordic countries.
+      </p>
+      <a href="https://nordicthoraciconcologygroup.wordpress.com" class="button" target="_blank">Visit Our Previous Website</a>
+    </section>
+  </main>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2024 Nordic Thoracic Oncology Group</p>
+        <p>
+            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
+            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+        </p>
+    </div>
+</footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/scripts.js"></script>
