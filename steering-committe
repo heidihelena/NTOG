@@ -158,7 +158,7 @@
     <div class="col-md-6">
       <div class="image-holder">
         <!-- Placeholder for group image -->
-        <img src="reykjavik.jpg" alt="Nordic Thoracic Oncology Group meeting in Reyjavik planning Nordic Lung Cancer congress 2025.">
+        <img src="reykjavik.jpg" alt="Nordic Thoracic Oncology Group meeting in Reyjavik planning Nordic Lung Cancer congress 2025." class="img-fluid rounded">">
       </div>
     </div>
     <div class="col-md-6 d-flex flex-column justify-content-center">
