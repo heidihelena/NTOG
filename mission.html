@@ -23,37 +23,82 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">NTOG</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <!-- Home -->
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          
-          <!-- About Us Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              About Us
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-              <li><a class="dropdown-item" href="about.html">About Us</a></li>
-              <li><a class="dropdown-item active" href="mission.html">Mission</a></li>
-              <li><a class="dropdown-item" href="history.html">History</a></li>
-              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-            </ul>
-          </li>
-          
-          <!-- Other navigation items -->
-          <!-- ... (retain your existing navigation structure) ... -->
-        </ul>
-      </div>
-    </div>
-  </nav>
+ <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">NTOG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        
+        <!-- About Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            About Us
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <li><a class="dropdown-item" href="about.html">About Us</a></li>
+            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+            <li><a class="dropdown-item" href="history.html">History</a></li>
+            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+          </ul>
+        </li>
+
+        <!-- Research Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Research
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            <li><a class="dropdown-item" href="funding.html">Funding</a></li>
+          </ul>
+        </li>
+
+        <!-- Events Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+            <li><a class="dropdown-item" href="events.html">Events Overview</a></li>
+            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+          </ul>
+        </li>
+
+        <!-- Clinical Resources Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clinical Resources
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+          </ul>
+        </li>
+
+        <!-- News Section -->
+        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+
+        <!-- Get Involved Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Get Involved
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+            <li><a class="dropdown-item" href="membership.html">Membership</a></li>
+            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+          </ul>
+        </li>
 
   <!-- Hero Section -->
   <section class="hero d-flex align-items-center" style="background-color: #333; background-image: url('https://ntog.org/path/to/mission-hero-image.jpg'); background-size: cover; background-position: center;">
