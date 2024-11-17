@@ -1,4 +1,4 @@
-<!-- Navigation -->
+  <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <!-- Brand -->
@@ -14,7 +14,7 @@
         <!-- About Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             About Us
           </a>
           <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
@@ -27,7 +27,7 @@
         <!-- Research Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Research
           </a>
           <ul class="dropdown-menu" aria-labelledby="researchDropdown">
@@ -35,13 +35,12 @@
             <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
             <li><a class="dropdown-item" href="publications.html">Publications</a></li>
             <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-            <li><a class="dropdown-item" href="funding.html">Funding</a></li>
           </ul>
         </li>
         <!-- Events Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Events
           </a>
           <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
@@ -53,7 +52,7 @@
         <!-- Clinical Resources Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Clinical Resources
           </a>
           <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
@@ -69,24 +68,16 @@
         <!-- Get Involved Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Get Involved
           </a>
           <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="membership.html">Membership</a></li>
+            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
             <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
             <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
           </ul>
         </li>
-        <!-- Sponsors -->
-        <li class="nav-item">
-          <a class="nav-link" href="sponsors.html">Sponsors</a>
-        </li>
-        <!-- Contact -->
-        <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact Us</a>
-        </li>
       </ul>
     </div>
   </div>
-</nav> 
+</nav>
