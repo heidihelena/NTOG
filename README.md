@@ -24,6 +24,6 @@ Set Standards of Care: Develop common Nordic standards for thoracic cancer care.
 Establish Guidelines: Create Nordic guidelines for professional education and training in thoracic oncology.
 Build Partnerships: Establish cooperation with other international, national, and regional organizations in the field.
 
-## Membership
-Any physician or researcher based in the Nordic countries and involved in thoracic oncology research or clinical care is welcome to join NTOG. Membership is free and can be obtained by contacting a member of the executive group.
+## Expert Network
+Any physician or researcher based in the Nordic countries and involved in thoracic oncology research or clinical care is welcome to join NTOG. Network membership is free and can be obtained by contacting a member of the executive group.
 
