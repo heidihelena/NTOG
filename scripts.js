@@ -1,3 +1,6 @@
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('nav ul').classList.toggle('open');
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
