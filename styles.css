@@ -12,10 +12,7 @@ h1, h2, h3, h5, .navbar-brand {
   font-weight: bold;
 }
 
-h1, .display-4 {
-  font-size: 2.5rem;
-}
-
+/* Links */
 a {
   color: #007bff;
   text-decoration: none;
@@ -26,25 +23,18 @@ a:hover {
   text-decoration: underline;
 }
 
-/* General Reset */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans', sans-serif;
-}
-
 /* Navbar Styling */
 .navbar {
   background-color: #333; /* Dark background */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure it's above all content */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .navbar-brand {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
   font-size: 1.5rem;
   color: #007bff; /* Blue brand text */
-  text-decoration: none;
 }
 
 .navbar-brand:hover {
@@ -53,83 +43,44 @@ body {
 
 .navbar-nav .nav-link {
   color: #f2f2f2; /* Light text for contrast */
-  padding: 8px 15px; /* Add spacing for better touch targets */
+  padding: 8px 15px;
   font-size: 1rem;
-  text-decoration: none;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
   background-color: #007bff; /* Blue background on hover */
-  color: #fff; /* White text for better readability */
-  border-radius: 4px; /* Rounded hover effect */
+  color: #fff;
+  border-radius: 4px;
 }
 
 /* Dropdown Styling */
 .dropdown-menu {
-  background-color: #fff; /* White dropdown background */
-  border: 1px solid #ddd; /* Subtle border for separation */
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-item {
   color: #333;
-  padding: 10px 20px; /* Larger touch targets */
+  padding: 10px 20px;
   font-size: 0.95rem;
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  background-color: #007bff; /* Blue highlight */
+  background-color: #007bff;
   color: #fff;
-  border-radius: 4px; /* Match navbar link style */
 }
 
 /* Mobile Toggle Button */
 .navbar-toggler {
-  border: none; /* Remove default border */
+  border: none;
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28242,242,242,0.8%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  filter: brightness(1.5); /* Lighten icon for better contrast */
-}
-
-/* Sticky Navbar */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000; /* Ensure it's above all content */
-}
-
-/* Responsive Padding for Navbar */
-.container-fluid {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-/* Add spacing below content to avoid overlap */
-body {
-  padding-top: 70px; /* Navbar height + some margin */
-}
-
-/* Footer Placeholder for Consistency */
-footer {
-  background-color: #333;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-}
-
-footer a {
-  color: #007bff;
-}
-
-footer a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  filter: brightness(1.5);
 }
 
 /* Hero Section */
@@ -143,6 +94,8 @@ footer a:hover {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background-size: cover;
+  background-position: center;
 }
 
 .hero h1 {
@@ -169,7 +122,11 @@ footer a:hover {
   background-color: #0056b3;
 }
 
-/* Content Section */
+/* Main Content */
+main {
+  padding-top: 70px; /* Adjust if navbar height changes */
+}
+
 section {
   margin: 50px auto;
   padding: 0 20px;
@@ -186,68 +143,6 @@ section p {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 15px;
-}
-
-/* Cards */
-.card {
-  border: none;
-  border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  overflow: hidden;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card-img-top {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.card-title {
-  font-size: 1.25rem;
-  color: #007bff;
-}
-
-.card-text {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-/* Footer */
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-}
-
-footer p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-/* Contact Form */
-#contact-form .form-control {
-  border-radius: 5px;
-}
-
-#contact-form .btn {
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
-#contact-form .btn:hover {
-  background-color: #0056b3;
 }
 
 /* Buttons */
@@ -271,6 +166,24 @@ footer p {
   color: #fff;
 }
 
+/* Footer */
+footer {
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #007bff;
+}
+
+footer a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 767px) {
   .hero h1 {
@@ -281,16 +194,12 @@ footer p {
     font-size: 1.2rem;
   }
 
-  .section {
+  section {
     padding: 10px;
   }
 
-  .card-title {
-    font-size: 1.1rem;
-  }
-
-  .card-text {
-    font-size: 0.9rem;
+  .navbar-nav .nav-link {
+    padding: 8px 0;
   }
 }
 
@@ -303,4 +212,3 @@ select:focus {
   outline: 2px dashed #007bff;
   outline-offset: 2px;
 }
-
