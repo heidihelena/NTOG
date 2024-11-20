@@ -1,0 +1,41 @@
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.btn-outline-primary, 
+.btn-primary {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  outline: 2px solid var(--primary-color-hover);
+}
+
+@media (max-width: 768px) {
+  table, 
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary,
+  .btn-outline-primary {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
