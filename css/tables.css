@@ -1,0 +1,61 @@
+table,
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table thead tr {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  text-align: left;
+}
+
+table th,
+table td,
+.table th,
+.table td {
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+table tbody tr:nth-of-type(even) {
+  background-color: var(--background-light);
+}
+
+table tbody tr:hover {
+  background-color: var(--background-lighter);
+}
+
+table a,
+.table a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+table a:hover,
+.table a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  table,
+  .table {
+    font-size: 0.8rem; /* Reduce font size to fit smaller screens */
+  }
+
+  table th,
+  table td,
+  .table th,
+  .table td {
+    padding: 8px 10px; /* Reduce padding for smaller cells */
+  }
+
+  .table-container {
+    overflow-x: auto; /* Adds horizontal scroll on mobile to prevent content overflow */
+  }
+}
