@@ -1,3 +1,26 @@
+// Select elements
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+const links = document.querySelectorAll('.nav-links a');
+
+// Toggle the menu on mobile
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Highlight the active link
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    // Remove the 'active' class from all links
+    links.forEach(item => item.classList.remove('active'));
+    // Add the 'active' class to the clicked link
+    link.classList.add('active');
+
+    // Close the menu after clicking on a link (mobile)
+    navLinks.classList.remove('open');
+  });
+});
+
 // Ensure the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
 
