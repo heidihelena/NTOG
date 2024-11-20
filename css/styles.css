@@ -3,7 +3,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #333;
   margin: 0;
-  padding: 20;
+  padding: 20px;
   background-color: #f8f9fa;
 }
 
@@ -28,14 +28,14 @@ a:hover {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;/* Ensure it's above all content */
+  z-index: 1000; /* Ensure it's above all content */
   background-color: #f8f9fa; /* Optional background */
   display: flex;
-  justify-content: center; /* Centers the items horizontally */
+  justify-content: center; /* Centers items horizontally */
   align-items: center; /* Centers items vertically */
   border-bottom: 1px solid #e5e5e5; /* Optional for a clean look */
-  padding: 20; /* Reset any default padding */
-  height: 60px; /* Ensure consistent height */
+  padding: 20px; /* Fixed padding with px */
+  height: 60px; /* Consistent height */
 }
 
 /* Navigation links styles */
@@ -47,7 +47,7 @@ a:hover {
 }
 
 .navbar-nav .nav-item {
-  margin: 0 15px; /* Adjust spacing between items */
+  margin: 0 15px; /* Spacing between items */
 }
 
 .navbar-nav .dropdown-menu {
@@ -212,7 +212,7 @@ footer a:hover {
   }
 }
 
-/* Accessibility test */
+/* Accessibility */
 a:focus,
 button:focus,
 input:focus,
