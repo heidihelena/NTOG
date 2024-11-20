@@ -1,158 +1,211 @@
-/* styles.css */
+:root {
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --secondary-color: #28a745; /* Green for success states */
+  --accent-yellow: #FFCD00; /* Swedish yellow for warnings */
+  --accent-red: #C60C30; /* Danish red for errors and critical alerts */
+  --background-light: #f8f9fa; /* Light background for sections */
+  --background-lighter: #f1f1f1; /* Lighter background for hover or focus states */
+  --border-color: #ddd; /* Neutral border color */
+  --text-dark: #343a40; /* Dark gray for main text */
+  --text-muted: #6c757d; /* Muted text for less emphasis */
+  --nav-background: #f8f9fa; /* Navigation background color to match light background */
+  --nav-link-color: #343a40; /* Dark text for navigation for contrast */
+  --nav-link-hover: #0056b3; /* Hover color for navigation links */
+  --font-primary: 'Roboto', sans-serif; /* Updated primary font for body text */
+  --font-heading: 'Lora', serif; /* Updated font for headings and navbar brand */
+  --hero-background-light: #e9ecef; /* Light grey for hero background */
+  --network-primary-color: #007bff; /* Primary color for network activations */
+}
 
-/* Importing fonts */
+/* Font Styling */
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: #333;
+  font-family: var(--font-primary);
+  color: var(--text-dark);
 }
 
 h1, h2, h5, .navbar-brand {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
 }
 
-/* Make the navbar fixed at the top */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000; /* Ensures the navbar stays on top of other elements */
-  
-.navbar-brand {
-  font-weight: bold;
+/* Navigation Styles */
+nav {
+  background-color: var(--nav-background);
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
 .nav-link {
-  font-size: 1.1rem;
-}
-
-.hero {
-  background-size: cover;
-  background-position: center;
-  height: 70vh;
+  color: var(--nav-link-color);
+  transition: color 0.3s ease;
   position: relative;
 }
 
-.hero::after {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.5);
+.nav-link:hover {
+  color: var(--nav-link-hover);
+}
+
+.nav-link::after {
+  content: '';
   position: absolute;
-  height: 100%;
-  width: 100%;
   left: 0;
-  top: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: var(--nav-link-hover);
+  transition: width 0.3s ease;
 }
 
-.hero .container {
-  position: relative;
-  z-index: 2;
+.nav-link:hover::after {
+  width: 100%;
 }
 
-.hero h1, .hero p {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+.navbar-toggler {
+  border-color: var(--border-color);
 }
 
-.hero .btn {
-  margin-top: 50px;
+.dropdown-menu {
+  background-color: var(--background-light);
+  border-color: var(--border-color);
 }
 
-section {
-  margin-bottom: 50px;
+.dropdown-item {
+  color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-section h2 {
-  margin-bottom: 20px;
-}
-
-footer p {
-  margin: 0;
-}
-
-.card {
-  border: none;
-}
-
-.card-title {
-  font-size: 1.5rem;
-}
-
-.card-text ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-outline-primary {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.btn-outline-primary:hover {
-  background-color: #007bff;
+.dropdown-item:hover {
+  background-color: var(--primary-color);
   color: #fff;
 }
 
-.text-primary {
-  color: #007bff !important;
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--hero-background-light);
+  background-size: cover;
+  animation: networkActivation 30s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Table Styling */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: var(--text-dark);
 }
 
-table thead tr {
-  background-color: #007bff;
-  color: #ffffff;
-  text-align: left;
+@keyframes networkActivation {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
 }
 
-table th,
-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    animation: none;
+  }
+
+  .nav-link::after {
+    transition: none;
+  }
+
+  .card {
+    transition: none;
+  }
 }
 
-table tbody tr:nth-of-type(even) {
-  background-color: #f9f9f9;
+/* Grid and Flexbox Layout Recommendations */
+
+/* Main Page Layout */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Sidebar (1/4) and Main Content (3/4) */
+  grid-template-rows: auto 1fr auto; /* Header, Content, Footer */
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  gap: 20px;
 }
 
-table tbody tr:hover {
-  background-color: #f1f1f1;
+.header {
+  grid-area: header;
 }
 
-table a {
-  color: #007bff;
-  text-decoration: none;
+.sidebar {
+  grid-area: sidebar;
 }
 
-table a:hover {
-  text-decoration: underline;
+.main {
+  grid-area: main;
 }
 
-/* Table Styling */
-.table {
-  margin-top: 20px;
+.footer {
+  grid-area: footer;
 }
 
-.table th,
-.table td {
-  vertical-align: middle;
+/* Navigation Menu Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.table a {
-  color: #007bff;
-  text-decoration: none;
+.navbar-nav {
+  display: flex;
+  gap: 15px;
 }
 
-.table a:hover {
-  text-decoration: underline;
+/* Table Layout */
+.table-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four columns for different data points */
+  gap: 10px;
+}
+
+.table-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+}
+
+/* Calculator and Widgets Layout */
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.calculator-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Cards Layout for Events and Education */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptive cards */
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: var(--background-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
