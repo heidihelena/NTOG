@@ -1,5 +1,4 @@
 /* Hero Section */
-/* Hero Section */
 .hero {
   height: 100vh;
   display: flex;
@@ -15,12 +14,9 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 80%;
-  padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  padding: 1rem;
+  /* Removed background, blur, and box-shadow */
 }
 
 /* Animated Background Overlay */
@@ -42,15 +38,12 @@
 @media (max-width: 768px) {
   .hero {
     height: 80vh;
+    padding: 1rem;
   }
 
   .hero-content {
-    max-width: 90%;
-    padding: 1.5rem;
-  }
-
-  .animated-background {
-    animation: gradientActivation 30s ease infinite;
+    max-width: 100%;
+    padding: 0;
   }
 }
 
@@ -58,12 +51,5 @@
 @media (prefers-reduced-motion: no-preference) {
   .animated-background {
     animation: gradientActivation 20s ease infinite;
-  }
-}
-
-/* Fallback for Older Browsers */
-@supports not (backdrop-filter: blur(5px)) {
-  .hero-content {
-    background-color: rgba(255, 255, 255, 0.8);
   }
 }
