@@ -78,9 +78,17 @@ nav {
   color: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  /* Mobile-specific styles */
+}
+
+.mobile-menu {
+  z-index: 1000;
+}
+
 /* Hero Section */
 .hero {
-  height: 100vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,11 +111,6 @@ nav {
   100% { background-position: 100% 100%; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero {
-    animation: none;
-  }
-
   .nav-link::after {
     transition: none;
   }
@@ -117,7 +120,7 @@ nav {
   }
 }
 
-/* Grid and Flexbox Layout Recommendations */
+/* Grid and Flexbox Layout*/
 
 /* Main Page Layout */
 .main-container {
