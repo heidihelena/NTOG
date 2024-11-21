@@ -1,5 +1,18 @@
-menuToggle.addEventListener('click', toggleMenu);
-menuToggle.addEventListener('touchstart', toggleMenu);
+document.addEventListener("DOMContentLoaded", function() {
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+
+  // Function to toggle the menu visibility
+  function toggleMenu(event) {
+    event.preventDefault(); // Prevent double firing
+    navMenu.classList.toggle('active');
+  }
+
+  // Add event listeners for both click and touchstart
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('touchstart', toggleMenu);
+});
+
 
 // Toggle function for responsive design
 function toggleNav() {
@@ -30,9 +43,6 @@ links.forEach(link => {
     document.getElementById("myTopnav").className = "topnav";
   });
 });
-
-// Ensure the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
 
   // Smooth Scroll for Anchor Links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
