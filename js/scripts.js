@@ -1,3 +1,6 @@
+menuToggle.addEventListener('click', toggleMenu);
+menuToggle.addEventListener('touchstart', toggleMenu);
+
 // Toggle function for responsive design
 function toggleNav() {
   var x = document.getElementById("myTopnav");
