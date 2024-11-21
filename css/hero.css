@@ -52,4 +52,13 @@
   .animated-background {
     animation: gradientActivation 20s ease infinite;
   }
+
+  /* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  .hero, .animated-background {
+    height: 60vh; /* Slightly increased height for a better view on mobile */
+    animation: none; /* Disable animations for better performance on mobile */
+    background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color)); /* Fallback to a static gradient background for better appearance */
+  }
+}
 }
