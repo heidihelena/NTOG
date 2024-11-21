@@ -85,56 +85,59 @@ h1, h2, h5, .navbar-brand {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--hero-background-light);
-  background-size: cover;
-  animation: networkActivation 30s ease-in-out infinite;
+  background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
+  background-size: 200% 200%;
+  animation: heroActivation 15s ease infinite;
   position: relative;
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    height: 50vh;
-  }
-}
-
+/* Hero Content Styling */
 .hero-content {
   position: relative;
   z-index: 1;
   color: var(--text-dark);
 }
-  
 
+.hero-content {
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
 
-@keyframes networkActivation {
+/* Animated Background Overlay */
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
+  background-size: 300% 300%;
+  animation: gradientActivation 20s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientActivation {
   0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  25% {
-    transform: scale(1.03);
-    opacity: 0.9;
+    background-position: 0% 50%;
   }
   50% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  75% {
-    transform: scale(1.03);
-    opacity: 0.9;
+    background-position: 100% 50%;
   }
   100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .animated-background,
-  .hero {
-    animation: none;
+    background-position: 0% 50%;
   }
 }
 
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+    animation: none; /* Disable the background animation on smaller devices */
+  }
+
+  .animated-background {
+    animation: none; /* Disable animated gradient for better performance on mobile */
+  }
+}
 
 /* Grid and Flexbox Layout*/
 
