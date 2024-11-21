@@ -29,17 +29,22 @@ h1, h2, h5, .navbar-brand {
 }
 
 /* Navigation Styles */
-
 .navbar {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 1rem 2rem;
   background-color: var(--nav-background);
+  position: relative;
 }
 
 .nav-menu {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-item {
@@ -57,9 +62,21 @@ h1, h2, h5, .navbar-brand {
   color: var(--nav-link-hover);
 }
 
+.hamburger {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
 @media (max-width: 768px) {
+  .navbar {
+    justify-content: space-between;
+  }
+
   .nav-menu {
-    display: none; /* Hide on mobile */
+    display: none;
   }
   
   .nav-menu.active {
@@ -70,10 +87,11 @@ h1, h2, h5, .navbar-brand {
     left: 0;
     right: 0;
     background-color: var(--nav-background);
+    padding: 1rem;
   }
   
   .hamburger {
-    display: block; /* Show hamburger on mobile */
+    display: block;
   }
 }
 
