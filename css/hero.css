@@ -1,0 +1,68 @@
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
+  background-size: 200% 200%;
+  animation: heroActivation 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero Content Styling */
+.hero-content {
+  position: relative;
+  z-index: 2; /* Ensures hero content is above the animated background */
+  color: var(--text-dark);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4); /* Increased opacity for better contrast */
+}
+
+/* Animated Background Overlay */
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
+  background-size: 300% 300%;
+  animation: gradientActivation 20s ease infinite;
+  z-index: -1; /* Keeps it behind the hero content */
+}
+
+@keyframes gradientActivation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  .hero, .animated-background {
+    height: 60vh; /* Slightly increased height for a better view on mobile */
+    animation: none; /* Disable animations for better performance on mobile */
+    background: var(--hero-background-light); /* Fallback to a static background color */
+  }
+}
+
+/* Vendor Prefixes for Cross-Browser Compatibility */
+@-webkit-keyframes gradientActivation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
