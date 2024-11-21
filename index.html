@@ -24,38 +24,36 @@
   <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/gothenburg.jpg">
 
   <!-- Additional Resources -->
-  <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/tables.css">
+<link rel="stylesheet" href="css/buttons.css">
 <!-- Bootstrap Bundle JS (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: ##f8f9fa;">
+   <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <!-- Brand -->
     <a class="navbar-brand" href="index.html">NTOG</a>
-    
     <!-- Toggler/collapsible Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+      aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        
         <!-- About Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             About Us
           </a>
           <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
@@ -65,11 +63,10 @@
             <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
           </ul>
         </li>
-        
         <!-- Research Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Research
           </a>
           <ul class="dropdown-menu" aria-labelledby="researchDropdown">
@@ -79,11 +76,10 @@
             <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
           </ul>
         </li>
-        
         <!-- Events Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Events
           </a>
           <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
@@ -92,11 +88,10 @@
             <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
           </ul>
         </li>
-        
         <!-- Clinical Resources Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Clinical Resources
           </a>
           <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
@@ -105,11 +100,10 @@
             <li><a class="dropdown-item" href="tools.html">Tools</a></li>
           </ul>
         </li>
-        
         <!-- Get Involved Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+            aria-haspopup="true" aria-expanded="false">
             Get Involved
           </a>
           <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
@@ -118,16 +112,15 @@
             <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
           </ul>
         </li>
-
-           <!-- News -->
+            <!-- News -->
         <li class="nav-item">
           <a class="nav-link" href="news.html">News</a>
         </li>
-        
       </ul>
     </div>
   </div>
 </nav>
+
   
  <!-- Hero Section with CSS Animation -->
 <section class="hero d-flex align-items-center" style="background: var(--hero-background-light); background-size: cover; background-position: center; position: relative; overflow: hidden;">
@@ -205,9 +198,9 @@
 </footer>
 
   <!-- Bootstrap JS Bundle -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
   <!-- Custom JS -->
-  <script src="js/scripts.js"></script>
+<script src="js/scripts.js"></script>
 
 </body>
 </html>
