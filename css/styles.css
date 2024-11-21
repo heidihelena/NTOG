@@ -32,8 +32,7 @@ h1, h2, h5, .navbar-brand {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   padding: 1rem 2rem;
   background-color: var(--nav-background);
 }
