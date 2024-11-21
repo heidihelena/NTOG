@@ -1,3 +1,4 @@
+// Toggle function for responsive design
 function toggleNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -11,6 +12,21 @@ function toggleNav() {
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const links = document.querySelectorAll('.nav-links a');
+
+// Event listener for menu toggle
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  toggleNav(); // Call the toggleNav function when menu is clicked
+});
+
+// Event listeners for individual links (optional)
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    // Reset the topnav class when a link is clicked
+    document.getElementById("myTopnav").className = "topnav";
+  });
+});
 
 // Ensure the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
