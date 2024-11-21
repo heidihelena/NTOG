@@ -35,7 +35,9 @@ h1, h2, h5, .navbar-brand {
   align-items: center;
   padding: 1rem 2rem;
   background-color: var(--nav-background);
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Ensures the navbar stays above other content */
 }
 
 .nav-menu {
@@ -93,6 +95,30 @@ h1, h2, h5, .navbar-brand {
   .hamburger {
     display: block;
   }
+}
+.nav-item {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--nav-background);
+  padding: 0.5rem;
+  min-width: 150px;
+}
+
+.nav-item:hover .submenu {
+  display: block;
+}
+
+.submenu a {
+  display: block;
+  padding: 0.5rem;
+  color: var(--nav-link-color);
+  text-decoration: none;
 }
 
 /* Grid and Flexbox Layout*/
