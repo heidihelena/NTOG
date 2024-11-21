@@ -1,11 +1,11 @@
-  <!-- Navigation -->
+   <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <!-- Brand -->
     <a class="navbar-brand" href="index.html">NTOG</a>
     <!-- Toggler/collapsible Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+      aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Navbar links -->
@@ -61,10 +61,6 @@
             <li><a class="dropdown-item" href="tools.html">Tools</a></li>
           </ul>
         </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
         <!-- Get Involved Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
@@ -76,6 +72,10 @@
             <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
             <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
           </ul>
+        </li>
+            <!-- News -->
+        <li class="nav-item">
+          <a class="nav-link" href="news.html">News</a>
         </li>
       </ul>
     </div>
