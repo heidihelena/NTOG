@@ -1,68 +1,69 @@
 /* Hero Section */
+/* Hero Section */
 .hero {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
-  background-size: 200% 200%;
-  animation: heroActivation 15s ease infinite;
   position: relative;
   overflow: hidden;
+  color: var(--text-dark);
 }
 
 /* Hero Content Styling */
 .hero-content {
   position: relative;
-  z-index: 2; /* Ensures hero content is above the animated background */
-  color: var(--text-dark);
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4); /* Increased opacity for better contrast */
+  z-index: 2;
+  max-width: 80%;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Animated Background Overlay */
 .animated-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color));
   background-size: 300% 300%;
   animation: gradientActivation 20s ease infinite;
-  z-index: -1; /* Keeps it behind the hero content */
+  z-index: 1;
 }
 
 @keyframes gradientActivation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-/* Media Query for Mobile Devices */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .hero, .animated-background {
-    height: 60vh; /* Slightly increased height for a better view on mobile */
-    animation: none; /* Disable animations for better performance on mobile */
-    background: var(--hero-background-light); /* Fallback to a static background color */
+  .hero {
+    height: 80vh;
+  }
+
+  .hero-content {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .animated-background {
+    animation: gradientActivation 30s ease infinite;
   }
 }
 
-/* Vendor Prefixes for Cross-Browser Compatibility */
-@-webkit-keyframes gradientActivation {
-  0% {
-    background-position: 0% 50%;
+/* High-performance Animation for Modern Browsers */
+@media (prefers-reduced-motion: no-preference) {
+  .animated-background {
+    animation: gradientActivation 20s ease infinite;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+}
+
+/* Fallback for Older Browsers */
+@supports not (backdrop-filter: blur(5px)) {
+  .hero-content {
+    background-color: rgba(255, 255, 255, 0.8);
   }
 }
