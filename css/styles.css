@@ -81,8 +81,6 @@ h1, h2, h5, .navbar-brand {
 /* Hero Section */
 .hero {
   height: 100vh;
-  @media (max-width: 768px) {
-    height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,37 +92,49 @@ h1, h2, h5, .navbar-brand {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+  }
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
   color: var(--text-dark);
 }
   
-.animated-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #c2e9fb, #a1c4fd);
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
-  z-index: -1;
+
+
+@keyframes networkActivation {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animated-background,
+  .hero {
+    animation: none;
+  }
 }
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-  .nav-link::after {
-    transition: none;
-  }
-
-  .card {
-    transition: none;
-  }
-}
 
 /* Grid and Flexbox Layout*/
 
@@ -154,6 +164,17 @@ h1, h2, h5, .navbar-brand {
 
 .footer {
   grid-area: footer;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr; /* Stacks content vertically */
+    grid-template-areas:
+      "header"
+      "main"
+      "sidebar"
+      "footer";
+  }
 }
 
 /* Table Layout */
@@ -206,3 +227,11 @@ h1, h2, h5, .navbar-brand {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+@media (max-width: 768px) {
+  .card {
+    transform: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
