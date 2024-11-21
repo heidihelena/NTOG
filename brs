@@ -26,17 +26,6 @@
 </head>
 <body>
 
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="testDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Test
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="testDropdown">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-  </ul>
-</li>
-
-
 <h2>Brief Resilience Scale (BRS)</h2>
 
 <p>Please respond to each item by marking <strong>one box per row</strong></p>
