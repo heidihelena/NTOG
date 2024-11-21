@@ -29,66 +29,60 @@ h1, h2, h5, .navbar-brand {
 }
 
 /* Navigation Styles */
-nav {
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
   background-color: var(--nav-background);
-  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-item {
+  list-style: none;
 }
 
 .nav-link {
+  text-decoration: none;
   color: var(--nav-link-color);
   transition: color 0.3s ease;
-  position: relative;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: var(--nav-link-hover);
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0;
-  height: 2px;
-  background-color: var(--nav-link-hover);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.navbar-toggler {
-  border-color: var(--border-color);
-}
-
-.dropdown-menu {
-  background-color: var(--background-light);
-  border-color: var(--border-color);
-}
-
-.dropdown-item {
-  color: var(--text-dark);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
-@media screen and (max-width: 768px) {
-  /* Mobile-specific styles */
-}
-
-.mobile-menu {
-  z-index: 1000;
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none; /* Hide on mobile */
+  }
+  
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--nav-background);
+  }
+  
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+  }
 }
 
 /* Hero Section */
 .hero {
-  height: 70vh;
+  height: 100vh;
+  @media (max-width: 768px) {
+    height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,18 +142,6 @@ nav {
 
 .footer {
   grid-area: footer;
-}
-
-/* Navigation Menu Styling */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-nav {
-  display: flex;
-  gap: 15px;
 }
 
 /* Table Layout */
