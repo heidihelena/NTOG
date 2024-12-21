@@ -1,14 +1,16 @@
 /* Hero Section */
 .hero {
   padding-top: 70px;
-  height: 100vh;
+  height: 50vh;
+  min-height: 300px; /* Ensures a minimum height */
+  max-height: 500px; /* Optional: prevents it from getting too tall */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
   overflow: hidden;
-  color: var(--text-dark);
+  color: var(--text-light);
 }
 
 /* Hero Content Styling */
@@ -38,7 +40,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero {
-    height: 80vh;
+    height: 50vh;
     padding: 1rem;
   }
 
@@ -57,9 +59,9 @@
   /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
   .hero, .animated-background {
-    height: 60vh; /* Slightly increased height for a better view on mobile */
+    height: 40vh; /* Slightly increased height for a better view on mobile */
     animation: none; /* Disable animations for better performance on mobile */
-    background: linear-gradient(45deg, var(--hero-background-light), var(--network-primary-color)); /* Fallback to a static gradient background for better appearance */
+    background: linear-gradient(45deg, var(--hero-background-dark), var(--network-primary-color)); /* Fallback to a static gradient background for better appearance */
   }
 }
 }
