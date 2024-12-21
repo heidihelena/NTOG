@@ -215,3 +215,78 @@ h1, h2, h5, .navbar-brand {
   }
 }
 
+/* Container and Project Styling */
+.container {
+  padding: 2rem 1rem;
+}
+
+.project {
+  margin-bottom: 2rem;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid var(--border-color);
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table tbody + tbody {
+  border-top: 2px solid var(--border-color);
+}
+
+/* Responsive Table */
+@media screen and (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Remove excess whitespace */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Adjust spacing for better mobile view */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+}
