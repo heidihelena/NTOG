@@ -30,22 +30,22 @@
 <body>
 
     <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
     <!-- Brand -->
     <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler/collapsible Button -->
+    <!-- Toggler Button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Navbar links -->
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <!-- About Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-expanded="false">
             About Us
           </a>
           <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
@@ -58,7 +58,7 @@
         <!-- Research Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-expanded="false">
             Research
           </a>
           <ul class="dropdown-menu" aria-labelledby="researchDropdown">
@@ -71,7 +71,7 @@
         <!-- Events Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-expanded="false">
             Events
           </a>
           <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
@@ -83,7 +83,7 @@
         <!-- Clinical Resources Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-expanded="false">
             Clinical Resources
           </a>
           <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
@@ -92,14 +92,10 @@
             <li><a class="dropdown-item" href="tools.html">Tools</a></li>
           </ul>
         </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
         <!-- Get Involved Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+            aria-expanded="false">
             Get Involved
           </a>
           <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
@@ -108,20 +104,24 @@
             <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
           </ul>
         </li>
+        <!-- News -->
+        <li class="nav-item">
+          <a class="nav-link" href="news.html">News</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
-         
-  <!-- Hero Section -->
-  <section class="hero d-flex align-items-center" style="background-color: #333; background-image: url('https://raw.githubusercontent.com/heidihelena/NTOG/main/volunteer_hero.jpg'); background-size: cover; background-position: center;">
-    <div class="container text-center">
-      <h1 class="display-4 text-white">Volunteer with NTOG</h1>
-      <p class="lead text-white">Contribute to advancing lung cancer research across the Nordic countries.</p>
-      <a href="#volunteer-opportunities" class="btn btn-primary">Explore Opportunities</a>
-    </div>
-  </section>
-
+  
+ <!-- Hero Section -->
+  <section class="hero mt-5 bg-dark text-white py-4">
+  <div class="container text-center">   
+    <h1 class="display-4 text-white">Volunteer with NTOG</h1>
+    <p class="lead text-white">Contribute to advancing lung cancer research across the Nordic countries.</p>
+    <a href="#volunteer-opportunities" class="btn btn-primary">Explore Opportunities</a>
+  </div>
+</section>
+  
   <!-- Main Content -->
   <main class="container my-5">
     <section id="volunteer-intro">
