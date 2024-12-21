@@ -14,7 +14,7 @@
   --nav-link-hover: #0056b3; /* Hover color for navigation links */
   --font-primary: 'Roboto', sans-serif; /* Updated primary font for body text */
   --font-heading: 'Lora', serif; /* Updated font for headings and navbar brand */
-  --hero-background-light: #e9ecef; /* Light grey for hero background */
+  --hero-background-dark: #343a40; /* Dark grey for hero background */
   --network-primary-color: #007bff; /* Primary color for network activations */
 }
 
