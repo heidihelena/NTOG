@@ -1,6 +1,5 @@
 /* Hero Section */
 .hero {
-  padding-top: 70px;
   height: 50vh;
   min-height: 300px; /* Ensures a minimum height */
   max-height: 500px; /* Optional: prevents it from getting too tall */
