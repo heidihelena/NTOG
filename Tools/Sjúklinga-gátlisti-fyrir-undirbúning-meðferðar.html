@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sjúklinga gátlisti fyrir undirbúning meðferðar</title>
+  <style>
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f6f8fb; color:#1f2937; }
+    header { background:#2563eb; color:white; padding:30px; }
+    main { max-width:900px; margin:auto; padding:20px; }
+    .card { background:white; padding:20px; border-radius:12px; margin-bottom:15px; }
+    .question { margin-top:15px; }
+    button { margin:4px; padding:8px; cursor:pointer; }
+    button.selected { background:#2563eb; color:white; }
+  </style>
+</head>
+<body>
+
+<header>
+<h1>Sjúklinga gátlisti fyrir undirbúning meðferðar</h1>
+</header>
+
+<main>
+<div class="card">
+<p>
+Þetta verkfæri hjálpar til við að greina þætti sem geta haft áhrif á undirbúning fyrir meðferð, þol meðferðar og bata.
+</p>
+</div>
+
+<div id="questions" class="card"></div>
+
+<div class="card">
+<p>Stig: <span id="score">0</span> / 44</p>
+</div>
+</main>
+
+<script>
+const questions = [
+ {id:1, text:"Hversu vel tekst þér að sinna daglegum athöfnum sjálfur/sjálf?"},
+ {id:2, text:"Hversu oft hefur þú næga orku í daglegu lífi?"},
+ {id:3, text:"Hversu auðvelt er fyrir þig að hreyfa þig?"},
+ {id:4, text:"Hversu vel eru aðrir sjúkdómar undir stjórn?"},
+ {id:5, text:"Hversu örugg/öruggur ertu um að lyfin þín hafi verið yfirfarin?"},
+ {id:6, text:"Hversu stöðug hefur þyngd þín verið nýlega?"},
+ {id:7, text:"Hversu vel borðar þú núna?"},
+ {id:8, text:"Hversu vel skilur þú meðferðarferlið?"},
+ {id:9, text:"Hversu vel tekst þér að takast á við streitu og áhyggjur?"},
+ {id:10, text:"Hversu mikinn stuðning færð þú í daglegu lífi?"},
+ {id:11, text:"Hversu auðvelt er að fá hjálp við praktísk atriði?"}
+];
+
+const answers = {};
+
+function render(){
+ const c=document.getElementById("questions");
+ c.innerHTML="";
+ questions.forEach(q=>{
+   const d=document.createElement("div");
+   d.className="question";
+   d.innerHTML=`<p>${q.id}. ${q.text}</p>
+   ${[0,1,2,3,4].map(s=>`<button onclick="select(${q.id},${s})">${s}</button>`).join("")}`;
+   c.appendChild(d);
+ });
+}
+
+function select(id,score){
+ answers[id]=score;
+ update();
+}
+
+function update(){
+ const total=Object.values(answers).reduce((a,b)=>a+b,0);
+ document.getElementById("score").textContent=total;
+}
+
+render();
+</script>
+
+</body>
+</html>
