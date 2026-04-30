@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Potilaan hoitoon valmistautumisen tarkistuslista / Patientens checklista för behandlingsförberedelse</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #5f6b7a;
+      --border: #d9e2ec;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+    }
+
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--text);}    
+    header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color:white; padding:30px; }
+    main { max-width:900px; margin:auto; padding:20px; }
+    .card { background:white; padding:20px; border-radius:12px; margin-bottom:15px; }
+    .question { margin-top:15px; }
+    button { margin:4px; padding:8px; cursor:pointer; }
+    button.selected { background:#2563eb; color:white; }
+  </style>
+</head>
+<body>
+
+<header>
+<h1>Potilaan hoitoon valmistautumisen tarkistuslista<br>Patientens checklista för behandlingsförberedelse</h1>
+</header>
+
+<main>
+<div class="card">
+<p>
+Tämä työkalu auttaa tunnistamaan hoitoon valmistautumiseen vaikuttavia tekijöitä.<br>
+Detta verktyg hjälper till att identifiera faktorer som påverkar behandlingsberedskap.
+</p>
+</div>
+
+<div id="questions" class="card"></div>
+
+<div class="card">
+<p>Pisteet / Poäng: <span id="score">0</span> / 44</p>
+</div>
+</main>
+
+<script>
+const questions = [
+ {id:1, fi:"Kuinka hyvin selviydyt päivittäisistä toimista?", sv:"Hur väl klarar du dagliga aktiviteter?"},
+ {id:2, fi:"Kuinka usein sinulla on energiaa?", sv:"Hur ofta har du tillräckligt med energi?"},
+ {id:3, fi:"Kuinka helposti liikut?", sv:"Hur lätt kan du röra dig?"},
+ {id:4, fi:"Kuinka hyvin muut sairautesi ovat hallinnassa?", sv:"Hur väl är dina andra sjukdomar under kontroll?"},
+ {id:5, fi:"Kuinka luottavainen olet lääkityksen hallintaan?", sv:"Hur säker är du på att din medicinering är genomgången?"},
+ {id:6, fi:"Kuinka vakaa painosi on ollut?", sv:"Hur stabil har din vikt varit?"},
+ {id:7, fi:"Kuinka hyvin syöt?", sv:"Hur bra äter du just nu?"},
+ {id:8, fi:"Kuinka hyvin ymmärrät hoitopolun?", sv:"Hur väl förstår du behandlingsprocessen?"},
+ {id:9, fi:"Kuinka hyvin hallitset stressiä?", sv:"Hur väl hanterar du stress?"},
+ {id:10, fi:"Kuinka paljon saat tukea?", sv:"Hur mycket stöd får du?"},
+ {id:11, fi:"Kuinka helposti saat apua käytännön asioihin?", sv:"Hur lätt får du hjälp med praktiska saker?"}
+];
+
+const answers = {};
+
+function render(){
+ const c=document.getElementById("questions");
+ c.innerHTML="";
+ questions.forEach(q=>{
+   const d=document.createElement("div");
+   d.className="question";
+   d.innerHTML=`<p>${q.id}. ${q.fi}<br><em>${q.sv}</em></p>
+   ${[0,1,2,3,4].map(s=>`<button onclick="select(${q.id},${s})">${s}</button>`).join("")}`;
+   c.appendChild(d);
+ });
+}
+
+function select(id,score){
+ answers[id]=score;
+ update();
+}
+
+function update(){
+ const total=Object.values(answers).reduce((a,b)=>a+b,0);
+ document.getElementById("score").textContent=total;
+}
+
+render();
+</script>
+
+</body>
+</html>
