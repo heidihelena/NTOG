@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nordic Thoracic Oncology Group | NTOG</title>
+  <meta name="description" content="Nordic Thoracic Oncology Group (NTOG) connects lung cancer clinicians and researchers across Denmark, Finland, Iceland, Norway, and Sweden to improve thoracic oncology research, education, and patient care.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, lung cancer, thoracic oncology, lung cancer research, Nordic lung cancer symposium, lung cancer guidelines, clinical studies, screening, Denmark, Finland, Iceland, Norway, Sweden">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+
+  <meta property="og:title" content="Nordic Thoracic Oncology Group (NTOG)">
+  <meta property="og:description" content="Connecting Nordic expertise in lung cancer research, education, and patient care across Denmark, Finland, Iceland, Norway, and Sweden.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nordic Thoracic Oncology Group (NTOG)">
+  <meta name="twitter:description" content="Nordic collaboration in lung cancer research, education, and care.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .home-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .home-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 860px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .feature-card,
+    .research-card,
+    .link-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .feature-card,
+    .research-card,
+    .link-card {
+      padding: 1.4rem;
+    }
+
+    .feature-card h3,
+    .research-card h3,
+    .link-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .feature-card p,
+    .research-card p,
+    .link-card p {
+      color: #52606d;
+      margin-bottom: 0;
+    }
+
+    .symposium-card {
+      border: 1px solid #d7eaf3;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .symposium-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .cta-panel {
+      border-radius: 1.25rem;
+      background: #f0f7fb;
+      border: 1px solid #d7eaf3;
+      padding: 2rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="home-hero">
+    <div class="container">
+      <span class="eyebrow">Nordic collaboration in thoracic oncology</span>
+      <h1 class="display-5 fw-bold mb-3">Nordic Thoracic Oncology Group</h1>
+      <p class="lead-narrow mb-4">NTOG connects lung cancer clinicians and researchers across Denmark, Finland, Iceland, Norway, and Sweden to strengthen research, education, clinical collaboration, and patient care.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="events.html" class="btn btn-light btn-lg">Nordic Lung Cancer Symposium 2027</a>
+        <a href="expert.html" class="btn btn-outline-light btn-lg">Find the Expert Network</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="about">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>About NTOG</h2>
+            <p class="lead">The Nordic Thoracic Oncology Group is a multidisciplinary network for lung cancer research and clinical collaboration across the Nordic region.</p>
+            <a href="about.html" class="btn btn-outline-primary">Learn more</a>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h3>Nordic network</h3>
+                  <p>Clinicians and researchers from Denmark, Finland, Iceland, Norway, and Sweden work together across specialties and institutions.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h3>Clinical collaboration</h3>
+                  <p>NTOG supports shared learning in lung cancer diagnostics, treatment, care pathways, multidisciplinary work, and follow-up.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h3>Research infrastructure</h3>
+                  <p>The network promotes collaboration in clinical studies, registry-based research, translational research, and quality indicators.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-card">
+                  <h3>Education</h3>
+                  <p>NTOG contributes to meetings, symposia, courses, guideline work, and Nordic exchange of thoracic oncology expertise.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="symposium">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Nordic Lung Cancer Symposium 2027</h2>
+            <p class="lead mb-0">13 to 15 May 2027, Copenhagen, Denmark</p>
+          </div>
+          <div>
+            <a href="events.html" class="btn btn-primary">View symposium page</a>
+          </div>
+        </div>
+
+        <div class="symposium-card">
+          <div class="row g-0">
+            <div class="col-lg-4">
+              <img src="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png" alt="Save the date: Nordic Lung Cancer Symposium 2027, 13 to 15 May 2027, Copenhagen">
+            </div>
+            <div class="col-lg-8">
+              <div class="p-4 p-lg-5">
+                <h3>Biennial Nordic meeting for lung cancer specialists</h3>
+                <p>The 2027 symposium will bring together clinicians, researchers, and healthcare professionals from across the Nordic countries for multidisciplinary exchange in thoracic oncology.</p>
+                <p class="mb-3">Planned themes include:</p>
+                <div class="mb-4">
+                  <span class="badge-topic">Stage III NSCLC</span>
+                  <span class="badge-topic">Lung cancer screening</span>
+                  <span class="badge-topic">Nodule management</span>
+                  <span class="badge-topic">Nordic registries</span>
+                  <span class="badge-topic">Quality indicators</span>
+                  <span class="badge-topic">Multidisciplinary care</span>
+                </div>
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                  <a href="events.html" class="btn btn-primary">Programme and registration: coming soon</a>
+                  <a href="abstracts.html" class="btn btn-outline-secondary">Abstract submission: opening soon</a>
+                </div>
+                <p class="muted-note mt-3 mb-0">Follow updates through the NTOG LinkedIn group and the hashtag #NTOG2027.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="research">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Research and collaboration</h2>
+            <p class="lead">NTOG supports Nordic collaboration in clinical, registry-based, and translational lung cancer research.</p>
+            <a href="ongoing-projects.html" class="btn btn-outline-primary">Explore research projects</a>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="research-card">
+                  <h3>Registries and quality indicators</h3>
+                  <p>Nordic lung cancer registries enable outcome comparisons, quality improvement, and population-based research.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="research-card">
+                  <h3>Care pathways and MDT models</h3>
+                  <p>Shared work on diagnostic timelines, multidisciplinary team structures, and standardised care pathways.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="research-card">
+                  <h3>Screening and early detection</h3>
+                  <p>Nordic collaboration on LDCT screening, pulmonary nodule management, prevention, and implementation.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="research-card">
+                  <h3>Clinical and translational studies</h3>
+                  <p>Collaboration in clinical trials, Stage III NSCLC, immunotherapy, radiotherapy, biomarkers, and translational endpoints.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="expert-network">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Expert network and work packages</h2>
+            <p class="lead">NTOG expertise is organised through national lung cancer organisations, work packages, specialty groups, and the Steering Committee.</p>
+            <p>Work packages coordinate practical Nordic collaboration in data, screening, clinical studies, guidelines, and education. Specialty groups connect experts by field and support protocol development, research, education, and harmonisation of lung cancer care.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <h3>Find the right route</h3>
+              <p>Use the Expert Network page to identify the relevant work package, specialty group, or Steering Committee contact.</p>
+              <div class="d-flex flex-column gap-2">
+                <a href="expert.html" class="btn btn-primary">Expert Network</a>
+                <a href="volunteer.html" class="btn btn-outline-primary">Volunteer and Work Packages</a>
+                <a href="steering-committee.html" class="btn btn-outline-primary">Steering Committee</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="membership">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <h2>Join NTOG</h2>
+            <p class="lead">Physicians, researchers, and healthcare professionals based in the Nordic countries and involved in thoracic oncology research or clinical care are welcome to join the network.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="link-card">
+                  <h3><a href="https://www.linkedin.com/groups/10015253/" target="_blank" rel="noopener">NTOG LinkedIn group</a></h3>
+                  <p>Join the professional network for updates and Nordic thoracic oncology discussion.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="link-card">
+                  <h3><a href="collaboration.html">Collaboration opportunities</a></h3>
+                  <p>Find routes for research collaboration, clinical studies, education, and Nordic projects.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="link-card">
+                  <h3><a href="protocols.html">Protocols</a></h3>
+                  <p>Review current harmonisation topics and protocol development areas.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="link-card">
+                  <h3><a href="news.html">Research News</a></h3>
+                  <p>Follow NTOG updates, research highlights, and network announcements.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
+</body>
+</html>
