@@ -1,442 +1,495 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO Meta Tags -->
-<title>Research Collaborations | Nordic Lung Cancer Research | NTOG</title>
+  <title>Research Collaborations | Nordic Lung Cancer Research | NTOG</title>
+  <meta name="description" content="NTOG supports Nordic research collaboration in lung cancer and thoracic oncology across Denmark, Finland, Iceland, Norway, and Sweden, including clinical trials, CTIS-coordinated studies, translational research, screening pilots, registry studies, and early-career research.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, research collaboration, lung cancer research, thoracic oncology, Nordic clinical trials, CTIS, translational research, lung cancer screening, registry research, PhD collaboration, Nordic lung cancer care">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
 
-<meta name="description" content="NTOG supports Nordic lung cancer research across Denmark, Finland, Iceland, Norway, and Sweden, including clinical trials, lung cancer registries, screening, biomarkers, multidisciplinary care, Stage III NSCLC, small-cell lung cancer, and translational thoracic oncology research.">
-<meta name="keywords" content="pulmonary nodule guideline, lung nodule follow-up, Pan-Nordic guideline, NTOG, lung cancer screening, low-dose CT, thoracic oncology, radiology reporting, pulmonology, Nordic lung cancer care">
+  <meta property="og:title" content="Research Collaborations | NTOG">
+  <meta property="og:description" content="NTOG supports Nordic collaboration on lung cancer clinical trials, translational research, screening pilots, registry studies, education, and early-career research.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/collaborations.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 
-<meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Research Collaborations | NTOG">
+  <meta name="twitter:description" content="Nordic collaboration on lung cancer research, CTIS-coordinated trials, translational research, screening pilots, and early-career projects.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
-<!-- Open Graph Meta Tags for Social Sharing -->
-<meta property="og:title" content="Research Collaboration | NTOG">
-<meta property="og:description" content="NTOG is working toward united Nordic lung cancer studies.">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Twitter / X Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Research Collaboration | NTOG">
-<meta name="twitter:description" content="Nordic collaboration on lung cancer research.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png"> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/tables.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/nav.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 900px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .topic-card,
+    .question-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .topic-card,
+    .question-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .topic-card h3,
+    .question-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.65rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .topic-card p,
+    .question-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.45rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-card {
+      margin-bottom: 0.85rem;
+      padding: 1rem 1.15rem;
+    }
+
+    .question-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-card h3 {
+      margin-bottom: 0.45rem;
+      font-size: 1.02rem;
+    }
+
+    .question-card p {
+      margin-bottom: 0.45rem;
+      line-height: 1.55;
+    }
+
+    .question-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">Research news</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item active" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-  
-   <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">Research Collaboration</h1>
-    <p class="lead">Nordic Lung Cancer Research</p>
-  </div>
-</section>
+  </nav>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-<section id="research-collaborations" class="research-collaborations">
-
-  <header>
-    <h1>Research Collaboration</h1>
-    <p>
-      The Nordic Thoracic Oncology Group (NTOG) supports collaborative lung cancer and thoracic oncology research across Denmark, Finland, Iceland, Norway, and Sweden. Through Nordic cooperation, NTOG aims to strengthen clinical research, registry-based studies, translational science, education, and quality improvement in lung cancer care.
-    </p>
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Research</span>
+      <h1 class="display-5 fw-bold mb-3">Research Collaboration</h1>
+      <p class="lead-narrow mb-4">NTOG connects researchers, clinicians, trial teams, students, PhD candidates, postdoctoral researchers, and national lung cancer groups across the Nordic region.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#start" class="btn btn-light btn-lg">Start a collaboration</a>
+        <a href="steering-committee.html" class="btn btn-outline-light btn-lg">Steering Committee</a>
+      </div>
+    </div>
   </header>
-<!-- Research Collaboration -->
-<section id="research-collaboration">
 
-  <h1>Research Collaboration</h1>
-  <h2 class="h4 text-muted mb-4">Nordic collaboration in thoracic oncology</h2>
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Nordic collaboration in thoracic oncology</h2>
+            <p class="lead">NTOG supports clinical and translational thoracic oncology research across Denmark, Finland, Iceland, Norway, and Sweden.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Many important research questions in lung cancer require larger and more diverse study populations than one Nordic country can provide alone. This is especially true for molecularly defined subgroups, rare clinical situations, early-phase translational studies, screening cohorts, and registry-based comparisons.</p>
+              <p>By working together, Nordic researchers can build stronger studies, recruit more effectively, and generate results that are relevant across the region.</p>
+              <p class="mb-0">NTOG provides a Nordic platform for connecting researchers, clinicians, trial teams, students, PhD candidates, postdoctoral researchers, and national lung cancer groups.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <p class="lead mb-3">
-    NTOG supports clinical and translational thoracic oncology research
-    across Denmark, Finland, Iceland, Norway, and Sweden.
-  </p>
+    <section class="section-block bg-light" id="collaboration-areas">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Collaboration areas</h2>
+            <p class="lead mb-0">Collaboration can start from a trial idea, translational question, screening pilot, student project, or registry comparison.</p>
+          </div>
+          <div>
+            <a href="expert.html" class="btn btn-outline-primary">Find expert contacts</a>
+          </div>
+        </div>
 
-  <p>
-    Many important research questions in lung cancer require larger and
-    more diverse study populations than one Nordic country can provide
-    alone. This is especially true for molecularly defined subgroups,
-    rare clinical situations, early-phase translational studies,
-    screening cohorts, and registry-based comparisons. By working
-    together, Nordic researchers can build stronger studies, recruit
-    more effectively, and generate results that are relevant across
-    the region.
-  </p>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Nordic clinical trials and CTIS</h3>
+              <p>CTIS allows sponsors to apply for authorisation to run a clinical trial in multiple EU/EEA countries through one online application. This creates opportunities for Nordic trials with shared protocols, harmonised procedures, and coordinated site activation.</p>
+              <p class="mb-0"><a href="https://www.ema.europa.eu/en/human-regulatory-overview/research-development/clinical-trials-human-medicines/clinical-trials-information-system" target="_blank" rel="noopener">EMA: Clinical Trials Information System</a></p>
+            </div>
+          </div>
 
-  <p>
-    NTOG provides a Nordic platform for connecting researchers,
-    clinicians, trial teams, students, PhD candidates, postdoctoral
-    researchers, and national lung cancer groups.
-  </p>
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Translational research</h3>
+              <p>Nordic groups collaborate on tissue, blood, imaging, pathology, genomics, biomarkers, treatment response, toxicity, resistance, and clinical outcome data.</p>
+            </div>
+          </div>
 
-  <hr>
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Screening pilots</h3>
+              <p>Low-dose CT screening pilots are developing at different stages across the Nordic countries, creating opportunities to compare recruitment, eligibility, workflows, nodule algorithms, smoking cessation, incidental findings, quality assurance, and implementation barriers.</p>
+            </div>
+          </div>
 
-  <h2 id="ctis">Nordic clinical trials and CTIS</h2>
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Digital and in-person collaboration</h3>
+              <p>Shared workspaces, video meetings, secure data platforms, and coordinated project documents make daily collaboration possible. In-person meetings remain important for trust, critique, and early idea development.</p>
+            </div>
+          </div>
 
-  <p>
-    The EU Clinical Trials Information System (CTIS) has changed how
-    clinical trials are submitted and managed in Europe. Sponsors can
-    use CTIS to apply for authorisation to run a clinical trial in
-    multiple EU/EEA countries through one online application, while
-    national regulators collaborate in the assessment and authorisation
-    process
-    (<a href="https://www.ema.europa.eu/en/human-regulatory-overview/research-development/clinical-trials-human-medicines/clinical-trials-information-system"
-        target="_blank" rel="noopener">EMA — CTIS</a>).
-  </p>
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Early-career research</h3>
+              <p>NTOG encourages cross-Nordic supervision, student projects, PhD collaboration, postdoctoral visits, short research stays, and presentation of developing work at NTOG-linked meetings.</p>
+            </div>
+          </div>
 
-  <p>
-    For Nordic thoracic oncology, this creates a practical opportunity.
-    Trials can be planned from the beginning as Nordic studies, with
-    shared protocols, harmonised procedures, coordinated site
-    activation, and transparent public trial information.
-  </p>
+          <div class="col-md-6 col-xl-4">
+            <div class="topic-card">
+              <h3>Registry-based comparisons</h3>
+              <p>Nordic registry-based research can compare care pathways, treatment use, quality indicators, outcomes, rare subgroups, and real-world implementation across healthcare systems.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    NTOG aims to support a future where Nordic-led thoracic oncology
-    trials can routinely include sites from several Nordic countries
-    when scientifically and logistically appropriate. This can
-    strengthen recruitment, improve generalisability, shorten
-    timelines, and give more patients access to clinical research.
-  </p>
+    <section class="section-block" id="translational-research">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>How NTOG supports translational collaboration</h2>
+            <p class="lead">The goal is to make Nordic translational research easier to initiate, easier to compare, and more robust scientifically.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="compact-list">
+                <li>Identify groups working on related questions.</li>
+                <li>Connect clinical cohorts with laboratory expertise.</li>
+                <li>Align key variables across biobanks and registries.</li>
+                <li>Discuss consent, data access, and sample-sharing frameworks.</li>
+                <li>Share methods, pipelines, and early observations.</li>
+                <li>Develop multicentre translational study ideas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    Researchers interested in developing or joining a Nordic clinical
-    trial are encouraged to contact the relevant
-    <a href="steering-committee.html">NTOG Steering Committee</a> member.
-  </p>
+    <section class="section-block bg-light" id="early-career">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Students, PhD candidates, and postdoctoral researchers</h2>
+            <p class="lead">Early-career collaboration should start early, before the project design is locked.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="compact-list">
+                <li>Medical student projects co-supervised by researchers in two Nordic countries.</li>
+                <li>Master's theses using Nordic clinical, registry, or translational data.</li>
+                <li>PhD projects based on Nordic cohorts, biobanks, registries, or multicentre studies.</li>
+                <li>Joint or dual-supervision models where feasible.</li>
+                <li>Postdoctoral visits to learn methods, develop analyses, or establish collaborations.</li>
+                <li>Short research stays between Nordic groups.</li>
+              </ul>
+              <p class="mt-3 mb-0">Students and early-career researchers are encouraged to present developing work at NTOG-linked meetings and to seek Nordic collaborators early in project planning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <hr>
+    <section class="section-block" id="questions">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Current collaboration questions</h2>
+            <p class="muted-note">Practical questions may be answered through existing NTOG contacts, or they may lead to new working groups, workshops, or multicentre study ideas.</p>
+          </div>
+          <div class="col-lg-8">
+            <article class="question-card">
+              <h3>How can I find a Nordic co-supervisor for a PhD or master's project?</h3>
+              <p>Contact the Steering Committee member closest to your research area. NTOG can help identify suitable Nordic researchers, clinical groups, registry experts, translational laboratories, or screening teams.</p>
+            </article>
 
-  <h2 id="translational-research">Translational research</h2>
+            <article class="question-card">
+              <h3>Which Nordic groups work with tissue, blood, imaging, or molecular data in stage III NSCLC?</h3>
+              <p>Several Nordic groups work with clinical and translational lung cancer data, including tumour tissue, blood-based biomarkers, imaging, pathology, genomics, treatment response, and outcomes. NTOG can help connect researchers working on related questions and identify whether a multicentre approach is feasible.</p>
+            </article>
 
-  <p>
-    Translational research groups across the Nordic region already
-    collaborate on tissue, blood, imaging, pathology, genomics,
-    biomarkers, treatment response, toxicity, resistance, and clinical
-    outcome data.
-  </p>
+            <article class="question-card">
+              <h3>Is there an existing Nordic protocol or SOP for nodule follow-up in screening pilots?</h3>
+              <p>Nordic screening pilots use partly different workflows, reflecting national programmes, radiology infrastructure, and implementation stage. NTOG supports comparison of these approaches and can help screening teams share protocols, nodule management algorithms, and quality assurance procedures.</p>
+            </article>
 
-  <p>NTOG supports translational collaboration by helping researchers:</p>
+            <article class="question-card">
+              <h3>How can my site join a Nordic CTIS-coordinated clinical trial?</h3>
+              <p>Sites interested in joining a Nordic clinical trial should contact the trial lead or the relevant NTOG Steering Committee member. Early contact is recommended so feasibility, patient population, site capacity, contracts, regulatory requirements, and national approval timelines can be considered before submission or site activation.</p>
+            </article>
 
-  <ul>
-    <li>identify groups working on related questions</li>
-    <li>connect clinical cohorts with laboratory expertise</li>
-    <li>align key variables across biobanks and registries</li>
-    <li>discuss consent, data access, and sample-sharing frameworks</li>
-    <li>share methods, pipelines, and early observations</li>
-    <li>develop multicentre translational study ideas</li>
-  </ul>
+            <article class="question-card">
+              <h3>Where can I present early translational results to Nordic colleagues?</h3>
+              <p>Early results can be discussed through NTOG working groups, smaller workshops, and the Nordic Lung Cancer Symposium. NTOG encourages early presentation of developing ideas, especially when feedback could improve study design or support multicentre collaboration.</p>
+            </article>
 
-  <p>
-    The goal is to make Nordic translational research easier to
-    initiate, easier to compare, and more robust scientifically.
-  </p>
+            <article class="question-card">
+              <h3>How can we develop a multicentre Nordic study from an existing national project?</h3>
+              <p>Start by defining which part of the project benefits from Nordic expansion: larger sample size, rare subgroup analysis, validation cohort, registry comparison, translational material, screening implementation, or broader generalisability. NTOG can help identify potential collaborators, data sources, and practical next steps.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <hr>
+    <section class="section-block bg-light" id="meeting-points">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Meeting points for collaboration</h2>
+            <p class="lead">Strong research networks require digital work and repeated personal contact.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Digital tools make daily collaboration possible across countries, but new ideas often develop fastest when researchers meet in the same room, discuss unfinished work, and identify shared problems.</p>
+              <p>NTOG supports both digital collaboration and in-person meetings. The Nordic Lung Cancer Symposium, NORTHDIP, and smaller working-group workshops remain important settings for developing studies, testing ideas, and building long-term Nordic research relationships.</p>
+              <div class="mt-3">
+                <span class="badge-topic">Nordic Lung Cancer Symposium</span>
+                <span class="badge-topic">NORTHDIP</span>
+                <span class="badge-topic">Working-group workshops</span>
+                <span class="badge-topic">Virtual subgroup meetings</span>
+                <span class="badge-topic">National lung cancer groups</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h2 id="digital-and-in-person">Digital collaboration and in-person meetings</h2>
-
-  <p>
-    Digital tools make daily collaboration possible across countries.
-    Shared workspaces, video meetings, secure data platforms, and
-    coordinated project documents are now essential parts of Nordic
-    research.
-  </p>
-
-  <p>
-    Still, strong research networks require trust, critique, and
-    repeated personal contact. New ideas often develop fastest when
-    researchers meet in the same room, discuss unfinished work, and
-    identify shared problems.
-  </p>
-
-  <p>
-    NTOG therefore supports both digital collaboration and in-person
-    meetings. The Nordic Lung Cancer Symposium, NORTHDIP, and smaller
-    working-group workshops remain important settings for developing
-    studies, testing ideas, and building long-term Nordic research
-    relationships.
-  </p>
-
-  <hr>
-
-  <h2 id="early-career">Students, PhD candidates, and postdoctoral researchers</h2>
-
-  <p>
-    NTOG encourages cross-Nordic supervision, exchange, and
-    early-career collaboration.
-  </p>
-
-  <p>Possible collaboration models include:</p>
-
-  <ul>
-    <li>medical student projects co-supervised by researchers in two Nordic countries</li>
-    <li>master&rsquo;s theses using Nordic clinical, registry, or translational data</li>
-    <li>PhD projects based on Nordic cohorts, biobanks, registries, or multicentre studies</li>
-    <li>joint or dual-supervision models where feasible</li>
-    <li>postdoctoral visits to learn methods, develop analyses, or establish new collaborations</li>
-    <li>short research stays between Nordic groups</li>
-  </ul>
-
-  <p>
-    Students and early-career researchers are encouraged to present
-    developing work at NTOG-linked meetings and to seek Nordic
-    collaborators early in project planning.
-  </p>
-
-  <hr>
-
-  <h2 id="screening-pilots">Lung cancer screening pilot teams</h2>
-
-  <p>
-    Nordic low-dose CT lung cancer screening pilots are developing at
-    different stages in different countries. This creates an
-    opportunity for mutual learning across the region.
-  </p>
-
-  <p>Screening teams can compare and discuss:</p>
-
-  <ul>
-    <li>recruitment strategies</li>
-    <li>eligibility criteria and risk models</li>
-    <li>radiology workflows</li>
-    <li>nodule management algorithms</li>
-    <li>smoking cessation pathways</li>
-    <li>incidental findings</li>
-    <li>quality assurance</li>
-    <li>early outcome data</li>
-    <li>implementation barriers</li>
-  </ul>
-
-  <p>
-    The aim is to support a coordinated Nordic approach where each
-    country&rsquo;s experience strengthens the others.
-  </p>
-
-  <hr>
-
-  <h2 id="current-questions">Current collaboration questions</h2>
-
-  <p>
-    NTOG welcomes practical research questions from clinicians,
-    researchers, students, trial teams, and national groups. Some
-    questions can be answered directly through existing NTOG contacts,
-    while others may lead to new working groups, workshops, or
-    multicentre study ideas.
-  </p>
-
-  <h3>Finding supervisors and collaborators</h3>
-
-  <dl>
-    <dt>How can I find a Nordic co-supervisor for a PhD or master&rsquo;s project?</dt>
-    <dd>
-      Contact the Steering Committee member closest to your research
-      area. NTOG can help identify suitable Nordic researchers,
-      clinical groups, registry experts, translational laboratories,
-      or screening teams.
-    </dd>
-
-    <dt>Which Nordic groups work with tissue, blood, imaging, or molecular data in stage III NSCLC?</dt>
-    <dd>
-      Several Nordic groups work with clinical and translational lung
-      cancer data, including tumour tissue, blood-based biomarkers,
-      imaging, pathology, genomics, treatment response, and outcomes.
-      NTOG can help connect researchers working on related questions
-      and identify whether a Nordic multicentre approach is feasible.
-    </dd>
-  </dl>
-
-  <h3>Screening and clinical workflows</h3>
-
-  <dl>
-    <dt>Is there an existing Nordic protocol or SOP for nodule follow-up in screening pilots?</dt>
-    <dd>
-      Nordic screening pilots use partly different workflows,
-      reflecting national programmes, radiology infrastructure, and
-      implementation stage. NTOG supports comparison of these
-      approaches and can help screening teams share protocols, nodule
-      management algorithms, and quality assurance procedures.
-    </dd>
-  </dl>
-
-  <h3>Clinical trials</h3>
-
-  <dl>
-    <dt>How can my site join a Nordic CTIS-coordinated clinical trial?</dt>
-    <dd>
-      Sites interested in joining a Nordic clinical trial should
-      contact the trial lead or the relevant NTOG Steering Committee
-      member. Early contact is recommended so feasibility, patient
-      population, site capacity, contracts, regulatory requirements,
-      and national approval timelines can be considered before
-      submission or site activation.
-    </dd>
-  </dl>
-
-  <h3>Presenting and developing early research</h3>
-
-  <dl>
-    <dt>Where can I present early translational results to Nordic colleagues?</dt>
-    <dd>
-      Early results can be discussed through NTOG working groups,
-      smaller workshops, and the Nordic Lung Cancer
-      Symposium. NTOG encourages early presentation of
-      developing ideas, especially when feedback could improve study
-      design or support multicentre collaboration.
-    </dd>
-
-    <dt>Which groups are interested in registry-based comparisons across Nordic countries?</dt>
-    <dd>
-      Registry-based research is a natural area for Nordic
-      collaboration. 
-    </dd>
-
-    <dt>How can we develop a multicentre Nordic study from an existing national project?</dt>
-    <dd>
-      Start by defining which part of the project benefits from Nordic
-      expansion: larger sample size, rare subgroup analysis, validation
-      cohort, registry comparison, translational material, screening
-      implementation, or broader generalisability. NTOG can help
-      identify potential collaborators, data sources, and
-      practical next steps.
-    </dd>
-  </dl>
-
-  <hr>
-
-  <h2 id="start">Start a collaboration</h2>
-
-  <p>
-    To propose a study, find a collaborator, involve a student or PhD
-    candidate, or connect with a Nordic working group, contact the
-    relevant <a href="steering-committee.html">NTOG Steering Committee</a> member.
-  </p>
-
-  <p>
-    You can also join the discussion through the NTOG LinkedIn group:
-    <a href="https://www.linkedin.com/groups/10015253/"
-       target="_blank" rel="noopener">linkedin.com/groups/10015253</a>,
-    or contact the NTOG Chair or Secretary.
-  </p>
-
-</section>
-    
+    <section class="section-block" id="start">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Start a collaboration</h2>
+            <p class="lead">To propose a study, find a collaborator, involve a student or PhD candidate, or connect with a Nordic working group, contact the relevant NTOG Steering Committee member.</p>
+            <p class="mb-0">You can also join the discussion through the NTOG LinkedIn group or contact the NTOG Chair or Secretary.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="steering-committee.html" class="btn btn-primary">Steering Committee</a>
+                <a href="expert.html" class="btn btn-outline-primary">Expert Network</a>
+                <a href="volunteer.html" class="btn btn-outline-primary">Work Packages</a>
+                <a href="https://www.linkedin.com/groups/10015253/" class="btn btn-outline-primary" target="_blank" rel="noopener">NTOG LinkedIn group</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-<script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
