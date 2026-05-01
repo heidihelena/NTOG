@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Clinical Tools and Educational Resources | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Clinical tools and educational resources from NTOG, including links to Nordic cancer data resources, guideline tools, MDT structure resources, screening and pulmonary nodule management education, and future educational calculators.">
+  <meta name="keywords" content="NTOG tools, clinical resources, Nordic cancer data, NORDCAN, lung cancer MDT, pulmonary nodule calculator, lung cancer screening, Fleischner, BTS, Lung-RADS, PLCOm2012, HUNT, Brock model, Mayo model, Herder model, Nordic lung cancer care">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <link rel="canonical" href="https://ntog.org/tools.html">
+
+  <meta property="og:title" content="Clinical Tools and Educational Resources | NTOG">
+  <meta property="og:description" content="NTOG clinical tools and educational resources for Nordic lung cancer research, MDT work, screening, nodule management, and quality improvement.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/tools.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clinical Tools and Educational Resources | NTOG">
+  <meta name="twitter:description" content="Educational resources and tool links for Nordic lung cancer care, research, MDT work, screening, and nodule management.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .tool-card,
+    .hub-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .tool-card,
+    .hub-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .tool-card h3,
+    .hub-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .tool-card p,
+    .hub-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .tool-label {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .tool-label.external {
+      background: #eef6fb;
+      color: #1f4e79;
+    }
+
+    .tool-label.development {
+      background: #f7f0df;
+      color: #7a4f01;
+    }
+
+    .tool-label.educational {
+      background: #edf7ed;
+      color: #246b30;
+    }
+
+    .status-note {
+      border-radius: 1rem;
+      border: 1px solid #d7eaf3;
+      background: #f0f7fb;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .warning-note {
+      border-radius: 1rem;
+      border: 1px solid #f1d6a8;
+      background: #fff7e6;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .tools-table {
+      margin-bottom: 0;
+    }
+
+    .tools-table th {
+      white-space: nowrap;
+      background: #102a43;
+      color: #ffffff;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="/about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="/history.html">History</a></li>
+              <li><a class="dropdown-item" href="/steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item active" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1 class="display-5 fw-bold mb-3">Clinical Tools and Educational Resources</h1>
+      <p class="lead-narrow mb-4">Links to selected external tools and NTOG educational resources for Nordic lung cancer research, MDT work, screening, nodule management, quality indicators, and clinical pathway development.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#current-tools" class="btn btn-light btn-lg">Current tools</a>
+        <a href="#educational-hub" class="btn btn-outline-light btn-lg">Educational hub concept</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Purpose of this page</h2>
+            <p class="lead">This page collects tools and educational resources that can support Nordic lung cancer research, teaching, pathway development, and quality improvement.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Some resources are external tools maintained by other organisations. Some are NTOG pages that summarise clinical resources, protocols, or research priorities. Some are proposed educational tools that are not yet implemented.</p>
+              <p class="mb-0">NTOG does not replace national guidelines, local clinical protocols, multidisciplinary team decisions, or validated clinical decision support systems.</p>
+            </div>
+          </div>
+        </div>
+        <div class="warning-note mt-4">
+          <strong>Clinical disclaimer:</strong> Tools linked or described here are for information, education, research planning, or quality improvement. They are not a substitute for local validated tools, national guidelines, clinical judgment, or multidisciplinary team assessment.
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="current-tools">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Current external tools and resources</h2>
+            <p class="lead mb-0">Selected external resources useful for Nordic lung cancer research, education, and pathway work.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label external">External data resource</span>
+              <h3>NORDCAN</h3>
+              <p>Nordic cancer statistics including incidence, mortality, prevalence, and survival data. Useful for population-level comparisons and research questions.</p>
+              <a href="https://nordcan.iarc.fr/" class="btn btn-outline-primary mt-3" target="_blank" rel="noopener">Open NORDCAN</a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label external">External guideline resource</span>
+              <h3>National lung cancer guidelines</h3>
+              <p>Links to Swedish, Norwegian, Danish, and Finnish national lung cancer guideline systems are collected on the NTOG guidelines page.</p>
+              <a href="/guidelines.html" class="btn btn-outline-primary mt-3">View guideline comparison</a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label external">External education</span>
+              <h3>NORTHDIP</h3>
+              <p>Nordic Radiotherapy Diploma Programme. Relevant for education and professional development in radiotherapy and thoracic oncology.</p>
+              <a href="https://northdip.org" class="btn btn-outline-primary mt-3" target="_blank" rel="noopener">Open NORTHDIP</a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label educational">NTOG resource</span>
+              <h3>MDT structure and pathway research</h3>
+              <p>NTOG research news summarises Nordic work on multidisciplinary team meetings and highlights questions for quality improvement and care pathway research.</p>
+              <a href="/research-news/lung-cancer-mdt-nordic-survey.html" class="btn btn-outline-primary mt-3">Read MDT article</a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label educational">NTOG resource</span>
+              <h3>Quality indicators and registries</h3>
+              <p>Research news and protocol pages describe Nordic questions around lung cancer quality indicators, registry variables, care pathways, and survival comparisons.</p>
+              <a href="/research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html" class="btn btn-outline-primary mt-3">Read registry article</a>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="tool-card">
+              <span class="tool-label educational">NTOG resource</span>
+              <h3>Screening and nodule management</h3>
+              <p>NTOG is developing Nordic educational and harmonisation work around lung cancer screening and pulmonary nodule follow-up.</p>
+              <a href="/guidelines/nodule-management.html" class="btn btn-outline-primary mt-3">View nodule page</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="mdt-tools">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>MDT structure resources</h2>
+            <p class="lead">NTOG can support shared learning on how lung cancer multidisciplinary team meetings are structured across countries and centres.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Possible educational resources for MDT work include templates for describing MDT structure, minimum pre-MDT information, specialty participation, documentation of decisions, treatment intent, trial availability, and communication back to patients and referring clinicians.</p>
+              <p class="mb-3">This work connects directly with NTOG priorities in care pathways, quality indicators, registry variables, clinical trial access, and real-world outcomes.</p>
+              <div>
+                <span class="badge-topic">MDT participation</span>
+                <span class="badge-topic">Referral criteria</span>
+                <span class="badge-topic">Pre-MDT data</span>
+                <span class="badge-topic">Treatment intent</span>
+                <span class="badge-topic">Trial access</span>
+                <span class="badge-topic">Decision documentation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="educational-hub">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Educational hub for nodule management and screening</h2>
+            <p class="lead">NTOG is considering an educational comparison hub for published pulmonary nodule and lung cancer screening models, algorithms, and frameworks.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="hub-card">
+              <span class="tool-label development">Concept in development</span>
+              <h3>Educational value: comparison, not calculation</h3>
+              <p>The proposed hub would place published nodule and screening calculators side by side so clinicians, trainees, and researchers can see how different frameworks agree or disagree when applied to the same example case.</p>
+              <p class="mb-0">It would not recommend biopsy, surgery, treatment, or a final management decision. It would not store patient data. It would not be a clinical decision support tool.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning-note mt-4">
+          <strong>Educational use only:</strong> The proposed hub would be for teaching, model comparison, and research discussion. It would carry the disclaimer: “Educational use only. Not for clinical decision-making. Use your local validated tool and your multidisciplinary team.”
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="hub-scope">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Proposed educational hub scope</h2>
+            <p class="lead mb-0">The hub would show how published models and pathways differ, without creating a composite recommendation.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>1. Basic calculators</h3>
+              <ul class="compact-list">
+                <li>Pack-years</li>
+                <li>Body mass index</li>
+                <li>Volume doubling time</li>
+                <li>Simple growth categories</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>2. Screening eligibility</h3>
+              <ul class="compact-list">
+                <li>USPSTF-style eligibility</li>
+                <li>NELSON-style eligibility</li>
+                <li>PLCOm2012 risk threshold comparison</li>
+                <li>HUNT model comparison</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>3. Nodule risk models</h3>
+              <ul class="compact-list">
+                <li>Brock / PanCan</li>
+                <li>Mayo / Swensen</li>
+                <li>Herder PET-refined probability</li>
+                <li>Development-cohort warnings</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>4. Management frameworks</h3>
+              <ul class="compact-list">
+                <li>Fleischner 2017</li>
+                <li>BTS 2015</li>
+                <li>Lung-RADS v2022</li>
+                <li>NELSON volumetric protocols</li>
+                <li>ESTI screening management</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>5. Comparison view</h3>
+              <ul class="compact-list">
+                <li>One example case, multiple frameworks</li>
+                <li>Side-by-side management output</li>
+                <li>Concordance and disagreement display</li>
+                <li>“Why they differ” explanation</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="hub-card">
+              <h3>6. Communication widgets</h3>
+              <ul class="compact-list">
+                <li>False-positive expectations</li>
+                <li>Overdiagnosis explanation</li>
+                <li>Radiation dose context</li>
+                <li>Smoking cessation and future eligibility</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="calculator-inventory">
+      <div class="container">
+        <h2>Illustrative calculator and framework inventory</h2>
+        <p class="lead">This inventory is a planning list. Inclusion does not mean the tool is implemented, validated by NTOG, or recommended for clinical use.</p>
+
+        <div class="table-wrap mt-4">
+          <table class="table table-striped tools-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Examples</th>
+                <th>Educational purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Risk and eligibility models</td>
+                <td>PLCOm2012, HUNT, USPSTF-style eligibility, NELSON-style eligibility</td>
+                <td>Show how screening eligibility changes depending on model assumptions, population, and smoking-history variables.</td>
+              </tr>
+              <tr>
+                <td>Nodule malignancy probability</td>
+                <td>Brock / PanCan, Mayo / Swensen, Herder</td>
+                <td>Compare how per-nodule risk estimates differ when morphology, patient factors, and PET findings are handled differently.</td>
+              </tr>
+              <tr>
+                <td>Nodule follow-up frameworks</td>
+                <td>Fleischner 2017, BTS 2015, Lung-RADS v2022, NELSON volumetric protocols, ESTI statements</td>
+                <td>Show how the same nodule can receive different follow-up or referral advice under different frameworks.</td>
+              </tr>
+              <tr>
+                <td>Programme-level communication</td>
+                <td>False positives, overdiagnosis, radiation dose context, smoking cessation</td>
+                <td>Support teaching and patient communication using population-level context, not individual diagnosis.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="editorial-principles">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Editorial and governance principles</h2>
+            <p class="lead">Any future NTOG educational calculator page should be transparent, version-stamped, citation-anchored, and clinically cautious.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="compact-list">
+                <li>Every model should display its name, year, version, coefficient source, and citation.</li>
+                <li>Every model should show when inputs fall outside the development-cohort range.</li>
+                <li>No model averaging, composite score, or “recommended” answer across frameworks.</li>
+                <li>No patient identifiers should be entered.</li>
+                <li>Inputs should not be stored, transmitted, or persisted.</li>
+                <li>Clinical deployment, if ever pursued, must be separate from the public educational hub and require local validation, governance, audit, and data protection review.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="development-order">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Suggested development order</h2>
+            <p class="lead">A cautious build should start with low-risk educational calculators before adding probabilistic models or pathway comparisons.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ol class="compact-list">
+                <li>Foundational calculators: pack-years, BMI, volume doubling time, and simple deterministic follow-up examples.</li>
+                <li>Published probabilistic models with citations, coefficient source tracking, and outside-population warnings.</li>
+                <li>Eligibility comparator for screening criteria and risk models.</li>
+                <li>Branching pathway examples such as BTS, NELSON-style volumetric follow-up, Lung-RADS, and ESTI-style screening management.</li>
+                <li>Full comparison view: one example case, all frameworks side by side.</li>
+                <li>Communication widgets for false positives, overdiagnosis, radiation context, and smoking cessation education.</li>
+                <li>English and Finnish language layers, with other Nordic languages added as capacity allows.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="related">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Related NTOG pages</h2>
+            <p class="lead mb-0">Use these pages for guidelines, protocol harmonisation, nodule management, research collaboration, and expert routing.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="/guidelines.html" class="btn btn-primary">Clinical Guidelines</a>
+                <a href="/protocols.html" class="btn btn-outline-primary">Protocols</a>
+                <a href="/guidelines/nodule-management.html" class="btn btn-outline-primary">Nodule Management and Screening</a>
+                <a href="/collaborations.html" class="btn btn-outline-primary">Research Collaboration</a>
+                <a href="/expert.html" class="btn btn-outline-primary">Expert Network</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/js/scripts.js" defer></script>
+</body>
+</html>
