@@ -243,3 +243,63 @@
     display: none;
   }
 }
+
+:root {
+  --dk-red: #c8102e;
+  --dk-red-dark: #8f0d22;
+  --dk-red-soft: #fff1f3;
+  --dk-red-border: #f2b8c2;
+
+  --cph-harbour: #0f6b7a;
+  --cph-harbour-dark: #084b55;
+  --cph-sand: #f5efe6;
+  --cph-stone: #e6e0d6;
+
+  --event-accent: var(--dk-red);
+  --event-accent-dark: var(--dk-red-dark);
+  --event-accent-soft: var(--dk-red-soft);
+}
+
+.btn-event {
+  background-color: var(--event-accent);
+  border-color: var(--event-accent);
+  color: #ffffff;
+}
+
+.btn-event:hover,
+.btn-event:focus {
+  background-color: var(--event-accent-dark);
+  border-color: var(--event-accent-dark);
+  color: #ffffff;
+}
+
+.badge-event {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: var(--event-accent-soft);
+  color: var(--event-accent-dark);
+  border: 1px solid var(--dk-red-border);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.ntog2027 .navbar {
+  border-bottom: 3px solid var(--dk-red);
+}
+
+.ntog2027 .nav-lung-art {
+  color: rgba(200, 16, 46, 0.12);
+}
+
+.ntog2027-hero {
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(5, 20, 31, 0.45), rgba(5, 20, 31, 0.45)),
+    linear-gradient(
+      135deg,
+      #071f35 0%,
+      #0f6b7a 45%,
+      #c8102e 100%
+    );
+}
