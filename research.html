@@ -1,333 +1,535 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO Meta Tags -->
-<title>Research Overview | Nordic Lung Cancer Research | NTOG</title>
+  <title>Research Overview | Nordic Lung Cancer Research | NTOG</title>
+  <meta name="description" content="NTOG supports Nordic lung cancer research across Denmark, Finland, Iceland, Norway, and Sweden, including clinical trials, lung cancer registries, screening, biomarkers, multidisciplinary care, Stage III NSCLC, small-cell lung cancer, and translational thoracic oncology research.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, lung cancer research, thoracic oncology, Nordic lung cancer registries, clinical trials, lung cancer screening, pulmonary nodule management, Stage III NSCLC, small-cell lung cancer, biomarkers, translational research, radiotherapy, multidisciplinary care">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
 
-<meta name="description" content="NTOG supports Nordic lung cancer research across Denmark, Finland, Iceland, Norway, and Sweden, including clinical trials, lung cancer registries, screening, biomarkers, multidisciplinary care, Stage III NSCLC, small-cell lung cancer, and translational thoracic oncology research.">
-<meta name="keywords" content="pulmonary nodule guideline, lung nodule follow-up, Pan-Nordic guideline, NTOG, lung cancer screening, low-dose CT, thoracic oncology, radiology reporting, pulmonology, Nordic lung cancer care">
+  <meta property="og:title" content="Research Overview | Nordic Lung Cancer Research | NTOG">
+  <meta property="og:description" content="NTOG supports Nordic collaboration in lung cancer clinical studies, registry-based research, screening, biomarkers, care pathways, Stage III NSCLC, small-cell lung cancer, and translational thoracic oncology research.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/research.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 
-<meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Research Overview | Nordic Lung Cancer Research | NTOG">
+  <meta name="twitter:description" content="Nordic collaboration in lung cancer research, clinical studies, registries, screening, biomarkers, and translational science.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
-<!-- Open Graph Meta Tags for Social Sharing -->
-<meta property="og:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta property="og:description" content="NTOG is working toward harmonised Nordic guidance for pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and diagnostic pathways.">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
-<meta property="og:url" content="https://ntog.org/pulmonary-nodule-guideline.html">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Twitter / X Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta name="twitter:description" content="Nordic collaboration on pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and Pan-Nordic guideline development.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png"> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/tables.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/nav.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 900px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .research-card,
+    .work-card,
+    .faq-card,
+    .link-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .research-card,
+    .work-card,
+    .faq-card,
+    .link-card {
+      padding: 1.5rem;
+    }
+
+    .research-card h3,
+    .work-card h3,
+    .faq-card h3,
+    .link-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .research-card p,
+    .work-card p,
+    .faq-card p,
+    .link-card p {
+      color: #52606d;
+    }
+
+    .topic-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .topic-list li {
+      margin-bottom: 0.65rem;
+    }
+
+    .topic-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .faq-card {
+      margin-bottom: 1rem;
+    }
+
+    .faq-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .cta-panel {
+      border-radius: 1.25rem;
+      background: #f0f7fb;
+      border: 1px solid #d7eaf3;
+      padding: 2rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">Research news</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item active" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-  
-   <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">Research Overview</h1>
-    <p class="lead">Nordic Lung Cancer Research</p>
-  </div>
-</section>
+  </nav>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-<section id="research-overview" class="research-overview">
-
-  <header>
-    <h1>Research Overview</h1>
-    <p>
-      The Nordic Thoracic Oncology Group (NTOG) supports collaborative lung cancer and thoracic oncology research across Denmark, Finland, Iceland, Norway, and Sweden. Through Nordic cooperation, NTOG aims to strengthen clinical research, registry-based studies, translational science, education, and quality improvement in lung cancer care.
-    </p>
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Research</span>
+      <h1 class="display-5 fw-bold mb-3">Research Overview</h1>
+      <p class="lead-narrow mb-4">NTOG supports collaborative lung cancer and thoracic oncology research across Denmark, Finland, Iceland, Norway, and Sweden.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="ongoing-projects.html" class="btn btn-light btn-lg">Ongoing projects</a>
+        <a href="collaborations.html" class="btn btn-outline-light btn-lg">Collaboration opportunities</a>
+      </div>
+    </div>
   </header>
 
-  <section class="faq-section">
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Nordic lung cancer research</h2>
+            <p class="lead">Through Nordic cooperation, NTOG aims to strengthen clinical research, registry-based studies, translational science, education, and quality improvement in lung cancer care.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The Nordic Thoracic Oncology Group (NTOG) is a multidisciplinary network of clinicians and researchers working in lung cancer and thoracic oncology across the Nordic countries.</p>
+              <p>NTOG brings together expertise from Denmark, Finland, Iceland, Norway, and Sweden to support research collaboration, education, clinical development, and improved care for patients with thoracic cancers.</p>
+              <p class="mb-0">Nordic collaboration is especially valuable because many modern lung cancer research questions require larger patient populations, comparable healthcare data, shared clinical expertise, and cross-country participation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <article class="faq-item">
-      <h2>What is the Nordic Thoracic Oncology Group?</h2>
-      <p>
-        The Nordic Thoracic Oncology Group (NTOG) is a multidisciplinary network of clinicians and researchers working in lung cancer and thoracic oncology across the Nordic countries. NTOG brings together expertise from Denmark, Finland, Iceland, Norway, and Sweden to support research collaboration, education, clinical development, and improved care for patients with thoracic cancers.
-      </p>
-    </article>
+    <section class="section-block bg-light" id="research-areas">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Research focus areas</h2>
+            <p class="lead mb-0">NTOG research focuses on clinically important questions in lung cancer and thoracic oncology.</p>
+          </div>
+          <div>
+            <a href="protocols.html" class="btn btn-outline-primary">View protocols</a>
+          </div>
+        </div>
 
-    <article class="faq-item">
-      <h2>What does NTOG research focus on?</h2>
-      <p>
-        NTOG research focuses on clinically important questions in lung cancer and thoracic oncology. Key areas include Nordic lung cancer registries, quality indicators, multidisciplinary care pathways, lung cancer screening, pulmonary nodule management, Stage III non-small cell lung cancer, small-cell lung cancer, clinical trial collaboration, radiotherapy, biomarkers, and translational research.
-      </p>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Clinical trial collaboration</h3>
+              <p>Collaborative clinical studies in lung cancer treatment, radiotherapy, immunotherapy, multimodality care, early-stage disease, Stage III NSCLC, and small-cell lung cancer.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Nordic registries and quality indicators</h3>
+              <p>Registry-based studies on diagnosis, treatment, survival, quality indicators, real-world outcomes, and variation in care across healthcare systems.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Screening and early detection</h3>
+              <p>Low-dose CT screening, eligibility, recruitment, CT workflows, radiology reporting, incidental findings, smoking cessation, cost-effectiveness, and implementation.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Pulmonary nodule management</h3>
+              <p>Pan-Nordic approaches to pulmonary nodule follow-up, diagnostic pathways, screening integration, radiology reporting, and clinical guideline development.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Translational research and biomarkers</h3>
+              <p>Tumour biology, molecular diagnostics, tissue studies, circulating tumour DNA, immune response, biomarkers, treatment selection, and resistance monitoring.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="research-card">
+              <h3>Digital tools and AI</h3>
+              <p>Artificial intelligence, digital tools, imaging workflows, clinical decision support, registry research methods, and quality improvement in lung cancer care.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <p><strong>Key research themes include:</strong></p>
-      <ul>
-        <li>Nordic lung cancer registries and quality indicators</li>
-        <li>Multidisciplinary team models and care pathways</li>
-        <li>Lung cancer screening and early detection</li>
-        <li>Stage III non-small cell lung cancer treatment strategies</li>
-        <li>Small-cell lung cancer research</li>
-        <li>Clinical trial collaboration</li>
-        <li>Translational research and biomarker studies</li>
-        <li>Radiotherapy and stereotactic body radiotherapy</li>
-        <li>Artificial intelligence and digital tools in lung cancer care</li>
-      </ul>
-    </article>
+    <section class="section-block" id="key-themes">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Key research themes</h2>
+            <p class="lead">Many NTOG themes connect research, clinical practice, registry data, guideline development, and education.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <div class="mb-3">
+                <span class="badge-topic">Nordic lung cancer registries</span>
+                <span class="badge-topic">Quality indicators</span>
+                <span class="badge-topic">MDT models</span>
+                <span class="badge-topic">Care pathways</span>
+                <span class="badge-topic">Lung cancer screening</span>
+                <span class="badge-topic">Early detection</span>
+                <span class="badge-topic">Stage III NSCLC</span>
+                <span class="badge-topic">Small-cell lung cancer</span>
+                <span class="badge-topic">Clinical trials</span>
+                <span class="badge-topic">Biomarkers</span>
+                <span class="badge-topic">Radiotherapy</span>
+                <span class="badge-topic">SBRT</span>
+                <span class="badge-topic">Artificial intelligence</span>
+                <span class="badge-topic">Digital tools</span>
+              </div>
+              <p class="mb-0">These themes are suitable for Nordic comparison, collaborative research, shared protocol development, specialty group work, and quality improvement initiatives.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <article class="faq-item">
-      <h2>Why is Nordic collaboration important in lung cancer research?</h2>
-      <p>
-        Nordic collaboration is important because many lung cancer research questions require larger patient populations, shared clinical expertise, and comparable healthcare data. Modern lung cancer is increasingly divided into smaller biological and clinical subgroups, making cross-country collaboration especially valuable for academic studies, registry research, biomarker projects, and clinical trials.
-      </p>
-      <p>
-        By working together, the Nordic countries can compare treatment pathways, evaluate outcomes, develop shared research questions, and create stronger evidence for improving lung cancer care.
-      </p>
-    </article>
+    <section class="section-block bg-light" id="why-collaboration-matters">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Why Nordic collaboration matters</h2>
+            <p class="lead">Modern lung cancer is increasingly divided into smaller biological and clinical subgroups.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Many lung cancer research questions require larger patient populations, shared clinical expertise, and comparable healthcare data. Cross-country collaboration is therefore valuable for academic studies, registry research, biomarker projects, and clinical trials.</p>
+              <p>By working together, the Nordic countries can compare treatment pathways, evaluate outcomes, develop shared research questions, and create stronger evidence for improving lung cancer care.</p>
+              <p class="mb-0">The goal is to support research that can improve diagnosis, treatment, follow-up, quality of care, and outcomes for patients with lung cancer and other thoracic cancers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <article class="faq-item">
-      <h2>Which countries are involved in NTOG?</h2>
-      <p>
-        NTOG brings together thoracic oncology professionals from the five Nordic countries:
-      </p>
-      <ul>
-        <li>Denmark</li>
-        <li>Finland</li>
-        <li>Iceland</li>
-        <li>Norway</li>
-        <li>Sweden</li>
-      </ul>
-    </article>
+    <section class="section-block" id="work-packages">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Research through work packages</h2>
+            <p class="muted-note">NTOG work packages organise practical collaboration and create routes for researchers and clinicians to contribute.</p>
+            <a href="volunteer.html" class="btn btn-outline-primary">Work package descriptions</a>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="work-card">
+                  <h3>WP1: Information and Harmonisation of Data</h3>
+                  <p>Nordic registries and biobanks, common variables, frameworks for data collection and analysis.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="work-card">
+                  <h3>WP2: Screening and Prevention</h3>
+                  <p>Joint Nordic LDCT screening protocol, prevention strategies, smoking cessation, and screening implementation.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="work-card">
+                  <h3>WP3: Clinical Studies</h3>
+                  <p>Collaborative trials in early-stage lung cancer, immunotherapy, radiotherapy, and multimodality treatment.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="work-card">
+                  <h3>WP4: Guidelines and Educational Activities</h3>
+                  <p>Consensus on Nordic guidelines, courses, seminars, congresses, and educational activities including NORTHDIP.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <article class="faq-item">
-      <h2>What types of lung cancer research does NTOG support?</h2>
-      <p>
-        NTOG supports several types of lung cancer and thoracic oncology research, including clinical trials, registry-based studies, translational research, biomarker studies, screening implementation research, quality-of-care studies, and multidisciplinary care pathway research.
-      </p>
-      <p>
-        The goal is to support research that can improve diagnosis, treatment, follow-up, and outcomes for patients with lung cancer and other thoracic cancers.
-      </p>
-    </article>
+    <section class="section-block bg-light" id="research-faq">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Research FAQ</h2>
+            <p class="muted-note">Short explanations for common search terms and public-facing research questions.</p>
+          </div>
+          <div class="col-lg-8">
+            <article class="faq-card">
+              <h3>What types of lung cancer research does NTOG support?</h3>
+              <p>NTOG supports clinical trials, registry-based studies, translational research, biomarker studies, screening implementation research, quality-of-care studies, and multidisciplinary care pathway research.</p>
+              <p class="mb-0">The goal is to support research that can improve diagnosis, treatment, follow-up, and outcomes for patients with lung cancer and other thoracic cancers.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>How are Nordic lung cancer registries used in research?</h2>
-      <p>
-        Nordic lung cancer registries and national cancer data resources can support research on diagnosis, treatment, survival, quality indicators, variation in care, and real-world outcomes. Registry-based research is particularly valuable for identifying differences between healthcare systems and for evaluating whether changes in clinical practice improve patient outcomes.
-      </p>
-      <p>
-        Harmonised registry research can also help Nordic researchers study rare subgroups, compare treatment strategies, and develop shared quality improvement initiatives.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>How are Nordic lung cancer registries used in research?</h3>
+              <p>Nordic lung cancer registries and national cancer data resources can support research on diagnosis, treatment, survival, quality indicators, variation in care, and real-world outcomes.</p>
+              <p class="mb-0">Harmonised registry research can help Nordic researchers study rare subgroups, compare treatment strategies, and develop shared quality improvement initiatives.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What are lung cancer quality indicators?</h2>
-      <p>
-        Lung cancer quality indicators are measures used to evaluate the quality of lung cancer diagnosis, treatment, and follow-up. They may include factors such as time to diagnosis, completeness of staging, access to multidisciplinary team review, treatment rates, use of molecular testing, survival, and patient outcomes.
-      </p>
-      <p>
-        Comparing quality indicators across the Nordic countries can help identify variation in care and support improvements in clinical pathways.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What are lung cancer quality indicators?</h3>
+              <p>Lung cancer quality indicators are measures used to evaluate the quality of lung cancer diagnosis, treatment, and follow-up. They may include time to diagnosis, completeness of staging, access to multidisciplinary team review, treatment rates, use of molecular testing, survival, and patient outcomes.</p>
+              <p class="mb-0">Comparing quality indicators across the Nordic countries can help identify variation in care and support improvements in clinical pathways.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What is lung cancer screening?</h2>
-      <p>
-        Lung cancer screening aims to detect lung cancer at an earlier and more treatable stage, usually by using low-dose computed tomography, also called low-dose CT. Screening is generally focused on people who have an increased risk of lung cancer, such as current or former smokers meeting specific risk criteria.
-      </p>
-      <p>
-        Nordic screening pilots are helping answer practical questions about eligibility criteria, recruitment, CT workflows, radiology reporting, incidental findings, smoking cessation support, cost-effectiveness, and national implementation.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What is lung cancer screening?</h3>
+              <p>Lung cancer screening aims to detect lung cancer at an earlier and more treatable stage, usually by using low-dose computed tomography, also called low-dose CT. Screening is generally focused on people who have an increased risk of lung cancer, such as current or former smokers meeting specific risk criteria.</p>
+              <p class="mb-0">Nordic screening pilots are helping answer practical questions about eligibility criteria, recruitment, CT workflows, radiology reporting, incidental findings, smoking cessation support, cost-effectiveness, and national implementation.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What is pulmonary nodule management?</h2>
-      <p>
-        A pulmonary nodule is a small finding in the lung, usually detected on CT imaging. Most pulmonary nodules are benign, but some require follow-up to exclude early lung cancer. Clear nodule management is important to detect cancer early while avoiding unnecessary investigations, referrals, and patient anxiety.
-      </p>
-      <p>
-        NTOG members are working toward a Pan-Nordic approach to pulmonary nodule follow-up and diagnostic pathways. This work is closely connected to lung cancer screening and clinical guideline development.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What is pulmonary nodule management?</h3>
+              <p>A pulmonary nodule is a small finding in the lung, usually detected on CT imaging. Most pulmonary nodules are benign, but some require follow-up to exclude early lung cancer.</p>
+              <p class="mb-0">NTOG members are working toward a Pan-Nordic approach to pulmonary nodule follow-up and diagnostic pathways. This work is closely connected to lung cancer screening and clinical guideline development.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What research is being done in Stage III non-small cell lung cancer?</h2>
-      <p>
-        Stage III non-small cell lung cancer is a complex area of lung cancer care that often requires input from several specialties, including oncology, pulmonology, thoracic surgery, radiology, pathology, and radiotherapy. Research in this field includes chemoradiotherapy, immunotherapy, surgery, radiotherapy techniques, biomarkers, patient selection, toxicity, survival, and quality of life.
-      </p>
-      <p>
-        Nordic collaboration can help compare treatment strategies, evaluate outcomes, and support clinical studies in this challenging patient group.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What research is being done in Stage III non-small cell lung cancer?</h3>
+              <p>Stage III non-small cell lung cancer often requires input from oncology, pulmonology, thoracic surgery, radiology, pathology, and radiotherapy. Research includes chemoradiotherapy, immunotherapy, surgery, radiotherapy techniques, biomarkers, patient selection, toxicity, survival, and quality of life.</p>
+              <p class="mb-0">Nordic collaboration can help compare treatment strategies, evaluate outcomes, and support clinical studies in this challenging patient group.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What research is being done in small-cell lung cancer?</h2>
-      <p>
-        Small-cell lung cancer is an aggressive form of lung cancer where new treatment strategies are urgently needed. NTOG-related research includes academic clinical trials, radiotherapy studies, immunotherapy combinations, limited-stage and extensive-stage disease, and real-world outcome studies.
-      </p>
-      <p>
-        Collaborative Nordic research can make it easier to conduct meaningful studies in small-cell lung cancer and to evaluate new treatment approaches across countries.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What research is being done in small-cell lung cancer?</h3>
+              <p>Small-cell lung cancer is an aggressive form of lung cancer where new treatment strategies are urgently needed. NTOG-related research includes academic clinical trials, radiotherapy studies, immunotherapy combinations, limited-stage and extensive-stage disease, and real-world outcome studies.</p>
+              <p class="mb-0">Collaborative Nordic research can make it easier to conduct meaningful studies in small-cell lung cancer and evaluate new treatment approaches across countries.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What is translational lung cancer research?</h2>
-      <p>
-        Translational lung cancer research connects laboratory science with clinical care. It may include tumour biology, molecular diagnostics, biomarkers, imaging, circulating tumour DNA, immune response, tissue studies, and clinical outcomes.
-      </p>
-      <p>
-        The aim of translational research is to improve how lung cancer is diagnosed, classified, treated, and monitored, and to bring scientific discoveries closer to patient care.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What is translational lung cancer research?</h3>
+              <p>Translational lung cancer research connects laboratory science with clinical care. It may include tumour biology, molecular diagnostics, biomarkers, imaging, circulating tumour DNA, immune response, tissue studies, and clinical outcomes.</p>
+              <p class="mb-0">The aim is to improve how lung cancer is diagnosed, classified, treated, and monitored, and to bring scientific discoveries closer to patient care.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>What role do biomarkers play in lung cancer research?</h2>
-      <p>
-        Biomarkers are biological features that can help guide diagnosis, prognosis, treatment selection, and monitoring of lung cancer. In modern lung cancer care, biomarkers are essential for targeted therapy, immunotherapy decisions, resistance monitoring, and clinical trial development.
-      </p>
-      <p>
-        Nordic collaboration in biomarker research can support larger datasets, shared expertise, and improved understanding of how molecular testing can be implemented in routine care.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>What role do biomarkers play in lung cancer research?</h3>
+              <p>Biomarkers are biological features that can help guide diagnosis, prognosis, treatment selection, and monitoring of lung cancer. In modern lung cancer care, biomarkers are essential for targeted therapy, immunotherapy decisions, resistance monitoring, and clinical trial development.</p>
+              <p class="mb-0">Nordic collaboration in biomarker research can support larger datasets, shared expertise, and improved understanding of molecular testing in routine care.</p>
+            </article>
 
-    <article class="faq-item">
-      <h2>How does NTOG research benefit patients?</h2>
-      <p>
-        NTOG research benefits patients by supporting earlier diagnosis, better treatment strategies, more consistent care pathways, improved use of registry data, stronger clinical trials, and better collaboration between Nordic experts.
-      </p>
-      <p>
-        The long-term goal is to improve outcomes and quality of care for patients with lung cancer and other thoracic cancers across the Nordic countries.
-      </p>
-    </article>
+            <article class="faq-card">
+              <h3>How can researchers collaborate with NTOG?</h3>
+              <p>Researchers interested in Nordic lung cancer or thoracic oncology collaboration can connect with NTOG through national lung cancer groups, NTOG meetings, research networks, work packages, and symposium activities.</p>
+              <p class="mb-0">NTOG welcomes collaboration on clinical trials, registry-based research, translational studies, screening projects, guideline development, and quality improvement initiatives with clear clinical or scientific relevance.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <article class="faq-item">
-      <h2>How can researchers collaborate with NTOG?</h2>
-      <p>
-        Researchers interested in Nordic lung cancer or thoracic oncology collaboration can connect with NTOG through national lung cancer groups, NTOG meetings, research networks, and symposium activities. NTOG welcomes collaboration on clinical trials, registry-based research, translational studies, screening projects, guideline development, and quality improvement initiatives.
-      </p>
-      <p>
-        Proposed research collaborations should have clear clinical or scientific relevance and ideally include opportunities for cross-country Nordic participation.
-      </p>
-    </article>
-
-  </section>
-
-
-
-    
+    <section class="section-block" id="next">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Research routes and resources</h2>
+            <p class="lead mb-0">Move from overview to projects, publications, collaboration opportunities, expert contacts, protocols, and symposium activities.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="ongoing-projects.html" class="btn btn-primary">Ongoing Projects</a>
+                <a href="publications.html" class="btn btn-outline-primary">Publications</a>
+                <a href="collaborations.html" class="btn btn-outline-primary">Collaboration Opportunities</a>
+                <a href="expert.html" class="btn btn-outline-primary">Expert Network</a>
+                <a href="/ntog2027/" class="btn btn-outline-primary">Nordic Lung Cancer Symposium 2027</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-<script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
