@@ -1,119 +1,132 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const hamburger = document.querySelector('.hamburger');
-  const navMenu = document.querySelector('.nav-menu');
+document.addEventListener("DOMContentLoaded", function () {
+  /* Legacy custom mobile navigation support.
+     Bootstrap navbar pages do not need this, but older pages may still use:
+     .hamburger + .nav-menu, .menu-toggle + .nav-links, or #myTopnav.
+  */
 
-  // Function to toggle the menu visibility
-  function toggleMenu(event) {
-    event.preventDefault(); // Prevent double firing
-    navMenu.classList.toggle('active');
-  }
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".nav-menu");
 
-  // Add event listeners for both click and touchstart
-  hamburger.addEventListener('click', toggleMenu);
-  hamburger.addEventListener('touchstart', toggleMenu);
-});
-
-
-// Toggle function for responsive design
-function toggleNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
-// Select elements
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-const links = document.querySelectorAll('.nav-links a');
-
-// Event listener for menu toggle
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-  toggleNav(); // Call the toggleNav function when menu is clicked
-});
-
-// Event listeners for individual links (optional)
-links.forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('active');
-    // Reset the topnav class when a link is clicked
-    document.getElementById("myTopnav").className = "topnav";
-  });
-});
-
-  // Smooth Scroll for Anchor Links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: "smooth"
-        });
-      }
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function (event) {
+      event.preventDefault();
+      navMenu.classList.toggle("active");
+      const expanded = navMenu.classList.contains("active");
+      hamburger.setAttribute("aria-expanded", expanded ? "true" : "false");
     });
-  });
+  }
 
-  // Lazy Loading Images (if any images have class 'lazy')
-  const lazyImages = document.querySelectorAll("img.lazy");
-  if ("IntersectionObserver" in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove("lazy");
-          imageObserver.unobserve(img);
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  const topnav = document.getElementById("myTopnav");
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", function () {
+      navLinks.classList.toggle("active");
+
+      if (topnav) {
+        topnav.classList.toggle("responsive");
+      }
+
+      const expanded = navLinks.classList.contains("active");
+      menuToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+
+        if (topnav) {
+          topnav.classList.remove("responsive");
         }
       });
     });
-
-    lazyImages.forEach(image => {
-      imageObserver.observe(image);
-    });
-  } else {
-    // Fallback for browsers that don't support IntersectionObserver
-    lazyImages.forEach(image => {
-      image.src = image.dataset.src;
-      image.classList.remove("lazy");
-    });
   }
 
-  // Alert for Register Button (if exists)
+  /* Smooth scroll for same-page anchor links only.
+     Does not interfere with Bootstrap dropdown toggles or empty href="#" controls.
+  */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (event) {
+      const href = anchor.getAttribute("href");
+
+      if (!href || href === "#") return;
+
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        event.preventDefault();
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", href);
+      }
+    });
+  });
+
+  /* Lazy loading for images using:
+     <img class="lazy" data-src="image.jpg" alt="...">
+  */
+  const lazyImages = document.querySelectorAll("img.lazy[data-src]");
+
+  if (lazyImages.length > 0) {
+    if ("IntersectionObserver" in window) {
+      const imageObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove("lazy");
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach(function (image) {
+        imageObserver.observe(image);
+      });
+    } else {
+      lazyImages.forEach(function (image) {
+        image.src = image.dataset.src;
+        image.classList.remove("lazy");
+      });
+    }
+  }
+
+  /* Deprecated demo registration button support.
+     Prefer real registration links on production pages.
+  */
   const registerButton = document.getElementById("registerButton");
   if (registerButton) {
     registerButton.addEventListener("click", function () {
-      alert("Thank you for registering! A confirmation email has been sent to your address.");
+      alert("Registration is not yet open. Please follow NTOG updates for further information.");
     });
   }
 
-  // Contact Form Validation (if a form with id 'contactForm' exists)
+  /* Lightweight contact-form validation.
+     Only runs if a form with id="contactForm" exists.
+  */
   const form = document.getElementById("contactForm");
+
   if (form) {
-    const emailInput = document.getElementById("email");
-    const submitButton = document.getElementById("submit");
+    const emailInput = form.querySelector('input[type="email"], #email');
+    const submitButton = form.querySelector('button[type="submit"], #submit');
 
-    emailInput.addEventListener("input", (e) => {
-      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailPattern.test(emailInput.value)) {
-        emailInput.style.borderColor = "red";
-        submitButton.disabled = true;
-      } else {
-        emailInput.style.borderColor = "";
-        submitButton.disabled = false;
+    if (emailInput && submitButton) {
+      emailInput.addEventListener("input", function () {
+        const valid = emailInput.checkValidity();
+        emailInput.classList.toggle("is-invalid", !valid && emailInput.value.length > 0);
+        submitButton.disabled = !valid;
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
       }
-    });
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault(); // Prevent form from submitting
-      // Further submission handling (e.g., AJAX call or displaying success message)
+      form.classList.add("was-validated");
     });
   }
-
 });
-
