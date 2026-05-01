@@ -96,57 +96,17 @@
   text-transform: uppercase;
 }
 
-/* Navbar lung art */
-.navbar .container {
-  position: relative;
-}
-
-.nav-lung-art {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 120px;
-  height: 72px;
-  color: rgba(31, 78, 121, 0.14);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.nav-lung-art svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.navbar-brand,
-.navbar-toggler,
-.navbar-collapse {
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width: 991.98px) {
-  .nav-lung-art {
-    display: none;
-  }
-}
-
 /* Copenhagen 2027 */
 .ntog2027 .navbar {
   border-bottom: 3px solid var(--dk-red);
 }
 
-.ntog2027 .nav-lung-art {
-  color: rgba(200, 16, 46, 0.12);
-}
-
-.ntog2027-hero {
+.ntog2027-poster-hero {
   margin-top: 56px;
-  padding: clamp(3rem, 7vw, 6rem) 0;
+  padding: clamp(3rem, 6vw, 5.5rem) 0;
   color: #ffffff;
   background:
-    linear-gradient(rgba(25, 0, 6, 0.42), rgba(25, 0, 6, 0.42)),
+    linear-gradient(rgba(25, 0, 6, 0.44), rgba(25, 0, 6, 0.44)),
     linear-gradient(
       135deg,
       var(--dk-red-deep) 0%,
@@ -156,23 +116,49 @@
   border-top: 4px solid var(--dk-red);
 }
 
-.ntog2027-hero .container {
-  max-width: 1120px;
+.ntog2027-poster-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.72fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
 }
 
-.ntog2027-hero h1 {
+.ntog2027-poster-copy h1 {
   max-width: 900px;
   color: #ffffff;
-  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
   line-height: 1.04;
   margin: 1rem 0 1.25rem;
 }
 
-.ntog2027-hero .hero-lead {
+.ntog2027-poster-copy .hero-lead {
   max-width: 760px;
   color: #f8e8ec;
   font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.7;
+}
+
+.ntog2027-poster-hero .eyebrow {
+  padding: 0.45rem 0.8rem;
+  border-color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.ntog2027-poster-card {
+  justify-self: center;
+  width: min(100%, 430px);
+  padding: 0.75rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.ntog2027-poster-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
 }
 
 .hero-actions {
@@ -205,22 +191,6 @@
   font-weight: 700;
 }
 
-.copenhagen-skyline {
-  width: 100%;
-  height: clamp(130px, 18vw, 230px);
-  overflow: hidden;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.copenhagen-skyline img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 58%;
-}
-
 .btn-event {
   background-color: var(--dk-red);
   border-color: var(--dk-red);
@@ -245,9 +215,19 @@
   font-size: 0.82rem;
 }
 
-@media (max-width: 768px) {
-  .ntog2027-hero {
-    padding: 2.75rem 0 2.5rem;
+@media (max-width: 991.98px) {
+  .ntog2027-poster-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ntog2027-poster-card {
+    width: min(100%, 360px);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ntog2027-poster-hero {
+    padding: 2.5rem 0;
   }
 
   .hero-actions {
@@ -265,14 +245,8 @@
     grid-template-columns: 1fr;
   }
 
-  .copenhagen-skyline {
-    height: 145px;
-  }
-
-  .copenhagen-skyline img {
-    width: 150%;
-    max-width: none;
-    transform: translateX(-12%);
-    object-position: center bottom;
+  .ntog2027-poster-card {
+    width: min(100%, 310px);
+    padding: 0.5rem;
   }
 }
