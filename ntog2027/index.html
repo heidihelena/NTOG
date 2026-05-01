@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<body class="ntog2027">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,70 +48,6 @@
       font-family: "Montserrat", Arial, sans-serif;
     }
 
-    .symposium-hero {
-      position: relative;
-      overflow: hidden;
-      margin-top: 56px;
-      padding: 8rem 0 6rem;
-      color: #ffffff;
-      background:
-        linear-gradient(135deg, rgba(16, 42, 67, 0.92), rgba(31, 78, 121, 0.88)),
-        url("https://raw.githubusercontent.com/heidihelena/NTOG/main/copenhagen2.png") center/cover no-repeat;
-    }
-
-    .symposium-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
-        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
-      pointer-events: none;
-    }
-
-    .symposium-hero .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 1rem;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .lead-narrow {
-      max-width: 940px;
-      font-size: 1.2rem;
-      line-height: 1.7;
-    }
-
-    .hero-facts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin: 1.75rem 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .hero-facts li {
-      padding: 0.55rem 0.85rem;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.92rem;
-      backdrop-filter: blur(6px);
-    }
-
     .section-block {
       padding: 3.75rem 0;
     }
@@ -131,13 +66,6 @@
       border-radius: 1rem;
       background: #ffffff;
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-    }
-
-    .content-card,
-    .fact-card,
-    .programme-card,
-    .audience-card,
-    .cta-panel {
       padding: 1.5rem;
     }
 
@@ -220,7 +148,7 @@
     }
   </style>
 </head>
-<body>
+<body class="ntog2027">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
@@ -285,17 +213,14 @@
       </div>
     </div>
   </nav>
-  
-</header>  
-<header class="ntog2027-hero">
-  <div class="ntog2027-hero-grid">
 
-    <div class="ntog2027-hero-content">
+  <header class="ntog2027-hero">
+    <div class="container">
       <span class="eyebrow">13 to 15 May 2027 · Copenhagen, Denmark</span>
 
       <h1>16th Nordic Lung Cancer Symposium</h1>
 
-      <p>
+      <p class="hero-lead">
         A Nordic multidisciplinary meeting for clinicians, nurses, clinical researchers,
         basic scientists, students, allied health professionals, and patient organisations
         working to improve outcomes for people affected by lung cancer.
@@ -313,15 +238,14 @@
         <span>Hosted in Denmark</span>
       </div>
     </div>
+  </header>
 
-    <div class="ntog2027-skyline" aria-label="Copenhagen skyline illustration">
-      <img
-        src=""https://raw.githubusercontent.com/heidihelena/NTOG/main/copenhagen3.png"
-        alt="Line drawing of Copenhagen skyline with Danish flag">
-    </div>
+  <section class="copenhagen-skyline" aria-label="Copenhagen skyline illustration">
+    <img
+      src="https://raw.githubusercontent.com/heidihelena/NTOG/main/copenhagen3.png"
+      alt="Line drawing of Copenhagen skyline with Danish flag">
+  </section>
 
-  </div>
-  
   <main>
     <section class="section-block" id="welcome">
       <div class="container">
@@ -582,3 +506,4 @@
   <script src="/js/scripts.js" defer></script>
 </body>
 </html>
+
