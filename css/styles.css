@@ -250,3 +250,22 @@
     padding: 0.5rem;
   }
 }
+
+.ntog2027-poster-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
+}
+
+@media (max-width: 575.98px) {
+  .ntog2027-poster-card {
+    width: min(100%, 310px);
+    padding: 0.5rem;
+  }
+
+  .ntog2027-poster-card img {
+    width: 100%;
+    height: auto;
+  }
+}
