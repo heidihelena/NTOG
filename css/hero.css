@@ -1,66 +1,152 @@
-/* Hero Section */
+/* Hero sections
+   Shared hero styles for older pages using .hero + .hero-content + .animated-background.
+   Newer pages may use .page-hero, .home-hero, .article-hero, or .symposium-hero with page-specific styling.
+*/
+
+:root {
+  --text-light: #ffffff;
+  --hero-background-dark: #102a43;
+  --network-primary-color: #1f4e79;
+  --hero-background-accent: #2f80a7;
+}
+
 .hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  max-height: 520px;
   height: 50vh;
-  min-height: 300px; /* Ensures a minimum height */
-  max-height: 500px; /* Optional: prevents it from getting too tall */
+  margin-top: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: var(--text-light);
+  color: var(--text-light, #ffffff);
+  background: linear-gradient(135deg, var(--hero-background-dark, #102a43) 0%, var(--network-primary-color, #1f4e79) 55%, var(--hero-background-accent, #2f80a7) 100%);
 }
 
-/* Hero Content Styling */
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 90%;
-  padding: 1rem;
-  /* Removed background, blur, and box-shadow */
+  width: min(90%, 960px);
+  padding: 1.5rem;
 }
 
-/* Animated Background Overlay */
+.hero-content h1,
+.hero-content h2,
+.hero-content p,
+.hero h1,
+.hero h2,
+.hero p {
+  color: inherit;
+}
+
+.hero-content h1,
+.hero h1 {
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.hero-content p,
+.hero p {
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
 .animated-background {
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, var(--hero-background-dark), var(--network-primary-color));
-  background-size: 300% 300%;
-  animation: gradientActivation 20s ease infinite;
   z-index: 1;
+  background: linear-gradient(135deg, var(--hero-background-dark, #102a43) 0%, var(--network-primary-color, #1f4e79) 55%, var(--hero-background-accent, #2f80a7) 100%);
+  background-size: 300% 300%;
+}
+
+.animated-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+    radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+  pointer-events: none;
 }
 
 @keyframes gradientActivation {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-/* Responsive Design */
+@media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
+  .animated-background {
+    animation: gradientActivation 20s ease infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-background {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
-    height: 50vh;
+    min-height: 260px;
+    height: 42vh;
     padding: 1rem;
   }
 
   .hero-content {
-    max-width: 100%;
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .hero-content h1,
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .hero-content p,
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .animated-background {
+    animation: none;
+    background: linear-gradient(135deg, var(--hero-background-dark, #102a43) 0%, var(--network-primary-color, #1f4e79) 60%, var(--hero-background-accent, #2f80a7) 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 240px;
+    height: auto;
+    padding: 4rem 1rem 3rem;
+  }
+}
+
+@media print {
+  .hero {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin-top: 0;
+    padding: 1rem 0;
+    color: #000000;
+    background: #ffffff;
+  }
+
+  .animated-background {
+    display: none;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: none;
     padding: 0;
   }
-}
-
-/* High-performance Animation for Modern Browsers */
-@media (prefers-reduced-motion: no-preference) {
-  .animated-background {
-    animation: gradientActivation 20s ease infinite;
-  }
-
-  /* Media Query for Mobile Devices */
-@media (max-width: 768px) {
-  .hero, .animated-background {
-    height: 40vh; /* Slightly increased height for a better view on mobile */
-    animation: none; /* Disable animations for better performance on mobile */
-    background: linear-gradient(45deg, var(--hero-background-dark), var(--network-primary-color)); /* Fallback to a static gradient background for better appearance */
-  }
-}
 }
