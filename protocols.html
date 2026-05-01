@@ -1,345 +1,481 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO Meta Tags -->
-<title>Protocols in Development | Clinical Resources | NTOG</title>
+  <title>Protocols and Harmonisation Work | Clinical Resources | NTOG</title>
+  <meta name="description" content="NTOG clinical protocol harmonisation work in lung cancer diagnostics, MDT meetings, pulmonary nodule management, screening workflows, molecular testing, Stage III NSCLC, small-cell lung cancer, quality indicators, registry data, and patient communication.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, lung cancer protocols, protocol harmonisation, pulmonary nodule management, lung cancer screening, low-dose CT, MDT protocol, molecular testing, Stage III NSCLC, small-cell lung cancer, Nordic lung cancer care, quality indicators">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
 
-<meta name="description" content="Working page for NTOG clinical protocol harmonisation, including lung cancer diagnostic pathways, MDT meetings, pulmonary nodule management, screening workflows, molecular testing, Stage III NSCLC, small-cell lung cancer, quality indicators, and patient communication templates.">
+  <meta property="og:title" content="Protocols and Harmonisation Work | NTOG">
+  <meta property="og:description" content="NTOG supports continuous Nordic harmonisation work in lung cancer diagnostics, MDT practice, nodule management, screening, molecular testing, treatment planning, registry data, and patient communication.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/protocols.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 
-<meta name="keywords" content="pulmonary nodule guideline, lung nodule follow-up, Pan-Nordic guideline, NTOG, lung cancer screening, low-dose CT, thoracic oncology, radiology reporting, pulmonology, Nordic lung cancer care">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Protocols and Harmonisation Work | NTOG">
+  <meta name="twitter:description" content="Continuous Nordic protocol harmonisation work in lung cancer care and research.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
-<meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Open Graph Meta Tags for Social Sharing -->
-<meta property="og:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta property="og:description" content="NTOG is working toward harmonised Nordic guidance for pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and diagnostic pathways.">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
-<meta property="og:url" content="https://ntog.org/pulmonary-nodule-guideline.html">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Twitter / X Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta name="twitter:description" content="Nordic collaboration on pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and Pan-Nordic guideline development.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png"> 
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
 
-  <!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/tables.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/nav.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .protocol-card,
+    .status-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .protocol-card,
+    .status-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .protocol-card h3,
+    .status-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.65rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .protocol-card p,
+    .status-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .status-badge.active {
+      background: #eef6fb;
+      color: #1f4e79;
+    }
+
+    .status-badge.completed {
+      background: #e9f7ef;
+      color: #17663a;
+    }
+
+    .status-badge.planned {
+      background: #f7f0df;
+      color: #7a4f01;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .alert-protocol {
+      border-radius: 1rem;
+      border: 1px solid #d7eaf3;
+      background: #f0f7fb;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">Research news</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item active" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-  
-   <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">NTOG Protocols</h1>
-    <p class="lead">Working page for Nordic protocol harmonisation under the NTOG umbrella. Final protocols and PDF downloads will be added as they become available.</p>
-  </div>
-</section>
+  </nav>
 
-  <!-- Main Content -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1 class="display-5 fw-bold mb-3">NTOG Protocols and Harmonisation Work</h1>
+      <p class="lead-narrow mb-4">A global-facing overview of continuous Nordic protocol harmonisation work in lung cancer care, diagnostics, research infrastructure, and quality improvement.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#protocol-areas" class="btn btn-light btn-lg">Protocol areas</a>
+        <a href="guidelines.html" class="btn btn-outline-light btn-lg">National guidelines</a>
+      </div>
+    </div>
+  </header>
 
-<main class="container my-5">
-
-  <section class="mb-5">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-
-        <h2>Nordic protocols to harmonise</h2>
-
-        <p>
-          NTOG is identifying clinical protocol areas where Nordic collaboration may support more consistent lung cancer diagnosis, staging, treatment planning, follow-up, and quality improvement.
-        </p>
-
-        <p>
-          The topics below are working areas for harmonisation. They are intended to support discussion, collaboration, and future consensus work across Nordic countries. They do not replace national guidelines, local hospital protocols, or clinical judgment.
-        </p>
-
-        <div class="alert alert-warning" role="alert">
-          <strong>Status:</strong> These protocol areas are currently in development. Final documents and PDF downloads will be added after review and approval.
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Continuous Nordic harmonisation</h2>
+            <p class="lead">NTOG identifies clinical and research protocol areas where Nordic collaboration can support more consistent lung cancer diagnosis, staging, treatment planning, follow-up, data collection, and quality improvement.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The protocol topics below are working areas for harmonisation. They support discussion, collaboration, and future consensus work across Nordic countries.</p>
+              <p>They do not replace national guidelines, local hospital protocols, regulatory requirements, or clinical judgment.</p>
+              <p class="mb-0">This is continuous work. Some areas already have active Nordic discussion, pilot activity, meeting outputs, or related research. Other areas remain planned harmonisation topics that will mature through work packages, expert groups, and NTOG meetings.</p>
+            </div>
+          </div>
         </div>
 
+        <div class="alert-protocol mt-4" role="status">
+          <strong>Status:</strong> NTOG protocols are living harmonisation topics. Final public documents, consensus statements, templates, and PDF downloads will be added after review and approval.
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="protocols-overview">
-    <div class="row g-4">
-
-      <!-- Protocol 1 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">1. Lung cancer diagnostic pathway</h2>
-            <p>
-              Harmonising the pathway from suspected lung cancer or incidental imaging finding to referral, CT imaging, staging, tissue diagnosis, molecular testing, MDT review, and treatment decision.
-            </p>
+    <section class="section-block bg-light" id="status-model">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Status model</h2>
+            <p class="muted-note">Use transparent status labels for a global audience. This avoids overstating unfinished work while showing progress.</p>
           </div>
-        </article>
-      </div>
-
-      <!-- Protocol 2 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">2. Standardized care pathway timelines</h2>
-            <p>
-              Comparing and harmonising timeline targets for referral, diagnostic work-up, MDT discussion, surgery, radiotherapy, systemic therapy, and palliative care.
-            </p>
+          <div class="col-lg-8">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="status-card">
+                  <span class="status-badge completed">Work started</span>
+                  <h3>Already active</h3>
+                  <p class="mb-0">Nordic discussion, pilots, research, meetings, or subgroup work already exist.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="status-card">
+                  <span class="status-badge active">Active harmonisation</span>
+                  <h3>Under development</h3>
+                  <p class="mb-0">Topic is being shaped into shared principles, variables, templates, or future protocol documents.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="status-card">
+                  <span class="status-badge planned">Planned topic</span>
+                  <h3>Future work</h3>
+                  <p class="mb-0">Topic is recognised as important but needs working-group ownership or additional scoping.</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </article>
+        </div>
       </div>
+    </section>
 
-      <!-- Protocol 3 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">3. Multidisciplinary team meeting protocol</h2>
-            <p>
-              Defining which lung cancer cases should be discussed, required pre-MDT information, core specialties, documentation standards, and decision communication.
-            </p>
+    <section class="section-block" id="protocol-areas">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Protocol and harmonisation areas</h2>
+            <p class="lead mb-0">Working topics under the NTOG umbrella.</p>
           </div>
-        </article>
-      </div>
-
-      <!-- Protocol 4 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">4. Pulmonary nodule management</h2>
-            <p>
-              Working toward a Pan-Nordic approach to pulmonary nodule follow-up, risk assessment, radiology reporting, referral thresholds, and diagnostic pathways.
-            </p>
+          <div>
+            <a href="expert.html" class="btn btn-outline-primary">Find expert contacts</a>
           </div>
-        </article>
-      </div>
+        </div>
 
-      <!-- Protocol 5 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">5. Lung cancer screening workflow</h2>
-            <p>
-              Harmonising workflow principles for low-dose CT screening, eligibility, radiology reporting, incidental findings, smoking cessation, follow-up, and referral.
-            </p>
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>1. Lung cancer diagnostic pathway</h3>
+              <p>Harmonising the pathway from suspected lung cancer or incidental imaging finding to referral, CT imaging, staging, tissue diagnosis, molecular testing, MDT review, and treatment decision.</p>
+            </article>
           </div>
-        </article>
-      </div>
 
-      <!-- Protocol 6 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">6. Molecular testing protocol</h2>
-            <p>
-              Defining minimum biomarker testing principles, tissue and liquid biopsy workflows, turnaround time targets, reporting standards, and re-testing at progression.
-            </p>
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>2. Standardised care pathway timelines</h3>
+              <p>Comparing and harmonising timeline targets for referral, diagnostic work-up, MDT discussion, surgery, radiotherapy, systemic therapy, and palliative care.</p>
+            </article>
           </div>
-        </article>
-      </div>
 
-      <!-- Protocol 7 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">7. Stage III NSCLC work-up and treatment planning</h2>
-            <p>
-              Harmonising staging, PET/CT, brain imaging, mediastinal assessment, pulmonary function testing, surgical assessment, radiotherapy planning, and MDT decision-making.
-            </p>
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>3. Multidisciplinary team meeting protocol</h3>
+              <p>Defining which lung cancer cases should be discussed, required pre-MDT information, core specialties, documentation standards, and decision communication.</p>
+            </article>
           </div>
-        </article>
-      </div>
 
-      <!-- Protocol 8 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">8. Small-cell lung cancer pathway</h2>
-            <p>
-              Defining Nordic principles for limited-stage and extensive-stage small-cell lung cancer work-up, staging, treatment urgency, radiotherapy, systemic therapy, and follow-up.
-            </p>
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge completed">Work started</span>
+              <h3>4. Pulmonary nodule management</h3>
+              <p>Working toward a Pan-Nordic approach to pulmonary nodule follow-up, risk assessment, radiology reporting, referral thresholds, and diagnostic pathways.</p>
+              <p class="mb-0"><a href="/guidelines/nodule-management.html">Screening and nodule follow-up page</a></p>
+            </article>
           </div>
-        </article>
-      </div>
 
-      <!-- Protocol 9 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">9. Quality indicators and registry data</h2>
-            <p>
-              Identifying core Nordic lung cancer quality indicators, registry variables, staging data, MDT data, treatment timelines, treatment intent, and outcome measures.
-            </p>
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge completed">Work started</span>
+              <h3>5. Lung cancer screening workflow</h3>
+              <p>Harmonising workflow principles for low-dose CT screening, eligibility, radiology reporting, incidental findings, smoking cessation, follow-up, and referral.</p>
+            </article>
           </div>
-        </article>
-      </div>
 
-      <!-- Protocol 10 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <p class="text-muted small mb-2">In development</p>
-            <h2 class="h5">10. Patient communication templates</h2>
-            <p>
-              Developing clear patient communication templates for CT findings, pulmonary nodule follow-up, screening invitations, incidental findings, MDT decisions, and smoking cessation support.
-            </p>
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>6. Molecular testing protocol</h3>
+              <p>Defining minimum biomarker testing principles, tissue and liquid biopsy workflows, turnaround time targets, reporting standards, and re-testing at progression.</p>
+            </article>
           </div>
-        </article>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>7. Stage III NSCLC work-up and treatment planning</h3>
+              <p>Harmonising staging, PET/CT, brain imaging, mediastinal assessment, pulmonary function testing, surgical assessment, radiotherapy planning, and MDT decision-making.</p>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge active">Active harmonisation</span>
+              <h3>8. Small-cell lung cancer pathway</h3>
+              <p>Defining Nordic principles for limited-stage and extensive-stage small-cell lung cancer work-up, staging, treatment urgency, radiotherapy, systemic therapy, and follow-up.</p>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge completed">Work started</span>
+              <h3>9. Quality indicators and registry data</h3>
+              <p>Identifying core Nordic lung cancer quality indicators, registry variables, staging data, MDT data, treatment timelines, treatment intent, and outcome measures.</p>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <article class="protocol-card">
+              <span class="status-badge planned">Planned topic</span>
+              <h3>10. Patient communication templates</h3>
+              <p>Developing clear patient communication templates for CT findings, pulmonary nodule follow-up, screening invitations, incidental findings, MDT decisions, and smoking cessation support.</p>
+            </article>
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-<p class="text-muted">
-  This is a working page. Protocol topics listed here are under discussion and harmonisation within the NTOG network. Final documents will be added when available.
-</p>
-
-  <section class="mt-5">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-
-        <h2>Future PDF downloads</h2>
-
-        <p>
-          When individual protocols are reviewed and approved, this page can be updated with download buttons for PDF versions.
-        </p>
-
-        <p>
-          Example future button:
-        </p>
-
-        <p>
-          <a href="#" class="btn btn-outline-primary disabled" aria-disabled="true">
-            PDF coming soon
-          </a>
-        </p>
-
+    <section class="section-block bg-light" id="what-has-started">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>What has already started</h2>
+            <p class="lead">Several protocol areas are already connected to active Nordic discussion, research, or work-package activity.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="compact-list">
+                <li><strong>Screening and pulmonary nodules:</strong> Nordic low-dose CT screening pilots and nodule follow-up workflows create a practical basis for shared comparison and harmonisation.</li>
+                <li><strong>Registry data and quality indicators:</strong> Nordic registry structures support comparison of timelines, staging, treatment intent, outcomes, and variation in care.</li>
+                <li><strong>Clinical studies:</strong> NTOG-linked academic studies in small-cell lung cancer and radiotherapy demonstrate the feasibility of Nordic trial collaboration.</li>
+                <li><strong>Education:</strong> NORTHDIP, the Nordic Lung Cancer Symposium, and working-group meetings provide recurring settings for protocol discussion and training.</li>
+                <li><strong>Expert networks:</strong> Steering Committee and specialty contacts provide routes for topic ownership and cross-country review.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <section class="section-block" id="future-documents">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Future public documents</h2>
+            <p class="lead">Final protocols, templates, consensus documents, and PDF downloads will be added after review and approval.</p>
+            <p class="mb-0">Until then, this page should function as a transparent working overview for Nordic and international collaborators.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="#" class="btn btn-outline-primary disabled" aria-disabled="true">PDF downloads coming later</a>
+                <a href="expert.html" class="btn btn-primary">Find expert contacts</a>
+                <a href="collaborations.html" class="btn btn-outline-primary">Research Collaboration</a>
+                <a href="guidelines.html" class="btn btn-outline-primary">National Guidelines</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-<script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
+
