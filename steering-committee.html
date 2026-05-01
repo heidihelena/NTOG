@@ -2,205 +2,483 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>NTOG Steering Committee | Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Meta Tags for SEO -->
-  <meta name="description" content="The NTOG Steering Committee represents all Nordic countries and includes key specialists in oncology, pulmonology, radiology, pathology, and thoracic surgery.">
-  <meta name="keywords" content="steering committee, lung cancer, oncology, thoracic, research, Nordic countries, NTOG">
-  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891" />
-  
-  <!-- Open Graph Meta Tags for Social Sharing -->
-  <meta property="og:title" content="NTOG Steering Committee | Nordic Thoracic Oncology Group">
-  <meta property="og:description" content="Uniting Nordic expertise to advance thoracic oncology and enhance patient outcomes across Denmark, Finland, Iceland, Norway, and Sweden.">
+
+  <title>Steering Committee | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="The NTOG Steering Committee represents all Nordic countries and includes specialists in oncology, pulmonology, radiology, pathology, thoracic surgery, and basic research.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, steering committee, lung cancer, thoracic oncology, oncology, pulmonology, radiology, pathology, thoracic surgery, Nordic countries">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+
+  <meta property="og:title" content="Steering Committee | Nordic Thoracic Oncology Group">
+  <meta property="og:description" content="The NTOG Steering Committee brings together Nordic expertise in lung cancer research, clinical care, education, and collaboration across Denmark, Finland, Iceland, Norway, and Sweden.">
   <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/gothenburg.jpg">
   <meta property="og:url" content="https://ntog.org/steering-committee.html">
   <meta property="og:type" content="website">
-  
-  <!-- Twitter Card Meta Tags -->
+
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="NTOG Steering Committee | Nordic Thoracic Oncology Group">
-  <meta name="twitter:description" content="Collaborating across Nordic countries to improve lung cancer research and care.">
+  <meta name="twitter:title" content="Steering Committee | Nordic Thoracic Oncology Group">
+  <meta name="twitter:description" content="NTOG Steering Committee members across the Nordic countries and thoracic oncology specialties.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/gothenburg.jpg">
-  
-  <!-- Additional Resources -->
-  <!-- Bootstrap CSS -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<!-- Bootstrap Bundle JS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 880px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .member-card,
+    .meeting-card,
+    .link-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .member-card,
+    .link-card {
+      padding: 1.5rem;
+    }
+
+    .member-card h3,
+    .link-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.35rem;
+      color: #102a43;
+    }
+
+    .member-card p,
+    .content-card p,
+    .meeting-card p,
+    .link-card p {
+      color: #52606d;
+    }
+
+    .role-badge {
+      display: inline-block;
+      margin-top: 0.45rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .country-heading {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #102a43;
+    }
+
+    .country-heading:first-child {
+      margin-top: 0;
+    }
+
+    .meeting-card {
+      overflow: hidden;
+    }
+
+    .meeting-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+    }
+
+    .meeting-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .meeting-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .meeting-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .cta-panel {
+      border-radius: 1.25rem;
+      background: #f0f7fb;
+      border: 1px solid #d7eaf3;
+      padding: 2rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Events Overview</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
- <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">NTOG Steering Committee</h1>
-    <p class="lead">Nordic Collaboration for Improving Lung Cancer Research and Care</p>
-      <a href="volunteer.html" class="btn btn-primary">Volunteer</a>
-  </div>
-</section>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-    <!-- About NTOG Steering Committee -->
-    <section id="steering-committee">
-      <h2>About the NTOG Steering Committee</h2>
-      <p>The NTOG Steering Committee represents all Nordic countries and includes key specialists in oncology, pulmonology, radiology, pathology, and thoracic surgery. This diverse group is dedicated to advancing lung cancer research and improving patient outcomes across the Nordic region. Our committee reflects a balanced representation from across the Nordic countries.</p>
-      <a href="about.html" class="btn btn-outline-primary">Learn More</a>
-    </section>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item active" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
 
-    <!-- Committee Members Section -->
-    <section id="committee-members" class="mt-5">
-      <h3>Committee Members</h3>
-      <div class="row">
-        <!-- Member List -->
-        <ul class="list-group">
-          <li class="list-group-item">Thomas Decker Christensen (Denmark, Thoracic Surgery)</li>
-          <li class="list-group-item">Peter Meldgaard (Denmark, Oncology)</li>
-          <li class="list-group-item">Zaigham Saghir (Denmark, Pulmonology)</li>
-          <li class="list-group-item">Heidi Andersén (Finland, Pulmonology, Web Editor)</li>
-          <li class="list-group-item">Aija Knuuttila (Finland, Oncology)</li>
-          <li class="list-group-item">Örvar Gunnarsson (Iceland, Oncology)</li>
-          <li class="list-group-item">Gudbjorg Jonsdottir (Iceland, Oncology, Vice Chairman)</li>
-          <li class="list-group-item">Odd-Terje Brustugun (Norway, Oncology, Chairman)</li>
-          <li class="list-group-item">Bjørn Henning Grønberg (Norway, Oncology)</li>
-          <li class="list-group-item">Maria Paula Ramnefjell (Norway, Pathology)</li>
-          <li class="list-group-item">Bengt Bergman (Sweden, Pulmonology)</li>
-          <li class="list-group-item">Mikael Johansson (Sweden, Oncology, Secretary)</li>
-          <li class="list-group-item">Tomas Hansen (Sweden, Radiology)</li>
-          <li class="list-group-item">Per Landelius (Sweden, Thoracic Surgery)</li>
-          <li class="list-group-item">Maria Planck (Sweden, Basic Researcher)</li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
         </ul>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <!-- Steering Committee Meetings: Reykjavik 2024 -->
-    <section id="events" class="mt-5">
-      <h2>Steering Committee Meetings</h2>
-      <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="https://raw.githubusercontent.com/heidihelena/NTOG/main/reykjavik.jpg" class="img-fluid rounded-start" alt="NTOG Meeting in Reykjavik November 2024">
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">NTOG governance</span>
+      <h1 class="display-5 fw-bold mb-3">NTOG Steering Committee</h1>
+      <p class="lead-narrow mb-4">The Steering Committee represents all Nordic countries and brings together expertise in oncology, pulmonology, radiology, pathology, thoracic surgery, and basic research.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#committee-members" class="btn btn-light btn-lg">Committee members</a>
+        <a href="expert.html" class="btn btn-outline-light btn-lg">Expert Network</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="steering-committee">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>About the Steering Committee</h2>
+            <p class="lead">The committee provides balanced Nordic representation and supports NTOG’s mission, research collaboration, clinical development, and educational activities.</p>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">November 2024 | Reykjavik, Iceland</h5>
-              <p class="card-text">The committee holds 1-2 physical meetings annually to ensure collaboration and alignment with NTOG's mission and initiatives. Most meetings and subgroup meetings are held virtually. During our meeting we discussed:</p>
-              <ul>
-                <li><strong>Clinical Studies:</strong> Discussions on ongoing and upcoming research.</li>
-                <li><strong>Lung Cancer Screening:</strong> Subgroup efforts for harmonizing research and clinical protocols.</li>
-                <li><strong>Education:</strong> Updates on the Nordic Radiotherapy Diploma Program (NORTHDIP) and positive feedback from participants.</li>
-              </ul>
-              <a href="https://northdip.org" class="btn btn-primary">Learn More about NORTHDIP</a>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The NTOG Steering Committee represents all Nordic countries and includes key specialists in oncology, pulmonology, radiology, pathology, thoracic surgery, and basic research.</p>
+              <p>The group is dedicated to advancing lung cancer research and improving patient outcomes across the Nordic region.</p>
+              <p class="mb-0">The committee holds 1 to 2 physical meetings annually to ensure collaboration and alignment with NTOG's mission and initiatives. Most meetings and subgroup meetings are held virtually.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="section-block bg-light" id="committee-members">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Committee members</h2>
+            <p class="lead mb-0">Members are listed by country and specialty.</p>
+          </div>
+          <div>
+            <a href="expert.html#contacts" class="btn btn-outline-primary">Contacts by topic</a>
+          </div>
+        </div>
+
+        <h3 class="country-heading">Denmark</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Thomas Decker Christensen</h3>
+              <p class="mb-0">Denmark, Thoracic Surgery</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Peter Meldgaard</h3>
+              <p class="mb-0">Denmark, Oncology</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Zaigham Saghir</h3>
+              <p class="mb-0">Denmark, Pulmonology</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="country-heading">Finland</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Heidi Andersén</h3>
+              <p class="mb-0">Finland, Pulmonology</p>
+              <span class="role-badge">Web Editor</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Aija Knuuttila</h3>
+              <p class="mb-0">Finland, Oncology</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="country-heading">Iceland</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Örvar Gunnarsson</h3>
+              <p class="mb-0">Iceland, Oncology</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Gudbjorg Jonsdottir</h3>
+              <p class="mb-0">Iceland, Oncology</p>
+              <span class="role-badge">Vice Chair</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="country-heading">Norway</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Odd-Terje Brustugun</h3>
+              <p class="mb-0">Norway, Oncology</p>
+              <span class="role-badge">Chair</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Bjørn Henning Grønberg</h3>
+              <p class="mb-0">Norway, Oncology</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Maria Paula Ramnefjell</h3>
+              <p class="mb-0">Norway, Pathology</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="country-heading">Sweden</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Bengt Bergman</h3>
+              <p class="mb-0">Sweden, Pulmonology</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Mikael Johansson</h3>
+              <p class="mb-0">Sweden, Oncology</p>
+              <span class="role-badge">Secretary</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Tomas Hansen</h3>
+              <p class="mb-0">Sweden, Radiology</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Per Landelius</h3>
+              <p class="mb-0">Sweden, Thoracic Surgery</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <div class="member-card">
+              <h3>Maria Planck</h3>
+              <p class="mb-0">Sweden, Basic Researcher</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="meetings">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Steering Committee meetings</h2>
+            <p class="lead mb-0">Physical meetings support strategic alignment. Most regular committee and subgroup work is conducted virtually.</p>
+          </div>
+        </div>
+
+        <div class="meeting-card">
+          <div class="row g-0">
+            <div class="col-lg-4">
+              <img src="https://raw.githubusercontent.com/heidihelena/NTOG/main/reykjavik.jpg" alt="NTOG Steering Committee meeting in Reykjavik, Iceland, November 2024">
+            </div>
+            <div class="col-lg-8">
+              <div class="p-4 p-lg-5">
+                <h3>November 2024, Reykjavik, Iceland</h3>
+                <p>During the Reykjavik meeting, the committee discussed ongoing and upcoming NTOG activities and subgroup work.</p>
+                <ul class="meeting-list mb-4">
+                  <li><strong>Clinical studies:</strong> Discussions on ongoing and upcoming research.</li>
+                  <li><strong>Lung cancer screening:</strong> Subgroup efforts for harmonising research and clinical protocols.</li>
+                  <li><strong>Education:</strong> Updates on the Nordic Radiotherapy Diploma Program (NORTHDIP) and positive feedback from participants.</li>
+                </ul>
+                <a href="https://northdip.org" class="btn btn-primary" target="_blank" rel="noopener">Learn more about NORTHDIP</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="next">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Committee work and expert networks</h2>
+            <p class="lead mb-0">The Steering Committee connects with NTOG work packages, specialty groups, national lung cancer organisations, and the Nordic Lung Cancer Symposium.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="expert.html" class="btn btn-primary">Expert Network</a>
+                <a href="volunteer.html" class="btn btn-outline-primary">Work Packages</a>
+                <a href="/ntog2027/" class="btn btn-outline-primary">Nordic Lung Cancer Symposium 2027</a>
+                <a href="mission.html" class="btn btn-outline-primary">NTOG Mission</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-      <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-      <p>
-        <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="terms-of-service.html" class="text-white">Terms of Service</a>
       </p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script> 
-  <!-- Custom JS -->
-  <script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
