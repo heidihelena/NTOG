@@ -295,11 +295,11 @@
 .ntog2027-hero {
   color: #ffffff;
   background:
-    linear-gradient(rgba(5, 20, 31, 0.45), rgba(5, 20, 31, 0.45)),
+    linear-gradient(rgba(35, 0, 8, 0.42), rgba(35, 0, 8, 0.42)),
     linear-gradient(
       135deg,
-      #071f35 0%,
-      #0f6b7a 45%,
+      #32000b 0%,
+      #8f0d22 52%,
       #c8102e 100%
     );
 }
