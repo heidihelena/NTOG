@@ -2,178 +2,374 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ongoing Research | Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Current research projects by the Nordic Thoracic Oncology Group (NTOG).">
-  <meta name="keywords" content="NTOG, ongoing research, lung cancer studies, oncology projects">
+
+  <title>Ongoing Projects | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Current and developing NTOG research projects in Nordic lung cancer and thoracic oncology, including TRIPLEX, ACHILES, ADIL, and DARTS.">
+  <meta name="keywords" content="NTOG, ongoing research, lung cancer studies, thoracic oncology, Nordic clinical trials, TRIPLEX, ACHILES, ADIL, DARTS, small-cell lung cancer, immunotherapy, radiotherapy">
+
+  <meta property="og:title" content="Ongoing Projects | Nordic Thoracic Oncology Group">
+  <meta property="og:description" content="Current and developing Nordic lung cancer studies and NTOG research projects.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/ongoing-projects.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ongoing Projects | NTOG">
+  <meta name="twitter:description" content="Current and developing NTOG research projects in Nordic lung cancer and thoracic oncology.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/tables.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/hero.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 900px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .project-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .project-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .project-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .status-badge.developing {
+      background: #f7f0df;
+      color: #7a4f01;
+    }
+
+    .project-meta {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .project-meta li {
+      margin-bottom: 0.35rem;
+      color: #52606d;
+    }
+
+    .project-meta li:last-child {
+      margin-bottom: 0;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Events Overview</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="animated-background"></div> <!-- This is crucial for the animation to work -->
-  <div class="hero-content">
-    <h1>Nordic Thoracic Oncology Group</h1>
-    <p>Advancing thoracic oncology research across the Nordic countries</p>
-  </div>
-</section>
-  
-<!-- Main Content -->
-<main class="container my-5">
-  <h1>Ongoing Research</h1>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- TRIPLEX Study -->
-  <section class="container my-5">
-    <div class="card">
-      <div class="row g-0">
-        <div class="col-md-12">
-          <div class="card-body">
-            <h2 class="card-title">TRIPLEX Study -recruiting</h2>
-            <p class="card-text">
-              A randomized phase III trial investigating the survival benefit of adding thoracic radiotherapy to durvalumab (MEDI4736) immunotherapy plus chemotherapy in extensive-stage small-cell lung cancer.
-            </p>
-            <p><strong>Lead Researcher:</strong> Bjørn Henning Grønberg</p>
-            <p>
-              <a href="https://raw.githubusercontent.com/heidihelena/images/main/NTOG_TRIPLEX.pdf" class="btn btn-outline-primary" target="_blank">Learn more about TRIPLEX</a>
-            </p>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item active" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Research</span>
+      <h1 class="display-5 fw-bold mb-3">Ongoing Projects</h1>
+      <p class="lead-narrow mb-4">Current and developing NTOG research projects in Nordic lung cancer and thoracic oncology.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#current-studies" class="btn btn-light btn-lg">Current studies</a>
+        <a href="collaborations.html" class="btn btn-outline-light btn-lg">Start collaboration</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Current NTOG research activity</h2>
+            <p class="lead">Ongoing projects belong on this page. Published trials and articles belong on the Publications page.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>NTOG supports Nordic lung cancer research through collaborative academic studies, clinical trials, translational projects, registry-based research, and work-package activity.</p>
+              <p class="mb-0">This page lists selected active or developing projects. Details should be updated as public trial registrations, protocols, abstracts, or publications become available.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ACHILES Study -->
-  <section class="container my-5">
-    <div class="card">
-      <div class="row g-0">
-        <div class="col-md-12">
-          <div class="card-body">
-            <h2 class="card-title">ACHILES Study</h2>
-            <p class="card-text">
-              A randomized phase II study comparing atezolizumab after concurrent chemoradiotherapy with chemoradiotherapy alone in limited-disease small-cell lung cancer.
-            </p>
-            <p><strong>Lead Researcher:</strong> Bjørn Henning Grønberg</p>
-            <p>
-              <a href="https://raw.githubusercontent.com/heidihelena/images/main/NTOG_ACHILES.pdf" class="btn btn-outline-primary" target="_blank">Learn more about ACHILES</a>
-            </p>
+    <section class="section-block bg-light" id="current-studies">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Current studies</h2>
+            <p class="lead mb-0">Selected NTOG-linked studies with available public project material.</p>
+          </div>
+          <div>
+            <a href="publications.html" class="btn btn-outline-primary">Published studies</a>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <article class="project-card">
+              <span class="status-badge">Recruiting</span>
+              <h3>TRIPLEX Study</h3>
+              <p>A randomized phase III trial investigating the survival benefit of adding thoracic radiotherapy to durvalumab (MEDI4736) immunotherapy plus chemotherapy in extensive-stage small-cell lung cancer.</p>
+              <ul class="project-meta">
+                <li><strong>Lead researcher:</strong> Bjørn Henning Grønberg</li>
+                <li><strong>Disease area:</strong> Extensive-stage small-cell lung cancer</li>
+                <li><strong>Study type:</strong> Randomized phase III trial</li>
+              </ul>
+              <a href="https://raw.githubusercontent.com/heidihelena/images/main/NTOG_TRIPLEX.pdf" class="btn btn-outline-primary" target="_blank" rel="noopener">Learn more about TRIPLEX</a>
+            </article>
+          </div>
+
+          <div class="col-lg-6">
+            <article class="project-card">
+              <span class="status-badge">NTOG study</span>
+              <h3>ACHILES Study</h3>
+              <p>A randomized phase II study comparing atezolizumab after concurrent chemoradiotherapy with chemoradiotherapy alone in limited-disease small-cell lung cancer.</p>
+              <ul class="project-meta">
+                <li><strong>Lead researcher:</strong> Bjørn Henning Grønberg</li>
+                <li><strong>Disease area:</strong> Limited-disease small-cell lung cancer</li>
+                <li><strong>Study type:</strong> Randomized phase II study</li>
+              </ul>
+              <a href="https://raw.githubusercontent.com/heidihelena/images/main/NTOG_ACHILES.pdf" class="btn btn-outline-primary" target="_blank" rel="noopener">Learn more about ACHILES</a>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>  
-  </main>  
-  
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+    </section>
+
+    <section class="section-block" id="developing-studies">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Developing studies</h2>
+            <p class="lead">ADIL and DARTS are expected to be important upcoming NTOG studies.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <article class="project-card">
+                  <span class="status-badge developing">In development</span>
+                  <h3>ADIL</h3>
+                  <p class="mb-0">Upcoming NTOG study. Study category, participating countries, and public registration or protocol links will be added when available.</p>
+                </article>
+              </div>
+              <div class="col-md-6">
+                <article class="project-card">
+                  <span class="status-badge developing">In development</span>
+                  <h3>DARTS</h3>
+                  <p class="mb-0">Upcoming NTOG study. Study category, participating countries, and public registration or protocol links will be added when available.</p>
+                </article>
+              </div>
+            </div>
+            <p class="muted-note mt-3 mb-0">These studies should stay on Ongoing Projects until public publications or formal published outputs are available.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="next">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Research routes</h2>
+            <p class="lead mb-0">Explore published studies, collaboration routes, expert contacts, and the wider research overview.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="research.html" class="btn btn-primary">Research Overview</a>
+                <a href="publications.html" class="btn btn-outline-primary">Publications</a>
+                <a href="collaborations.html" class="btn btn-outline-primary">Collaboration Opportunities</a>
+                <a href="expert.html" class="btn btn-outline-primary">Expert Network</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-<script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
+
