@@ -4,79 +4,183 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO Meta Tags -->
   <title>NTOG Research News | Nordic Lung Cancer Research Updates</title>
-
   <meta name="description" content="Research news from the Nordic Thoracic Oncology Group, including updates on Nordic lung cancer research, quality registries, clinical trials, care pathways, screening, guidelines, and thoracic oncology collaboration.">
-
   <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, lung cancer research, Nordic lung cancer care, thoracic oncology, lung cancer registries, clinical trials, care pathways, lung cancer screening, quality indicators, multidisciplinary care">
-
   <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
 
-  <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="NTOG Research News | Nordic Lung Cancer Research Updates">
   <meta property="og:description" content="Updates from the Nordic Thoracic Oncology Group on lung cancer research, clinical collaboration, quality registries, care pathways, screening, and thoracic oncology.">
   <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
   <meta property="og:url" content="https://ntog.org/news.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
 
-  <!-- Twitter / X Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NTOG Research News | Nordic Lung Cancer Research Updates">
   <meta name="twitter:description" content="Research news on Nordic lung cancer research, quality registries, clinical trials, care pathways, screening, and thoracic oncology collaboration.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://ntog.org/news.html">
 
-  <!-- Bootstrap CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/tables.css">
-  <link rel="stylesheet" href="css/buttons.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/nav.css">
-</head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
 
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .news-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+    }
+
+    .news-card .card-body {
+      padding: 1.5rem;
+    }
+
+    .news-card .card-footer {
+      padding: 0 1.5rem 1.5rem;
+      background: #ffffff;
+      border-top: 0;
+    }
+
+    .news-card h3 {
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .news-card h3 a {
+      color: #102a43;
+    }
+
+    .news-card h3 a:hover {
+      color: #1f4e79;
+      text-decoration: underline !important;
+    }
+
+    .news-card p {
+      color: #52606d;
+    }
+
+    .news-meta {
+      color: #697586;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .content-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      padding: 1.5rem;
+    }
+
+    .content-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
 <body>
 
-  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
-
-      <!-- Brand -->
-      <a class="navbar-brand" href="index.html">NTOG</a>
-
-      <!-- Toggler Button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Navbar Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-
-          <!-- About Dropdown -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="aboutDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-              About Us
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
               <li><a class="dropdown-item" href="about.html">About Us</a></li>
               <li><a class="dropdown-item" href="mission.html">Mission</a></li>
@@ -85,17 +189,8 @@
             </ul>
           </li>
 
-          <!-- Research Dropdown -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="researchDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Research
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
             <ul class="dropdown-menu" aria-labelledby="researchDropdown">
               <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
               <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
@@ -104,35 +199,17 @@
             </ul>
           </li>
 
-          <!-- Events Dropdown -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="eventsDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Events
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
             <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-              <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
               <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
               <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
             </ul>
           </li>
 
-          <!-- Clinical Resources Dropdown -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="resourcesDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Clinical Resources
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
               <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
               <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
@@ -140,17 +217,8 @@
             </ul>
           </li>
 
-          <!-- Get Involved Dropdown -->
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="getInvolvedDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Get Involved
-            </a>
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
             <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
               <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
               <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
@@ -158,146 +226,142 @@
             </ul>
           </li>
 
-          <!-- News -->
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="news.html">Research News</a>
           </li>
-
         </ul>
       </div>
     </div>
   </nav>
 
-  <main>
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Research News</span>
+      <h1 class="display-5 fw-bold mb-3">NTOG Research News</h1>
+      <p class="lead-narrow mb-4">Updates on Nordic lung cancer research, clinical collaboration, quality registries, care pathways, screening, guidelines, and thoracic oncology.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#latest-news" class="btn btn-light btn-lg">Latest updates</a>
+        <a href="research.html" class="btn btn-outline-light btn-lg">Research Overview</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero mt-5 bg-dark text-white py-5">
-      <div class="container text-center">
-        <h1 class="display-4">NTOG Research News</h1>
-        <p class="lead">
-          Updates on Nordic lung cancer research, clinical collaboration, quality registries, care pathways, and thoracic oncology.
-        </p>
+  <main>
+    <section class="section-block" id="intro">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>News from NTOG and Nordic collaborators</h2>
+            <p class="lead">This page collects public-facing updates relevant to Nordic lung cancer research, quality improvement, clinical collaboration, and care pathway development.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Research news items can highlight publications, registry reports, clinical trial updates, screening and nodule work, guideline development, educational activities, and multidisciplinary care.</p>
+              <p class="mb-0">Longer research summaries should link to dedicated article pages under the <code>research-news/</code> folder.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Research News Feed -->
-    <section class="research-news-feed py-5">
+    <section class="section-block bg-light" id="latest-news">
       <div class="container">
-
         <div class="row mb-4">
-          <div class="col-lg-8 mx-auto text-center">
+          <div class="col-lg-8">
             <h2>Latest research news</h2>
-            <p class="text-muted">
-              Follow updates from NTOG and Nordic collaborators on lung cancer research, clinical trials, registries, guidelines, and care improvement.
-            </p>
+            <p class="muted-note mb-0">Updates from NTOG and Nordic collaborators on lung cancer research, clinical trials, registries, guidelines, and care improvement.</p>
           </div>
         </div>
 
         <div class="row g-4">
-
-          <!-- News Item 1 -->
           <div class="col-md-6 col-lg-4">
-            <article class="card h-100 shadow-sm">
+            <article class="news-card">
               <div class="card-body">
-                <p class="text-muted small mb-2">
-                  Research news · Nordic lung cancer care · Quality registries · Care pathways
-                </p>
-
-                <h3 class="h5 card-title">
+                <p class="news-meta mb-2">Research news · Nordic lung cancer care · Quality registries · Care pathways</p>
+                <h3 class="card-title">
                   <a href="research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html" class="text-decoration-none">
-                    Nordic lung cancer survival, quality registries, and standardized care pathways
+                    Nordic lung cancer survival, quality registries, and standardised care pathways
                   </a>
                 </h3>
-
-                <p class="card-text">
-                  Lung cancer survival has improved across the Nordic countries, but important differences remain. Quality registries, standardized pathways, and system-level factors may help explain and accelerate progress.
-                </p>
+                <p class="card-text">Lung cancer survival has improved across the Nordic countries, but important differences remain. Quality registries, standardised pathways, and system-level factors may help explain and accelerate progress.</p>
               </div>
-
-              <div class="card-footer bg-white border-0">
-                <a href="research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html" class="btn btn-outline-primary btn-sm">
-                  Read more
-                </a>
+              <div class="card-footer">
+                <a href="research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html" class="btn btn-outline-primary btn-sm">Read more</a>
               </div>
             </article>
           </div>
 
-          <!-- News Item 2 -->
           <div class="col-md-6 col-lg-4">
-            <article class="card h-100 shadow-sm">
+            <article class="news-card">
               <div class="card-body">
-                <p class="text-muted small mb-2">
-                  Research news · Multidisciplinary care · Lung cancer · 2026
-                </p>
-
-                <h3 class="h5 card-title">
+                <p class="news-meta mb-2">Research news · Multidisciplinary care · Lung cancer · 2026</p>
+                <h3 class="card-title">
                   <a href="research-news/lung-cancer-mdt-nordic-survey.html" class="text-decoration-none">
                     Nordic survey highlights multidisciplinary team meetings in lung cancer care
                   </a>
                 </h3>
-
-                <p class="card-text">
-                  A Nordic survey published in <em>Acta Oncologica</em> describes how multidisciplinary team meetings for lung cancer are organised across the Nordic countries.
-                </p>
+                <p class="card-text">A Nordic survey published in <em>Acta Oncologica</em> describes how multidisciplinary team meetings for lung cancer are organised across the Nordic countries.</p>
               </div>
-
-              <div class="card-footer bg-white border-0">
-                <a href="research-news/lung-cancer-mdt-nordic-survey.html" class="btn btn-outline-primary btn-sm">
-                  Read more
-                </a>
+              <div class="card-footer">
+                <a href="research-news/lung-cancer-mdt-nordic-survey.html" class="btn btn-outline-primary btn-sm">Read more</a>
               </div>
             </article>
           </div>
 
-          <!-- News Item 3 -->
           <div class="col-md-6 col-lg-4">
-            <article class="card h-100 shadow-sm">
+            <article class="news-card">
               <div class="card-body">
-                <p class="text-muted small mb-2">
-                  Research news · Lung cancer quality · Finland · Care pathways
-                </p>
-
-                <h3 class="h5 card-title">
+                <p class="news-meta mb-2">Research news · Lung cancer quality · Finland · Care pathways</p>
+                <h3 class="card-title">
                   <a href="research-news/finnish-lung-cancer-quality-report.html" class="text-decoration-none">
                     Finnish lung cancer quality report highlights need for earlier diagnosis
                   </a>
                 </h3>
-
-                <p class="card-text">
-                  A Finnish lung cancer quality report highlights regional variation in diagnosis, data completeness challenges, and the role of standardized care pathways.
-                </p>
+                <p class="card-text">A Finnish lung cancer quality report highlights regional variation in diagnosis, data completeness challenges, and the role of standardised care pathways.</p>
               </div>
-
-              <div class="card-footer bg-white border-0">
-                <a href="research-news/finnish-lung-cancer-quality-report.html" class="btn btn-outline-primary btn-sm">
-                  Read more
-                </a>
+              <div class="card-footer">
+                <a href="research-news/finnish-lung-cancer-quality-report.html" class="btn btn-outline-primary btn-sm">Read more</a>
               </div>
             </article>
           </div>
-
         </div>
       </div>
     </section>
 
+    <section class="section-block" id="next">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Related routes</h2>
+            <p class="lead mb-0">Use the research pages for ongoing studies, publications, collaboration routes, and expert contacts.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="research.html" class="btn btn-primary">Research Overview</a>
+                <a href="ongoing-projects.html" class="btn btn-outline-primary">Ongoing Projects</a>
+                <a href="publications.html" class="btn btn-outline-primary">Publications</a>
+                <a href="collaborations.html" class="btn btn-outline-primary">Research Collaboration</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-      <p>© 2026 Nordic Thoracic Oncology Group</p>
-      <p>
-        <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="terms-of-service.html" class="text-white">Terms of Service</a>
       </p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-
-  <!-- Custom JS -->
   <script src="js/scripts.js" defer></script>
-
 </body>
 </html>
+
