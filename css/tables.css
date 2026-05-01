@@ -1,33 +1,79 @@
+/* Table styling and responsive table helpers */
+
+:root {
+  --primary-color: #1f4e79;
+  --primary-color-hover: #163a5a;
+  --background-light: #f8fafc;
+  --background-lighter: #eef6fb;
+  --border-color: #d8e0e8;
+  --border-color-light: #e5e7eb;
+  --text-body: #334e68;
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
+  --radius-lg: 1rem;
+}
+
+.table-wrap,
+.table-responsive,
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap {
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-lg);
+  background-color: #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Site tables. Applies to plain tables and Bootstrap .table tables. */
 table,
 .table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
+  margin: 1.25rem 0;
   font-size: 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-body);
+  background-color: #ffffff;
+  border-collapse: collapse;
 }
 
-table thead tr {
+.table-wrap table,
+.table-responsive table,
+.table-container table {
+  margin: 0;
+}
+
+table thead tr,
+.table thead tr {
   background-color: var(--primary-color);
   color: #ffffff;
   text-align: left;
+}
+
+table thead th,
+.table thead th {
+  color: #ffffff;
+  font-weight: 700;
+  border-color: var(--primary-color);
 }
 
 table th,
 table td,
 .table th,
 .table td {
-  padding: 12px 15px;
+  padding: 0.75rem 0.95rem;
   border: 1px solid var(--border-color);
-  vertical-align: middle;
+  vertical-align: top;
 }
 
-table tbody tr:nth-of-type(even) {
+table tbody tr:nth-of-type(even),
+.table tbody tr:nth-of-type(even) {
   background-color: var(--background-light);
 }
 
-table tbody tr:hover {
+table tbody tr:hover,
+.table tbody tr:hover {
   background-color: var(--background-lighter);
 }
 
@@ -35,27 +81,95 @@ table a,
 .table a {
   color: var(--primary-color);
   text-decoration: none;
+  font-weight: 600;
 }
 
 table a:hover,
-.table a:hover {
+table a:focus,
+.table a:hover,
+.table a:focus {
+  color: var(--primary-color-hover);
   text-decoration: underline;
+}
+
+/* Compact tables for dense clinical/resource pages */
+.table-compact,
+.table.table-compact {
+  font-size: 0.92rem;
+}
+
+.table-compact th,
+.table-compact td,
+.table.table-compact th,
+.table.table-compact td {
+  padding: 0.55rem 0.7rem;
+}
+
+/* Plain table option when card/shadow styling is not wanted */
+.table-plain,
+.table.table-plain {
+  box-shadow: none;
+  border-collapse: collapse;
+}
+
+.table-plain tbody tr:hover,
+.table.table-plain tbody tr:hover {
+  background-color: transparent;
+}
+
+/* Better alignment for numeric values */
+.table-numeric,
+td.table-numeric,
+th.table-numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 768px) {
   table,
   .table {
-    font-size: 0.8rem; /* Reduce font size to fit smaller screens */
+    font-size: 0.86rem;
   }
 
   table th,
   table td,
   .table th,
   .table td {
-    padding: 8px 10px; /* Reduce padding for smaller cells */
+    padding: 0.5rem 0.6rem;
+  }
+}
+
+@media print {
+  .table-wrap,
+  .table-responsive,
+  .table-container {
+    overflow: visible;
+    box-shadow: none;
+    border: none;
   }
 
-  .table-container {
-    overflow-x: auto; /* Adds horizontal scroll on mobile to prevent content overflow */
+  table,
+  .table {
+    font-size: 9pt;
+    box-shadow: none;
+  }
+
+  table thead tr,
+  .table thead tr {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  table thead th,
+  .table thead th {
+    color: #000000;
+    border-color: #000000;
+  }
+
+  table th,
+  table td,
+  .table th,
+  .table td {
+    border-color: #000000;
   }
 }
