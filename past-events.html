@@ -3,157 +3,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Upcoming SBRT Meeting 2025 hosted by NTOG.">
-  <title>Upcoming Events | NTOG</title>
-<!-- Additional Resources -->
-  <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<!-- Bootstrap Bundle JS (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+  <title>Past Events | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Selected past events from the Nordic Thoracic Oncology Group, including Nordic Lung Cancer Symposium meetings and NTOG Steering Committee meetings.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, past events, Nordic Lung Cancer Symposium, lung cancer meeting, Gothenburg 2025, Bergen 2022, Copenhagen, thoracic oncology">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <link rel="canonical" href="https://ntog.org/past-events.html">
+
+  <meta property="og:title" content="Past Events | Nordic Thoracic Oncology Group">
+  <meta property="og:description" content="Selected past NTOG events, including Nordic Lung Cancer Symposium meetings and Steering Committee meetings.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/past-events.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Past Events | NTOG">
+  <meta name="twitter:description" content="Selected past Nordic Lung Cancer Symposium meetings and NTOG events.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .event-card,
+    .archive-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .event-card,
+    .archive-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .event-card h3,
+    .archive-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .event-card p,
+    .archive-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .event-meta {
+      margin-bottom: 0.85rem;
+      color: #697586;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .event-type {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .event-type.meeting {
+      background: #f7f0df;
+      color: #7a4f01;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.55rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-list {
+      position: relative;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .timeline-list li {
+      position: relative;
+      padding-left: 2.25rem;
+      padding-bottom: 1.35rem;
+    }
+
+    .timeline-list li:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-list li::before {
+      content: "";
+      position: absolute;
+      left: 0.35rem;
+      top: 0.3rem;
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 50%;
+      background: #1f4e79;
+      box-shadow: 0 0 0 4px #d7eaf3;
+    }
+
+    .timeline-list li::after {
+      content: "";
+      position: absolute;
+      left: 0.73rem;
+      top: 1.35rem;
+      bottom: 0.1rem;
+      width: 1px;
+      background: #d7eaf3;
+    }
+
+    .timeline-list li:last-child::after {
+      display: none;
+    }
+
+    .timeline-year {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: #1f4e79;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-
-    <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Events Overview</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <body>
-  <!-- Main Content -->
-<main class="container my-5">
-  <header class="text-center mb-5">
-    <h1 class="display-4">Past Events</h1>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item active" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Events</span>
+      <h1 class="display-5 fw-bold mb-3">Past Events</h1>
+      <p class="lead-narrow mb-4">Selected past NTOG meetings and Nordic Lung Cancer Symposium events. This archive will be expanded as historical programme information is confirmed.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#symposia" class="btn btn-light btn-lg">Symposium archive</a>
+        <a href="/ntog2027/" class="btn btn-outline-light btn-lg">Next symposium: 2027</a>
+      </div>
+    </div>
   </header>
 
-  <section class="row justify-content-center">
-    <div class="col-12 col-lg-10">
-      <article class="card shadow-sm mb-4">
-        <div class="card-body p-4 p-md-5">
-          <h2 class="card-title h3 mb-3">NTOG Steering Committee Meeting</h2>
-
-          <p class="mb-1"><strong>Date:</strong> 23–24 April 2026</p>
-          <p class="mb-4"><strong>Location:</strong> Helsinki, Finland</p>
-
-          <p class="lead mb-3">
-            The NTOG Steering Committee met in Helsinki for an insightful meeting focused on
-            strengthening Nordic collaboration in thoracic oncology.
-          </p>
-
-          <h3 class="h5 mt-4">Key themes</h3>
-          <ul class="mb-0">
-            <li>Nordic lung cancer screening: current status, participation, and implementation models</li>
-            <li>Pan-Nordic pulmonary nodule management guideline development and harmonization</li>
-            <li>Quality indicators and standardization priorities across countries</li>
-            <li>Upcoming clinical trials: <strong>ADIL</strong> and <strong>DARTS</strong></li>
-          </ul>
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>NTOG events archive</h2>
+            <p class="lead">The Nordic Lung Cancer Symposium is a recurring NTOG meeting point for clinicians, researchers, basic scientists, students, and other professionals working to improve outcomes for patients with lung cancer.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>This page lists selected past events where public information or internal event details are available. It is not yet a complete historical archive of all NTOG meetings.</p>
+              <p class="mb-0">Known symposium history includes the 14th Nordic Lung Cancer Symposium in Bergen in 2022, the 15th in Gothenburg in 2025, the 16th planned for Copenhagen in 2027, and the 17th planned for Helsinki in 2029.</p>
+            </div>
+          </div>
         </div>
-      </article>
-    </div>
-  </section>
-</main>
+      </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <section class="section-block bg-light" id="symposia">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Nordic Lung Cancer Symposium</h2>
+            <p class="lead mb-0">Selected past symposia with confirmed public information.</p>
+          </div>
+        </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <article class="event-card">
+              <span class="event-type">Symposium</span>
+              <p class="event-meta">8 to 10 May 2025 · Gothenburg, Sweden</p>
+              <h3>15th Nordic Lung Cancer Symposium</h3>
+              <p>The 15th Nordic Lung Cancer Symposium was held at Clarion Hotel Draken in Gothenburg. The meeting targeted clinicians, clinical researchers, basic scientists, and students working to improve lives for patients with lung cancer.</p>
+              <p>The event continued NTOG's aim to increase communication between Nordic lung cancer experts and facilitate new and existing collaborations.</p>
+              <a href="https://cancerakademin.se/evenemang/nordic-lungcancer-symposium-2025/" class="btn btn-outline-primary" target="_blank" rel="noopener">Archived event page</a>
+            </article>
+          </div>
+
+          <div class="col-lg-6">
+            <article class="event-card">
+              <span class="event-type">Symposium</span>
+              <p class="event-meta">25 to 28 August 2022 · Bergen, Norway</p>
+              <h3>14th Nordic Lung Cancer Symposium</h3>
+              <p>The 14th Nordic Lung Cancer Symposium was held in Bergen, Norway. Public event listings describe the meeting as a forum where clinicians, scientists, and lung cancer experts met to exchange knowledge, research, and network.</p>
+              <p class="mb-4">The venue was listed as Radisson Blu Royal Hotel, Bergen.</p>
+              <a href="https://stayhappening.com/e/the-14th-nordic-lung-cancer-symposium-E2ISURI83NA" class="btn btn-outline-primary" target="_blank" rel="noopener">Archived public listing</a>
+            </article>
+          </div>
+
+          <div class="col-lg-6">
+            <article class="event-card">
+              <span class="event-type">Symposium</span>
+              <p class="event-meta">2003 · Copenhagen, Denmark</p>
+              <h3>6th Nordic Lung Cancer Symposium</h3>
+              <p>The International Congress Calendar entry from UIA lists the 6th Nordic Lung Cancer Symposium as an NTOG-organised meeting held in Copenhagen, Denmark, in 2003.</p>
+              <a href="https://uia.org/s/ca/en/1300532133" class="btn btn-outline-primary" target="_blank" rel="noopener">UIA archive entry</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="meetings">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Selected NTOG meetings</h2>
+            <p class="lead mb-0">Recent Steering Committee meetings and working meetings.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <article class="event-card">
+              <span class="event-type meeting">Steering Committee meeting</span>
+              <p class="event-meta">23 to 24 April 2026 · Helsinki, Finland</p>
+              <h3>NTOG Steering Committee Meeting</h3>
+              <p>The NTOG Steering Committee met in Helsinki to strengthen Nordic collaboration in thoracic oncology.</p>
+              <h4 class="h6 mt-4">Key themes</h4>
+              <ul class="compact-list">
+                <li>Nordic lung cancer screening: current status, participation, and implementation models.</li>
+                <li>Pan-Nordic pulmonary nodule management guideline development and harmonisation.</li>
+                <li>Quality indicators and standardisation priorities across countries.</li>
+                <li>Upcoming clinical trials: ADIL and DARTS.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="col-lg-6">
+            <article class="event-card">
+              <span class="event-type meeting">Steering Committee meeting</span>
+              <p class="event-meta">November 2024 · Reykjavik, Iceland</p>
+              <h3>NTOG Steering Committee Meeting</h3>
+              <p>The committee discussed ongoing and upcoming research, lung cancer screening, subgroup work for harmonising research and clinical protocols, and education.</p>
+              <h4 class="h6 mt-4">Key themes</h4>
+              <ul class="compact-list">
+                <li>Clinical studies.</li>
+                <li>Lung cancer screening and harmonisation work.</li>
+                <li>NORTHDIP and educational activity.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="timeline">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Known symposium sequence</h2>
+            <p class="lead">This timeline combines confirmed public records with NTOG planning information.</p>
+            <p class="muted-note">Earlier meetings will be added as locations, years, and programme links are verified.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="archive-card">
+              <ul class="timeline-list">
+                <li>
+                  <span class="timeline-year">2003</span>
+                  <p class="mb-0">6th Nordic Lung Cancer Symposium, Copenhagen, Denmark.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">2022</span>
+                  <p class="mb-0">14th Nordic Lung Cancer Symposium, Bergen, Norway.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">2025</span>
+                  <p class="mb-0">15th Nordic Lung Cancer Symposium, Gothenburg, Sweden.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">2027</span>
+                  <p class="mb-0">16th Nordic Lung Cancer Symposium, Copenhagen, Denmark.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">2029</span>
+                  <p class="mb-0">17th Nordic Lung Cancer Symposium, Helsinki, Finland.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="next">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Future meetings</h2>
+            <p class="lead mb-0">The next Nordic Lung Cancer Symposium will be held in Copenhagen in 2027.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="/ntog2027/" class="btn btn-primary">Nordic Lung Cancer Symposium 2027</a>
+                <a href="upcoming-events.html" class="btn btn-outline-primary">Upcoming Events</a>
+                <a href="history.html" class="btn btn-outline-primary">NTOG History</a>
+                <a href="mission.html" class="btn btn-outline-primary">NTOG Mission</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle (include only once) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom JS -->
-  <script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
+
