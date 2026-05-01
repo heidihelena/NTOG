@@ -1,261 +1,468 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO Meta Tags -->
-<title>Pan-Nordic Pulmonary Nodule Guideline | NTOG</title>
+  <title>Lung Cancer Screening and Pulmonary Nodule Management | NTOG</title>
+  <meta name="description" content="NTOG supports Nordic collaboration on lung cancer screening and pulmonary nodule management, including low-dose CT screening workflows, incidental pulmonary nodules, radiology reporting, diagnostic pathways, artificial intelligence, registries, and Pan-Nordic harmonisation.">
+  <meta name="keywords" content="pulmonary nodule guideline, lung nodule follow-up, Pan-Nordic guideline, NTOG, lung cancer screening, low-dose CT, thoracic oncology, radiology reporting, pulmonology, artificial intelligence, Nordic lung cancer care">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <link rel="canonical" href="https://ntog.org/guidelines/nodule-management.html">
 
-<meta name="description" content="NTOG is supporting development of a Pan-Nordic pulmonary nodule guideline to harmonise nodule follow-up, diagnostic pathways, lung cancer screening workflows, radiology reporting, and clinical collaboration across the Nordic countries.">
+  <meta property="og:title" content="Lung Cancer Screening and Pulmonary Nodule Management | NTOG">
+  <meta property="og:description" content="NTOG is working toward harmonised Nordic approaches for lung cancer screening, pulmonary nodule follow-up, radiology reporting, and diagnostic pathways.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/guidelines/nodule-management.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
 
-<meta name="keywords" content="pulmonary nodule guideline, lung nodule follow-up, Pan-Nordic guideline, NTOG, lung cancer screening, low-dose CT, thoracic oncology, radiology reporting, pulmonology, Nordic lung cancer care">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lung Cancer Screening and Pulmonary Nodule Management | NTOG">
+  <meta name="twitter:description" content="Nordic collaboration on low-dose CT screening, pulmonary nodule follow-up, radiology reporting, artificial intelligence, registries, and Pan-Nordic guideline development.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
-<meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Open Graph Meta Tags for Social Sharing -->
-<meta property="og:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta property="og:description" content="NTOG is working toward harmonised Nordic guidance for pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and diagnostic pathways.">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
-<meta property="og:url" content="https://ntog.org/pulmonary-nodule-guideline.html">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Twitter / X Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pan-Nordic Pulmonary Nodule Guideline | NTOG">
-<meta name="twitter:description" content="Nordic collaboration on pulmonary nodule follow-up, lung cancer screening workflows, radiology reporting, and Pan-Nordic guideline development.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png"> 
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
 
-  <!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/tables.css">
-<link rel="stylesheet" href="/css/buttons.css">
-<link rel="stylesheet" href="/css/hero.css">
-<link rel="stylesheet" href="/css/nav.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .topic-card,
+    .timeline-card,
+    .cta-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .topic-card,
+    .timeline-card,
+    .cta-panel {
+      padding: 1.5rem;
+    }
+
+    .topic-card h3,
+    .timeline-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .topic-card p,
+    .timeline-card p,
+    .cta-panel p {
+      color: #52606d;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .status-note {
+      border-radius: 1rem;
+      border: 1px solid #d7eaf3;
+      background: #f0f7fb;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="/">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Lung Cancer Symposium</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">Research news</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="/about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="/history.html">History</a></li>
+              <li><a class="dropdown-item" href="/steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item active" href="/protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-  
-   <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">NTOG Guidelines</h1>
-    <p class="lead">Nordic Lung Cancer Screening and Pulmonary Nodule Research</p>
-  </div>
-</section>
+  </nav>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-<section id="lung-cancer-screening-nodule-management" class="research-section">
-
-  <header>
-    <h2>Nordic collaboration on lung cancer screening and pulmonary nodule management</h2>
-    <p>
-      The Nordic Thoracic Oncology Group (NTOG) supports cross-country collaboration on two closely connected areas of lung cancer care:
-      <strong>lung cancer screening</strong> and <strong>pulmonary nodule management</strong>.
-    </p>
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1 class="display-5 fw-bold mb-3">Lung Cancer Screening and Pulmonary Nodule Management</h1>
+      <p class="lead-narrow mb-4">Nordic collaboration on low-dose CT screening, incidental pulmonary nodules, radiology reporting, diagnostic pathways, registries, artificial intelligence, and Pan-Nordic harmonisation.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#nodule-guideline" class="btn btn-light btn-lg">Pan-Nordic nodule work</a>
+        <a href="/protocols.html" class="btn btn-outline-light btn-lg">Protocols</a>
+      </div>
+    </div>
   </header>
 
-<p>
-  Across the Nordic countries, national and regional lung cancer screening pilots are providing important evidence on how low-dose CT screening can be implemented in real-world healthcare systems. These initiatives address key questions, including participant selection, risk-based screening, radiology workflows, management of incidental findings, smoking cessation, artificial intelligence, and the resources required for sustainable national programmes.
-</p>
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Screening and nodule management belong together</h2>
+            <p class="lead">NTOG supports cross-country collaboration on two closely connected areas of lung cancer care: lung cancer screening and pulmonary nodule management.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Across the Nordic countries, national and regional lung cancer screening pilots are providing important evidence on how low-dose CT screening can be implemented in real-world healthcare systems.</p>
+              <p>These initiatives address participant selection, risk-based screening, radiology workflows, management of incidental findings, smoking cessation, artificial intelligence, and the resources required for sustainable national programmes.</p>
+              <p class="mb-0">In parallel, NTOG members are working toward a Pan-Nordic approach to pulmonary nodule follow-up and diagnostic pathways.</p>
+            </div>
+          </div>
+        </div>
+        <div class="status-note mt-4">
+          <strong>Status:</strong> This is an NTOG harmonisation and research-development area. It is not a final clinical guideline and does not replace national guidelines, local protocols, or clinical judgment.
+        </div>
+      </div>
+    </section>
 
-<p>
-  NTOG considers that the evidence now supports moving towards lung cancer screening in the Nordic countries. Implementation will require dedicated resources, specialist expertise, and coordinated healthcare pathways to ensure that screening is delivered safely, effectively, and equitably.
-</p>
+    <section class="section-block bg-light" id="why-this-matters">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Why this matters</h2>
+            <p class="lead">Screening programmes and routine CT imaging both create a large population of people with pulmonary nodules requiring structured follow-up.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Lung cancer screening programmes identify nodules in people at increased risk of lung cancer, while routine CT imaging already creates a large de facto screening population across healthcare systems.</p>
+              <p>Without clear and consistent follow-up pathways, this can lead to unnecessary referrals, patient anxiety, variation in care, and inefficient use of specialist resources.</p>
+              <p class="mb-0">Nordic collaboration can help create practical pathways that are clinically safe, realistic to implement, and suitable for comparison across healthcare systems.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-  In parallel, NTOG members are working towards a <strong>Pan-Nordic approach to pulmonary nodule follow-up</strong>. The idea for a shared Nordic guideline on incidental pulmonary nodules emerged from discussions within the Nordic thoracic oncology and lung cancer community.
-</p>
+    <section class="section-block" id="screening">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Lung cancer screening in the Nordic countries</h2>
+            <p class="lead mb-0">Nordic countries are at different stages of screening evaluation and implementation.</p>
+          </div>
+        </div>
 
-<p>
-  Following the NTOG meeting in Gothenburg, existing national guidelines from Denmark, Norway, and Sweden were compared to identify common principles and important differences. This work, coordinated by Torben Riis Rasmussen of the Danish Lung Cancer Group, laid the foundation for a joint Nordic initiative.
-</p>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="topic-card">
+              <h3>Implementation questions</h3>
+              <p>Screening pilots in Norway, Sweden, Finland, and Denmark are testing different models for recruitment, eligibility, low-dose CT imaging, radiology reporting, follow-up, and integration with clinical care.</p>
+              <p class="mb-0">Important questions include how to identify people at increased risk, which eligibility criteria are appropriate for Nordic populations, how incidental findings should be handled, and how AI and registry data can support screening and follow-up.</p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="topic-card">
+              <h3>Operational requirements</h3>
+              <p>Implementation requires more than CT capacity. Screening programmes need coordinated systems for invitation, eligibility assessment, scan reading, follow-up decisions, patient communication, data collection, quality assurance, and smoking cessation support.</p>
+              <p class="mb-0">NTOG considers that current evidence supports moving toward lung cancer screening in the Nordic countries, provided implementation is resourced, coordinated, equitable, and quality-assured.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-  Current national guidelines across the Nordic countries are based on broadly similar evidence, but they differ in risk thresholds, follow-up strategies, and organisational pathways. This variation highlights the need for greater harmonisation in detection, reporting, and early management of incidental pulmonary nodules.
-</p>
+    <section class="section-block bg-light" id="nodule-guideline">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Toward a Pan-Nordic pulmonary nodule guideline</h2>
+            <p class="lead">The aim is to create a concise, implementable consensus document that supports harmonised follow-up while allowing clinical flexibility.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The idea for a shared Nordic guideline on incidental pulmonary nodules emerged from discussions within the Nordic thoracic oncology and lung cancer community.</p>
+              <p>Following the NTOG meeting in Gothenburg, existing national guidelines from Denmark, Norway, and Sweden were compared to identify common principles and important differences. This work, coordinated by Torben Riis Rasmussen of the Danish Lung Cancer Group, laid the foundation for a joint Nordic initiative.</p>
+              <p>Current national guidelines across the Nordic countries are based on broadly similar evidence, but they differ in risk thresholds, follow-up strategies, and organisational pathways.</p>
+              <p class="mb-0">This variation highlights the need for greater harmonisation in detection, reporting, and early management of incidental pulmonary nodules.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-  Pulmonary nodules are frequently detected both in lung cancer screening programmes and in routine clinical imaging. Harmonised Nordic guidance could improve consistency, reduce unnecessary variation, support earlier lung cancer detection, and make follow-up pathways clearer for clinicians and patients.
-</p>
+    <section class="section-block" id="scope">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Proposed scope</h2>
+            <p class="muted-note">The proposed work focuses on nodule follow-up and diagnostic pathways, not treatment decisions for confirmed cancer.</p>
+          </div>
+          <div class="col-lg-8">
+            <div class="topic-card">
+              <div class="mb-3">
+                <span class="badge-topic">Size thresholds</span>
+                <span class="badge-topic">Subsolid nodules</span>
+                <span class="badge-topic">Ground-glass nodules</span>
+                <span class="badge-topic">Follow-up duration</span>
+                <span class="badge-topic">Risk prediction</span>
+                <span class="badge-topic">Volumetry</span>
+                <span class="badge-topic">Artificial intelligence</span>
+                <span class="badge-topic">Age</span>
+                <span class="badge-topic">Frailty</span>
+                <span class="badge-topic">Comorbidities</span>
+                <span class="badge-topic">Cancer risk</span>
+              </div>
+              <p class="mb-0">A Pan-Nordic pulmonary nodule guideline could support more consistent follow-up protocols, clearer diagnostic pathways, better communication between radiology and pulmonology, fewer unnecessary referrals and investigations, improved early lung cancer detection, and shared Nordic quality improvement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h3>Why this matters</h3>
+    <section class="section-block bg-light" id="care-model">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>A practical Nordic care model</h2>
+            <p class="lead">The goal is a practical framework that supports high-quality care across different Nordic healthcare systems.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Meeting discussions highlighted the need for models that are both clinically safe and operationally realistic.</p>
+              <p>A future Nordic approach may combine structured radiology reporting, conditional follow-up recommendations, selected multidisciplinary discussions, standardised patient communication, and clear escalation pathways.</p>
+              <p class="mb-0">The aim is not to create unnecessary complexity, but to support local pulmonology involvement when malignancy is suspected and centralised expertise where appropriate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-  Lung cancer screening and nodule management are closely linked. Screening programmes identify nodules in people at increased risk of lung cancer, while routine CT imaging already creates a large “de facto screening” population across healthcare systems.
-</p>
+    <section class="section-block" id="data-research">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Data, registries, and future research</h2>
+            <p class="lead">Nordic health data systems offer important opportunities for research on screening, nodules, diagnostic pathways, and outcomes.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="compact-list">
+                <li>Harmonised terminology for solid, part-solid, and non-solid nodules.</li>
+                <li>Common definitions for follow-up, diagnostic escalation, and outcomes.</li>
+                <li>Improved use of cancer registries and local screening databases.</li>
+                <li>Evaluation of artificial intelligence in radiology workflows and nodule management.</li>
+                <li>Long-term development of pooled or federated Nordic datasets.</li>
+                <li>Realistic approaches to privacy, consent, data access, and national governance.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-  Without clear and consistent follow-up pathways, this can lead to unnecessary referrals, patient anxiety, variation in care, and inefficient use of specialist resources. Nordic collaboration can help create practical pathways that are clinically safe and realistic to implement.
-</p>
+    <section class="section-block bg-light" id="next-steps">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Next steps</h2>
+            <p class="lead">NTOG members plan to continue Nordic collaboration on lung cancer screening and pulmonary nodule management.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="timeline-card">
+              <h3>Proposed working group</h3>
+              <p>A proposed working group, led by Zaigham Saghir, will include one pulmonologist and one radiologist from Finland, Denmark, Norway, and Sweden.</p>
+              <p>The group will consult other experts during the work.</p>
+              <p class="mb-0">This initiative reflects NTOG's broader mission to strengthen Nordic collaboration in thoracic oncology research, support evidence-based care, and improve outcomes for patients with lung cancer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h3>Lung cancer screening in the Nordic countries</h3>
-
-<p>
-  Nordic countries are currently at different stages of lung cancer screening evaluation and implementation. Screening pilots in Norway, Sweden, Finland, and Denmark are testing different models for recruitment, eligibility, low-dose CT imaging, radiology reporting, follow-up, and integration with clinical care.
-</p>
-
-<p>
-  Early experience shows that implementation requires more than CT capacity. Screening programmes need coordinated systems for invitation, eligibility assessment, scan reading, follow-up decisions, patient communication, data collection, quality assurance, and integration of smoking cessation support.
-</p>
-
-<p>
-  Important implementation questions include how to identify people at increased risk, which eligibility criteria are most appropriate for Nordic populations, how incidental findings should be handled, and how artificial intelligence and registry data can support screening and follow-up.
-</p>
-
-<h3>Toward a Pan-Nordic pulmonary nodule guideline</h3>
-
-<p>
-  NTOG members have identified strong interest in developing a shared Nordic framework for pulmonary nodule management. The aim is to create a concise and implementable consensus document that supports harmonised follow-up across countries while allowing clinical flexibility.
-</p>
-
-<p>
-  A Pan-Nordic pulmonary nodule guideline could support more consistent follow-up protocols, clearer diagnostic pathways, better communication between radiology and pulmonology, fewer unnecessary referrals and investigations, improved early lung cancer detection, and shared Nordic quality improvement.
-</p>
-
-<p>
-  The proposed work will focus on <strong>nodule follow-up and diagnostic pathways</strong>, rather than treatment decisions for confirmed cancer. Important clinical questions include size thresholds, subsolid and ground-glass nodules, follow-up duration, risk prediction, volumetry, artificial intelligence, age, frailty, comorbidities, and overall cancer risk.
-</p>
-
-<h3>A practical Nordic care model</h3>
-
-<p>
-  Meeting discussions highlighted the need for models that are both clinically safe and operationally realistic. A future Nordic approach may combine structured radiology reporting, conditional follow-up recommendations, selected multidisciplinary discussions, standardised patient communication, and clear escalation pathways.
-</p>
-
-<p>
-  The goal is not to create unnecessary complexity. The aim is to develop a practical framework that supports high-quality care across different Nordic healthcare systems, with local pulmonology involvement when malignancy is suspected and centralised expertise where appropriate.
-</p>
-
-<h3>Data, registries, and future research</h3>
-
-<p>
-  Nordic health data systems offer important opportunities for research on lung cancer screening, pulmonary nodules, diagnostic pathways, and outcomes. Successful collaboration requires common definitions, structured data collection, and realistic approaches to privacy, consent, and data access.
-</p>
-
-<p>
-  Key priorities include harmonised terminology for solid, part-solid, and non-solid nodules, common definitions for follow-up and outcomes, improved use of cancer registries and local screening databases, evaluation of artificial intelligence, and long-term development of pooled or federated Nordic datasets.
-</p>
-
-<h3>Next steps</h3>
-
-<p>
-  NTOG members plan to continue Nordic collaboration on lung cancer screening and pulmonary nodule management. A proposed working group, led by Zaigham Saghir, will include one pulmonologist and one radiologist from Finland, Denmark, Norway, and Sweden.
-</p>
-
-<p>
-  The group will consult other experts during the work. This initiative reflects NTOG’s broader mission to strengthen Nordic collaboration in thoracic oncology research, support evidence-based care, and improve outcomes for patients with lung cancer.
-</p>
-</section>
-
-    
+    <section class="section-block" id="related">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Related NTOG pages</h2>
+            <p class="lead mb-0">Use these links for national guideline comparison, protocol harmonisation, expert routing, and research collaboration.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="/guidelines.html" class="btn btn-primary">National Lung Cancer Guidelines</a>
+                <a href="/protocols.html" class="btn btn-outline-primary">Protocols and Harmonisation Work</a>
+                <a href="/expert.html" class="btn btn-outline-primary">Expert Network</a>
+                <a href="/collaborations.html" class="btn btn-outline-primary">Research Collaboration</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-<script src="js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/js/scripts.js" defer></script>
 </body>
 </html>
