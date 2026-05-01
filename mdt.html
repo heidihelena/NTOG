@@ -2,50 +2,207 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NTOG — Lung cancer MDT checklist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTOG Lung Cancer MDT Checklist</title>
+<meta name="description" content="Educational lung cancer MDT checklist adapted for Nordic use by NTOG. Runs locally in the browser and does not store data.">
 <style>
-  body { font-family: -apple-system, system-ui, sans-serif; max-width: 900px;
-         margin: 2em auto; padding: 0 1em; color: #222; line-height: 1.5; }
-  h1 { color: #0b5394; }
-  h2 { border-bottom: 2px solid #0b5394; padding-bottom: 4px; margin-top: 2em; }
-  fieldset { border: 1px solid #ccc; margin-bottom: 1em; padding: 1em; }
-  legend { font-weight: 600; padding: 0 .5em; }
-  label { display: block; margin: .4em 0 .15em; font-weight: 500; }
-  input, select, textarea { width: 100%; box-sizing: border-box; padding: .4em;
-                            font-size: 1em; border: 1px solid #bbb; border-radius: 4px; }
-  textarea { min-height: 3em; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
-  .hint { font-size: .85em; color: #666; }
-  .warn { color: #b00; font-size: .85em; margin-top: .25em; }
-  .privacy { background: #fff7d6; border: 1px solid #e0c200; padding: .8em;
-             border-radius: 6px; margin-bottom: 1.5em; }
-  button { padding: .6em 1.2em; font-size: 1em; border-radius: 6px;
-           border: 1px solid #0b5394; background: #0b5394; color: #fff;
-           cursor: pointer; margin-right: .5em; }
-  button.secondary { background: #fff; color: #0b5394; }
-  #summary { white-space: pre-wrap; background: #f5f5f5; padding: 1em;
-             border-radius: 6px; font-family: ui-monospace, monospace;
-             font-size: .9em; margin-top: 1em; }
+  :root {
+    --ntog-blue: #0b5394;
+    --ntog-blue-dark: #073763;
+    --ntog-light: #f5f8fb;
+    --ntog-border: #cfd8e3;
+    --ntog-warning-bg: #fff7d6;
+    --ntog-warning-border: #e0c200;
+    --text: #222;
+    --muted: #666;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    max-width: 980px;
+    margin: 2em auto;
+    padding: 0 1em;
+    color: var(--text);
+    line-height: 1.5;
+    background: #fff;
+  }
+
+  h1 {
+    color: var(--ntog-blue);
+    margin-bottom: 0.25em;
+  }
+
+  h2 {
+    border-bottom: 2px solid var(--ntog-blue);
+    padding-bottom: 4px;
+    margin-top: 2em;
+    color: var(--ntog-blue-dark);
+  }
+
+  h3 {
+    margin-top: 1.1em;
+    color: var(--ntog-blue-dark);
+  }
+
+  fieldset {
+    border: 1px solid var(--ntog-border);
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  fieldset.submodule {
+    background: var(--ntog-light);
+  }
+
+  legend {
+    font-weight: 700;
+    padding: 0 .5em;
+    color: var(--ntog-blue-dark);
+  }
+
+  label {
+    display: block;
+    margin: .4em 0 .15em;
+    font-weight: 600;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .45em;
+    font-size: 1em;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  textarea {
+    min-height: 3em;
+    resize: vertical;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+  }
+
+  .row3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+  }
+
+  .hint {
+    font-size: .86em;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .warn {
+    color: #b00;
+    font-size: .9em;
+    margin-top: .75em;
+    font-weight: 600;
+  }
+
+  .privacy,
+  .disclaimer {
+    background: var(--ntog-warning-bg);
+    border: 1px solid var(--ntog-warning-border);
+    padding: .9em;
+    border-radius: 8px;
+    margin-bottom: 1.2em;
+  }
+
+  .disclaimer {
+    background: #eef6fb;
+    border-color: #b9d6e8;
+  }
+
+  .button-row {
+    margin-top: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+  }
+
+  button {
+    padding: .65em 1.2em;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid var(--ntog-blue);
+    background: var(--ntog-blue);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button.secondary {
+    background: #fff;
+    color: var(--ntog-blue);
+  }
+
+  #summary {
+    white-space: pre-wrap;
+    background: #f5f5f5;
+    padding: 1em;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+  }
+
+  @media (max-width: 760px) {
+    .row,
+    .row3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media print {
-    fieldset, button, .privacy, .lang { display: none; }
-    #summary { background: #fff; border: none; padding: 0; }
+    form > fieldset,
+    form > h2,
+    .privacy,
+    .disclaimer,
+    .button-row,
+    #missing,
+    .intro-text {
+      display: none;
+    }
+
+    body {
+      margin: 1em;
+      max-width: none;
+      font-size: 11pt;
+    }
+
+    #summary {
+      background: #fff;
+      border: none;
+      padding: 0;
+      font-size: 10pt;
+    }
   }
 </style>
 </head>
 <body>
 
 <h1>Lung cancer MDT checklist</h1>
-<p class="hint">
-  Based on the Finnish structured MDT referral by
-  Uibu T, Knuuttila A, Andersen H et al. 2018, updated 12/2021 and 12/2025.
-  Adapted for Nordic use by NTOG.
+<p class="hint intro-text">
+  Based on the Finnish structured MDT referral by Uibu T, Knuuttila A, Andersén H et al. 2018, updated 12/2021 and 12/2025. Adapted for Nordic educational use by NTOG.
 </p>
 
 <div class="privacy">
-  🔒 <strong>Privacy:</strong> This form runs entirely in your browser.
-  No data is sent anywhere. Refreshing the page clears all fields.
-  Do not share screenshots containing identifiable patient information.
+  <strong>Privacy:</strong> This form runs entirely in your browser. No data is sent anywhere. Refreshing the page clears all fields. Do not share screenshots, printouts, or copied summaries containing identifiable patient information outside approved clinical systems.
+</div>
+
+<div class="disclaimer">
+  <strong>Use:</strong> This checklist is a structured preparation and teaching tool for lung cancer MDT discussion. It does not replace national guidelines, local protocols, clinical judgment, or formal MDT documentation systems.
 </div>
 
 <form id="mdtForm">
@@ -65,37 +222,50 @@
     <div><label>Age</label><input type="number" name="age" min="0" max="120"></div>
     <div><label>Sex</label>
       <select name="sex">
-        <option value="">—</option>
-        <option>Female</option><option>Male</option><option>Other / not specified</option>
+        <option value="">Select</option>
+        <option>Female</option>
+        <option>Male</option>
+        <option>Other / not specified</option>
       </select>
     </div>
   </div>
+
   <label>Smoking status</label>
   <select name="smokingStatus">
-    <option value="">—</option>
+    <option value="">Select</option>
     <option>Never smoker</option>
     <option>Former smoker</option>
     <option>Current smoker</option>
   </select>
-  <label>Pack-years</label>
-  <input type="number" name="packYears" min="0" step="0.1">
+
+  <div class="row">
+    <div>
+      <label>Pack-years</label>
+      <input type="number" name="packYears" min="0" step="0.1">
+    </div>
+    <div>
+      <label>Years since quitting <span class="hint">if former smoker</span></label>
+      <input type="number" name="quitYears" min="0" step="0.5">
+    </div>
+  </div>
 
   <div class="row">
     <div><label>Weight (kg)</label><input type="number" name="weight" step="0.1" id="weight"></div>
     <div><label>Height (cm)</label><input type="number" name="height" step="0.1" id="height"></div>
   </div>
-  <label>BMI (auto-calculated)</label>
+  <label>BMI <span class="hint">auto-calculated</span></label>
   <input type="text" name="bmi" id="bmi" readonly>
 </fieldset>
 
 <h2>Comorbidity and medication</h2>
 <fieldset>
   <label>Significant comorbidities</label>
-  <textarea name="comorbidities"
-    placeholder="asthma, COPD, ILD, cardiovascular disease, autoimmune disease, diabetes…"></textarea>
+  <textarea name="comorbidities" placeholder="asthma, COPD, ILD, cardiovascular disease, autoimmune disease, diabetes, renal disease…"></textarea>
+
   <label>Previous cancers and surgeries</label>
   <textarea name="prevCancer"></textarea>
-  <label>Anticoagulation and immunosuppression (drug name)</label>
+
+  <label>Anticoagulation and immunosuppression <span class="hint">drug name, indication, pausing feasibility if relevant</span></label>
   <textarea name="anticoag"></textarea>
 </fieldset>
 
@@ -103,189 +273,389 @@
 <fieldset>
   <label>WHO / ECOG performance status</label>
   <select name="ecog">
-    <option value="">—</option>
-    <option value="0">0 — Fully active</option>
-    <option value="1">1 — Restricted strenuous activity, ambulatory</option>
-    <option value="2">2 — Ambulatory, self-care, &lt;50% in bed</option>
-    <option value="3">3 — Limited self-care, &gt;50% in bed</option>
-    <option value="4">4 — Completely disabled, bedridden</option>
+    <option value="">Select</option>
+    <option value="0">0, fully active</option>
+    <option value="1">1, restricted strenuous activity, ambulatory</option>
+    <option value="2">2, ambulatory, self-care, less than 50% in bed</option>
+    <option value="3">3, limited self-care, more than 50% in bed</option>
+    <option value="4">4, completely disabled, bedridden</option>
   </select>
-  <label>GS8 score (geriatric screening)</label>
-  <input type="number" name="gs8" min="0" max="17" step="0.5">
-  <label>Performance / exercise capacity
-    <span class="hint">(stair test, CPET, e.g. 500 m flat walk)</span></label>
+
+  <label>G8 score <span class="hint">geriatric screening, 0 to 17</span></label>
+  <input type="number" name="g8" min="0" max="17" step="0.5">
+
+  <label>Performance / exercise capacity <span class="hint">stair test, CPET, six-minute walk, 500 m flat walk, oxygen need</span></label>
   <textarea name="performance"></textarea>
 </fieldset>
 
 <h2>Lung function</h2>
 <fieldset>
   <div class="row">
-    <div><label>FVC (value, %, z-score)</label><input type="text" name="fvc"></div>
-    <div><label>FEV1 (value, %, z-score)</label><input type="text" name="fev1"></div>
+    <div><label>FVC <span class="hint">value, %, z-score</span></label><input type="text" name="fvc"></div>
+    <div><label>FEV1 <span class="hint">value, %, z-score</span></label><input type="text" name="fev1"></div>
   </div>
   <div class="row">
     <div><label>DLCO</label><input type="text" name="dlco"></div>
     <div><label>DLCO/VA (%)</label><input type="text" name="dlcoVa"></div>
   </div>
-  <label>V/Q scan result (if relevant)</label>
+  <label>V/Q scan result <span class="hint">if relevant for operability or radiotherapy planning</span></label>
   <input type="text" name="vq">
 </fieldset>
 
 <h2>Imaging</h2>
 <fieldset>
-  <label>Imaging studies <span class="hint">(method + date + main findings)</span></label>
-  <textarea name="imaging" placeholder="e.g. CT thorax + upper abdomen, dd.mm.yyyy: …
-MRI brain, dd.mm.yyyy: …
-PET-CT, dd.mm.yyyy: …"></textarea>
+  <legend>Imaging overview</legend>
+  <p class="hint">Enter dates for each imaging module. Use the same date format throughout. Avoid personal identifiers in free text if the summary is copied outside the clinical record.</p>
+
+  <fieldset class="submodule">
+    <legend>Baseline diagnostic CT</legend>
+    <div class="row3">
+      <div><label>CT date</label><input type="date" name="ctDate"></div>
+      <div><label>CT region</label>
+        <select name="ctRegion">
+          <option value="">Select</option>
+          <option>Thorax</option>
+          <option>Thorax + upper abdomen</option>
+          <option>Thorax + abdomen</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div><label>Contrast</label>
+        <select name="ctContrast">
+          <option value="">Select</option>
+          <option>Contrast-enhanced</option>
+          <option>Non-contrast</option>
+          <option>Unknown</option>
+        </select>
+      </div>
+    </div>
+    <label>Primary lesion and thoracic findings</label>
+    <textarea name="ctFindings" placeholder="location, size, morphology, invasion, atelectasis, pleural findings, satellite nodules…"></textarea>
+    <label>Nodal findings on CT</label>
+    <textarea name="ctNodes" placeholder="hilar / mediastinal stations, size, suspicious morphology…"></textarea>
+    <label>Extrathoracic / adrenal / liver / bone findings on CT</label>
+    <textarea name="ctExtra"></textarea>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>PET-CT</legend>
+    <div class="row3">
+      <div><label>PET-CT date</label><input type="date" name="petDate"></div>
+      <div><label>PET status</label>
+        <select name="petStatus">
+          <option value="">Select</option>
+          <option>Done</option>
+          <option>Booked</option>
+          <option>Not indicated</option>
+          <option>Not yet done</option>
+        </select>
+      </div>
+      <div><label>Comparison with CT</label>
+        <select name="petCtComparison">
+          <option value="">Select</option>
+          <option>Concordant</option>
+          <option>Discordant</option>
+          <option>Not assessable</option>
+        </select>
+      </div>
+    </div>
+    <label>PET-CT findings</label>
+    <textarea name="petFindings" placeholder="primary tumour uptake, nodal uptake, suspected distant metastases, inflammatory differential…"></textarea>
+    <label>Sites needing confirmation</label>
+    <textarea name="petConfirm" placeholder="e.g. adrenal lesion, bone lesion, contralateral node, pleural uptake…"></textarea>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Brain imaging</legend>
+    <div class="row3">
+      <div><label>Brain imaging date</label><input type="date" name="brainDate"></div>
+      <div><label>Brain imaging modality</label>
+        <select name="brainModality">
+          <option value="">Select</option>
+          <option>MRI brain</option>
+          <option>CT brain</option>
+          <option>Not done</option>
+          <option>Booked</option>
+          <option>Not indicated</option>
+        </select>
+      </div>
+      <div><label>Contrast</label>
+        <select name="brainContrast">
+          <option value="">Select</option>
+          <option>With contrast</option>
+          <option>Without contrast</option>
+          <option>Unknown</option>
+        </select>
+      </div>
+    </div>
+    <label>Brain imaging findings</label>
+    <textarea name="brainFindings" placeholder="metastases, indeterminate lesions, negative, not performed…"></textarea>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Previous and comparison imaging</legend>
+    <div class="row3">
+      <div><label>Previous CT date</label><input type="date" name="prevCtDate"></div>
+      <div><label>Previous PET-CT date</label><input type="date" name="prevPetDate"></div>
+      <div><label>Other comparison date</label><input type="date" name="otherImagingDate"></div>
+    </div>
+    <label>Growth / stability / volume doubling time</label>
+    <textarea name="growth" placeholder="size change, VDT if available, new lesion, stable since date…"></textarea>
+    <label>Prior imaging relevance</label>
+    <textarea name="priorImaging" placeholder="screening LDCT, incidental finding, previous cancer follow-up, inflammatory history…"></textarea>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Radiology review for MDT</legend>
+    <div class="row3">
+      <div><label>Radiology review date</label><input type="date" name="radiologyReviewDate"></div>
+      <div><label>Radiologist present at MDT?</label>
+        <select name="radiologistPresent">
+          <option value="">Select</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Planned</option>
+        </select>
+      </div>
+      <div><label>Imaging complete for staging?</label>
+        <select name="imagingComplete">
+          <option value="">Select</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Unclear</option>
+        </select>
+      </div>
+    </div>
+    <label>Radiology MDT question</label>
+    <textarea name="radiologyQuestion" placeholder="resectability, mediastinal invasion, oligometastatic disease, target for biopsy, RT planning issue…"></textarea>
+    <label>Radiology conclusion / missing imaging</label>
+    <textarea name="radiologyConclusion"></textarea>
+  </fieldset>
+
+  <label>Other imaging studies <span class="hint">method + date + main findings</span></label>
+  <textarea name="otherImaging" placeholder="e.g. bone scan, liver MRI, spine MRI, ultrasound, cardiac imaging…"></textarea>
 </fieldset>
 
 <h2>Pathology</h2>
 <fieldset>
-  <label>Diagnostic sample <span class="hint">(site, method)</span></label>
+  <label>Diagnostic sample <span class="hint">site, method, date if useful</span></label>
   <input type="text" name="diagSample">
-  <label>Histology / cytology
-    <span class="hint">(adenocarcinoma: also growth pattern e.g. micropapillary)</span></label>
+
+  <label>Histology / cytology <span class="hint">adenocarcinoma: include growth pattern if reported, e.g. micropapillary</span></label>
   <input type="text" name="histology">
+
   <label>Largest tumour diameter (cm)</label>
   <input type="number" name="diameter" step="0.1">
-  <label>Staging investigations and findings
-    <span class="hint">(e.g. EBUS: 4R benign, 4L insufficient, 11R adenocarcinoma metastasis)</span></label>
+
+  <label>Staging investigations and findings <span class="hint">e.g. EBUS: 4R benign, 4L insufficient, 11R adenocarcinoma metastasis</span></label>
   <textarea name="staging"></textarea>
-  <label>c1-TNM before MDT (and basis)</label>
+
+  <label>c1-TNM before MDT <span class="hint">and basis</span></label>
   <input type="text" name="cTNM1" placeholder="e.g. cT2aN2M0 / cM1a malignant pleural effusion">
 </fieldset>
 
 <h2>Biomarkers</h2>
 <fieldset>
-  <label>PD-L1 (TPS, %) <span class="hint">— numeric only, not "positive" / "high" / "low"</span></label>
+  <label>PD-L1 (TPS, %) <span class="hint">numeric only, not positive / high / low</span></label>
   <input type="number" name="pdl1" min="0" max="100">
-  <label>EGFR <span class="hint">(if positive: subtype e.g. exon 19 del, L858R, exon 20 ins)</span></label>
+
+  <label>EGFR <span class="hint">if positive: subtype e.g. exon 19 del, L858R, exon 20 ins</span></label>
   <input type="text" name="egfr">
-  <label>ALK fusion <span class="hint">(IHC / FISH / NGS)</span></label>
+
+  <label>ALK fusion <span class="hint">IHC / FISH / NGS</span></label>
   <input type="text" name="alk">
-  <label>ROS1 fusion</label><input type="text" name="ros1">
-  <label>BRAF <span class="hint">(esp. V600E)</span></label><input type="text" name="braf">
-  <label>KRAS <span class="hint">(esp. G12C)</span></label><input type="text" name="kras">
-  <label>MET <span class="hint">(exon 14 skipping, amplification)</span></label><input type="text" name="met">
-  <label>RET fusions</label><input type="text" name="ret">
-  <label>ERBB2 / HER2 <span class="hint">(mutation / amplification, esp. exon 20 ins)</span></label>
-  <input type="text" name="her2">
-  <label>NTRK1–3 fusions</label><input type="text" name="ntrk">
+
+  <div class="row">
+    <div><label>ROS1 fusion</label><input type="text" name="ros1"></div>
+    <div><label>BRAF <span class="hint">esp. V600E</span></label><input type="text" name="braf"></div>
+  </div>
+
+  <div class="row">
+    <div><label>KRAS <span class="hint">esp. G12C</span></label><input type="text" name="kras"></div>
+    <div><label>MET <span class="hint">exon 14 skipping, amplification</span></label><input type="text" name="met"></div>
+  </div>
+
+  <div class="row">
+    <div><label>RET fusions</label><input type="text" name="ret"></div>
+    <div><label>ERBB2 / HER2 <span class="hint">mutation / amplification, esp. exon 20 ins</span></label><input type="text" name="her2"></div>
+  </div>
+
+  <label>NTRK1 to 3 fusions</label><input type="text" name="ntrk">
   <label>Other NGS findings</label><textarea name="otherNgs"></textarea>
 </fieldset>
 
 <h2>Patient preference</h2>
 <fieldset>
-  <label>Patient's treatment preference</label>
+  <label>Patient's treatment preference, concerns, and information needs</label>
   <textarea name="patientPref"></textarea>
 </fieldset>
 
 <h2>MDT recommendation</h2>
 <fieldset>
-  <label>MDT participants
-    <span class="hint">(radiologist, thoracic surgeon, pulmonologist, pathologist, oncologist, nurse…)</span></label>
+  <label>MDT participants <span class="hint">radiologist, thoracic surgeon, pulmonologist, pathologist, oncologist, nurse, palliative care…</span></label>
   <textarea name="participants"></textarea>
+
   <label>Further investigations recommended</label><textarea name="furtherInv"></textarea>
   <label>c2-TNM after MDT</label><input type="text" name="cTNM2">
-  <label>Surgery or bronchoscopic procedures (e.g. stents)</label><textarea name="surgery"></textarea>
-  <label>Oncological drug therapy
-    <span class="hint">(also: eligibility for clinical trials?)</span></label>
+  <label>Treatment intent</label>
+  <select name="intent">
+    <option value="">Select</option>
+    <option>Curative</option>
+    <option>Potentially curative after further staging</option>
+    <option>Life-prolonging palliative</option>
+    <option>Symptom-directed palliative</option>
+    <option>Best supportive care</option>
+    <option>Unclear, further information needed</option>
+  </select>
+
+  <label>Surgery or bronchoscopic procedures <span class="hint">including stents if relevant</span></label><textarea name="surgery"></textarea>
+
+  <label>Oncological drug therapy <span class="hint">include eligibility for clinical trials</span></label>
   <textarea name="onco"></textarea>
-  <label>Radiotherapy
-    <span class="hint">(chemoradiation / definitive / palliative — target?)</span></label>
+
+  <label>Radiotherapy <span class="hint">chemoradiation / definitive / palliative, target and fractionation if known</span></label>
   <textarea name="rt"></textarea>
-  <label>Symptom care</label><textarea name="symptom"></textarea>
+
+  <label>Symptom care and supportive care</label><textarea name="symptom"></textarea>
 </fieldset>
 
-<button type="button" onclick="generateSummary()">Generate summary</button>
-<button type="button" class="secondary" onclick="window.print()">Print / save as PDF</button>
-<button type="button" class="secondary" onclick="copySummary()">Copy summary to clipboard</button>
-<button type="reset" class="secondary" onclick="document.getElementById('summary').textContent=''">Clear all</button>
+<div class="button-row">
+  <button type="button" onclick="generateSummary()">Generate summary</button>
+  <button type="button" class="secondary" onclick="window.print()">Print / save as PDF</button>
+  <button type="button" class="secondary" onclick="copySummary()">Copy summary to clipboard</button>
+  <button type="reset" class="secondary" onclick="document.getElementById('summary').textContent=''; document.getElementById('missing').textContent=''">Clear all</button>
+</div>
+
 <div id="missing" class="warn"></div>
 <pre id="summary"></pre>
 
 </form>
 
 <script>
-// BMI auto-calc
 const w = document.getElementById('weight');
 const h = document.getElementById('height');
 const b = document.getElementById('bmi');
+
 function recalcBmi() {
   const W = parseFloat(w.value), H = parseFloat(h.value);
-  if (W > 0 && H > 0) b.value = (W / ((H/100) ** 2)).toFixed(1);
+  if (W > 0 && H > 0) b.value = (W / ((H / 100) ** 2)).toFixed(1);
   else b.value = '';
 }
+
 w.addEventListener('input', recalcBmi);
 h.addEventListener('input', recalcBmi);
 
-// Required-ish fields for missing-data warning
 const importantFields = [
-  'meetingDate','presenter','age','sex','smokingStatus','ecog',
-  'imaging','histology','cTNM1'
+  'meetingDate', 'presenter', 'age', 'sex', 'smokingStatus', 'ecog',
+  'ctDate', 'ctFindings', 'histology', 'cTNM1'
 ];
+
+const fieldLabels = {
+  meetingDate: 'meeting date',
+  presenter: 'presenter',
+  age: 'age',
+  sex: 'sex',
+  smokingStatus: 'smoking status',
+  ecog: 'WHO/ECOG',
+  ctDate: 'baseline CT date',
+  ctFindings: 'baseline CT findings',
+  histology: 'histology/cytology',
+  cTNM1: 'c1-TNM before MDT'
+};
+
+function valueOf(form, name) {
+  return (form.elements[name]?.value || '').trim();
+}
+
+function line(label, value) {
+  return `${label}: ${value || ''}`;
+}
 
 function generateSummary() {
   const f = document.getElementById('mdtForm');
-  const v = name => (f.elements[name]?.value || '').trim();
+  const v = name => valueOf(f, name);
 
-  // Missing data check
   const missing = importantFields.filter(n => !v(n));
   document.getElementById('missing').textContent =
-    missing.length ? '⚠ Missing important fields: ' + missing.join(', ') : '';
+    missing.length ? 'Missing important fields: ' + missing.map(n => fieldLabels[n] || n).join(', ') : '';
 
   const lines = [
+    'LUNG CANCER MDT CHECKLIST',
+    'Educational structured summary. Verify in local clinical system before use.',
+    '',
     `MDT MEETING DATE: ${v('meetingDate')}    PRESENTER: ${v('presenter')}`,
-    `HOSPITAL: ${v('hospital')}`,
-    ``,
+    line('HOSPITAL / CENTRE', v('hospital')),
+    '',
+    'PATIENT',
     `AGE / SEX: ${v('age')} / ${v('sex')}`,
-    `SMOKING: ${v('smokingStatus')}, ${v('packYears')} pack-years`,
+    `SMOKING: ${v('smokingStatus')}, ${v('packYears')} pack-years, quit years: ${v('quitYears')}`,
     `WEIGHT / HEIGHT / BMI: ${v('weight')} kg / ${v('height')} cm / ${v('bmi')}`,
-    `COMORBIDITIES: ${v('comorbidities')}`,
-    `PREVIOUS CANCERS / SURGERIES: ${v('prevCancer')}`,
-    `ANTICOAGULATION / IMMUNOSUPPRESSION: ${v('anticoag')}`,
-    `WHO/ECOG: ${v('ecog')}    GS8: ${v('gs8')}`,
-    `PERFORMANCE: ${v('performance')}`,
+    line('COMORBIDITIES', v('comorbidities')),
+    line('PREVIOUS CANCERS / SURGERIES', v('prevCancer')),
+    line('ANTICOAGULATION / IMMUNOSUPPRESSION', v('anticoag')),
+    `WHO/ECOG: ${v('ecog')}    G8: ${v('g8')}`,
+    line('PERFORMANCE / EXERCISE CAPACITY', v('performance')),
+    '',
+    'LUNG FUNCTION',
     `FVC: ${v('fvc')}    FEV1: ${v('fev1')}`,
     `DLCO: ${v('dlco')}    DLCO/VA: ${v('dlcoVa')}    V/Q: ${v('vq')}`,
-    ``,
-    `IMAGING:`, v('imaging'),
-    ``,
-    `DIAGNOSTIC SAMPLE: ${v('diagSample')}`,
-    `HISTOLOGY / CYTOLOGY: ${v('histology')}`,
-    `LARGEST DIAMETER: ${v('diameter')} cm`,
-    `STAGING: ${v('staging')}`,
-    `c1-TNM: ${v('cTNM1')}`,
-    ``,
-    `BIOMARKERS`,
-    `  PD-L1 (TPS %): ${v('pdl1')}`,
-    `  EGFR: ${v('egfr')}`,
-    `  ALK: ${v('alk')}    ROS1: ${v('ros1')}`,
-    `  BRAF: ${v('braf')}    KRAS: ${v('kras')}`,
-    `  MET: ${v('met')}    RET: ${v('ret')}`,
-    `  HER2: ${v('her2')}    NTRK: ${v('ntrk')}`,
-    `  Other NGS: ${v('otherNgs')}`,
-    ``,
-    `PATIENT PREFERENCE: ${v('patientPref')}`,
-    ``,
-    `============ MDT RECOMMENDATION ============`,
-    `PARTICIPANTS: ${v('participants')}`,
-    `FURTHER INVESTIGATIONS: ${v('furtherInv')}`,
-    `c2-TNM: ${v('cTNM2')}`,
-    `SURGERY / PROCEDURES: ${v('surgery')}`,
-    `ONCOLOGICAL DRUG THERAPY: ${v('onco')}`,
-    `RADIOTHERAPY: ${v('rt')}`,
-    `SYMPTOM CARE: ${v('symptom')}`,
+    '',
+    'IMAGING',
+    `BASELINE CT: ${v('ctDate')}    Region: ${v('ctRegion')}    Contrast: ${v('ctContrast')}`,
+    line('  Primary lesion and thoracic findings', v('ctFindings')),
+    line('  CT nodal findings', v('ctNodes')),
+    line('  CT extrathoracic findings', v('ctExtra')),
+    `PET-CT: ${v('petDate')}    Status: ${v('petStatus')}    CT/PET concordance: ${v('petCtComparison')}`,
+    line('  PET-CT findings', v('petFindings')),
+    line('  Sites needing confirmation', v('petConfirm')),
+    `BRAIN IMAGING: ${v('brainDate')}    Modality: ${v('brainModality')}    Contrast: ${v('brainContrast')}`,
+    line('  Brain imaging findings', v('brainFindings')),
+    `PREVIOUS IMAGING: Previous CT ${v('prevCtDate')}    Previous PET-CT ${v('prevPetDate')}    Other ${v('otherImagingDate')}`,
+    line('  Growth / stability / VDT', v('growth')),
+    line('  Prior imaging relevance', v('priorImaging')),
+    `RADIOLOGY REVIEW: ${v('radiologyReviewDate')}    Radiologist present: ${v('radiologistPresent')}    Imaging complete: ${v('imagingComplete')}`,
+    line('  Radiology MDT question', v('radiologyQuestion')),
+    line('  Radiology conclusion / missing imaging', v('radiologyConclusion')),
+    line('OTHER IMAGING', v('otherImaging')),
+    '',
+    'PATHOLOGY AND STAGING',
+    line('DIAGNOSTIC SAMPLE', v('diagSample')),
+    line('HISTOLOGY / CYTOLOGY', v('histology')),
+    line('LARGEST TUMOUR DIAMETER', v('diameter') ? `${v('diameter')} cm` : ''),
+    line('STAGING INVESTIGATIONS', v('staging')),
+    line('c1-TNM BEFORE MDT', v('cTNM1')),
+    '',
+    'BIOMARKERS',
+    `PD-L1 TPS: ${v('pdl1')}%`,
+    line('EGFR', v('egfr')),
+    `ALK: ${v('alk')}    ROS1: ${v('ros1')}`,
+    `BRAF: ${v('braf')}    KRAS: ${v('kras')}`,
+    `MET: ${v('met')}    RET: ${v('ret')}`,
+    `HER2: ${v('her2')}    NTRK: ${v('ntrk')}`,
+    line('Other NGS', v('otherNgs')),
+    '',
+    line('PATIENT PREFERENCE', v('patientPref')),
+    '',
+    '============ MDT RECOMMENDATION ============',
+    line('PARTICIPANTS', v('participants')),
+    line('FURTHER INVESTIGATIONS', v('furtherInv')),
+    line('c2-TNM AFTER MDT', v('cTNM2')),
+    line('TREATMENT INTENT', v('intent')),
+    line('SURGERY / PROCEDURES', v('surgery')),
+    line('ONCOLOGICAL DRUG THERAPY', v('onco')),
+    line('RADIOTHERAPY', v('rt')),
+    line('SYMPTOM / SUPPORTIVE CARE', v('symptom'))
   ];
+
   document.getElementById('summary').textContent = lines.join('\n');
 }
 
 function copySummary() {
-  const txt = document.getElementById('summary').textContent;
-  if (!txt) { generateSummary(); }
+  if (!document.getElementById('summary').textContent) generateSummary();
   navigator.clipboard.writeText(document.getElementById('summary').textContent);
 }
 </script>
 
 </body>
 </html>
+
