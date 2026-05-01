@@ -1,41 +1,142 @@
+/* Button utilities and Bootstrap overrides */
+
+:root {
+  --primary-color: #1f4e79;
+  --primary-color-hover: #163a5a;
+  --secondary-color: #2f7d46;
+  --accent-red: #c60c30;
+  --button-focus-ring: rgba(31, 78, 121, 0.35);
+}
+
+.btn {
+  border-radius: 0.45rem;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+  color: #ffffff;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+  color: #ffffff;
 }
 
 .btn-outline-primary {
   border-color: var(--primary-color);
   color: var(--primary-color);
+  background-color: transparent;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
   background-color: var(--primary-color);
-  color: #fff;
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.show > .btn-outline-primary.dropdown-toggle {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-success {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-danger {
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
 }
 
 .text-primary {
   color: var(--primary-color) !important;
 }
 
-.btn-outline-primary, 
-.btn-primary {
-  transition: background-color 0.3s ease, color 0.3s ease;
+.bg-primary {
+  background-color: var(--primary-color) !important;
 }
 
-.btn-outline-primary:focus,
-.btn-outline-primary:active {
-  outline: 2px solid var(--primary-color-hover);
+.border-primary {
+  border-color: var(--primary-color) !important;
+}
+
+.btn:focus,
+.btn:focus-visible,
+.btn-primary:focus,
+.btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.25rem var(--button-focus-ring);
+  outline: 0;
+}
+
+.btn:disabled,
+.btn.disabled,
+fieldset:disabled .btn {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+/* Use this wrapper when buttons should stack on narrow screens */
+.button-stack,
+.btn-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.button-stack .btn,
+.btn-stack .btn {
+  width: auto;
 }
 
 @media (max-width: 768px) {
-  table, 
+  table,
   .table {
     font-size: 0.9rem;
   }
 
-  .btn-primary,
-  .btn-outline-primary {
+  .button-stack .btn,
+  .btn-stack .btn {
     width: 100%;
-    margin-bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
   }
 }
