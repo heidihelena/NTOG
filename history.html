@@ -2,160 +2,416 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>History of NTOG | Nordic Thoracic Oncology Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Meta Tags for SEO -->
-  <meta name="description" content="Discover the rich history of the Nordic Thoracic Oncology Group (NTOG), from its founding to its significant milestones in advancing lung cancer research across the Nordic region.">
-  <meta name="keywords" content="history, NTOG, lung cancer, oncology, thoracic, Nordic countries, research milestones">
-  
-  <!-- Open Graph Meta Tags for Social Sharing -->
-  <meta property="og:title" content="History of NTOG | Nordic Thoracic Oncology Group">
-  <meta property="og:description" content="Learn about the founding and evolution of the Nordic Thoracic Oncology Group (NTOG) and its impact on lung cancer research.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/images/main/history_hero.jpg">
+
+  <title>History | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Learn about the history of the Nordic Thoracic Oncology Group (NTOG), founded in 1993 as a collaborative Nordic network for thoracic oncology research, education, and patient care.">
+  <meta name="keywords" content="NTOG, Nordic Thoracic Oncology Group, history, lung cancer, thoracic oncology, Nordic collaboration, clinical trials, lung cancer research, Denmark, Finland, Iceland, Norway, Sweden">
+
+  <meta property="og:title" content="History | Nordic Thoracic Oncology Group">
+  <meta property="og:description" content="NTOG was founded in 1993 as a Nordic collaborative network for thoracic oncology specialists across Denmark, Finland, Iceland, Norway, and Sweden.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
   <meta property="og:url" content="https://ntog.org/history.html">
   <meta property="og:type" content="website">
-  
-<!-- Additional Resources -->
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/tables.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/nav.css">
-<!-- Bootstrap Bundle CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="History | Nordic Thoracic Oncology Group">
+  <meta name="twitter:description" content="The history of NTOG, Nordic collaboration, and thoracic oncology research.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 880px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .timeline-card,
+    .link-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .content-card,
+    .timeline-card,
+    .link-card {
+      padding: 1.5rem;
+    }
+
+    .timeline-card h3,
+    .link-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .timeline-card p,
+    .link-card p {
+      color: #52606d;
+    }
+
+    .timeline-list {
+      position: relative;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .timeline-list li {
+      position: relative;
+      padding-left: 2.25rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .timeline-list li:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-list li::before {
+      content: "";
+      position: absolute;
+      left: 0.35rem;
+      top: 0.3rem;
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 50%;
+      background: #1f4e79;
+      box-shadow: 0 0 0 4px #d7eaf3;
+    }
+
+    .timeline-list li::after {
+      content: "";
+      position: absolute;
+      left: 0.73rem;
+      top: 1.35rem;
+      bottom: 0.1rem;
+      width: 1px;
+      background: #d7eaf3;
+    }
+
+    .timeline-list li:last-child::after {
+      display: none;
+    }
+
+    .timeline-year {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #1f4e79;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .cta-panel {
+      border-radius: 1.25rem;
+      background: #f0f7fb;
+      border: 1px solid #d7eaf3;
+      padding: 2rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body> 
-  
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.html">NTOG</a>
-    <!-- Toggler Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- About Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            About Us
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="about.html">About Us</a></li>
-            <li><a class="dropdown-item" href="mission.html">Mission</a></li>
-            <li><a class="dropdown-item" href="history.html">History</a></li>
-            <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
-          </ul>
-        </li>
-        <!-- Research Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Research
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="researchDropdown">
-            <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
-            <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
-            <li><a class="dropdown-item" href="publications.html">Publications</a></li>
-            <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
-          </ul>
-        </li>
-        <!-- Events Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Events
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-            <li><a class="dropdown-item" href="events.html">Events Overview</a></li>
-            <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
-            <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
-          </ul>
-        </li>
-        <!-- Clinical Resources Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Clinical Resources
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-            <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
-            <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
-            <li><a class="dropdown-item" href="tools.html">Tools</a></li>
-          </ul>
-        </li>
-        <!-- Get Involved Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Get Involved
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-            <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
-            <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-            <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
-          </ul>
-        </li>
-        <!-- News -->
-        <li class="nav-item">
-          <a class="nav-link" href="news.html">News</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
- <!-- Hero Section -->
-  <section class="hero mt-5 bg-dark text-white py-4">
-  <div class="container text-center">
-    <h1 class="display-4">Our History</h1>
-    <p class="lead">Tracing the journey of collaboration and innovation in thoracic oncology across the Nordic countries</p>
-  </div>
-</section>
+<body>
 
-<!-- Main Content -->
-  <main class="container my-5">
-    <section id="history">
-      <h2>The Journey of NTOG</h2>
-      <p>
-        The Nordic Thoracic Oncology Group (NTOG) was established in 1993 as a collaborative network of thoracic oncology specialists from Denmark, Finland, Iceland, Norway, and Sweden. Recognizing the need for a unified approach to tackle lung cancer—a leading cause of cancer-related mortality in the Nordic region—NTOG was formed to advance research, improve patient care, and foster professional collaboration across borders.
-      </p>
-      <h2>Early Years and Formation</h2>
-      <p>
-        In the early 1990s, thoracic oncology professionals from the Nordic countries began informal collaborations to share knowledge and resources. The success of these initial interactions highlighted the potential benefits of a formal network. Thus, NTOG was officially founded in 1993, providing a structured platform for joint clinical trials, research projects, and educational initiatives.
-      </p>
-        NTOGs primary mission is to advance lung cancer research and treatment across the Nordic countries. 
-      <a href="https://uia.org/s/or/en/1122285972" class="button" target="_blank">UIA</a> 
-      </p>
-        Past studies and symposiums show NTOG’s dedication to advancing lung cancer research and treatment in the Nordic region.
-      </p>
-      <a href="https://nordicthoraciconcologygroup.wordpress.com" class="button" target="_blank">Visit Our Previous Website</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="mission.html">Mission</a></li>
+              <li><a class="dropdown-item active" href="history.html">History</a></li>
+              <li><a class="dropdown-item" href="steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">History</span>
+      <h1 class="display-5 fw-bold mb-3">The history of NTOG</h1>
+      <p class="lead-narrow mb-4">A Nordic collaboration in thoracic oncology, founded in 1993 to strengthen research, education, clinical trials, and patient care across Denmark, Finland, Iceland, Norway, and Sweden.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#timeline" class="btn btn-light btn-lg">View timeline</a>
+        <a href="mission.html" class="btn btn-outline-light btn-lg">Read the mission</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="history">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>The journey of NTOG</h2>
+            <p class="lead">The Nordic Thoracic Oncology Group was established in 1993 as a collaborative network of thoracic oncology specialists from the five Nordic countries.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The Nordic Thoracic Oncology Group (NTOG) was established in 1993 as a collaborative network of thoracic oncology specialists from Denmark, Finland, Iceland, Norway, and Sweden.</p>
+              <p>Recognising the need for a unified approach to lung cancer, a leading cause of cancer-related mortality in the Nordic region, NTOG was formed to advance research, improve patient care, and foster professional collaboration across borders.</p>
+              <p class="mb-0">NTOG’s primary mission is to advance lung cancer research and treatment across the Nordic countries through clinical collaboration, translational research, education, meetings, and shared professional networks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="formation">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Early years and formation</h2>
+            <p class="lead">The group grew out of informal Nordic collaboration between thoracic oncology professionals in the early 1990s.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>In the early 1990s, thoracic oncology professionals from the Nordic countries began informal collaborations to share knowledge and resources. The success of these initial interactions highlighted the potential value of a formal network.</p>
+              <p>In 1993, NTOG was officially founded, providing a structured platform for joint clinical trials, research projects, professional exchange, and educational initiatives.</p>
+              <p class="mb-0">Past studies and symposia show NTOG’s continued dedication to advancing lung cancer research and treatment in the Nordic region.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="timeline">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2>Selected milestones</h2>
+            <p class="muted-note">This timeline keeps the established facts and gives the page a clearer historical structure.</p>
+          </div>
+          <div class="col-lg-8">
+            <div class="timeline-card">
+              <ul class="timeline-list">
+                <li>
+                  <span class="timeline-year">Early 1990s</span>
+                  <p class="mb-0">Thoracic oncology professionals from the Nordic countries began informal collaboration, sharing knowledge, research ideas, and professional networks.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">1993</span>
+                  <p class="mb-0">NTOG was established as a formal collaborative network of thoracic oncology specialists from Denmark, Finland, Iceland, Norway, and Sweden.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">Nordic collaboration</span>
+                  <p class="mb-0">NTOG developed as a platform for joint clinical trials, research projects, educational initiatives, professional meetings, and cross-border exchange.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">Symposia and studies</span>
+                  <p class="mb-0">NTOG studies and Nordic Lung Cancer Symposia have supported continued development of lung cancer research and treatment across the Nordic region.</p>
+                </li>
+                <li>
+                  <span class="timeline-year">2027 and beyond</span>
+                  <p class="mb-0">The 16th Nordic Lung Cancer Symposium will be held in Copenhagen in 2027, followed by the 17th symposium in Helsinki in 2029.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="symposium-history">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Nordic Lung Cancer Symposium</h2>
+            <p class="lead">The symposium is an important part of NTOG’s history and future, providing a recurring Nordic forum for thoracic oncology professionals.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The Nordic Lung Cancer Symposium brings together clinicians, researchers, and healthcare professionals to discuss evidence, clinical practice, research collaboration, and future directions in lung cancer care.</p>
+              <div class="mt-3 mb-4">
+                <span class="badge-topic">15th: Gothenburg</span>
+                <span class="badge-topic">16th: Copenhagen 2027</span>
+                <span class="badge-topic">17th: Helsinki 2029</span>
+              </div>
+              <p class="mb-0">The rotating host cities reflect NTOG’s Nordic structure and the shared responsibility of national lung cancer communities for continued professional exchange.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="legacy-links">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Historical references</h2>
+            <p class="lead mb-0">Previous web resources and external listings preserve parts of NTOG’s earlier public presence.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="https://uia.org/s/or/en/1122285972" class="btn btn-primary" target="_blank" rel="noopener">UIA listing</a>
+                <a href="https://nordicthoraciconcologygroup.wordpress.com" class="btn btn-outline-primary" target="_blank" rel="noopener">Previous NTOG website</a>
+                <a href="/ntog2027/" class="btn btn-outline-primary">Nordic Lung Cancer Symposium 2027</a>
+              </div>
+              <p class="muted-note mt-3 mb-0">Legacy links are retained for historical continuity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-        <p>&copy; 2024 Nordic Thoracic Oncology Group</p>
-        <p>
-            <a href="privacy-policy.html" class="text-white me-2">Privacy Policy</a>
-            <a href="terms-of-service.html" class="text-white">Terms of Service</a>
-        </p>
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
     </div>
-</footer>
-  
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <!-- Custom JS -->
-  <script src="js/scripts.js"></script>
+  </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
 </body>
 </html>
