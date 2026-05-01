@@ -1,21 +1,7 @@
-/* High-contrast hero patch for /css/styles.css
-   Replace the relevant :root hero colours and hero helper block with this.
-*/
-
 :root {
-  /* Core NTOG palette */
   --primary-color: #1f4e79;
   --primary-color-hover: #163a5a;
-  --secondary-color: #2f7d46;
-  --accent-yellow: #ffcd00;
-  --accent-red: #c60c30;
 
-  /* Backgrounds */
-  --background-white: #ffffff;
-  --background-light: #f8fafc;
-  --background-lighter: #eef6fb;
-
-  /* High-contrast hero palette */
   --hero-background-dark: #071f35;
   --hero-background-mid: #0b3a63;
   --hero-background-accent: #155f86;
@@ -23,292 +9,14 @@
   --hero-text: #ffffff;
   --hero-text-muted: #e8f3fb;
 
-  /* Borders and shadows */
-  --border-color: #d8e0e8;
-  --border-color-light: #e5e7eb;
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
-  --shadow-medium: 0 14px 35px rgba(15, 23, 42, 0.08);
-
-  /* Text */
-  --text-dark: #1f2933;
-  --text-body: #334e68;
-  --text-muted: #697586;
-
-  /* Navigation */
-  --nav-background: #f8f9fa;
-  --nav-link-color: #343a40;
-  --nav-link-hover: #1f4e79;
-
-  /* Typography */
-  --font-primary: "Open Sans", Arial, sans-serif;
-  --font-heading: "Montserrat", Arial, sans-serif;
-
-  /* Layout */
-  --content-max-width: 1140px;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-}
-
-/* Hero helpers */
-.hero,
-.page-hero,
-.home-hero,
-.article-hero,
-.symposium-hero {
-  position: relative;
-  margin-top: 56px;
-  color: var(--hero-text);
-  background:
-    linear-gradient(var(--hero-overlay), var(--hero-overlay)),
-    linear-gradient(
-      135deg,
-      var(--hero-background-dark) 0%,
-      var(--hero-background-mid) 52%,
-      var(--hero-background-accent) 100%
-    );
-}
-
-.hero.bg-dark,
-.page-hero,
-.home-hero,
-.article-hero,
-.symposium-hero {
-  color: var(--hero-text);
-  background:
-    linear-gradient(var(--hero-overlay), var(--hero-overlay)),
-    linear-gradient(
-      135deg,
-      var(--hero-background-dark) 0%,
-      var(--hero-background-mid) 52%,
-      var(--hero-background-accent) 100%
-    );
-}
-
-.hero::after,
-.page-hero::after,
-.home-hero::after,
-.article-hero::after,
-.symposium-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.12), transparent 24%),
-    radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.08), transparent 22%);
-}
-
-.hero > .container,
-.page-hero > .container,
-.home-hero > .container,
-.article-hero > .container,
-.symposium-hero > .container,
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-.hero h1,
-.hero h2,
-.hero h3,
-.hero p,
-.page-hero h1,
-.page-hero h2,
-.page-hero h3,
-.page-hero p,
-.home-hero h1,
-.home-hero h2,
-.home-hero h3,
-.home-hero p,
-.article-hero h1,
-.article-hero h2,
-.article-hero h3,
-.article-hero p,
-.symposium-hero h1,
-.symposium-hero h2,
-.symposium-hero h3,
-.symposium-hero p {
-  color: inherit;
-}
-
-.hero .lead,
-.hero .lead-narrow,
-.page-hero .lead,
-.page-hero .lead-narrow,
-.home-hero .lead,
-.home-hero .lead-narrow,
-.article-hero .lead,
-.article-hero .lead-narrow,
-.symposium-hero .lead,
-.symposium-hero .lead-narrow {
-  color: var(--hero-text-muted);
-}
-
-.eyebrow {
-  display: inline-block;
-  margin-bottom: 1rem;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 999px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.hero .btn-outline-light,
-.page-hero .btn-outline-light,
-.home-hero .btn-outline-light,
-.article-hero .btn-outline-light,
-.symposium-hero .btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.85);
-  color: #ffffff;
-}
-
-.hero .btn-outline-light:hover,
-.hero .btn-outline-light:focus,
-.page-hero .btn-outline-light:hover,
-.page-hero .btn-outline-light:focus,
-.home-hero .btn-outline-light:hover,
-.home-hero .btn-outline-light:focus,
-.article-hero .btn-outline-light:hover,
-.article-hero .btn-outline-light:focus,
-.symposium-hero .btn-outline-light:hover,
-.symposium-hero .btn-outline-light:focus {
-  background: #ffffff;
-  color: var(--hero-background-dark);
-}
-
-/* If old pages use .animated-background, keep it darker too. */
-.animated-background {
-  background:
-    linear-gradient(var(--hero-overlay), var(--hero-overlay)),
-    linear-gradient(
-      135deg,
-      var(--hero-background-dark) 0%,
-      var(--hero-background-mid) 52%,
-      var(--hero-background-accent) 100%
-    );
-  background-size: 300% 300%;
-}
-
-@media (prefers-contrast: more) {
-  :root {
-    --hero-background-dark: #03111f;
-    --hero-background-mid: #062b4c;
-    --hero-background-accent: #0b4f73;
-    --hero-overlay: rgba(0, 0, 0, 0.55);
-    --hero-text-muted: #ffffff;
-  }
-
-  .eyebrow {
-    border-color: #ffffff;
-    background: rgba(0, 0, 0, 0.25);
-  }
-}
-.navbar .container {
-  position: relative;
-}
-
-.nav-lung-art {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 120px;
-  height: 72px;
-  color: rgba(31, 78, 121, 0.14);
-  pointer-events: none;
-  z-index: 0;
-}
-.nav-lung-art svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.navbar-brand,
-.navbar-toggler,
-.navbar-collapse {
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width: 991.98px) {
-  .nav-lung-art {
-    display: none;
-  }
-}
-
-/* NTOG shared hero + Copenhagen 2027 event styling
-   Add this near the end of /css/styles.css, or place in /ntog2027/ntog2027.css.
-*/
-
-:root {
-  /* Core NTOG palette */
-  --primary-color: #1f4e79;
-  --primary-color-hover: #163a5a;
-  --secondary-color: #2f7d46;
-  --accent-yellow: #ffcd00;
-  --accent-red: #c60c30;
-
-  /* Backgrounds */
-  --background-white: #ffffff;
-  --background-light: #f8fafc;
-  --background-lighter: #eef6fb;
-
-  /* High-contrast general hero palette */
-  --hero-background-dark: #071f35;
-  --hero-background-mid: #0b3a63;
-  --hero-background-accent: #155f86;
-  --hero-overlay: rgba(3, 17, 31, 0.42);
-  --hero-text: #ffffff;
-  --hero-text-muted: #e8f3fb;
-
-  /* Denmark / Copenhagen event palette */
   --dk-red: #c8102e;
   --dk-red-dark: #74101f;
   --dk-red-deep: #260006;
   --dk-red-soft: #fff1f3;
   --dk-red-border: #f2b8c2;
-
-  --event-accent: var(--dk-red);
-  --event-accent-dark: var(--dk-red-dark);
-  --event-accent-soft: var(--dk-red-soft);
-
-  /* Borders and shadows */
-  --border-color: #d8e0e8;
-  --border-color-light: #e5e7eb;
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
-  --shadow-medium: 0 14px 35px rgba(15, 23, 42, 0.08);
-
-  /* Text */
-  --text-dark: #1f2933;
-  --text-body: #334e68;
-  --text-muted: #697586;
-
-  /* Navigation */
-  --nav-background: #f8f9fa;
-  --nav-link-color: #343a40;
-  --nav-link-hover: #1f4e79;
-
-  /* Typography */
-  --font-primary: "Open Sans", Arial, sans-serif;
-  --font-heading: "Montserrat", Arial, sans-serif;
-
-  /* Layout */
-  --content-max-width: 1140px;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
 }
 
-/* General hero helpers for ordinary NTOG pages */
+/* Standard NTOG hero */
 .hero,
 .page-hero,
 .home-hero,
@@ -325,28 +33,6 @@
       var(--hero-background-mid) 52%,
       var(--hero-background-accent) 100%
     );
-}
-
-.hero.bg-dark,
-.page-hero,
-.home-hero,
-.article-hero,
-.symposium-hero {
-  color: var(--hero-text);
-}
-
-.hero::after,
-.page-hero::after,
-.home-hero::after,
-.article-hero::after,
-.symposium-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.12), transparent 24%),
-    radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.08), transparent 22%);
 }
 
 .hero > .container,
@@ -410,57 +96,7 @@
   text-transform: uppercase;
 }
 
-.hero .btn-outline-light,
-.page-hero .btn-outline-light,
-.home-hero .btn-outline-light,
-.article-hero .btn-outline-light,
-.symposium-hero .btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.85);
-  color: #ffffff;
-}
-
-.hero .btn-outline-light:hover,
-.hero .btn-outline-light:focus,
-.page-hero .btn-outline-light:hover,
-.page-hero .btn-outline-light:focus,
-.home-hero .btn-outline-light:hover,
-.home-hero .btn-outline-light:focus,
-.article-hero .btn-outline-light:hover,
-.article-hero .btn-outline-light:focus,
-.symposium-hero .btn-outline-light:hover,
-.symposium-hero .btn-outline-light:focus {
-  background: #ffffff;
-  color: var(--hero-background-dark);
-}
-
-.animated-background {
-  background:
-    linear-gradient(var(--hero-overlay), var(--hero-overlay)),
-    linear-gradient(
-      135deg,
-      var(--hero-background-dark) 0%,
-      var(--hero-background-mid) 52%,
-      var(--hero-background-accent) 100%
-    );
-  background-size: 300% 300%;
-}
-
-@media (prefers-contrast: more) {
-  :root {
-    --hero-background-dark: #03111f;
-    --hero-background-mid: #062b4c;
-    --hero-background-accent: #0b4f73;
-    --hero-overlay: rgba(0, 0, 0, 0.55);
-    --hero-text-muted: #ffffff;
-  }
-
-  .eyebrow {
-    border-color: #ffffff;
-    background: rgba(0, 0, 0, 0.25);
-  }
-}
-
-/* Navbar decorative lung art */
+/* Navbar lung art */
 .navbar .container {
   position: relative;
 }
@@ -496,31 +132,7 @@
   }
 }
 
-/* Denmark event buttons and badges */
-.btn-event {
-  background-color: var(--event-accent);
-  border-color: var(--event-accent);
-  color: #ffffff;
-}
-
-.btn-event:hover,
-.btn-event:focus {
-  background-color: var(--event-accent-dark);
-  border-color: var(--event-accent-dark);
-  color: #ffffff;
-}
-
-.badge-event {
-  display: inline-block;
-  padding: 0.35rem 0.65rem;
-  border-radius: 999px;
-  background: var(--event-accent-soft);
-  color: var(--event-accent-dark);
-  border: 1px solid var(--dk-red-border);
-  font-weight: 700;
-  font-size: 0.82rem;
-}
-
+/* Copenhagen 2027 */
 .ntog2027 .navbar {
   border-bottom: 3px solid var(--dk-red);
 }
@@ -529,85 +141,45 @@
   color: rgba(200, 16, 46, 0.12);
 }
 
-/* Copenhagen 2027 hero.
-   Use this HTML:
-   <body class="ntog2027">
-   <header class="ntog2027-hero">
-     <div class="ntog2027-hero-grid">
-       <div class="ntog2027-hero-content">...</div>
-       <div class="ntog2027-skyline"><img src="/images/copenhagen3.jpeg" ...></div>
-     </div>
-   </header>
-*/
 .ntog2027-hero {
   margin-top: 56px;
-  background: #ffffff;
-  border-top: 4px solid var(--dk-red);
-}
-
-.ntog2027-hero::after {
-  content: none;
-}
-
-.ntog2027-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 42%) 1fr;
-  min-height: 620px;
-}
-
-.ntog2027-hero-content {
-  padding: clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(3rem, 7vw, 6rem) 0;
   color: #ffffff;
   background:
-    linear-gradient(rgba(25, 0, 6, 0.46), rgba(25, 0, 6, 0.46)),
+    linear-gradient(rgba(25, 0, 6, 0.42), rgba(25, 0, 6, 0.42)),
     linear-gradient(
       135deg,
       var(--dk-red-deep) 0%,
       var(--dk-red-dark) 55%,
       var(--dk-red) 100%
     );
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-top: 4px solid var(--dk-red);
 }
 
-.ntog2027-hero-content h1,
-.ntog2027-hero-content h2,
-.ntog2027-hero-content h3,
-.ntog2027-hero-content p {
-  color: inherit;
+.ntog2027-hero .container {
+  max-width: 1120px;
 }
 
-.ntog2027-hero-content h1 {
+.ntog2027-hero h1 {
+  max-width: 900px;
   color: #ffffff;
-  font-size: clamp(2.3rem, 4.5vw, 4.6rem);
-  line-height: 1.05;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 1.04;
   margin: 1rem 0 1.25rem;
-  max-width: 11ch;
 }
 
-.ntog2027-hero-content p {
+.ntog2027-hero .hero-lead {
+  max-width: 760px;
   color: #f8e8ec;
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.7;
-  max-width: 38rem;
-}
-
-.ntog2027-hero-content .eyebrow {
-  width: fit-content;
-  padding: 0.45rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
 }
 
 .hero-actions .btn {
@@ -633,55 +205,49 @@
   font-weight: 700;
 }
 
-.ntog2027-skyline {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 2rem 2rem 3rem;
-  background:
-    linear-gradient(to bottom, #ffffff 0%, #ffffff 72%, #fafafa 100%);
+.copenhagen-skyline {
+  width: 100%;
+  height: clamp(130px, 18vw, 230px);
   overflow: hidden;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.ntog2027-skyline img {
-  width: min(100%, 980px);
-  height: auto;
+.copenhagen-skyline img {
   display: block;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
 }
 
-@media (max-width: 991.98px) {
-  .ntog2027-hero-grid {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-
-  .ntog2027-hero-content {
-    padding: 2.5rem 1.25rem;
-  }
-
-  .ntog2027-hero-content h1 {
-    max-width: 12ch;
-  }
-
-  .ntog2027-skyline {
-    padding: 1rem 0 1.5rem;
-  }
-
-  .ntog2027-skyline img {
-    width: 115%;
-    max-width: none;
-  }
+.btn-event {
+  background-color: var(--dk-red);
+  border-color: var(--dk-red);
+  color: #ffffff;
 }
 
-@media (max-width: 575.98px) {
-  .ntog2027-hero-content {
-    padding: 2rem 1rem;
-  }
+.btn-event:hover,
+.btn-event:focus {
+  background-color: var(--dk-red-dark);
+  border-color: var(--dk-red-dark);
+  color: #ffffff;
+}
 
-  .ntog2027-hero-content h1 {
-    font-size: 2.35rem;
-    max-width: 11ch;
+.badge-event {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: var(--dk-red-soft);
+  color: var(--dk-red-dark);
+  border: 1px solid var(--dk-red-border);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+  .ntog2027-hero {
+    padding: 2.75rem 0 2.5rem;
   }
 
   .hero-actions {
@@ -699,12 +265,14 @@
     grid-template-columns: 1fr;
   }
 
-  .ntog2027-skyline {
-    padding: 0.5rem 0 1rem;
+  .copenhagen-skyline {
+    height: 145px;
   }
 
-  .ntog2027-skyline img {
+  .copenhagen-skyline img {
     width: 150%;
-    transform: translateX(-8%);
+    max-width: none;
+    transform: translateX(-12%);
+    object-position: center bottom;
   }
 }
