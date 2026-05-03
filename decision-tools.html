@@ -4,23 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Treatment Value Discussion Tool | Nordic Thoracic Oncology Group</title>
-  <meta name="description" content="Educational treatment value discussion tool from NTOG for structured reflection on overall survival, hazard ratio, NNT, NNH, quality-adjusted life years, cost, and uncertainty in thoracic oncology evidence.">
-  <meta name="keywords" content="NTOG, treatment value, lung cancer, overall survival, hazard ratio, NNT, NNH, QALY, cost effectiveness, thoracic oncology, shared decision making, health economics">
+  <title>Understanding Treatment Value | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Educational NTOG page explaining treatment value concepts in thoracic oncology, including overall survival, hazard ratio, absolute benefit, NNT, NNH, QALY, cost, uncertainty, and worked examples.">
+  <meta name="keywords" content="NTOG, treatment value, lung cancer, overall survival, hazard ratio, absolute benefit, NNT, NNH, QALY, cost effectiveness, thoracic oncology, shared decision making, health economics, evidence interpretation">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
   <link rel="canonical" href="https://ntog.org/decision-tool.html">
 
-  <meta property="og:title" content="Treatment Value Discussion Tool | NTOG">
-  <meta property="og:description" content="Educational tool for structured discussion of treatment benefit, harms, quality of life, cost, and uncertainty in thoracic oncology evidence.">
+  <meta property="og:title" content="Understanding Treatment Value | NTOG">
+  <meta property="og:description" content="Educational page explaining key treatment value concepts and examples for thoracic oncology evidence.">
   <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
   <meta property="og:url" content="https://ntog.org/decision-tool.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Treatment Value Discussion Tool | NTOG">
-  <meta name="twitter:description" content="Educational treatment value discussion tool for thoracic oncology evidence.">
+  <meta name="twitter:title" content="Understanding Treatment Value | NTOG">
+  <meta name="twitter:description" content="Educational page explaining treatment value concepts in thoracic oncology evidence.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +44,15 @@
 
     h1, h2, h3, h4, .navbar-brand {
       font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    h2 {
+      color: #102a43;
+    }
+
+    h3 {
+      color: #102a43;
+      font-size: 1.15rem;
     }
 
     .page-hero {
@@ -87,7 +96,7 @@
     }
 
     .lead-narrow {
-      max-width: 920px;
+      max-width: 940px;
       font-size: 1.18rem;
       line-height: 1.7;
       color: #e8f3fb;
@@ -102,14 +111,17 @@
     }
 
     .content-card,
-    .score-card,
+    .term-card,
+    .example-card,
     .calculator-card,
-    .notice-card {
+    .notice-card,
+    .warning-card {
       border: 1px solid #e5e7eb;
       border-radius: 1rem;
       background: #ffffff;
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
       padding: 1.5rem;
+      height: 100%;
     }
 
     .notice-card {
@@ -117,15 +129,48 @@
       border-color: #f1d6a8;
     }
 
-    .score-card h3,
-    .calculator-card h3 {
+    .warning-card {
+      background: #f8fbfd;
+      border-color: #cfe3ee;
+    }
+
+    .term-card strong,
+    .example-card strong {
       color: #102a43;
-      font-size: 1.15rem;
+    }
+
+    .term-label {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: #e8f3fb;
+      color: #1f4e79;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .formula-box {
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      font-family: "Courier New", monospace;
+      font-size: 0.95rem;
     }
 
     .muted-note {
       color: #697586;
       font-size: 0.95rem;
+    }
+
+    .concept-list li,
+    .interpretation-list li,
+    .checklist li {
+      margin-bottom: 0.65rem;
     }
 
     .score-output {
@@ -142,13 +187,31 @@
       color: #1f4e79;
     }
 
-    .interpretation-list li {
-      margin-bottom: 0.6rem;
-    }
-
     .form-label {
       font-weight: 700;
       color: #102a43;
+    }
+
+    .anchor-nav {
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .anchor-nav a {
+      display: inline-block;
+      padding: 0.85rem 0.8rem;
+      color: #1f4e79;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .anchor-nav a:hover,
+    .anchor-nav a:focus {
+      text-decoration: underline;
+    }
+
+    .mini-table th {
+      white-space: nowrap;
     }
 
     footer a {
@@ -229,146 +292,250 @@
   <header class="page-hero">
     <div class="container">
       <span class="eyebrow">Clinical resources</span>
-      <h1 class="display-5 fw-bold mb-3">Treatment Value Discussion Tool</h1>
-      <p class="lead-narrow mb-4">An educational framework for discussing clinical benefit, toxicity, quality of life, cost, and uncertainty in thoracic oncology evidence.</p>
+      <h1 class="display-5 fw-bold mb-3">Understanding Treatment Value</h1>
+      <p class="lead-narrow mb-4">A teaching page for interpreting treatment benefit, harms, quality of life, cost, and uncertainty in thoracic oncology evidence.</p>
       <div class="d-flex flex-column flex-sm-row gap-3">
-        <a href="#calculator" class="btn btn-light btn-lg">Open score exercise</a>
-        <a href="/tools.html" class="btn btn-outline-light btn-lg">Back to tools</a>
+        <a href="#terms" class="btn btn-light btn-lg">Learn the key terms</a>
+        <a href="#examples" class="btn btn-outline-light btn-lg">See worked examples</a>
       </div>
     </div>
   </header>
 
+  <div class="anchor-nav">
+    <div class="container d-flex flex-wrap">
+      <a href="#purpose">Purpose</a>
+      <a href="#terms">Key terms</a>
+      <a href="#absolute-relative">Absolute vs relative benefit</a>
+      <a href="#examples">Examples</a>
+      <a href="#calculator">Score exercise</a>
+      <a href="#checklist">Interpretation checklist</a>
+    </div>
+  </div>
+
   <main>
-    <section class="section-block" id="overview">
+    <section class="section-block" id="purpose">
       <div class="container">
         <div class="row g-4 align-items-start">
           <div class="col-lg-5">
             <h2>Purpose</h2>
-            <p class="lead">This tool supports structured discussion of treatment value. It is not a formal health-economic assessment and it is not a clinical recommendation engine.</p>
+            <p class="lead">Treatment value is not one number. It is a structured judgement about benefit, harm, burden, cost, uncertainty, and patient goals.</p>
           </div>
           <div class="col-lg-7">
             <div class="notice-card">
               <h3>Educational use only</h3>
-              <p>The score is a simplified teaching exercise. It helps make assumptions visible when comparing treatment options. It does not replace trial interpretation, national reimbursement assessment, cost-effectiveness modelling, patient preference, clinical judgment, or MDT decision-making.</p>
-              <p class="mb-0">Use original trial data, local costs, absolute effects, toxicity data, confidence intervals, subgroup validity, and patient goals before drawing conclusions.</p>
+              <p>This page explains common concepts used when discussing cancer treatment evidence. It is not a clinical recommendation engine and it is not a formal health-economic assessment.</p>
+              <p class="mb-0">Treatment decisions require original trial data, local guidelines, reimbursement rules, MDT interpretation, clinical judgement, and patient preference.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-block bg-light" id="criteria">
+    <section class="section-block bg-light" id="terms">
       <div class="container">
-        <h2>Discussion criteria</h2>
-        <p class="lead">The criteria below are simplified anchors for discussion. They should be interpreted with uncertainty, study design, follow-up time, comparator quality, and clinical context.</p>
+        <h2>Key terms</h2>
+        <p class="lead">These terms often appear together, but they answer different questions.</p>
 
-        <div class="table-wrap mt-4">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Criterion</th>
-                <th>What it captures</th>
-                <th>Simple scoring anchor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Overall survival benefit</strong></td>
-                <td>Median or mean survival extension associated with treatment compared with the control arm.</td>
-                <td>Low: &lt;3 months. Moderate: 3 to 6 months. High: &gt;6 months.</td>
-              </tr>
-              <tr>
-                <td><strong>Hazard ratio</strong></td>
-                <td>Relative effect on the event rate over time. Must be interpreted with absolute benefit and proportional hazards assumptions.</td>
-                <td>Favourable: &lt;0.70. Moderate: 0.70 to 0.90. Unfavourable: &gt;0.90.</td>
-              </tr>
-              <tr>
-                <td><strong>Number needed to treat</strong></td>
-                <td>Number of patients who need treatment for one additional patient to benefit at a defined time point.</td>
-                <td>Favourable: &lt;10. Moderate: 10 to 20. Less favourable: &gt;20.</td>
-              </tr>
-              <tr>
-                <td><strong>Number needed to harm</strong></td>
-                <td>Number of patients treated for one additional clinically relevant adverse event at a defined time point.</td>
-                <td>Less favourable: &lt;10. Moderate: 10 to 20. Favourable: &gt;20.</td>
-              </tr>
-              <tr>
-                <td><strong>Quality-adjusted life years</strong></td>
-                <td>Combined quantity and quality of survival. Requires explicit utility assumptions.</td>
-                <td>Low: &lt;0.5. Moderate: 0.5 to 1.0. High: &gt;1.0.</td>
-              </tr>
-              <tr>
-                <td><strong>Direct treatment cost</strong></td>
-                <td>Drug, procedure, administration, monitoring, toxicity management, and downstream healthcare costs.</td>
-                <td>Low: &lt;10,000 EUR. Moderate: 10,000 to 50,000 EUR. High: &gt;50,000 EUR.</td>
-              </tr>
-              <tr>
-                <td><strong>Evidence certainty</strong></td>
-                <td>Confidence in the result, including trial phase, randomisation, maturity, confidence intervals, crossover, missing data, and external validity.</td>
-                <td>Low, moderate, or high certainty. This should modify interpretation, not just the arithmetic score.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="row g-4 mt-2">
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Survival</span>
+              <h3>Overall survival, OS</h3>
+              <p><strong>Meaning:</strong> Time from a defined starting point, often randomisation, until death from any cause.</p>
+              <p><strong>Example:</strong> Median OS is 18 months with the new treatment and 14 months with control. The median OS gain is 4 months.</p>
+              <p class="muted-note mb-0">Median OS does not show the full survival curve. It may miss delayed benefit, long-term survivors, cure fraction, or early harm.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Relative effect</span>
+              <h3>Hazard ratio, HR</h3>
+              <p><strong>Meaning:</strong> A relative comparison of event rates over time between two groups.</p>
+              <p><strong>Example:</strong> HR 0.70 means the event rate is estimated to be 30% lower in the treatment group during follow-up.</p>
+              <p class="muted-note mb-0">HR is not the same as 30% more patients surviving. It must be interpreted with the absolute survival difference and the shape of the survival curves.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Absolute effect</span>
+              <h3>Absolute benefit</h3>
+              <p><strong>Meaning:</strong> The actual difference in outcome between groups at a defined time point.</p>
+              <p><strong>Example:</strong> At 2 years, 45% are alive with treatment and 35% with control. The absolute survival benefit is 10 percentage points.</p>
+              <p class="muted-note mb-0">Absolute benefit is usually easier to discuss with patients than relative benefit.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Benefit count</span>
+              <h3>Number needed to treat, NNT</h3>
+              <p><strong>Meaning:</strong> Number of patients who need the treatment for one additional patient to benefit at a defined time point.</p>
+              <div class="formula-box">NNT = 1 / absolute risk reduction</div>
+              <p><strong>Example:</strong> If survival improves from 35% to 45%, the absolute benefit is 10 percentage points. NNT = 1 / 0.10 = 10.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Harm count</span>
+              <h3>Number needed to harm, NNH</h3>
+              <p><strong>Meaning:</strong> Number of patients treated for one additional patient to experience a harmful outcome.</p>
+              <div class="formula-box">NNH = 1 / absolute risk increase</div>
+              <p><strong>Example:</strong> If severe toxicity rises from 10% to 20%, the absolute increase is 10 percentage points. NNH = 10.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Quality and length</span>
+              <h3>Quality-adjusted life year, QALY</h3>
+              <p><strong>Meaning:</strong> A measure combining length of life and health-related quality of life.</p>
+              <div class="formula-box">QALY = time lived × utility value</div>
+              <p><strong>Example:</strong> 1 year lived with utility 0.75 equals 0.75 QALYs.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Cost</span>
+              <h3>Direct treatment cost</h3>
+              <p><strong>Meaning:</strong> Costs directly related to treatment delivery and consequences.</p>
+              <p><strong>Examples:</strong> Drug cost, infusion visits, scans, laboratory tests, hospitalisation, toxicity management, and later healthcare use.</p>
+              <p class="muted-note mb-0">A low drug price does not always mean low total cost. A high drug price does not always mean poor value.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Trust in result</span>
+              <h3>Evidence certainty</h3>
+              <p><strong>Meaning:</strong> How confident we are that the observed effect is real, relevant, and applicable.</p>
+              <p><strong>Consider:</strong> Trial phase, randomisation, sample size, confidence intervals, follow-up maturity, crossover, missing data, endpoint choice, and external validity.</p>
+              <p class="muted-note mb-0">Certainty should modify interpretation. It should not be treated as just another arithmetic point.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Fit to patient</span>
+              <h3>Applicability</h3>
+              <p><strong>Meaning:</strong> Whether the trial result is relevant to the patient or population being discussed.</p>
+              <p><strong>Consider:</strong> Performance status, age, comorbidity, molecular subgroup, line of therapy, previous treatments, geography, access, and patient goals.</p>
+              <p class="muted-note mb-0">A valid trial can still be poorly applicable to an individual patient.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section-block" id="example">
+    <section class="section-block" id="absolute-relative">
       <div class="container">
-        <h2>Example matrix</h2>
-        <p class="lead">The examples are illustrative only. They are not real treatment recommendations.</p>
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Absolute and relative benefit are different</h2>
+            <p class="lead">Relative effects can sound large even when the absolute benefit is small. Absolute effects usually make the clinical meaning clearer.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <div class="table-wrap">
+                <table class="table table-striped mini-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Scenario</th>
+                      <th>Control survival</th>
+                      <th>Treatment survival</th>
+                      <th>Absolute benefit</th>
+                      <th>Simple interpretation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>A</td>
+                      <td>40%</td>
+                      <td>50%</td>
+                      <td>10 percentage points</td>
+                      <td>10 more patients alive per 100 treated.</td>
+                    </tr>
+                    <tr>
+                      <td>B</td>
+                      <td>4%</td>
+                      <td>5%</td>
+                      <td>1 percentage point</td>
+                      <td>1 more patient alive per 100 treated.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="muted-note mt-3 mb-0">Both scenarios may have a similar relative improvement, but their practical meaning is different.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="table-wrap mt-4">
-          <table class="table table-striped table-compact">
-            <thead>
-              <tr>
-                <th>Treatment option</th>
-                <th>OS benefit</th>
-                <th>HR</th>
-                <th>NNT</th>
-                <th>NNH</th>
-                <th>QALY</th>
-                <th>Cost</th>
-                <th>Evidence certainty</th>
-                <th>Teaching score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Option A</td>
-                <td>5 months, moderate</td>
-                <td>0.68, favourable</td>
-                <td>15, moderate</td>
-                <td>25, favourable</td>
-                <td>0.8, moderate</td>
-                <td>12,000 EUR, moderate</td>
-                <td>Moderate</td>
-                <td>16 / 21</td>
-              </tr>
-              <tr>
-                <td>Option B</td>
-                <td>8 months, high</td>
-                <td>0.58, favourable</td>
-                <td>10, moderate</td>
-                <td>15, moderate</td>
-                <td>1.2, high</td>
-                <td>45,000 EUR, moderate</td>
-                <td>High</td>
-                <td>18 / 21</td>
-              </tr>
-              <tr>
-                <td>Option C</td>
-                <td>3 months, low to moderate</td>
-                <td>0.85, moderate</td>
-                <td>20, moderate</td>
-                <td>10, moderate</td>
-                <td>0.4, low</td>
-                <td>8,000 EUR, low</td>
-                <td>Low</td>
-                <td>12 / 21</td>
-              </tr>
-            </tbody>
-          </table>
+    <section class="section-block bg-light" id="examples">
+      <div class="container">
+        <h2>Worked examples</h2>
+        <p class="lead">The examples are simplified and fictional. They are designed to teach interpretation, not to recommend treatment.</p>
+
+        <div class="row g-4 mt-2">
+          <div class="col-lg-4">
+            <div class="example-card">
+              <h3>Example 1: Moderate survival gain, acceptable harm</h3>
+              <p><strong>Trial result:</strong> Median OS improves from 14 to 18 months. HR 0.72. Two-year survival improves from 35% to 45%.</p>
+              <p><strong>NNT:</strong> Absolute benefit is 10 percentage points. NNT = 10.</p>
+              <p><strong>Harm:</strong> Severe toxicity increases from 12% to 17%. Absolute harm increase is 5 percentage points. NNH = 20.</p>
+              <p class="mb-0"><strong>Teaching interpretation:</strong> Benefit appears clinically relevant, but the discussion should include toxicity severity, patient priorities, and whether the trial population matches local patients.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="example-card">
+              <h3>Example 2: Good HR, small absolute benefit</h3>
+              <p><strong>Trial result:</strong> HR 0.65. One-year survival improves from 94% to 96%.</p>
+              <p><strong>NNT:</strong> Absolute benefit is 2 percentage points. NNT = 50.</p>
+              <p><strong>Harm:</strong> Grade 3 to 4 toxicity increases by 8 percentage points. NNH = 13.</p>
+              <p class="mb-0"><strong>Teaching interpretation:</strong> The relative effect looks favourable, but the absolute benefit is small. Toxicity and patient selection become central.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="example-card">
+              <h3>Example 3: Delayed benefit and uncertainty</h3>
+              <p><strong>Trial result:</strong> Median OS differs by only 1 month, but the survival curves separate after 18 months.</p>
+              <p><strong>Issue:</strong> Median OS may underestimate benefit if a subgroup has durable response.</p>
+              <p><strong>Evidence question:</strong> Are biomarkers, subgroup analyses, and follow-up mature enough to identify who benefits?</p>
+              <p class="mb-0"><strong>Teaching interpretation:</strong> A single median value is inadequate. Survival curves, landmark survival, subgroup validity, and long-term follow-up are needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="concept-map">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>How the concepts connect</h2>
+            <p class="lead">A treatment can look valuable in one dimension and weak in another.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="concept-list mb-0">
+                <li><strong>OS asks:</strong> Do patients live longer?</li>
+                <li><strong>HR asks:</strong> How different are the event rates over follow-up?</li>
+                <li><strong>Absolute benefit asks:</strong> How many more patients benefit at a specific time point?</li>
+                <li><strong>NNT asks:</strong> How many patients must be treated for one additional benefit?</li>
+                <li><strong>NNH asks:</strong> How many patients must be treated for one additional harm?</li>
+                <li><strong>QALY asks:</strong> How much quality-adjusted survival is gained?</li>
+                <li><strong>Cost asks:</strong> What resources are required, and what else could those resources provide?</li>
+                <li><strong>Certainty asks:</strong> How much trust should we place in the estimate?</li>
+                <li><strong>Applicability asks:</strong> Does the evidence fit this patient or population?</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -377,14 +544,14 @@
       <div class="container">
         <div class="row g-4">
           <div class="col-lg-5">
-            <h2>Score exercise</h2>
-            <p class="lead">Select simplified categories to generate a teaching score. The result is a prompt for discussion, not a decision.</p>
-            <div class="content-card mt-3">
-              <h3>Interpretation</h3>
+            <h2>Teaching score exercise</h2>
+            <p class="lead">This optional exercise helps learners make assumptions visible. The score is a prompt for discussion, not a decision.</p>
+            <div class="warning-card mt-3">
+              <h3>How to use the score</h3>
               <ul class="interpretation-list mb-0">
-                <li><strong>6 to 10:</strong> weak or uncertain value signal. Review assumptions and evidence quality.</li>
+                <li><strong>6 to 10:</strong> weak or uncertain value signal. Recheck assumptions and evidence quality.</li>
                 <li><strong>11 to 15:</strong> mixed value signal. Discuss absolute benefit, toxicity, uncertainty, and patient goals.</li>
-                <li><strong>16 to 21:</strong> stronger value signal, provided evidence certainty and applicability are acceptable.</li>
+                <li><strong>16 to 21:</strong> stronger value signal. Interpret only if evidence certainty and applicability are acceptable.</li>
               </ul>
             </div>
           </div>
@@ -396,54 +563,54 @@
                   <div class="col-md-6">
                     <label for="osBenefit" class="form-label">Overall survival benefit</label>
                     <select id="osBenefit" class="form-select">
-                      <option value="1">Low, &lt;3 months</option>
+                      <option value="1">Low, less than 3 months</option>
                       <option value="2">Moderate, 3 to 6 months</option>
-                      <option value="3">High, &gt;6 months</option>
+                      <option value="3">High, more than 6 months</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label for="hr" class="form-label">Hazard ratio</label>
                     <select id="hr" class="form-select">
-                      <option value="3">Favourable, &lt;0.70</option>
+                      <option value="3">Favourable, less than 0.70</option>
                       <option value="2">Moderate, 0.70 to 0.90</option>
-                      <option value="1">Unfavourable, &gt;0.90</option>
+                      <option value="1">Unfavourable, more than 0.90</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label for="nnt" class="form-label">Number needed to treat</label>
                     <select id="nnt" class="form-select">
-                      <option value="3">Favourable, &lt;10</option>
+                      <option value="3">Favourable, less than 10</option>
                       <option value="2">Moderate, 10 to 20</option>
-                      <option value="1">Less favourable, &gt;20</option>
+                      <option value="1">Less favourable, more than 20</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label for="nnh" class="form-label">Number needed to harm</label>
                     <select id="nnh" class="form-select">
-                      <option value="1">Less favourable, &lt;10</option>
+                      <option value="1">Less favourable, less than 10</option>
                       <option value="2">Moderate, 10 to 20</option>
-                      <option value="3">Favourable, &gt;20</option>
+                      <option value="3">Favourable, more than 20</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label for="qaly" class="form-label">QALY gain</label>
                     <select id="qaly" class="form-select">
-                      <option value="1">Low, &lt;0.5</option>
+                      <option value="1">Low, less than 0.5</option>
                       <option value="2">Moderate, 0.5 to 1.0</option>
-                      <option value="3">High, &gt;1.0</option>
+                      <option value="3">High, more than 1.0</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label for="cost" class="form-label">Direct treatment cost</label>
                     <select id="cost" class="form-select">
-                      <option value="3">Low, &lt;10,000 EUR</option>
+                      <option value="3">Low, less than 10,000 EUR</option>
                       <option value="2">Moderate, 10,000 to 50,000 EUR</option>
-                      <option value="1">High, &gt;50,000 EUR</option>
+                      <option value="1">High, more than 50,000 EUR</option>
                     </select>
                   </div>
 
@@ -474,23 +641,53 @@
       </div>
     </section>
 
-    <section class="section-block" id="limitations">
+    <section class="section-block" id="checklist">
       <div class="container">
         <div class="row g-4 align-items-start">
           <div class="col-lg-5">
-            <h2>Limitations</h2>
-            <p class="lead">A numeric score can hide more than it reveals unless the assumptions are made explicit.</p>
+            <h2>Interpretation checklist</h2>
+            <p class="lead">Before calling a treatment high value or low value, make the assumptions explicit.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <ul class="checklist mb-0">
+                <li>What is the absolute survival benefit at a clinically meaningful time point?</li>
+                <li>Does the hazard ratio match the visual impression of the survival curves?</li>
+                <li>Are hazards proportional, or do curves cross or separate late?</li>
+                <li>What is the NNT for the endpoint that matters most?</li>
+                <li>What is the NNH for severe, persistent, irreversible, or fatal toxicity?</li>
+                <li>How does treatment affect symptoms, function, and quality of life?</li>
+                <li>Are QALY estimates based on transparent utility assumptions?</li>
+                <li>Which costs are included, and which are excluded?</li>
+                <li>Are subgroup findings prespecified, powered, and biologically plausible?</li>
+                <li>Does the trial population resemble the patient or local population?</li>
+                <li>How mature are the data, and how wide are the confidence intervals?</li>
+                <li>What would change the conclusion?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="limitations">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Common interpretation traps</h2>
+            <p class="lead">A single metric can be misleading when separated from context.</p>
           </div>
           <div class="col-lg-7">
             <div class="content-card">
               <ul class="mb-0">
-                <li>Median OS benefit may not reflect long-term survivors or cure fraction.</li>
-                <li>Hazard ratios do not show absolute benefit and may be misleading if hazards are non-proportional.</li>
-                <li>NNT and NNH depend on time point, baseline risk, endpoint choice, and follow-up duration.</li>
-                <li>QALY estimates depend on utility values and modelling assumptions.</li>
-                <li>Cost thresholds differ between countries and reimbursement systems.</li>
-                <li>Subgroup results may be underpowered or exploratory.</li>
-                <li>Patient goals may override a population-level value assessment.</li>
+                <li>A favourable HR can coexist with small absolute benefit.</li>
+                <li>Median OS may miss long-term responders or delayed treatment effects.</li>
+                <li>NNT and NNH change with time point, baseline risk, endpoint definition, and follow-up duration.</li>
+                <li>Progression-free survival does not automatically imply better overall survival or quality of life.</li>
+                <li>QALY estimates depend on utility values and model structure.</li>
+                <li>Cost thresholds differ across countries and reimbursement systems.</li>
+                <li>Exploratory subgroup effects are hypothesis-generating unless confirmed.</li>
+                <li>Patient goals may outweigh a population-level value judgement.</li>
               </ul>
             </div>
           </div>
@@ -513,7 +710,6 @@
   <script src="/js/scripts.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("valueCalculator");
       const result = document.getElementById("result");
       const calculateButton = document.getElementById("calculateButton");
       const resetButton = document.getElementById("resetButton");
