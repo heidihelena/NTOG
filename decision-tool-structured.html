@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Structured Treatment Value Profile | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Structured NTOG treatment value profile for systematic educational capture of overall survival benefit, hazard ratio, absolute benefit, NNT, NNH, toxicity, evidence certainty, patient fit, resource use, QALY context, and ICER context in thoracic oncology evidence.">
+  <meta name="keywords" content="NTOG, structured value profile, treatment value, lung cancer, thoracic oncology, overall survival, hazard ratio, absolute benefit, NNT, NNH, toxicity, evidence certainty, QALY context, ICER context, cost, clinical benefit">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <link rel="canonical" href="https://ntog.org/decision-tool-structured.html">
+
+  <meta property="og:title" content="Structured Treatment Value Profile | NTOG">
+  <meta property="og:description" content="Field-based educational profile for structured discussion of treatment benefit, harm, evidence certainty, patient fit, resource use, QALY context, and ICER context.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/decision-tool-structured.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Structured Treatment Value Profile | NTOG">
+  <meta name="twitter:description" content="Structured educational profile for treatment value discussion in thoracic oncology evidence.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background:
+        linear-gradient(rgba(3, 17, 31, 0.44), rgba(3, 17, 31, 0.44)),
+        linear-gradient(135deg, #071f35 0%, #0b3a63 52%, #155f86 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.08), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 999px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+      color: #e8f3fb;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .profile-card,
+    .notice-card,
+    .output-card,
+    .method-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      padding: 1.5rem;
+    }
+
+    .notice-card {
+      background: #fff7e6;
+      border-color: #f1d6a8;
+    }
+
+    .method-card {
+      background: #f8fafc;
+    }
+
+    .form-section {
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      background: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .form-section h3 {
+      font-size: 1.08rem;
+      color: #102a43;
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      font-weight: 700;
+      color: #102a43;
+    }
+
+    .help-text {
+      color: #697586;
+      font-size: 0.9rem;
+      margin-top: 0.35rem;
+    }
+
+    .score-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1f4e79;
+      line-height: 1.1;
+    }
+
+    .domain-score {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.55rem 0;
+    }
+
+    .domain-score:last-child {
+      border-bottom: 0;
+    }
+
+    .flag-list li {
+      margin-bottom: 0.45rem;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    .json-output {
+      min-height: 240px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.88rem;
+      white-space: pre;
+      background: #0f172a;
+      color: #e5e7eb;
+      border-radius: 0.8rem;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    .button-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NTOG Structured Treatment Value Profile",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web browser",
+    "author": {
+      "@type": "Organization",
+      "name": "Nordic Thoracic Oncology Group"
+    },
+    "description": "Browser-based educational structured profile for discussion of treatment value in thoracic oncology evidence.",
+    "url": "https://ntog.org/decision-tool-structured.html",
+    "softwareVersion": "0.1.0"
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="/about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="/history.html">History</a></li>
+              <li><a class="dropdown-item" href="/steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1 class="display-5 fw-bold mb-3">Structured Treatment Value Profile</h1>
+      <p class="lead-narrow mb-4">
+        A field-based educational tool for systematic capture of benefit, harm, evidence maturity,
+        patient fit, resource use, QALY context, and ICER context in thoracic oncology evidence.
+      </p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#profile" class="btn btn-light btn-lg">Open structured profile</a>
+        <a href="/decision-tool.html" class="btn btn-outline-light btn-lg">Open discussion compass</a>
+        <a href="/tools.html" class="btn btn-outline-light btn-lg">Back to tools</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Purpose</h2>
+            <p class="lead">
+              This structured profile makes treatment-value assumptions visible before they are compressed into a conclusion.
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <div class="notice-card">
+              <h3>Educational and research use only</h3>
+              <p>
+                This tool supports structured discussion of treatment value. It is not a formal cost-effectiveness model,
+                reimbursement assessment, clinical recommendation engine, or QALY counter.
+              </p>
+              <p class="mb-0">
+                QALY and ICER fields are captured as context. They are not used as automatic decision thresholds.
+                Clinical interpretation requires the original trial data, subgroup validity, toxicity severity, patient goals,
+                local implementation feasibility, and national reimbursement context.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="method">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <h2>Scoring structure</h2>
+            <p class="lead">
+              The profile produces a transparent discussion score from five domains. The score is a prompt for interpretation, not a recommendation.
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <div class="method-card">
+              <p><strong>Formula</strong></p>
+              <pre class="mb-3"><code>structured_value_profile_score =
+clinical_benefit_score
++ safety_tolerability_score
++ evidence_confidence_score
++ patient_implementation_fit_score
++ resource_reasonableness_score</code></pre>
+              <div class="row g-3">
+                <div class="col-md-6"><strong>Clinical benefit:</strong> 35 points</div>
+                <div class="col-md-6"><strong>Safety and tolerability:</strong> 20 points</div>
+                <div class="col-md-6"><strong>Evidence confidence:</strong> 20 points</div>
+                <div class="col-md-6"><strong>Patient and implementation fit:</strong> 15 points</div>
+                <div class="col-md-6"><strong>Resource reasonableness:</strong> 10 points</div>
+              </div>
+              <p class="muted-note mt-3 mb-0">
+                QALY gain and ICER are recorded as context fields and exported in JSON, but they are not included in the score.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="profile">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-8">
+            <form id="structuredValueForm" class="profile-card">
+              <div class="form-section">
+                <h3>1. Treatment and evidence context</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="treatmentName" class="form-label">Treatment or strategy</label>
+                    <input id="treatmentName" class="form-control" type="text" placeholder="Example: Treatment A + standard care">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="comparatorName" class="form-label">Comparator</label>
+                    <input id="comparatorName" class="form-control" type="text" placeholder="Example: Standard care">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="setting" class="form-label">Clinical setting</label>
+                    <select id="setting" class="form-select">
+                      <option value="advanced">Advanced or metastatic disease</option>
+                      <option value="locally_advanced">Locally advanced disease</option>
+                      <option value="adjuvant">Adjuvant setting</option>
+                      <option value="neoadjuvant">Neoadjuvant setting</option>
+                      <option value="screening_or_prevention">Screening, prevention, or early detection</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="endpointStrength" class="form-label">Primary evidence anchor</label>
+                    <select id="endpointStrength" class="form-select">
+                      <option value="10">Overall survival or cure-relevant endpoint</option>
+                      <option value="7">Progression-free survival with supportive OS or QoL signal</option>
+                      <option value="4">PFS, response, or surrogate endpoint only</option>
+                      <option value="1">Uncertain or exploratory endpoint</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>2. Clinical benefit</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="osGain" class="form-label">Overall survival gain</label>
+                    <select id="osGain" class="form-select">
+                      <option value="0">No demonstrated OS gain or harmful signal</option>
+                      <option value="4">Small, less than 3 months</option>
+                      <option value="7">Moderate, 3 to 6 months</option>
+                      <option value="10">Large, more than 6 months or cure-relevant</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="hazardRatio" class="form-label">Hazard ratio for main benefit endpoint</label>
+                    <select id="hazardRatio" class="form-select">
+                      <option value="0">Unfavourable or not reported</option>
+                      <option value="3">0.90 to 1.00</option>
+                      <option value="5">0.70 to 0.89</option>
+                      <option value="7">Less than 0.70</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="absoluteBenefit" class="form-label">Absolute benefit at clinically relevant time point</label>
+                    <select id="absoluteBenefit" class="form-select">
+                      <option value="0">None, unclear, or less than 2 percentage points</option>
+                      <option value="3">2 to 4 percentage points</option>
+                      <option value="5">5 to 9 percentage points</option>
+                      <option value="8">10 percentage points or more</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="nnt" class="form-label">Number needed to treat</label>
+                    <select id="nnt" class="form-select">
+                      <option value="0">Not reported or more than 30</option>
+                      <option value="3">21 to 30</option>
+                      <option value="6">10 to 20</option>
+                      <option value="10">Less than 10</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>3. Safety and tolerability</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="toxicity" class="form-label">Excess grade 3 to 5 toxicity</label>
+                    <select id="toxicity" class="form-select">
+                      <option value="0">High excess toxicity or severe concern</option>
+                      <option value="4">Moderate excess toxicity</option>
+                      <option value="7">Small excess toxicity</option>
+                      <option value="10">No meaningful excess or lower toxicity</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="nnh" class="form-label">Number needed to harm</label>
+                    <select id="nnh" class="form-select">
+                      <option value="0">Less than 10 or not acceptable</option>
+                      <option value="3">10 to 20</option>
+                      <option value="6">21 to 50</option>
+                      <option value="8">More than 50 or no clear harm signal</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="mortalitySignal" class="form-label">Treatment-related mortality signal</label>
+                    <select id="mortalitySignal" class="form-select">
+                      <option value="0">Concerning signal</option>
+                      <option value="1">Uncertain or incompletely reported</option>
+                      <option value="2">No concerning signal</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="chronicToxicity" class="form-label">Chronic or irreversible toxicity</label>
+                    <select id="chronicToxicity" class="form-select">
+                      <option value="0">Common or clinically important</option>
+                      <option value="1">Possible but limited</option>
+                      <option value="2">Minimal or not apparent</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>4. Evidence confidence</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="studyDesign" class="form-label">Study design</label>
+                    <select id="studyDesign" class="form-select">
+                      <option value="0">Single-arm, retrospective, or uncontrolled</option>
+                      <option value="4">Non-randomised comparative or weak control</option>
+                      <option value="7">Randomised phase II or limited phase III evidence</option>
+                      <option value="10">Well-conducted randomised phase III or robust meta-analysis</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="followUp" class="form-label">Follow-up maturity</label>
+                    <select id="followUp" class="form-select">
+                      <option value="0">Immature or unclear</option>
+                      <option value="3">Somewhat immature</option>
+                      <option value="5">Adequate for main endpoint</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="comparatorQuality" class="form-label">Comparator quality</label>
+                    <select id="comparatorQuality" class="form-select">
+                      <option value="0">Weak, outdated, or inappropriate comparator</option>
+                      <option value="2">Partly relevant comparator</option>
+                      <option value="3">Relevant current comparator</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="externalValidity" class="form-label">External validity for Nordic practice</label>
+                    <select id="externalValidity" class="form-select">
+                      <option value="0">Poor or uncertain applicability</option>
+                      <option value="1">Partly applicable</option>
+                      <option value="2">Good applicability</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>5. Patient and implementation fit</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="qolEffect" class="form-label">Quality of life or symptom effect</label>
+                    <select id="qolEffect" class="form-select">
+                      <option value="0">Worse, unclear, or not reported</option>
+                      <option value="3">Neutral or mixed</option>
+                      <option value="6">Improved symptoms or QoL</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="patientGoalFit" class="form-label">Fit with likely patient goals</label>
+                    <select id="patientGoalFit" class="form-select">
+                      <option value="0">Poor fit or major conflict with goals</option>
+                      <option value="3">Mixed fit</option>
+                      <option value="5">Good fit</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="treatmentBurden" class="form-label">Treatment burden</label>
+                    <select id="treatmentBurden" class="form-select">
+                      <option value="0">High burden, frequent visits, complex monitoring</option>
+                      <option value="2">Moderate burden</option>
+                      <option value="4">Low burden or simpler delivery</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="implementationNotes" class="form-label">Implementation notes</label>
+                    <input id="implementationNotes" class="form-control" type="text" placeholder="Example: infusion capacity, travel burden, biomarker delay">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>6. Resource use and economic context</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="incrementalCost" class="form-label">Incremental direct cost</label>
+                    <select id="incrementalCost" class="form-select">
+                      <option value="0">High, more than 50,000 EUR or major budget impact</option>
+                      <option value="3">Moderate, 10,000 to 50,000 EUR</option>
+                      <option value="6">Low, less than 10,000 EUR</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="resourceIntensity" class="form-label">Resource intensity and opportunity cost</label>
+                    <select id="resourceIntensity" class="form-select">
+                      <option value="0">High resource pressure</option>
+                      <option value="2">Moderate resource pressure</option>
+                      <option value="4">Low resource pressure</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="qalyContext" class="form-label">QALY context, optional and not scored</label>
+                    <select id="qalyContext" class="form-select">
+                      <option value="not_reported">Not reported</option>
+                      <option value="low">Less than 0.5 QALY</option>
+                      <option value="moderate">0.5 to 1.0 QALY</option>
+                      <option value="high">More than 1.0 QALY</option>
+                      <option value="uncertain">Uncertain or model-dependent</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="icerContext" class="form-label">ICER context, optional and not scored</label>
+                    <select id="icerContext" class="form-select">
+                      <option value="not_reported">Not reported</option>
+                      <option value="favourable">Favourable in local context</option>
+                      <option value="borderline">Borderline or uncertain</option>
+                      <option value="unfavourable">Unfavourable in local context</option>
+                      <option value="not_applicable">Not applicable</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="economicNotes" class="form-label">Economic assumptions or resource notes</label>
+                    <textarea id="economicNotes" class="form-control" rows="3" placeholder="Record assumptions, local price uncertainty, modelling limits, administration cost, monitoring burden, or downstream costs."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="button-stack mt-4">
+                <button type="button" class="btn btn-primary" id="calculateButton">Generate structured profile</button>
+                <button type="button" class="btn btn-outline-primary" id="loadExampleButton">Load example</button>
+                <button type="reset" class="btn btn-outline-secondary" id="resetButton">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="output-card sticky-lg-top" style="top: 5rem;">
+              <h2>Output</h2>
+              <div id="scoreOutput" aria-live="polite">
+                <p class="mb-1"><strong>Structured value profile score</strong></p>
+                <div class="score-number">Not calculated</div>
+                <p class="muted-note mb-0">Generate the profile to view domain scores, flags, and JSON export.</p>
+              </div>
+
+              <hr>
+
+              <h3 class="h5">Domain scores</h3>
+              <div id="domainScores" class="mb-3">
+                <p class="muted-note mb-0">No domain scores yet.</p>
+              </div>
+
+              <h3 class="h5">Discussion flags</h3>
+              <ul id="flagList" class="flag-list mb-3">
+                <li class="muted-note">No flags yet.</li>
+              </ul>
+
+              <div class="button-stack">
+                <button type="button" class="btn btn-outline-primary btn-sm" id="copyJsonButton">Copy JSON</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" id="downloadJsonButton">Download JSON</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="json-export">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <h2>Research export</h2>
+            <p class="lead">
+              The browser creates a structured JSON object for transparent reporting, teaching, and research-method documentation.
+            </p>
+            <p class="muted-note">
+              No patient identifiers are required. The page does not store, transmit, or persist data.
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <pre id="jsonOutput" class="json-output">No JSON generated.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="citation">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>How to cite this tool</h2>
+            <p class="lead">Cite the exact version used in scientific work.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>
+                Nordic Thoracic Oncology Group. <em>NTOG Structured Treatment Value Profile</em>.
+                Version 0.1.0. Nordic Thoracic Oncology Group; 2026.
+                Available from: https://ntog.org/decision-tool-structured.html
+              </p>
+              <p class="mb-0">
+                This tool is educational research software. It does not replace clinical judgment,
+                multidisciplinary review, national guideline recommendations, or formal health-economic assessment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-0">
+        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/js/scripts.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ids = [
+        "endpointStrength", "osGain", "hazardRatio", "absoluteBenefit", "nnt",
+        "toxicity", "nnh", "mortalitySignal", "chronicToxicity",
+        "studyDesign", "followUp", "comparatorQuality", "externalValidity",
+        "qolEffect", "patientGoalFit", "treatmentBurden",
+        "incrementalCost", "resourceIntensity"
+      ];
+
+      const form = document.getElementById("structuredValueForm");
+      const calculateButton = document.getElementById("calculateButton");
+      const resetButton = document.getElementById("resetButton");
+      const loadExampleButton = document.getElementById("loadExampleButton");
+      const copyJsonButton = document.getElementById("copyJsonButton");
+      const downloadJsonButton = document.getElementById("downloadJsonButton");
+      const scoreOutput = document.getElementById("scoreOutput");
+      const domainScores = document.getElementById("domainScores");
+      const flagList = document.getElementById("flagList");
+      const jsonOutput = document.getElementById("jsonOutput");
+
+      let latestExport = null;
+
+      function value(id) {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      }
+
+      function score(id) {
+        const parsed = parseInt(value(id), 10);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function setValue(id, newValue) {
+        const el = document.getElementById(id);
+        if (el) el.value = newValue;
+      }
+
+      function scoreBand(total) {
+        if (total < 35) return "Weak or highly uncertain value signal";
+        if (total < 55) return "Mixed value signal";
+        if (total < 75) return "Favourable discussion signal";
+        return "Strong discussion signal";
+      }
+
+      function collectScores() {
+        const clinicalBenefit =
+          score("endpointStrength") +
+          score("osGain") +
+          score("hazardRatio") +
+          score("absoluteBenefit") +
+          score("nnt");
+
+        const safetyTolerability =
+          score("toxicity") +
+          score("nnh") +
+          score("mortalitySignal") +
+          score("chronicToxicity");
+
+        const evidenceConfidence =
+          score("studyDesign") +
+          score("followUp") +
+          score("comparatorQuality") +
+          score("externalValidity");
+
+        const patientFit =
+          score("qolEffect") +
+          score("patientGoalFit") +
+          score("treatmentBurden");
+
+        const resourceReasonableness =
+          score("incrementalCost") +
+          score("resourceIntensity");
+
+        const total = clinicalBenefit + safetyTolerability + evidenceConfidence + patientFit + resourceReasonableness;
+
+        return {
+          clinical_benefit_score: clinicalBenefit,
+          safety_tolerability_score: safetyTolerability,
+          evidence_confidence_score: evidenceConfidence,
+          patient_implementation_fit_score: patientFit,
+          resource_reasonableness_score: resourceReasonableness,
+          total_score: total
+        };
+      }
+
+      function buildFlags(scores) {
+        const flags = [];
+        if (score("hazardRatio") >= 7 && score("absoluteBenefit") <= 3) {
+          flags.push("Favourable hazard ratio but limited absolute benefit. Avoid over-interpreting relative effect.");
+        }
+        if (score("osGain") <= 4 && score("toxicity") <= 4) {
+          flags.push("Small OS gain with meaningful toxicity burden. Review severity, reversibility, and patient goals.");
+        }
+        if (scores.evidence_confidence_score < 10) {
+          flags.push("Low evidence confidence. Check trial maturity, comparator quality, and external validity.");
+        }
+        if (score("endpointStrength") <= 4 && score("qolEffect") <= 3) {
+          flags.push("Surrogate or weak endpoint without clear QoL support. Interpretation should remain cautious.");
+        }
+        if (score("incrementalCost") === 0 && scores.clinical_benefit_score < 22) {
+          flags.push("High cost or budget impact with limited clinical-benefit score. Local reimbursement and opportunity cost matter.");
+        }
+        if (score("patientGoalFit") === 0) {
+          flags.push("Poor fit with likely patient goals. Population-level value may not match individual priorities.");
+        }
+        if (value("qalyContext") !== "not_reported" || value("icerContext") !== "not_reported") {
+          flags.push("QALY or ICER context was recorded but not used as an automatic scoring threshold.");
+        }
+        if (flags.length === 0) {
+          flags.push("No major automatic discussion flags. Still review original evidence and local context.");
+        }
+        return flags;
+      }
+
+      function buildExport(scores, flags) {
+        const inputs = {};
+        ids.forEach(function (id) {
+          inputs[id] = value(id);
+        });
+
+        return {
+          schema_version: "ntog_structured_value_profile_0.1.0",
+          generated_at: new Date().toISOString(),
+          tool: {
+            name: "NTOG Structured Treatment Value Profile",
+            version: "0.1.0",
+            purpose: "Educational and research discussion profile, not clinical recommendation or formal cost-effectiveness assessment."
+          },
+          treatment_context: {
+            treatment_name: value("treatmentName"),
+            comparator_name: value("comparatorName"),
+            clinical_setting: value("setting")
+          },
+          scored_inputs: inputs,
+          non_scored_context: {
+            qaly_context: value("qalyContext"),
+            icer_context: value("icerContext"),
+            implementation_notes: value("implementationNotes"),
+            economic_notes: value("economicNotes")
+          },
+          score_formula: "clinical_benefit + safety_tolerability + evidence_confidence + patient_implementation_fit + resource_reasonableness",
+          domain_scores: scores,
+          interpretation: scoreBand(scores.total_score),
+          discussion_flags: flags,
+          boundaries: [
+            "Not a treatment recommendation.",
+            "Not a formal cost-effectiveness assessment.",
+            "QALY and ICER are context fields, not scoring thresholds.",
+            "Requires original trial interpretation, patient goals, clinical judgment, and local reimbursement context."
+          ]
+        };
+      }
+
+      function render(scores, flags, exportObject) {
+        scoreOutput.innerHTML = `
+          <p class="mb-1"><strong>Structured value profile score</strong></p>
+          <div class="score-number">${scores.total_score} / 100</div>
+          <p class="mb-1"><strong>Interpretation:</strong> ${scoreBand(scores.total_score)}</p>
+          <p class="muted-note mb-0">Discussion score only. Not a recommendation or formal health-economic conclusion.</p>
+        `;
+
+        domainScores.innerHTML = `
+          <div class="domain-score"><span>Clinical benefit</span><strong>${scores.clinical_benefit_score} / 35</strong></div>
+          <div class="domain-score"><span>Safety and tolerability</span><strong>${scores.safety_tolerability_score} / 20</strong></div>
+          <div class="domain-score"><span>Evidence confidence</span><strong>${scores.evidence_confidence_score} / 20</strong></div>
+          <div class="domain-score"><span>Patient and implementation fit</span><strong>${scores.patient_implementation_fit_score} / 15</strong></div>
+          <div class="domain-score"><span>Resource reasonableness</span><strong>${scores.resource_reasonableness_score} / 10</strong></div>
+        `;
+
+        flagList.innerHTML = flags.map(function (flag) {
+          return `<li>${flag}</li>`;
+        }).join("");
+
+        jsonOutput.textContent = JSON.stringify(exportObject, null, 2);
+      }
+
+      function calculate() {
+        const scores = collectScores();
+        const flags = buildFlags(scores);
+        latestExport = buildExport(scores, flags);
+        render(scores, flags, latestExport);
+      }
+
+      calculateButton.addEventListener("click", calculate);
+
+      loadExampleButton.addEventListener("click", function () {
+        setValue("treatmentName", "Example treatment + standard care");
+        setValue("comparatorName", "Standard care");
+        setValue("setting", "advanced");
+        setValue("endpointStrength", "10");
+        setValue("osGain", "7");
+        setValue("hazardRatio", "7");
+        setValue("absoluteBenefit", "5");
+        setValue("nnt", "6");
+        setValue("toxicity", "4");
+        setValue("nnh", "3");
+        setValue("mortalitySignal", "2");
+        setValue("chronicToxicity", "1");
+        setValue("studyDesign", "10");
+        setValue("followUp", "5");
+        setValue("comparatorQuality", "3");
+        setValue("externalValidity", "2");
+        setValue("qolEffect", "3");
+        setValue("patientGoalFit", "5");
+        setValue("treatmentBurden", "2");
+        setValue("incrementalCost", "3");
+        setValue("resourceIntensity", "2");
+        setValue("qalyContext", "moderate");
+        setValue("icerContext", "borderline");
+        setValue("implementationNotes", "Example: moderate infusion and monitoring burden.");
+        setValue("economicNotes", "Example only. Local acquisition price and downstream monitoring costs not verified.");
+        calculate();
+      });
+
+      resetButton.addEventListener("click", function () {
+        window.setTimeout(function () {
+          latestExport = null;
+          scoreOutput.innerHTML = `
+            <p class="mb-1"><strong>Structured value profile score</strong></p>
+            <div class="score-number">Not calculated</div>
+            <p class="muted-note mb-0">Generate the profile to view domain scores, flags, and JSON export.</p>
+          `;
+          domainScores.innerHTML = `<p class="muted-note mb-0">No domain scores yet.</p>`;
+          flagList.innerHTML = `<li class="muted-note">No flags yet.</li>`;
+          jsonOutput.textContent = "No JSON generated.";
+        }, 0);
+      });
+
+      copyJsonButton.addEventListener("click", async function () {
+        if (!latestExport) calculate();
+        try {
+          await navigator.clipboard.writeText(JSON.stringify(latestExport, null, 2));
+          copyJsonButton.textContent = "Copied";
+          window.setTimeout(function () {
+            copyJsonButton.textContent = "Copy JSON";
+          }, 1500);
+        } catch (err) {
+          jsonOutput.focus();
+        }
+      });
+
+      downloadJsonButton.addEventListener("click", function () {
+        if (!latestExport) calculate();
+        const blob = new Blob([JSON.stringify(latestExport, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "ntog-structured-value-profile.json";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      });
+    });
+  </script>
+</body>
+</html>
