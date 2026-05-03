@@ -1,0 +1,44 @@
+NTOG Educational Research Tools
+Copyright 2026 Nordic Thoracic Oncology Group
+
+This product includes browser-based educational research software developed
+for the Nordic Thoracic Oncology Group.
+
+Licensed software components:
+The calculator source code, HTML, CSS, and JavaScript authored for these tools
+are licensed under the Apache License, Version 2.0.
+
+Educational content:
+Unless otherwise stated, explanatory educational text, method descriptions,
+and non-software documentation are licensed under Creative Commons Attribution
+4.0 International (CC BY 4.0).
+
+Trademark notice:
+The NTOG name, Nordic Thoracic Oncology Group name, logo, visual identity,
+event branding, and associated marks are not licensed for reuse under the
+Apache License or CC BY 4.0. They may not be used to imply endorsement,
+affiliation, certification, or clinical approval without written permission.
+
+Clinical and educational notice:
+These tools are educational and research resources. They are not medical
+devices, not autonomous clinical decision systems, not diagnostic tools,
+and not substitutes for national guidelines, local clinical protocols,
+formal health-economic assessment, reimbursement decisions, multidisciplinary
+team review, clinical judgment, or patient preference.
+
+Model and method attribution:
+Published clinical models, guidelines, trial data, health-economic frameworks,
+and third-party calculators cited or implemented in these tools remain
+attributable to their original authors, journals, societies, institutions,
+or publishers. NTOG implementation or discussion does not imply endorsement
+by the original authors or organisations.
+
+Experimental NTOG methods:
+NTOG experimental scores, including experimental screening, nodule, value,
+or treatment discussion indices, are non-validated research methods unless
+explicitly stated otherwise in a versioned validation publication.
+
+Citation:
+If these tools are used in scientific work, cite the exact version used,
+the archived software release DOI if available, and the underlying model
+or guideline publications relevant to the analysis.
