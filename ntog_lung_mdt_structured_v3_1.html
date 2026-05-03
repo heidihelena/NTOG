@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTOG Lung Cancer MDT Structured Form v3.1</title>
+<meta name="description" content="Structured lung cancer MDT form for local browser use, registry extraction, TNM staging support, CCI calculation, and itemised G8 screening.">
+<style>
+  :root {
+    --ntog-blue: #0b5394;
+    --ntog-blue-dark: #073763;
+    --ntog-light: #f5f8fb;
+    --ntog-border: #cfd8e3;
+    --ntog-warning-bg: #fff7d6;
+    --ntog-warning-border: #e0c200;
+    --ok-bg: #ecf7ed;
+    --ok-border: #8bc28f;
+    --danger: #b00020;
+    --text: #222;
+    --muted: #5f6873;
+    --surface: #fff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    max-width: 1180px;
+    margin: 2em auto;
+    padding: 0 1em;
+    color: var(--text);
+    line-height: 1.45;
+    background: #fff;
+  }
+
+  h1 {
+    color: var(--ntog-blue);
+    margin-bottom: 0.2em;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    border-bottom: 2px solid var(--ntog-blue);
+    padding-bottom: 4px;
+    margin-top: 1.8em;
+    color: var(--ntog-blue-dark);
+  }
+
+  h3 {
+    margin: 1em 0 .5em;
+    color: var(--ntog-blue-dark);
+  }
+
+  fieldset {
+    border: 1px solid var(--ntog-border);
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  fieldset.submodule {
+    background: var(--ntog-light);
+  }
+
+  legend {
+    font-weight: 700;
+    padding: 0 .5em;
+    color: var(--ntog-blue-dark);
+  }
+
+  label {
+    display: block;
+    margin: .4em 0 .16em;
+    font-weight: 650;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: .48em;
+    font-size: 1em;
+    border: 1px solid #b8c0ca;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  input[readonly] {
+    background: #f2f4f7;
+    color: #222;
+  }
+
+  textarea {
+    min-height: 4.5em;
+    resize: vertical;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1em;
+  }
+
+  .row3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1em;
+  }
+
+  .row4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1em;
+  }
+
+  .hint {
+    font-size: .86em;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .registry-key {
+    display: inline-block;
+    margin-left: .25em;
+    font-size: .72em;
+    font-weight: 600;
+    color: #445;
+    background: #e9eef5;
+    border: 1px solid #d0dae6;
+    border-radius: 999px;
+    padding: .06em .45em;
+  }
+
+  .notice, .privacy, .disclaimer {
+    padding: .9em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+
+  .privacy {
+    background: var(--ntog-warning-bg);
+    border: 1px solid var(--ntog-warning-border);
+  }
+
+  .disclaimer {
+    background: #eef6fb;
+    border: 1px solid #b9d6e8;
+  }
+
+  .notice {
+    background: var(--ok-bg);
+    border: 1px solid var(--ok-border);
+  }
+
+  .derived-panel {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(255,255,255,.98);
+    border: 1px solid var(--ntog-border);
+    border-radius: 10px;
+    padding: .8em;
+    margin: 1em 0;
+    box-shadow: 0 3px 14px rgba(0,0,0,.06);
+  }
+
+  .derived-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .75em;
+  }
+
+  .metric {
+    background: var(--ntog-light);
+    border: 1px solid var(--ntog-border);
+    border-radius: 8px;
+    padding: .65em;
+    min-height: 4.2em;
+  }
+
+  .metric .label {
+    display: block;
+    color: var(--muted);
+    font-size: .78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  .metric .value {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 800;
+    margin-top: .18em;
+    color: var(--ntog-blue-dark);
+  }
+
+  .metric .small {
+    display: block;
+    margin-top: .18em;
+    font-size: .82em;
+    color: var(--muted);
+  }
+
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .35em .85em;
+    margin-top: .35em;
+  }
+
+  .checkbox-grid.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .check {
+    display: flex;
+    gap: .45em;
+    align-items: flex-start;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.25;
+    background: #fff;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    padding: .45em .5em;
+  }
+
+  .check input[type="checkbox"] {
+    width: auto;
+    min-width: 1em;
+    margin-top: .12em;
+  }
+
+  .check .points {
+    color: var(--muted);
+    font-size: .82em;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .node-table {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .55em;
+  }
+
+  .node-row {
+    display: grid;
+    grid-template-columns: 5.8em 1fr;
+    gap: .45em;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    padding: .45em;
+  }
+
+  .node-code {
+    font-weight: 800;
+    color: var(--ntog-blue-dark);
+  }
+
+  .node-code small {
+    display: block;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: .75em;
+  }
+
+  .warn {
+    color: var(--danger);
+    font-weight: 750;
+    margin-top: .75em;
+  }
+
+  .field-warning {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 2px rgba(176, 0, 32, .08);
+  }
+
+  #testOutput {
+    display: none;
+    white-space: pre-wrap;
+    background: #f7f9fc;
+    padding: 1em;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .86em;
+    margin-top: 1em;
+    border: 1px solid #ccd6e2;
+  }
+
+  #testOutput.visible {
+    display: block;
+  }
+
+  .pill-row {
+    display: flex;
+    gap: .4em;
+    flex-wrap: wrap;
+    margin-top: .4em;
+  }
+
+  .pill {
+    border: 1px solid var(--ntog-border);
+    border-radius: 999px;
+    padding: .15em .55em;
+    background: #fff;
+    color: #2d3c4f;
+    font-size: .86em;
+    font-weight: 600;
+  }
+
+  .button-row {
+    margin-top: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+  }
+
+  button {
+    padding: .65em 1.05em;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid var(--ntog-blue);
+    background: var(--ntog-blue);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button.secondary {
+    background: #fff;
+    color: var(--ntog-blue);
+  }
+
+  #summary {
+    white-space: pre-wrap;
+    background: #f5f5f5;
+    padding: 1em;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+  }
+
+  @media (max-width: 980px) {
+    .row4, .derived-grid, .node-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .checkbox-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 720px) {
+    body { margin: 1em auto; }
+    .row, .row3, .row4, .derived-grid, .checkbox-grid, .checkbox-grid.two, .node-table { grid-template-columns: 1fr; }
+    .derived-panel { position: static; }
+  }
+
+  @media print {
+    .privacy, .disclaimer, .notice, form > h2, form > fieldset, .button-row, #missing, #validationWarnings, #testOutput, .intro-text, .derived-panel {
+      display: none;
+    }
+    body { margin: 1em; max-width: none; font-size: 11pt; }
+    #summary { background: #fff; border: none; padding: 0; font-size: 10pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Lung cancer MDT structured form (v3.1)</h1>
+<p class="hint intro-text">Structured browser-only MDT form for cTNM support, CCI calculation, itemised G8 screening, treatment selection, and registry extraction.</p>
+
+<div class="privacy"><strong>Privacy:</strong> Runs in the browser. No data is transmitted or stored by this page. Refreshing the page clears the form.</div>
+<div class="disclaimer"><strong>Clinical use:</strong> This is a structured preparation tool. TNM, CCI, G8, and treatment fields are decision support fields and must be verified in the approved clinical record and against local protocol.</div>
+<div class="notice"><strong>Design principle:</strong> Inputs are coded for registry extraction. The only free-text clinical input is other diseases.</div>
+
+<form id="mdtForm">
+
+<section class="derived-panel" aria-label="Derived values">
+  <div class="derived-grid">
+    <div class="metric"><span class="label">cTNM</span><span class="value" id="tnmDisplay">cTxNxMx</span><span class="small" id="tnmBasisDisplay">Waiting for inputs</span></div>
+    <div class="metric"><span class="label">Stage group</span><span class="value" id="stageDisplay">Not assigned</span><span class="small" id="stageDetailDisplay">IASLC / AJCC v9 support</span></div>
+    <div class="metric"><span class="label">CCI</span><span class="value" id="cciDisplay">0</span><span class="small" id="cciDetailDisplay">Age adjusted: 0</span></div>
+    <div class="metric"><span class="label">G8</span><span class="value" id="g8Display">Not calculated</span><span class="small" id="g8DetailDisplay">Itemised screen</span></div>
+    <div class="metric"><span class="label">Completeness</span><span class="value" id="completeDisplay">0%</span><span class="small" id="completeDetailDisplay">Required fields</span></div>
+  </div>
+</section>
+
+<h2>1. MDT workflow</h2>
+<fieldset>
+  <div class="row4">
+    <div><label>Meeting date <span class="registry-key">meeting_date</span></label><input type="date" name="meetingDate"></div>
+    <div><label>Hospital / centre <span class="registry-key">hospital_centre</span></label><input type="text" name="hospitalCentre" autocomplete="off"></div>
+    <div><label>MDT purpose <span class="registry-key">mdt_purpose</span></label>
+      <select name="mdtPurpose">
+        <option value="">Select</option>
+        <option value="diagnostic_workup">Diagnostic workup</option>
+        <option value="initial_staging">Initial staging</option>
+        <option value="treatment_selection">Treatment selection</option>
+        <option value="postoperative_review">Postoperative review</option>
+        <option value="recurrence_progression">Recurrence or progression</option>
+        <option value="re_discussion_after_tests">Re-discussion after further tests</option>
+      </select>
+    </div>
+    <div><label>Urgency <span class="registry-key">urgency</span></label>
+      <select name="urgency">
+        <option value="routine">Routine</option>
+        <option value="urgent">Urgent</option>
+        <option value="same_week">Same week decision required</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row4">
+    <div><label>Presenter specialty <span class="registry-key">presenter_specialty</span></label>
+      <select name="presenterSpecialty">
+        <option value="">Select</option>
+        <option value="pulmonology">Pulmonology</option>
+        <option value="thoracic_surgery">Thoracic surgery</option>
+        <option value="medical_oncology">Medical oncology</option>
+        <option value="radiation_oncology">Radiation oncology</option>
+        <option value="radiology">Radiology</option>
+        <option value="pathology">Pathology</option>
+        <option value="nurse_coordinator">Nurse coordinator</option>
+      </select>
+    </div>
+    <div><label>Attending specialist after MDT <span class="registry-key">attending_specialist</span></label>
+      <select name="attendingSpecialist">
+        <option value="">Select</option>
+        <option value="pulmonologist">Pulmonologist</option>
+        <option value="thoracic_surgeon">Thoracic surgeon</option>
+        <option value="medical_oncologist">Medical oncologist</option>
+        <option value="radiation_oncologist">Radiation oncologist</option>
+        <option value="palliative_care">Palliative care specialist</option>
+        <option value="geriatrician">Geriatrician</option>
+        <option value="primary_care_after_bsc">Primary care after BSC decision</option>
+      </select>
+    </div>
+    <div><label>Clinical question <span class="registry-key">mdt_question</span></label>
+      <select name="mdtQuestion">
+        <option value="">Select</option>
+        <option value="confirm_stage">Confirm stage</option>
+        <option value="choose_biopsy_target">Choose biopsy target</option>
+        <option value="operability">Operability</option>
+        <option value="radical_rt_eligibility">Radical radiotherapy eligibility</option>
+        <option value="systemic_treatment">Systemic treatment</option>
+        <option value="oligometastatic_pathway">Oligometastatic pathway</option>
+        <option value="supportive_care">Supportive care pathway</option>
+      </select>
+    </div>
+    <div><label>Pathway status <span class="registry-key">pathway_status</span></label>
+      <select name="pathwayStatus">
+        <option value="new_referral">New referral</option>
+        <option value="awaiting_staging">Awaiting staging</option>
+        <option value="awaiting_pathology">Awaiting pathology</option>
+        <option value="ready_for_treatment_decision">Ready for treatment decision</option>
+        <option value="post_mdt_tests_planned">Post-MDT tests planned</option>
+      </select>
+    </div>
+  </div>
+</fieldset>
+
+<h2>2. Patient and baseline risk</h2>
+<fieldset>
+  <div class="row4">
+    <div><label>Age <span class="registry-key">age_years</span></label><input type="number" name="age" min="0" max="120" step="1"></div>
+    <div><label>Sex <span class="registry-key">sex</span></label>
+      <select name="sex">
+        <option value="">Select</option>
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+        <option value="other_not_specified">Other / not specified</option>
+      </select>
+    </div>
+    <div><label>Smoking status <span class="registry-key">smoking_status</span></label>
+      <select name="smokingStatus">
+        <option value="">Select</option>
+        <option value="never">Never smoker</option>
+        <option value="former">Former smoker</option>
+        <option value="current">Current smoker</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+    <div><label>Pack-years <span class="registry-key">pack_years</span></label><input type="number" name="packYears" min="0" step="0.1"></div>
+  </div>
+
+  <div class="row4">
+    <div><label>Years since quitting <span class="registry-key">quit_years</span></label><input type="number" name="quitYears" min="0" step="0.5"></div>
+    <div><label>Weight, kg <span class="registry-key">weight_kg</span></label><input type="number" name="weightKg" min="0" step="0.1"></div>
+    <div><label>Height, cm <span class="registry-key">height_cm</span></label><input type="number" name="heightCm" min="0" step="0.1"></div>
+    <div><label>BMI, auto <span class="registry-key">bmi</span></label><input type="text" name="bmi" id="bmi" readonly></div>
+  </div>
+
+  <div class="row3">
+    <div><label>WHO / ECOG performance status <span class="registry-key">ecog</span></label>
+      <select name="ecog">
+        <option value="">Select</option>
+        <option value="0">0, fully active</option>
+        <option value="1">1, restricted strenuous activity</option>
+        <option value="2">2, ambulatory and self-care</option>
+        <option value="3">3, limited self-care</option>
+        <option value="4">4, completely disabled</option>
+      </select>
+    </div>
+    <div><label>G8 total, auto <span class="registry-key">g8_score</span></label><input type="text" name="g8Score" id="g8Score" readonly></div>
+    <div><label>Frailty screen action <span class="registry-key">frailty_action</span></label>
+      <select name="frailtyAction">
+        <option value="not_assessed">Not assessed</option>
+        <option value="not_required">Not required</option>
+        <option value="geriatric_assessment_requested">Geriatric assessment requested</option>
+        <option value="geriatric_assessment_done">Geriatric assessment done</option>
+      </select>
+    </div>
+  </div>
+
+  <fieldset class="submodule">
+    <legend>G8 geriatric screening, itemised</legend>
+    <p class="hint">Total range 0 to 17. Score <= 14 is a positive screen and should trigger comprehensive geriatric assessment according to local policy. BMI and age items are auto-filled from the patient section.</p>
+    <div class="row3">
+      <div><label>1. Food intake decline, 3 months <span class="registry-key">g8_intake</span></label>
+        <select name="g8Intake">
+          <option value="">Not assessed</option>
+          <option value="0">0, severe decrease</option>
+          <option value="1">1, moderate decrease</option>
+          <option value="2">2, no decrease</option>
+        </select>
+      </div>
+      <div><label>2. Weight loss, 3 months <span class="registry-key">g8_weight_loss</span></label>
+        <select name="g8WeightLoss">
+          <option value="">Not assessed</option>
+          <option value="0">0, more than 3 kg</option>
+          <option value="1">1, does not know</option>
+          <option value="2">2, 1 to 3 kg</option>
+          <option value="3">3, no weight loss</option>
+        </select>
+      </div>
+      <div><label>3. Mobility <span class="registry-key">g8_mobility</span></label>
+        <select name="g8Mobility">
+          <option value="">Not assessed</option>
+          <option value="0">0, bed or chair bound</option>
+          <option value="1">1, out of bed but stays indoors</option>
+          <option value="2">2, goes out</option>
+        </select>
+      </div>
+    </div>
+    <div class="row3">
+      <div><label>4. Neuropsychological problems <span class="registry-key">g8_neuropsych</span></label>
+        <select name="g8Neuropsych">
+          <option value="">Not assessed</option>
+          <option value="0">0, severe dementia or depression</option>
+          <option value="1">1, mild dementia or depression</option>
+          <option value="2">2, none</option>
+        </select>
+      </div>
+      <div><label>5. BMI band, auto <span class="registry-key">g8_bmi_points</span></label><input type="text" name="g8BmiPoints" id="g8BmiPoints" readonly></div>
+      <div><label>6. More than 3 prescription drugs/day <span class="registry-key">g8_polypharmacy</span></label>
+        <select name="g8Polypharmacy">
+          <option value="">Not assessed</option>
+          <option value="0">0, yes</option>
+          <option value="1">1, no</option>
+        </select>
+      </div>
+    </div>
+    <div class="row3">
+      <div><label>7. Self-rated health vs peers <span class="registry-key">g8_self_health</span></label>
+        <select name="g8SelfHealth">
+          <option value="">Not assessed</option>
+          <option value="0">0, not as good</option>
+          <option value="0.5">0.5, does not know</option>
+          <option value="1">1, as good</option>
+          <option value="2">2, better</option>
+        </select>
+      </div>
+      <div><label>8. Age band, auto <span class="registry-key">g8_age_points</span></label><input type="text" name="g8AgePoints" id="g8AgePoints" readonly></div>
+      <div><label>G8 flag <span class="registry-key">g8_flag</span></label><input type="text" name="g8Flag" id="g8Flag" readonly></div>
+    </div>
+  </fieldset>
+</fieldset>
+
+<h2>3. Comorbidity and CCI</h2>
+<fieldset>
+  <div class="row3">
+    <div><label>CCI cancer counting rule <span class="registry-key">cci_cancer_rule</span></label>
+      <select name="cciCancerRule">
+        <option value="exclude_index">Exclude current index lung cancer</option>
+        <option value="include_index">Include current lung cancer from M category</option>
+      </select>
+    </div>
+    <div><label>Anticoagulation / antiplatelet <span class="registry-key">antithrombotic_class</span></label>
+      <select name="antithromboticClass">
+        <option value="none">None</option>
+        <option value="doac">DOAC</option>
+        <option value="warfarin">Warfarin</option>
+        <option value="lmwh">LMWH</option>
+        <option value="single_antiplatelet">Single antiplatelet</option>
+        <option value="dual_antiplatelet">Dual antiplatelet</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+    <div><label>Immunosuppression <span class="registry-key">immunosuppression_class</span></label>
+      <select name="immunosuppressionClass">
+        <option value="none">None</option>
+        <option value="systemic_corticosteroid">Systemic corticosteroid</option>
+        <option value="biologic_or_jak">Biologic or JAK inhibitor</option>
+        <option value="transplant_drugs">Transplant immunosuppression</option>
+        <option value="cytotoxic_immunosuppression">Cytotoxic immunosuppression</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+  </div>
+
+  <h3>Charlson conditions</h3>
+  <div class="checkbox-grid" id="cciGrid"></div>
+
+  <label>Other diseases <span class="registry-key">other_diseases_text</span></label>
+  <textarea name="otherDiseases" placeholder="Only open clinical field. Use for diseases not captured by coded comorbidity items."></textarea>
+</fieldset>
+
+<h2>4. Functional and pulmonary testing</h2>
+<fieldset>
+  <fieldset class="submodule">
+    <legend>Lung function</legend>
+    <div class="row4">
+      <div><label>FVC, % predicted <span class="registry-key">fvc_percent</span></label><input type="number" name="fvcPercent" min="0" max="200" step="1"></div>
+      <div><label>FEV1, % predicted <span class="registry-key">fev1_percent</span></label><input type="number" name="fev1Percent" min="0" max="200" step="1"></div>
+      <div><label>DLCO, % predicted <span class="registry-key">dlco_percent</span></label><input type="number" name="dlcoPercent" min="0" max="200" step="1"></div>
+      <div><label>Resting oxygen need <span class="registry-key">resting_oxygen</span></label>
+        <select name="restingOxygenNeed">
+          <option value="none">None</option>
+          <option value="nocturnal">Nocturnal only</option>
+          <option value="exertional">Exertional only</option>
+          <option value="continuous">Continuous</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Treatment fitness labs</legend>
+    <div class="row4">
+      <div><label>eGFR, ml/min/1.73 m2 <span class="registry-key">egfr_ml_min_1_73m2</span></label><input type="number" name="egfrValue" min="0" max="200" step="1"></div>
+      <div><label>Albumin, g/L <span class="registry-key">albumin_g_l</span></label><input type="number" name="albuminValue" min="0" max="80" step="1"></div>
+      <div><label>Haemoglobin, g/L <span class="registry-key">haemoglobin_g_l</span></label><input type="number" name="haemoglobinValue" min="0" max="250" step="1"></div>
+      <div><label>Lab fitness flag <span class="registry-key">lab_fitness_flag</span></label>
+        <select name="labFitnessFlag">
+          <option value="not_assessed">Not assessed</option>
+          <option value="acceptable">Acceptable for planned treatment</option>
+          <option value="renal_review_needed">Renal review needed</option>
+          <option value="nutrition_review_needed">Nutrition review needed</option>
+          <option value="anaemia_review_needed">Anaemia review needed</option>
+          <option value="multiple_issues_review_needed">Multiple issues, review needed</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Clinical stair test</legend>
+    <div class="row4">
+      <div><label>Stair test status <span class="registry-key">stair_test_status</span></label>
+        <select name="stairTestStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_possible">Not possible</option>
+        </select>
+      </div>
+      <div><label>Floors climbed <span class="registry-key">stair_floors</span></label><input type="number" name="stairFloors" min="0" step="0.5"></div>
+      <div><label>Vertical height, m <span class="registry-key">stair_height_m</span></label><input type="number" name="stairHeightM" min="0" step="0.1"></div>
+      <div><label>Stopping reason <span class="registry-key">stair_stop_reason</span></label>
+        <select name="stairStopReason">
+          <option value="not_applicable">Not applicable</option>
+          <option value="completed">Completed target</option>
+          <option value="dyspnoea">Dyspnoea</option>
+          <option value="desaturation">Desaturation</option>
+          <option value="leg_fatigue">Leg fatigue</option>
+          <option value="chest_pain">Chest pain</option>
+          <option value="dizziness">Dizziness</option>
+          <option value="other_coded">Other coded reason</option>
+        </select>
+      </div>
+    </div>
+    <div class="row4">
+      <div><label>SpO2 start, % <span class="registry-key">stair_spo2_start</span></label><input type="number" name="stairSpo2Start" min="0" max="100"></div>
+      <div><label>Lowest SpO2, % <span class="registry-key">stair_spo2_lowest</span></label><input type="number" name="stairSpo2Lowest" min="0" max="100"></div>
+      <div><label>Heart rate peak <span class="registry-key">stair_hr_peak</span></label><input type="number" name="stairHrPeak" min="0" max="250"></div>
+      <div><label>Test supervisor <span class="registry-key">stair_supervisor</span></label>
+        <select name="stairSupervisor">
+          <option value="not_applicable">Not applicable</option>
+          <option value="physiotherapist">Physiotherapist</option>
+          <option value="nurse">Nurse</option>
+          <option value="pulmonologist">Pulmonologist</option>
+          <option value="surgeon">Surgeon</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Six-minute walk test</legend>
+    <div class="row4">
+      <div><label>6MWT status <span class="registry-key">six_mwt_status</span></label>
+        <select name="sixMwtStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_possible">Not possible</option>
+        </select>
+      </div>
+      <div><label>Distance, m <span class="registry-key">six_mwt_distance_m</span></label><input type="number" name="sixMwtDistanceM" min="0" max="1000" step="1"></div>
+      <div><label>Lowest SpO2, % <span class="registry-key">six_mwt_spo2_lowest</span></label><input type="number" name="sixMwtSpo2Lowest" min="0" max="100"></div>
+      <div><label>Oxygen during test <span class="registry-key">six_mwt_oxygen</span></label>
+        <select name="sixMwtOxygen">
+          <option value="room_air">Room air</option>
+          <option value="oxygen_1_2_l">Oxygen 1 to 2 L/min</option>
+          <option value="oxygen_3_4_l">Oxygen 3 to 4 L/min</option>
+          <option value="oxygen_5_l_or_more">Oxygen 5 L/min or more</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+    <div class="row4">
+      <div><label>Borg dyspnoea end <span class="registry-key">six_mwt_borg_end</span></label><input type="number" name="sixMwtBorgEnd" min="0" max="10" step="0.5"></div>
+      <div><label>Stopped early <span class="registry-key">six_mwt_stopped_early</span></label>
+        <select name="sixMwtStoppedEarly">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+          <option value="not_applicable">Not applicable</option>
+        </select>
+      </div>
+      <div><label>Stopping reason <span class="registry-key">six_mwt_stop_reason</span></label>
+        <select name="sixMwtStopReason">
+          <option value="not_applicable">Not applicable</option>
+          <option value="dyspnoea">Dyspnoea</option>
+          <option value="desaturation">Desaturation</option>
+          <option value="leg_fatigue">Leg fatigue</option>
+          <option value="chest_pain">Chest pain</option>
+          <option value="dizziness">Dizziness</option>
+          <option value="other_coded">Other coded reason</option>
+        </select>
+      </div>
+      <div><label>CPET status <span class="registry-key">cpet_status</span></label>
+        <select name="cpetStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_possible">Not possible</option>
+        </select>
+      </div>
+    </div>
+    <div class="row3">
+      <div><label>VO2 peak, ml/kg/min <span class="registry-key">vo2_peak</span></label><input type="number" name="vo2Peak" min="0" step="0.1"></div>
+      <div><label>VO2 peak, % predicted <span class="registry-key">vo2_peak_percent</span></label><input type="number" name="vo2PeakPercent" min="0" max="200" step="1"></div>
+      <div><label>Exercise risk category <span class="registry-key">exercise_risk_category</span></label>
+        <select name="exerciseRiskCategory">
+          <option value="not_assigned">Not assigned</option>
+          <option value="acceptable_for_lobectomy">Acceptable for lobectomy</option>
+          <option value="limited_resection_or_sabr_consider">Limited resection or SABR considered</option>
+          <option value="high_risk_requires_specialist_review">High risk, specialist review required</option>
+          <option value="not_operable_functional_reason">Not operable for functional reason</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+</fieldset>
+
+<h2>5. Imaging and primary tumour structure</h2>
+<fieldset>
+  <fieldset class="submodule">
+    <legend>Baseline CT and primary tumour</legend>
+    <div class="row4">
+      <div><label>CT date <span class="registry-key">ct_date</span></label><input type="date" name="ctDate"></div>
+      <div><label>CT region <span class="registry-key">ct_region</span></label>
+        <select name="ctRegion">
+          <option value="thorax_upper_abdomen">Thorax and upper abdomen</option>
+          <option value="thorax">Thorax only</option>
+          <option value="thorax_abdomen">Thorax and abdomen</option>
+          <option value="whole_body">Whole body</option>
+        </select>
+      </div>
+      <div><label>Contrast <span class="registry-key">ct_contrast</span></label>
+        <select name="ctContrast">
+          <option value="contrast_enhanced">Contrast-enhanced</option>
+          <option value="non_contrast">Non-contrast</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div><label>Imaging complete for staging <span class="registry-key">imaging_complete</span></label>
+        <select name="imagingComplete">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+          <option value="unclear">Unclear</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row4">
+      <div><label>Tumour side <span class="registry-key">tumour_side</span></label>
+        <select name="tumourSide">
+          <option value="">Select</option>
+          <option value="right">Right</option>
+          <option value="left">Left</option>
+          <option value="bilateral">Bilateral / multifocal</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div><label>Primary place <span class="registry-key">tumour_lobe</span></label>
+        <select name="tumourLobe">
+          <option value="">Select</option>
+          <option value="rul">Right upper lobe</option>
+          <option value="rml">Right middle lobe</option>
+          <option value="rll">Right lower lobe</option>
+          <option value="lul">Left upper lobe</option>
+          <option value="lingula">Lingula</option>
+          <option value="lll">Left lower lobe</option>
+          <option value="main_bronchus">Main bronchus</option>
+          <option value="trachea_carina">Trachea / carina</option>
+          <option value="pleural_based">Pleural-based</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div><label>Segment <span class="registry-key">tumour_segment</span></label>
+        <select name="tumourSegment">
+          <option value="not_recorded">Not recorded</option>
+          <option value="apical">Apical</option>
+          <option value="posterior">Posterior</option>
+          <option value="anterior">Anterior</option>
+          <option value="lateral">Lateral</option>
+          <option value="medial">Medial</option>
+          <option value="superior">Superior</option>
+          <option value="basal_anterior">Basal anterior</option>
+          <option value="basal_medial">Basal medial</option>
+          <option value="basal_lateral">Basal lateral</option>
+          <option value="basal_posterior">Basal posterior</option>
+        </select>
+      </div>
+      <div><label>Morphology <span class="registry-key">tumour_morphology</span></label>
+        <select name="tumourMorphology">
+          <option value="solid">Solid</option>
+          <option value="part_solid">Part-solid</option>
+          <option value="pure_ground_glass">Pure ground-glass</option>
+          <option value="cavitary">Cavitary</option>
+          <option value="endobronchial">Endobronchial</option>
+          <option value="pneumonic_type">Pneumonic type</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row4">
+      <div><label>Total lesion size, mm <span class="registry-key">tumour_total_size_mm</span></label><input type="number" name="tumourTotalSizeMm" min="0" step="0.1"></div>
+      <div><label>T-size used for TNM, mm <span class="registry-key">tumour_t_size_mm</span></label><input type="number" name="tumourTSizeMm" min="0" step="0.1"></div>
+      <div><label>T-size basis <span class="registry-key">tumour_t_size_basis</span></label>
+        <select name="tumourTSizeBasis">
+          <option value="ct_solid_or_invasive_component">CT solid or invasive component</option>
+          <option value="ct_total_lesion">CT total lesion</option>
+          <option value="pathology_invasive_component">Pathology invasive component</option>
+          <option value="not_measurable">Not measurable</option>
+        </select>
+      </div>
+      <div><label>Special T descriptor <span class="registry-key">t_special</span></label>
+        <select name="tSpecial">
+          <option value="">None</option>
+          <option value="Tx">Tx, primary tumour cannot be assessed</option>
+          <option value="T0">T0, no evidence of primary tumour</option>
+          <option value="Tis">Tis, carcinoma in situ</option>
+          <option value="T1mi">T1mi, minimally invasive adenocarcinoma</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Local T descriptors <span class="registry-key">t_feature_codes</span></label>
+    <div class="checkbox-grid">
+      <label class="check"><input type="checkbox" name="tFeatures" value="visceral_pleura" data-t="T2a">Visceral pleura invasion <span class="points">T2a</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="adjacent_lobe" data-t="T2a">Adjacent lobe invasion <span class="points">T2a</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="main_bronchus_no_carina" data-t="T2a">Main bronchus, no carina <span class="points">T2a</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="atelectasis_pneumonitis_hilum" data-t="T2a">Atelectasis or pneumonitis to hilum <span class="points">T2a</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="parietal_pleura_chest_wall" data-t="T3">Parietal pleura or chest wall <span class="points">T3</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="pericardium" data-t="T3">Pericardium <span class="points">T3</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="phrenic_nerve" data-t="T3">Phrenic nerve <span class="points">T3</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="azygos_vein" data-t="T3">Azygos vein <span class="points">T3</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="thoracic_roots_stellate" data-t="T3">Thoracic roots or stellate ganglion <span class="points">T3</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="mediastinum_or_thymus" data-t="T4">Mediastinum or thymus <span class="points">T4</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="trachea_or_carina" data-t="T4">Trachea or carina <span class="points">T4</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="recurrent_laryngeal_or_vagus" data-t="T4">Recurrent laryngeal or vagus nerve <span class="points">T4</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="esophagus_or_diaphragm" data-t="T4">Esophagus or diaphragm <span class="points">T4</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="heart_or_great_vessels" data-t="T4">Heart, great vessels, intrapericardial vessels <span class="points">T4</span></label>
+      <label class="check"><input type="checkbox" name="tFeatures" value="spine_or_brachial_plexus" data-t="T4">Vertebra, spinal canal, cervical roots, brachial plexus <span class="points">T4</span></label>
+    </div>
+
+    <div class="row3">
+      <div><label>Separate tumour nodules <span class="registry-key">separate_nodule_pattern</span></label>
+        <select name="separateNodulePattern">
+          <option value="none">None documented</option>
+          <option value="same_lobe">Same lobe as primary</option>
+          <option value="different_ipsilateral_lobe">Different ipsilateral lobe</option>
+          <option value="contralateral_lobe">Contralateral lobe</option>
+          <option value="synchronous_primary_suspected">Synchronous primary suspected</option>
+          <option value="multifocal_ground_glass">Multifocal ground-glass / lepidic</option>
+          <option value="diffuse_pneumonic_type">Diffuse pneumonic-type malignancy</option>
+        </select>
+      </div>
+      <div><label>Radiology present at MDT <span class="registry-key">radiologist_present</span></label>
+        <select name="radiologistPresent">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="planned">Planned</option>
+        </select>
+      </div>
+      <div><label>Resectability by imaging <span class="registry-key">radiology_resectability</span></label>
+        <select name="radiologyResectability">
+          <option value="not_assessed">Not assessed</option>
+          <option value="resectable">Resectable</option>
+          <option value="borderline_resectable">Borderline resectable</option>
+          <option value="unresectable_local">Unresectable local disease</option>
+          <option value="metastatic_disease">Metastatic disease</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>PET-CT and brain imaging</legend>
+    <div class="row4">
+      <div><label>PET-CT status <span class="registry-key">pet_status</span></label>
+        <select name="petStatus">
+          <option value="">Select</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+          <option value="not_done">Not done</option>
+        </select>
+      </div>
+      <div><label>PET-CT date <span class="registry-key">pet_date</span></label><input type="date" name="petDate"></div>
+      <div><label>PET-CT concordance <span class="registry-key">pet_ct_concordance</span></label>
+        <select name="petCtConcordance">
+          <option value="not_assessed">Not assessed</option>
+          <option value="concordant">Concordant</option>
+          <option value="discordant">Discordant</option>
+          <option value="not_applicable">Not applicable</option>
+        </select>
+      </div>
+      <div><label>Brain imaging status <span class="registry-key">brain_status</span></label>
+        <select name="brainStatus">
+          <option value="">Select</option>
+          <option value="mri_done_negative">MRI done, negative</option>
+          <option value="mri_done_positive">MRI done, positive</option>
+          <option value="ct_done_negative">CT done, negative</option>
+          <option value="ct_done_positive">CT done, positive</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+          <option value="not_done">Not done</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+</fieldset>
+
+<h2>6. Diagnostic procedures and pathology</h2>
+<fieldset>
+  <fieldset class="submodule">
+    <legend>Bronchoscopy</legend>
+    <div class="row4">
+      <div><label>Bronchoscopy status <span class="registry-key">bronchoscopy_status</span></label>
+        <select name="bronchoscopyStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+        </select>
+      </div>
+      <div><label>Bronchoscopy date <span class="registry-key">bronchoscopy_date</span></label><input type="date" name="bronchoscopyDate"></div>
+      <div><label>Visual finding <span class="registry-key">bronchoscopy_visual</span></label>
+        <select name="bronchoscopyVisual">
+          <option value="not_applicable">Not applicable</option>
+          <option value="normal_airways">Normal airways</option>
+          <option value="visible_endobronchial_tumour">Visible endobronchial tumour</option>
+          <option value="extrinsic_compression">Extrinsic compression</option>
+          <option value="stenosis">Stenosis</option>
+          <option value="bleeding_lesion">Bleeding lesion</option>
+          <option value="other_coded">Other coded finding</option>
+        </select>
+      </div>
+      <div><label>Bronchoscopy sample result <span class="registry-key">bronchoscopy_result</span></label>
+        <select name="bronchoscopyResult">
+          <option value="not_applicable">Not applicable</option>
+          <option value="malignant_cytology">Malignant cytology</option>
+          <option value="malignant_histology">Malignant histology</option>
+          <option value="benign">Benign</option>
+          <option value="non_diagnostic">Non-diagnostic</option>
+          <option value="insufficient">Insufficient</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+    </div>
+    <label>Bronchoscopy sample methods <span class="registry-key">bronchoscopy_methods</span></label>
+    <div class="checkbox-grid two">
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="washings">Washings</label>
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="brush">Brush</label>
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="forceps_biopsy">Forceps biopsy</label>
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="transbronchial_biopsy">Transbronchial biopsy</label>
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="cryobiopsy">Cryobiopsy</label>
+      <label class="check"><input type="checkbox" name="bronchoscopyMethods" value="bal">BAL</label>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>EBUS / EUS and nodal stations</legend>
+    <div class="row4">
+      <div><label>EBUS status <span class="registry-key">ebus_status</span></label>
+        <select name="ebusStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+        </select>
+      </div>
+      <div><label>EBUS date <span class="registry-key">ebus_date</span></label><input type="date" name="ebusDate"></div>
+      <div><label>EUS status <span class="registry-key">eus_status</span></label>
+        <select name="eusStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+        </select>
+      </div>
+      <div><label>N0 basis if no positive nodes <span class="registry-key">clinical_n0_basis</span></label>
+        <select name="clinicalN0Basis">
+          <option value="">Not specified, auto N = NX</option>
+          <option value="ct_pet_no_suspicious_nodes">CT/PET no suspicious nodes</option>
+          <option value="invasive_sampling_negative">Invasive sampling negative</option>
+          <option value="ct_pet_and_sampling_negative">CT/PET and invasive sampling negative</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint">Select the strongest status per station. Positive imaging is counted for clinical N; positive cytology and histology set higher evidence levels.</p>
+    <div class="node-table" id="nodeTable"></div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>CT-guided biopsy and other tissue confirmation</legend>
+    <div class="row4">
+      <div><label>CT-guided biopsy status <span class="registry-key">ct_biopsy_status</span></label>
+        <select name="ctBiopsyStatus">
+          <option value="not_done">Not done</option>
+          <option value="done">Done</option>
+          <option value="booked">Booked</option>
+          <option value="not_indicated">Not indicated</option>
+          <option value="not_feasible">Not feasible</option>
+        </select>
+      </div>
+      <div><label>CT-guided biopsy date <span class="registry-key">ct_biopsy_date</span></label><input type="date" name="ctBiopsyDate"></div>
+      <div><label>CT-guided biopsy site <span class="registry-key">ct_biopsy_site</span></label>
+        <select name="ctBiopsySite">
+          <option value="not_applicable">Not applicable</option>
+          <option value="primary_lung_tumour">Primary lung tumour</option>
+          <option value="pleura">Pleura</option>
+          <option value="adrenal">Adrenal</option>
+          <option value="bone">Bone</option>
+          <option value="liver">Liver</option>
+          <option value="distant_node">Distant lymph node</option>
+        </select>
+      </div>
+      <div><label>CT-guided biopsy result <span class="registry-key">ct_biopsy_result</span></label>
+        <select name="ctBiopsyResult">
+          <option value="not_applicable">Not applicable</option>
+          <option value="malignant_histology">Malignant histology</option>
+          <option value="malignant_cytology">Malignant cytology</option>
+          <option value="benign">Benign</option>
+          <option value="non_diagnostic">Non-diagnostic</option>
+          <option value="insufficient">Insufficient</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Pathology and biomarkers</legend>
+    <div class="row4">
+      <div><label>Histology / cytology <span class="registry-key">histology</span></label>
+        <select name="histology">
+          <option value="">Select</option>
+          <option value="adenocarcinoma">Adenocarcinoma</option>
+          <option value="squamous_cell_carcinoma">Squamous cell carcinoma</option>
+          <option value="nsclc_nos">NSCLC NOS</option>
+          <option value="small_cell_lung_cancer">Small cell lung cancer</option>
+          <option value="large_cell_neuroendocrine">Large cell neuroendocrine carcinoma</option>
+          <option value="typical_carcinoid">Typical carcinoid</option>
+          <option value="atypical_carcinoid">Atypical carcinoid</option>
+          <option value="metastasis_to_lung">Metastasis to lung</option>
+          <option value="benign_or_no_malignancy">Benign / no malignancy</option>
+          <option value="pending">Pending</option>
+          <option value="other_coded">Other coded histology</option>
+        </select>
+      </div>
+      <div><label>Diagnostic basis <span class="registry-key">diagnostic_basis</span></label>
+        <select name="diagnosticBasis">
+          <option value="">Select</option>
+          <option value="histology_primary">Histology from primary</option>
+          <option value="cytology_primary">Cytology from primary</option>
+          <option value="histology_node">Histology from node</option>
+          <option value="cytology_node">Cytology from node</option>
+          <option value="histology_metastasis">Histology from metastasis</option>
+          <option value="cytology_metastasis">Cytology from metastasis</option>
+          <option value="clinical_radiological_only">Clinical / radiological only</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <div><label>PD-L1 TPS, % <span class="registry-key">pdl1_tps</span></label><input type="number" name="pdl1Tps" min="0" max="100" step="1"></div>
+      <div><label>Molecular testing status <span class="registry-key">molecular_status</span></label>
+        <select name="molecularStatus">
+          <option value="not_done">Not done</option>
+          <option value="pending">Pending</option>
+          <option value="complete">Complete</option>
+          <option value="insufficient_tissue">Insufficient tissue</option>
+          <option value="not_indicated">Not indicated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row4">
+      <div><label>EGFR <span class="registry-key">egfr_status</span></label>
+        <select name="egfrStatus">
+          <option value="not_tested">Not tested</option>
+          <option value="negative">Negative</option>
+          <option value="exon_19_del">Exon 19 deletion</option>
+          <option value="l858r">L858R</option>
+          <option value="exon_20_insertion">Exon 20 insertion</option>
+          <option value="other_positive">Other positive</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <div><label>ALK <span class="registry-key">alk_status</span></label><select name="alkStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="pending">Pending</option></select></div>
+      <div><label>ROS1 <span class="registry-key">ros1_status</span></label><select name="ros1Status"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="pending">Pending</option></select></div>
+      <div><label>BRAF <span class="registry-key">braf_status</span></label><select name="brafStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="v600e">V600E</option><option value="other_positive">Other positive</option><option value="pending">Pending</option></select></div>
+    </div>
+
+    <div class="row4">
+      <div><label>KRAS <span class="registry-key">kras_status</span></label><select name="krasStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="g12c">G12C</option><option value="other_positive">Other positive</option><option value="pending">Pending</option></select></div>
+      <div><label>MET <span class="registry-key">met_status</span></label><select name="metStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="exon_14_skipping">Exon 14 skipping</option><option value="amplification">Amplification</option><option value="other_positive">Other positive</option><option value="pending">Pending</option></select></div>
+      <div><label>RET <span class="registry-key">ret_status</span></label><select name="retStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="pending">Pending</option></select></div>
+      <div><label>NTRK <span class="registry-key">ntrk_status</span></label><select name="ntrkStatus"><option value="not_tested">Not tested</option><option value="negative">Negative</option><option value="positive">Positive</option><option value="pending">Pending</option></select></div>
+    </div>
+  </fieldset>
+</fieldset>
+
+<h2>7. M category and metastatic sites</h2>
+<fieldset>
+  <div class="row4">
+    <div><label>M pattern <span class="registry-key">m_pattern</span></label>
+      <select name="metastasisPattern">
+        <option value="">Select</option>
+        <option value="M0">No distant metastasis documented</option>
+        <option value="M1a">M1a, pleural/pericardial disease or contralateral lung nodule</option>
+        <option value="M1b">M1b, single extrathoracic metastasis</option>
+        <option value="M1c1">M1c1, multiple metastases in one organ system</option>
+        <option value="M1c2">M1c2, metastases in multiple organ systems</option>
+        <option value="Mx">Mx, metastasis cannot be assessed</option>
+      </select>
+    </div>
+    <div><label>Metastasis confirmation <span class="registry-key">met_confirmation</span></label>
+      <select name="metConfirmation">
+        <option value="not_applicable">Not applicable</option>
+        <option value="imaging_only">Imaging only</option>
+        <option value="cytology_confirmed">Cytology confirmed</option>
+        <option value="histology_confirmed">Histology confirmed</option>
+        <option value="pending">Pending</option>
+      </select>
+    </div>
+    <div><label>Oligometastatic status <span class="registry-key">oligometastatic_status</span></label>
+      <select name="oligometastaticStatus">
+        <option value="not_applicable">Not applicable</option>
+        <option value="yes_potential_local_therapy">Yes, potential local therapy</option>
+        <option value="yes_not_for_local_therapy">Yes, not for local therapy</option>
+        <option value="no_polymetastatic">No, polymetastatic</option>
+        <option value="unclear">Unclear</option>
+      </select>
+    </div>
+    <div><label>Extrathoracic burden <span class="registry-key">extrathoracic_met_burden</span></label>
+      <select name="extraThoracicMetastasisBurden">
+        <option value="not_applicable">Not applicable</option>
+        <option value="single_lesion">Single lesion</option>
+        <option value="multiple_same_organ">Multiple lesions in one organ system</option>
+        <option value="multiple_organ_systems">Multiple organ systems</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+  </div>
+
+  <label>Metastatic site codes <span class="registry-key">metastatic_sites</span></label>
+  <div class="checkbox-grid">
+    <label class="check"><input type="checkbox" name="metastaticSites" value="pleural_nodules_or_effusion">Pleural nodules or malignant effusion</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="pericardial_nodules_or_effusion">Pericardial nodules or malignant effusion</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="contralateral_lung_nodule">Contralateral lung nodule</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="brain">Brain</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="bone">Bone</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="adrenal">Adrenal</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="liver">Liver</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="distant_nonregional_node">Distant non-regional node</label>
+    <label class="check"><input type="checkbox" name="metastaticSites" value="other_organ_system_coded">Other coded organ system</label>
+  </div>
+</fieldset>
+
+<h2>8. Patient preference, participants, and MDT decision</h2>
+<fieldset>
+  <div class="row3">
+    <div><label>Patient preference status <span class="registry-key">patient_preference_status</span></label>
+      <select name="patientPreferenceStatus">
+        <option value="not_discussed">Not discussed</option>
+        <option value="curative_treatment_if_possible">Curative treatment if possible</option>
+        <option value="prefers_non_surgical_treatment">Prefers non-surgical treatment</option>
+        <option value="prioritises_quality_of_life">Prioritises quality of life</option>
+        <option value="undecided">Undecided</option>
+        <option value="declines_active_treatment">Declines active treatment</option>
+      </select>
+    </div>
+    <div><label>Treatment intent <span class="registry-key">treatment_intent</span></label>
+      <select name="treatmentIntent">
+        <option value="">Select</option>
+        <option value="curative">Curative</option>
+        <option value="potentially_curative_after_staging">Potentially curative after further staging</option>
+        <option value="life_prolonging_palliative">Life-prolonging palliative</option>
+        <option value="symptom_directed_palliative">Symptom-directed palliative</option>
+        <option value="best_supportive_care">Best supportive care</option>
+        <option value="unclear_further_information_needed">Unclear, further information needed</option>
+      </select>
+    </div>
+    <div><label>MDT decision status <span class="registry-key">mdt_decision_status</span></label>
+      <select name="mdtDecisionStatus">
+        <option value="decision_made">Decision made</option>
+        <option value="conditional_on_tests">Conditional on further tests</option>
+        <option value="deferred">Deferred</option>
+        <option value="refer_to_other_mdt">Refer to other MDT</option>
+      </select>
+    </div>
+  </div>
+
+  <fieldset class="submodule">
+    <legend>MDT participants present</legend>
+    <div class="checkbox-grid">
+      <label class="check"><input type="checkbox" name="participants" value="pulmonologist">Pulmonologist</label>
+      <label class="check"><input type="checkbox" name="participants" value="thoracic_surgeon">Thoracic surgeon</label>
+      <label class="check"><input type="checkbox" name="participants" value="medical_oncologist">Medical oncologist</label>
+      <label class="check"><input type="checkbox" name="participants" value="radiation_oncologist">Radiation oncologist</label>
+      <label class="check"><input type="checkbox" name="participants" value="radiologist">Radiologist</label>
+      <label class="check"><input type="checkbox" name="participants" value="pathologist">Pathologist</label>
+      <label class="check"><input type="checkbox" name="participants" value="nurse_coordinator">Nurse coordinator</label>
+      <label class="check"><input type="checkbox" name="participants" value="palliative_care">Palliative care</label>
+      <label class="check"><input type="checkbox" name="participants" value="geriatrician">Geriatrician</label>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Further investigations selected</legend>
+    <div class="checkbox-grid">
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="none">None</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="pet_ct">PET-CT</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="mri_brain">MRI brain</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="bronchoscopy">Bronchoscopy</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="ebus_eus">EBUS / EUS</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="ct_guided_lung_biopsy">CT-guided lung biopsy</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="biopsy_metastasis">Biopsy suspected metastasis</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="pft">Pulmonary function tests</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="cpet">CPET</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="cardiology_review">Cardiology review</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="molecular_testing">Complete molecular testing</label>
+      <label class="check"><input type="checkbox" name="furtherInvestigations" value="geriatric_assessment">Geriatric assessment</label>
+    </div>
+  </fieldset>
+
+  <fieldset class="submodule">
+    <legend>Treatments selected</legend>
+    <p class="hint">Decision support only. Treatment selections record the MDT decision; they are not an automated treatment recommendation.</p>
+    <div class="checkbox-grid">
+      <label class="check"><input type="checkbox" name="treatments" value="none_selected">None selected yet</label>
+      <label class="check"><input type="checkbox" name="treatments" value="surgery_lobectomy">Surgery, lobectomy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="surgery_segmentectomy">Surgery, segmentectomy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="surgery_wedge">Surgery, wedge resection</label>
+      <label class="check"><input type="checkbox" name="treatments" value="surgery_pneumonectomy">Surgery, pneumonectomy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="neoadjuvant_systemic">Neoadjuvant systemic therapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="adjuvant_systemic">Adjuvant systemic therapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="definitive_chemoradiotherapy">Definitive chemoradiotherapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="sabr_sbrt">SABR / SBRT</label>
+      <label class="check"><input type="checkbox" name="treatments" value="palliative_radiotherapy">Palliative radiotherapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="platinum_doublet_chemo">Platinum doublet chemotherapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="chemo_immunotherapy">Chemo-immunotherapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="immunotherapy_monotherapy">Immunotherapy monotherapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="targeted_therapy">Targeted therapy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="durvalumab_consolidation">Durvalumab consolidation</label>
+      <label class="check"><input type="checkbox" name="treatments" value="clinical_trial">Clinical trial screening</label>
+      <label class="check"><input type="checkbox" name="treatments" value="therapeutic_bronchoscopy">Therapeutic bronchoscopy</label>
+      <label class="check"><input type="checkbox" name="treatments" value="pleural_procedure">Pleural procedure</label>
+      <label class="check"><input type="checkbox" name="treatments" value="palliative_care_referral">Palliative care referral</label>
+      <label class="check"><input type="checkbox" name="treatments" value="best_supportive_care">Best supportive care</label>
+      <label class="check"><input type="checkbox" name="treatments" value="smoking_cessation">Smoking cessation support</label>
+      <label class="check"><input type="checkbox" name="treatments" value="prehabilitation">Prehabilitation</label>
+      <label class="check"><input type="checkbox" name="treatments" value="nutrition_support">Nutrition support</label>
+      <label class="check"><input type="checkbox" name="treatments" value="oxygen_assessment">Oxygen assessment</label>
+    </div>
+  </fieldset>
+</fieldset>
+
+<div class="button-row">
+  <button type="button" onclick="generateSummary()">Generate summary</button>
+  <button type="button" class="secondary" onclick="loadSyntheticTestCase()">Load synthetic test case</button>
+  <button type="button" class="secondary" onclick="copySummary()">Copy summary</button>
+  <button type="button" class="secondary" onclick="downloadJson()">Download JSON</button>
+  <button type="button" class="secondary" onclick="downloadCsv()">Download CSV</button>
+  <button type="button" class="secondary" onclick="window.print()">Print / save PDF</button>
+  <button type="reset" class="secondary" onclick="resetDerived()">Clear all</button>
+</div>
+
+<div id="missing" class="warn"></div>
+<div id="validationWarnings" class="warn"></div>
+<pre id="summary"></pre>
+<pre id="testOutput"></pre>
+
+</form>
+
+<script>
+const cciItems = [
+  {value:'mi', label:'Myocardial infarction', points:1},
+  {value:'heart_failure', label:'Congestive heart failure', points:1},
+  {value:'peripheral_vascular', label:'Peripheral vascular disease', points:1},
+  {value:'cerebrovascular', label:'Cerebrovascular disease or TIA', points:1},
+  {value:'dementia', label:'Dementia', points:1},
+  {value:'chronic_pulmonary', label:'Chronic pulmonary disease', points:1},
+  {value:'rheumatologic', label:'Rheumatologic disease', points:1},
+  {value:'peptic_ulcer', label:'Peptic ulcer disease', points:1},
+  {value:'mild_liver', label:'Mild liver disease', points:1, overriddenBy:'moderate_severe_liver'},
+  {value:'diabetes_no_complications', label:'Diabetes without chronic complications', points:1, overriddenBy:'diabetes_complications'},
+  {value:'diabetes_complications', label:'Diabetes with chronic complications', points:2},
+  {value:'hemiplegia_paraplegia', label:'Hemiplegia or paraplegia', points:2},
+  {value:'renal_disease', label:'Moderate or severe renal disease', points:2},
+  {value:'previous_solid_tumour', label:'Previous solid tumour, non-index', points:2, overriddenBy:'metastatic_solid_tumour_non_index'},
+  {value:'leukemia', label:'Leukemia', points:2},
+  {value:'lymphoma', label:'Lymphoma', points:2},
+  {value:'moderate_severe_liver', label:'Moderate or severe liver disease', points:3},
+  {value:'metastatic_solid_tumour_non_index', label:'Metastatic solid tumour, non-index', points:6},
+  {value:'aids_hiv', label:'AIDS / HIV', points:6}
+];
+
+const nodeStations = [
+  {code:'1R', label:'supraclav / low cervical'}, {code:'1L', label:'supraclav / low cervical'},
+  {code:'2R', label:'upper paratracheal'}, {code:'2L', label:'upper paratracheal'},
+  {code:'3A', label:'prevascular'}, {code:'3P', label:'prevertebral'},
+  {code:'4R', label:'lower paratracheal'}, {code:'4L', label:'lower paratracheal'},
+  {code:'5', label:'subaortic'}, {code:'6', label:'para-aortic'}, {code:'7', label:'subcarinal'},
+  {code:'8R', label:'paraesophageal'}, {code:'8L', label:'paraesophageal'},
+  {code:'9R', label:'pulmonary ligament'}, {code:'9L', label:'pulmonary ligament'},
+  {code:'10R', label:'hilar'}, {code:'10L', label:'hilar'},
+  {code:'11R', label:'interlobar'}, {code:'11L', label:'interlobar'},
+  {code:'12R', label:'lobar'}, {code:'12L', label:'lobar'},
+  {code:'13R', label:'segmental'}, {code:'13L', label:'segmental'},
+  {code:'14R', label:'subsegmental'}, {code:'14L', label:'subsegmental'}
+];
+
+const nodeStatusOptions = [
+  ['not_assessed', 'Not assessed'],
+  ['negative_sampled', 'Sampled negative'],
+  ['insufficient_sampled', 'Sampled insufficient'],
+  ['positive_imaging', 'Positive on CT/PET only'],
+  ['positive_cytology', 'Positive cytology'],
+  ['positive_histology', 'Positive histology']
+];
+
+const tRank = {Tx:0, T0:1, Tis:2, T1mi:3, T1a:4, T1b:5, T1c:6, T2a:7, T2b:8, T3:9, T4:10};
+const nRank = {NX:0, N0:1, N1:2, N2a:3, N2b:4, N3:5};
+const mRank = {Mx:0, M0:1, M1a:2, M1b:3, M1c1:4, M1c2:5};
+
+const REQUIRED_FIELDS = [
+  ['Meeting date', 'meetingDate'],
+  ['MDT purpose', 'mdtPurpose'],
+  ['Attending specialist', 'attendingSpecialist'],
+  ['Age', 'age'],
+  ['Sex', 'sex'],
+  ['Smoking status', 'smokingStatus'],
+  ['ECOG', 'ecog'],
+  ['Weight for BMI and G8', 'weightKg'],
+  ['Height for BMI and G8', 'heightCm'],
+  ['G8 intake item', 'g8Intake'],
+  ['G8 weight loss item', 'g8WeightLoss'],
+  ['G8 mobility item', 'g8Mobility'],
+  ['G8 neuropsych item', 'g8Neuropsych'],
+  ['G8 polypharmacy item', 'g8Polypharmacy'],
+  ['G8 self-rated health item', 'g8SelfHealth'],
+  ['CT date', 'ctDate'],
+  ['Tumour side', 'tumourSide'],
+  ['Tumour place', 'tumourLobe'],
+  ['T-size or special T descriptor', 'tnmSizeDescriptor'],
+  ['Histology', 'histology'],
+  ['Diagnostic basis', 'diagnosticBasis'],
+  ['PET status', 'petStatus'],
+  ['Brain imaging status', 'brainStatus'],
+  ['M pattern', 'metastasisPattern'],
+  ['Treatment intent', 'treatmentIntent']
+];
+
+const M1A_SITE_CODES = new Set([
+  'pleural_nodules_or_effusion',
+  'pericardial_nodules_or_effusion',
+  'contralateral_lung_nodule'
+]);
+
+const EXTRATHORACIC_SITE_SYSTEM = {
+  brain: 'brain',
+  bone: 'bone',
+  adrenal: 'adrenal',
+  liver: 'liver',
+  distant_nonregional_node: 'distant_nonregional_node',
+  other_organ_system_coded: 'other_organ_system'
+};
+
+let latestDerived = {};
+let latestValidationWarnings = [];
+
+function initCciGrid() {
+  const grid = document.getElementById('cciGrid');
+  grid.innerHTML = '';
+  cciItems.forEach(item => {
+    const label = document.createElement('label');
+    label.className = 'check';
+    label.innerHTML = `<input type="checkbox" name="cciConditions" value="${item.value}">${item.label}<span class="points">${item.points}</span>`;
+    grid.appendChild(label);
+  });
+}
+
+function initNodeTable() {
+  const table = document.getElementById('nodeTable');
+  table.innerHTML = '';
+  nodeStations.forEach(st => {
+    const row = document.createElement('div');
+    row.className = 'node-row';
+    const select = document.createElement('select');
+    select.name = 'node_' + st.code.replace(/[^A-Za-z0-9]/g, '_');
+    select.dataset.nodeStation = st.code;
+    nodeStatusOptions.forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt[0];
+      o.textContent = opt[1];
+      select.appendChild(o);
+    });
+    row.innerHTML = `<div class="node-code">${st.code}<small>${st.label}</small></div>`;
+    row.appendChild(select);
+    table.appendChild(row);
+  });
+}
+
+function formEl() { return document.getElementById('mdtForm'); }
+function valueOf(name) { return (formEl().elements[name]?.value || '').trim(); }
+function numValue(name) { const n = parseFloat(valueOf(name)); return Number.isFinite(n) ? n : null; }
+function positiveNumValue(name) { const n = numValue(name); return n !== null && n > 0 ? n : null; }
+function checkedValues(name) { return Array.from(formEl().querySelectorAll(`input[name="${name}"]:checked`)).map(x => x.value); }
+function hasChecked(name, value) { return checkedValues(name).includes(value); }
+function displayValue(v) { return v === '' || v === null || v === undefined ? 'not recorded' : String(v).replaceAll('_', ' '); }
+function maxCategory(current, candidate, rankMap) { return (rankMap[candidate] || 0) > (rankMap[current] || 0) ? candidate : current; }
+function isValidDateString(value) { return /^\d{4}-\d{2}-\d{2}$/.test(value); }
+function clearFieldWarnings() { formEl().querySelectorAll('.field-warning').forEach(el => el.classList.remove('field-warning')); }
+function setFieldWarning(name, enabled) {
+  const el = formEl().elements[name];
+  if (el && el.classList) el.classList.toggle('field-warning', Boolean(enabled));
+}
+
+function calcBmi() {
+  const w = numValue('weightKg');
+  const h = numValue('heightCm');
+  if (w && h) return (w / Math.pow(h / 100, 2)).toFixed(1);
+  return '';
+}
+
+function g8BmiPoints(bmi) {
+  if (!Number.isFinite(bmi)) return null;
+  if (bmi < 19) return 0;
+  if (bmi < 21) return 1;
+  if (bmi < 23) return 2;
+  return 3;
+}
+
+function g8AgePoints(age) {
+  if (!Number.isFinite(age) || age <= 0) return null;
+  if (age > 85) return 0;
+  if (age >= 80) return 1;
+  return 2;
+}
+
+function calcG8() {
+  const bmiNum = parseFloat(calcBmi());
+  const bmiPts = g8BmiPoints(bmiNum);
+  const agePts = g8AgePoints(numValue('age'));
+  const manual = ['g8Intake','g8WeightLoss','g8Mobility','g8Neuropsych','g8Polypharmacy','g8SelfHealth']
+    .map(name => numValue(name));
+  const items = [...manual, bmiPts, agePts];
+  const completed = items.filter(v => v !== null);
+  const partial = completed.reduce((s, v) => s + v, 0);
+  const isComplete = completed.length === 8;
+  return {
+    bmiPoints: bmiPts,
+    agePoints: agePts,
+    completed: completed.length,
+    total: isComplete ? partial : null,
+    partial: partial,
+    flag: isComplete ? (partial <= 14 ? 'positive_screen_refer_cga' : 'negative_screen') : 'incomplete'
+  };
+}
+
+function calcTCategory() {
+  const special = valueOf('tSpecial');
+  let t = special || 'Tx';
+  const size = numValue('tumourTSizeMm');
+
+  if (!special && size !== null && size > 0) {
+    if (size <= 10) t = 'T1a';
+    else if (size <= 20) t = 'T1b';
+    else if (size <= 30) t = 'T1c';
+    else if (size <= 40) t = 'T2a';
+    else if (size <= 50) t = 'T2b';
+    else if (size <= 70) t = 'T3';
+    else t = 'T4';
+  }
+
+  checkedValues('tFeatures').forEach(feature => {
+    const cb = formEl().querySelector(`input[name="tFeatures"][value="${feature}"]`);
+    if (cb && cb.dataset.t) t = maxCategory(t, cb.dataset.t, tRank);
+  });
+
+  const nodule = valueOf('separateNodulePattern');
+  if (nodule === 'same_lobe') t = maxCategory(t, 'T3', tRank);
+  if (nodule === 'different_ipsilateral_lobe') t = maxCategory(t, 'T4', tRank);
+  if (nodule === 'diffuse_pneumonic_type') t = maxCategory(t, 'T4', tRank);
+
+  return t;
+}
+
+function stationGroupForSide(code, side) {
+  if (!side || side === 'unknown' || side === 'bilateral') return 'N?';
+  if (code === '1R' || code === '1L') return 'N3';
+  const n1Right = ['10R','11R','12R','13R','14R'];
+  const n1Left = ['10L','11L','12L','13L','14L'];
+  const n2Common = ['3A','3P','7'];
+  const n2Right = ['2R','4R','8R','9R'];
+  const n2Left = ['2L','4L','5','6','8L','9L'];
+
+  if (side === 'right') {
+    if (n1Right.includes(code)) return 'N1';
+    if (n2Common.includes(code) || n2Right.includes(code)) return 'N2';
+    return 'N3';
+  }
+  if (side === 'left') {
+    if (n1Left.includes(code)) return 'N1';
+    if (n2Common.includes(code) || n2Left.includes(code)) return 'N2';
+    return 'N3';
+  }
+  return 'N?';
+}
+
+function getNodeData() {
+  return Array.from(formEl().querySelectorAll('[data-node-station]')).map(sel => ({
+    station: sel.dataset.nodeStation,
+    status: sel.value,
+    group: stationGroupForSide(sel.dataset.nodeStation, valueOf('tumourSide'))
+  }));
+}
+
+function calcNCategory() {
+  const nodes = getNodeData();
+  const positives = nodes.filter(n => n.status.startsWith('positive'));
+  if (!positives.length) {
+    const basis = valueOf('clinicalN0Basis');
+    return basis ? 'N0' : 'NX';
+  }
+  if (positives.some(n => n.group === 'N?')) return 'NX';
+  if (positives.some(n => n.group === 'N3')) return 'N3';
+  const n2Stations = positives.filter(n => n.group === 'N2').map(n => n.station);
+  const n2Unique = Array.from(new Set(n2Stations));
+  if (n2Unique.length === 1) return 'N2a';
+  if (n2Unique.length > 1) return 'N2b';
+  if (positives.some(n => n.group === 'N1')) return 'N1';
+  return 'NX';
+}
+
+function calcMCategory() {
+  const selected = valueOf('metastasisPattern');
+  let m = selected || 'Mx';
+  const metastaticSites = checkedValues('metastaticSites');
+
+  if (valueOf('separateNodulePattern') === 'contralateral_lobe') m = maxCategory(m, 'M1a', mRank);
+  metastaticSites.filter(site => M1A_SITE_CODES.has(site)).forEach(() => {
+    m = maxCategory(m, 'M1a', mRank);
+  });
+
+  const extraSystems = new Set(
+    metastaticSites
+      .map(site => EXTRATHORACIC_SITE_SYSTEM[site])
+      .filter(Boolean)
+  );
+  const extraBurden = valueOf('extraThoracicMetastasisBurden');
+
+  if (extraBurden === 'multiple_organ_systems' || extraSystems.size > 1) {
+    m = maxCategory(m, 'M1c2', mRank);
+  } else if (extraSystems.size === 1) {
+    if (extraBurden === 'multiple_same_organ') m = maxCategory(m, 'M1c1', mRank);
+    else m = maxCategory(m, 'M1b', mRank);
+  }
+
+  return m;
+}
+
+function calcEvidenceCategory() {
+  const nodeData = getNodeData();
+  const hasNodeHistology = nodeData.some(n => n.status === 'positive_histology');
+  const hasNodeCytology = nodeData.some(n => n.status === 'positive_cytology');
+  const diag = valueOf('diagnosticBasis');
+  const bronch = valueOf('bronchoscopyResult');
+  const ctResult = valueOf('ctBiopsyResult');
+  const metConf = valueOf('metConfirmation');
+  if (hasNodeHistology || diag.includes('histology') || bronch === 'malignant_histology' || ctResult === 'malignant_histology' || metConf === 'histology_confirmed') return 'E3b';
+  if (hasNodeCytology || diag.includes('cytology') || bronch === 'malignant_cytology' || ctResult === 'malignant_cytology' || metConf === 'cytology_confirmed') return 'E3a';
+  if (valueOf('ctDate') || valueOf('petStatus') === 'done' || nodeData.some(n => n.status === 'positive_imaging')) return 'E2';
+  return 'E1/E?';
+}
+
+function calcStageGroup(t, n, m) {
+  if (m === 'M1c1' || m === 'M1c2') return 'IVB';
+  if (m === 'M1a' || m === 'M1b') return 'IVA';
+  if (m === 'Mx') return 'Staging incomplete';
+  if (m !== 'M0') return 'Not assigned';
+  if (t === 'Tis' && n === 'N0') return '0';
+  if ((t === 'Tx' || t === 'T0') && n === 'N0') return 'Occult carcinoma';
+  if (t === 'Tx' || t === 'T0' || n === 'NX') return 'Manual review';
+  const nCol = n;
+  const rowKey = (t === 'T1mi') ? 'T1a' : t;
+  const table = {
+    T1a: {N0:'IA1', N1:'IIA', N2a:'IIB', N2b:'IIIA', N3:'IIIB'},
+    T1b: {N0:'IA2', N1:'IIA', N2a:'IIB', N2b:'IIIA', N3:'IIIB'},
+    T1c: {N0:'IA3', N1:'IIA', N2a:'IIB', N2b:'IIIA', N3:'IIIB'},
+    T2a: {N0:'IB', N1:'IIB', N2a:'IIIA', N2b:'IIIB', N3:'IIIB'},
+    T2b: {N0:'IIA', N1:'IIB', N2a:'IIIA', N2b:'IIIB', N3:'IIIB'},
+    T3:  {N0:'IIB', N1:'IIIA', N2a:'IIIA', N2b:'IIIB', N3:'IIIC'},
+    T4:  {N0:'IIIA', N1:'IIIA', N2a:'IIIB', N2b:'IIIB', N3:'IIIC'}
+  };
+  return table[rowKey]?.[nCol] || 'Not assigned';
+}
+
+function hasAmbiguousPositiveNodalLaterality() {
+  return getNodeData().some(n => n.status.startsWith('positive') && n.group === 'N?');
+}
+
+function stageDetail(t, n, m, stage) {
+  if (hasAmbiguousPositiveNodalLaterality()) return 'Primary side bilateral or unknown, nodal category needs manual review';
+  if (m === 'Mx') return 'Mx, staging incomplete';
+  if (n === 'NX') return 'N category unresolved';
+  if (stage === 'Occult carcinoma') return 'Tx/T0 N0 M0, separate from stage 0';
+  if (stage === 'Manual review') return 'T0/Tx with nodal disease or incomplete category';
+  return 'IASLC / AJCC v9 support';
+}
+
+function ageCciPoints(age) {
+  if (!Number.isFinite(age) || age < 50) return 0;
+  if (age < 60) return 1;
+  if (age < 70) return 2;
+  if (age < 80) return 3;
+  return 4;
+}
+
+function calcCci() {
+  const selected = new Set(checkedValues('cciConditions'));
+  if (selected.has('diabetes_complications')) selected.delete('diabetes_no_complications');
+  if (selected.has('moderate_severe_liver')) selected.delete('mild_liver');
+  if (selected.has('metastatic_solid_tumour_non_index')) selected.delete('previous_solid_tumour');
+
+  let rawWithoutCancer = 0;
+  cciItems.forEach(item => {
+    if (item.value === 'previous_solid_tumour' || item.value === 'metastatic_solid_tumour_non_index') return;
+    if (selected.has(item.value)) rawWithoutCancer += item.points;
+  });
+
+  let cancerScore = 0;
+  let cancerRuleApplied = 'none';
+  if (selected.has('previous_solid_tumour')) cancerScore = Math.max(cancerScore, 2);
+  if (selected.has('metastatic_solid_tumour_non_index')) cancerScore = Math.max(cancerScore, 6);
+
+  if (valueOf('cciCancerRule') === 'include_index') {
+    const m = calcMCategory();
+    if (m.startsWith('M1')) {
+      cancerScore = Math.max(cancerScore, 6);
+      cancerRuleApplied = 'index_lung_cancer_metastatic_weight';
+    } else if (m === 'M0') {
+      cancerScore = Math.max(cancerScore, 2);
+      cancerRuleApplied = 'index_lung_cancer_malignancy_weight';
+    }
+  }
+
+  const raw = rawWithoutCancer + cancerScore;
+  const agePoints = ageCciPoints(numValue('age'));
+  return {raw, agePoints, adjusted: raw + agePoints, selected: Array.from(selected), cancerScore, cancerRuleApplied};
+}
+
+function requiredFieldFilled(fieldName) {
+  if (fieldName === 'tnmSizeDescriptor') {
+    return Boolean(positiveNumValue('tumourTSizeMm') || valueOf('tSpecial') || valueOf('tumourTSizeBasis') === 'not_measurable');
+  }
+  if (['age', 'weightKg', 'heightCm'].includes(fieldName)) {
+    return Boolean(positiveNumValue(fieldName));
+  }
+  return Boolean(valueOf(fieldName));
+}
+
+function completeness() {
+  const checks = REQUIRED_FIELDS.map(([label, fieldName]) => [label, requiredFieldFilled(fieldName)]);
+  const done = checks.filter(x => x[1]).length;
+  return {percent: Math.round((done / checks.length) * 100), missing: checks.filter(x => !x[1]).map(x => x[0]), total: checks.length, done};
+}
+
+function validateFormState(t, n, m, g8) {
+  clearFieldWarnings();
+  const warnings = [];
+
+  const size = numValue('tumourTSizeMm');
+  if (!valueOf('tSpecial') && size === 0) {
+    warnings.push('T-size 0 mm cannot be size-staged. Use Tx, T0, Tis, T1mi, or mark T-size basis as not measurable.');
+    setFieldWarning('tumourTSizeMm', true);
+  }
+
+  const side = valueOf('tumourSide');
+  if ((side === 'bilateral' || side === 'unknown') && getNodeData().some(x => x.status.startsWith('positive'))) {
+    warnings.push('Positive nodes with bilateral or unknown primary side cannot be mapped automatically. N category requires manual review.');
+    setFieldWarning('tumourSide', true);
+  }
+
+  const smoking = valueOf('smokingStatus');
+  const packYears = numValue('packYears');
+  const quitYears = numValue('quitYears');
+  if (smoking === 'never' && packYears !== null && packYears > 0) {
+    warnings.push('Never smoker has pack-years recorded. Check smoking status or pack-year entry.');
+    setFieldWarning('smokingStatus', true);
+    setFieldWarning('packYears', true);
+  }
+  if (smoking === 'current' && quitYears !== null && quitYears > 0) {
+    warnings.push('Current smoker has years-since-quitting recorded. Check smoking status or quit-years entry.');
+    setFieldWarning('smokingStatus', true);
+    setFieldWarning('quitYears', true);
+  }
+  if (smoking === 'current' && packYears !== null && packYears === 0) {
+    warnings.push('Current smoker has 0 pack-years. Check pack-year entry.');
+    setFieldWarning('packYears', true);
+  }
+  if (smoking === 'former' && quitYears === null) {
+    warnings.push('Former smoker selected without years-since-quitting.');
+    setFieldWarning('quitYears', true);
+  }
+
+  const meetingDate = valueOf('meetingDate');
+  const dateFields = [
+    ['ctDate', 'CT date', null],
+    ['petDate', 'PET-CT date', 'petStatus'],
+    ['bronchoscopyDate', 'Bronchoscopy date', 'bronchoscopyStatus'],
+    ['ebusDate', 'EBUS date', 'ebusStatus'],
+    ['ctBiopsyDate', 'CT-guided biopsy date', 'ctBiopsyStatus']
+  ];
+  if (isValidDateString(meetingDate)) {
+    dateFields.forEach(([field, label, statusField]) => {
+      const status = statusField ? valueOf(statusField) : 'done';
+      const dateValue = valueOf(field);
+      if (isValidDateString(dateValue) && dateValue > meetingDate && (status === 'done' || statusField === null)) {
+        warnings.push(`${label} is after the MDT meeting date although the item is marked done or used as baseline evidence.`);
+        setFieldWarning(field, true);
+        setFieldWarning('meetingDate', true);
+      }
+    });
+  }
+
+  const selectedM = valueOf('metastasisPattern');
+  const hasMetSites = checkedValues('metastaticSites').length > 0 || valueOf('separateNodulePattern') === 'contralateral_lobe';
+  if (selectedM === 'M0' && hasMetSites && m !== 'M0') {
+    warnings.push(`M0 selection was escalated to ${m} by metastatic site codes. Verify M pattern.`);
+    setFieldWarning('metastasisPattern', true);
+  }
+  if (selectedM === '' && m !== 'Mx') {
+    warnings.push(`M category auto-derived as ${m} from metastatic site codes, but M pattern is not explicitly selected.`);
+    setFieldWarning('metastasisPattern', true);
+  }
+
+  const histology = valueOf('histology');
+  if (valueOf('cciCancerRule') === 'include_index' && (histology === 'typical_carcinoid' || histology === 'atypical_carcinoid')) {
+    warnings.push('CCI include-index rule is selected for carcinoid histology. Verify whether the index tumour should be counted in the local CCI convention.');
+    setFieldWarning('cciCancerRule', true);
+    setFieldWarning('histology', true);
+  }
+
+  if (g8 && g8.flag === 'positive_screen_refer_cga' && valueOf('frailtyAction') === 'not_assessed') {
+    warnings.push('G8 <= 14, positive screen. Frailty action is not assessed. Consider comprehensive geriatric assessment.');
+    setFieldWarning('frailtyAction', true);
+  }
+  if (g8 && g8.completed > 0 && g8.completed < 8) {
+    warnings.push(`G8 is incomplete: ${g8.completed}/8 items available.`);
+  }
+
+  if (m === 'Mx') warnings.push('Mx selected or implied. Stage group is intentionally marked incomplete.');
+  if (n === 'NX') warnings.push('N category is NX. Select an explicit N0 basis or resolve nodal station laterality/status.');
+  if (t === 'Tx' && !valueOf('tSpecial') && !(size && size > 0)) warnings.push('T category is Tx because no positive T-size or special T descriptor is available.');
+
+  return Array.from(new Set(warnings));
+}
+
+function updateDerived() {
+  const bmi = calcBmi();
+  document.getElementById('bmi').value = bmi;
+
+  const t = calcTCategory();
+  const n = calcNCategory();
+  const m = calcMCategory();
+  const e = calcEvidenceCategory();
+  const stage = calcStageGroup(t, n, m);
+  const detail = stageDetail(t, n, m, stage);
+  const cci = calcCci();
+  const g8 = calcG8();
+  const comp = completeness();
+
+  document.getElementById('g8BmiPoints').value = g8.bmiPoints === null ? '' : g8.bmiPoints + ' pts';
+  document.getElementById('g8AgePoints').value = g8.agePoints === null ? '' : g8.agePoints + ' pts';
+  document.getElementById('g8Score').value = g8.total === null
+    ? g8.partial + ' (partial: ' + g8.completed + '/8)'
+    : g8.total + ' / 17';
+  document.getElementById('g8Flag').value = g8.flag === 'positive_screen_refer_cga'
+    ? 'Positive (<= 14), refer for CGA'
+    : g8.flag === 'negative_screen' ? 'Negative' : 'Incomplete';
+
+  latestValidationWarnings = validateFormState(t, n, m, g8);
+
+  latestDerived = {
+    bmi: bmi,
+    cT: t,
+    cN: n,
+    cM: m,
+    cTNM: `c${t}${n}${m}`,
+    evidenceCategory: e,
+    stageGroup: stage,
+    stageDetail: detail,
+    cciRaw: cci.raw,
+    cciAgePoints: cci.agePoints,
+    cciAgeAdjusted: cci.adjusted,
+    cciCancerScore: cci.cancerScore,
+    cciCancerRuleApplied: cci.cancerRuleApplied,
+    g8Total: g8.total,
+    g8Partial: g8.partial,
+    g8Completed: g8.completed,
+    g8BmiPoints: g8.bmiPoints,
+    g8AgePoints: g8.agePoints,
+    g8Flag: g8.flag,
+    completenessPercent: comp.percent,
+    missingRequiredFields: comp.missing,
+    validationWarnings: latestValidationWarnings
+  };
+
+  document.getElementById('tnmDisplay').textContent = latestDerived.cTNM;
+  document.getElementById('tnmBasisDisplay').textContent = latestValidationWarnings.length ? `${e}; review flags ${latestValidationWarnings.length}` : e;
+  document.getElementById('stageDisplay').textContent = stage;
+  document.getElementById('stageDetailDisplay').textContent = detail;
+  document.getElementById('cciDisplay').textContent = String(cci.raw);
+  document.getElementById('cciDetailDisplay').textContent = `Age points: ${cci.agePoints}; age adjusted: ${cci.adjusted}`;
+  document.getElementById('g8Display').textContent = g8.total === null ? `${g8.partial}/17 partial` : `${g8.total}/17`;
+  document.getElementById('g8DetailDisplay').textContent = g8.flag === 'positive_screen_refer_cga' ? 'Positive screen, refer CGA' : g8.flag === 'negative_screen' ? 'Negative screen' : `${g8.completed}/8 items`;
+  document.getElementById('completeDisplay').textContent = comp.percent + '%';
+  document.getElementById('completeDetailDisplay').textContent = `${comp.done}/${comp.total} required fields`;
+  document.getElementById('missing').textContent = comp.missing.length ? 'Missing required fields: ' + comp.missing.join(', ') : '';
+  document.getElementById('validationWarnings').textContent = latestValidationWarnings.length ? 'Review flags: ' + latestValidationWarnings.join(' ') : '';
+}
+
+function collectData() {
+  updateDerived();
+  const data = {};
+  formEl().querySelectorAll('input, select, textarea').forEach(el => {
+    if (!el.name) return;
+    if (el.dataset.nodeStation) return;
+    if (el.type === 'checkbox') {
+      if (!data[el.name]) data[el.name] = [];
+      if (el.checked) data[el.name].push(el.value);
+    } else {
+      data[el.name] = el.value;
+    }
+  });
+  data.nodeStations = {};
+  getNodeData().forEach(n => data.nodeStations[n.station] = {status:n.status, anatomicGroup:n.group});
+  data.derived = latestDerived;
+  data.exportedAt = new Date().toISOString();
+  data.schemaVersion = 'ntog_lung_mdt_structured_v3_1';
+  return data;
+}
+
+function fmtArray(arr) { return Array.isArray(arr) && arr.length ? arr.join(', ') : 'none'; }
+function positiveNodesText() {
+  const nodes = getNodeData().filter(n => n.status.startsWith('positive'));
+  if (!nodes.length) return 'none recorded';
+  return nodes.map(n => `${n.station} ${n.status.replaceAll('_', ' ')} ${n.group}`).join('; ');
+}
+function sampledNodesText() {
+  const nodes = getNodeData().filter(n => n.status !== 'not_assessed');
+  if (!nodes.length) return 'none recorded';
+  return nodes.map(n => `${n.station}: ${n.status.replaceAll('_', ' ')}`).join('; ');
+}
+
+function generateSummary() {
+  const d = collectData();
+  const lines = [
+    'LUNG CANCER MDT STRUCTURED SUMMARY (v3.1)',
+    'Decision support fields require clinical verification.',
+    '',
+    `Meeting: ${d.meetingDate || ''} | Centre: ${d.hospitalCentre || ''}`,
+    `Purpose: ${displayValue(d.mdtPurpose)} | Question: ${displayValue(d.mdtQuestion)} | Attending specialist: ${displayValue(d.attendingSpecialist)}`,
+    '',
+    'PATIENT',
+    `Age / sex: ${d.age || ''} / ${displayValue(d.sex)}`,
+    `Smoking: ${displayValue(d.smokingStatus)} | Pack-years: ${d.packYears || ''} | Quit years: ${d.quitYears || ''}`,
+    `BMI: ${d.derived.bmi || ''} | ECOG: ${d.ecog || ''}`,
+    `G8: ${d.derived.g8Total === null ? d.derived.g8Partial + ' (partial ' + d.derived.g8Completed + '/8)' : d.derived.g8Total + '/17'} | Flag: ${d.derived.g8Flag} | Frailty action: ${displayValue(d.frailtyAction)}`,
+    `CCI: ${d.derived.cciRaw} | CCI age adjusted: ${d.derived.cciAgeAdjusted} | Other diseases: ${d.otherDiseases || ''}`,
+    '',
+    'FUNCTIONAL AND PULMONARY TESTING',
+    `FVC%: ${d.fvcPercent || ''} | FEV1%: ${d.fev1Percent || ''} | DLCO%: ${d.dlcoPercent || ''} | Resting oxygen: ${displayValue(d.restingOxygenNeed)}`,
+    `Labs: eGFR ${d.egfrValue || ''} ml/min/1.73 m2 | albumin ${d.albuminValue || ''} g/L | haemoglobin ${d.haemoglobinValue || ''} g/L | lab flag ${displayValue(d.labFitnessFlag)}`,
+    `Stair test: ${displayValue(d.stairTestStatus)} | floors ${d.stairFloors || ''} | height ${d.stairHeightM || ''} m | lowest SpO2 ${d.stairSpo2Lowest || ''}% | stop reason ${displayValue(d.stairStopReason)}`,
+    `6MWT: ${displayValue(d.sixMwtStatus)} | distance ${d.sixMwtDistanceM || ''} m | lowest SpO2 ${d.sixMwtSpo2Lowest || ''}% | oxygen ${displayValue(d.sixMwtOxygen)} | CPET ${displayValue(d.cpetStatus)} VO2 peak ${d.vo2Peak || ''}`,
+    '',
+    'IMAGING AND PRIMARY TUMOUR',
+    `CT: ${d.ctDate || ''} | Region ${displayValue(d.ctRegion)} | Contrast ${displayValue(d.ctContrast)} | Imaging complete ${displayValue(d.imagingComplete)}`,
+    `Tumour: ${displayValue(d.tumourSide)} ${displayValue(d.tumourLobe)} ${displayValue(d.tumourSegment)} | Morphology ${displayValue(d.tumourMorphology)}`,
+    `Size: total ${d.tumourTotalSizeMm || ''} mm | T-size ${d.tumourTSizeMm || ''} mm | basis ${displayValue(d.tumourTSizeBasis)}`,
+    `T features: ${fmtArray(d.tFeatures)} | Separate nodules: ${displayValue(d.separateNodulePattern)}`,
+    `PET-CT: ${displayValue(d.petStatus)} ${d.petDate || ''} | Brain: ${displayValue(d.brainStatus)}`,
+    '',
+    'DIAGNOSTIC PROCEDURES AND PATHOLOGY',
+    `Bronchoscopy: ${displayValue(d.bronchoscopyStatus)} ${d.bronchoscopyDate || ''} | visual ${displayValue(d.bronchoscopyVisual)} | result ${displayValue(d.bronchoscopyResult)} | methods ${fmtArray(d.bronchoscopyMethods)}`,
+    `EBUS: ${displayValue(d.ebusStatus)} ${d.ebusDate || ''} | EUS ${displayValue(d.eusStatus)} | N0 basis ${displayValue(d.clinicalN0Basis)}`,
+    `Sampled or suspicious nodes: ${sampledNodesText()}`,
+    `Positive nodes: ${positiveNodesText()}`,
+    `CT-guided biopsy: ${displayValue(d.ctBiopsyStatus)} ${d.ctBiopsyDate || ''} | site ${displayValue(d.ctBiopsySite)} | result ${displayValue(d.ctBiopsyResult)}`,
+    `Histology: ${displayValue(d.histology)} | Diagnostic basis: ${displayValue(d.diagnosticBasis)} | PD-L1 TPS ${d.pdl1Tps || ''}% | Molecular ${displayValue(d.molecularStatus)}`,
+    `EGFR ${displayValue(d.egfrStatus)} | ALK ${displayValue(d.alkStatus)} | ROS1 ${displayValue(d.ros1Status)} | BRAF ${displayValue(d.brafStatus)} | KRAS ${displayValue(d.krasStatus)} | MET ${displayValue(d.metStatus)} | RET ${displayValue(d.retStatus)} | NTRK ${displayValue(d.ntrkStatus)}`,
+    '',
+    'STAGING',
+    `Auto cTNM: ${d.derived.cTNM} ${d.derived.evidenceCategory} | Stage group: ${d.derived.stageGroup} | ${d.derived.stageDetail}`,
+    `M pattern: ${displayValue(d.metastasisPattern)} | Sites: ${fmtArray(d.metastaticSites)} | Extrathoracic burden: ${displayValue(d.extraThoracicMetastasisBurden)} | Confirmation: ${displayValue(d.metConfirmation)} | Oligometastatic: ${displayValue(d.oligometastaticStatus)}`,
+    '',
+    'MDT DECISION',
+    `Patient preference: ${displayValue(d.patientPreferenceStatus)} | Intent: ${displayValue(d.treatmentIntent)} | Decision status: ${displayValue(d.mdtDecisionStatus)}`,
+    `Participants: ${fmtArray(d.participants)}`,
+    `Further investigations: ${fmtArray(d.furtherInvestigations)}`,
+    `Treatments selected: ${fmtArray(d.treatments)}`,
+    '',
+    `Completeness: ${d.derived.completenessPercent}% | Missing: ${d.derived.missingRequiredFields.join(', ') || 'none'}`,
+    `Review flags: ${d.derived.validationWarnings.join(' ') || 'none'}`
+  ];
+  document.getElementById('summary').textContent = lines.join('\n');
+}
+
+function copySummary() {
+  if (!document.getElementById('summary').textContent) generateSummary();
+  const text = document.getElementById('summary').textContent;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text);
+    return;
+  }
+  const tmp = document.createElement('textarea');
+  tmp.value = text;
+  tmp.style.position = 'fixed';
+  tmp.style.left = '-9999px';
+  document.body.appendChild(tmp);
+  tmp.focus();
+  tmp.select();
+  document.execCommand('copy');
+  document.body.removeChild(tmp);
+}
+
+function downloadJson() {
+  const data = collectData();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  downloadBlob(blob, 'lung_mdt_registry_extract.json');
+}
+
+function flatten(prefix, obj, out) {
+  Object.keys(obj || {}).forEach(key => {
+    const value = obj[key];
+    const newKey = prefix ? prefix + '.' + key : key;
+    if (Array.isArray(value)) out[newKey] = value.join(';');
+    else if (value && typeof value === 'object') flatten(newKey, value, out);
+    else out[newKey] = value ?? '';
+  });
+}
+
+function csvEscape(value) {
+  let s = String(value ?? '');
+  if (/^[=+\-@\t\r]/.test(s)) s = '\'' + s;
+  if (/[",\n;]/.test(s)) return '"' + s.replaceAll('"', '""') + '"';
+  return s;
+}
+
+function downloadCsv() {
+  const flat = {};
+  flatten('', collectData(), flat);
+  const keys = Object.keys(flat);
+  const csv = keys.join(',') + '\n' + keys.map(k => csvEscape(flat[k])).join(',') + '\n';
+  const blob = new Blob([csv], {type:'text/csv'});
+  downloadBlob(blob, 'lung_mdt_registry_extract.csv');
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+
+function setField(name, value) {
+  const el = formEl().elements[name];
+  if (!el) return;
+  el.value = value;
+}
+
+function setCheckbox(name, value, checked) {
+  const el = formEl().querySelector(`input[name="${name}"][value="${value}"]`);
+  if (el) el.checked = checked;
+}
+
+function setNodeStatus(station, status) {
+  const el = formEl().querySelector(`[data-node-station="${station}"]`);
+  if (el) el.value = status;
+}
+
+function loadSyntheticTestCase() {
+  formEl().reset();
+  setField('meetingDate', new Date().toISOString().slice(0, 10));
+  setField('hospitalCentre', 'Synthetic centre');
+  setField('mdtPurpose', 'treatment_selection');
+  setField('presenterSpecialty', 'pulmonology');
+  setField('attendingSpecialist', 'radiation_oncologist');
+  setField('mdtQuestion', 'radical_rt_eligibility');
+  setField('age', '67');
+  setField('sex', 'female');
+  setField('smokingStatus', 'former');
+  setField('packYears', '35');
+  setField('quitYears', '6');
+  setField('weightKg', '68');
+  setField('heightCm', '166');
+  setField('ecog', '1');
+  setField('g8Intake', '2');
+  setField('g8WeightLoss', '2');
+  setField('g8Mobility', '2');
+  setField('g8Neuropsych', '2');
+  setField('g8Polypharmacy', '0');
+  setField('g8SelfHealth', '1');
+  setField('frailtyAction', 'geriatric_assessment_requested');
+  setCheckbox('cciConditions', 'chronic_pulmonary', true);
+  setField('fvcPercent', '88');
+  setField('fev1Percent', '62');
+  setField('dlcoPercent', '58');
+  setField('egfrValue', '82');
+  setField('albuminValue', '39');
+  setField('haemoglobinValue', '128');
+  setField('labFitnessFlag', 'acceptable');
+  setField('stairTestStatus', 'done');
+  setField('stairFloors', '3');
+  setField('stairHeightM', '9');
+  setField('stairSpo2Lowest', '91');
+  setField('sixMwtStatus', 'done');
+  setField('sixMwtDistanceM', '430');
+  setField('sixMwtSpo2Lowest', '90');
+  setField('ctDate', new Date().toISOString().slice(0, 10));
+  setField('tumourSide', 'right');
+  setField('tumourLobe', 'rul');
+  setField('tumourMorphology', 'solid');
+  setField('tumourTotalSizeMm', '35');
+  setField('tumourTSizeMm', '35');
+  setField('petStatus', 'done');
+  setField('brainStatus', 'mri_done_negative');
+  setField('bronchoscopyStatus', 'done');
+  setField('bronchoscopyResult', 'malignant_histology');
+  setCheckbox('bronchoscopyMethods', 'forceps_biopsy', true);
+  setField('ebusStatus', 'done');
+  setNodeStatus('4R', 'positive_cytology');
+  setNodeStatus('7', 'positive_cytology');
+  setField('ctBiopsyStatus', 'not_indicated');
+  setField('histology', 'adenocarcinoma');
+  setField('diagnosticBasis', 'histology_primary');
+  setField('pdl1Tps', '40');
+  setField('molecularStatus', 'pending');
+  setField('metastasisPattern', 'M0');
+  setField('metConfirmation', 'not_applicable');
+  setField('patientPreferenceStatus', 'curative_treatment_if_possible');
+  setField('treatmentIntent', 'curative');
+  setCheckbox('participants', 'pulmonologist', true);
+  setCheckbox('participants', 'radiologist', true);
+  setCheckbox('participants', 'pathologist', true);
+  setCheckbox('participants', 'radiation_oncologist', true);
+  setCheckbox('treatments', 'definitive_chemoradiotherapy', true);
+  setCheckbox('treatments', 'durvalumab_consolidation', true);
+  updateDerived();
+  generateSummary();
+}
+
+
+function resetFormForTest() {
+  formEl().reset();
+  document.getElementById('summary').textContent = '';
+  document.getElementById('missing').textContent = '';
+  document.getElementById('validationWarnings').textContent = '';
+  clearFieldWarnings();
+}
+
+function runUnitTests() {
+  const output = [];
+  let passed = 0;
+  let failed = 0;
+
+  function assertEqual(name, actual, expected) {
+    if (actual === expected) {
+      passed += 1;
+      output.push(`PASS ${name}: ${actual}`);
+    } else {
+      failed += 1;
+      output.push(`FAIL ${name}: expected ${expected}, got ${actual}`);
+    }
+  }
+
+  function assertDeepIncludes(name, actualArray, expectedText) {
+    const haystack = actualArray.join(' ');
+    if (haystack.includes(expectedText)) {
+      passed += 1;
+      output.push(`PASS ${name}: found ${expectedText}`);
+    } else {
+      failed += 1;
+      output.push(`FAIL ${name}: expected warning containing ${expectedText}, got ${haystack}`);
+    }
+  }
+
+  resetFormForTest();
+  setField('weightKg', '68');
+  setField('heightCm', '166');
+  assertEqual('BMI 68 kg / 166 cm', calcBmi(), '24.7');
+
+  [['10','T1a'], ['10.5','T1b'], ['30','T1c'], ['30.1','T2a'], ['70','T3'], ['70.1','T4']].forEach(([size, expected]) => {
+    resetFormForTest();
+    setField('tumourTSizeMm', size);
+    assertEqual(`T size ${size}`, calcTCategory(), expected);
+  });
+
+  resetFormForTest();
+  setField('tumourTSizeMm', '0');
+  assertEqual('T size 0 guarded', calcTCategory(), 'Tx');
+  assertDeepIncludes('T size 0 warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory()), 'T-size 0 mm');
+
+  resetFormForTest();
+  setField('tumourTSizeMm', '8');
+  setCheckbox('tFeatures', 'visceral_pleura', true);
+  assertEqual('T visceral pleura upgrade', calcTCategory(), 'T2a');
+
+  resetFormForTest();
+  setField('tumourTSizeMm', '25');
+  setCheckbox('tFeatures', 'mediastinum_or_thymus', true);
+  assertEqual('T mediastinum upgrade', calcTCategory(), 'T4');
+
+  resetFormForTest();
+  setField('tumourSide', 'right');
+  setField('clinicalN0Basis', 'ct_pet_no_suspicious_nodes');
+  assertEqual('N0 basis', calcNCategory(), 'N0');
+
+  resetFormForTest();
+  setField('tumourSide', 'right');
+  setNodeStatus('11R', 'positive_cytology');
+  assertEqual('Right N1 11R', calcNCategory(), 'N1');
+
+  resetFormForTest();
+  setField('tumourSide', 'right');
+  setNodeStatus('4R', 'positive_cytology');
+  assertEqual('Right single N2 station', calcNCategory(), 'N2a');
+
+  resetFormForTest();
+  setField('tumourSide', 'right');
+  setNodeStatus('4R', 'positive_cytology');
+  setNodeStatus('7', 'positive_cytology');
+  assertEqual('Right multistation N2', calcNCategory(), 'N2b');
+
+  resetFormForTest();
+  setField('tumourSide', 'right');
+  setNodeStatus('4L', 'positive_cytology');
+  assertEqual('Right contralateral 4L', calcNCategory(), 'N3');
+
+  resetFormForTest();
+  setField('tumourSide', 'bilateral');
+  setNodeStatus('7', 'positive_cytology');
+  assertEqual('Bilateral positive node requires review', calcNCategory(), 'NX');
+  assertDeepIncludes('Bilateral N warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory()), 'N category requires manual review');
+
+  resetFormForTest();
+  assertEqual('M blank', calcMCategory(), 'Mx');
+  setField('metastasisPattern', 'M0');
+  assertEqual('M0 explicit', calcMCategory(), 'M0');
+
+  resetFormForTest();
+  setField('metastasisPattern', 'M0');
+  setCheckbox('metastaticSites', 'brain', true);
+  assertEqual('M0 plus brain escalates', calcMCategory(), 'M1b');
+
+  resetFormForTest();
+  setCheckbox('metastaticSites', 'brain', true);
+  setField('extraThoracicMetastasisBurden', 'multiple_same_organ');
+  assertEqual('Single organ multiple metastases', calcMCategory(), 'M1c1');
+
+  resetFormForTest();
+  setCheckbox('metastaticSites', 'brain', true);
+  setCheckbox('metastaticSites', 'bone', true);
+  assertEqual('Multiple organ systems metastases', calcMCategory(), 'M1c2');
+
+  assertEqual('Stage T1a N0 M0', calcStageGroup('T1a','N0','M0'), 'IA1');
+  assertEqual('Stage T2a N2b M0', calcStageGroup('T2a','N2b','M0'), 'IIIB');
+  assertEqual('Stage T3 N3 M0', calcStageGroup('T3','N3','M0'), 'IIIC');
+  assertEqual('Stage M1a', calcStageGroup('T1a','N0','M1a'), 'IVA');
+  assertEqual('Stage M1c2', calcStageGroup('T1a','N0','M1c2'), 'IVB');
+  assertEqual('Occult carcinoma row', calcStageGroup('Tx','N0','M0'), 'Occult carcinoma');
+  assertEqual('Mx stage incomplete', calcStageGroup('T2a','N0','Mx'), 'Staging incomplete');
+
+  resetFormForTest();
+  setField('age', '67');
+  setCheckbox('cciConditions', 'chronic_pulmonary', true);
+  const cci = calcCci();
+  assertEqual('CCI chronic pulmonary raw', String(cci.raw), '1');
+  assertEqual('CCI age points 67', String(cci.agePoints), '2');
+  assertEqual('CCI adjusted 67', String(cci.adjusted), '3');
+
+  resetFormForTest();
+  setField('otherDiseases', '=cmd|calc');
+  assertEqual('CSV injection prefix', csvEscape(valueOf('otherDiseases')), "'=cmd|calc");
+
+  assertEqual('G8 BMI 18.9', g8BmiPoints(18.9), 0);
+  assertEqual('G8 BMI 19', g8BmiPoints(19), 1);
+  assertEqual('G8 BMI 20.99', g8BmiPoints(20.99), 1);
+  assertEqual('G8 BMI 21', g8BmiPoints(21), 2);
+  assertEqual('G8 BMI 22.99', g8BmiPoints(22.99), 2);
+  assertEqual('G8 BMI 23', g8BmiPoints(23), 3);
+  assertEqual('G8 age 79', g8AgePoints(79), 2);
+  assertEqual('G8 age 80', g8AgePoints(80), 1);
+  assertEqual('G8 age 85', g8AgePoints(85), 1);
+  assertEqual('G8 age 86', g8AgePoints(86), 0);
+
+  resetFormForTest();
+  setField('age', '67');
+  setField('weightKg', '68');
+  setField('heightCm', '166');
+  const g8inc = calcG8();
+  assertEqual('G8 incomplete total null', g8inc.total, null);
+  assertEqual('G8 partial from BMI and age', g8inc.partial, 5);
+  assertEqual('G8 incomplete flag', g8inc.flag, 'incomplete');
+
+  resetFormForTest();
+  setField('age', '82');
+  setField('weightKg', '52');
+  setField('heightCm', '170');
+  setField('g8Intake', '1');
+  setField('g8WeightLoss', '0');
+  setField('g8Mobility', '1');
+  setField('g8Neuropsych', '2');
+  setField('g8Polypharmacy', '0');
+  setField('g8SelfHealth', '0.5');
+  const g8pos = calcG8();
+  assertEqual('G8 positive total', g8pos.total, 5.5);
+  assertEqual('G8 positive flag', g8pos.flag, 'positive_screen_refer_cga');
+  assertDeepIncludes('G8 positive warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory(), g8pos), 'positive screen');
+
+  resetFormForTest();
+  setField('age', '70');
+  setField('weightKg', '70');
+  setField('heightCm', '170');
+  setField('g8Intake', '2');
+  setField('g8WeightLoss', '3');
+  setField('g8Mobility', '2');
+  setField('g8Neuropsych', '2');
+  setField('g8Polypharmacy', '1');
+  setField('g8SelfHealth', '2');
+  const g8neg = calcG8();
+  assertEqual('G8 negative total', g8neg.total, 17);
+  assertEqual('G8 negative flag', g8neg.flag, 'negative_screen');
+
+  loadSyntheticTestCase();
+  assertEqual('Synthetic BMI', latestDerived.bmi, '24.7');
+  assertEqual('Synthetic cT', latestDerived.cT, 'T2a');
+  assertEqual('Synthetic cN', latestDerived.cN, 'N2b');
+  assertEqual('Synthetic cM', latestDerived.cM, 'M0');
+  assertEqual('Synthetic cTNM', latestDerived.cTNM, 'cT2aN2bM0');
+  assertEqual('Synthetic evidence', latestDerived.evidenceCategory, 'E3b');
+  assertEqual('Synthetic stage', latestDerived.stageGroup, 'IIIB');
+  assertEqual('Synthetic CCI raw', String(latestDerived.cciRaw), '1');
+  assertEqual('Synthetic CCI adjusted', String(latestDerived.cciAgeAdjusted), '3');
+  assertEqual('Synthetic G8 total', latestDerived.g8Total, 14);
+  assertEqual('Synthetic G8 flag', latestDerived.g8Flag, 'positive_screen_refer_cga');
+  assertEqual('Synthetic completeness', String(latestDerived.completenessPercent), '100');
+
+  const testOutput = document.getElementById('testOutput');
+  testOutput.classList.add('visible');
+  testOutput.textContent = [`MDT tool v3.1 unit tests: ${passed} passed, ${failed} failed`, ...output].join('\n');
+}
+
+function resetDerived() {
+  // The timeout lets the native form reset complete before derived fields are recalculated.
+  setTimeout(() => {
+    document.getElementById('summary').textContent = '';
+    document.getElementById('missing').textContent = '';
+    document.getElementById('validationWarnings').textContent = '';
+    updateDerived();
+  }, 0);
+}
+
+initCciGrid();
+initNodeTable();
+formEl().addEventListener('input', updateDerived);
+formEl().addEventListener('change', updateDerived);
+updateDerived();
+if (new URLSearchParams(window.location.search).has('test') || window.location.hash === '#test') runUnitTests();
+</script>
+
+</body>
+</html>
