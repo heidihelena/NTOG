@@ -1,4 +1,6 @@
 <!--
+  SPDX-License-Identifier: Apache-2.0
+
   NTOG LungRisk Educational and Research Hub
   Browser-based educational research software for comparing published lung
   cancer screening criteria, person-level risk models, pulmonary nodule
@@ -70,156 +72,46 @@
   <link rel="stylesheet" href="/css/nav.css">
 
   <style>
-    :root {
-      --ntog-blue-dark: #102a43;
-      --ntog-blue: #1f4e79;
-      --ntog-blue-light: #eef6fb;
-      --ntog-border: #e5e7eb;
-      --ntog-text: #1f2933;
-      --ntog-muted: #52606d;
-      --ntog-warning: #fff7e6;
-      --ntog-green: #246b30;
-      --ntog-research-bg: #f1f7ec;
-      --ntog-research-border: #9ac27d;
-      --ntog-research-strong: #3f6f22;
-      --ntog-danger-bg: #fff1f2;
-      --ntog-danger-border: #fecdd3;
-    }
+    /*
+      Tool-specific styles only.
+      Shared site classes such as body, page-hero, section-block, content-card,
+      warning-note, table-wrap, tool-label, badge-topic, footer, and navbar stay
+      in /css/*.css to avoid duplicated visual systems.
+    */
 
-    body {
-      font-family: "Open Sans", Arial, sans-serif;
-      color: var(--ntog-text);
-      background: #ffffff;
-    }
-
-    h1, h2, h3, h4, .navbar-brand {
-      font-family: "Montserrat", Arial, sans-serif;
-    }
-
-    a {
-      color: var(--ntog-blue);
-    }
-
-    .page-hero {
-      position: relative;
-      overflow: hidden;
-      margin-top: 56px;
-      padding: 7rem 0 5rem;
-      color: #ffffff;
-      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
-    }
-
-    .page-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 18% 24%, rgba(255,255,255,0.14), transparent 25%), radial-gradient(circle at 82% 38%, rgba(255,255,255,0.11), transparent 24%);
-      pointer-events: none;
-    }
-
-    .page-hero .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 1rem;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid rgba(255,255,255,0.45);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .lead-narrow {
-      max-width: 960px;
-      font-size: 1.18rem;
-      line-height: 1.7;
-    }
-
-    .section-block {
-      padding: 3.5rem 0;
-    }
-
-    .section-block + .section-block {
-      border-top: 1px solid var(--ntog-border);
-    }
-
-    .content-card,
-    .form-panel,
-    .result-panel,
-    .calc-card,
-    .formula-card,
-    .reference-card {
-      height: 100%;
-      border: 1px solid var(--ntog-border);
-      border-radius: 1rem;
-      background: #ffffff;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-      padding: 1.5rem;
-    }
-
-    .tool-label {
-      display: inline-block;
-      margin-bottom: 0.85rem;
-      padding: 0.3rem 0.65rem;
-      border-radius: 999px;
-      background: var(--ntog-blue-light);
-      color: var(--ntog-blue);
-      font-weight: 700;
-      font-size: 0.8rem;
-    }
-
-    .tool-label.research {
-      background: var(--ntog-research-bg);
-      color: var(--ntog-research-strong);
-      border: 1px solid var(--ntog-research-border);
-    }
-
-    .warning-note,
-    .privacy-bar {
-      border-radius: 1rem;
-      border: 1px solid #f1d6a8;
-      background: var(--ntog-warning);
-      color: var(--ntog-text);
-      padding: 1.25rem;
-    }
-
-    .privacy-bar {
-      font-size: 0.96rem;
-    }
-
-    .muted-note {
-      color: #697586;
-      font-size: 0.95rem;
-    }
-
-    .compact-list {
-      margin-bottom: 0;
-      padding-left: 1.2rem;
-    }
-
-    .compact-list li {
-      margin-bottom: 0.55rem;
-    }
-
-    .calculator-shell {
-      border: 1px solid var(--ntog-border);
+    .lungrisk-shell {
+      border: 1px solid #e5e7eb;
       border-radius: 1.25rem;
       background: #f8fafc;
       padding: 1rem;
+      max-width: 100%;
+      overflow: hidden;
     }
 
-    .survey-nav {
+    .lungrisk-shell *,
+    .lungrisk-panel *,
+    .lungrisk-result-card *,
+    .lungrisk-score-card *,
+    .lungrisk-framework-card * {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    .lungrisk-nav {
       position: sticky;
       top: 82px;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
     }
 
-    .form-section {
-      border: 1px solid var(--ntog-border);
+    .lungrisk-nav .list-group-item {
+      white-space: normal;
+      line-height: 1.25;
+    }
+
+    .lungrisk-form-section {
+      border: 1px solid #e5e7eb;
       border-radius: 1rem;
       background: #ffffff;
       padding: 1.35rem;
@@ -227,91 +119,101 @@
       scroll-margin-top: 88px;
     }
 
-    .form-section h3 {
+    .lungrisk-form-section h3 {
       font-size: 1.12rem;
-      color: var(--ntog-blue-dark);
+      color: #102a43;
       margin-bottom: 0.4rem;
     }
 
-    .subject-kicker {
-      color: var(--ntog-muted);
+    .lungrisk-kicker {
+      color: #52606d;
       font-size: 0.94rem;
       margin-bottom: 1rem;
     }
 
-    .ntog-section {
-      border-color: var(--ntog-research-border);
+    .lungrisk-ntog-section {
+      border-color: #9ac27d;
       background: linear-gradient(180deg, #f8fcf4 0%, #ffffff 100%);
     }
 
-    .ntog-field {
+    .lungrisk-ntog-field {
       border: 1px solid #cfe4c2;
       border-radius: 0.8rem;
       padding: 0.75rem;
-      background: var(--ntog-research-bg);
+      background: #f1f7ec;
       height: 100%;
     }
 
-    .ntog-field .form-label::after {
+    .lungrisk-ntog-field .form-label::after {
       content: " NTOG";
       display: inline-block;
       margin-left: 0.3rem;
       padding: 0.05rem 0.35rem;
       border-radius: 999px;
       background: #ddecce;
-      color: var(--ntog-research-strong);
+      color: #3f6f22;
       font-size: 0.68rem;
       font-weight: 700;
       vertical-align: middle;
     }
 
-    .field-help {
+    .lungrisk-field-help {
       margin-top: 0.25rem;
       color: #697586;
       font-size: 0.82rem;
     }
 
-    .calculator-shell .result-panel {
+    .lungrisk-panel {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      padding: 1.25rem;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .lungrisk-shell .lungrisk-panel {
       height: auto;
     }
 
-    .readiness-block {
-      border: 1px solid var(--ntog-border);
+    .lungrisk-readiness {
+      border: 1px solid #e5e7eb;
       border-radius: 0.8rem;
       background: #f8fafc;
       padding: 0.9rem;
     }
 
-
-    .metric-card {
-      border: 1px solid var(--ntog-border);
+    .lungrisk-metric {
+      border: 1px solid #e5e7eb;
       border-radius: 1rem;
       background: #ffffff;
       padding: 1rem;
       height: 100%;
     }
 
-    .metric-label {
-      color: var(--ntog-muted);
+    .lungrisk-metric-label {
+      color: #52606d;
       font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
-    .metric-value {
-      color: var(--ntog-blue-dark);
+    .lungrisk-metric-value {
+      color: #102a43;
       font-family: "Montserrat", Arial, sans-serif;
       font-size: 1.8rem;
       line-height: 1.2;
     }
 
-    .metric-subtext {
+    .lungrisk-metric-subtext {
       color: #697586;
       font-size: 0.85rem;
     }
 
-    .status-pill {
+    .lungrisk-status {
       display: inline-block;
       padding: 0.2rem 0.55rem;
       border-radius: 999px;
@@ -322,123 +224,152 @@
       white-space: nowrap;
     }
 
-    .status-calculated,
-    .status-meets,
-    .status-educational_only {
+    .lungrisk-status-calculated,
+    .lungrisk-status-meets,
+    .lungrisk-status-educational_only {
       background: #edf7ed;
       color: #246b30;
     }
 
-    .status-calculated_partial,
-    .status-cannot_assess,
-    .status-not_calculable {
+    .lungrisk-status-calculated_partial,
+    .lungrisk-status-cannot_assess,
+    .lungrisk-status-not_calculable {
       background: #fff7e6;
       color: #7a4f01;
     }
 
-    .status-does_not_meet,
-    .status-outside_population,
-    .status-disabled {
+    .lungrisk-status-does_not_meet,
+    .lungrisk-status-outside_population,
+    .lungrisk-status-disabled {
       background: #f1f5f9;
       color: #475569;
     }
 
-    .result-card-lite,
-    .framework-card,
-    .score-card {
-      border: 1px solid var(--ntog-border);
+    .lungrisk-result-card,
+    .lungrisk-framework-card,
+    .lungrisk-score-card {
+      border: 1px solid #e5e7eb;
       border-radius: 1rem;
       background: #ffffff;
       padding: 1rem;
       margin-bottom: 0.9rem;
     }
 
-    .score-card {
-      border-color: var(--ntog-research-border);
+    .lungrisk-score-card {
+      border-color: #9ac27d;
       background: #fbfef8;
     }
 
-    .result-title {
+    .lungrisk-result-title {
       display: flex;
       justify-content: space-between;
       gap: 0.75rem;
       align-items: flex-start;
+      flex-wrap: wrap;
     }
 
-    .risk-number {
+    .lungrisk-result-title > div,
+    .lungrisk-result-title > strong {
+      flex: 1 1 180px;
+      min-width: 0;
+    }
+
+    .lungrisk-risk-number {
       margin-top: 0.55rem;
-      color: var(--ntog-blue-dark);
+      color: #102a43;
       font-family: "Montserrat", Arial, sans-serif;
-      font-size: 2rem;
+      font-size: clamp(1.45rem, 4vw, 2rem);
       line-height: 1.15;
+      overflow-wrap: anywhere;
     }
 
-    .warning-list {
+    .lungrisk-warning-list {
       margin: 0.6rem 0 0;
       padding-left: 1.15rem;
       color: #62410a;
       font-size: 0.92rem;
     }
 
-    .framework-grid {
+    .lungrisk-framework-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 0.85rem;
     }
 
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 1rem;
-      border: 1px solid var(--ntog-border);
-      background: #ffffff;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-    }
-
-    .tools-table {
-      margin-bottom: 0;
-    }
-
-    .tools-table th {
-      white-space: nowrap;
-      background: var(--ntog-blue-dark);
-      color: #ffffff;
-    }
-
-    .formula-code {
+    .lungrisk-formula-code {
       display: block;
       padding: 0.9rem;
       border-radius: 0.75rem;
       background: #0f172a;
       color: #e2e8f0;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       white-space: pre-wrap;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .lungrisk-export-box {
+      min-height: 360px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.82rem;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .lungrisk-panel .table-wrap {
+      max-width: 100%;
       overflow-x: auto;
     }
 
-    .export-box {
-      min-height: 360px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.84rem;
+    .lungrisk-panel table {
+      table-layout: auto;
+      min-width: 640px;
     }
 
-    .badge-topic {
-      display: inline-block;
-      margin: 0.15rem 0.25rem 0.15rem 0;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      background: var(--ntog-blue-light);
-      color: var(--ntog-blue);
-      font-weight: 700;
-      font-size: 0.82rem;
+    .lungrisk-panel td,
+    .lungrisk-panel th {
+      vertical-align: top;
     }
 
-    footer a {
-      text-decoration: none;
+    @media (max-width: 991.98px) {
+      .lungrisk-nav {
+        position: static;
+        max-height: none;
+        overflow: visible;
+      }
+
+      .lungrisk-panel {
+        height: auto;
+      }
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 575.98px) {
+      .lungrisk-shell {
+        padding: 0.65rem;
+        border-radius: 1rem;
+      }
+
+      .lungrisk-form-section,
+      .lungrisk-panel,
+      .lungrisk-result-card,
+      .lungrisk-score-card,
+      .lungrisk-framework-card {
+        padding: 1rem;
+      }
+
+      .lungrisk-metric {
+        padding: 0.85rem;
+      }
+
+      .lungrisk-metric-value {
+        font-size: 1.35rem;
+      }
+
+      .lungrisk-status {
+        white-space: normal;
+        text-align: left;
+      }
     }
   </style>
 </head>
@@ -551,16 +482,16 @@
             <p class="lead mb-0">Questions are grouped by subject. NTOG emerging-risk questions are visually separated in green. They feed NTOG research scores and warnings, but never alter the coefficients of the published validated models.</p>
           </div>
           <div class="col-lg-5">
-            <div class="privacy-bar">
+            <div class="warning-note">
               <strong>Privacy:</strong> Static browser calculation only. No backend, no cookies, no localStorage, no persistence. JSON export is generated in the browser.
             </div>
           </div>
         </div>
 
-        <div class="calculator-shell">
+        <div class="lungrisk-shell">
           <div class="row g-4">
             <aside class="col-lg-3">
-              <div class="survey-nav">
+              <div class="lungrisk-nav">
                 <div class="list-group shadow-sm">
                   <a class="list-group-item list-group-item-action" href="#survey-governance">Governance</a>
                   <a class="list-group-item list-group-item-action" href="#survey-demo">Demographics</a>
@@ -581,9 +512,9 @@
 
             <div class="col-lg-6">
               <form id="lungRiskForm" novalidate>
-                <section class="form-section" id="survey-governance">
+                <section class="lungrisk-form-section" id="survey-governance">
                   <h3>Governance switches</h3>
-                  <p class="subject-kicker">These switches simulate local governance decisions. Original PLCOm2012 cannot run unless race/ethnicity and education collection is explicitly enabled for the session.</p>
+                  <p class="lungrisk-kicker">These switches simulate local governance decisions. Original PLCOm2012 cannot run unless race/ethnicity and education collection is explicitly enabled for the session.</p>
                   <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="allowSensitiveFields">
                     <label class="form-check-label" for="allowSensitiveFields">Allow original PLCO race/ethnicity and education fields for this educational run</label>
@@ -598,9 +529,9 @@
                   </div>
                 </section>
 
-                <section class="form-section" id="survey-demo">
+                <section class="lungrisk-form-section" id="survey-demo">
                   <h3>Demographics and anthropometrics</h3>
-                  <p class="subject-kicker">Used for BMI, PLCOm2012, HUNT, Brock, Mayo, and applicability warnings.</p>
+                  <p class="lungrisk-kicker">Used for BMI, PLCOm2012, HUNT, Brock, Mayo, and applicability warnings.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="ageYears">Age, years</label><input class="form-control" type="number" id="ageYears" min="0" max="120" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="sexAtBirth">Sex assigned at birth</label><select class="form-select" id="sexAtBirth"><option value="unknown">Unknown</option><option value="female">Female</option><option value="male">Male</option><option value="intersex">Intersex</option></select></div>
@@ -613,16 +544,16 @@
                   </div>
                 </section>
 
-                <section class="form-section" id="survey-smoking">
+                <section class="lungrisk-form-section" id="survey-smoking">
                   <h3>Cigarette smoking and smoke exposure</h3>
-                  <p class="subject-kicker">Pack-years are calculated, but duration, intensity, quit-time, and age-started are preserved separately.</p>
+                  <p class="lungrisk-kicker">Pack-years are calculated, but duration, intensity, quit-time, and age-started are preserved separately.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="smokingStatus">Cigarette smoking status</label><select class="form-select" id="smokingStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="cigsPerDay">Cigarettes per day</label><input class="form-control" type="number" id="cigsPerDay" min="0" step="0.1"></div>
-                    <div class="col-md-4"><label class="form-label" for="yearsSmoked">Years smoked</label><input class="form-control" type="number" id="yearsSmoked" min="0" step="0.1"><div class="field-help">Can be derived from age started plus age quit or current age if blank.</div></div>
+                    <div class="col-md-4"><label class="form-label" for="yearsSmoked">Years smoked</label><input class="form-control" type="number" id="yearsSmoked" min="0" step="0.1"><div class="lungrisk-field-help">Can be derived from age started plus age quit or current age if blank.</div></div>
                     <div class="col-md-4"><label class="form-label" for="ageStarted">Age started</label><input class="form-control" type="number" id="ageStarted" min="0" max="120" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="ageQuit">Age quit</label><input class="form-control" type="number" id="ageQuit" min="0" max="120" step="0.1"></div>
-                    <div class="col-md-4"><label class="form-label" for="yearsSinceQuitRaw">Years since quitting, if known</label><input class="form-control" type="number" id="yearsSinceQuitRaw" min="0" step="0.1"><div class="field-help">Current smokers normalize to 0 for models requiring quit time.</div></div>
+                    <div class="col-md-4"><label class="form-label" for="yearsSinceQuitRaw">Years since quitting, if known</label><input class="form-control" type="number" id="yearsSinceQuitRaw" min="0" step="0.1"><div class="lungrisk-field-help">Current smokers normalize to 0 for models requiring quit time.</div></div>
                     <div class="col-md-4"><label class="form-label" for="packYearsOverride">Pack-years override</label><input class="form-control" type="number" id="packYearsOverride" min="0" step="0.1"></div>
                     <div class="col-md-8"><label class="form-label" for="packYearsOverrideReason">Override rationale</label><input class="form-control" type="text" id="packYearsOverrideReason" placeholder="Required if override is entered"></div>
                     <div class="col-md-4"><label class="form-label" for="dailyCough">Daily cough</label><select class="form-select" id="dailyCough"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
@@ -631,9 +562,9 @@
                   </div>
                 </section>
 
-                <section class="form-section" id="survey-history">
+                <section class="lungrisk-form-section" id="survey-history">
                   <h3>Respiratory, cancer, and family history</h3>
-                  <p class="subject-kicker">Validated-model fields and clinical context fields are kept in the same subject group.</p>
+                  <p class="lungrisk-kicker">Validated-model fields and clinical context fields are kept in the same subject group.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="copdHistory">COPD diagnosed</label><select class="form-select" id="copdHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="emphysemaHistory">Emphysema diagnosed or on CT</label><select class="form-select" id="emphysemaHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
@@ -643,47 +574,47 @@
                     <div class="col-md-4"><label class="form-label" for="extrathoracicGt5y">Extrathoracic cancer more than 5 years before nodule</label><select class="form-select" id="extrathoracicGt5y"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="extrathoracicWithin5y">Extrathoracic cancer within 5 years</label><select class="form-select" id="extrathoracicWithin5y"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="familyLungCancer">Family history of lung cancer, any relative</label><select class="form-select" id="familyLungCancer"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
-                    <div class="col-md-4"><label class="form-label" for="firstDegreeLungCancer">First-degree relative with lung cancer</label><select class="form-select" id="firstDegreeLungCancer"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select><div class="field-help">Used by Brock in this prototype.</div></div>
+                    <div class="col-md-4"><label class="form-label" for="firstDegreeLungCancer">First-degree relative with lung cancer</label><select class="form-select" id="firstDegreeLungCancer"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select><div class="lungrisk-field-help">Used by Brock in this prototype.</div></div>
                     <div class="col-md-4"><label class="form-label" for="tbHistory">Previous tuberculosis</label><select class="form-select" id="tbHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="ntmHistory">Previous NTM disease</label><select class="form-select" id="ntmHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="bronchiectasisHistory">Bronchiectasis</label><select class="form-select" id="bronchiectasisHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                   </div>
                 </section>
 
-                <section class="form-section ntog-section" id="survey-emerging">
+                <section class="lungrisk-form-section lungrisk-ntog-section" id="survey-emerging">
                   <span class="tool-label research">NTOG research extension</span>
                   <h3>NTOG emerging-risk questions</h3>
-                  <p class="subject-kicker">Green fields feed warnings, research export, and the non-validated NTOG literature-weighted score. They never change PLCOm2012, HUNT, Brock, Mayo, or Herder coefficients.</p>
+                  <p class="lungrisk-kicker">Green fields feed warnings, research export, and the non-validated NTOG literature-weighted score. They never change PLCOm2012, HUNT, Brock, Mayo, or Herder coefficients.</p>
                   <div class="row g-3">
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="ildDiagnosis">ILD or pulmonary fibrosis</label><select class="form-select" id="ildDiagnosis"><option value="none">None</option><option value="ipf">IPF</option><option value="non_ipf_ild">Non-IPF ILD</option><option value="sarcoidosis">Sarcoidosis</option><option value="hypersensitivity_pneumonitis">Hypersensitivity pneumonitis</option><option value="ctd_ild">Connective-tissue-disease ILD</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="cpfe">Combined pulmonary fibrosis and emphysema</label><select class="form-select" id="cpfe"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="antifibrotic">Antifibrotic treatment</label><select class="form-select" id="antifibrotic"><option value="none">None</option><option value="pirfenidone">Pirfenidone</option><option value="nintedanib">Nintedanib</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="thoracicRt">Prior thoracic radiotherapy</label><select class="form-select" id="thoracicRt"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="rtIndication">RT indication</label><select class="form-select" id="rtIndication"><option value="not_applicable">Not applicable</option><option value="hodgkin">Hodgkin lymphoma</option><option value="breast">Breast cancer</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="rtYear">RT year</label><input class="form-control" type="number" id="rtYear" min="1900" max="2100" step="1"></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="rtSide">RT side</label><select class="form-select" id="rtSide"><option value="not_applicable">Not applicable</option><option value="right">Right</option><option value="left">Left</option><option value="bilateral_or_mediastinal">Bilateral or mediastinal</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="transplantHistory">Transplant history</label><select class="form-select" id="transplantHistory"><option value="none">None</option><option value="lung">Lung</option><option value="other_solid_organ">Other solid organ</option><option value="hematopoietic">Hematopoietic</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="hivHistory">HIV</label><select class="form-select" id="hivHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="chronicSteroid">Chronic steroid use, 3 months</label><select class="form-select" id="chronicSteroid"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="dmardBiologic">Biologic, JAK inhibitor, or DMARD</label><input class="form-control" type="text" id="dmardBiologic" placeholder="None, unknown, or drug/class"></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="autoimmuneDiagnosis">Autoimmune diagnosis</label><select class="form-select" id="autoimmuneDiagnosis"><option value="none">None</option><option value="ra">RA</option><option value="ibd">IBD</option><option value="psoriasis">Psoriasis</option><option value="sle">SLE</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
-                    <div class="col-md-3"><div class="ntog-field"><label class="form-label" for="snusStatus">Snus</label><select class="form-select" id="snusStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
-                    <div class="col-md-3"><div class="ntog-field"><label class="form-label" for="ecigStatus">E-cigarettes</label><select class="form-select" id="ecigStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
-                    <div class="col-md-3"><div class="ntog-field"><label class="form-label" for="heatedTobaccoStatus">Heated tobacco</label><select class="form-select" id="heatedTobaccoStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
-                    <div class="col-md-3"><div class="ntog-field"><label class="form-label" for="cannabisStatus">Cannabis smoking</label><select class="form-select" id="cannabisStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="radonTested">Home radon tested</label><select class="form-select" id="radonTested"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="radonBqm3">Measured radon, Bq/m3</label><input class="form-control" type="number" id="radonBqm3" min="0" step="1"></div></div>
-                    <div class="col-md-4"><div class="ntog-field"><label class="form-label" for="currentMunicipality">Current postcode or municipality</label><input class="form-control" type="text" id="currentMunicipality"></div></div>
-                    <div class="col-md-12"><div class="ntog-field"><label class="form-label" for="previousPostcodes">Previous postcodes or municipalities, 15 years</label><input class="form-control" type="text" id="previousPostcodes" placeholder="Optional research linkage field"></div></div>
-                    <div class="col-md-12"><div class="ntog-field"><label class="form-label">Occupational exposures</label><div class="row g-2"><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="asbestos" id="occAsbestos"><label class="form-check-label" for="occAsbestos">Asbestos</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="silica" id="occSilica"><label class="form-check-label" for="occSilica">Silica</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="diesel" id="occDiesel"><label class="form-check-label" for="occDiesel">Diesel exhaust</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="welding_fumes" id="occWelding"><label class="form-check-label" for="occWelding">Welding fumes</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="chromium_nickel" id="occChromiumNickel"><label class="form-check-label" for="occChromiumNickel">Chromium or nickel</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="mining" id="occMining"><label class="form-check-label" for="occMining">Mining</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="firefighting" id="occFirefighting"><label class="form-check-label" for="occFirefighting">Firefighting</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="painting" id="occPainting"><label class="form-check-label" for="occPainting">Painting</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="pesticides_herbicides" id="occPesticides"><label class="form-check-label" for="occPesticides">Pesticides or herbicides</label></div></div></div></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="covidSevere">Severe or hospitalised COVID</label><select class="form-select" id="covidSevere"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
-                    <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="diabetesStatus">Diabetes</label><select class="form-select" id="diabetesStatus"><option value="unknown">Unknown</option><option value="no">No</option><option value="type1">Type 1</option><option value="type2">Type 2</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="ildDiagnosis">ILD or pulmonary fibrosis</label><select class="form-select" id="ildDiagnosis"><option value="none">None</option><option value="ipf">IPF</option><option value="non_ipf_ild">Non-IPF ILD</option><option value="sarcoidosis">Sarcoidosis</option><option value="hypersensitivity_pneumonitis">Hypersensitivity pneumonitis</option><option value="ctd_ild">Connective-tissue-disease ILD</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="cpfe">Combined pulmonary fibrosis and emphysema</label><select class="form-select" id="cpfe"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="antifibrotic">Antifibrotic treatment</label><select class="form-select" id="antifibrotic"><option value="none">None</option><option value="pirfenidone">Pirfenidone</option><option value="nintedanib">Nintedanib</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="thoracicRt">Prior thoracic radiotherapy</label><select class="form-select" id="thoracicRt"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="rtIndication">RT indication</label><select class="form-select" id="rtIndication"><option value="not_applicable">Not applicable</option><option value="hodgkin">Hodgkin lymphoma</option><option value="breast">Breast cancer</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="rtYear">RT year</label><input class="form-control" type="number" id="rtYear" min="1900" max="2100" step="1"></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="rtSide">RT side</label><select class="form-select" id="rtSide"><option value="not_applicable">Not applicable</option><option value="right">Right</option><option value="left">Left</option><option value="bilateral_or_mediastinal">Bilateral or mediastinal</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="transplantHistory">Transplant history</label><select class="form-select" id="transplantHistory"><option value="none">None</option><option value="lung">Lung</option><option value="other_solid_organ">Other solid organ</option><option value="hematopoietic">Hematopoietic</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="hivHistory">HIV</label><select class="form-select" id="hivHistory"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="chronicSteroid">Chronic steroid use, 3 months</label><select class="form-select" id="chronicSteroid"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="autoimmuneDiagnosis">Autoimmune diagnosis</label><select class="form-select" id="autoimmuneDiagnosis"><option value="none">None</option><option value="ra">RA</option><option value="ibd">IBD</option><option value="psoriasis">Psoriasis</option><option value="sle">SLE</option><option value="other">Other</option><option value="unknown">Unknown</option></select></div></div>
+                    <div class="col-md-12"><div class="lungrisk-ntog-field"><label class="form-label" for="dmardBiologic">Biologic, JAK inhibitor, or DMARD</label><input class="form-control" type="text" id="dmardBiologic" placeholder="None, unknown, or drug/class"></div></div>
+                    <div class="col-md-3"><div class="lungrisk-ntog-field"><label class="form-label" for="snusStatus">Snus</label><select class="form-select" id="snusStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
+                    <div class="col-md-3"><div class="lungrisk-ntog-field"><label class="form-label" for="ecigStatus">E-cigarettes</label><select class="form-select" id="ecigStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
+                    <div class="col-md-3"><div class="lungrisk-ntog-field"><label class="form-label" for="heatedTobaccoStatus">Heated tobacco</label><select class="form-select" id="heatedTobaccoStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
+                    <div class="col-md-3"><div class="lungrisk-ntog-field"><label class="form-label" for="cannabisStatus">Cannabis smoking</label><select class="form-select" id="cannabisStatus"><option value="unknown">Unknown</option><option value="never">Never</option><option value="former">Former</option><option value="current">Current</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="radonTested">Home radon tested</label><select class="form-select" id="radonTested"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="radonBqm3">Measured radon, Bq/m3</label><input class="form-control" type="number" id="radonBqm3" min="0" step="1"></div></div>
+                    <div class="col-md-4"><div class="lungrisk-ntog-field"><label class="form-label" for="currentMunicipality">Current postcode or municipality</label><input class="form-control" type="text" id="currentMunicipality"></div></div>
+                    <div class="col-md-12"><div class="lungrisk-ntog-field"><label class="form-label" for="previousPostcodes">Previous postcodes or municipalities, 15 years</label><input class="form-control" type="text" id="previousPostcodes" placeholder="Optional research linkage field"></div></div>
+                    <div class="col-md-12"><div class="lungrisk-ntog-field"><label class="form-label">Occupational exposures</label><div class="row g-2"><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="asbestos" id="occAsbestos"><label class="form-check-label" for="occAsbestos">Asbestos</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="silica" id="occSilica"><label class="form-check-label" for="occSilica">Silica</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="diesel" id="occDiesel"><label class="form-check-label" for="occDiesel">Diesel exhaust</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="welding_fumes" id="occWelding"><label class="form-check-label" for="occWelding">Welding fumes</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="chromium_nickel" id="occChromiumNickel"><label class="form-check-label" for="occChromiumNickel">Chromium or nickel</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="mining" id="occMining"><label class="form-check-label" for="occMining">Mining</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="firefighting" id="occFirefighting"><label class="form-check-label" for="occFirefighting">Firefighting</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="painting" id="occPainting"><label class="form-check-label" for="occPainting">Painting</label></div></div><div class="col-sm-4"><div class="form-check"><input class="form-check-input occ" type="checkbox" value="pesticides_herbicides" id="occPesticides"><label class="form-check-label" for="occPesticides">Pesticides or herbicides</label></div></div></div></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="covidSevere">Severe or hospitalised COVID</label><select class="form-select" id="covidSevere"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div></div>
+                    <div class="col-md-6"><div class="lungrisk-ntog-field"><label class="form-label" for="diabetesStatus">Diabetes</label><select class="form-select" id="diabetesStatus"><option value="unknown">Unknown</option><option value="no">No</option><option value="type1">Type 1</option><option value="type2">Type 2</option></select></div></div>
                   </div>
                 </section>
 
-                <section class="form-section" id="survey-ct">
+                <section class="lungrisk-form-section" id="survey-ct">
                   <h3>CT examination and index nodule</h3>
-                  <p class="subject-kicker">Single-nodule prototype. The JSON structure preserves nodule-level separation.</p>
+                  <p class="lungrisk-kicker">Single-nodule prototype. The JSON structure preserves nodule-level separation.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="ctDate">Current CT date</label><input class="form-control" type="date" id="ctDate"></div>
                     <div class="col-md-4"><label class="form-label" for="priorCtDate">Prior CT date</label><input class="form-control" type="date" id="priorCtDate"></div>
@@ -712,9 +643,9 @@
                   </div>
                 </section>
 
-                <section class="form-section" id="survey-pet">
+                <section class="lungrisk-form-section" id="survey-pet">
                   <h3>PET/CT</h3>
-                  <p class="subject-kicker">Herder uses Mayo/Swensen pretest probability and FDG uptake category. Brock-pretest Herder is not wired in this version.</p>
+                  <p class="lungrisk-kicker">Herder uses Mayo/Swensen pretest probability and FDG uptake category. Brock-pretest Herder is not wired in this version.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="petPerformed">FDG-PET/CT performed</label><select class="form-select" id="petPerformed"><option value="unknown">Unknown</option><option value="no">No</option><option value="yes">Yes</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="fdgUptake">FDG uptake category</label><select class="form-select" id="fdgUptake"><option value="unknown">Unknown</option><option value="absent">Absent</option><option value="faint">Faint</option><option value="moderate">Moderate</option><option value="intense">Intense</option></select></div>
@@ -728,13 +659,13 @@
             </div>
 
             <div class="col-lg-3">
-              <div class="result-panel">
+              <div class="lungrisk-panel">
                 <h3>Basic calculators</h3>
                 <div class="row g-3">
-                  <div class="col-6"><div class="metric-card"><div class="metric-label">BMI</div><div class="metric-value" id="bmiOut">-</div><div class="metric-subtext">kg/m2</div></div></div>
-                  <div class="col-6"><div class="metric-card"><div class="metric-label">Pack-years</div><div class="metric-value" id="packYearsOut">-</div><div class="metric-subtext" id="packYearsNote">calculated</div></div></div>
-                  <div class="col-6"><div class="metric-card"><div class="metric-label">Quit-years</div><div class="metric-value" id="quitYearsOut">-</div><div class="metric-subtext">normalized</div></div></div>
-                  <div class="col-6"><div class="metric-card"><div class="metric-label">VDT</div><div class="metric-value" id="vdtOut">-</div><div class="metric-subtext">days</div></div></div>
+                  <div class="col-6"><div class="lungrisk-metric"><div class="lungrisk-metric-label">BMI</div><div class="lungrisk-metric-value" id="bmiOut">-</div><div class="lungrisk-metric-subtext">kg/m2</div></div></div>
+                  <div class="col-6"><div class="lungrisk-metric"><div class="lungrisk-metric-label">Pack-years</div><div class="lungrisk-metric-value" id="packYearsOut">-</div><div class="lungrisk-metric-subtext" id="packYearsNote">calculated</div></div></div>
+                  <div class="col-6"><div class="lungrisk-metric"><div class="lungrisk-metric-label">Quit-years</div><div class="lungrisk-metric-value" id="quitYearsOut">-</div><div class="lungrisk-metric-subtext">normalized</div></div></div>
+                  <div class="col-6"><div class="lungrisk-metric"><div class="lungrisk-metric-label">VDT</div><div class="lungrisk-metric-value" id="vdtOut">-</div><div class="lungrisk-metric-subtext">days</div></div></div>
                 </div>
                 <div class="mt-3 muted-note" id="growthCategoryOut">Growth category: not assessed.</div>
               </div>
@@ -748,20 +679,20 @@
       <div class="container">
         <div class="row g-4">
           <div class="col-lg-4">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <h2 class="h4">Screening and person-level models</h2>
-              <div class="readiness-block mb-3"><h3 class="h6 mb-2">Readiness</h3><div id="readinessOut" class="d-flex flex-column gap-2"></div></div>
+              <div class="lungrisk-readiness mb-3"><h3 class="h6 mb-2">Readiness</h3><div id="readinessOut" class="d-flex flex-column gap-2"></div></div>
               <div id="screeningResults"></div>
             </div>
           </div>
           <div class="col-lg-4">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <h2 class="h4">Nodule-level models</h2>
               <div id="noduleResults"></div>
             </div>
           </div>
           <div class="col-lg-4">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <h2 class="h4">NTOG experimental scores</h2>
               <div id="ntogScreeningScoreResult"></div>
               <div id="ntogScoreResult" class="mt-3"></div>
@@ -771,14 +702,14 @@
 
         <div class="row g-4 mt-1">
           <div class="col-lg-6">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <h2 class="h4">Management framework readiness</h2>
               <p class="muted-note">This lane checks context and data availability only. It does not output Fleischner, BTS, Lung-RADS, NELSON, or ESTI management advice.</p>
-              <div class="framework-grid" id="frameworkResults"></div>
+              <div class="lungrisk-framework-grid" id="frameworkResults"></div>
             </div>
           </div>
           <div class="col-lg-6">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <h2 class="h4">Warnings and structured report text</h2>
               <div id="modifierWarnings"></div>
               <hr>
@@ -789,7 +720,7 @@
 
         <div class="row g-4 mt-1" id="json-export-section">
           <div class="col-12">
-            <div class="result-panel">
+            <div class="lungrisk-panel">
               <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center mb-3">
                 <div>
                   <h2 class="h4 mb-1">JSON export</h2>
@@ -800,7 +731,7 @@
                   <button type="button" class="btn btn-primary" id="downloadJsonBtn">Download JSON</button>
                 </div>
               </div>
-              <textarea class="form-control export-box" id="jsonExport" spellcheck="false" readonly></textarea>
+              <textarea class="form-control lungrisk-export-box" id="jsonExport" spellcheck="false" readonly></textarea>
             </div>
           </div>
         </div>
@@ -822,50 +753,31 @@
         </div>
 
         <div class="row g-4">
-          <div class="col-lg-6"><article class="formula-card"><h3>PLCOm2012 original</h3><p class="muted-note">Person-level 6-year lung cancer risk in ever-smokers. Original race/ethnicity and education fields are governance-gated.</p><code class="formula-code">lp = 0.0778868*(age-62) - 0.0812744*(education-4) - 0.0274194*(BMI-27) + 0.3553063*COPD + 0.4589971*previous_cancer + 0.5871850*family_lung_cancer + 0.2597431*current_smoker - 1.8226060*((cigarettes_per_day/10)^-1 - 0.4021541613) + 0.0317321*(years_smoked-27) - 0.0308572*(quit_years-10) - 4.532506 + race_coefficient
+          <div class="col-lg-6"><article class="content-card"><h3>PLCOm2012 original</h3><p class="muted-note">Person-level 6-year lung cancer risk in ever-smokers. Original race/ethnicity and education fields are governance-gated.</p><code class="lungrisk-formula-code">lp = 0.0778868*(age-62) - 0.0812744*(education-4) - 0.0274194*(BMI-27) + 0.3553063*COPD + 0.4589971*previous_cancer + 0.5871850*family_lung_cancer + 0.2597431*current_smoker - 1.8226060*((cigarettes_per_day/10)^-1 - 0.4021541613) + 0.0317321*(years_smoked-27) - 0.0308572*(quit_years-10) - 4.532506 + race_coefficient
 risk = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>HUNT Lung Cancer Model, corrected 6-year equation</h3><p class="muted-note">Person-level 6-year risk in ever-smokers. Natural logarithms, with +1 before log transformations.</p><code class="formula-code">Xb6 = 1.18203062 + 0.31573217*male - 1.98496138*(age/100)^-1 + 1.11994217*ln(pack_years+1) - 0.04002877*cigarettes_per_day - 0.24019955*ln(quit_years+1) - 1.70238304*ln(BMI+1) + 0.08072420*ln(indoor_smoke_hours+1) + 0.49212668*daily_cough
+          <div class="col-lg-6"><article class="content-card"><h3>HUNT Lung Cancer Model</h3><p class="muted-note">Person-level 6-year risk in ever-smokers. Natural logarithms, with +1 before log transformations.</p><code class="lungrisk-formula-code">Xb6 = 1.18203062 + 0.31573217*male - 1.98496138*(age/100)^-1 + 1.11994217*ln(pack_years+1) - 0.04002877*cigarettes_per_day - 0.24019955*ln(quit_years+1) - 1.70238304*ln(BMI+1) + 0.08072420*ln(indoor_smoke_hours+1) + 0.49212668*daily_cough
 risk6 = 1/(1+exp(-Xb6))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Brock / PanCan full model</h3><p class="muted-note">Nodule-level probability. This prototype reads first-degree relative lung cancer for the family-history term.</p><code class="formula-code">lp = -6.7892 + 0.0287*(age-62) + 0.6011*female + 0.2961*first_degree_relative_lung_cancer + 0.2953*emphysema - 5.3854*((diameter_mm/10)^-0.5 - 1.58113883) + type_coefficient + 0.6581*upper_lobe - 0.0824*(nodule_count-4) + 0.7729*spiculation
-solid = 0, part_solid = 0.377, non_solid_ground_glass = -0.1276
+          <div class="col-lg-6"><article class="content-card"><h3>Brock / PanCan full model</h3><p class="muted-note">Nodule-level probability. This prototype reads first-degree relative lung cancer for the family-history term.</p><code class="lungrisk-formula-code">lp = -6.7892 + 0.0287*(age-62) + 0.6011*female + 0.2961*first_degree_relative_lung_cancer + 0.2953*emphysema - 5.3854*((diameter_mm/10)^-0.5 - 1.58113883) + type_coefficient + 0.6581*upper_lobe - 0.0824*(nodule_count-4) + 0.7729*spiculation
 risk = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Mayo / Swensen pretest probability</h3><p class="muted-note">Nodule-level pretest probability. Current or former smoker equals 1. Never smoker equals 0.</p><code class="formula-code">lp = -6.8272 + 0.0391*age + 0.7917*current_or_former_smoker + 1.3388*extrathoracic_cancer_gt5y + 0.1274*diameter_mm + 0.7838*upper_lobe + 1.0407*spiculation
+          <div class="col-lg-6"><article class="content-card"><h3>Mayo / Swensen pretest probability</h3><p class="muted-note">Nodule-level pretest probability. Current or former smoker equals 1. Never smoker equals 0.</p><code class="lungrisk-formula-code">lp = -6.8272 + 0.0391*age + 0.7917*current_or_former_smoker + 1.3388*extrathoracic_cancer_gt5y + 0.1274*diameter_mm + 0.7838*upper_lobe + 1.0407*spiculation
 mayo_probability = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Herder PET-refined probability</h3><p class="muted-note">Original Herder uses Mayo/Swensen pretest probability. External or Brock-pretest Herder is not implemented.</p><code class="formula-code">x = -4.739 + 3.691*mayo_probability + 2.322*faint_uptake + 4.617*moderate_uptake + 4.771*intense_uptake
+          <div class="col-lg-6"><article class="content-card"><h3>Herder PET-refined probability</h3><p class="muted-note">Original Herder uses Mayo/Swensen pretest probability. External or Brock-pretest Herder is not implemented.</p><code class="lungrisk-formula-code">x = -4.739 + 3.691*mayo_probability + 2.322*faint_uptake + 4.617*moderate_uptake + 4.771*intense_uptake
 herder_probability = 1/(1+exp(-x))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Volume doubling time</h3><p class="muted-note">Requires current and prior volume, CT dates, and same measurement method.</p><code class="formula-code">VDT_days = ln(2) * interval_days / ln(current_volume_mm3 / prior_volume_mm3)</code></article></div>
-          <div class="col-12"><article class="formula-card"><span class="tool-label research">NTOG experimental screening model v0.3</span><h3>ntog_experimental_screening_score</h3><p>This score is a literature-weighted pre-CT screening research index. It is designed to capture risk patterns missed by smoking-only criteria, including never-smokers and newer smokers with strong biological or environmental modifiers. It uses no CT nodule variables, no PET variables, and no VDT.</p><code class="formula-code">ntog_experimental_screening_score = min(100, A + T + R + X + H)
+          <div class="col-lg-6"><article class="content-card"><h3>Volume doubling time</h3><p class="muted-note">Requires current and prior volume, CT dates, and same measurement method.</p><code class="lungrisk-formula-code">VDT_days = ln(2) * interval_days / ln(current_volume_mm3 / prior_volume_mm3)</code></article></div>
+          <div class="col-12"><article class="content-card"><span class="tool-label research">NTOG experimental screening model v0.3</span><h3>ntog_experimental_screening_score</h3><p>This score is a literature-weighted pre-CT screening research index. It is designed to capture risk patterns missed by smoking-only criteria, including never-smokers and newer smokers with strong biological or environmental modifiers. It uses no CT nodule variables, no PET variables, and no VDT.</p><code class="lungrisk-formula-code">ntog_experimental_screening_score = min(100, A + T + R + X + H)
 
 A = age component, max 15
 T = tobacco architecture component, max 25
 R = respiratory and fibrosis phenotype component, max 20
 X = environmental and occupational exposure component, max 20
-H = host, family, prior thoracic RT, and immunosuppression component, max 20
+H = host, family, prior thoracic RT, and immunosuppression component, max 20</code></article></div>
+          <div class="col-12"><article class="content-card"><span class="tool-label research">NTOG non-validated research index</span><h3>ntog_not_valitated_risk_score</h3><p>The score is built as a literature-weighted point index, not as a fitted risk model. The numeric weights are draft NTOG v0.3 weights, not validated coefficients.</p><code class="lungrisk-formula-code">ntog_not_valitated_risk_score = round(100 * (P + N + G + S + E) / W_available)
 
-Point bands:
-A: &lt;40y=0, 40-49y=4, 50-54y=7, 55-59y=9, 60-64y=11, 65-69y=13, &gt;=70y=15
-T: pack-years up to 8, duration up to 7, intensity up to 4, current/recent quit up to 4, cap 25
-R: IPF 8, non-IPF ILD 5, CPFE 6, emphysema 4, COPD 3, cough/infection-pattern points, cap 20
-X: radon up to 5, occupational exposures up to 10, passive/indoor smoke and non-cigarette inhaled exposures, cap 20
-H: first-degree/family history, prior thoracic RT, prior cancer, transplant, HIV, steroids, biologics/DMARDs, cap 20
-
-Research signal bands: &lt;20 low, 20-39 intermediate, 40-59 elevated, 60-79 high, &gt;=80 very high. No clinical screening threshold is defined.</code></article></div>
-          <div class="col-12"><article class="formula-card"><span class="tool-label research">NTOG non-validated research index</span><h3>ntog_not_valitated_risk_score</h3><p>The score is built as a literature-weighted point index, not as a fitted risk model. Literature supports inclusion of smoking, family history, COPD/emphysema, ILD/pulmonary fibrosis, radon, occupational carcinogens, thoracic radiation, immunosuppression, infection/inflammation confounders, air pollution linkage fields, and nodule morphology. The numeric weights below are draft NTOG v0.3 weights, not validated coefficients.</p><code class="formula-code">ntog_not_valitated_risk_score = round(100 * (P + N + G + S + E) / W_available)
-
-Weights if available:
-P = person-model component, max 20 points, max of PLCOm2012 and HUNT percent risk
-N = nodule-model component, max 35 points, max of Brock, Mayo, and Herder percent risk
-G = growth component, max 15 points, VDT or simple growth category
-S = smoking-architecture component, max 10 points, duration, intensity, current smoking, recent quitting
-E = NTOG emerging-risk component, max 20 points, ILD/CPFE, thoracic RT, immunosuppression, TB/NTM/bronchiectasis, radon, occupational exposures, autoimmune disease, COVID imaging context, diabetes, non-cigarette smoke flags
-W_available = sum of component weights that are calculable. Missing validated domains are not imputed.
-
-Point bands:
-P: &lt;0.5%=2, 0.5-0.99%=4, 1.0-1.49%=8, 1.5-1.99%=12, 2.0-3.99%=16, &gt;=4%=20
-N: &lt;1%=1, 1-4.99%=4, 5-9.99%=10, 10-29.99%=18, 30-64.99%=28, &gt;=65%=35
-G: VDT &lt;100d=15, 100-399d=13, 400-599d=10, categorical growing/new=8, stable/decreasing/resolved=0
-S: duration up to 5, intensity up to 2, current smoking 2, quit within 5 years 1, cap 10
-E: summed literature modifier points, cap 20</code></article></div>
+P = person-model component, max 20 points
+N = nodule-model component, max 35 points
+G = growth component, max 15 points
+S = smoking-architecture component, max 10 points
+E = NTOG emerging-risk component, max 20 points</code></article></div>
         </div>
       </div>
     </section>
@@ -873,7 +785,7 @@ E: summed literature modifier points, cap 20</code></article></div>
     <section class="section-block" id="references">
       <div class="container">
         <h2>Source notes</h2>
-        <div class="reference-card">
+        <div class="content-card">
           <ul class="compact-list">
             <li>PLCOm2012: Tammemagi MC et al. <em>N Engl J Med</em>. 2013;368:728-736.</li>
             <li>HUNT Lung Cancer Model: Markaki M et al. <em>EBioMedicine</em>. 2018;31:36-46. Corrigendum <em>EBioMedicine</em>. 2022;82:104187.</li>
@@ -887,19 +799,43 @@ E: summed literature modifier points, cap 20</code></article></div>
     </section>
   </main>
 
+  <footer class="bg-dark text-white py-4 mt-0">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="small mb-2">
+        Tool source code licensed under
+        <a href="/LICENSE" class="text-white">Apache License 2.0</a>.
+        Educational text licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/" class="text-white" target="_blank" rel="noopener">CC BY 4.0</a>.
+        NTOG name and logo are not licensed for reuse.
+      </p>
+      <p class="small mb-2">
+        Educational and research use only. Not a medical device, diagnostic tool,
+        autonomous clinical decision system, reimbursement decision tool, or substitute
+        for national guidelines, MDT review, clinical judgment, or patient preference.
+      </p>
+      <p class="mb-0">
+        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/scripts.js"></script>
   <script>
     (function () {
       "use strict";
 
       const MODEL_VERSIONS = {
-        PLCOm2012_ORIGINAL: "2013_NEJM_coefficients_static_0.2.0",
-        HUNT_LCM_6Y: "2022_corrigendum_coefficients_static_0.2.0",
-        BROCK_FULL: "full_model_with_spiculation_static_0.2.0",
-        MAYO_SWENSEN_DEPENDENCY: "swensen_1997_static_0.2.0",
-        HERDER: "herder_2005_static_0.2.0",
-        VDT: "vdt_static_0.2.0",
-        NTOG_NOT_VALITATED_RISK_SCORE: "ntog_not_valitated_risk_score_literature_weighted_0.3.0",
-        NTOG_EXPERIMENTAL_SCREENING_SCORE: "ntog_experimental_screening_score_literature_weighted_0.3.0"
+        PLCOm2012_ORIGINAL: "2013_NEJM_coefficients_static_0.3.1",
+        HUNT_LCM_6Y: "2022_corrigendum_coefficients_static_0.3.1",
+        BROCK_FULL: "full_model_with_spiculation_static_0.3.1",
+        MAYO_SWENSEN_DEPENDENCY: "swensen_1997_static_0.3.1",
+        HERDER: "herder_2005_static_0.3.1",
+        VDT: "vdt_static_0.3.1",
+        NTOG_NOT_VALITATED_RISK_SCORE: "ntog_not_valitated_risk_score_literature_weighted_0.3.1",
+        NTOG_EXPERIMENTAL_SCREENING_SCORE: "ntog_experimental_screening_score_literature_weighted_0.3.1"
       };
 
       const MODEL_CITATIONS = {
@@ -922,9 +858,8 @@ E: summed literature modifier points, cap 20</code></article></div>
       function numberValue(id) {
         const el = $(id);
         if (!el) return null;
-        const raw = el.value;
-        if (raw === "" || raw === null || raw === undefined) return null;
-        const n = Number(raw);
+        if (el.value === "") return null;
+        const n = Number(el.value);
         return Number.isFinite(n) ? n : null;
       }
 
@@ -952,11 +887,11 @@ E: summed literature modifier points, cap 20</code></article></div>
 
       function statusPill(status, label) {
         const safeStatus = String(status || "not_calculable").replace(/[^a-zA-Z0-9_]/g, "_");
-        return `<span class="status-pill status-${safeStatus}">${htmlEscape(label || status)}</span>`;
+        return `<span class="lungrisk-status lungrisk-status-${safeStatus}">${htmlEscape(label || status)}</span>`;
       }
 
       function uuid() {
-        if (typeof window !== "undefined" && window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+        if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
           const r = Math.random() * 16 | 0;
           const v = c === "x" ? r : (r & 0x3 | 0x8);
@@ -995,7 +930,7 @@ E: summed literature modifier points, cap 20</code></article></div>
       function collectInput() {
         const occupationalExposures = $$(".occ:checked").map((el) => el.value);
         return {
-          schema_version: "0.3.0-static-educational",
+          schema_version: "0.3.1-static-educational",
           calculation_session_id: uuid(),
           calculated_at: new Date().toISOString(),
           site_config: {
@@ -1072,8 +1007,8 @@ E: summed literature modifier points, cap 20</code></article></div>
               rt_side: stringValue("rtSide"),
               transplant_history: stringValue("transplantHistory"),
               hiv: stringValue("hivHistory"),
-              biologic_or_dmard_current: textValue("dmardBiologic"),
               chronic_steroid_3mo: stringValue("chronicSteroid"),
+              biologic_or_dmard_current: textValue("dmardBiologic"),
               snus_status: stringValue("snusStatus"),
               ecig_status: stringValue("ecigStatus"),
               heated_tobacco_status: stringValue("heatedTobaccoStatus"),
@@ -1136,7 +1071,6 @@ E: summed literature modifier points, cap 20</code></article></div>
         const p = input.patient;
         const s = input.questionnaire.smoking;
         const warnings = [];
-
         const bmi = p.height_cm && p.weight_kg && p.height_cm > 0 ? p.weight_kg / Math.pow(p.height_cm / 100, 2) : null;
 
         let ageQuit = s.age_quit_smoking;
@@ -1158,20 +1092,11 @@ E: summed literature modifier points, cap 20</code></article></div>
 
         if (s.age_started_smoking !== null && yearsSmoked !== null) {
           const expectedEnd = s.age_started_smoking + yearsSmoked;
-          if (s.smoking_status === "former" && ageQuit !== null && Math.abs(expectedEnd - ageQuit) > 2) {
-            warnings.push("Smoking timeline mismatch: age started plus years smoked differs from age quit by more than 2 years.");
-          }
-          if (s.smoking_status === "current" && p.age_years !== null && Math.abs(expectedEnd - p.age_years) > 2) {
-            warnings.push("Smoking timeline mismatch: age started plus years smoked differs from current age by more than 2 years.");
-          }
+          if (s.smoking_status === "former" && ageQuit !== null && Math.abs(expectedEnd - ageQuit) > 2) warnings.push("Smoking timeline mismatch: age started plus years smoked differs from age quit by more than 2 years.");
+          if (s.smoking_status === "current" && p.age_years !== null && Math.abs(expectedEnd - p.age_years) > 2) warnings.push("Smoking timeline mismatch: age started plus years smoked differs from current age by more than 2 years.");
         }
 
-        if (s.age_started_smoking !== null && p.age_years !== null && s.age_started_smoking > p.age_years) warnings.push("Age started smoking is greater than current age.");
-        if (ageQuit !== null && p.age_years !== null && ageQuit > p.age_years) warnings.push("Age quit smoking is greater than current age.");
-        if (ageQuit !== null && s.age_started_smoking !== null && ageQuit < s.age_started_smoking) warnings.push("Age quit smoking is lower than age started smoking.");
-
         const packYearsCalculated = s.cigarettes_per_day !== null && yearsSmoked !== null && s.cigarettes_per_day >= 0 && yearsSmoked >= 0 ? (s.cigarettes_per_day / 20) * yearsSmoked : null;
-
         let packYearsFinal = packYearsCalculated;
         if (s.pack_years_override !== null) {
           packYearsFinal = s.pack_years_override;
@@ -1206,24 +1131,20 @@ E: summed literature modifier points, cap 20</code></article></div>
           years_since_quit_normalized: quitNormalized,
           warnings
         };
-
         return input;
       }
 
       function calculateVDT(input) {
         const n = input.imaging.nodules[0];
         const days = daysBetween(input.imaging.ct_date, input.imaging.prior_ct_date);
-        const warnings = [];
-
-        if (input.imaging.same_measurement_method !== "yes") return { status: "not_calculable", value_days: null, growth_category: growthCategory(input), warnings: ["VDT requires the same measurement method across scans."] };
-        if (days === null || days <= 0) return { status: "not_calculable", value_days: null, growth_category: growthCategory(input), warnings: ["VDT requires current and prior CT dates with current date after prior date."] };
-        if (!n.volume_mm3 || !n.prior_volume_mm3 || n.volume_mm3 <= 0 || n.prior_volume_mm3 <= 0) return { status: "not_calculable", value_days: null, growth_category: growthCategory(input), warnings: ["VDT requires current and prior nodule volumes greater than 0."] };
-        if (n.volume_mm3 <= n.prior_volume_mm3) return { status: "not_calculable", value_days: null, growth_category: growthCategory(input), warnings: ["VDT is not calculated when volume is stable or decreasing."] };
-
+        const category = growthCategory(input);
+        if (input.imaging.same_measurement_method !== "yes") return { status: "not_calculable", value_days: null, growth_category: category, warnings: ["VDT requires the same measurement method across scans."] };
+        if (days === null || days <= 0) return { status: "not_calculable", value_days: null, growth_category: category, warnings: ["VDT requires current and prior CT dates with current date after prior date."] };
+        if (!n.volume_mm3 || !n.prior_volume_mm3 || n.volume_mm3 <= 0 || n.prior_volume_mm3 <= 0) return { status: "not_calculable", value_days: null, growth_category: category, warnings: ["VDT requires current and prior nodule volumes greater than 0."] };
+        if (n.volume_mm3 <= n.prior_volume_mm3) return { status: "not_calculable", value_days: null, growth_category: category, warnings: ["VDT is not calculated when volume is stable or decreasing."] };
         const vdt = Math.log(2) * days / Math.log(n.volume_mm3 / n.prior_volume_mm3);
-        if (!Number.isFinite(vdt)) return { status: "not_calculable", value_days: null, growth_category: growthCategory(input), warnings: ["VDT formula returned a non-finite value."] };
-        if (days < 30) warnings.push("Short interval: growth-rate estimates are sensitive to measurement variability.");
-        return { status: "calculated", value_days: round(vdt, 0), growth_category: growthCategory(input), warnings };
+        const warnings = days < 30 ? ["Short interval: growth-rate estimates are sensitive to measurement variability."] : [];
+        return { status: "calculated", value_days: round(vdt, 0), growth_category: category, warnings };
       }
 
       function growthCategory(input) {
@@ -1282,7 +1203,6 @@ E: summed literature modifier points, cap 20</code></article></div>
           }
         }
         results.push({ code: "NELSON_STYLE", name: "NELSON-style eligibility", status: nelsonStatus, detail: nelsonReason, warnings: ["Uses >=15 cigarettes/day for >=25 years or >=10 cigarettes/day for >=30 years. Not an NTOG screening recommendation."] });
-
         return results;
       }
 
@@ -1321,7 +1241,6 @@ E: summed literature modifier points, cap 20</code></article></div>
 
         const raceCoef = { white_ai_an: 0, black: 0.3944778, hispanic: -0.7434744, asian: -0.466585, nhpi: 1.027152 }[p.ethnicity_race_plco];
         if (raceCoef === undefined) return notCalculable(code, name, ["patient.ethnicity_race_plco_unrecognized"], ["Controlled PLCO race enum required. No fallback to White."], population, citation, version, "not_calculable", "6 years");
-
         if (p.age_years < 50 || p.age_years > 80) warnings.push("Age outside common screening age range. Calculation shown with applicability warning, not blocked.");
         if (p.bmi_kg_m2 < 18.5 || p.bmi_kg_m2 > 40) warnings.push("BMI is outside common range. PLCO BMI term is linear and may be poorly calibrated at tails.");
 
@@ -1381,7 +1300,6 @@ E: summed literature modifier points, cap 20</code></article></div>
         const q = input.questionnaire;
         const missing = [];
         const warnings = ["Nodule-level estimate only. Do not combine with person-level screening risk."];
-
         if (isMissing(p.age_years)) missing.push("patient.age_years");
         if (p.sex_at_birth !== "female" && p.sex_at_birth !== "male") missing.push("patient.sex_at_birth");
         if (isMissing(q.cancer_family.first_degree_relative_lung_cancer)) missing.push("questionnaire.cancer_family.first_degree_relative_lung_cancer");
@@ -1391,16 +1309,11 @@ E: summed literature modifier points, cap 20</code></article></div>
         if (isMissing(n.upper_lobe_location)) missing.push(`nodule.${n.nodule_label}.upper_lobe_location`);
         if (isMissing(n.nodule_count_exam)) missing.push(`nodule.${n.nodule_label}.nodule_count_exam`);
         if (isMissing(n.spiculation)) missing.push(`nodule.${n.nodule_label}.spiculation`);
-
         if (missing.length) return notCalculable(code, name, missing, ["No imputation performed."], population, citation, version, "not_calculable", "2 to 4 years");
-
         if (p.age_years < 50 || p.age_years > 80) warnings.push("Age outside common screening age range. Calculation shown with applicability warning, not blocked.");
         if (n.max_diameter_mm < 4 || n.max_diameter_mm > 30) warnings.push("Nodule diameter outside common Brock development/calculator range. Interpret as extrapolation.");
-        if (q.emerging_risk_extension && q.emerging_risk_extension.ild_diagnosis !== "none" && q.emerging_risk_extension.ild_diagnosis !== "unknown") warnings.push("ILD or fibrosis reported. Brock applicability may be reduced.");
-
         const typeCoef = { solid: 0, part_solid: 0.377, non_solid_ground_glass: -0.1276 }[n.nodule_type];
         if (typeCoef === undefined) return notCalculable(code, name, [`nodule.${n.nodule_label}.nodule_type`], ["Unknown nodule type blocked before coefficient step."], population, citation, version, "not_calculable", "2 to 4 years");
-
         const female = p.sex_at_birth === "female" ? 1 : 0;
         const firstDegree = bool01(q.cancer_family.first_degree_relative_lung_cancer);
         const emphysema = bool01(q.respiratory.emphysema);
@@ -1421,19 +1334,13 @@ E: summed literature modifier points, cap 20</code></article></div>
         const q = input.questionnaire;
         const missing = [];
         const warnings = ["Hidden dependency for original Herder unless Mayo display is enabled."];
-
         if (isMissing(p.age_years)) missing.push("patient.age_years");
         if (q.smoking.smoking_status === "unknown") missing.push("questionnaire.smoking.smoking_status");
         if (isMissing(q.cancer_family.extrathoracic_cancer_gt5y)) missing.push("questionnaire.cancer_family.extrathoracic_cancer_gt5y");
         if (isMissing(n.max_diameter_mm) || n.max_diameter_mm <= 0) missing.push(`nodule.${n.nodule_label}.max_diameter_mm`);
         if (isMissing(n.upper_lobe_location)) missing.push(`nodule.${n.nodule_label}.upper_lobe_location`);
         if (isMissing(n.spiculation)) missing.push(`nodule.${n.nodule_label}.spiculation`);
-
-        if (q.cancer_family.previous_lung_cancer === "yes") warnings.push("Prior lung cancer reported. Mayo applicability may be reduced.");
-        if (q.cancer_family.extrathoracic_cancer_within5y === "yes") warnings.push("Recent extrathoracic cancer reported. Original Mayo model uses extrathoracic cancer more than 5 years before nodule detection.");
-        if (q.emerging_risk_extension && q.emerging_risk_extension.ild_diagnosis !== "none" && q.emerging_risk_extension.ild_diagnosis !== "unknown") warnings.push("ILD or fibrosis reported. Mayo applicability may be reduced.");
         if (missing.length) return notCalculable(code, name, missing, warnings, population, citation, version, "not_calculable", "pretest");
-
         const smoker = q.smoking.smoking_status === "current" || q.smoking.smoking_status === "former" ? 1 : 0;
         const cancer = bool01(q.cancer_family.extrathoracic_cancer_gt5y);
         const upper = bool01(n.upper_lobe_location);
@@ -1452,16 +1359,13 @@ E: summed literature modifier points, cap 20</code></article></div>
         const pet = n.pet || {};
         const g = input.site_config.governance;
         const warnings = ["PET-refined nodule-level estimate only. Do not use as sole basis for diagnosis or treatment."];
-
         if (pet.pet_performed !== "yes") return notCalculable(code, name, [`nodule.${n.nodule_label}.pet_performed`], ["PET not performed."], population, citation, version, "not_calculable", "PET-refined");
         if (!pet.fdg_uptake_category || pet.fdg_uptake_category === "unknown") return notCalculable(code, name, [`nodule.${n.nodule_label}.fdg_uptake_category`], ["PET uptake category missing."], population, citation, version, "not_calculable", "PET-refined");
         if (g.block_herder_if_pet_small_nodule_caveat && pet.caveat_small_nodule) return notCalculable(code, name, [], ["PET result flagged as unreliable because nodule may be below reliable PET resolution."], population, citation, version, "not_calculable", "PET-refined");
         if (g.block_herder_if_inflammation_or_infection_caveat && pet.caveat_inflammation_or_infection) return notCalculable(code, name, [], ["PET result blocked because uptake may reflect infection or inflammation."], population, citation, version, "not_calculable", "PET-refined");
         if (!pretest || pretest.status !== "calculated" || pretest.risk_value === null) return notCalculable(code, name, pretest ? pretest.missing_variables : ["pretest_probability"], ["Mayo/Swensen pretest probability unavailable."], population, citation, version, "not_calculable", "PET-refined");
-
         if (pet.caveat_inflammation_or_infection) warnings.push("PET uptake may reflect infection or inflammation.");
         if (pet.caveat_small_nodule) warnings.push("Nodule may be below reliable PET spatial resolution.");
-
         const uptake = pet.fdg_uptake_category;
         const faint = uptake === "faint" ? 1 : 0;
         const moderate = uptake === "moderate" ? 1 : 0;
@@ -1473,13 +1377,14 @@ E: summed literature modifier points, cap 20</code></article></div>
 
       function extensionWarnings(input) {
         const ext = input.questionnaire.emerging_risk_extension;
+        const resp = input.questionnaire.respiratory;
         const warnings = [];
         if (ext.ild_diagnosis && ext.ild_diagnosis !== "none" && ext.ild_diagnosis !== "unknown") warnings.push("Interstitial lung disease or pulmonary fibrosis reported. Nodule-model applicability may be reduced because fibrotic lungs can obscure or mimic nodules.");
         if (ext.cpfe_combined_emphysema === "yes") warnings.push("Combined pulmonary fibrosis and emphysema reported. Treat as an applicability and MDT-context warning, not as a coefficient in published models.");
         if (ext.thoracic_rt_history === "yes") warnings.push("Prior thoracic radiotherapy reported. Screening-risk models may not capture this exposure.");
         if (ext.transplant_history && ext.transplant_history !== "none" && ext.transplant_history !== "unknown") warnings.push("Transplant history reported. Differential diagnosis and FDG-PET interpretation may differ under immunosuppression.");
         if (ext.hiv === "yes" || ext.chronic_steroid_3mo === "yes" || (ext.biologic_or_dmard_current && !["none", "unknown"].includes(ext.biologic_or_dmard_current.toLowerCase()))) warnings.push("Immunosuppression reported. Infection, inflammation, and malignancy priors may differ from derivation cohorts.");
-        if (input.questionnaire.respiratory.tb_history === "yes" || input.questionnaire.respiratory.ntm_history === "yes" || input.questionnaire.respiratory.bronchiectasis === "yes") warnings.push("TB, NTM, or bronchiectasis history reported. Scar and infection differentials may affect nodule interpretation and PET specificity.");
+        if (resp.tb_history === "yes" || resp.ntm_history === "yes" || resp.bronchiectasis === "yes") warnings.push("TB, NTM, or bronchiectasis history reported. Scar and infection differentials may affect nodule interpretation and PET specificity.");
         if (ext.radon_measured_bq_m3 !== null && ext.radon_measured_bq_m3 >= 100) warnings.push("Measured home radon is at or above 100 Bq/m3. Keep as exposure context and research variable, not a coefficient change.");
         if (ext.occupational_exposures && ext.occupational_exposures.length > 0) warnings.push("Occupational exposure field positive: " + ext.occupational_exposures.join(", ") + ". Use as research and MDT context only.");
         if (ext.severe_or_hospitalised_covid === "yes") warnings.push("Severe or hospitalised COVID reported. Post-inflammatory ground-glass or fibrotic bands can confound subsolid-nodule assessment.");
@@ -1529,7 +1434,6 @@ E: summed literature modifier points, cap 20</code></article></div>
         const s = input.questionnaire.smoking;
         if (s.smoking_status === "unknown") return { weight: 10, available: false, points: 0, basis: "Smoking status unknown." };
         if (s.smoking_status === "never") return { weight: 10, available: true, points: 0, basis: "Never cigarette smoker." };
-        if (s.years_smoked === null && s.cigarettes_per_day === null) return { weight: 10, available: false, points: 0, basis: "Smoking duration and intensity missing." };
         let points = 0;
         const details = [];
         if (s.years_smoked !== null) {
@@ -1583,7 +1487,6 @@ E: summed literature modifier points, cap 20</code></article></div>
 
       function screeningAgeComponent(input) {
         const age = input.patient.age_years;
-        const basis = [];
         if (age === null) return { weight: 15, available: false, points: 0, basis: "Age missing." };
         let points = 0;
         if (age >= 70) points = 15;
@@ -1592,8 +1495,7 @@ E: summed literature modifier points, cap 20</code></article></div>
         else if (age >= 55) points = 9;
         else if (age >= 50) points = 7;
         else if (age >= 40) points = 4;
-        basis.push("age " + age + "y: " + points);
-        return { weight: 15, available: true, points, basis: basis.join(", ") };
+        return { weight: 15, available: true, points, basis: "age " + age + "y: " + points };
       }
 
       function screeningTobaccoComponent(input) {
@@ -1655,10 +1557,7 @@ E: summed literature modifier points, cap 20</code></article></div>
         }
         if (ext.occupational_exposures && ext.occupational_exposures.length > 0) {
           let occ = 0;
-          for (const exposure of ext.occupational_exposures) {
-            if (["asbestos", "silica", "chromium_nickel", "mining", "firefighting"].includes(exposure)) occ += 4;
-            else occ += 2;
-          }
+          for (const exposure of ext.occupational_exposures) occ += ["asbestos", "silica", "chromium_nickel", "mining", "firefighting"].includes(exposure) ? 4 : 2;
           occ = Math.min(occ, 10);
           points += occ;
           basis.push("occupational exposure points: " + occ);
@@ -1719,7 +1618,6 @@ E: summed literature modifier points, cap 20</code></article></div>
           "Designed for Nordic cohort validation, including never-smokers and newer smokers with strong modifier load.",
           "No clinical screening threshold is defined. Do not use as an NTOG screening recommendation."
         ];
-        if (missing.length) warnings.push("Required screening inputs missing: " + missing.join(", ") + ".");
         return {
           model_code: "ntog_experimental_screening_score",
           model_name: "NTOG experimental literature-weighted screening score",
@@ -1800,16 +1698,16 @@ E: summed literature modifier points, cap 20</code></article></div>
       function renderResultCard(result) {
         const riskText = result.status === "calculated" ? `${result.risk_percent}%` : "-";
         const missing = result.missing_variables && result.missing_variables.length ? `<div class="mt-2"><strong>Missing:</strong> ${htmlEscape(result.missing_variables.join(", "))}</div>` : "";
-        const warnings = result.warnings && result.warnings.length ? `<ul class="warning-list">${result.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul>` : "";
-        return `<div class="result-card-lite"><div class="result-title"><div><strong>${htmlEscape(result.model_name)}</strong><br><span class="muted-note">${htmlEscape(result.risk_horizon || "")}</span></div>${statusPill(result.status)}</div><div class="risk-number">${htmlEscape(riskText)}</div>${missing}${warnings}<div class="muted-note mt-2">${htmlEscape(result.citation || "")}</div></div>`;
+        const warnings = result.warnings && result.warnings.length ? `<ul class="lungrisk-warning-list">${result.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul>` : "";
+        return `<div class="lungrisk-result-card"><div class="lungrisk-result-title"><div><strong>${htmlEscape(result.model_name)}</strong><br><span class="muted-note">${htmlEscape(result.risk_horizon || "")}</span></div>${statusPill(result.status)}</div><div class="lungrisk-risk-number">${htmlEscape(riskText)}</div>${missing}${warnings}<div class="muted-note mt-2">${htmlEscape(result.citation || "")}</div></div>`;
       }
 
       function renderEligibilityCard(item) {
-        return `<div class="result-card-lite"><div class="result-title"><strong>${htmlEscape(item.name)}</strong>${statusPill(item.status, item.status.replace(/_/g, " "))}</div><p class="mb-1">${htmlEscape(item.detail)}</p><ul class="warning-list">${item.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
+        return `<div class="lungrisk-result-card"><div class="lungrisk-result-title"><strong>${htmlEscape(item.name)}</strong>${statusPill(item.status, item.status.replace(/_/g, " "))}</div><p class="mb-1">${htmlEscape(item.detail)}</p><ul class="lungrisk-warning-list">${item.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
       }
 
       function renderFrameworkCard(item) {
-        return `<div class="framework-card"><div class="result-title"><strong>${htmlEscape(item.name)}</strong>${statusPill(item.status)}</div><p class="mb-0 muted-note">${htmlEscape(item.detail)}</p></div>`;
+        return `<div class="lungrisk-framework-card"><div class="lungrisk-result-title"><strong>${htmlEscape(item.name)}</strong>${statusPill(item.status)}</div><p class="mb-0 muted-note">${htmlEscape(item.detail)}</p></div>`;
       }
 
       function renderWarnings(warnings) {
@@ -1820,13 +1718,13 @@ E: summed literature modifier points, cap 20</code></article></div>
       function renderNtogScreeningScore(score) {
         const value = score.ntog_experimental_screening_score === null ? "-" : String(score.ntog_experimental_screening_score);
         const rows = Object.entries(score.components || {}).map(([key, c]) => `<tr><td>${htmlEscape(key.replace(/_/g, " "))}</td><td>${htmlEscape(c.points)} / ${htmlEscape(c.weight)}</td><td>${htmlEscape(c.available ? "yes" : "no")}</td><td>${htmlEscape(c.basis)}</td></tr>`).join("");
-        return `<div class="score-card"><div class="result-title"><div><strong>${htmlEscape(score.model_name)}</strong><br><span class="muted-note">Pre-CT screening research signal. ${htmlEscape(score.version)}</span></div>${statusPill(score.status, score.status.replace(/_/g, " "))}</div><div class="risk-number">${htmlEscape(value)}</div><p class="muted-note mb-2">${htmlEscape(score.category || "No category")}</p><div class="table-wrap"><table class="table table-sm tools-table"><thead><tr><th>Component</th><th>Points</th><th>Available</th><th>Basis</th></tr></thead><tbody>${rows}</tbody></table></div><ul class="warning-list">${score.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
+        return `<div class="lungrisk-score-card"><div class="lungrisk-result-title"><div><strong>${htmlEscape(score.model_name)}</strong><br><span class="muted-note">Pre-CT screening research signal. ${htmlEscape(score.version)}</span></div>${statusPill(score.status, score.status.replace(/_/g, " "))}</div><div class="lungrisk-risk-number">${htmlEscape(value)}</div><p class="muted-note mb-2">${htmlEscape(score.category || "No category")}</p><div class="table-wrap"><table class="table table-sm tools-table"><thead><tr><th>Component</th><th>Points</th><th>Available</th><th>Basis</th></tr></thead><tbody>${rows}</tbody></table></div><ul class="lungrisk-warning-list">${score.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
       }
 
       function renderNtogScore(score) {
         const value = score.ntog_not_valitated_risk_score === null ? "-" : String(score.ntog_not_valitated_risk_score);
         const rows = Object.entries(score.components || {}).map(([key, c]) => `<tr><td>${htmlEscape(key.replace(/_/g, " "))}</td><td>${htmlEscape(c.points)} / ${htmlEscape(c.weight)}</td><td>${htmlEscape(c.available ? "yes" : "no")}</td><td>${htmlEscape(c.basis)}</td></tr>`).join("");
-        return `<div class="score-card"><div class="result-title"><div><strong>${htmlEscape(score.model_name)}</strong><br><span class="muted-note">${htmlEscape(score.version)}</span></div>${statusPill(score.status, score.status.replace(/_/g, " "))}</div><div class="risk-number">${htmlEscape(value)}</div><p class="muted-note mb-2">${htmlEscape(score.category || "No category")}</p><div class="table-wrap"><table class="table table-sm tools-table"><thead><tr><th>Component</th><th>Points</th><th>Available</th><th>Basis</th></tr></thead><tbody>${rows}</tbody></table></div><ul class="warning-list">${score.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
+        return `<div class="lungrisk-score-card"><div class="lungrisk-result-title"><div><strong>${htmlEscape(score.model_name)}</strong><br><span class="muted-note">${htmlEscape(score.version)}</span></div>${statusPill(score.status, score.status.replace(/_/g, " "))}</div><div class="lungrisk-risk-number">${htmlEscape(value)}</div><p class="muted-note mb-2">${htmlEscape(score.category || "No category")}</p><div class="table-wrap"><table class="table table-sm tools-table"><thead><tr><th>Component</th><th>Points</th><th>Available</th><th>Basis</th></tr></thead><tbody>${rows}</tbody></table></div><ul class="lungrisk-warning-list">${score.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul></div>`;
       }
 
       function renderReadiness(results) {
@@ -1921,6 +1819,16 @@ E: summed literature modifier points, cap 20</code></article></div>
         else el.value = value ?? "";
       }
 
+      function syncSensitiveFields() {
+        const allowed = $("allowSensitiveFields").checked;
+        $("racePlco").disabled = !allowed;
+        $("educationPlco").disabled = !allowed;
+        if (!allowed) {
+          $("racePlco").value = "";
+          $("educationPlco").value = "";
+        }
+      }
+
       function loadExample() {
         const today = new Date().toISOString().slice(0, 10);
         setValue("allowSensitiveFields", true);
@@ -1956,14 +1864,14 @@ E: summed literature modifier points, cap 20</code></article></div>
         setValue("bronchiectasisHistory", "no");
         setValue("ildDiagnosis", "none");
         setValue("cpfe", "no");
-        setValue("antifibrotic", "none");
         setValue("thoracicRt", "no");
         setValue("rtIndication", "not_applicable");
         setValue("rtSide", "not_applicable");
+        setValue("antifibrotic", "none");
         setValue("transplantHistory", "none");
         setValue("hivHistory", "no");
-        setValue("dmardBiologic", "none");
         setValue("chronicSteroid", "no");
+        setValue("dmardBiologic", "none");
         setValue("autoimmuneDiagnosis", "none");
         setValue("snusStatus", "never");
         setValue("ecigStatus", "never");
@@ -2007,16 +1915,6 @@ E: summed literature modifier points, cap 20</code></article></div>
         runAll();
       }
 
-      function syncSensitiveFields() {
-        const allowed = $("allowSensitiveFields").checked;
-        $("racePlco").disabled = !allowed;
-        $("educationPlco").disabled = !allowed;
-        if (!allowed) {
-          $("racePlco").value = "";
-          $("educationPlco").value = "";
-        }
-      }
-
       function resetForm() {
         $("lungRiskForm").reset();
         setValue("noduleLabel", "N1");
@@ -2027,7 +1925,11 @@ E: summed literature modifier points, cap 20</code></article></div>
       function copyJson() {
         const text = $("jsonExport").value;
         if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text);
-        else { $("jsonExport").focus(); $("jsonExport").select(); document.execCommand("copy"); }
+        else {
+          $("jsonExport").focus();
+          $("jsonExport").select();
+          document.execCommand("copy");
+        }
       }
 
       function downloadJson() {
@@ -2042,55 +1944,26 @@ E: summed literature modifier points, cap 20</code></article></div>
         URL.revokeObjectURL(url);
       }
 
-      if (typeof window !== "undefined") {
-        window.NTOGLungRiskTest = { logistic, normalize, screeningEligibility, plcoM2012, hunt6, brock, mayo, herder, calculateVDT, frameworkLane, ntogNotValitatedRiskScore, ntogExperimentalScreeningScore };
-      }
+      window.NTOGLungRiskTest = { logistic, normalize, screeningEligibility, plcoM2012, hunt6, brock, mayo, herder, calculateVDT, frameworkLane, ntogNotValitatedRiskScore, ntogExperimentalScreeningScore };
 
-      if (typeof document !== "undefined") {
-        document.addEventListener("DOMContentLoaded", function () {
-          $("runBtn").addEventListener("click", runAll);
-          $("exampleBtn").addEventListener("click", loadExample);
-          $("resetBtn").addEventListener("click", resetForm);
-          $("copyJsonBtn").addEventListener("click", copyJson);
-          $("downloadJsonBtn").addEventListener("click", downloadJson);
-          $("allowSensitiveFields").addEventListener("change", function () { syncSensitiveFields(); runAll(); });
-          $$("#lungRiskForm input, #lungRiskForm select, #blockSmallNodulePet, #blockInflammationPet").forEach((el) => {
-            el.addEventListener("input", runAll);
-            el.addEventListener("change", runAll);
-          });
-          const today = new Date().toISOString().slice(0, 10);
-          setValue("questionnaireDate", today);
-          setValue("noduleLabel", "N1");
-          syncSensitiveFields();
-          runAll();
+      document.addEventListener("DOMContentLoaded", function () {
+        $("runBtn").addEventListener("click", runAll);
+        $("exampleBtn").addEventListener("click", loadExample);
+        $("resetBtn").addEventListener("click", resetForm);
+        $("copyJsonBtn").addEventListener("click", copyJson);
+        $("downloadJsonBtn").addEventListener("click", downloadJson);
+        $("allowSensitiveFields").addEventListener("change", function () { syncSensitiveFields(); runAll(); });
+        $$("#lungRiskForm input, #lungRiskForm select, #blockSmallNodulePet, #blockInflammationPet").forEach((el) => {
+          el.addEventListener("input", runAll);
+          el.addEventListener("change", runAll);
         });
-      }
+        const today = new Date().toISOString().slice(0, 10);
+        setValue("questionnaireDate", today);
+        setValue("noduleLabel", "N1");
+        syncSensitiveFields();
+        runAll();
+      });
     })();
   </script>
-
- <footer class="bg-dark text-white py-4 mt-0">
-    <div class="container text-center">
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
-      <p class="small mb-2">
-  Tool source code licensed under
-  <a href="/LICENSE" class="text-white">Apache License 2.0</a>.
-  Educational text licensed under
-  <a href="https://creativecommons.org/licenses/by/4.0/" class="text-white" target="_blank" rel="noopener">CC BY 4.0</a>.
-  NTOG name and logo are not licensed for reuse.
-</p>
-<p class="small mb-0">
-  Educational and research use only. Not a medical device, diagnostic tool,
-  autonomous clinical decision system, reimbursement decision tool, or substitute
-  for national guidelines, MDT review, clinical judgment, or patient preference.
-</p>     
-      <p class="mb-0">
-        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
-        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="/js/scripts.js" defer></script>
 </body>
 </html>
