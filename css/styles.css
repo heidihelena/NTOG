@@ -101,7 +101,7 @@
 }
 
 .navbar {
-  border-bottom: 3px solid var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
 }
 /* Regular site footer */
 footer.bg-dark {
