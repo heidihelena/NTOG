@@ -104,6 +104,18 @@
   border-bottom: 4px solid var(--primary-color);
 }
 
+/* Regular site navigation active and hover states */
+.navbar .nav-link.active,
+.navbar .dropdown-item.active {
+  color: #ffffff !important;
+  background-color: var(--primary-color);
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-item:hover {
+  color: var(--primary-color-hover) !important;
+}
+
 footer.bg-dark {
   background: linear-gradient(135deg, #071f35 0%, #163a5a 55%, #1f4e79 100%) !important;
 }
