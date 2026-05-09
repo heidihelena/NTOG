@@ -6,7 +6,7 @@
 
   <title>NTOG Experimental Lung Screening and Nodule Risk Hub | Survey and Calculators</title>
   <meta name="description" content="Browser-only NTOG educational and research prototype comparing published lung cancer screening criteria, PLCOm2012, HUNT, Brock, Mayo, Herder, VDT, guideline-reading">
-  <meta name="keywords" content="NTOG experimental lung screening model, never smoker lung cancer risk, newer smoker lung cancer risk, pulmonary nodule risk calculator, PLCOm2012 formula, HUNT lung cancer">
+  <meta name="keywords" content="NTOG experimental lung screening model, never smoker lung cancer risk, former smoker lung cancer risk, pulmonary nodule risk calculator, PLCOm2012 formula, HUNT lung cancer">
   <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
@@ -249,7 +249,6 @@
       padding: 0.9rem;
     }
 
-
     .metric-card {
       border: 1px solid var(--ntog-border);
       border-radius: 1rem;
@@ -410,6 +409,7 @@
   </style>
 </head>
 <body>
+  <a class="visually-hidden-focusable" href="#lung-risk-tool">Skip to calculator</a>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
@@ -479,7 +479,7 @@
     <div class="container">
       <span class="eyebrow">Experimental screening and nodule research</span>
       <h1 class="display-5 fw-bold mb-3">NTOG Experimental Screening and Nodule Risk Research Hub</h1>
-      <p class="lead-narrow mb-4">Educational browser-only survey and calculators for comparing published screening criteria, person-level lung cancer risk models, nodule malignancy models, growth calculators, and research indices. No data is sent, stored, or used for any purpose beyond this browser session.</p>
+      <p class="lead-narrow mb-4">Educational browser-only survey and calculators for comparing published screening criteria, person-level lung cancer risk models, nodule malignancy models, growth calculators, and research indices. Entered calculator data is processed locally in the browser and is not transmitted by this page.</p>
       <div class="d-flex flex-column flex-sm-row gap-3">
         <a href="#lung-risk-tool" class="btn btn-light btn-lg">Start survey</a>
         <a href="#formula-library" class="btn btn-outline-light btn-lg">See formulas</a>
@@ -499,7 +499,7 @@
           <div class="col-lg-7">
             <div class="content-card">
               <p>The page does not send, store, or persist entered data. It does not recommend screening, biopsy, surgery, systemic therapy, radiotherapy, discharge, or surveillance. No patient identifiers are requested or processed.</p>
-              <p class="mb-0">PLCOm2012 and HUNT estimate person-level future lung cancer risk in ever-smokers. Brock, Mayo, and Herder estimate nodule-level malignancy probability. The experimental NTOG emerging-risk questions support research signal documentation and do not alter validated model outputs.</p>
+              <p class="mb-0">PLCOm2012 and HUNT estimate person-level future lung cancer risk in ever-smokers. Brock and Mayo estimate nodule-level malignancy probability. The Herder PET-refined calculation is shown as educational-only pending original-table verification. The experimental NTOG emerging-risk questions support research signal documentation and do not alter validated model outputs.</p>
             </div>
           </div>
         </div>
@@ -515,11 +515,11 @@
           <div class="col-lg-7">
             <span class="tool-label">Browser-only educational prototype</span>
             <h2>Survey and calculator</h2>
-            <p class="lead mb-0">Questions are grouped by subject. NTOG emerging-risk questions are visually separated in green. They feed NTOG research scores and warnings, but never alter the coefficients of PLCOm2012, HUNT, Brock, Mayo, or Herder.</p>
+            <p class="lead mb-0">Questions are grouped by subject. NTOG emerging-risk questions are visually separated in green. They feed NTOG research scores and warnings, but never alter the coefficients of PLCOm2012, HUNT, Brock, or Mayo. Herder is displayed as educational-only pending source-table verification.</p>
           </div>
           <div class="col-lg-5">
             <div class="privacy-bar">
-              <strong>Privacy:</strong> Static browser calculation only. No backend, no cookies, no localStorage, no persistence. JSON export is generated in the browser.
+              <strong>Privacy:</strong> Entered calculator data is processed locally by this static page. This page loads external fonts and CDN assets unless self-hosted.
             </div>
           </div>
         </div>
@@ -550,10 +550,11 @@
               <form id="lungRiskForm" novalidate>
                 <section class="form-section" id="survey-governance">
                   <h3>Governance switches</h3>
-                  <p class="subject-kicker">These switches simulate local governance decisions. Original PLCOm2012 cannot run unless race/ethnicity and education collection is explicitly enabled for this educational context.</p>
+                  <p class="subject-kicker">These switches simulate local governance decisions. Original PLCOm2012 cannot run unless race/ethnicity and education variables are explicitly enabled to reproduce the published model.</p>
                   <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="allowSensitiveFields">
-                    <label class="form-check-label" for="allowSensitiveFields">Allow original PLCO race/ethnicity and education fields for this educational run</label>
+                    <label class="form-check-label" for="allowSensitiveFields">Enable original PLCOm2012 race/ethnicity and education variables for reproducing the published model</label>
+                    <div class="field-help">Race/ethnicity is used only as a published model variable. It should not be interpreted as a biological risk mechanism.</div>
                   </div>
                   <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" id="blockSmallNodulePet" checked>
@@ -575,8 +576,8 @@
                     <div class="col-md-4"><label class="form-label" for="heightCm">Height, cm</label><input class="form-control" type="number" id="heightCm" min="30" max="250" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="weightKg">Weight, kg</label><input class="form-control" type="number" id="weightKg" min="1" max="400" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="questionnaireDate">Questionnaire date</label><input class="form-control" type="date" id="questionnaireDate"></div>
-                    <div class="col-md-6 sensitive-field"><label class="form-label" for="racePlco">Controlled PLCO race/ethnicity enum</label><select class="form-select" id="racePlco" disabled><option value="white">White</option></select></div>
-                    <div class="col-md-6 sensitive-field"><label class="form-label" for="educationPlco">PLCO education level</label><select class="form-select" id="educationPlco" disabled><option value="lt_12">Less than 12 years</option></select></div>
+                    <div class="col-md-6 sensitive-field"><label class="form-label" for="racePlco">Controlled PLCO race/ethnicity enum</label><select class="form-select" id="racePlco" disabled><option value="">Select</option><option value="white">White</option><option value="black">Black</option><option value="hispanic">Hispanic</option><option value="asian">Asian</option><option value="american_indian_alaskan_native">American Indian / Alaskan Native</option><option value="native_hawaiian_pacific_islander">Native Hawaiian / Pacific Islander</option></select></div>
+                    <div class="col-md-6 sensitive-field"><label class="form-label" for="educationPlco">PLCO education level</label><select class="form-select" id="educationPlco" disabled><option value="">Select</option><option value="1">Less than high school</option><option value="2">High school graduate</option><option value="3">Post-high-school training</option><option value="4">Some college</option><option value="5">College graduate</option><option value="6">Postgraduate/professional degree</option></select></div>
                   </div>
                 </section>
 
@@ -593,7 +594,7 @@
                     <div class="col-md-4"><label class="form-label" for="packYearsOverride">Pack-years override</label><input class="form-control" type="number" id="packYearsOverride" min="0" step="0.1"></div>
                     <div class="col-md-8"><label class="form-label" for="packYearsOverrideReason">Override rationale</label><input class="form-control" type="text" id="packYearsOverrideReason" placeholder="e.g., self-reported, estimated"></div>
                     <div class="col-md-4"><label class="form-label" for="dailyCough">Daily cough</label><select class="form-select" id="dailyCough"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-                    <div class="col-md-4"><label class="form-label" for="indoorSmokeHours">Daily indoor smoke exposure, hours</label><input class="form-control" type="number" id="indoorSmokeHours" min="0" max="24" step="0.1"></div>
+                    <div class="col-md-4"><label class="form-label" for="indoorSmokeHours">Daily indoor tobacco-smoke exposure, hours</label><input class="form-control" type="number" id="indoorSmokeHours" min="0" max="24" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="passiveSmoke">Regular passive smoke exposure</label><select class="form-select" id="passiveSmoke"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                   </div>
                 </section>
@@ -609,8 +610,8 @@
                     <div class="col-md-4"><label class="form-label" for="previousLungCancer">Previous lung cancer</label><select class="form-select" id="previousLungCancer"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="extrathoracicGt5y">Extrathoracic cancer more than 5 years before nodule</label><select class="form-select" id="extrathoracicGt5y"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="extrathoracicWithin5y">Extrathoracic cancer within 5 years</label><select class="form-select" id="extrathoracicWithin5y"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-                    <div class="col-md-4"><label class="form-label" for="familyLungCancer">Family history of lung cancer, any relative</label><select class="form-select" id="familyLungCancer"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-                    <div class="col-md-4"><label class="form-label" for="firstDegreeLungCancer">First-degree relative with lung cancer</label><select class="form-select" id="firstDegreeLungCancer"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+                    <div class="col-md-4"><label class="form-label" for="familyLungCancer">Family history of lung cancer used for PLCOm2012</label><select class="form-select" id="familyLungCancer"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+                    <div class="col-md-4"><label class="form-label" for="firstDegreeLungCancer">First-degree relative with lung cancer used for Brock</label><select class="form-select" id="firstDegreeLungCancer"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="tbHistory">Previous tuberculosis</label><select class="form-select" id="tbHistory"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="ntmHistory">Previous NTM disease</label><select class="form-select" id="ntmHistory"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="bronchiectasisHistory">Bronchiectasis</label><select class="form-select" id="bronchiectasisHistory"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
@@ -620,7 +621,7 @@
                 <section class="form-section ntog-section" id="survey-emerging">
                   <span class="tool-label research">NTOG research extension</span>
                   <h3>NTOG emerging-risk questions</h3>
-                  <p class="subject-kicker">Green fields feed warnings, research export, and the non-validated NTOG literature-weighted score. They never change PLCOm2012, HUNT, Brock, Mayo, or Herder.</p>
+                  <p class="subject-kicker">Green fields feed warnings, research export, and the non-validated NTOG literature-weighted score. They never change PLCOm2012, HUNT, Brock, or Mayo.</p>
                   <div class="row g-3">
                     <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="ildDiagnosis">ILD or pulmonary fibrosis</label><select class="form-select" id="ildDiagnosis"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div></div>
                     <div class="col-md-6"><div class="ntog-field"><label class="form-label" for="cpfe">Combined pulmonary fibrosis and emphysema</label><select class="form-select" id="cpfe"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div></div>
@@ -681,10 +682,10 @@
 
                 <section class="form-section" id="survey-pet">
                   <h3>PET/CT</h3>
-                  <p class="subject-kicker">Herder uses Mayo/Swensen pretest probability and FDG uptake category. Brock-pretest Herder is not wired in this version.</p>
+                  <p class="subject-kicker">The educational Herder calculation uses Mayo/Swensen pretest probability and FDG uptake category, and requires original-table verification before clinical or research use. Brock-pretest Herder is not wired in this version.</p>
                   <div class="row g-3">
                     <div class="col-md-4"><label class="form-label" for="petPerformed">FDG-PET/CT performed</label><select class="form-select" id="petPerformed"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-                    <div class="col-md-4"><label class="form-label" for="fdgUptake">FDG uptake category</label><select class="form-select" id="fdgUptake"><option value="unknown">Unknown</option><option value="low">Low</option><option value="moderate">Moderate</option><option value="high">High</option></select></div>
+                    <div class="col-md-4"><label class="form-label" for="fdgUptake">FDG uptake category</label><select class="form-select" id="fdgUptake"><option value="unknown">Unknown</option><option value="absent">Absent/no uptake</option><option value="low">Faint/discrete</option><option value="moderate">Moderate</option><option value="high">Intense/high</option></select></div>
                     <div class="col-md-4"><label class="form-label" for="suvMax">SUVmax, optional</label><input class="form-control" type="number" id="suvMax" min="0" step="0.1"></div>
                     <div class="col-md-4"><label class="form-label" for="petDate">PET interpretation date</label><input class="form-control" type="date" id="petDate"></div>
                     <div class="col-md-4"><div class="form-check mt-4"><input class="form-check-input" type="checkbox" id="petSmallNoduleCaveat"><label class="form-check-label" for="petSmallNoduleCaveat">PET may be unreliable for small nodule</label></div></div>
@@ -717,21 +718,21 @@
           <div class="col-lg-4">
             <div class="result-panel">
               <h2 class="h4">Screening and person-level models</h2>
-              <div class="readiness-block mb-3"><h3 class="h6 mb-2">Readiness</h3><div id="readinessOut" class="d-flex flex-column gap-2"></div></div>
-              <div id="screeningResults"></div>
+              <div class="readiness-block mb-3"><h3 class="h6 mb-2">Readiness</h3><div id="readinessOut" class="d-flex flex-column gap-2" aria-live="polite"></div></div>
+              <div id="screeningResults" aria-live="polite"></div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="result-panel">
               <h2 class="h4">Nodule-level models</h2>
-              <div id="noduleResults"></div>
+              <div id="noduleResults" aria-live="polite"></div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="result-panel">
               <h2 class="h4">NTOG experimental scores</h2>
-              <div id="ntogScreeningScoreResult"></div>
-              <div id="ntogScoreResult" class="mt-3"></div>
+              <div id="ntogScreeningScoreResult" aria-live="polite"></div>
+              <div id="ntogScoreResult" class="mt-3" aria-live="polite"></div>
             </div>
           </div>
         </div>
@@ -741,13 +742,13 @@
             <div class="result-panel">
               <h2 class="h4">Management framework readiness</h2>
               <p class="muted-note">This lane checks context and data availability only. It does not output Fleischner, BTS, Lung-RADS, NELSON, or ESTI management advice.</p>
-              <div class="framework-grid" id="frameworkResults"></div>
+              <div class="framework-grid" id="frameworkResults" aria-live="polite"></div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="result-panel">
               <h2 class="h4">Warnings and structured report text</h2>
-              <div id="modifierWarnings"></div>
+              <div id="modifierWarnings" aria-live="polite"></div>
               <hr>
               <p id="structuredReportText" class="mb-0"></p>
             </div>
@@ -760,14 +761,14 @@
               <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center mb-3">
                 <div>
                   <h2 class="h4 mb-1">JSON export</h2>
-                  <p class="muted-note mb-0">Structured export with inputs, normalized variables, model outputs, warnings, formulas, score components, and audit metadata.</p>
+                  <p class="muted-note mb-0">Structured export with inputs, derived-variable provenance, model outputs, applicability, formula metadata, thresholds, privacy notes, and dependency graph.</p>
                 </div>
                 <div class="d-flex gap-2">
                   <button type="button" class="btn btn-outline-primary" id="copyJsonBtn">Copy JSON</button>
                   <button type="button" class="btn btn-primary" id="downloadJsonBtn">Download JSON</button>
                 </div>
               </div>
-              <textarea class="form-control export-box" id="jsonExport" spellcheck="false" readonly></textarea>
+              <textarea class="form-control export-box" id="jsonExport" spellcheck="false" readonly aria-live="polite"></textarea>
             </div>
           </div>
         </div>
@@ -779,7 +780,12 @@
         <div class="row g-4 align-items-start mb-4">
           <div class="col-lg-5">
             <h2>Formulas and score construction</h2>
-            <p class="lead mb-0">The validated formulas are shown exactly as implemented. NTOG scores are separate, non-validated, literature-weighted research indices. The screening score is pre-CT.</p>
+            <p class="lead mb-0">
+              Published model equations are displayed for transparency. PLCOm2012 and HUNT
+              coefficients are inserted pending independent test-case validation. Mayo and
+              Brock are implemented with published/common coefficient forms. Herder remains
+              educational-only pending original-table verification.
+            </p>
           </div>
           <div class="col-lg-7">
             <div class="warning-note">
@@ -789,17 +795,134 @@
         </div>
 
         <div class="row g-4">
-          <div class="col-lg-6"><article class="formula-card"><h3>PLCOm2012 original</h3><p class="muted-note">Person-level 6-year lung cancer risk in ever-smokers. Original race/ethnicity and education required.</p><code class="formula-code">logit(lp) = -4.62 + age + smoking + education + race
-risk = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>HUNT Lung Cancer Model, corrected 6-year equation</h3><p class="muted-note">Person-level 6-year risk in ever-smokers. Natural logarithm of pack-years.</p><code class="formula-code">logit(Xb6) = -8.65 + age_component + ln(pack_years + 1) + smoking_status
+          <div class="col-lg-6"><article class="formula-card"><h3>PLCOm2012 original</h3><p class="muted-note">Person-level 6-year lung cancer risk in ever-smokers. The model first builds a linear predictor from centered clinical and smoking variables, then converts that value to a probability with the logistic function. Original race/ethnicity and education fields require explicit governance opt-in.</p><code class="formula-code">Step 1: code variables
+education: 1 less than high school, 2 high school graduate,
+           3 post-high-school training, 4 some college,
+           5 college graduate, 6 postgraduate/professional
+COPD, personal_cancer_history, family_history_lung_cancer,
+current_smoker: yes = 1, no = 0
+quit_years = 0 for current smokers
+
+Step 2: transform variables
+age_centered = age - 62
+education_centered = education - 4
+BMI_centered = BMI - 27
+smoking_intensity_transform = (cigarettes_per_day/10)^-1 - 0.4021541613
+years_smoked_centered = years_smoked - 27
+quit_years_centered = quit_years - 10
+
+Step 3: calculate linear predictor
+lp = -4.532506
+    + 0.0778868*(age - 62)
+    - 0.0812744*(education - 4)
+    - 0.0274194*(BMI - 27)
+    + 0.3553063*COPD
+    + 0.4589971*personal_cancer_history
+    + 0.5871850*family_history_lung_cancer
+    + 0.2597431*current_smoker
+    - 1.8226060*((cigarettes_per_day/10)^-1 - 0.4021541613)
+    + 0.0317321*(years_smoked - 27)
+    - 0.0308572*(quit_years - 10)
+    + race_ethnicity_term
+
+race_ethnicity_term:
+White / American Indian / Alaskan Native = 0
+Black = 0.3944778
+Hispanic = -0.7434744
+Asian = -0.4665850
+Native Hawaiian / Pacific Islander = 1.0271520
+
+Step 4: convert to 6-year probability
+risk = exp(lp)/(1+exp(lp))</code></article></div>
+          <div class="col-lg-6"><article class="formula-card"><h3>HUNT Lung Cancer Model, corrected 6-year equation</h3><p class="muted-note">Person-level 6-year risk in ever-smokers. The corrected equation uses natural logarithms with +1 increments, then converts Xb6 to a 6-year probability.</p><code class="formula-code">Step 1: code variables
+male: male = 1, female = 0
+daily_cough: yes = 1, no = 0
+quit_years = 0 for current smokers
+smoke_exposure_hours = daily indoor tobacco-smoke exposure hours
+
+Step 2: transform variables
+age_inverse = (age/100)^(-1)
+ln_pack_years = ln(pack_years + 1)
+ln_quit_years = ln(quit_years + 1)
+ln_BMI = ln(BMI + 1)
+ln_smoke_exposure = ln(smoke_exposure_hours + 1)
+
+Step 3: calculate corrected 6-year predictor
+Xb6 = 1.18203062
+    + 0.31573217*male
+    - 1.98496138*(age/100)^(-1)
+    + 1.11994217*ln(pack_years + 1)
+    - 0.04002877*cigarettes_per_day
+    - 0.24019955*ln(quit_years + 1)
+    - 1.70238304*ln(BMI + 1)
+    + 0.08072420*ln(smoke_exposure_hours + 1)
+    + 0.49212668*daily_cough
+
+Step 4: convert to 6-year probability
 risk6 = 1/(1+exp(-Xb6))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Brock / PanCan full model</h3><p class="muted-note">Nodule-level probability. This prototype reads first-degree relative lung cancer from family history, not separate entry.</p><code class="formula-code">lp = -6.3 + 0.0286*age + 0.769*ln(diameter) + spiculation + nodule_type
-nodule_type: solid = 0, part_solid = 0.377, non_solid_ground_glass = -0.1276
-risk = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Mayo / Swensen pretest probability</h3><p class="muted-note">Nodule-level pretest probability. Current or former smoker equals 1. Never smoker equals 0.</p><code class="formula-code">lp = -6.5 + 0.0287*age + smoking + 0.654*ln(diameter) + upper_lobe
-mayo_probability = 1/(1+exp(-lp))</code></article></div>
-          <div class="col-lg-6"><article class="formula-card"><h3>Herder PET-refined probability</h3><p class="muted-note">Original Herder uses Mayo/Swensen pretest probability. External or Brock-pretest variants exist.</p><code class="formula-code">lp = -1.3 + 1.41*ln(mayo_pretest/(1-mayo_pretest)) + 0.67*fdg_uptake
-herder_probability = 1/(1+exp(-x))</code></article></div>
+          <div class="col-lg-6"><article class="formula-card"><h3>Brock / PanCan full model with spiculation, as commonly implemented</h3><p class="muted-note">Nodule-level probability. The full model combines patient factors, nodule morphology, size transformation, nodule count, and location, then applies the logistic conversion. This prototype prefers maximum diameter, falling back to mean diameter if maximum diameter is unavailable, and reads first-degree relative lung cancer from family history.</p><code class="formula-code">Step 1: code variables
+female, family_history_lung_cancer, emphysema,
+upper_lobe, spiculation: yes = 1, no = 0
+diameter_mm = maximum diameter if available, otherwise mean diameter
+
+nodule_type_term:
+solid = 0
+part-solid = 0.377
+non-solid / ground-glass = -0.1276
+
+Step 2: transform variables
+age_centered = age - 62
+diameter_transform = (diameter_mm/10)^-0.5 - 1.58113883
+nodule_count_centered = nodule_count - 4
+
+Step 3: calculate linear predictor
+x = -6.7892
+    + 0.0287*(age - 62)
+    + 0.6011*female
+    + 0.2961*family_history_lung_cancer
+    + 0.2953*emphysema
+    - 5.3854*((diameter_mm/10)^-0.5 - 1.58113883)
+    + nodule_type_term
+    + 0.6581*upper_lobe
+    - 0.0824*(nodule_count - 4)
+    + 0.7729*spiculation
+
+Step 4: convert to malignancy probability
+risk = 1/(1+exp(-x))</code></article></div>
+          <div class="col-lg-6"><article class="formula-card"><h3>Mayo / Swensen pretest probability</h3><p class="muted-note">Nodule-level pretest probability. This model uses clinical risk factors and nodule imaging features to build a linear predictor, then applies the logistic conversion.</p><code class="formula-code">Step 1: code variables
+smoking: current or former smoker = 1, never smoker = 0
+previous_extrathoracic_cancer_gt_5y: yes = 1, no = 0
+spiculation: yes = 1, no = 0
+upper_lobe: yes = 1, no = 0
+diameter_mm = maximum diameter if available, otherwise mean diameter
+
+Step 2: calculate linear predictor
+x = -6.8272 + 0.0391*age + 0.7917*smoking
+    + 1.3388*previous_extrathoracic_cancer_gt_5y
+    + 0.1274*diameter_mm
+    + 1.0407*spiculation
+    + 0.7838*upper_lobe
+
+Step 3: convert to malignancy probability
+risk = 1/(1+exp(-x))</code></article></div>
+          <div class="col-lg-6"><article class="formula-card"><h3>Herder PET-refined probability</h3><p class="muted-note">Herder refines a pretest nodule probability using FDG-PET uptake. This prototype currently uses Mayo probability directly as the pretest probability input and requires verification against the original model table before clinical or research use.</p><code class="formula-code">Step 1: start with Mayo pretest probability
+mayo_probability = Mayo / Swensen probability as a 0-1 value
+
+Step 2: code FDG-PET uptake indicators
+absent/no uptake: faint = 0, moderate = 0, intense = 0
+faint/discrete:   faint = 1, moderate = 0, intense = 0
+moderate:         faint = 0, moderate = 1, intense = 0
+intense/high:     faint = 0, moderate = 0, intense = 1
+
+Step 3: calculate PET-refined predictor
+x = -4.739
+    + 3.691*mayo_probability
+    + 2.322*faint_uptake
+    + 4.617*moderate_uptake
+    + 4.771*intense_uptake
+
+Step 4: convert to PET-refined probability
+risk = 1/(1+exp(-x))</code></article></div>
           <div class="col-lg-6"><article class="formula-card"><h3>Volume doubling time</h3><p class="muted-note">Requires current and prior volume, CT dates, and same measurement method.</p><code class="formula-code">volume_change_ratio = current_volume / prior_volume
 days_between = daysBetween(prior_date, current_date)
 vdt = days_between * ln(2) / ln(volume_change_ratio)</code></article></div>
@@ -818,10 +941,10 @@ X: radon up to 5, occupational exposures up to 10, passive/indoor smoke and non-
 H: first-degree/family history, prior thoracic RT, prior cancer, transplant, HIV, steroids, biologics/DMARDs, cap 20
 
 Research signal bands: <20 low, 20-39 intermediate, 40-59 elevated, 60-79 high, >=80 very high. No clinical screening threshold is defined.</code></article></div>
-          <div class="col-12"><article class="formula-card"><span class="tool-label research">NTOG non-validated research index</span><h3>ntog_not_validated_risk_score</h3><p>The score is built as a literature-weighted composite. Missing domains are not imputed; score is normalized by available weight.</p><code class="formula-code">
+          <div class="col-12"><article class="formula-card"><span class="tool-label research">NTOG post-CT research score</span><h3>NTOG post-CT research score</h3><p>This post-CT score is a non-validated, literature-weighted research composite. Missing domains are not imputed; score is normalized by available weight.</p><code class="formula-code">
 Weights if available:
 P = person-model component, max 20 points, max of PLCOm2012 and HUNT percent risk
-N = nodule-model component, max 35 points, max of Brock, Mayo, and Herder percent risk
+N = nodule-model component, max 35 points, max of calculated Brock, Mayo, and verified Herder percent risk
 G = growth component, max 15 points, VDT or simple growth category
 S = smoking-architecture component, max 10 points, duration, intensity, current smoking, recent quitting
 E = NTOG emerging-risk component, max 20 points, ILD/CPFE, thoracic RT, immunosuppression, TB/NTM/bronchiectasis, radon, occupational exposures, autoimmune disease, COVID imaging context, diabetes, never-smoker context
@@ -854,9 +977,26 @@ E: summed literature modifier points, cap 20</code></article></div>
     </section>
   </main>
 
-  <footer class="bg-dark text-white py-4 mt-0">
+    <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
       <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+
+      <p class="small mb-2">
+        Tool source code licensed under
+        <a href="/LICENSE" class="text-white">Apache License 2.0</a>.
+        Educational text licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/" class="text-white" target="_blank" rel="noopener">
+          CC BY 4.0
+        </a>.
+        NTOG name and logo are not licensed for reuse.
+      </p>
+
+      <p class="small mb-2">
+        Educational and research use only. Not a medical device, diagnostic tool,
+        autonomous clinical decision system, reimbursement decision tool, or substitute
+        for national guidelines, MDT review, clinical judgment, or patient preference.
+      </p>
+
       <p class="mb-0">
         <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
@@ -868,15 +1008,15 @@ E: summed literature modifier points, cap 20</code></article></div>
   <script src="/js/scripts.js" defer></script>
 
   <script>
-    (function () {
+    (() => {
       "use strict";
 
       const MODEL_VERSIONS = {
-        PLCOm2012_ORIGINAL: "2013_NEJM_coefficients_static_0.2.0",
-        HUNT_LCM_6Y: "2022_corrigendum_coefficients_static_0.2.0",
-        BROCK_FULL: "full_model_with_spiculation_static_0.2.0",
-        MAYO_SWENSEN_DEPENDENCY: "swensen_1997_static_0.2.0",
-        HERDER: "herder_2005_static_0.2.0",
+        PLCOm2012_ORIGINAL: "plcom2012_2013_published_coefficients_static_0.3.0",
+        HUNT_LCM_6Y: "hunt_lcm_6y_2022_corrigendum_coefficients_static_0.3.0",
+        BROCK_FULL: "brock_pancan_full_with_spiculation_common_implementation_static_0.3.1",
+        MAYO_SWENSEN_DEPENDENCY: "swensen_1997_published_coefficients_static_0.3.0",
+        HERDER: "herder_2005_requires_original_table_verification_static_0.3.1",
         VDT: "vdt_static_0.2.0",
         NTOG_NOT_VALIDATED_RISK_SCORE: "ntog_not_validated_risk_score_literature_weighted_0.3.0",
         NTOG_EXPERIMENTAL_SCREENING_SCORE: "ntog_experimental_screening_score_literature_weighted_0.3.0"
@@ -888,96 +1028,327 @@ E: summed literature modifier points, cap 20</code></article></div>
         BROCK_FULL: "McWilliams A et al. N Engl J Med. 2013;369:910-919.",
         MAYO_SWENSEN_DEPENDENCY: "Swensen SJ et al. Arch Intern Med. 1997;157:849-855.",
         HERDER: "Herder GJ et al. Chest. 2005;128:2490-2496.",
-        NTOG_NOT_VALIDATED_RISK_SCORE: "Non-validated NTOG post-CT literature-weighted research index v0.3. No clinical validation.",
-        NTOG_EXPERIMENTAL_SCREENING_SCORE: "Non-validated NTOG pre-CT literature-weighted screening research model v0.3. No clinical validation."
+        NTOG_NOT_VALIDATED_RISK_SCORE: "Non-validated NTOG post-CT literature-weighted research index v0.3.",
+        NTOG_EXPERIMENTAL_SCREENING_SCORE: "Non-validated NTOG pre-CT literature-weighted screening research model v0.3."
       };
 
       const $ = (id) => document.getElementById(id);
       const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+      const round = (value, places = 1) => {
+        if (!Number.isFinite(value)) return null;
+        return Number(value.toFixed(places));
+      };
+
       const logistic = (x) => 1 / (1 + Math.exp(-x));
-      const round = (value, places = 1) => Number.isFinite(value) ? Number(value.toFixed(places)) : null;
-      const pct = (p) => Number.isFinite(p) ? round(p * 100, 1) : null;
-      const htmlEscape = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;" }[char]));
 
-      function numberValue(id) {
+      const percent = (probability) => {
+        if (!Number.isFinite(probability)) return null;
+        return round(probability * 100, 1);
+      };
+
+      const htmlEscape = (value) => {
+        return String(value ?? "").replace(/[&<>'"]/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "'": "&#39;",
+          "\"": "&quot;"
+        }[char]));
+      };
+
+      const getNumber = (id) => {
+        const el = $(id);
+        if (!el || el.value === "") return null;
+
+        const value = Number(el.value);
+        return Number.isFinite(value) ? value : null;
+      };
+
+      const getText = (id) => {
         const el = $(id);
         if (!el) return null;
-        const raw = el.value;
-        if (raw === "" || raw === null || raw === undefined) return null;
-        const n = Number(raw);
-        return Number.isFinite(n) ? n : null;
-      }
 
-      function stringValue(id) {
-        const el = $(id);
-        return el ? el.value : "";
-      }
-
-      function textValue(id) {
-        const el = $(id);
-        if (!el) return null;
         const value = el.value.trim();
         return value.length ? value : null;
-      }
+      };
 
-      function bool01(value) {
+      const getValue = (id) => {
+        const el = $(id);
+        if (!el) return null;
+        return el.value === "" ? null : el.value;
+      };
+
+      const getChecked = (id) => {
+        const el = $(id);
+        return Boolean(el && el.checked);
+      };
+
+      const yesNo = (value) => {
         if (value === "yes") return 1;
         if (value === "no") return 0;
         return null;
-      }
+      };
 
-      function isMissing(value) {
-        return value === null || value === undefined || value === "" || value === "unknown" || Number.isNaN(value);
-      }
+      const isYes = (id) => getValue(id) === "yes";
 
-      function statusPill(status, label) {
-        const safeStatus = String(status || "not_calculable").replace(/[^a-zA-Z0-9_]/g, "_");
-        return `<span class="status-pill status-${safeStatus}">${htmlEscape(label || status)}</span>`;
-      }
+      const uuid = () => {
+        if (window.crypto?.randomUUID) return window.crypto.randomUUID();
 
-      function uuid() {
-        if (typeof window !== "undefined" && window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-          const r = Math.random() * 16 | 0;
-          const v = c === "x" ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
+          const random = Math.random() * 16 | 0;
+          const value = char === "x" ? random : (random & 0x3 | 0x8);
+          return value.toString(16);
         });
+      };
+
+      const daysBetween = (olderDate, newerDate) => {
+        if (!olderDate || !newerDate) return null;
+
+        const older = new Date(`${olderDate}T00:00:00Z`);
+        const newer = new Date(`${newerDate}T00:00:00Z`);
+
+        if (Number.isNaN(older.getTime()) || Number.isNaN(newer.getTime())) return null;
+
+        return Math.round((newer.getTime() - older.getTime()) / 86400000);
+      };
+
+      const setText = (id, value) => {
+        const el = $(id);
+        if (el) el.textContent = value ?? "-";
+      };
+
+      const setHTML = (id, value) => {
+        const el = $(id);
+        if (el) el.innerHTML = value ?? "";
+      };
+
+      const statusPill = (status, label = status) => {
+        const safeStatus = String(status || "not_calculable").replace(/[^a-zA-Z0-9_]/g, "_");
+        return `<span class="status-pill status-${safeStatus}">${htmlEscape(label)}</span>`;
+      };
+
+      function calculateBMI(heightCm, weightKg) {
+        if (!heightCm || !weightKg || heightCm <= 0 || weightKg <= 0) return null;
+
+        const heightM = heightCm / 100;
+        return round(weightKg / (heightM * heightM), 1);
       }
 
-      function daysBetween(dateA, dateB) {
-        if (!dateA || !dateB) return null;
-        const a = new Date(dateA + "T00:00:00Z");
-        const b = new Date(dateB + "T00:00:00Z");
-        if (Number.isNaN(a.getTime()) || Number.isNaN(b.getTime())) return null;
-        return Math.round((a.getTime() - b.getTime()) / 86400000);
+      function calculatePackYears(cigsPerDay, yearsSmoked, override, smokingStatus) {
+        if (smokingStatus === "never") {
+          return {
+            value: 0,
+            source: "set_to_zero_for_never_smoker"
+          };
+        }
+
+        if (override !== null && override >= 0) {
+          return {
+            value: round(override, 1),
+            source: "override"
+          };
+        }
+
+        if (cigsPerDay === null || yearsSmoked === null) {
+          return {
+            value: null,
+            source: "missing"
+          };
+        }
+
+        if (cigsPerDay < 0 || yearsSmoked < 0) {
+          return {
+            value: null,
+            source: "invalid"
+          };
+        }
+
+        return {
+          value: round((cigsPerDay / 20) * yearsSmoked, 1),
+          source: "calculated"
+        };
       }
 
-      function resultTemplate({ model_code, model_name, status, risk_value, risk_percent, risk_horizon, unit = "percent", inputs_used = {}, missing_variables = [], warnings = [], model_population = "", citation = "", version = "" }) {
-        return { model_code, model_name, status, risk_value, risk_percent, risk_horizon, unit, inputs_used, missing_variables, warnings, model_population, citation, version };
+      function calculateQuitYears(age, ageQuit, rawQuitYears, smokingStatus) {
+        if (smokingStatus === "never") return null;
+        if (smokingStatus === "current") return 0;
+        if (rawQuitYears !== null) return round(rawQuitYears, 1);
+        if (age !== null && ageQuit !== null && age >= ageQuit) return round(age - ageQuit, 1);
+
+        return null;
       }
 
-      function notCalculable(code, name, missing, warnings, population, citation, version, status = "not_calculable", horizon = null) {
-        return resultTemplate({
+      function calculateVDT(input) {
+        const currentVolume = input.currentVolumeMm3;
+        const priorVolume = input.priorVolumeMm3;
+        const sameMethod = input.measurementSameMethod === "yes";
+        const intervalDays = daysBetween(input.priorCtDate, input.ctDate);
+
+        const missing = [];
+
+        if (!sameMethod) missing.push("same measurement method");
+        if (currentVolume === null || currentVolume <= 0) missing.push("current volume > 0");
+        if (priorVolume === null || priorVolume <= 0) missing.push("prior volume > 0");
+        if (intervalDays === null || intervalDays <= 0) missing.push("valid positive CT date interval");
+
+        if (missing.length) {
+          return {
+            status: "not_calculable",
+            value: null,
+            category: "not assessed",
+            missing
+          };
+        }
+
+        const ratio = currentVolume / priorVolume;
+
+        if (ratio <= 1) {
+          return {
+            status: "calculated",
+            value: null,
+            category: "stable or decreasing",
+            missing: []
+          };
+        }
+
+        const vdt = intervalDays * Math.log(2) / Math.log(ratio);
+
+        let category = "indeterminate";
+        if (vdt < 100) category = "very rapid growth";
+        else if (vdt < 400) category = "growth in suspicious range";
+        else if (vdt < 600) category = "slow growth";
+        else category = "very slow growth";
+
+        return {
+          status: "calculated",
+          value: round(vdt, 0),
+          category,
+          missing: []
+        };
+      }
+
+      const FORMULA_METADATA = {
+        PLCOm2012_ORIGINAL: {
+          formula_name: "PLCOm2012 original 6-year logistic model",
+          coefficient_source: MODEL_CITATIONS.PLCOm2012_ORIGINAL,
+          coefficient_status: "inserted_pending_independent_test_case_validation",
+          link_function: "logistic",
+          horizon: "6 years",
+          implementation_note: "Race/ethnicity and education are included only to reproduce the published model."
+        },
+        HUNT_LCM_6Y: {
+          formula_name: "HUNT Lung Cancer Model corrected 6-year logistic equation",
+          coefficient_source: MODEL_CITATIONS.HUNT_LCM_6Y,
+          coefficient_status: "inserted_pending_independent_test_case_validation",
+          link_function: "logistic",
+          horizon: "6 years",
+          implementation_note: "Natural logarithms and corrigendum +1 increments are used."
+        },
+        MAYO_SWENSEN_DEPENDENCY: {
+          formula_name: "Mayo / Swensen solitary pulmonary nodule model",
+          coefficient_source: MODEL_CITATIONS.MAYO_SWENSEN_DEPENDENCY,
+          coefficient_status: "published_coefficients_inserted",
+          link_function: "logistic",
+          horizon: null,
+          implementation_note: "Uses extrathoracic cancer more than 5 years before nodule assessment, not broad previous-cancer history."
+        },
+        BROCK_FULL: {
+          formula_name: "Brock / PanCan full model with spiculation, common implementation",
+          coefficient_source: MODEL_CITATIONS.BROCK_FULL,
+          coefficient_status: "published_coefficients_inserted_common_variant",
+          link_function: "logistic",
+          horizon: null,
+          implementation_note: "This prototype prefers maximum diameter and falls back to mean diameter if maximum diameter is unavailable."
+        },
+        HERDER: {
+          formula_name: "Herder PET-refined probability",
+          coefficient_source: MODEL_CITATIONS.HERDER,
+          coefficient_status: "requires_original_table_verification",
+          link_function: "logistic",
+          horizon: null,
+          implementation_note: "Displayed educationally; currently uses Mayo probability directly as the pretest probability input."
+        }
+      };
+
+      function makeApplicability(status, population, reasons = []) {
+        return {
+          status,
+          model_population: population || null,
+          reasons
+        };
+      }
+
+      function makeResult({
+        code,
+        name,
+        status,
+        riskValue = null,
+        horizon = null,
+        inputs = {},
+        transformed = {},
+        missing = [],
+        warnings = [],
+        population = "",
+        applicability = null
+      }) {
+        return {
           model_code: code,
           model_name: name,
-          status,
-          risk_value: null,
-          risk_percent: null,
+          calculation_status: status,
+          applicability: applicability || makeApplicability(
+            status === "calculated" ? "potentially_applicable" : "not_assessed",
+            population,
+            missing.length ? ["Required variables are missing."] : []
+          ),
+          risk_probability: Number.isFinite(riskValue) ? riskValue : null,
+          risk_percent: percent(riskValue),
           risk_horizon: horizon,
-          missing_variables: missing || [],
-          warnings: warnings || [],
-          model_population: population,
-          citation,
-          version
+          formula_metadata: FORMULA_METADATA[code] || null,
+          inputs_used: inputs,
+          transformed_variables: transformed,
+          missing_variables: missing,
+          warnings,
+          citation: MODEL_CITATIONS[code] || "",
+          version: MODEL_VERSIONS[code] || ""
+        };
+      }
+
+      function missingResult(code, name, missing, warnings = [], population = "", horizon = null, applicability = null) {
+        return makeResult({
+          code,
+          name,
+          status: "not_calculable",
+          horizon,
+          missing,
+          warnings,
+          population,
+          applicability
         });
       }
 
       function collectInput() {
         const occupationalExposures = $$(".occ:checked").map((el) => el.value);
+
+        const age = getNumber("ageYears");
+        const heightCm = getNumber("heightCm");
+        const weightKg = getNumber("weightKg");
+        const cigsPerDay = getNumber("cigsPerDay");
+        const yearsSmoked = getNumber("yearsSmoked");
+        const packYearsOverride = getNumber("packYearsOverride");
+        const smokingStatus = getValue("smokingStatus");
+        const packYearsResult = calculatePackYears(
+          cigsPerDay,
+          yearsSmoked,
+          packYearsOverride,
+          smokingStatus
+        );
+
         return {
-          schema_version: "0.3.0-static-educational",
+          schema_version: "0.4.0-static-educational",
           calculation_session_id: uuid(),
           calculated_at: new Date().toISOString(),
+
           site_config: {
             enabled_models: {
               PLCOm2012_ORIGINAL: true,
@@ -994,39 +1365,1742 @@ E: summed literature modifier points, cap 20</code></article></div>
               HUNT_screening_percent: null
             },
             governance: {
-              allow_race_ethnicity: $("allowSensitiveFields").checked,
-              allow_education: $("allowSensitiveFields").checked,
-              block_herder_if_pet_small_nodule_caveat: $("blockSmallNodulePet").checked,
-              block_herder_if_inflammation_or_infection_caveat: $("blockInflammationPet").checked,
+              allow_race_ethnicity: getChecked("allowSensitiveFields"),
+              allow_education: getChecked("allowSensitiveFields"),
+              block_herder_if_pet_small_nodule_caveat: getChecked("blockSmallNodulePet"),
+              block_herder_if_inflammation_or_infection_caveat: getChecked("blockInflammationPet")
             }
           },
-          // ... rest of form data collection
+
+          person: {
+            age_years: age,
+            sex_at_birth: getValue("sexAtBirth"),
+            country_context: getText("countryContext"),
+            height_cm: heightCm,
+            weight_kg: weightKg,
+            bmi: calculateBMI(heightCm, weightKg),
+            questionnaire_date: getValue("questionnaireDate"),
+            race_plco: getChecked("allowSensitiveFields") ? getValue("racePlco") : null,
+            education_plco: getChecked("allowSensitiveFields") ? getValue("educationPlco") : null
+          },
+
+          smoking: {
+            status: smokingStatus,
+            cigarettes_per_day: cigsPerDay,
+            years_smoked: yearsSmoked,
+            age_started: getNumber("ageStarted"),
+            age_quit: getNumber("ageQuit"),
+            years_since_quit_raw: getNumber("yearsSinceQuitRaw"),
+            pack_years: packYearsResult.value,
+            pack_years_source: packYearsResult.source,
+            pack_years_override: packYearsOverride,
+            pack_years_override_reason: getText("packYearsOverrideReason"),
+            daily_cough: getValue("dailyCough"),
+            indoor_smoke_hours: getNumber("indoorSmokeHours"),
+            passive_smoke: getValue("passiveSmoke")
+          },
+
+          history: {
+            copd: getValue("copdHistory"),
+            emphysema: getValue("emphysemaHistory"),
+            hemoptysis: getValue("hemoptysis"),
+            previous_cancer_any: getValue("previousCancerAny"),
+            previous_lung_cancer: getValue("previousLungCancer"),
+            extrathoracic_cancer_gt_5y: getValue("extrathoracicGt5y"),
+            extrathoracic_cancer_within_5y: getValue("extrathoracicWithin5y"),
+            family_lung_cancer: getValue("familyLungCancer"),
+            first_degree_lung_cancer: getValue("firstDegreeLungCancer"),
+            tb: getValue("tbHistory"),
+            ntm: getValue("ntmHistory"),
+            bronchiectasis: getValue("bronchiectasisHistory")
+          },
+
+          ntog_emerging_risks: {
+            ild_or_fibrosis: getValue("ildDiagnosis"),
+            cpfe: getValue("cpfe"),
+            antifibrotic_treatment: getValue("antifibrotic"),
+            prior_thoracic_rt: getValue("thoracicRt"),
+            rt_indication: getValue("rtIndication"),
+            rt_year: getNumber("rtYear"),
+            rt_side: getValue("rtSide"),
+            transplant_history: getValue("transplantHistory"),
+            hiv: getValue("hivHistory"),
+            chronic_steroid_use_3_months: getValue("chronicSteroid"),
+            dmard_biologic_or_jak: getText("dmardBiologic"),
+            autoimmune_diagnosis: getValue("autoimmuneDiagnosis"),
+            snus: getValue("snusStatus"),
+            e_cigarettes: getValue("ecigStatus"),
+            heated_tobacco: getValue("heatedTobaccoStatus"),
+            cannabis_smoking: getValue("cannabisStatus"),
+            radon_tested: getValue("radonTested"),
+            radon_bqm3: getNumber("radonBqm3"),
+            current_municipality: getText("currentMunicipality"),
+            previous_postcodes_or_municipalities_15y: getText("previousPostcodes"),
+            occupational_exposures: occupationalExposures,
+            severe_or_hospitalised_covid: getValue("covidSevere"),
+            diabetes: getValue("diabetesStatus")
+          },
+
+          ct: {
+            ct_date: getValue("ctDate"),
+            prior_ct_date: getValue("priorCtDate"),
+            context: getValue("ctContext"),
+            low_dose_ct: getValue("lowDoseCt"),
+            thin_slice_ct: getValue("thinSliceCt"),
+            measurement_same_method: getValue("measurementSameMethod")
+          },
+
+          nodule: {
+            label: getText("noduleLabel") || "N1",
+            side: getValue("noduleSide"),
+            lobe: getValue("noduleLobe"),
+            upper_lobe: getValue("upperLobe"),
+            max_diameter_mm: getNumber("maxDiameterMm"),
+            mean_diameter_mm: getNumber("meanDiameterMm"),
+            prior_mean_diameter_mm: getNumber("priorMeanDiameterMm"),
+            current_volume_mm3: getNumber("currentVolumeMm3"),
+            prior_volume_mm3: getNumber("priorVolumeMm3"),
+            type: getValue("noduleType"),
+            solid_component_mm: getNumber("solidComponentMm"),
+            spiculation: getValue("spiculation"),
+            nodule_count: getNumber("noduleCount"),
+            perifissural: getValue("perifissural"),
+            calcification_pattern: getValue("calcificationPattern"),
+            margin: getValue("noduleMargin"),
+            temporal_status: getValue("temporalStatus"),
+            radiologist_confidence: getValue("radiologistConfidence")
+          },
+
+          pet: {
+            performed: getValue("petPerformed"),
+            fdg_uptake: getValue("fdgUptake"),
+            suv_max: getNumber("suvMax"),
+            date: getValue("petDate"),
+            small_nodule_caveat: getChecked("petSmallNoduleCaveat"),
+            inflammation_or_infection_caveat: getChecked("petInflammationCaveat")
+          }
         };
       }
+
+      function calculateScreeningModels(input, normalized) {
+        const results = [];
+
+        const age = input.person.age_years;
+        const bmi = input.person.bmi;
+        const smokingStatus = input.smoking.status;
+        const education = input.person.education_plco === null
+          ? null
+          : Number(input.person.education_plco);
+        const educationOrdinal = Number.isFinite(education) ? education : null;
+        const raceEthnicityTerm = {
+          white: 0,
+          american_indian_alaskan_native: 0,
+          black: 0.3944778,
+          hispanic: -0.7434744,
+          asian: -0.4665850,
+          native_hawaiian_pacific_islander: 1.0271520
+        }[input.person.race_plco];
+        const copd = binaryYes(input.history.copd);
+        const personalCancerHistory = binaryYes(input.history.previous_cancer_any);
+        const familyHistoryLungCancer = binaryYes(input.history.family_lung_cancer);
+        const currentSmoker = smokingStatus === "current"
+          ? 1
+          : smokingStatus === "former"
+            ? 0
+            : null;
+        const cigarettesPerDay = input.smoking.cigarettes_per_day;
+        const yearsSmoked = input.smoking.years_smoked;
+        const quitYears = normalized.quit_years;
+        const plcoMissing = [];
+
+        if (!input.site_config.governance.allow_race_ethnicity) {
+          plcoMissing.push("race/ethnicity governance permission");
+        }
+
+        if (!input.site_config.governance.allow_education) {
+          plcoMissing.push("education governance permission");
+        }
+
+        if (smokingStatus === "never") {
+          results.push(missingResult(
+            "PLCOm2012_ORIGINAL",
+            "PLCOm2012 original",
+            [],
+            ["PLCOm2012 is an ever-smoker model and is not applicable to never-smokers."],
+            "Ever-smokers",
+            "6 years",
+            makeApplicability("outside_population", "Ever-smokers", ["Smoking status is never."])
+          ));
+        } else {
+          plcoMissing.push(...requireFields({
+            age,
+            BMI: bmi,
+            COPD: copd,
+            "personal cancer history": personalCancerHistory,
+            "family history of lung cancer": familyHistoryLungCancer,
+            "smoking status": currentSmoker,
+            "years smoked": yearsSmoked,
+            "quit-years": quitYears
+          }));
+
+          if (input.site_config.governance.allow_education) {
+            plcoMissing.push(...requireFields({ education: educationOrdinal }));
+          }
+
+          if (input.site_config.governance.allow_race_ethnicity) {
+            plcoMissing.push(...requireFields({ "race/ethnicity": raceEthnicityTerm }));
+          }
+
+          if (cigarettesPerDay === null || cigarettesPerDay <= 0) {
+            plcoMissing.push("cigarettes per day > 0");
+          }
+
+          if (yearsSmoked !== null && yearsSmoked <= 0) {
+            plcoMissing.push("years smoked > 0");
+          }
+
+          if (plcoMissing.length) {
+            results.push(missingResult(
+              "PLCOm2012_ORIGINAL",
+              "PLCOm2012 original",
+              [...new Set(plcoMissing)],
+              [],
+              "Ever-smokers",
+              "6 years"
+            ));
+          } else {
+            const smokingIntensityTransform =
+              Math.pow(cigarettesPerDay / 10, -1) - 0.4021541613;
+            const plcoWarnings = [
+              "PLCOm2012 is an ever-smoker 6-year risk model and requires explicit governance permission for race/ethnicity and education fields.",
+              "For current smokers, quit_years is coded as 0."
+            ];
+
+            if (cigarettesPerDay > 100) {
+              plcoWarnings.push("Cigarettes per day is above 100; verify the smoking intensity input before interpreting this result.");
+            }
+
+            const lp =
+              -4.532506 +
+              0.0778868 * (age - 62) -
+              0.0812744 * (educationOrdinal - 4) -
+              0.0274194 * (bmi - 27) +
+              0.3553063 * copd +
+              0.4589971 * personalCancerHistory +
+              0.5871850 * familyHistoryLungCancer +
+              0.2597431 * currentSmoker -
+              1.8226060 * smokingIntensityTransform +
+              0.0317321 * (yearsSmoked - 27) -
+              0.0308572 * (quitYears - 10) +
+              raceEthnicityTerm;
+
+            results.push(makeResult({
+              code: "PLCOm2012_ORIGINAL",
+              name: "PLCOm2012 original",
+              status: "calculated",
+              riskValue: logistic(lp),
+              horizon: "6 years",
+              inputs: {
+                age,
+                education_ordinal: educationOrdinal,
+                bmi,
+                copd,
+                personal_cancer_history: personalCancerHistory,
+                family_history_lung_cancer: familyHistoryLungCancer,
+                current_smoker: currentSmoker,
+                cigarettes_per_day: cigarettesPerDay,
+                years_smoked: yearsSmoked,
+                quit_years: quitYears,
+                quit_years_current_smoker_coded_zero: smokingStatus === "current",
+                race_ethnicity: input.person.race_plco
+              },
+              transformed: {
+                age_centered_62: round(age - 62, 6),
+                education_centered_4: round(educationOrdinal - 4, 6),
+                bmi_centered_27: round(bmi - 27, 6),
+                smoking_intensity_transform: round(smokingIntensityTransform, 6),
+                years_smoked_centered_27: round(yearsSmoked - 27, 6),
+                quit_years_centered_10: round(quitYears - 10, 6),
+                race_ethnicity_term: raceEthnicityTerm,
+                linear_predictor: round(lp, 6)
+              },
+              warnings: plcoWarnings,
+              population: "Ever-smokers",
+              applicability: makeApplicability("applicable", "Ever-smokers", ["Ever-smoker input supplied."])
+            }));
+          }
+        }
+
+        if (smokingStatus === "never") {
+          results.push(missingResult(
+            "HUNT_LCM_6Y",
+            "HUNT Lung Cancer Model",
+            [],
+            ["HUNT LCM is an ever-smoker model and is not applicable to never-smokers."],
+            "Ever-smokers",
+            "6 years",
+            makeApplicability("outside_population", "Ever-smokers", ["Smoking status is never."])
+          ));
+        } else {
+          const male = input.person.sex_at_birth === "male"
+            ? 1
+            : input.person.sex_at_birth === "female"
+              ? 0
+              : null;
+          const packYears = input.smoking.pack_years;
+          const cigarettesPerDay = input.smoking.cigarettes_per_day;
+          const smokeExposureHours = input.smoking.indoor_smoke_hours;
+          const dailyCough = binaryYes(input.smoking.daily_cough);
+
+          const huntMissing = requireFields({
+            age,
+            sex: male,
+            "pack-years": packYears,
+            "cigarettes per day": cigarettesPerDay,
+            "quit-years": quitYears,
+            BMI: bmi,
+            "smoke exposure hours": smokeExposureHours,
+            "daily cough": dailyCough
+          });
+
+          if (age !== null && age <= 0) huntMissing.push("age > 0");
+          if (bmi !== null && bmi <= 0) huntMissing.push("BMI > 0");
+          if (packYears !== null && packYears < 0) huntMissing.push("pack-years >= 0");
+          if (cigarettesPerDay !== null && cigarettesPerDay < 0) huntMissing.push("cigarettes per day >= 0");
+          if (quitYears !== null && quitYears < 0) huntMissing.push("quit-years >= 0");
+          if (smokeExposureHours !== null && smokeExposureHours < 0) huntMissing.push("smoke exposure hours >= 0");
+
+          if (huntMissing.length) {
+            results.push(missingResult(
+              "HUNT_LCM_6Y",
+              "HUNT Lung Cancer Model",
+              [...new Set(huntMissing)],
+              [],
+              "Ever-smokers",
+              "6 years"
+            ));
+          } else {
+            const ageInverse = Math.pow(age / 100, -1);
+            const logPackYears = Math.log(packYears + 1);
+            const logQuitYears = Math.log(quitYears + 1);
+            const logBmi = Math.log(bmi + 1);
+            const logSmokeExposureHours = Math.log(smokeExposureHours + 1);
+
+            const xb6 =
+              1.18203062 +
+              0.31573217 * male -
+              1.98496138 * ageInverse +
+              1.11994217 * logPackYears -
+              0.04002877 * cigarettesPerDay -
+              0.24019955 * logQuitYears -
+              1.70238304 * logBmi +
+              0.08072420 * logSmokeExposureHours +
+              0.49212668 * dailyCough;
+
+            results.push(makeResult({
+              code: "HUNT_LCM_6Y",
+              name: "HUNT Lung Cancer Model",
+              status: "calculated",
+              riskValue: logistic(xb6),
+              horizon: "6 years",
+              inputs: {
+                age,
+                male,
+                pack_years: packYears,
+                cigarettes_per_day: cigarettesPerDay,
+                quit_years: quitYears,
+                bmi,
+                smoke_exposure_hours: smokeExposureHours,
+                daily_cough: dailyCough
+              },
+              transformed: {
+                age_over_100_inverse: round(ageInverse, 6),
+                log_pack_years_plus_1: round(logPackYears, 6),
+                log_quit_years_plus_1: round(logQuitYears, 6),
+                log_bmi_plus_1: round(logBmi, 6),
+                log_smoke_exposure_hours_plus_1: round(logSmokeExposureHours, 6),
+                linear_predictor: round(xb6, 6)
+              },
+              warnings: [
+                "HUNT LCM is an ever-smoker model. The 2022 corrigendum +1 logarithm increments and natural logarithms are applied."
+              ],
+              population: "Ever-smokers",
+              applicability: makeApplicability("applicable", "Ever-smokers", ["Ever-smoker input supplied."])
+            }));
+          }
+        }
+
+        return results;
+      }
+
+      function requireFields(fieldMap) {
+        return Object.entries(fieldMap)
+          .filter(([, value]) => value === null || value === undefined || value === "unknown" || value === "")
+          .map(([label]) => label);
+      }
+
+      function binaryYes(value) {
+        if (value === "yes") return 1;
+        if (value === "no") return 0;
+        return null;
+      }
+
+      function binaryFemale(sexAtBirth) {
+        if (sexAtBirth === "female") return 1;
+        if (sexAtBirth === "male") return 0;
+        return null;
+      }
+
+      function diameterForNoduleModel(input) {
+        const diameter = input.nodule.max_diameter_mm ?? input.nodule.mean_diameter_mm;
+        if (diameter === null || diameter <= 0) return null;
+        return diameter;
+      }
+
+      function calculateNoduleModels(input) {
+        const results = [];
+
+        const age = input.person.age_years;
+        const sexFemale = binaryFemale(input.person.sex_at_birth);
+        const diameter = diameterForNoduleModel(input);
+
+        const upperLobe = binaryYes(input.nodule.upper_lobe);
+        const spiculation = binaryYes(input.nodule.spiculation);
+        const emphysema = binaryYes(input.history.emphysema);
+        const familyHistory = binaryYes(input.history.first_degree_lung_cancer);
+
+        const smokingStatus = input.smoking.status;
+        const smoker = smokingStatus === "current" || smokingStatus === "former"
+          ? 1
+          : smokingStatus === "never"
+            ? 0
+            : null;
+
+        const previousCancer =
+          input.history.extrathoracic_cancer_gt_5y === "yes"
+            ? 1
+            : input.history.extrathoracic_cancer_gt_5y === "no"
+              ? 0
+              : null;
+
+        let mayoRisk = null;
+
+        {
+          const missing = requireFields({
+            age,
+            "smoking status": smoker,
+            "previous extrathoracic cancer history": previousCancer,
+            diameter,
+            spiculation,
+            "upper-lobe location": upperLobe
+          });
+
+          if (missing.length) {
+            results.push(missingResult(
+              "MAYO_SWENSEN_DEPENDENCY",
+              "Mayo / Swensen pretest probability",
+              missing,
+              [],
+              "Solitary pulmonary nodules"
+            ));
+          } else {
+            const mayoWarnings = [
+              "Mayo model was developed for solitary pulmonary nodules. Applicability should be checked for screening-detected, multiple, subsolid, or previously treated cancer contexts."
+            ];
+
+            if (input.history.previous_cancer_any === "yes" && input.history.extrathoracic_cancer_gt_5y !== "yes") {
+              mayoWarnings.push("Previous cancer was recorded, but Mayo only uses extrathoracic cancer more than 5 years before nodule assessment; the broader previous-cancer field is retained as context only.");
+            }
+
+            if (input.history.extrathoracic_cancer_within_5y === "yes") {
+              mayoWarnings.push("Extrathoracic cancer within 5 years was recorded; this is not coded as the Mayo previous-cancer variable and may affect applicability.");
+            }
+
+            const lp =
+              -6.8272 +
+              0.0391 * age +
+              0.7917 * smoker +
+              1.3388 * previousCancer +
+              0.1274 * diameter +
+              1.0407 * spiculation +
+              0.7838 * upperLobe;
+
+            mayoRisk = logistic(lp);
+
+            results.push(makeResult({
+              code: "MAYO_SWENSEN_DEPENDENCY",
+              name: "Mayo / Swensen pretest probability",
+              status: "calculated",
+              riskValue: mayoRisk,
+              inputs: {
+                age,
+                smoker,
+                previous_extrathoracic_cancer_gt_5y: previousCancer,
+                diameter_mm: diameter,
+                spiculation,
+                upper_lobe: upperLobe
+              },
+              transformed: {
+                linear_predictor: round(lp, 6)
+              },
+              warnings: mayoWarnings,
+              population: "Solitary pulmonary nodules",
+              applicability: makeApplicability("conditional", "Solitary pulmonary nodules", ["Assumes solitary pulmonary nodule context."])
+            }));
+          }
+        }
+
+        {
+          const noduleCount = input.nodule.nodule_count;
+          const noduleType = input.nodule.type;
+
+          const typeTerm = {
+            solid: 0,
+            part_solid: 0.377,
+            non_solid: -0.1276
+          }[noduleType];
+
+          const missing = requireFields({
+            age,
+            sex: sexFemale,
+            "first-degree family lung cancer": familyHistory,
+            emphysema,
+            diameter,
+            "nodule type": typeTerm,
+            "upper-lobe location": upperLobe,
+            "nodule count": noduleCount,
+            spiculation
+          });
+
+          if (noduleCount !== null && noduleCount < 1) {
+            missing.push("valid nodule count >= 1");
+          }
+
+          if (missing.length) {
+            results.push(missingResult(
+              "BROCK_FULL",
+              "Brock / PanCan full model with spiculation",
+              missing,
+              [],
+              "Screening-detected pulmonary nodules"
+            ));
+          } else {
+            const diameterTransform =
+              Math.pow(diameter / 10, -0.5) - 1.58113883;
+
+            const lp =
+              -6.7892 +
+              0.0287 * (age - 62) +
+              0.6011 * sexFemale +
+              0.2961 * familyHistory +
+              0.2953 * emphysema -
+              5.3854 * diameterTransform +
+              typeTerm +
+              0.6581 * upperLobe -
+              0.0824 * (noduleCount - 4) +
+              0.7729 * spiculation;
+
+            const brockRisk = logistic(lp);
+
+            results.push(makeResult({
+              code: "BROCK_FULL",
+              name: "Brock / PanCan full model with spiculation",
+              status: "calculated",
+              riskValue: brockRisk,
+              inputs: {
+                age,
+                female: sexFemale,
+                first_degree_family_lung_cancer: familyHistory,
+                emphysema,
+                diameter_mm: diameter,
+                diameter_source: input.nodule.max_diameter_mm !== null ? "max_diameter_mm" : "mean_diameter_mm",
+                nodule_type: noduleType,
+                upper_lobe: upperLobe,
+                nodule_count: noduleCount,
+                spiculation
+              },
+              transformed: {
+                age_centered_62: round(age - 62, 6),
+                diameter_transform: round(diameterTransform, 6),
+                nodule_type_term: typeTerm,
+                nodule_count_centered_4: round(noduleCount - 4, 6),
+                linear_predictor: round(lp, 6)
+              },
+              warnings: [
+                "Brock/PanCan was developed in screening cohorts. Applicability may differ for symptomatic, previously treated, or non-screening populations.",
+                "This implementation uses first-degree family history as the family-history input."
+              ],
+              population: "Screening-detected pulmonary nodules",
+              applicability: makeApplicability("conditional", "Screening-detected pulmonary nodules", ["Applicability may differ outside screening cohorts."])
+            }));
+          }
+        }
+
+        {
+          const herderWarnings = [];
+          const governance = input.site_config.governance;
+
+          if (
+            governance.block_herder_if_pet_small_nodule_caveat &&
+            input.pet.small_nodule_caveat
+          ) {
+            herderWarnings.push("Herder blocked because PET was flagged as unreliable for a small nodule.");
+          }
+
+          if (
+            governance.block_herder_if_inflammation_or_infection_caveat &&
+            input.pet.inflammation_or_infection_caveat
+          ) {
+            herderWarnings.push("Herder blocked because FDG uptake may reflect infection or inflammation.");
+          }
+
+          if (herderWarnings.length) {
+            results.push(missingResult(
+              "HERDER",
+              "Herder PET-refined probability",
+              [],
+              herderWarnings,
+              "Pulmonary nodules with FDG-PET",
+              null
+            ));
+          } else if (input.pet.performed !== "yes" || input.pet.fdg_uptake === "unknown" || mayoRisk === null) {
+            const missing = [];
+
+            if (mayoRisk === null) missing.push("Mayo pretest probability");
+            if (input.pet.performed !== "yes") missing.push("PET performed");
+            if (input.pet.fdg_uptake === "unknown") missing.push("FDG uptake category");
+
+            results.push(missingResult(
+              "HERDER",
+              "Herder PET-refined probability",
+              missing,
+              [],
+              "Pulmonary nodules with FDG-PET"
+            ));
+          } else {
+            const fdgTerm = {
+              absent: {
+                coefficient: 0,
+                faint_uptake: 0,
+                moderate_uptake: 0,
+                intense_uptake: 0,
+                label: "absent/no uptake"
+              },
+              low: {
+                coefficient: 2.322,
+                faint_uptake: 1,
+                moderate_uptake: 0,
+                intense_uptake: 0,
+                label: "faint/discrete uptake"
+              },
+              moderate: {
+                coefficient: 4.617,
+                faint_uptake: 0,
+                moderate_uptake: 1,
+                intense_uptake: 0,
+                label: "moderate uptake"
+              },
+              high: {
+                coefficient: 4.771,
+                faint_uptake: 0,
+                moderate_uptake: 0,
+                intense_uptake: 1,
+                label: "intense/high uptake"
+              }
+            }[input.pet.fdg_uptake];
+
+            if (!fdgTerm) {
+              results.push(missingResult(
+                "HERDER",
+                "Herder PET-refined probability",
+                ["valid FDG uptake category"],
+                [],
+                "Pulmonary nodules with FDG-PET"
+              ));
+            } else {
+              const lp =
+                -4.739 +
+                3.691 * mayoRisk +
+                fdgTerm.coefficient;
+
+              const herderRisk = logistic(lp);
+
+              results.push(makeResult({
+                code: "HERDER",
+                name: "Herder PET-refined probability",
+                status: "educational_only",
+                riskValue: herderRisk,
+                inputs: {
+                  mayo_pretest_probability: mayoRisk,
+                  fdg_uptake: input.pet.fdg_uptake,
+                  fdg_label: fdgTerm.label,
+                  fdg_coefficient: fdgTerm.coefficient
+                },
+                transformed: {
+                  mayo_pretest_percent: percent(mayoRisk),
+                  fdg_terms: {
+                    faint_uptake: fdgTerm.faint_uptake,
+                    moderate_uptake: fdgTerm.moderate_uptake,
+                    intense_uptake: fdgTerm.intense_uptake
+                  },
+                  linear_predictor: round(lp, 6)
+                },
+                warnings: [
+                  "Herder assumes PET interpretation is clinically reliable. Infection, inflammation, and small-nodule partial-volume effects can reduce validity.",
+                  "This Herder implementation uses Mayo probability directly as the pretest probability input and requires verification against the original model table before clinical or research use."
+                ],
+                population: "Pulmonary nodules with FDG-PET",
+                applicability: makeApplicability("requires_verification", "Pulmonary nodules with FDG-PET", ["Original Herder model table has not been independently verified in this prototype."])
+              }));
+            }
+          }
+        }
+
+        return results;
+      }
+
+      function calculateExperimentalScreeningScore(input, normalized) {
+        let agePoints = 0;
+        const age = input.person.age_years;
+
+        if (age !== null) {
+          if (age >= 70) agePoints = 15;
+          else if (age >= 65) agePoints = 13;
+          else if (age >= 60) agePoints = 11;
+          else if (age >= 55) agePoints = 9;
+          else if (age >= 50) agePoints = 7;
+          else if (age >= 40) agePoints = 4;
+        }
+
+        const packYears = input.smoking.pack_years || 0;
+        const duration = input.smoking.years_smoked || 0;
+        const cigsPerDay = input.smoking.cigarettes_per_day || 0;
+
+        let tobaccoPoints = 0;
+        if (input.smoking.status !== "never") {
+          tobaccoPoints = Math.min(
+            25,
+            Math.min(8, packYears / 5) +
+            Math.min(7, duration / 5) +
+            Math.min(4, cigsPerDay / 10) +
+            (input.smoking.status === "current" ? 4 : 0) +
+            (
+              input.smoking.status === "former" &&
+              normalized.quit_years !== null &&
+              normalized.quit_years <= 5
+                ? 2
+                : 0
+            )
+          );
+        }
+
+        let respiratoryPoints = 0;
+        if (input.ntog_emerging_risks.ild_or_fibrosis === "yes") respiratoryPoints += 8;
+        if (input.ntog_emerging_risks.cpfe === "yes") respiratoryPoints += 6;
+        if (input.history.emphysema === "yes") respiratoryPoints += 4;
+        if (input.history.copd === "yes") respiratoryPoints += 3;
+        if (input.smoking.daily_cough === "yes") respiratoryPoints += 2;
+        respiratoryPoints = Math.min(20, respiratoryPoints);
+
+        let exposurePoints = 0;
+        if ((input.ntog_emerging_risks.radon_bqm3 || 0) >= 200) exposurePoints += 5;
+        if (input.ntog_emerging_risks.occupational_exposures.length) exposurePoints += 5;
+        if (input.smoking.passive_smoke === "yes") exposurePoints += 2;
+        if ((input.smoking.indoor_smoke_hours || 0) >= 2) exposurePoints += 2;
+        if (input.ntog_emerging_risks.e_cigarettes === "yes") exposurePoints += 1;
+        if (input.ntog_emerging_risks.cannabis_smoking === "yes") exposurePoints += 1;
+        exposurePoints = Math.min(20, exposurePoints);
+
+        let hostPoints = 0;
+        if (input.history.first_degree_lung_cancer === "yes") hostPoints += 5;
+        else if (input.history.family_lung_cancer === "yes") hostPoints += 3;
+        if (input.ntog_emerging_risks.prior_thoracic_rt === "yes") hostPoints += 5;
+        if (input.history.previous_cancer_any === "yes") hostPoints += 3;
+        if (input.ntog_emerging_risks.transplant_history === "yes") hostPoints += 3;
+        if (input.ntog_emerging_risks.hiv === "positive") hostPoints += 3;
+        if (input.ntog_emerging_risks.chronic_steroid_use_3_months === "yes") hostPoints += 2;
+        if (input.ntog_emerging_risks.dmard_biologic_or_jak) hostPoints += 2;
+        hostPoints = Math.min(20, hostPoints);
+
+        const total = round(agePoints + tobaccoPoints + respiratoryPoints + exposurePoints + hostPoints, 1);
+
+        let band = "low";
+        if (total >= 80) band = "very high";
+        else if (total >= 60) band = "high";
+        else if (total >= 40) band = "elevated";
+        else if (total >= 20) band = "intermediate";
+
+        return {
+          model_code: "NTOG_EXPERIMENTAL_SCREENING_SCORE",
+          model_name: "NTOG experimental screening score",
+          status: "educational_only",
+          score: total,
+          score_range: "0-100",
+          band,
+          components: {
+            age: round(agePoints, 1),
+            tobacco: round(tobaccoPoints, 1),
+            respiratory_fibrosis: round(respiratoryPoints, 1),
+            environmental_occupational: round(exposurePoints, 1),
+            host_family_rt_immunosuppression: round(hostPoints, 1)
+          },
+          warnings: [
+            "Non-validated NTOG draft research index.",
+            "No clinical screening threshold is defined."
+          ],
+          citation: MODEL_CITATIONS.NTOG_EXPERIMENTAL_SCREENING_SCORE,
+          version: MODEL_VERSIONS.NTOG_EXPERIMENTAL_SCREENING_SCORE
+        };
+      }
+
+      function maxRiskPercent(results) {
+        const values = results
+          .filter((result) => result.calculation_status === "calculated")
+          .map((result) => result.risk_percent)
+          .filter((value) => Number.isFinite(value));
+
+        return values.length ? Math.max(...values) : null;
+      }
+
+      function calculatePersonModelPoints(riskPercent) {
+        if (riskPercent < 0.5) return 2;
+        if (riskPercent < 1.0) return 4;
+        if (riskPercent < 1.5) return 8;
+        if (riskPercent < 2.0) return 12;
+        if (riskPercent < 4.0) return 16;
+        return 20;
+      }
+
+      function calculateNoduleModelPoints(riskPercent) {
+        if (riskPercent < 1) return 1;
+        if (riskPercent < 5) return 4;
+        if (riskPercent < 10) return 10;
+        if (riskPercent < 30) return 18;
+        if (riskPercent < 65) return 28;
+        return 35;
+      }
+
+      function calculateGrowthPoints(input, normalized) {
+        const vdt = normalized.vdt;
+
+        if (Number.isFinite(vdt.value)) {
+          if (vdt.value < 100) return { points: 15, source: "vdt_less_than_100_days" };
+          if (vdt.value < 400) return { points: 13, source: "vdt_100_to_399_days" };
+          if (vdt.value < 600) return { points: 10, source: "vdt_400_to_599_days" };
+          return { points: 0, source: "vdt_600_days_or_more" };
+        }
+
+        if (vdt.status === "calculated" && vdt.category === "stable or decreasing") {
+          return { points: 0, source: "volume_stable_or_decreasing" };
+        }
+
+        if (input.nodule.temporal_status === "growing" || input.nodule.temporal_status === "new") {
+          return { points: 8, source: `categorical_${input.nodule.temporal_status}` };
+        }
+
+        if (input.nodule.temporal_status === "stable") {
+          return { points: 0, source: "categorical_stable" };
+        }
+
+        return null;
+      }
+
+      function calculateSmokingArchitecturePoints(input, normalized) {
+        if (input.smoking.status === "never") {
+          return {
+            points: 0,
+            source: {
+              status: "never",
+              duration: 0,
+              intensity: 0,
+              current_smoking: 0,
+              recent_quit: 0
+            }
+          };
+        }
+
+        const smokingKnown =
+          input.smoking.status !== "unknown" ||
+          input.smoking.years_smoked !== null ||
+          input.smoking.cigarettes_per_day !== null ||
+          normalized.quit_years !== null;
+
+        if (!smokingKnown) return null;
+
+        const durationPoints = Math.min(5, (input.smoking.years_smoked || 0) / 10);
+        const intensityPoints = Math.min(2, (input.smoking.cigarettes_per_day || 0) / 20);
+        const currentPoints = input.smoking.status === "current" ? 2 : 0;
+        const recentQuitPoints =
+          input.smoking.status === "former" &&
+          normalized.quit_years !== null &&
+          normalized.quit_years <= 5
+            ? 1
+            : 0;
+
+        return {
+          points: Math.min(10, durationPoints + intensityPoints + currentPoints + recentQuitPoints),
+          source: {
+            duration: round(durationPoints, 1),
+            intensity: round(intensityPoints, 1),
+            current_smoking: currentPoints,
+            recent_quit: recentQuitPoints
+          }
+        };
+      }
+
+      function calculateEmergingModifierPoints(input) {
+        const emerging = input.ntog_emerging_risks;
+        const history = input.history;
+        const assessedValues = [
+          emerging.ild_or_fibrosis,
+          emerging.cpfe,
+          emerging.prior_thoracic_rt,
+          emerging.transplant_history,
+          emerging.hiv,
+          emerging.chronic_steroid_use_3_months,
+          emerging.autoimmune_diagnosis,
+          emerging.radon_tested,
+          emerging.severe_or_hospitalised_covid,
+          emerging.diabetes,
+          history.tb,
+          history.ntm,
+          history.bronchiectasis
+        ];
+
+        const available =
+          assessedValues.some((value) => value && value !== "unknown") ||
+          Boolean(emerging.dmard_biologic_or_jak) ||
+          emerging.radon_bqm3 !== null ||
+          emerging.occupational_exposures.length > 0 ||
+          input.smoking.status === "never";
+
+        if (!available) return null;
+
+        const contributions = [];
+        const add = (label, points) => {
+          if (points > 0) contributions.push({ label, points });
+        };
+
+        add("ILD or pulmonary fibrosis", emerging.ild_or_fibrosis === "yes" ? 5 : 0);
+        add("CPFE", emerging.cpfe === "yes" ? 4 : 0);
+        add("Prior thoracic radiotherapy", emerging.prior_thoracic_rt === "yes" ? 4 : 0);
+        add("Transplant history", emerging.transplant_history === "yes" ? 3 : 0);
+        add("HIV", emerging.hiv === "positive" ? 2 : 0);
+        add("Chronic steroid use", emerging.chronic_steroid_use_3_months === "yes" ? 2 : 0);
+        add("Biologic/JAK/DMARD", emerging.dmard_biologic_or_jak ? 2 : 0);
+        add("Previous tuberculosis", history.tb === "yes" ? 2 : 0);
+        add("Previous NTM disease", history.ntm === "yes" ? 2 : 0);
+        add("Bronchiectasis", history.bronchiectasis === "yes" ? 2 : 0);
+        add("Radon 100-199 Bq/m3", emerging.radon_bqm3 >= 100 && emerging.radon_bqm3 < 200 ? 1 : 0);
+        add("Radon 200+ Bq/m3", emerging.radon_bqm3 >= 200 ? 3 : 0);
+        add("Occupational exposures", Math.min(4, emerging.occupational_exposures.length * 3));
+        add("Autoimmune diagnosis", emerging.autoimmune_diagnosis !== "unknown" ? 2 : 0);
+        add("Severe or hospitalised COVID", emerging.severe_or_hospitalised_covid === "yes" ? 1 : 0);
+        add("Diabetes", emerging.diabetes === "yes" ? 1 : 0);
+        add(
+          "Never-smoker emerging-risk context",
+          input.smoking.status === "never" &&
+          (
+            history.first_degree_lung_cancer === "yes" ||
+            history.family_lung_cancer === "yes" ||
+            emerging.ild_or_fibrosis === "yes"
+          )
+            ? 1
+            : 0
+        );
+
+        const total = contributions.reduce((sum, item) => sum + item.points, 0);
+
+        return {
+          points: Math.min(20, total),
+          source: contributions
+        };
+      }
+
+      function calculateNtogNotValidatedRiskScore(input, normalized, screeningModels, noduleModels) {
+        const components = {};
+        const missingComponents = [];
+        let rawPoints = 0;
+        let availableWeight = 0;
+
+        const addComponent = (key, label, weight, result) => {
+          if (!result) {
+            components[key] = {
+              label,
+              available: false,
+              weight,
+              points: null,
+              source: null
+            };
+            missingComponents.push(label);
+            return;
+          }
+
+          const points = round(result.points, 1);
+          components[key] = {
+            label,
+            available: true,
+            weight,
+            points,
+            source: result.source
+          };
+          rawPoints += points;
+          availableWeight += weight;
+        };
+
+        const personRiskPercent = maxRiskPercent(screeningModels);
+        addComponent(
+          "person_models",
+          "Person-model component",
+          20,
+          personRiskPercent === null
+            ? null
+            : {
+                points: calculatePersonModelPoints(personRiskPercent),
+                source: { max_percent_risk: personRiskPercent }
+              }
+        );
+
+        const noduleRiskPercent = maxRiskPercent(noduleModels);
+        addComponent(
+          "nodule_models",
+          "Nodule-model component",
+          35,
+          noduleRiskPercent === null
+            ? null
+            : {
+                points: calculateNoduleModelPoints(noduleRiskPercent),
+                source: { max_percent_risk: noduleRiskPercent }
+              }
+        );
+
+        addComponent(
+          "growth",
+          "Growth component",
+          15,
+          calculateGrowthPoints(input, normalized)
+        );
+
+        addComponent(
+          "smoking_architecture",
+          "Smoking-architecture component",
+          10,
+          calculateSmokingArchitecturePoints(input, normalized)
+        );
+
+        addComponent(
+          "emerging_risks",
+          "NTOG emerging-risk component",
+          20,
+          calculateEmergingModifierPoints(input)
+        );
+
+        if (!availableWeight) {
+          return {
+            model_code: "NTOG_NOT_VALIDATED_RISK_SCORE",
+            model_name: "NTOG post-CT research score",
+            status: "not_calculable",
+            score: null,
+            score_range: "0-100",
+            band: "not calculable",
+            raw_points: 0,
+            available_weight: 0,
+            domain_completeness_percent: 0,
+            components,
+            missing_components: missingComponents,
+            warnings: ["No score domains were calculable."],
+            citation: MODEL_CITATIONS.NTOG_NOT_VALIDATED_RISK_SCORE,
+            version: MODEL_VERSIONS.NTOG_NOT_VALIDATED_RISK_SCORE
+          };
+        }
+
+        const score = round((rawPoints / availableWeight) * 100, 1);
+        const domainCompletenessPercent = round(availableWeight, 1);
+
+        let band = "insufficient data";
+        if (availableWeight >= 70) {
+          if (score >= 80) band = "very high";
+          else if (score >= 60) band = "high";
+          else if (score >= 40) band = "elevated";
+          else if (score >= 20) band = "intermediate";
+          else band = "low";
+        }
+
+        return {
+          model_code: "NTOG_NOT_VALIDATED_RISK_SCORE",
+          model_name: "NTOG post-CT research score",
+          status: missingComponents.length ? "calculated_partial" : "educational_only",
+          score,
+          score_range: "0-100",
+          band,
+          raw_points: round(rawPoints, 1),
+          available_weight: availableWeight,
+          domain_completeness_percent: domainCompletenessPercent,
+          components,
+          missing_components: missingComponents,
+          warnings: [
+            "Non-validated NTOG draft research index.",
+            "Score is normalized by available component weight when domains are missing.",
+            "No clinical action threshold is defined."
+          ],
+          citation: MODEL_CITATIONS.NTOG_NOT_VALIDATED_RISK_SCORE,
+          version: MODEL_VERSIONS.NTOG_NOT_VALIDATED_RISK_SCORE
+        };
+      }
+
+      function calculateWarnings(input) {
+        const warnings = [];
+
+        if (input.smoking.status === "never") {
+          warnings.push("Never-smoker context: ever-smoker screening models may be outside population.");
+        }
+
+        if (
+          input.smoking.status === "never" &&
+          (
+            (input.smoking.cigarettes_per_day !== null && input.smoking.cigarettes_per_day > 0) ||
+            (input.smoking.years_smoked !== null && input.smoking.years_smoked > 0) ||
+            (input.smoking.pack_years_override !== null && input.smoking.pack_years_override > 0)
+          )
+        ) {
+          warnings.push("Inconsistent smoking input: never-smoker status with positive cigarette exposure fields. Pack-years were set to zero for model calculations.");
+        }
+
+        if (input.ntog_emerging_risks.ild_or_fibrosis === "yes") {
+          warnings.push("ILD or pulmonary fibrosis recorded as an emerging-risk modifier.");
+        }
+
+        if (input.ntog_emerging_risks.cpfe === "yes") {
+          warnings.push("CPFE recorded as an emerging-risk modifier.");
+        }
+
+        if (input.pet.small_nodule_caveat) {
+          warnings.push("PET caveat: uptake may be unreliable for a small nodule.");
+        }
+
+        if (input.pet.inflammation_or_infection_caveat) {
+          warnings.push("PET caveat: uptake may reflect infection or inflammation.");
+        }
+
+        if (input.history.previous_lung_cancer === "yes") {
+          warnings.push("Previous lung cancer recorded. Standard risk models may not apply cleanly.");
+        }
+
+        return warnings;
+      }
+
+      function normalizeInput(input) {
+        return {
+          bmi: input.person.bmi,
+          pack_years: input.smoking.pack_years,
+          quit_years: calculateQuitYears(
+            input.person.age_years,
+            input.smoking.age_quit,
+            input.smoking.years_since_quit_raw,
+            input.smoking.status
+          ),
+          vdt: calculateVDT({
+            currentVolumeMm3: input.nodule.current_volume_mm3,
+            priorVolumeMm3: input.nodule.prior_volume_mm3,
+            priorCtDate: input.ct.prior_ct_date,
+            ctDate: input.ct.ct_date,
+            measurementSameMethod: input.ct.measurement_same_method
+          })
+        };
+      }
+
+      function buildDerivedVariableProvenance(input, normalized) {
+        const quitSource = (() => {
+          if (input.smoking.status === "never") return "never_smoker_not_applicable";
+          if (input.smoking.status === "current") return "current_smoker_coded_zero";
+          if (input.smoking.years_since_quit_raw !== null) return "user_reported_years_since_quit";
+          if (
+            input.person.age_years !== null &&
+            input.smoking.age_quit !== null &&
+            input.person.age_years >= input.smoking.age_quit
+          ) {
+            return "calculated_from_age_minus_age_quit";
+          }
+          return "missing";
+        })();
+
+        const vdtIntervalDays = daysBetween(input.ct.prior_ct_date, input.ct.ct_date);
+        const vdtRatio = input.nodule.current_volume_mm3 && input.nodule.prior_volume_mm3
+          ? input.nodule.current_volume_mm3 / input.nodule.prior_volume_mm3
+          : null;
+
+        return {
+          bmi: {
+            value: normalized.bmi,
+            source: input.person.height_cm !== null && input.person.weight_kg !== null
+              ? "calculated_from_height_cm_and_weight_kg"
+              : "missing",
+            inputs: ["person.height_cm", "person.weight_kg"],
+            formula: "weight_kg / (height_cm / 100)^2"
+          },
+          pack_years: {
+            value: normalized.pack_years,
+            source: input.smoking.pack_years_source,
+            inputs: input.smoking.pack_years_source === "set_to_zero_for_never_smoker"
+              ? ["smoking.status"]
+              : input.smoking.pack_years_source === "override"
+                ? ["smoking.pack_years_override"]
+                : ["smoking.cigarettes_per_day", "smoking.years_smoked"],
+            formula: input.smoking.pack_years_source === "calculated"
+              ? "(cigarettes_per_day / 20) * years_smoked"
+              : null,
+            override_reason: input.smoking.pack_years_override_reason
+          },
+          quit_years: {
+            value: normalized.quit_years,
+            source: quitSource,
+            inputs: ["smoking.status", "smoking.years_since_quit_raw", "person.age_years", "smoking.age_quit"],
+            formula: quitSource === "calculated_from_age_minus_age_quit"
+              ? "age_years - age_quit"
+              : null,
+            current_smoker_coded_zero: input.smoking.status === "current",
+            never_smoker_not_applicable: input.smoking.status === "never"
+          },
+          vdt: {
+            value: normalized.vdt.value,
+            status: normalized.vdt.status,
+            category: normalized.vdt.category,
+            source: normalized.vdt.status === "calculated"
+              ? "calculated_from_serial_volumes_and_ct_dates"
+              : "missing_or_not_calculable",
+            inputs: [
+              "nodule.current_volume_mm3",
+              "nodule.prior_volume_mm3",
+              "ct.prior_ct_date",
+              "ct.ct_date",
+              "ct.measurement_same_method"
+            ],
+            transformed_variables: {
+              days_between_cts: vdtIntervalDays,
+              volume_change_ratio: Number.isFinite(vdtRatio) ? round(vdtRatio, 6) : null
+            },
+            formula: "days_between * ln(2) / ln(current_volume / prior_volume)",
+            missing_variables: normalized.vdt.missing || []
+          }
+        };
+      }
+
+      function buildScreeningThresholdResults(input, screeningModels) {
+        const byCode = Object.fromEntries(
+          screeningModels.map((result) => [result.model_code, result])
+        );
+
+        const plco = byCode.PLCOm2012_ORIGINAL || null;
+        const hunt = byCode.HUNT_LCM_6Y || null;
+        const plcoThreshold = input.site_config.thresholds.PLCOm2012_screening_percent;
+
+        return {
+          PLCOm2012_ORIGINAL: {
+            model_code: "PLCOm2012_ORIGINAL",
+            threshold_percent: plcoThreshold,
+            risk_percent: plco?.risk_percent ?? null,
+            calculation_status: plco?.calculation_status ?? "not_calculable",
+            applicability: plco?.applicability ?? null,
+            meets_threshold: Number.isFinite(plco?.risk_percent) && Number.isFinite(plcoThreshold)
+              ? plco.risk_percent >= plcoThreshold
+              : null,
+            threshold_source: "site_config.thresholds.PLCOm2012_screening_percent"
+          },
+          HUNT_LCM_6Y: {
+            model_code: "HUNT_LCM_6Y",
+            threshold_percent: input.site_config.thresholds.HUNT_screening_percent,
+            risk_percent: hunt?.risk_percent ?? null,
+            calculation_status: hunt?.calculation_status ?? "not_calculable",
+            applicability: hunt?.applicability ?? null,
+            meets_threshold: null,
+            threshold_source: null,
+            note: "No HUNT screening threshold is configured in this prototype."
+          }
+        };
+      }
+
+      function buildPrivacyBlock() {
+        return {
+          browser_only_calculation: true,
+          entered_calculator_data_transmitted_by_tool: false,
+          application_backend: false,
+          application_cookies_set_by_this_code: false,
+          application_local_storage: false,
+          external_assets_loaded: true,
+          external_asset_hosts: [
+            "fonts.googleapis.com",
+            "fonts.gstatic.com",
+            "cdn.jsdelivr.net",
+            "raw.githubusercontent.com"
+          ],
+          external_asset_note: "External asset hosts may receive request metadata such as IP address, user agent, referrer, and timing unless assets are self-hosted.",
+          json_export_generated_in_browser: true
+        };
+      }
+
+      function buildDependencyGraph() {
+        return {
+          derived_variables: {
+            "normalized.bmi": ["person.height_cm", "person.weight_kg"],
+            "normalized.pack_years": ["smoking.cigarettes_per_day", "smoking.years_smoked", "smoking.pack_years_override"],
+            "normalized.quit_years": ["smoking.status", "smoking.years_since_quit_raw", "person.age_years", "smoking.age_quit"],
+            "normalized.vdt": [
+              "nodule.current_volume_mm3",
+              "nodule.prior_volume_mm3",
+              "ct.prior_ct_date",
+              "ct.ct_date",
+              "ct.measurement_same_method"
+            ]
+          },
+          model_inputs: {
+            PLCOm2012_ORIGINAL: [
+              "person.age_years",
+              "person.education_plco",
+              "normalized.bmi",
+              "history.copd",
+              "history.previous_cancer_any",
+              "history.family_lung_cancer",
+              "smoking.status",
+              "smoking.cigarettes_per_day",
+              "smoking.years_smoked",
+              "normalized.quit_years",
+              "person.race_plco"
+            ],
+            HUNT_LCM_6Y: [
+              "person.sex_at_birth",
+              "person.age_years",
+              "normalized.pack_years",
+              "smoking.cigarettes_per_day",
+              "normalized.quit_years",
+              "normalized.bmi",
+              "smoking.indoor_smoke_hours",
+              "smoking.daily_cough"
+            ],
+            MAYO_SWENSEN_DEPENDENCY: [
+              "person.age_years",
+              "smoking.status",
+              "history.extrathoracic_cancer_gt_5y",
+              "nodule.max_diameter_mm",
+              "nodule.mean_diameter_mm",
+              "nodule.spiculation",
+              "nodule.upper_lobe"
+            ],
+            BROCK_FULL: [
+              "person.age_years",
+              "person.sex_at_birth",
+              "history.first_degree_lung_cancer",
+              "history.emphysema",
+              "nodule.max_diameter_mm",
+              "nodule.mean_diameter_mm",
+              "nodule.type",
+              "nodule.upper_lobe",
+              "nodule.nodule_count",
+              "nodule.spiculation"
+            ],
+            HERDER: [
+              "outputs.nodule_level_models.MAYO_SWENSEN_DEPENDENCY.risk_probability",
+              "pet.performed",
+              "pet.fdg_uptake",
+              "pet.small_nodule_caveat",
+              "pet.inflammation_or_infection_caveat"
+            ]
+          },
+          output_dependencies: {
+            screening_threshold_results: [
+              "outputs.screening_and_person_level_models",
+              "site_config.thresholds"
+            ],
+            ntog_experimental_screening_score: [
+              "person",
+              "smoking",
+              "history",
+              "ntog_emerging_risks",
+              "normalized.quit_years"
+            ],
+            ntog_not_validated_risk_score: [
+              "outputs.screening_and_person_level_models",
+              "outputs.nodule_level_models",
+              "normalized.vdt",
+              "smoking",
+              "history",
+              "ntog_emerging_risks"
+            ]
+          }
+        };
+      }
+
+      function buildExport() {
+        const input = collectInput();
+        const normalized = normalizeInput(input);
+        const derivedVariableProvenance = buildDerivedVariableProvenance(input, normalized);
+
+        const screeningModels = calculateScreeningModels(input, normalized);
+        const noduleModels = calculateNoduleModels(input);
+        const experimentalScreeningScore = calculateExperimentalScreeningScore(input, normalized);
+        const ntogNotValidatedRiskScore = calculateNtogNotValidatedRiskScore(
+          input,
+          normalized,
+          screeningModels,
+          noduleModels
+        );
+        const warnings = calculateWarnings(input);
+
+        return {
+          ...input,
+          normalized,
+          derived_variable_provenance: derivedVariableProvenance,
+          privacy: buildPrivacyBlock(),
+          outputs: {
+            screening_and_person_level_models: screeningModels,
+            nodule_level_models: noduleModels,
+            screening_threshold_results: buildScreeningThresholdResults(input, screeningModels),
+            ntog_experimental_screening_score: experimentalScreeningScore,
+            ntog_not_validated_risk_score: ntogNotValidatedRiskScore,
+            warnings
+          },
+          dependency_graph: buildDependencyGraph(),
+          audit: {
+            duplicate_footer_removed: true,
+            implementation_note: "PLCOm2012, HUNT LCM 6-year, Mayo, and Brock/PanCan use inserted coefficient equations. They require independent test-case validation before clinical or formal research use. Herder is educational-only pending original-table verification."
+          }
+        };
+      }
+
+      function resultCard(result) {
+        const risk = result.risk_percent !== null && result.risk_percent !== undefined
+          ? `${result.risk_percent}%`
+          : "Not calculated";
+        const status = result.calculation_status || result.status || "not_calculable";
+
+        const missing = result.missing_variables?.length
+          ? `<p class="muted-note mb-1"><strong>Missing:</strong> ${htmlEscape(result.missing_variables.join(", "))}</p>`
+          : "";
+
+        const warnings = result.warnings?.length
+          ? `<ul class="warning-list">${result.warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul>`
+          : "";
+
+        return `
+          <div class="result-card-lite">
+            <div class="result-title">
+              <h3 class="h6 mb-0">${htmlEscape(result.model_name)}</h3>
+              ${statusPill(status)}
+            </div>
+            <div class="risk-number">${htmlEscape(risk)}</div>
+            ${result.risk_horizon ? `<p class="muted-note mb-1">Horizon: ${htmlEscape(result.risk_horizon)}</p>` : ""}
+            ${missing}
+            ${warnings}
+          </div>
+        `;
+      }
+
+      function scoreCard(score) {
+        return `
+          <div class="score-card">
+            <div class="result-title">
+              <h3 class="h6 mb-0">${htmlEscape(score.model_name)}</h3>
+              ${statusPill(score.status)}
+            </div>
+            <div class="risk-number">${htmlEscape(score.score)} / 100</div>
+            <p class="muted-note mb-2">Research signal band: ${htmlEscape(score.band)}</p>
+            <ul class="compact-list">
+              <li>Age: ${htmlEscape(score.components.age)}</li>
+              <li>Tobacco: ${htmlEscape(score.components.tobacco)}</li>
+              <li>Respiratory/fibrosis: ${htmlEscape(score.components.respiratory_fibrosis)}</li>
+              <li>Environmental/occupational: ${htmlEscape(score.components.environmental_occupational)}</li>
+              <li>Host/family/RT/immunosuppression: ${htmlEscape(score.components.host_family_rt_immunosuppression)}</li>
+            </ul>
+          </div>
+        `;
+      }
+
+      function postCtScoreCard(score) {
+        const componentItems = Object.values(score.components || {}).map((component) => {
+          const value = component.available
+            ? `${htmlEscape(component.points)} / ${htmlEscape(component.weight)}`
+            : `missing / ${htmlEscape(component.weight)}`;
+
+          return `<li>${htmlEscape(component.label)}: ${value}</li>`;
+        }).join("");
+
+        const missing = score.missing_components?.length
+          ? `<p class="muted-note mb-2"><strong>Missing:</strong> ${htmlEscape(score.missing_components.join(", "))}</p>`
+          : "";
+
+        const warnings = score.warnings?.length
+          ? `<ul class="warning-list">${score.warnings.map((warning) => `<li>${htmlEscape(warning)}</li>`).join("")}</ul>`
+          : "";
+
+        return `
+          <div class="score-card">
+            <div class="result-title">
+              <h3 class="h6 mb-0">${htmlEscape(score.model_name)}</h3>
+              ${statusPill(score.status)}
+            </div>
+            <div class="risk-number">${score.score === null ? "Not calculated" : `${htmlEscape(score.score)} / 100`}</div>
+            <p class="muted-note mb-2">Research signal band: ${htmlEscape(score.band)}</p>
+            <p class="muted-note mb-2">Raw available points: ${htmlEscape(score.raw_points)} / ${htmlEscape(score.available_weight)}</p>
+            <p class="muted-note mb-2">Domain completeness: ${htmlEscape(score.domain_completeness_percent ?? 0)}%</p>
+            ${missing}
+            <ul class="compact-list">${componentItems}</ul>
+            ${warnings}
+          </div>
+        `;
+      }
+
+      function renderFrameworkReadiness(exportData) {
+        const input = exportData;
+
+        const frameworks = [
+          {
+            name: "Fleischner",
+            ready: input.ct.context === "incidental" && input.nodule.max_diameter_mm !== null,
+            note: "Requires incidental-nodule context and nodule measurements."
+          },
+          {
+            name: "BTS",
+            ready: input.nodule.max_diameter_mm !== null || input.nodule.current_volume_mm3 !== null,
+            note: "Requires diameter or volumetric data."
+          },
+          {
+            name: "Lung-RADS",
+            ready: input.ct.context === "screening" && input.ct.low_dose_ct !== "no",
+            note: "Requires screening LDCT context."
+          },
+          {
+            name: "NELSON / volumetric",
+            ready: input.nodule.current_volume_mm3 !== null,
+            note: "Requires nodule volume."
+          }
+        ];
+
+        return frameworks.map((fw) => `
+          <div class="framework-card">
+            <div class="result-title">
+              <h3 class="h6 mb-0">${htmlEscape(fw.name)}</h3>
+              ${fw.ready ? statusPill("calculated", "ready") : statusPill("cannot_assess", "not ready")}
+            </div>
+            <p class="muted-note mb-0">${htmlEscape(fw.note)}</p>
+          </div>
+        `).join("");
+      }
+
+      function render(exportData) {
+        const normalized = exportData.normalized;
+
+        setText("bmiOut", normalized.bmi ?? "-");
+        setText("packYearsOut", normalized.pack_years ?? "-");
+        setText("packYearsNote", exportData.smoking.pack_years_source || "unknown");
+        setText("quitYearsOut", normalized.quit_years ?? "-");
+        setText("vdtOut", normalized.vdt.value ?? "-");
+        setText("growthCategoryOut", `Growth category: ${normalized.vdt.category}.`);
+
+        setHTML("readinessOut", `
+          <div>${statusPill(exportData.person.age_years !== null ? "calculated" : "cannot_assess", "age")}</div>
+          <div>${statusPill(exportData.smoking.pack_years !== null ? "calculated" : "cannot_assess", "pack-years")}</div>
+          <div>${statusPill(exportData.nodule.max_diameter_mm !== null || exportData.nodule.mean_diameter_mm !== null ? "calculated" : "cannot_assess", "nodule size")}</div>
+          <div>${statusPill(exportData.pet.performed === "yes" ? "calculated" : "cannot_assess", "PET")}</div>
+        `);
+
+        setHTML(
+          "screeningResults",
+          exportData.outputs.screening_and_person_level_models.map(resultCard).join("")
+        );
+
+        setHTML(
+          "noduleResults",
+          exportData.outputs.nodule_level_models.map(resultCard).join("")
+        );
+
+        setHTML(
+          "ntogScreeningScoreResult",
+          scoreCard(exportData.outputs.ntog_experimental_screening_score)
+        );
+
+        setHTML(
+          "ntogScoreResult",
+          postCtScoreCard(exportData.outputs.ntog_not_validated_risk_score)
+        );
+
+        setHTML("frameworkResults", renderFrameworkReadiness(exportData));
+
+        const warnings = exportData.outputs.warnings;
+
+        setHTML(
+          "modifierWarnings",
+          warnings.length
+            ? `<ul class="warning-list">${warnings.map((w) => `<li>${htmlEscape(w)}</li>`).join("")}</ul>`
+            : `<p class="muted-note mb-0">No modifier warnings generated.</p>`
+        );
+
+        const noduleLabel = exportData.nodule.label || "index nodule";
+        const reportText = [
+          `Educational browser-only calculation for ${noduleLabel}.`,
+          `BMI: ${normalized.bmi ?? "not available"}.`,
+          `Pack-years: ${normalized.pack_years ?? "not available"}.`,
+          `VDT: ${normalized.vdt.value ?? "not calculable"} days.`,
+          `This output is for education and research planning only and is not clinical advice.`
+        ].join(" ");
+
+        setText("structuredReportText", reportText);
+
+        const json = JSON.stringify(exportData, null, 2);
+        const jsonBox = $("jsonExport");
+        if (jsonBox) jsonBox.value = json;
+      }
+
+      function runCalculations() {
+        const exportData = buildExport();
+        render(exportData);
+        return exportData;
+      }
+
+      function resetForm() {
+        const form = $("lungRiskForm");
+        if (form) form.reset();
+
+        if ($("noduleLabel")) $("noduleLabel").value = "N1";
+        if ($("blockSmallNodulePet")) $("blockSmallNodulePet").checked = true;
+
+        toggleSensitiveFields();
+        runCalculations();
+      }
+
+      function loadExample() {
+        const exampleValues = {
+          ageYears: 67,
+          sexAtBirth: "female",
+          countryContext: "Finland",
+          heightCm: 166,
+          weightKg: 72,
+          racePlco: "white",
+          educationPlco: "4",
+          smokingStatus: "former",
+          cigsPerDay: 15,
+          yearsSmoked: 32,
+          ageStarted: 18,
+          ageQuit: 60,
+          dailyCough: "no",
+          indoorSmokeHours: 0,
+          copdHistory: "yes",
+          emphysemaHistory: "yes",
+          previousCancerAny: "no",
+          extrathoracicGt5y: "no",
+          extrathoracicWithin5y: "no",
+          familyLungCancer: "yes",
+          firstDegreeLungCancer: "yes",
+          ildDiagnosis: "no",
+          cpfe: "no",
+          radonTested: "yes",
+          radonBqm3: 130,
+          ctContext: "screening",
+          lowDoseCt: "yes",
+          thinSliceCt: "yes",
+          measurementSameMethod: "yes",
+          noduleLabel: "N1",
+          noduleSide: "right",
+          noduleLobe: "RUL",
+          upperLobe: "yes",
+          maxDiameterMm: 9,
+          meanDiameterMm: 8,
+          priorMeanDiameterMm: 6,
+          currentVolumeMm3: 260,
+          priorVolumeMm3: 110,
+          noduleType: "solid",
+          spiculation: "yes",
+          noduleCount: 1,
+          temporalStatus: "growing",
+          petPerformed: "yes",
+          fdgUptake: "moderate",
+          suvMax: 3.4
+        };
+
+        Object.entries(exampleValues).forEach(([id, value]) => {
+          const el = $(id);
+          if (el) el.value = value;
+        });
+
+        if ($("allowSensitiveFields")) $("allowSensitiveFields").checked = true;
+        toggleSensitiveFields();
+
+        const today = new Date();
+        const prior = new Date(today);
+        prior.setDate(today.getDate() - 180);
+
+        if ($("ctDate")) $("ctDate").value = today.toISOString().slice(0, 10);
+        if ($("priorCtDate")) $("priorCtDate").value = prior.toISOString().slice(0, 10);
+        if ($("questionnaireDate")) $("questionnaireDate").value = today.toISOString().slice(0, 10);
+
+        runCalculations();
+      }
+
+      async function copyJson() {
+        const box = $("jsonExport");
+        if (!box) return;
+
+        try {
+          await navigator.clipboard.writeText(box.value);
+        } catch {
+          box.select();
+          document.execCommand("copy");
+        }
+      }
+
+      function downloadJson() {
+        const box = $("jsonExport");
+        if (!box) return;
+
+        const blob = new Blob([box.value], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `ntog-risk-export-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+      }
+
+      function toggleSensitiveFields() {
+        const allowed = getChecked("allowSensitiveFields");
+
+        ["racePlco", "educationPlco"].forEach((id) => {
+          const el = $(id);
+          if (!el) return;
+          el.disabled = !allowed;
+          if (!allowed) el.value = "";
+        });
+      }
+
+      function bindEvents() {
+        $("runBtn")?.addEventListener("click", runCalculations);
+        $("exampleBtn")?.addEventListener("click", loadExample);
+        $("resetBtn")?.addEventListener("click", resetForm);
+        $("copyJsonBtn")?.addEventListener("click", copyJson);
+        $("downloadJsonBtn")?.addEventListener("click", downloadJson);
+
+        $("allowSensitiveFields")?.addEventListener("change", () => {
+          toggleSensitiveFields();
+          runCalculations();
+        });
+
+        $("lungRiskForm")?.addEventListener("input", () => {
+          runCalculations();
+        });
+
+        $("lungRiskForm")?.addEventListener("change", () => {
+          runCalculations();
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        toggleSensitiveFields();
+        bindEvents();
+        runCalculations();
+      });
     })();
   </script>
-  
-  <footer class="bg-dark text-white py-4 mt-0">
-    <div class="container text-center">
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
-      <p class="small mb-2">
-  Tool source code licensed under
-  <a href="/LICENSE" class="text-white">Apache License 2.0</a>.
-  Educational text licensed under
-  <a href="https://creativecommons.org/licenses/by/4.0/" class="text-white" target="_blank" rel="noopener">CC BY 4.0</a>.
-  NTOG name and logo are not licensed for reuse.
-</p>
-<p class="small mb-0">
-  Educational and research use only. Not a medical device, diagnostic tool,
-  autonomous clinical decision system, reimbursement decision tool, or substitute
-  for national guidelines, MDT review, clinical judgment, or patient preference.
-</p>     
-      <p class="mb-0">
-        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
-        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
-      </p>
-    </div>
-  </footer>
-  
 </body>
 </html>
