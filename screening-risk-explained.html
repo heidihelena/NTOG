@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Understanding Lung Cancer Screening Risk | Nordic Thoracic Oncology Group</title>
+  <meta name="description" content="Educational NTOG resource explaining lung cancer screening risk, PLCOm2012 thresholds, pulmonary nodules, incidental findings, screening pathways, and programme capacity.">
+  <meta name="keywords" content="lung cancer screening risk, PLCOm2012 threshold, pulmonary nodules, incidental findings, low-dose CT screening, nodule management, screening programme capacity, NTOG">
+  <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <link rel="canonical" href="https://ntog.org/understanding-screening-risk.html">
+
+  <meta property="og:title" content="Understanding Lung Cancer Screening Risk | NTOG">
+  <meta property="og:description" content="Educational explanation of lung cancer screening thresholds, risk models, nodules, incidental findings, and screening programme workload.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:url" content="https://ntog.org/understanding-screening-risk.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Understanding Lung Cancer Screening Risk | NTOG">
+  <meta name="twitter:description" content="Educational explanation of screening thresholds, nodules, incidental findings, and why screening requires a full pathway rather than a single CT scan.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/tables.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/nav.css">
+
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      color: #1f2933;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.11), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lead-narrow {
+      max-width: 920px;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .section-block {
+      padding: 3.5rem 0;
+    }
+
+    .section-block + .section-block {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .content-card,
+    .tool-card,
+    .hub-card,
+    .cta-panel,
+    .risk-card,
+    .pathway-card {
+      height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      padding: 1.5rem;
+    }
+
+    .tool-card h3,
+    .hub-card h3,
+    .risk-card h3,
+    .pathway-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.75rem;
+      color: #102a43;
+    }
+
+    .content-card p,
+    .tool-card p,
+    .hub-card p,
+    .cta-panel p,
+    .risk-card p,
+    .pathway-card p {
+      color: #52606d;
+    }
+
+    .tool-label {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .tool-label.external {
+      background: #eef6fb;
+      color: #1f4e79;
+    }
+
+    .tool-label.development {
+      background: #f7f0df;
+      color: #7a4f01;
+    }
+
+    .tool-label.educational {
+      background: #edf7ed;
+      color: #246b30;
+    }
+
+    .status-note {
+      border-radius: 1rem;
+      border: 1px solid #d7eaf3;
+      background: #f0f7fb;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .warning-note {
+      border-radius: 1rem;
+      border: 1px solid #f1d6a8;
+      background: #fff7e6;
+      color: #1f2933;
+      padding: 1.25rem;
+    }
+
+    .compact-list {
+      margin-bottom: 0;
+      padding-left: 1.2rem;
+    }
+
+    .compact-list li {
+      margin-bottom: 0.6rem;
+    }
+
+    .compact-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .badge-topic {
+      display: inline-block;
+      margin: 0.15rem 0.25rem 0.15rem 0;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: #eef6fb;
+      color: #1f4e79;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .tools-table {
+      margin-bottom: 0;
+    }
+
+    .tools-table th {
+      white-space: nowrap;
+      background: #102a43;
+      color: #ffffff;
+    }
+
+    .muted-note {
+      color: #697586;
+      font-size: 0.95rem;
+    }
+
+    .risk-number {
+      font-family: "Montserrat", Arial, sans-serif;
+      color: #102a43;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 0.35rem;
+      max-width: 620px;
+      margin: 1.25rem auto 0;
+    }
+
+    .person-dot {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      background: #dbe7f3;
+      border: 1px solid #c8d6e5;
+    }
+
+    .person-dot.risk {
+      background: #f6c36f;
+      border-color: #d99a2b;
+    }
+
+    .mini-tool-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #f8fafc;
+      padding: 1.25rem;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">NTOG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="/about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="/history.html">History</a></li>
+              <li><a class="dropdown-item" href="/steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
+              <li><a class="dropdown-item" href="/tools.html">Tools</a></li>
+              <li><a class="dropdown-item active" href="/understanding-screening-risk.html">Understanding Screening Risk</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/news.html">Research News</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Screening education</span>
+      <h1 class="display-5 fw-bold mb-3">Understanding Lung Cancer Screening Risk, Thresholds, Nodules, and Incidental Findings</h1>
+      <p class="lead-narrow mb-4">Lung cancer screening risk models estimate future risk in groups of people with similar characteristics. They do not diagnose cancer in an individual. Safe screening requires thresholds, nodule pathways, incidental finding rules, and enough capacity for the work created after the first CT.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="#risk-thresholds" class="btn btn-light btn-lg">Understand thresholds</a>
+        <a href="#screening-pathway" class="btn btn-outline-light btn-lg">Screening pathway</a>
+        <a href="/tools.html" class="btn btn-outline-light btn-lg">Back to tools</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="overview">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Purpose of this page</h2>
+            <p class="lead">This page explains how to interpret lung cancer screening risk estimates, thresholds, pulmonary nodules, and incidental findings without mistaking them for a diagnosis.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Many people understand that screening can find cancer earlier. Fewer understand that a safe programme also needs capacity for many normal scans, benign nodules, recall scans, PET/CT, biopsy, MDT review, surgery for selected cases, and findings outside the lung nodule pathway.</p>
+              <p class="mb-0">This page is intended for education, programme planning, and shared understanding. It does not determine whether an individual should be screened or how a CT finding should be managed.</p>
+            </div>
+          </div>
+        </div>
+        <div class="warning-note mt-4">
+          <strong>Clinical disclaimer:</strong> This page explains population risk, screening thresholds, nodule management, and incidental findings for education and programme planning. It does not replace national guidelines, local protocols, multidisciplinary team assessment, clinical judgement, or patient preference.
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="risk-thresholds">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-7">
+            <span class="tool-label educational">Key message</span>
+            <h2>Risk is not the same as diagnosis</h2>
+            <p class="lead">A 6-year lung cancer risk estimate describes the expected number of future lung cancers in a group of similar people. It does not say that a specific person currently has cancer.</p>
+            <div class="content-card mt-4">
+              <h3>Example</h3>
+              <p class="mb-0">A 1.5% 6-year risk means about 1 to 2 people out of 100 with similar risk factors may develop lung cancer over 6 years, while about 98 to 99 may not.</p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="risk-card text-center">
+              <div class="muted-note fw-bold text-uppercase mb-2">Example threshold</div>
+              <div class="risk-number">1.51%</div>
+              <p>PLCOm2012 risk over 6 years.</p>
+              <p class="mb-0"><strong>This is a screening selection threshold, not a diagnostic statement.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card mt-4">
+          <h3>What does a 1.5% 6-year risk mean?</h3>
+          <p>Imagine 100 people with similar age, smoking history, BMI, COPD, family history, and other model variables. Around 1 to 2 may develop lung cancer over 6 years. The model does not identify exactly which person this will be.</p>
+          <div class="person-grid" aria-label="Illustration of approximately 1 to 2 people out of 100 at risk over 6 years">
+            <span class="person-dot risk"></span><span class="person-dot risk"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+            <span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span><span class="person-dot"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="threshold-balance">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Why screening thresholds exist</h2>
+            <p class="lead">Screening thresholds balance benefit and harm. If the threshold is too low, many low-risk people may receive scans with little chance of benefit. If the threshold is too high, some people who could benefit may be missed.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="table-wrap">
+              <table class="table table-striped tools-table">
+                <thead>
+                  <tr>
+                    <th>Threshold choice</th>
+                    <th>Effect</th>
+                    <th>Programme consequence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Lower threshold</td>
+                    <td>More people eligible. More cancers may be found.</td>
+                    <td>More scans, more nodules, more incidental findings, more follow-up.</td>
+                  </tr>
+                  <tr>
+                    <td>Higher threshold</td>
+                    <td>Fewer people eligible. Screening is focused on higher-risk groups.</td>
+                    <td>Fewer scans and downstream investigations, but some cancers may be missed.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="status-note mt-4">
+          <strong>Population selection:</strong> A threshold such as PLCOm2012 risk at or above 1.51% over 6 years means that the person belongs to a risk group where screening may be justified under a defined programme rule. It does not mean cancer is likely now.
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="screening-pathway">
+      <div class="container">
+        <div class="row g-4 align-items-start mb-4">
+          <div class="col-lg-5">
+            <h2>Screening is a pathway, not a single scan</h2>
+            <p class="lead">A safe screening programme needs a complete pathway for risk selection, CT acquisition, nodule measurement, recall scans, incidental findings, PET/CT, biopsy, surgery, MDT review, and audit.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="warning-note">
+              <strong>Operational point:</strong> Screening capacity is not only scanner capacity. It also requires radiology time, tracking systems, recall governance, diagnostic capacity, MDT capacity, treatment capacity, communication processes, and quality assurance.
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <article class="pathway-card">
+              <span class="tool-label educational">Before CT</span>
+              <h3>Eligibility and communication</h3>
+              <p>Eligibility, invitation, shared decision-making, smoking cessation support, consent, and risk communication.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="pathway-card">
+              <span class="tool-label educational">At CT</span>
+              <h3>Imaging and reporting</h3>
+              <p>Low-dose CT protocol, structured reporting, nodule measurement, previous imaging comparison, and incidental finding classification.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="pathway-card">
+              <span class="tool-label educational">After CT</span>
+              <h3>Follow-up and audit</h3>
+              <p>Surveillance intervals, recall systems, PET/CT, biopsy, MDT review, treatment, communication, and outcomes audit.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="nodule-management">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Why pulmonary nodules need structured management</h2>
+            <p class="lead">Small lung nodules are common on CT. Most are benign, especially very small nodules.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>The purpose of nodule management systems is to identify the minority that need closer assessment while avoiding unnecessary procedures for benign findings.</p>
+              <p class="mb-0">Nodule size, growth, density, morphology, location, patient risk factors, and previous imaging all affect interpretation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="warning-note mt-4">
+          <strong>Important:</strong> Finding a nodule does not mean finding cancer. Structured nodule pathways reduce avoidable anxiety, unnecessary imaging, and unnecessary procedures.
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="incidental-findings">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Incidental findings are part of screening</h2>
+            <p class="lead">CT screening can show findings outside the target question of lung cancer. These findings need programme rules before screening starts.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Incidental findings may include emphysema, coronary artery calcification, interstitial lung abnormalities, adrenal lesions, thyroid nodules, kidney lesions, liver lesions, aortic aneurysm, or other abnormalities.</p>
+              <p class="mb-0">Programmes need agreed rules for which findings are reported, which require follow-up, which can be ignored, and how results are communicated.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="diagnostic-cascades">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Safe programmes avoid unmanaged diagnostic cascades</h2>
+            <p class="lead">A screening programme can become inefficient if every small or low-risk finding leads to additional imaging, referrals, or procedures.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p>Structured thresholds and nodule-management systems reduce unnecessary follow-up while preserving safety. The aim is not to ignore findings. The aim is to manage findings proportionately.</p>
+              <ul class="compact-list">
+                <li>False-positive and overdiagnosis communication</li>
+                <li>Recall governance and nodule tracking</li>
+                <li>Incidental finding policy</li>
+                <li>MDT, biopsy, surgical, and oncology capacity</li>
+                <li>Equity monitoring, quality assurance, and outcomes audit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="programme-capacity">
+      <div class="container">
+        <h2>What a screening programme must be able to handle</h2>
+        <p class="lead">A good programme is not just buying CT scanners and inviting people. It needs the full pathway.</p>
+
+        <div class="row g-4 mt-1">
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Many scans</h3><p>Most screened people will not have lung cancer, but their scans still require acquisition, reporting, communication, and audit.</p></article>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Many benign nodules</h3><p>Small nodules are frequent. Most do not need invasive procedures, but they need structured interpretation.</p></article>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Repeat surveillance</h3><p>Some findings require repeat CT at defined intervals. Reliable recall systems are essential.</p></article>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Selected escalation</h3><p>PET/CT, biopsy, MDT review, surgery, radiotherapy, or systemic therapy may be needed for selected cases.</p></article>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Incidental findings</h3><p>Findings outside the lung nodule pathway need explicit, proportionate, auditable policy.</p></article>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <article class="hub-card"><h3>Clear rules</h3><p>Rules reduce anxiety, unnecessary follow-up, variation, and unmanaged diagnostic cascades.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="related">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2>Related NTOG resources</h2>
+            <p class="lead mb-0">Use this page alongside the calculator, guideline pages, and nodule management resources.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="cta-panel">
+              <div class="d-flex flex-column gap-2">
+                <a href="/tools.html" class="btn btn-primary">Clinical Tools and Educational Resources</a>
+                <a href="/ntog_lungrisk_static_tools_v3.html" class="btn btn-outline-primary">Nodule and screening calculators</a>
+                <a href="/guidelines/nodule-management.html" class="btn btn-outline-primary">Nodule Management and Screening</a>
+                <a href="/guidelines.html" class="btn btn-outline-primary">Clinical Guidelines</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-0">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="small mb-2">Educational and research use only. Not a medical device, diagnostic tool, autonomous clinical decision system, reimbursement decision tool, or substitute for national guidelines, MDT review, clinical judgment, or patient preference.</p>
+      <p class="mb-0">
+        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
+        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/js/scripts.js" defer></script>
+</body>
+</html>
