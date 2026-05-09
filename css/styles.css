@@ -450,3 +450,25 @@ footer.bg-dark {
 .ntog2027 footer.bg-dark {
   background: linear-gradient(135deg, var(--dk-red-deep), var(--dk-red-dark)) !important;
 }
+.symposium-feature .btn-primary {
+  background-color: var(--dk-red);
+  border-color: var(--dk-red);
+}
+
+.symposium-feature .btn-primary:hover,
+.symposium-feature .btn-primary:focus {
+  background-color: var(--dk-red-dark);
+  border-color: var(--dk-red-dark);
+}
+
+.symposium-feature .btn-outline-primary {
+  color: var(--dk-red);
+  border-color: var(--dk-red);
+}
+
+.symposium-feature .btn-outline-primary:hover,
+.symposium-feature .btn-outline-primary:focus {
+  color: #ffffff;
+  background-color: var(--dk-red);
+  border-color: var(--dk-red);
+}
