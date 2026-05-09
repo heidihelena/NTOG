@@ -324,11 +324,6 @@ footer.bg-dark {
   --primary-color-hover: var(--dk-red-dark);
 }
 
-.ntog2027 body,
-body.ntog2027 {
-  background: #fff8f9;
-}
-
 /* Event navbar */
 .ntog2027 .navbar {
   background: #ffffff !important;
