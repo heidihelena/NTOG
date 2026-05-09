@@ -19,7 +19,6 @@
   --ntog-grey-section: #f3f4f6;
   --ntog-grey-border: #e5e7eb;
 }
-}
 
 /* Standard NTOG hero */
 .hero,
@@ -332,7 +331,7 @@ body.ntog2027 {
 .ntog2027 .programme-card,
 .ntog2027 .audience-card,
 .ntog2027 .cta-panel {
-  border: 1px solid #f2b8c2;
+  border: 1px solid #ead5d9;
   background: #ffffff;
   box-shadow: 0 12px 28px rgba(116, 16, 31, 0.08);
 }
