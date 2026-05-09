@@ -14,6 +14,11 @@
   --dk-red-deep: #260006;
   --dk-red-soft: #fff1f3;
   --dk-red-border: #f2b8c2;
+
+  --ntog-grey-soft: #f7f7f8;
+  --ntog-grey-section: #f3f4f6;
+  --ntog-grey-border: #e5e7eb;
+}
 }
 
 /* Standard NTOG hero */
@@ -305,7 +310,7 @@ body.ntog2027 {
 
 /* Section backgrounds */
 .ntog2027 .section-block.bg-light {
-  background: linear-gradient(180deg, #fff1f3 0%, #fff8f9 100%) !important;
+  background: linear-gradient(180deg, #f7f7f8 0%, #f3f4f6 100%) !important;
 }
 
 .ntog2027 .section-block + .section-block {
