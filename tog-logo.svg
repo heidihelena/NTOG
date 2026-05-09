@@ -1,0 +1,60 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NTOG circular segmented logo</title>
+  <desc id="desc">A circular segmented ring logo in red, yellow, and blue.</desc>
+
+  <defs>
+    <linearGradient id="redGrad" x1="190" y1="400" x2="520" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E6001F"/>
+      <stop offset="1" stop-color="#C8102E"/>
+    </linearGradient>
+
+    <linearGradient id="yellowGrad" x1="520" y1="190" x2="835" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD21A"/>
+      <stop offset="1" stop-color="#F2B400"/>
+    </linearGradient>
+
+    <linearGradient id="blueGrad" x1="210" y1="500" x2="850" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0057B8"/>
+      <stop offset="0.55" stop-color="#004B9B"/>
+      <stop offset="1" stop-color="#002F63"/>
+    </linearGradient>
+
+    <linearGradient id="blueGrad2" x1="330" y1="810" x2="700" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0057B8"/>
+      <stop offset="1" stop-color="#004B9B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ring segments -->
+  <g fill="none" stroke-width="126" stroke-linecap="butt">
+    <!-- Red upper-left segment -->
+    <path
+      d="M 222 418
+         A 305 305 0 0 1 501 207"
+      stroke="url(#redGrad)" />
+
+    <!-- Yellow upper-right segment -->
+    <path
+      d="M 539 208
+         A 305 305 0 0 1 805 428"
+      stroke="url(#yellowGrad)" />
+
+    <!-- Dark blue right segment -->
+    <path
+      d="M 810 449
+         A 305 305 0 0 1 696 756"
+      stroke="url(#blueGrad)" />
+
+    <!-- Blue bottom segment -->
+    <path
+      d="M 665 776
+         A 305 305 0 0 1 360 776"
+      stroke="url(#blueGrad2)" />
+
+    <!-- Blue left segment -->
+    <path
+      d="M 324 753
+         A 305 305 0 0 1 211 471"
+      stroke="url(#blueGrad)" />
+  </g>
+</svg>
