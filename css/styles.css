@@ -103,9 +103,9 @@
 .navbar {
   border-bottom: 4px solid var(--primary-color);
 }
-/* Regular site footer */
+
 footer.bg-dark {
-background: #2f343a !important;
+  background: linear-gradient(135deg, #071f35 0%, #163a5a 55%, #1f4e79 100%) !important;
 }
 
 .footer-logo-link img {
