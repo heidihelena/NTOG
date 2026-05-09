@@ -134,6 +134,48 @@
   background-color: #eef6fb;
 }
 
+.navbar-toggler {
+  border: 1px solid rgba(31, 78, 121, 0.22);
+  border-radius: 999px;
+  padding: 0.45rem 0.6rem;
+  box-shadow: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.18rem rgba(31, 78, 121, 0.18);
+}
+
+.navbar-toggler-icon {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.navbar-toggler:hover {
+  border-color: var(--primary-color);
+}
+
+.ntog2027 .navbar-toggler {
+  border-color: rgba(200, 16, 46, 0.25);
+}
+
+.ntog2027 .navbar-toggler:hover {
+  border-color: var(--dk-red);
+}
+
+.ntog2027 .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.18rem rgba(200, 16, 46, 0.18);
+}
+
+.navbar-brand img {
+  background: #ffffff;
+  border-radius: 999px;
+}
+
+.navbar-brand span {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 footer.bg-dark {
   background: linear-gradient(135deg, #071f35 0%, #163a5a 55%, #1f4e79 100%) !important;
 }
@@ -477,4 +519,20 @@ footer.bg-dark {
   background: #fff5f6;
   color: var(--dk-red-dark);
   border: 1px solid #ead5d9;
+}
+
+.ntog-about-logo {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 992px) {
+  #about .row.align-items-center {
+    column-gap: 1rem;
+  }
+
+  .ntog-about-logo {
+    margin-top: 0.35rem;
+  }
 }
