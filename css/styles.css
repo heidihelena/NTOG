@@ -269,3 +269,129 @@
     height: auto;
   }
 }
+
+/* Stronger red theme for NTOG 2027 page */
+.ntog2027 {
+  --primary-color: var(--dk-red);
+  --primary-color-hover: var(--dk-red-dark);
+}
+
+.ntog2027 body,
+body.ntog2027 {
+  background: #fff8f9;
+}
+
+/* Navbar */
+.ntog2027 .navbar {
+  background: #ffffff !important;
+  border-bottom: 4px solid var(--dk-red);
+  box-shadow: 0 6px 18px rgba(116, 16, 31, 0.08);
+}
+
+.ntog2027 .navbar-brand {
+  color: var(--dk-red-dark) !important;
+}
+
+.ntog2027 .nav-link.active,
+.ntog2027 .dropdown-item.active {
+  color: #ffffff !important;
+  background-color: var(--dk-red);
+}
+
+.ntog2027 .nav-link:hover,
+.ntog2027 .dropdown-item:hover {
+  color: var(--dk-red-dark) !important;
+}
+
+/* Section backgrounds */
+.ntog2027 .section-block.bg-light {
+  background: linear-gradient(180deg, #fff1f3 0%, #fff8f9 100%) !important;
+}
+
+.ntog2027 .section-block + .section-block {
+  border-top: 1px solid #f2b8c2;
+}
+
+/* Headings */
+.ntog2027 h2 {
+  color: var(--dk-red-dark);
+}
+
+.ntog2027 .lead {
+  color: #5f1b28;
+}
+
+/* Cards */
+.ntog2027 .content-card,
+.ntog2027 .fact-card,
+.ntog2027 .programme-card,
+.ntog2027 .audience-card,
+.ntog2027 .cta-panel {
+  border: 1px solid #f2b8c2;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(116, 16, 31, 0.08);
+}
+
+.ntog2027 .fact-card,
+.ntog2027 .programme-card,
+.ntog2027 .audience-card {
+  border-top: 5px solid var(--dk-red);
+}
+
+.ntog2027 .fact-card h3,
+.ntog2027 .programme-card h3,
+.ntog2027 .audience-card h3,
+.ntog2027 .fact-value {
+  color: var(--dk-red-dark);
+}
+
+.ntog2027 .fact-label {
+  color: var(--dk-red);
+}
+
+/* Topic badges */
+.ntog2027 .badge-topic {
+  background: var(--dk-red-soft);
+  color: var(--dk-red-dark);
+  border: 1px solid var(--dk-red-border);
+}
+
+/* Status box */
+.ntog2027 .status-note {
+  border: 1px solid var(--dk-red-border);
+  background: #fff1f3;
+  color: #3a0a13;
+}
+
+.ntog2027 .status-note strong {
+  color: var(--dk-red-dark);
+}
+
+/* Bootstrap buttons on this page */
+.ntog2027 .btn-primary {
+  background-color: var(--dk-red);
+  border-color: var(--dk-red);
+}
+
+.ntog2027 .btn-primary:hover,
+.ntog2027 .btn-primary:focus {
+  background-color: var(--dk-red-dark);
+  border-color: var(--dk-red-dark);
+}
+
+.ntog2027 .btn-outline-primary {
+  color: var(--dk-red);
+  border-color: var(--dk-red);
+}
+
+.ntog2027 .btn-outline-primary:hover,
+.ntog2027 .btn-outline-primary:focus {
+  color: #ffffff;
+  background-color: var(--dk-red);
+  border-color: var(--dk-red);
+}
+
+/* Footer */
+.ntog2027 footer.bg-dark {
+  background: linear-gradient(135deg, var(--dk-red-deep), var(--dk-red-dark)) !important;
+}
