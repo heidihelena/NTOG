@@ -472,3 +472,10 @@ footer.bg-dark {
   background-color: var(--dk-red);
   border-color: var(--dk-red);
 }
+
+/* Homepage symposium feature badges */
+.symposium-feature .badge-topic {
+  background: var(--dk-red-soft);
+  color: var(--dk-red-dark);
+  border: 1px solid var(--dk-red-border);
+}
