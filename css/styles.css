@@ -171,6 +171,33 @@
   box-shadow: 0 0 0 0.18rem rgba(200, 16, 46, 0.18);
 }
 
+.ntog-menu-plus {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.ntog-menu-plus::before,
+.ntog-menu-plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 999px;
+  background: #4b5563;
+  transform: translate(-50%, -50%);
+}
+
+.ntog-menu-plus::before {
+  width: 24px;
+  height: 2.5px;
+}
+
+.ntog-menu-plus::after {
+  width: 2.5px;
+  height: 24px;
+}
+
 .navbar-brand img {
   background: #ffffff;
   border-radius: 999px;
