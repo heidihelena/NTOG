@@ -100,6 +100,20 @@
   text-transform: uppercase;
 }
 
+.navbar {
+  border-bottom: 3px solid var(--primary-color);
+}
+/* Regular site footer */
+footer.bg-dark {
+background: #2f343a !important;
+}
+
+.footer-logo-link img {
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.75rem;
+}
 /* Copenhagen 2027 */
 .ntog2027 .navbar {
   border-bottom: 3px solid var(--dk-red);
