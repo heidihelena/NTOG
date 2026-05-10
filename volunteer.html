@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Volunteer | Nordic Thoracic Oncology Group</title>
-  <meta name="description" content="Volunteer or collaborate with the Nordic Thoracic Oncology Group. Contact NTOG at chair@ntog.org or info@ntog.org.">
+  <meta name="description" content="Volunteer or collaborate with the Nordic Thoracic Oncology Group. NTOG welcomes clinicians, researchers, trainees, and collaborators interested in Nordic lung cancer research, education, and harmonisation.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
   <link rel="canonical" href="https://ntog.org/volunteer.html">
@@ -13,11 +13,10 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <meta property="og:title" content="Volunteer | Nordic Thoracic Oncology Group">
-  <meta property="og:description" content="Volunteer or collaborate with NTOG. Contact chair@ntog.org or info@ntog.org.">
+  <meta property="og:description" content="Volunteer or collaborate with NTOG in Nordic lung cancer research, education, and harmonisation.">
   <meta property="og:url" content="https://ntog.org/volunteer.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
@@ -29,7 +28,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Volunteer | Nordic Thoracic Oncology Group">
-  <meta name="twitter:description" content="Volunteer or collaborate with NTOG. Contact chair@ntog.org or info@ntog.org.">
+  <meta name="twitter:description" content="Volunteer or collaborate with NTOG in Nordic lung cancer research, education, and harmonisation.">
   <meta name="twitter:image" content="https://ntog.org/og-image.png">
   <meta name="twitter:image:alt" content="Nordic Thoracic Oncology Group logo and site title">
 
@@ -48,7 +47,11 @@
       background: #ffffff;
     }
 
-    h1, h2, h3, h4, .navbar-brand {
+    h1,
+    h2,
+    h3,
+    h4,
+    .navbar-brand {
       font-family: "Montserrat", Arial, sans-serif;
     }
 
@@ -104,7 +107,6 @@
 
     .intro-card,
     .contact-card,
-    .topic-card,
     .link-card {
       height: 100%;
       border: 1px solid #e5e7eb;
@@ -113,12 +115,12 @@
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
     }
 
-    .intro-card {
+    .intro-card,
+    .contact-card {
       padding: 1.5rem;
     }
 
     .intro-card h3,
-    .topic-card h3,
     .contact-card h3,
     .link-card h3 {
       font-size: 1.15rem;
@@ -127,7 +129,6 @@
     }
 
     .intro-card p,
-    .topic-card p,
     .contact-card p,
     .link-card p {
       margin-bottom: 0;
@@ -168,42 +169,6 @@
       font-weight: 700;
     }
 
-    .wp-table th {
-      white-space: nowrap;
-    }
-
-    .badge-topic {
-      display: inline-block;
-      margin: 0.15rem 0.25rem 0.15rem 0;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      background: #eef6fb;
-      color: #1f4e79;
-      font-weight: 700;
-      font-size: 0.82rem;
-    }
-
-    .topic-card {
-      padding: 1.35rem;
-    }
-
-    .contact-card {
-      padding: 1.5rem;
-    }
-
-    .contact-card ul {
-      padding-left: 1.1rem;
-      margin-bottom: 0;
-    }
-
-    .contact-card li {
-      margin-bottom: 0.45rem;
-    }
-
-    .contact-card li:last-child {
-      margin-bottom: 0;
-    }
-
     .link-card {
       padding: 1.25rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -239,21 +204,17 @@
     }
   </style>
 </head>
-<body>
 
-   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-  <img
-    src="/ntog-logo.svg"
-    alt=""
-    width="34"
-    height="34"
-    aria-hidden="true"
-  >
-  <span>NTOG</span>
-</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+        <span>NTOG</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -298,11 +259,11 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <a class="nav-link dropdown-toggle active" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">Get Involved</a>
             <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
-              <li><a class="dropdown-item active" href="expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="expert.html">Expert Network</a></li>
               <li><a class="dropdown-item" href="collaboration.html">Collaboration Opportunities</a></li>
-              <li><a class="dropdown-item" href="volunteer.html">Volunteer</a></li>
+              <li><a class="dropdown-item active" href="volunteer.html" aria-current="page">Volunteer</a></li>
             </ul>
           </li>
 
@@ -314,35 +275,118 @@
     </div>
   </nav>
 
-<header class="page-hero">
-  <div class="container">
-    <span class="eyebrow">Get involved</span>
-    <h1 class="display-5 fw-bold mb-3">Volunteer</h1>
-    <p class="lead-narrow mb-4">
-      NTOG welcomes clinicians, researchers, and collaborators interested in Nordic lung cancer research, education, and harmonisation.
-    </p>
-    <div class="d-flex flex-column flex-sm-row gap-3">
-      <a href="mailto:chair@ntog.org" class="btn btn-light btn-lg">Contact chair@ntog.org</a>
-      <a href="mailto:info@ntog.org" class="btn btn-outline-light btn-lg">Contact info@ntog.org</a>
-    </div>
-  </div>
-</header>
-  
-<main>
-  <section class="section-block" id="volunteer">
+  <header class="page-hero">
     <div class="container">
-      <div class="row g-4 align-items-start">
-        <div class="col-lg-5">
-          <h2>Volunteer with NTOG</h2>
-          <p class="lead">
-            We welcome interest from people who want to contribute to Nordic thoracic oncology collaboration.
-          </p>
+      <span class="eyebrow">Get involved</span>
+      <h1 class="display-5 fw-bold mb-3">Volunteer with NTOG</h1>
+      <p class="lead-narrow mb-4">
+        NTOG welcomes clinicians, researchers, trainees, nurses, data specialists, and collaborators who want to contribute to Nordic thoracic oncology research, education, guidelines, screening, and harmonisation.
+      </p>
+      <div class="d-flex flex-column flex-sm-row gap-3">
+        <a href="mailto:chair@ntog.org" class="btn btn-light btn-lg">Contact the chair</a>
+        <a href="mailto:info@ntog.org" class="btn btn-outline-light btn-lg">Contact NTOG</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-block" id="volunteer">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Ways to contribute</h2>
+            <p class="lead">
+              Volunteer involvement can range from a focused contribution to an ongoing role in a work package, study group, educational activity, or harmonisation project.
+            </p>
+            <p class="muted-note">
+              Early-career clinicians and researchers are welcome. NTOG aims to support Nordic collaboration across countries, disciplines, and career stages.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="intro-card">
+                  <h3>Research and studies</h3>
+                  <p>Contribute to clinical studies, registry-based research, translational projects, epidemiology, real-world evidence, or protocol development.</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="intro-card">
+                  <h3>Guidelines and harmonisation</h3>
+                  <p>Support Nordic alignment on diagnostics, treatment pathways, follow-up, multidisciplinary care, and quality standards.</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="intro-card">
+                  <h3>Education and communication</h3>
+                  <p>Help develop educational content, meetings, symposium sessions, newsletters, research updates, or professional network activities.</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="intro-card">
+                  <h3>Data and implementation</h3>
+                  <p>Support data quality, registry collaboration, implementation work, screening initiatives, audit projects, or Nordic benchmarking.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-          <div class="col-md-6 col-xl-3">
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="route">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>How to route your enquiry</h2>
+            <p class="lead">
+              Use the clearest route available. This helps the Steering Committee connect you with the right country representative, specialty group, or work package.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
             <div class="contact-card">
-              <h3>General route</h3>
-              <p>For uncertain enquiries, start with the Steering Committee page and route the message by country, specialty, or work package.</p>
+              <ol class="route-list">
+                <li>
+                  <h3>Specific project or work package</h3>
+                  <p>Contact the relevant project lead, work package lead, or Steering Committee member if the area is already clear.</p>
+                </li>
+
+                <li>
+                  <h3>Country-specific enquiry</h3>
+                  <p>Use the Steering Committee page to identify the appropriate country representative.</p>
+                </li>
+
+                <li>
+                  <h3>General volunteer interest</h3>
+                  <p>Email <a href="mailto:chair@ntog.org">chair@ntog.org</a> or <a href="mailto:info@ntog.org">info@ntog.org</a> with your background, country, specialty, and area of interest.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="message">
+      <div class="container">
+        <div class="cta-panel">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-8">
+              <h2 class="mb-3">What to include in your message</h2>
+              <p class="mb-0">
+                Include your name, affiliation, country, professional role, main area of interest, and whether you are interested in a specific project, work package, educational activity, or general collaboration.
+              </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+              <a href="mailto:chair@ntog.org?subject=Volunteer%20interest%20in%20NTOG" class="btn btn-primary btn-lg mb-2">Email the chair</a>
+              <br>
+              <a href="mailto:info@ntog.org?subject=Volunteer%20interest%20in%20NTOG" class="btn btn-outline-primary btn-lg">Email NTOG</a>
             </div>
           </div>
         </div>
@@ -352,29 +396,33 @@
     <section class="section-block bg-light" id="links">
       <div class="container">
         <h2 class="mb-4">Useful links</h2>
+
         <div class="row g-4">
           <div class="col-md-6 col-xl-3">
             <div class="link-card">
-              <h3><a href="protocols.html">Protocols</a></h3>
-              <p>Current harmonisation topics and protocol development status.</p>
+              <h3><a href="expert.html">Expert Network</a></h3>
+              <p>Find Nordic expertise in thoracic oncology, diagnostics, treatment, research, and related specialties.</p>
             </div>
           </div>
+
           <div class="col-md-6 col-xl-3">
             <div class="link-card">
-              <h3><a href="expert.html">Volunteer on Work Packages</a></h3>
-              <p>Descriptions of WP1, WP2, WP3, and WP4.</p>
+              <h3><a href="collaboration.html">Collaboration Opportunities</a></h3>
+              <p>Explore options for research, clinical, educational, and organisational collaboration with NTOG.</p>
             </div>
           </div>
+
           <div class="col-md-6 col-xl-3">
             <div class="link-card">
               <h3><a href="steering-committee.html">Steering Committee</a></h3>
-              <p>Full NTOG committee roster and country representation.</p>
+              <p>Identify NTOG committee members and country representation.</p>
             </div>
           </div>
+
           <div class="col-md-6 col-xl-3">
             <div class="link-card">
               <h3><a href="https://www.linkedin.com/groups/10015253/">NTOG LinkedIn group</a></h3>
-              <p>Network updates and professional discussion.</p>
+              <p>Follow network updates and professional discussion.</p>
             </div>
           </div>
         </div>
@@ -385,15 +433,11 @@
   <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
       <a href="/" class="footer-logo-link" aria-label="NTOG home">
-  <img
-    src="/ntog-logo.svg"
-    alt="Nordic Thoracic Oncology Group logo"
-    width="56"
-    height="56"
-    loading="lazy"
-  >
-</a>
+        <img src="/ntog-logo.svg" alt="Nordic Thoracic Oncology Group logo" width="56" height="56" loading="lazy">
+      </a>
+
       <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+
       <p class="mb-0">
         <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="terms-of-service.html" class="text-white">Terms of Service</a>
@@ -402,6 +446,6 @@
   </footer>
 
   <script src="/js/bootstrap5.3.8/bootstrap.bundle.min.js" defer></script>
-  <script src="/js/scripts.js"></script>
+  <script src="/js/scripts.js" defer></script>
 </body>
 </html>
