@@ -20,6 +20,28 @@
   --ntog-grey-border: #e5e7eb;
 }
 
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+.navbar-brand {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 700;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+.fw-bold,
+strong {
+  font-weight: 700;
+}
+
 /* Standard NTOG hero */
 .hero,
 .page-hero,
