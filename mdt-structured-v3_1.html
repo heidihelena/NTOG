@@ -356,6 +356,49 @@
     border: 1px solid #ddd;
   }
 
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: .75em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--ntog-border);
+  }
+
+  .site-brand {
+    color: var(--ntog-blue-dark);
+    font-size: 1.05em;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .support-note {
+    margin: .75em 0 0;
+    padding: .6em .7em;
+    color: #4f3f00;
+    background: var(--ntog-warning-bg);
+    border-left: 4px solid var(--ntog-warning-border);
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .site-footer {
+    margin-top: 2em;
+    padding: 1.2em;
+    color: #fff;
+    background: #24313f;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .site-footer p {
+    margin: .4em 0;
+  }
+
+  .disclaimer-footer {
+    font-size: .86em;
+  }
+
   @media (max-width: 980px) {
     .row4, .derived-grid, .node-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .checkbox-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -368,7 +411,9 @@
   }
 
   @media print {
-    .privacy, .disclaimer, .notice, form > h2, form > fieldset, .button-row, #missing, #validationWarnings, #testOutput, .intro-text, .derived-panel {
+    .privacy, .disclaimer, .notice, form > h2, form > fieldset,
+    .button-row, #missing, #validationWarnings, #testOutput,
+    .intro-text, .derived-panel, .site-nav, .site-footer {
       display: none;
     }
     body { margin: 1em; max-width: none; font-size: 11pt; }
@@ -378,8 +423,8 @@
 </head>
 
 <body>
-    <a class="navbar-brand" href="/">NTOG</a>
-  </div>
+<nav class="site-nav" aria-label="Site">
+  <a class="site-brand" href="/">NTOG</a>
 </nav>
 
 <h1>Lung cancer MDT structured form (v3.1)</h1>
@@ -399,6 +444,7 @@
     <div class="metric"><span class="label">G8</span><span class="value" id="g8Display">Not calculated</span><span class="small" id="g8DetailDisplay">Itemised screen</span></div>
     <div class="metric"><span class="label">Completeness</span><span class="value" id="completeDisplay">0%</span><span class="small" id="completeDetailDisplay">Required fields</span></div>
   </div>
+  <p class="hint support-note">Auto-staging is decision support only and must be verified by the MDT against the current TNM manual and local protocol.</p>
 </section>
 
 <h2>1. MDT workflow</h2>
@@ -1327,8 +1373,8 @@
   <button type="reset" class="secondary" onclick="resetDerived()">Clear all</button>
 </div>
 
-<div id="missing" class="warn"></div>
-<div id="validationWarnings" class="warn"></div>
+<div id="missing" class="warn" aria-live="polite"></div>
+<div id="validationWarnings" class="warn" aria-live="polite"></div>
 <pre id="summary"></pre>
 <pre id="testOutput"></pre>
 
@@ -1468,7 +1514,6 @@ function valueOf(name) { return (formEl().elements[name]?.value || '').trim(); }
 function numValue(name) { const n = parseFloat(valueOf(name)); return Number.isFinite(n) ? n : null; }
 function positiveNumValue(name) { const n = numValue(name); return n !== null && n > 0 ? n : null; }
 function checkedValues(name) { return Array.from(formEl().querySelectorAll(`input[name="${name}"]:checked`)).map(x => x.value); }
-function hasChecked(name, value) { return checkedValues(name).includes(value); }
 function displayValue(v) { return v === '' || v === null || v === undefined ? 'not recorded' : String(v).replaceAll('_', ' '); }
 function maxCategory(current, candidate, rankMap) { return (rankMap[candidate] || 0) > (rankMap[current] || 0) ? candidate : current; }
 function isValidDateString(value) { return /^\d{4}-\d{2}-\d{2}$/.test(value); }
@@ -1476,6 +1521,24 @@ function clearFieldWarnings() { formEl().querySelectorAll('.field-warning').forE
 function setFieldWarning(name, enabled) {
   const el = formEl().elements[name];
   if (el && el.classList) el.classList.toggle('field-warning', Boolean(enabled));
+}
+
+function connectLabelsToControls() {
+  formEl().querySelectorAll('label').forEach((label, index) => {
+    if (label.htmlFor || label.querySelector('input, select, textarea')) return;
+    const control = label.nextElementSibling;
+    if (!control || !['INPUT', 'SELECT', 'TEXTAREA'].includes(control.tagName)) return;
+
+    const baseId = control.name ? `field_${control.name}` : `field_${index}`;
+    let id = control.id || baseId;
+    let suffix = 2;
+    while (document.getElementById(id) && document.getElementById(id) !== control) {
+      id = `${baseId}_${suffix}`;
+      suffix += 1;
+    }
+    control.id = id;
+    label.htmlFor = id;
+  });
 }
 
 function calcBmi() {
@@ -1918,6 +1981,11 @@ function sampledNodesText() {
 
 function generateSummary() {
   const d = collectData();
+  const cciLabels = Array.isArray(d.cciConditions) && d.cciConditions.length
+    ? d.cciConditions
+        .map(v => { const item = cciItems.find(i => i.value === v); return item ? item.label : v; })
+        .join(', ')
+    : 'none';
   const lines = [
     'LUNG CANCER MDT STRUCTURED SUMMARY (v3.1)',
     'Decision support fields require clinical verification.',
@@ -1930,7 +1998,7 @@ function generateSummary() {
     `Smoking: ${displayValue(d.smokingStatus)} | Pack-years: ${d.packYears || ''} | Quit years: ${d.quitYears || ''}`,
     `BMI: ${d.derived.bmi || ''} | ECOG: ${d.ecog || ''}`,
     `G8: ${d.derived.g8Total === null ? d.derived.g8Partial + ' (partial ' + d.derived.g8Completed + '/8)' : d.derived.g8Total + '/17'} | Flag: ${d.derived.g8Flag} | Frailty action: ${displayValue(d.frailtyAction)}`,
-    `CCI: ${d.derived.cciRaw} | CCI age adjusted: ${d.derived.cciAgeAdjusted} | Other diseases: ${d.otherDiseases || ''}`,
+    `CCI: ${d.derived.cciRaw} (age adjusted: ${d.derived.cciAgeAdjusted}) | Conditions: ${cciLabels} | Other diseases: ${d.otherDiseases || ''}`,
     '',
     'FUNCTIONAL AND PULMONARY TESTING',
     `FVC%: ${d.fvcPercent || ''} | FEV1%: ${d.fev1Percent || ''} | DLCO%: ${d.dlcoPercent || ''} | Resting oxygen: ${displayValue(d.restingOxygenNeed)}`,
@@ -2168,7 +2236,7 @@ function runUnitTests() {
   resetFormForTest();
   setField('tumourTSizeMm', '0');
   assertEqual('T size 0 guarded', calcTCategory(), 'Tx');
-  assertDeepIncludes('T size 0 warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory()), 'T-size 0 mm');
+  assertDeepIncludes('T size 0 warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory(), calcG8()), 'T-size 0 mm');
 
   resetFormForTest();
   setField('tumourTSizeMm', '8');
@@ -2210,7 +2278,7 @@ function runUnitTests() {
   setField('tumourSide', 'bilateral');
   setNodeStatus('7', 'positive_cytology');
   assertEqual('Bilateral positive node requires review', calcNCategory(), 'NX');
-  assertDeepIncludes('Bilateral N warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory()), 'N category requires manual review');
+  assertDeepIncludes('Bilateral N warning', validateFormState(calcTCategory(), calcNCategory(), calcMCategory(), calcG8()), 'N category requires manual review');
 
   resetFormForTest();
   assertEqual('M blank', calcMCategory(), 'Mx');
@@ -2332,44 +2400,22 @@ function resetDerived() {
 
 initCciGrid();
 initNodeTable();
+connectLabelsToControls();
 formEl().addEventListener('input', updateDerived);
 formEl().addEventListener('change', updateDerived);
 updateDerived();
 if (new URLSearchParams(window.location.search).has('test') || window.location.hash === '#test') runUnitTests();
 </script>
 
- <footer class="bg-dark text-white py-4 mt-0">
-    <div class="container text-center">
-    <a href="/" class="footer-logo-link" aria-label="NTOG home">
-  <img
-    src="/ntog-logo.svg"
-    alt="Nordic Thoracic Oncology Group logo"
-    width="56"
-    height="56"
-    loading="lazy"
-  >
-</a>  
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
-      <p class="small mb-2">
-  Tool source code licensed under
-  <a href="/LICENSE" class="text-white">Apache License 2.0</a>.
-  Educational text licensed under
-  <a href="https://creativecommons.org/licenses/by/4.0/" class="text-white" target="_blank" rel="noopener">CC BY 4.0</a>.
-  NTOG name and logo are not licensed for reuse.
-</p>
-<p class="small mb-0">
-  Educational and research use only. Not a medical device, diagnostic tool,
-  autonomous clinical decision system, reimbursement decision tool, or substitute
-  for national guidelines, MDT review, clinical judgment, or patient preference.
-</p>     
-      <p class="mb-0">
-        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
-        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
-      </p>
-    </div>
-  </footer>
-  
-  <script src="/js/bootstrap5.3.8/bootstrap.bundle.min.js" defer></script>
-  <script src="/js/scripts.js" defer></script>
+<footer class="site-footer">
+  <p class="disclaimer-footer">
+    &copy; 2026 Heidi Andersen. Source code authored by Heidi Andersen.
+    Structured preparation tool for education and research use.
+    Version ntog_lung_mdt_structured_v3_1.
+  </p>
+  <p class="disclaimer-footer">
+    NTOG name and logo are used for this project context and are not licensed for reuse.
+  </p>
+</footer>
 </body>
 </html>
