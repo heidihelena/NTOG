@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Educational NTOG study design and simulation builder for PICOTS, codebooks, simulated data, design checks, and starter R code." />
+  <title>NTOG Study Design &amp; Simulation Builder v0.9</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #52606d;
+      --soft-muted: #697586;
+      --line: #e5e7eb;
+      --panel: #ffffff;
+      --page: #ffffff;
+      --brand: #102a43;
+      --brand-2: #1f4e79;
+      --brand-3: #2f80a7;
+      --soft-blue: #f0f7fb;
+      --soft-blue-line: #d7eaf3;
+      --slate: #334155;
+      --green-bg: #dcfce7;
+      --green-fg: #166534;
+      --yellow-bg: #fef3c7;
+      --yellow-fg: #92400e;
+      --purple-bg: #f3e8ff;
+      --purple-fg: #6b21a8;
+      --red-bg: #fee2e2;
+      --red-fg: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Open Sans", Arial, sans-serif;
+      background: var(--page);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .container {
+      width: min(100% - 32px, 1140px);
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    .nav-container {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .navbar-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #102a43;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #1f4e79;
+      color: #ffffff;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .nav-menu-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .navbar-toggler {
+      display: none;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      color: #102a43;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .nav-link,
+    .nav-dropdown summary {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0.5rem 0.75rem;
+      color: #334155;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .nav-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-dropdown summary::after {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 0.45rem;
+      margin-top: -0.2rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active,
+    .nav-dropdown summary:hover,
+    .nav-dropdown[open] summary {
+      color: #102a43;
+      background: #edf5fa;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 230px;
+      display: grid;
+      gap: 2px;
+      padding: 0.45rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.55rem 0.75rem;
+      color: #334155;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a.active {
+      background: #f0f7fb;
+      color: #102a43;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 4.5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.10), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      margin: 0 0 1rem;
+      max-width: 920px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .lead-narrow {
+      max-width: 820px;
+      margin: 0 0 1.25rem;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 1.5rem;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.65rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero-button.primary {
+      background: #ffffff;
+      color: #102a43;
+    }
+
+    .hero-button.secondary {
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      color: #ffffff;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 3rem 24px;
+      display: grid;
+      gap: 18px;
+      background: #ffffff;
+    }
+
+    h2,
+    h3 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-top: 14px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    label {
+      display: block;
+      font-weight: 650;
+      margin: 12px 0 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      background: var(--brand-2);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      margin: 4px 6px 4px 0;
+    }
+
+    button:hover {
+      background: #173f63;
+    }
+
+    button.secondary {
+      background: var(--slate);
+    }
+
+    button.secondary:hover {
+      background: #1f2937;
+    }
+
+    button.copy-btn {
+      background: #475569;
+      font-size: 0.9rem;
+      padding: 8px 10px;
+    }
+
+    button:focus,
+    a:focus,
+    summary:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid rgba(21, 94, 117, 0.35);
+      outline-offset: 2px;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 8px;
+      max-height: 420px;
+      overflow: auto;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fbfdff;
+      margin: 8px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--brand-2);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .safety-note {
+      border-left: 4px solid var(--brand-2);
+      background: #ecfeff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-top: 14px;
+      color: #164e63;
+      font-weight: 650;
+    }
+
+    .model-readiness-note {
+      border-left: 4px solid var(--purple-fg);
+      background: var(--purple-bg);
+      color: var(--purple-fg);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-weight: 650;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    .green {
+      background: var(--green-bg);
+      color: var(--green-fg);
+    }
+
+    .yellow {
+      background: var(--yellow-bg);
+      color: var(--yellow-fg);
+    }
+
+    .purple {
+      background: var(--purple-bg);
+      color: var(--purple-fg);
+    }
+
+    .red {
+      background: var(--red-bg);
+      color: var(--red-fg);
+    }
+
+    .pass {
+      color: var(--green-fg);
+      font-weight: 800;
+    }
+
+    .fail {
+      color: var(--red-fg);
+      font-weight: 800;
+    }
+
+    .warning-list {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .warning-list li {
+      margin-bottom: 5px;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 10px 14px;
+    }
+
+    .output-grid > div:nth-child(odd) {
+      font-weight: 800;
+      color: var(--slate);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .action-row {
+      margin-top: 12px;
+    }
+
+    .site-footer {
+      margin-top: 0;
+      padding: 2rem 1rem;
+      background: #111827;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .footer-logo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 0.75rem;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #102a43;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .site-footer p {
+      margin: 0 0 0.5rem;
+    }
+
+    .site-footer a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 820px) {
+      .nav-container {
+        flex-wrap: wrap;
+      }
+
+      .navbar-toggler {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 0 0.75rem;
+      }
+
+      .nav-menu-toggle:checked ~ .nav-menu {
+        display: flex;
+      }
+
+      .nav-link,
+      .nav-dropdown summary {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 0.5rem;
+        margin: 0 0 0.5rem;
+      }
+
+      .page-hero {
+        padding: 5.5rem 0 3rem;
+      }
+
+      main {
+        padding: 2rem 16px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .output-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="container nav-container">
+      <a class="navbar-brand" href="/">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>NTOG</span>
+      </a>
+
+      <input class="nav-menu-toggle" type="checkbox" id="navMenuToggle" aria-label="Toggle navigation menu" />
+      <label class="navbar-toggler" for="navMenuToggle" aria-label="Toggle navigation menu">Menu</label>
+
+      <div class="nav-menu">
+        <details class="nav-dropdown">
+          <summary>About Us</summary>
+          <div class="dropdown-menu">
+            <a href="about.html">About Us</a>
+            <a href="mission.html">Mission</a>
+            <a href="history.html">History</a>
+            <a href="steering-committee.html">Steering Committee</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Research</summary>
+          <div class="dropdown-menu">
+            <a href="research.html">Research Overview</a>
+            <a href="ongoing-projects.html">Ongoing Projects</a>
+            <a href="publications.html">Publications</a>
+            <a href="collaborations.html">Collaborations</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Events</summary>
+          <div class="dropdown-menu">
+            <a href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a>
+            <a href="upcoming-events.html">Upcoming Events</a>
+            <a href="past-events.html">Past Events</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Clinical Resources</summary>
+          <div class="dropdown-menu">
+            <a href="guidelines.html">Clinical Guidelines</a>
+            <a href="protocols.html">Protocols</a>
+            <a class="active" href="tools.html">Tools</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Get Involved</summary>
+          <div class="dropdown-menu">
+            <a href="expert.html">Expert Network</a>
+            <a href="collaboration.html">Collaboration Opportunities</a>
+            <a href="volunteer.html">Volunteer</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="news.html">Research News</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1>NTOG Study Design &amp; Simulation Builder</h1>
+      <p class="lead-narrow">Training tool for moving from clinical idea to PICOTS, codebook, simulated data, design checks, and starter R code.</p>
+      <div class="safety-note">This tool is for training and early study design. It does not replace protocol development, ethics review, data permissions, statistical review, or clinical judgement.</div>
+      <div class="hero-actions">
+        <a class="hero-button primary" href="#conceptHeading">Start builder</a>
+        <a class="hero-button secondary" href="federated-dataset-builder.html">Open Federated Dataset Builder</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="trainingNoticeHeading">
+      <h2 id="trainingNoticeHeading">Training notice</h2>
+      <p class="hint">Prototype version: v0.9. Educational use only.</p>
+
+      <p>
+        This educational prototype supports early study design training. It helps users practise how to structure a research question, define variables, identify common design conflicts, and separate simulated teaching examples from real study analysis.
+      </p>
+
+      <p>This tool teaches:</p>
+
+      <ul>
+        <li>PICOTS structure</li>
+        <li>Codebook thinking</li>
+        <li>Endpoint-variable mismatch</li>
+        <li>Descriptive versus survival-analysis conflicts</li>
+        <li>Time-zero alignment</li>
+        <li>Immortal-time bias risk</li>
+        <li>Missing-variable checks</li>
+        <li>Model-readiness versus technical code execution</li>
+        <li>Separation between toy simulation and real analysis</li>
+      </ul>
+
+      <p>
+        This tool is for education and early study design only. It does not replace protocol development, ethics review, data permissions, statistical review, patient-level data governance, or clinical judgement.
+      </p>
+
+      <p>
+        Do not enter patient-level, identifiable, confidential, or unpublished sensitive data.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="conceptHeading">
+      <h2 id="conceptHeading">Study concept form</h2>
+
+      <div class="grid-2">
+        <div>
+          <label for="title">Working title</label>
+          <input id="title" autocomplete="off" value="Oligometastatic NSCLC and SABR treatment patterns in Nordic clinical practice" />
+        </div>
+        <div>
+          <label for="diseaseArea">Disease area</label>
+          <select id="diseaseArea">
+            <option value="NSCLC">NSCLC</option>
+            <option value="SCLC">SCLC</option>
+            <option value="Other thoracic oncology">Other thoracic oncology</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="questionType">Question type</label>
+      <select id="questionType">
+        <option value="Descriptive">Descriptive</option>
+        <option value="Association / prognostic">Association / prognostic</option>
+        <option value="Treatment-effect / causal">Treatment-effect / causal</option>
+        <option value="Survey / preference">Survey / preference</option>
+        <option value="Care quality / QI">Care quality / QI</option>
+        <option value="Mixed methods">Mixed methods</option>
+      </select>
+
+      <label for="question">Research question</label>
+      <textarea id="question" autocomplete="off">How many patients with oligometastatic NSCLC received SABR in Nordic clinical practice?</textarea>
+
+      <div class="grid-2">
+        <div>
+          <label for="population">Population</label>
+          <textarea id="population" autocomplete="off">Patients with oligometastatic NSCLC identified from Nordic registry and hospital data.</textarea>
+        </div>
+        <div>
+          <label for="exposure">Exposure / intervention</label>
+          <textarea id="exposure" autocomplete="off">SABR or other local ablative radiotherapy.</textarea>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="comparator">Comparator</label>
+          <textarea id="comparator" autocomplete="off">Not specified</textarea>
+        </div>
+        <div>
+          <label for="endpoint">Primary outcome</label>
+          <textarea id="endpoint" autocomplete="off">Receipt of SABR / local ablative radiotherapy as a treatment-pattern endpoint</textarea>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div>
+          <label for="timeZero">Time zero</label>
+          <input id="timeZero" autocomplete="off" value="Date of metastatic diagnosis or MDT decision date" />
+        </div>
+        <div>
+          <label for="followup">Follow-up</label>
+          <input id="followup" autocomplete="off" value="12 months from time zero" />
+        </div>
+        <div>
+          <label for="dataSource">Data source</label>
+          <input id="dataSource" autocomplete="off" value="Cancer registry, hospital records, radiotherapy information system" />
+        </div>
+      </div>
+
+      <label for="studyPathway">Study pathway</label>
+      <select id="studyPathway">
+        <option value="Registry-Based Outcome Study">Registry-Based Outcome Study</option>
+        <option value="Prospective Observational Study">Prospective Observational Study</option>
+        <option value="Survey / Preference Study">Survey / Preference Study</option>
+        <option value="Clinical Trial Feasibility Concept">Clinical Trial Feasibility Concept</option>
+        <option value="Care Quality / QI Study">Care Quality / QI Study</option>
+        <option value="Mixed Methods Study">Mixed Methods Study</option>
+      </select>
+    </section>
+
+    <section class="card" aria-labelledby="codebookHeading">
+      <h2 id="codebookHeading">Variable codebook section</h2>
+      <button type="button" class="preset-btn" data-preset="coreLung">Load core lung variables</button>
+      <button type="button" class="preset-btn" data-preset="oligoRT">Add oligometastatic radiotherapy variables</button>
+      <button type="button" class="preset-btn" data-preset="surveyVars">Add survey variables</button>
+      <div id="presetStatus" class="hint">No preset loaded yet.</div>
+
+      <label for="variableCodebook">variableCodebook</label>
+      <textarea id="variableCodebook" autocomplete="off" spellcheck="false"></textarea>
+      <div class="hint">Format: variable_name | label | type | role | coding | registry_source | registry_variable | transformation_rule</div>
+      <div id="codebookPreview" class="hint"></div>
+    </section>
+
+    <section class="card" aria-labelledby="analysisHeading">
+      <h2 id="analysisHeading">Analysis plan section</h2>
+
+      <div class="grid-3">
+        <div>
+          <label for="analysisTarget">Analysis target</label>
+          <select id="analysisTarget">
+            <option value="descriptive">Descriptive table</option>
+            <option value="binary">Binary outcome model</option>
+            <option value="continuous">Continuous outcome model</option>
+            <option value="survival">Survival analysis</option>
+          </select>
+        </div>
+        <div>
+          <label for="primaryExposureVar">Primary exposure variable</label>
+          <input id="primaryExposureVar" autocomplete="off" placeholder="rt_received" />
+        </div>
+        <div>
+          <label for="primaryOutcomeVar">Primary endpoint variable name</label>
+          <input id="primaryOutcomeVar" autocomplete="off" placeholder="os_event" />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="survivalTimeVar">Survival time variable</label>
+          <input id="survivalTimeVar" autocomplete="off" placeholder="os_days" />
+        </div>
+        <div>
+          <label for="adjustmentVars">Adjustment variables</label>
+          <input id="adjustmentVars" autocomplete="off" placeholder="age_dx + sex + ecog_ps + metastasis_count" />
+          <div id="adjustmentPreview" class="hint"></div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div>
+          <label for="endpointType">Endpoint type</label>
+          <select id="endpointType">
+            <option value="Not specified">Not specified</option>
+            <option value="Binary">Binary</option>
+            <option value="Continuous">Continuous</option>
+            <option value="Time-to-event / survival">Time-to-event / survival</option>
+          </select>
+        </div>
+        <div>
+          <label for="effectSize">Effect size</label>
+          <input id="effectSize" placeholder="Example: HR 0.75, OR 1.5, mean difference 5" />
+        </div>
+        <div>
+          <label for="baseline">Baseline assumption</label>
+          <input id="baseline" placeholder="Example: 12-month survival 50%" />
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div>
+          <label for="alpha">Alpha</label>
+          <input id="alpha" value="0.05" />
+        </div>
+        <div>
+          <label for="power">Power</label>
+          <input id="power" value="0.80" />
+        </div>
+        <div>
+          <label for="missingness">Missingness</label>
+          <input id="missingness" value="10%" />
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button type="button" id="inferEndpointBtn" class="secondary">Suggest endpoint variable</button>
+        <div id="endpointInferencePreview" class="hint">Endpoint text is exported to JSON. Use a matching variable for data exports.</div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="checksHeading">
+      <h2 id="checksHeading">Study design checks</h2>
+      <div id="liveDesignChecks" class="hint">Design checks will update as assumptions change.</div>
+      <details>
+        <summary>What these checks mean</summary>
+        <p>Warnings are teaching prompts. They do not approve or reject a real study.</p>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="powerHeading">
+      <h2 id="powerHeading">Power scenario section</h2>
+      <div class="grid-3">
+        <div>
+          <label for="powerHr">HR</label>
+          <input id="powerHr" value="0.75" />
+        </div>
+        <div>
+          <label for="powerAlpha">Alpha</label>
+          <input id="powerAlpha" value="0.05" />
+        </div>
+        <div>
+          <label for="powerTarget">Power</label>
+          <input id="powerTarget" value="0.80" />
+        </div>
+      </div>
+      <div class="grid-3">
+        <div>
+          <label for="powerEventProportion">Expected event proportion</label>
+          <input id="powerEventProportion" value="0.45" />
+        </div>
+        <div>
+          <label for="powerMissingness">Missingness</label>
+          <input id="powerMissingness" value="0.10" />
+        </div>
+        <div>
+          <label for="allocationProportion">Allocation proportion</label>
+          <input id="allocationProportion" value="0.50" />
+        </div>
+      </div>
+      <button id="calculatePowerBtn" type="button">Calculate teaching estimate</button>
+      <div id="powerPreview" class="hint"></div>
+      <details>
+        <summary>Formula</summary>
+        <p>required_events = ((z_alpha + z_beta)^2) / (p1 * p2 * log(HR)^2). Teaching estimate only. Not final statistical justification.</p>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="generateHeading">
+      <h2 id="generateHeading">Generate outputs</h2>
+      <button id="generateBtn" type="button">Generate</button>
+    </section>
+
+    <section id="outputCard" class="card hidden" aria-labelledby="outputHeading">
+      <h2 id="outputHeading">Output section</h2>
+      <div id="statusBanner"></div>
+      <div id="output"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/" class="footer-logo-link" aria-label="NTOG home">N</a>
+    <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
+    <p class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var NL = String.fromCharCode(10);
+      var loadedPresetNames = [];
+      var copyStore = {};
+
+      var variablePresets = {
+        coreLung: [
+          "patient_id | Study patient ID | id | identifier | anonymous sequential ID | study_database | patient_id | generate anonymous sequential ID",
+          "country | Country | categorical | feasibility | DK=Denmark, FI=Finland, IS=Iceland, NO=Norway, SE=Sweden, 9=missing | registry | country | harmonise Nordic country code",
+          "centre_id | Centre ID | categorical | feasibility | local coded centre identifier | local_EHR | centre | pseudonymise centre",
+          "diagnosis_date | Date of diagnosis | date | timing | yyyy-mm-dd | cancer_registry | diagnosis_date | harmonise date",
+          "age_dx | Age at diagnosis | continuous | confounder | years | cancer_registry | birth_date + diagnosis_date | calculate age at diagnosis",
+          "sex | Sex | categorical | confounder | 1=female, 2=male, 3=other, 9=missing | population_registry | sex | harmonise coding",
+          "ecog_ps | ECOG performance status | ordinal | confounder | 0,1,2,3,4,9=missing | local_EHR | ECOG/WHO_PS | map to ECOG 0-4",
+          "histology | Histology | categorical | confounder | adenocarcinoma, squamous, NSCLC_NOS, other, 9=missing | cancer_registry | morphology | harmonise histology",
+          "stage_dx | Stage at diagnosis | categorical | confounder | I, II, III, IV, 9=missing | cancer_registry | stage | harmonise to I-IV",
+          "systemic_tx | Systemic treatment | categorical | exposure_confounder | chemo, immunotherapy, targeted, chemo_io, none, other, 9=missing | oncology_EHR | systemic_treatment | harmonise regimen class",
+          "time_zero_date | Time zero date | date | timing | yyyy-mm-dd | derived | time_zero | derive from study definition",
+          "os_days | Overall survival time | continuous | outcome_time | days from time zero to death or censoring | derived | os_days | calculate days",
+          "os_event | Death event | binary | outcome_event | 0=alive/censored, 1=dead | population_registry | death_date | 1 if death date present"
+        ],
+        oligoRT: [
+          "metastasis_count | Number of metastases | integer | confounder | integer count, 99=missing | imaging/EHR | metastasis_count | extract count",
+          "mdt_decision_date | MDT decision date | date | timing | yyyy-mm-dd | MDT_system | MDT_date | harmonise date",
+          "response_before_rt | Response before radiotherapy | categorical | mediator_selection | CR, PR, SD, PD, not_assessed, 9=missing | imaging/EHR | response | do not adjust blindly",
+          "rt_received | Radiotherapy received | binary | exposure | 0=no, 1=yes, 9=missing | radiotherapy_system | rt_course | derive eligible course",
+          "rt_start_date | Radiotherapy start date | date | timing_exposure | yyyy-mm-dd | radiotherapy_system | rt_start | harmonise date",
+          "days_mdt_to_rt | Days from MDT to radiotherapy | integer | timing_exposure | days, blank if no RT | derived | rt_start_date - mdt_decision_date | calculate date difference",
+          "sabr_timing_group | SABR timing group | categorical | exposure | early_90d, late_gt90d, not_received | derived | days_mdt_to_rt | early_90d if days_mdt_to_rt <= 90",
+          "landmark_eligible_90d | 90-day landmark eligible | binary | design_filter | 0=no, 1=yes | derived | os_days | 1 if os_days > 90",
+          "rt_intent | Radiotherapy intent | categorical | exposure_definition | ablative, consolidation, oligoprogression, palliative, mixed, 9=missing | radiotherapy_system | intent | harmonise intent",
+          "rt_dose_gy | Radiotherapy dose | continuous | exposure_detail | total dose in Gy | radiotherapy_system | dose | total dose",
+          "rt_fractions | Radiotherapy fractions | integer | exposure_detail | number of fractions | radiotherapy_system | fractions | count fractions"
+        ],
+        surveyVars: [
+          "respondent_id | Survey respondent ID | id | identifier | anonymous sequential ID | survey | respondent_id | generate ID",
+          "primary_score | Primary survey score | continuous | primary_outcome | scale-specific score | survey | score | calculate scale",
+          "preference_group | Preference group | categorical | exposure | A, B, C, 9=missing | survey | preference | harmonise preference response"
+        ]
+      };
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function getValue(id) {
+        var el = byId(id);
+        return el && String(el.value).trim() ? String(el.value).trim() : "Not specified";
+      }
+
+      function escapeHtml(text) {
+        var map = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "\"": "&quot;",
+          "'": "&#039;"
+        };
+
+        return String(text == null ? "" : text).split("").map(function (char) {
+          return map[char] || char;
+        }).join("");
+      }
+
+      function cleanVariableName(name) {
+        var cleaned = String(name || "").toLowerCase().split("").map(function (char) {
+          return "abcdefghijklmnopqrstuvwxyz0123456789_".indexOf(char) >= 0 ? char : "_";
+        }).join("");
+
+        while (cleaned.indexOf("__") >= 0) cleaned = cleaned.split("__").join("_");
+        while (cleaned.charAt(0) === "_") cleaned = cleaned.slice(1);
+        while (cleaned.charAt(cleaned.length - 1) === "_") cleaned = cleaned.slice(0, -1);
+
+        return cleaned || "unnamed_variable";
+      }
+
+      function codebookRowFromParts(parts) {
+        return {
+          name: cleanVariableName(parts[0] || "unnamed_variable"),
+          label: parts[1] || "Not specified",
+          type: parts[2] || "Not specified",
+          role: parts[3] || "Not specified",
+          coding: parts[4] || "Not specified",
+          registry_source: parts[5] || "Not specified",
+          registry_variable: parts[6] || "Not specified",
+          transformation_rule: parts[7] || "Not specified"
+        };
+      }
+
+      function parseCodebookRows() {
+        var raw = getValue("variableCodebook");
+        if (raw === "Not specified") return [];
+
+        return raw.split(NL).map(function (line) {
+          return line.trim();
+        }).filter(Boolean).map(function (line) {
+          return codebookRowFromParts(line.split("|").map(function (part) {
+            return part.trim();
+          }));
+        });
+      }
+
+      function inferEndpointVariables() {
+        var endpointText = getValue("endpoint").toLowerCase();
+        var analysisTarget = getValue("analysisTarget");
+
+        if (endpointText === "not specified" && analysisTarget !== "survival") {
+          return {
+            primaryOutcomeVar: "Not specified",
+            survivalTimeVar: "Not applicable",
+            endpointVariables: []
+          };
+        }
+
+        if (endpointText.indexOf("overall survival") >= 0 ||
+            endpointText.indexOf(" os ") >= 0 ||
+            endpointText === "os" ||
+            analysisTarget === "survival") {
+          return {
+            primaryOutcomeVar: "os_event",
+            survivalTimeVar: "os_days",
+            endpointVariables: ["os_days", "os_event"]
+          };
+        }
+
+        if (endpointText.indexOf("sabr") >= 0 ||
+            endpointText.indexOf("radiotherapy") >= 0 ||
+            endpointText.indexOf("local ablative") >= 0 ||
+            endpointText.indexOf(" rt ") >= 0 ||
+            endpointText === "rt") {
+          return {
+            primaryOutcomeVar: "rt_received",
+            survivalTimeVar: "Not applicable",
+            endpointVariables: ["rt_received"]
+          };
+        }
+
+        return {
+          primaryOutcomeVar: cleanVariableName(endpointText),
+          survivalTimeVar: "Not applicable",
+          endpointVariables: [cleanVariableName(endpointText)]
+        };
+      }
+
+      function endpointRowForName(name) {
+        if (name === "Not applicable" || !name) return null;
+
+        if (name === "os_days") {
+          return {
+            name: "os_days",
+            label: "Overall survival time",
+            type: "continuous",
+            role: "outcome_time",
+            coding: "days",
+            registry_source: "derived",
+            registry_variable: "os_days",
+            transformation_rule: "inferred from endpoint text"
+          };
+        }
+
+        if (name === "os_event") {
+          return {
+            name: "os_event",
+            label: "Death event",
+            type: "binary",
+            role: "outcome_event",
+            coding: "0=alive/censored, 1=dead",
+            registry_source: "population_registry",
+            registry_variable: "death_date",
+            transformation_rule: "inferred from endpoint text"
+          };
+        }
+
+        if (name === "rt_received") {
+          return {
+            name: "rt_received",
+            label: "Radiotherapy received",
+            type: "binary",
+            role: "primary_outcome",
+            coding: "0=no, 1=yes, 9=missing",
+            registry_source: "radiotherapy_system",
+            registry_variable: "rt_course",
+            transformation_rule: "inferred from endpoint text"
+          };
+        }
+
+        return {
+          name: name,
+          label: "Inferred endpoint variable from endpoint text",
+          type: "binary",
+          role: "primary_outcome",
+          coding: "0=no/event absent, 1=yes/event present",
+          registry_source: "derived",
+          registry_variable: name,
+          transformation_rule: "inferred from endpoint text"
+        };
+      }
+
+      function ensureEndpointRows(rows) {
+        var inferred = inferEndpointVariables();
+        var existingNames = {};
+        var outputRows = rows.slice();
+
+        outputRows.forEach(function (row) {
+          existingNames[row.name] = true;
+        });
+
+        inferred.endpointVariables.forEach(function (name) {
+          var row = endpointRowForName(name);
+
+          if (row && !existingNames[row.name]) {
+            outputRows.push(row);
+            existingNames[row.name] = true;
+          }
+        });
+
+        return outputRows;
+      }
+
+      function endpointAwareCodebookRows() {
+        return ensureEndpointRows(parseCodebookRows());
+      }
+
+      function codebookMap() {
+        var map = {};
+        endpointAwareCodebookRows().forEach(function (row) {
+          map[row.name] = row;
+        });
+        return map;
+      }
+
+      function csvEscape(value) {
+        var text = String(value == null ? "" : value);
+        var needsQuotes = text.indexOf(",") >= 0 || text.indexOf("\"") >= 0 || text.indexOf(NL) >= 0;
+        return needsQuotes ? "\"" + text.split("\"").join("\"\"") + "\"" : text;
+      }
+
+      function generateCodebookCsv() {
+        var rows = endpointAwareCodebookRows();
+        var header = [
+          "variable_name",
+          "label",
+          "type",
+          "role",
+          "coding",
+          "registry_source",
+          "registry_variable",
+          "transformation_rule"
+        ].join(",");
+
+        return header + NL + rows.map(function (row) {
+          return [
+            row.name,
+            row.label,
+            row.type,
+            row.role,
+            row.coding,
+            row.registry_source,
+            row.registry_variable,
+            row.transformation_rule
+          ].map(csvEscape).join(",");
+        }).join(NL) + (rows.length ? NL : "");
+      }
+
+      function validateCodebook() {
+        var rows = parseCodebookRows();
+        var seen = {};
+        var issues = [];
+
+        rows.forEach(function (row, index) {
+          if (seen[row.name]) issues.push("Duplicate variable name: " + row.name);
+          seen[row.name] = true;
+          if (row.label === "Not specified") issues.push("Missing label in row " + (index + 1) + ": " + row.name);
+          if (row.type === "Not specified") issues.push("Missing type in row " + (index + 1) + ": " + row.name);
+          if (row.role === "Not specified") issues.push("Missing role in row " + (index + 1) + ": " + row.name);
+        });
+
+        return issues;
+      }
+
+      function splitAdjustmentVars(text) {
+        if (!text || text === "Not specified") return [];
+
+        return String(text).split(/[,+]/).map(function (part) {
+          return cleanVariableName(part.trim());
+        }).filter(Boolean);
+      }
+
+      function variableExists(name) {
+        return !!codebookMap()[cleanVariableName(name)];
+      }
+
+      function adjustmentValidationIssues() {
+        var map = codebookMap();
+        var issues = [];
+
+        splitAdjustmentVars(getValue("adjustmentVars")).forEach(function (name) {
+          if (!map[name]) {
+            issues.push("Adjustment variable not found in codebook: " + name);
+          } else if (String(map[name].role).toLowerCase().indexOf("mediator_selection") >= 0) {
+            issues.push("Mediator/selection variable included as adjustment: " + name);
+          }
+        });
+
+        return issues;
+      }
+
+      function comparatorIsClear() {
+        var comparator = getValue("comparator").toLowerCase();
+        return comparator !== "not specified" && comparator.length > 3;
+      }
+
+      function isTimingComparison() {
+        var combined = [
+          getValue("question"),
+          getValue("exposure"),
+          getValue("comparator"),
+          getValue("endpoint"),
+          getValue("primaryExposureVar")
+        ].join(" ").toLowerCase();
+
+        return combined.indexOf("timing") >= 0 ||
+          combined.indexOf("early") >= 0 ||
+          combined.indexOf("late") >= 0 ||
+          combined.indexOf("days_mdt_to_rt") >= 0 ||
+          combined.indexOf("sabr_timing_group") >= 0;
+      }
+
+      function primaryOutcomeLooksSurvival() {
+        var text = [
+          getValue("endpoint"),
+          getValue("primaryOutcomeVar"),
+          getValue("survivalTimeVar")
+        ].join(" ").toLowerCase();
+
+        return text.indexOf("survival") >= 0 ||
+          text.indexOf("death") >= 0 ||
+          text.indexOf("os") >= 0 ||
+          text.indexOf("pfs") >= 0 ||
+          text.indexOf("event") >= 0;
+      }
+
+      function parseNumber(value, fallback) {
+        var match = String(value || "").match(/-?\d+(\.\d+)?/);
+        return match ? Number(match[0]) : fallback;
+      }
+
+      function parseProportion(value, fallback) {
+        var number = parseNumber(value, fallback);
+        if (!isFinite(number)) return fallback;
+        return number > 1 ? number / 100 : number;
+      }
+
+      function estimatedCoxEvents() {
+        var n = 300;
+        var eventProportion = parseProportion(getValue("powerEventProportion"), 0.45);
+        var missing = parseProportion(getValue("powerMissingness"), parseProportion(getValue("missingness"), 0.10));
+        return Math.round(n * eventProportion * (1 - missing));
+      }
+
+      function isDescriptiveQuestionType() {
+        return getValue("questionType").toLowerCase().indexOf("descriptive") >= 0;
+      }
+
+      function activePlanUsesSurvival() {
+        return getValue("analysisTarget") === "survival" ||
+          getValue("endpointType") === "Time-to-event / survival" ||
+          cleanVariableName(getValue("survivalTimeVar")) === "os_days";
+      }
+
+      function activeQuestionLooksTreatmentPattern() {
+        var text = [
+          getValue("question"),
+          getValue("endpoint"),
+          getValue("primaryOutcomeVar")
+        ].join(" ").toLowerCase();
+
+        return text.indexOf("how many") >= 0 ||
+          text.indexOf("received sabr") >= 0 ||
+          text.indexOf("receipt of sabr") >= 0 ||
+          text.indexOf("treatment-pattern") >= 0 ||
+          text.indexOf("rt_received") >= 0;
+      }
+
+      function picotsOutcomeConflictsWithSurvivalPlan() {
+        var endpointText = getValue("endpoint").toLowerCase();
+        var outcomeVar = cleanVariableName(getValue("primaryOutcomeVar"));
+
+        return activePlanUsesSurvival() &&
+          (endpointText.indexOf("receipt") >= 0 || endpointText.indexOf("received") >= 0 || endpointText.indexOf("treatment-pattern") >= 0) &&
+          (outcomeVar === "os_event" || outcomeVar === "pfs_event" || primaryOutcomeLooksSurvival());
+      }
+
+      function hasCodebookVariable(name) {
+        return Boolean(codebookMap()[name]);
+      }
+
+      function activeStudyPathwayIsRegistryBased() {
+        return getValue("studyPathway") === "Registry-Based Outcome Study";
+      }
+
+      function hasLoadedPreset(name) {
+        return loadedPresetNames.indexOf(name) >= 0;
+      }
+
+      function designChecks() {
+        var warnings = [];
+        var rows = codebookMap();
+        var questionType = getValue("questionType").toLowerCase();
+        var analysisTarget = getValue("analysisTarget");
+        var inferredEndpoint = inferEndpointVariables();
+        var exposureRaw = getValue("primaryExposureVar");
+        var exposureVar = exposureRaw === "Not specified" ? "" : cleanVariableName(exposureRaw);
+        var outcomeVar = cleanVariableName(getValue("primaryOutcomeVar") === "Not specified" ? inferredEndpoint.primaryOutcomeVar : getValue("primaryOutcomeVar"));
+        var survivalTimeVar = cleanVariableName(getValue("survivalTimeVar") === "Not specified" ? inferredEndpoint.survivalTimeVar : getValue("survivalTimeVar"));
+
+        if (questionType.indexOf("survey") >= 0 && analysisTarget === "survival") {
+          warnings.push({ level: "yellow", text: "Question type says survey but analysis target is survival." });
+        }
+
+        if (getValue("endpoint") !== "Not specified" && getValue("primaryOutcomeVar") === "Not specified") {
+          warnings.push({ level: "yellow", text: "Endpoint text is not automatically a data column. Choose or generate a matching endpoint variable such as rt_received, os_event, or primary_score." });
+        }
+
+        if (isDescriptiveQuestionType() && activePlanUsesSurvival()) {
+          warnings.push({ level: "purple", text: "Question type is descriptive, but analysis target is survival." });
+        }
+
+        if (picotsOutcomeConflictsWithSurvivalPlan()) {
+          warnings.push({ level: "purple", text: "The PICOTS primary outcome is receipt of SABR, but the analysis plan uses overall survival." });
+        }
+
+        if (analysisTarget === "survival" && !survivalTimeVar) {
+          warnings.push({ level: "red", text: "Survival analysis selected without survival time variable." });
+        }
+
+        if ((questionType.indexOf("treatment-effect") >= 0 || isTimingComparison()) && !comparatorIsClear()) {
+          warnings.push({ level: "purple", text: "Treatment-effect or timing comparison needs a clear comparator." });
+        }
+
+        if (analysisTarget === "survival" && !primaryOutcomeLooksSurvival()) {
+          warnings.push({ level: "yellow", text: "Primary outcome text does not match survival outcome variables." });
+        }
+
+        if (analysisTarget !== "descriptive" && (!exposureVar || !rows[exposureVar])) {
+          warnings.push({ level: "red", text: "Codebook missing exposure variable: " + (exposureVar || "not specified") + "." });
+        }
+
+        if (analysisTarget !== "descriptive" && (!outcomeVar || !rows[outcomeVar])) {
+          warnings.push({ level: "red", text: "Codebook missing outcome variable: " + (outcomeVar || "not specified") + "." });
+        }
+
+        if (analysisTarget === "survival" && survivalTimeVar && !rows[survivalTimeVar]) {
+          warnings.push({ level: "red", text: "Codebook missing survival time variable: " + survivalTimeVar + "." });
+        }
+
+        if (analysisTarget === "survival" && exposureVar === "rt_received") {
+          warnings.push({ level: "purple", text: "Survival comparison using rt_received should not be interpreted causally without target trial thinking, time-zero alignment, and methods review." });
+        }
+
+        if (analysisTarget === "survival" && exposureVar === "rt_received" &&
+            hasCodebookVariable("days_mdt_to_rt") && hasCodebookVariable("sabr_timing_group")) {
+          warnings.push({ level: "yellow", text: "If SABR timing is analysed, use days_mdt_to_rt and sabr_timing_group rather than rt_received alone." });
+        }
+
+        if (activeStudyPathwayIsRegistryBased() && hasLoadedPreset("surveyVars")) {
+          warnings.push({ level: "yellow", text: "Survey variables are loaded, but the selected pathway is registry-based." });
+        }
+
+        if (analysisTarget === "survival" && rows.response_before_rt &&
+            String(rows.response_before_rt.role).toLowerCase().indexOf("mediator_selection") >= 0) {
+          warnings.push({ level: "purple", text: "response_before_rt is marked as mediator_selection and should not be adjusted for automatically." });
+        }
+
+        adjustmentValidationIssues().forEach(function (issue) {
+          warnings.push({
+            level: issue.indexOf("Mediator") === 0 ? "purple" : "yellow",
+            text: issue + "."
+          });
+        });
+
+        if (isTimingComparison() && analysisTarget === "survival") {
+          warnings.push({ level: "purple", text: "Timing-based treatment comparison needs methods review for time-zero alignment, immortal-time bias, and landmark strategy." });
+        }
+
+        if (analysisTarget === "survival" && estimatedCoxEvents() < 20) {
+          warnings.push({ level: "purple", text: "Too few expected events for Cox model interpretation." });
+        }
+
+        return warnings;
+      }
+
+      function readinessStatus() {
+        var validationIssues = validateCodebook();
+        var warnings = designChecks();
+        var hasRed = warnings.some(function (warning) { return warning.level === "red"; });
+        var hasPurple = warnings.some(function (warning) { return warning.level === "purple"; });
+
+        if (isDescriptiveQuestionType() && activePlanUsesSurvival()) {
+          return {
+            level: "purple",
+            label: "methods review required",
+            message: "The research question is descriptive, but the analysis plan specifies survival modelling. Clarify whether this is a treatment-pattern study or a survival comparison before interpretation."
+          };
+        }
+
+        if (validationIssues.length || hasRed) {
+          return { level: "red", label: "not ready", message: "Resolve required variables and codebook issues before simulation." };
+        }
+
+        if (hasPurple) {
+          return { level: "purple", label: "methods review required", message: "Use this for teaching only until design assumptions have methods review." };
+        }
+
+        if (warnings.length) {
+          return { level: "yellow", label: "revise assumptions", message: "Review warnings before using generated examples." };
+        }
+
+        return { level: "green", label: "preliminary simulation ready", message: "Ready for browser-side simulated data and code testing." };
+      }
+
+      function prettyPresetName(name) {
+        var labels = {
+          coreLung: "core lung variables",
+          oligoRT: "oligometastatic radiotherapy variables",
+          surveyVars: "survey variables"
+        };
+        return labels[name] || name;
+      }
+
+      function loadVariablePreset(name) {
+        var box = byId("variableCodebook");
+        var existing = box.value.trim();
+        var existingNames = {};
+
+        parseCodebookRows().forEach(function (row) {
+          existingNames[row.name] = true;
+        });
+
+        var rows = (variablePresets[name] || []).filter(function (line) {
+          return !existingNames[cleanVariableName(line.split("|")[0].trim())];
+        });
+
+        box.value = [existing, rows.join(NL)].filter(Boolean).join(NL);
+
+        if (loadedPresetNames.indexOf(name) < 0) loadedPresetNames.push(name);
+        byId("presetStatus").textContent = "Loaded presets: " + loadedPresetNames.map(prettyPresetName).join(", ") + ".";
+        renderCodebookPreview();
+        renderDesignChecks();
+      }
+
+      function renderCodebookPreview() {
+        var rows = parseCodebookRows();
+        var exportedRows = endpointAwareCodebookRows();
+        var issues = validateCodebook();
+        byId("codebookPreview").textContent = exportedRows.length
+          ? rows.length + " entered codebook rows, " + exportedRows.length + " exported row(s) including inferred endpoint variables. " + issues.length + " validation issue(s)."
+          : "No codebook rows entered yet.";
+      }
+
+      function renderAdjustmentPreview() {
+        var vars = splitAdjustmentVars(getValue("adjustmentVars"));
+        byId("adjustmentPreview").textContent = vars.length
+          ? "Parsed adjustment variables: " + vars.join(", ") + "."
+          : "";
+      }
+
+      function renderEndpointInferencePreview() {
+        var inferred = inferEndpointVariables();
+        var text = "Suggested endpoint variable: " + inferred.primaryOutcomeVar + ".";
+
+        if (inferred.survivalTimeVar !== "Not applicable") {
+          text += " Survival time variable: " + inferred.survivalTimeVar + ".";
+        }
+
+        text += " Exported endpoint column(s): " + inferred.endpointVariables.join(", ") + ".";
+        byId("endpointInferencePreview").textContent = text;
+      }
+
+      function applyEndpointInference() {
+        var inferred = inferEndpointVariables();
+
+        byId("primaryOutcomeVar").value = inferred.primaryOutcomeVar;
+
+        if (inferred.survivalTimeVar !== "Not applicable") {
+          byId("survivalTimeVar").value = inferred.survivalTimeVar;
+          byId("endpointType").value = "Time-to-event / survival";
+        } else if (getValue("analysisTarget") !== "survival") {
+          byId("survivalTimeVar").value = "";
+          byId("endpointType").value = "Binary";
+        }
+
+        renderEndpointInferencePreview();
+        renderCodebookPreview();
+        renderAdjustmentPreview();
+        renderDesignChecks();
+        renderPowerPreview();
+      }
+
+      function warningListHtml(warnings) {
+        if (!warnings.length) return "<p class='hint'>No automatic design warnings detected.</p>";
+        return "<ul class='warning-list'>" + warnings.map(function (warning) {
+          return "<li><strong>" + escapeHtml(warning.level.toUpperCase()) + ":</strong> " + escapeHtml(warning.text) + "</li>";
+        }).join("") + "</ul>";
+      }
+
+      function designWarningTexts() {
+        return designChecks().map(function (warning) {
+          return warning.text;
+        });
+      }
+
+      function designConflictResolutionHtml() {
+        if (!(isDescriptiveQuestionType() && activePlanUsesSurvival())) {
+          return "";
+        }
+
+        return "<details open><summary>Resolve active design conflict</summary>" +
+          "<p>You selected a descriptive research question but requested survival analysis. Choose one before interpretation:</p>" +
+          "<ol>" +
+          "<li>Keep descriptive treatment-pattern study.</li>" +
+          "<li>Convert to survival association study.</li>" +
+          "<li>Create both as separate aims.</li>" +
+          "</ol></details>";
+      }
+
+      function renderDesignChecks() {
+        var status = readinessStatus();
+        byId("liveDesignChecks").innerHTML =
+          "<span class='status " + status.level + "'>" + escapeHtml(status.label) + "</span>" +
+          warningListHtml(designChecks()) +
+          designConflictResolutionHtml();
+      }
+
+      function daysToDate(startDate, days) {
+        var date = new Date(startDate.getTime());
+        date.setDate(date.getDate() + days);
+        return date;
+      }
+
+      function formatDate(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, "0");
+        var day = String(date.getDate()).padStart(2, "0");
+        return year + "-" + month + "-" + day;
+      }
+
+      function toyValueForVariable(row, index) {
+        var name = row.name;
+        var type = String(row.type).toLowerCase();
+        var role = String(row.role).toLowerCase();
+
+        if (role.indexOf("identifier") >= 0 || name.slice(-3) === "_id") {
+          return name === "patient_id" || name === "respondent_id" ? "S" + String(index + 1).padStart(3, "0") : "C" + ((index % 5) + 1);
+        }
+        if (name === "country") return ["DK", "FI", "IS", "NO", "SE"][index % 5];
+        if (name.indexOf("date") >= 0) return "2024-" + String((index % 12) + 1).padStart(2, "0") + "-" + String((index % 27) + 1).padStart(2, "0");
+        if (name === "age_dx") return 45 + (index % 35);
+        if (name === "sex") return (index % 2) + 1;
+        if (name === "ecog_ps") return index % 4;
+        if (name === "metastasis_count") return (index % 5) + 1;
+        if (name === "rt_received") return index % 2;
+        if (name === "days_mdt_to_rt") return index % 2 ? 120 : 45;
+        if (name === "sabr_timing_group") return index % 2 ? "late_gt90d" : "early_90d";
+        if (name === "landmark_eligible_90d") return 1;
+        if (name === "os_days") return 120 + index * 37;
+        if (name === "os_event" || type.indexOf("binary") >= 0 || role.indexOf("outcome_event") >= 0) return index % 2;
+        if (type.indexOf("integer") >= 0) return (index % 5) + 1;
+        if (type.indexOf("continuous") >= 0) return (10 + index * 1.7).toFixed(1);
+        return ["A", "B", "C", "D"][index % 4];
+      }
+
+      function generateToySimulatedCsv() {
+        var rows = endpointAwareCodebookRows();
+        var activeRows = rows.length ? rows : [
+          { name: "patient_id", type: "id", role: "identifier" },
+          { name: "rt_received", type: "binary", role: "exposure" },
+          { name: "os_days", type: "continuous", role: "outcome_time" },
+          { name: "os_event", type: "binary", role: "outcome_event" }
+        ];
+        var header = activeRows.map(function (row) { return row.name; }).join(",");
+        var body = Array.from({ length: 12 }, function (_, index) {
+          return activeRows.map(function (row) {
+            return csvEscape(toyValueForVariable(row, index));
+          }).join(",");
+        }).join(NL);
+
+        return header + NL + body + NL;
+      }
+
+      function randomChoice(values) {
+        return values[Math.floor(Math.random() * values.length)];
+      }
+
+      function clamp(number, min, max) {
+        return Math.max(min, Math.min(max, number));
+      }
+
+      function generateTeachingRows(count) {
+        var rows = [];
+        var start = new Date(2021, 0, 1);
+
+        for (var i = 0; i < count; i++) {
+          var age = Math.round(clamp(42 + Math.random() * 42 + Math.random() * 10 - 5, 35, 90));
+          var ecog = randomChoice([0, 0, 1, 1, 1, 2, 2, 3]);
+          var metastasis = randomChoice([1, 1, 2, 2, 3, 4, 5]);
+          var mdtDate = daysToDate(start, Math.floor(Math.random() * 900));
+          var rtProbability = clamp(0.72 - ecog * 0.10 - metastasis * 0.04 + (age < 70 ? 0.05 : -0.03), 0.15, 0.85);
+          var rtReceived = Math.random() < rtProbability ? 1 : 0;
+          var daysMdtToRt = rtReceived ? Math.floor(15 + Math.random() * 165) : "";
+          var rtStartDate = rtReceived ? formatDate(daysToDate(mdtDate, daysMdtToRt)) : "";
+          var timingGroup = rtReceived ? (daysMdtToRt <= 90 ? "early_90d" : "late_gt90d") : "not_received";
+          var eventProbability = clamp(0.28 + age * 0.002 + ecog * 0.08 + metastasis * 0.035 - rtReceived * 0.07 + Math.random() * 0.12, 0.12, 0.88);
+          var osEvent = Math.random() < eventProbability ? 1 : 0;
+          var baseDays = osEvent ? 80 + Math.random() * 820 : 420 + Math.random() * 900;
+          var osDays = Math.round(clamp(baseDays - ecog * 25 - metastasis * 12 + rtReceived * 35 + Math.random() * 60, 30, 1400));
+          var landmarkEligible = osDays > 90 ? 1 : 0;
+
+          rows.push({
+            patient_id: "P" + String(i + 1).padStart(4, "0"),
+            country: randomChoice(["DK", "FI", "IS", "NO", "SE"]),
+            centre_id: "C" + String((i % 12) + 1).padStart(2, "0"),
+            age_dx: age,
+            sex: randomChoice([1, 2]),
+            ecog_ps: ecog,
+            metastasis_count: metastasis,
+            mdt_decision_date: formatDate(mdtDate),
+            rt_start_date: rtStartDate,
+            days_mdt_to_rt: daysMdtToRt,
+            sabr_timing_group: timingGroup,
+            rt_received: rtReceived,
+            os_days: osDays,
+            os_event: osEvent,
+            landmark_eligible_90d: landmarkEligible
+          });
+        }
+
+        return rows;
+      }
+
+      function generateLargeTeachingCsv(count) {
+        var baseColumns = [
+          "patient_id",
+          "country",
+          "centre_id",
+          "age_dx",
+          "sex",
+          "ecog_ps",
+          "metastasis_count",
+          "mdt_decision_date",
+          "rt_start_date",
+          "days_mdt_to_rt",
+          "sabr_timing_group",
+          "rt_received",
+          "os_days",
+          "os_event",
+          "landmark_eligible_90d"
+        ];
+        var columns = baseColumns.slice();
+
+        inferEndpointVariables().endpointVariables.forEach(function (name) {
+          if (name !== "Not applicable" && columns.indexOf(name) < 0) {
+            columns.push(name);
+          }
+        });
+
+        var body = generateTeachingRows(count || 300).map(function (row) {
+          return columns.map(function (column) {
+            if (row[column] != null) return csvEscape(row[column]);
+            if (column.indexOf("_days") >= 0 || column.indexOf("_time") >= 0) return csvEscape(Math.round(60 + Math.random() * 540));
+            return csvEscape(Math.random() < 0.45 ? 1 : 0);
+          }).join(",");
+        }).join(NL);
+
+        return columns.join(",") + NL + body + NL;
+      }
+
+      function rVector(values) {
+        return "c(" + values.map(function (value) {
+          return "\"" + value.split("\"").join("\\\"") + "\"";
+        }).join(", ") + ")";
+      }
+
+      function descriptiveMeasureName() {
+        var inferredEndpoint = inferEndpointVariables();
+        var rawOutcome = getValue("primaryOutcomeVar") === "Not specified"
+          ? inferredEndpoint.primaryOutcomeVar
+          : getValue("primaryOutcomeVar");
+
+        if (rawOutcome === "Not specified" || rawOutcome === "Not applicable") {
+          return "rt_received";
+        }
+
+        return cleanVariableName(rawOutcome);
+      }
+
+      function generateDescriptiveRCode() {
+        var measure = descriptiveMeasureName();
+
+        return [
+          "library(readr)",
+          "library(dplyr)",
+          "",
+          "study_data <- read_csv(\"study_data.csv\", show_col_types = FALSE)",
+          "codebook <- read_csv(\"codebook.csv\", show_col_types = FALSE)",
+          "message(\"Training note: descriptive treatment-pattern code is for teaching and import checking. It does not estimate causal effects or survival associations.\")",
+          "message(\"Small toy datasets are for import and code testing only. Use larger probabilistic simulations for model-readiness training.\")",
+          "",
+          "primary_measure <- \"" + measure + "\"",
+          "required_vars <- c(\"patient_id\", primary_measure)",
+          "missing_required <- setdiff(required_vars, names(study_data))",
+          "if (length(missing_required) > 0) {",
+          "  stop(paste(\"Missing required variable(s):\", paste(missing_required, collapse = \", \")))",
+          "}",
+          "",
+          "descriptive_table <- study_data %>%",
+          "  summarise(",
+          "    n = n(),",
+          "    n_primary_measure_yes = sum(.data[[primary_measure]] == 1, na.rm = TRUE),",
+          "    percent_primary_measure_yes = round(mean(.data[[primary_measure]] == 1, na.rm = TRUE) * 100, 1)",
+          "  )",
+          "print(descriptive_table)",
+          "",
+          "if (\"sabr_timing_group\" %in% names(study_data)) {",
+          "  timing_summary <- study_data %>%",
+          "    count(sabr_timing_group, name = \"n\") %>%",
+          "    mutate(percent = round(n / sum(n) * 100, 1))",
+          "  print(timing_summary)",
+          "}",
+          "",
+          "rt_detail_vars <- intersect(c(\"days_mdt_to_rt\", \"rt_dose_gy\", \"rt_fractions\"), names(study_data))",
+          "if (length(rt_detail_vars) > 0) {",
+          "  rt_detail_summary <- study_data %>%",
+          "    summarise(across(all_of(rt_detail_vars), ~ round(median(.x, na.rm = TRUE), 1)))",
+          "  print(rt_detail_summary)",
+          "}",
+          "",
+          "missingness_summary <- data.frame(",
+          "  variable = names(study_data),",
+          "  missing_n = sapply(study_data, function(x) {",
+          "    values_chr <- as.character(x)",
+          "    sum(is.na(x) | values_chr == \"\" | values_chr %in% c(\"9\", \"99\", \"missing\"))",
+          "  }),",
+          "  stringsAsFactors = FALSE",
+          ")",
+          "missingness_summary$missing_percent <- round(missingness_summary$missing_n / nrow(study_data) * 100, 1)",
+          "print(missingness_summary)",
+          "",
+          "# A descriptive treatment-pattern question should not be interpreted as a survival or causal treatment-effect analysis.",
+          "# Select Survival analysis only after revising the study question, comparator, time zero, and methods review plan.",
+          ""
+        ].join(NL);
+      }
+
+      function generateGeneralModelRCode(target) {
+        var inferredEndpoint = inferEndpointVariables();
+        var exposureRaw = getValue("primaryExposureVar");
+        var exposure = cleanVariableName(exposureRaw === "Not specified" ? "rt_received" : exposureRaw);
+        var outcome = cleanVariableName(getValue("primaryOutcomeVar") === "Not specified" ? inferredEndpoint.primaryOutcomeVar : getValue("primaryOutcomeVar"));
+        var adjustmentVars = splitAdjustmentVars(getValue("adjustmentVars"));
+        var predictors = [exposure].concat(adjustmentVars.filter(function (name) { return name !== exposure; }));
+        var modelLine = target === "binary"
+          ? "model <- glm(" + outcome + " ~ " + predictors.join(" + ") + ", data = study_data, family = binomial())"
+          : "model <- lm(" + outcome + " ~ " + predictors.join(" + ") + ", data = study_data)";
+        var effectLine = target === "binary"
+          ? "exp(cbind(estimate = coef(model), confint(model)))"
+          : "confint(model)";
+
+        return [
+          "library(readr)",
+          "library(dplyr)",
+          "",
+          "study_data <- read_csv(\"study_data.csv\", show_col_types = FALSE)",
+          "codebook <- read_csv(\"codebook.csv\", show_col_types = FALSE)",
+          "message(\"Training note: this model is for code testing and model-readiness teaching, not final analysis.\")",
+          "",
+          "required_vars <- " + rVector([outcome].concat(predictors)),
+          "missing_required <- setdiff(required_vars, names(study_data))",
+          "if (length(missing_required) > 0) {",
+          "  stop(paste(\"Missing required variable(s):\", paste(missing_required, collapse = \", \")))",
+          "}",
+          "",
+          modelLine,
+          "print(summary(model))",
+          "print(" + effectLine + ")",
+          "",
+          "events_or_rows <- if (\"" + target + "\" == \"binary\") sum(study_data$" + outcome + " == 1, na.rm = TRUE) else nrow(study_data)",
+          "events_per_predictor <- events_or_rows / max(length(" + rVector(predictors) + "), 1)",
+          "if (events_per_predictor < 5) warning(\"Few observations/events per predictor: model likely unstable for interpretation.\")",
+          ""
+        ].join(NL);
+      }
+
+      function generateRCode() {
+        var target = getValue("analysisTarget");
+
+        if (target === "descriptive") {
+          return generateDescriptiveRCode();
+        }
+
+        if (target === "survival") {
+          return generateSurvivalRCode();
+        }
+
+        return generateGeneralModelRCode(target);
+      }
+
+      function generateSurvivalRCode() {
+        var inferredEndpoint = inferEndpointVariables();
+        var exposure = cleanVariableName(getValue("primaryExposureVar") === "Not specified" ? "rt_received" : getValue("primaryExposureVar"));
+        var outcome = cleanVariableName(getValue("primaryOutcomeVar") === "Not specified" ? inferredEndpoint.primaryOutcomeVar : getValue("primaryOutcomeVar"));
+        var inferredTime = inferredEndpoint.survivalTimeVar === "Not applicable" ? "os_days" : inferredEndpoint.survivalTimeVar;
+        var time = cleanVariableName(getValue("survivalTimeVar") === "Not specified" ? inferredTime : getValue("survivalTimeVar"));
+        var adjustmentVars = splitAdjustmentVars(getValue("adjustmentVars"));
+        if (!adjustmentVars.length) adjustmentVars = ["age_dx", "sex", "ecog_ps", "metastasis_count"];
+        var adjustedPredictors = [exposure].concat(adjustmentVars.filter(function (name) { return name !== exposure; }));
+
+        return [
+          "library(readr)",
+          "library(dplyr)",
+          "library(survival)",
+          "",
+          "study_data <- read_csv(\"study_data.csv\", show_col_types = FALSE)",
+          "codebook <- read_csv(\"codebook.csv\", show_col_types = FALSE)",
+          "message(\"Training note: the 12-row toy dataset is for import and code testing only. Use the larger probabilistic teaching dataset, or real study data, for model-readiness testing.\")",
+          "",
+          "required_vars <- " + rVector(["patient_id", exposure, time, outcome]),
+          "missing_required <- setdiff(required_vars, names(study_data))",
+          "if (length(missing_required) > 0) {",
+          "  stop(paste(\"Missing required variable(s):\", paste(missing_required, collapse = \", \")))",
+          "}",
+          "",
+          "descriptive_table <- study_data %>%",
+          "  summarise(",
+          "    n = n(),",
+          "    events = sum(" + outcome + " == 1, na.rm = TRUE),",
+          "    median_followup_days = median(" + time + ", na.rm = TRUE),",
+          "    rt_received_percent = mean(" + exposure + " == 1, na.rm = TRUE) * 100",
+          "  )",
+          "print(descriptive_table)",
+          "",
+          "model_readiness_check <- function(data, event_var, predictors) {",
+          "  events <- sum(data[[event_var]] == 1, na.rm = TRUE)",
+          "  events_per_predictor <- events / max(length(predictors), 1)",
+          "  if (events < 20) warning(\"Events < 20: model is for code testing only.\")",
+          "  if (events_per_predictor < 5) warning(\"Events per predictor < 5: Cox model likely unstable.\")",
+          "  tibble(events = events, predictors = length(predictors), events_per_predictor = events_per_predictor)",
+          "}",
+          "",
+          "simple_predictors <- " + rVector([exposure]),
+          "print(model_readiness_check(study_data, \"" + outcome + "\", simple_predictors))",
+          "simple_cox <- coxph(Surv(" + time + ", " + outcome + ") ~ " + exposure + ", data = study_data)",
+          "print(summary(simple_cox))",
+          "",
+          "adjusted_predictors <- " + rVector(adjustedPredictors),
+          "missing_adjusted <- setdiff(adjusted_predictors, names(study_data))",
+          "if (length(missing_adjusted) > 0) {",
+          "  warning(paste(\"Adjusted model skipped. Missing variable(s):\", paste(missing_adjusted, collapse = \", \")))",
+          "} else {",
+          "  print(model_readiness_check(study_data, \"" + outcome + "\", adjusted_predictors))",
+          "  adjusted_formula <- as.formula(paste(\"Surv(" + time + ", " + outcome + ") ~\", paste(adjusted_predictors, collapse = \" + \")))",
+          "  adjusted_cox <- coxph(adjusted_formula, data = study_data)",
+          "  print(summary(adjusted_cox))",
+          "}",
+          "",
+          "check_hr_interpretability <- function(model) {",
+          "  hr <- exp(coef(model))",
+          "  ci <- suppressMessages(exp(confint(model)))",
+          "  bad_hr <- any(!is.finite(hr)) || any(hr < 0.05 | hr > 20, na.rm = TRUE)",
+          "  bad_ci <- any(!is.finite(ci)) || any(ci <= 0, na.rm = TRUE)",
+          "  if (bad_hr || bad_ci) warning(\"HR is extreme or CI is 0 to Inf: model is not interpretable.\")",
+          "  list(hr = hr, ci = ci)",
+          "}",
+          "check_hr_interpretability(simple_cox)",
+          "if (exists(\"adjusted_cox\")) check_hr_interpretability(adjusted_cox)",
+          "",
+          "landmark_vars <- c(\"landmark_eligible_90d\", \"sabr_timing_group\", \"" + time + "\", \"" + outcome + "\", \"age_dx\", \"sex\", \"ecog_ps\")",
+          "missing_landmark <- setdiff(landmark_vars, names(study_data))",
+          "if (length(missing_landmark) > 0) {",
+          "  warning(paste(\"90-day landmark model skipped. Missing variable(s):\", paste(missing_landmark, collapse = \", \")))",
+          "} else {",
+          "  landmark_data <- study_data %>%",
+          "    filter(landmark_eligible_90d == 1, sabr_timing_group %in% c(\"early_90d\", \"late_gt90d\")) %>%",
+          "    mutate(os_days_from_landmark = " + time + " - 90)",
+          "  print(model_readiness_check(landmark_data, \"" + outcome + "\", c(\"sabr_timing_group\", \"age_dx\", \"sex\", \"ecog_ps\")))",
+          "  landmark_model <- coxph(Surv(os_days_from_landmark, " + outcome + ") ~ sabr_timing_group + age_dx + sex + ecog_ps, data = landmark_data)",
+          "  print(summary(landmark_model))",
+          "  check_hr_interpretability(landmark_model)",
+          "}",
+          ""
+        ].join(NL);
+      }
+
+      function inverseNormal(probability) {
+        var p = probability;
+        if (p <= 0 || p >= 1) return NaN;
+
+        var a = [-39.6968302866538, 220.946098424521, -275.928510446969, 138.357751867269, -30.6647980661472, 2.50662827745924];
+        var b = [-54.4760987982241, 161.585836858041, -155.698979859887, 66.8013118877197, -13.2806815528857];
+        var c = [-0.00778489400243029, -0.322396458041136, -2.40075827716184, -2.54973253934373, 4.37466414146497, 2.93816398269878];
+        var d = [0.00778469570904146, 0.32246712907004, 2.445134137143, 3.75440866190742];
+        var plow = 0.02425;
+        var phigh = 1 - plow;
+        var q;
+        var r;
+
+        if (p < plow) {
+          q = Math.sqrt(-2 * Math.log(p));
+          return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+            ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+        }
+
+        if (p > phigh) {
+          q = Math.sqrt(-2 * Math.log(1 - p));
+          return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) /
+            ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+        }
+
+        q = p - 0.5;
+        r = q * q;
+        return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q /
+          (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
+      }
+
+      function roundTo(value, decimals) {
+        var factor = Math.pow(10, decimals);
+        return Math.round(value * factor) / factor;
+      }
+
+      function calculatePowerScenario() {
+        var hr = parseNumber(getValue("powerHr"), 0.75);
+        var alpha = parseProportion(getValue("powerAlpha"), 0.05);
+        var targetPower = parseProportion(getValue("powerTarget"), 0.80);
+        var eventProportion = parseProportion(getValue("powerEventProportion"), 0.45);
+        var missingness = parseProportion(getValue("powerMissingness"), 0.10);
+        var allocation = parseProportion(getValue("allocationProportion"), 0.50);
+        var p1 = clamp(allocation, 0.01, 0.99);
+        var p2 = 1 - p1;
+        var zAlpha = inverseNormal(1 - alpha / 2);
+        var zBeta = inverseNormal(targetPower);
+        var logHr = Math.log(hr);
+        var requiredEvents = ((zAlpha + zBeta) * (zAlpha + zBeta)) / (p1 * p2 * logHr * logHr);
+        var requiredN = requiredEvents / eventProportion;
+        var missingnessAdjustedN = requiredN / (1 - missingness);
+        var appliesToCurrentPlan = activePlanUsesSurvival() && !isDescriptiveQuestionType();
+
+        return {
+          label: "Teaching estimate only. Not final statistical justification.",
+          applies_to_current_analysis_plan: appliesToCurrentPlan,
+          reason_not_applicable: appliesToCurrentPlan
+            ? "Applies only as a teaching approximation for the selected survival analysis plan."
+            : "The active study question is descriptive. HR-based survival power estimates apply only if the study is changed to a survival comparison.",
+          scenario_type: appliesToCurrentPlan ? "active_survival_comparison_training_example" : "future_survival_comparison_training_example",
+          display_decimals: 1,
+          hr: hr,
+          alpha: alpha,
+          power: targetPower,
+          expected_event_proportion: eventProportion,
+          missingness: missingness,
+          allocation_proportion: p1,
+          required_events: roundTo(requiredEvents, 1),
+          required_n: roundTo(requiredN, 1),
+          missingness_adjusted_n: roundTo(missingnessAdjustedN, 1)
+        };
+      }
+
+      function renderPowerPreview() {
+        var result = calculatePowerScenario();
+        byId("powerPreview").innerHTML =
+          "<p><strong>Teaching estimate only. Not final statistical justification.</strong></p>" +
+          "<p><strong>Applies to current analysis plan:</strong> " + (result.applies_to_current_analysis_plan ? "Yes" : "No") + ". " + escapeHtml(result.reason_not_applicable) + "</p>" +
+          "<p>Required events: " + result.required_events.toFixed(result.display_decimals) + " (round up: " + Math.ceil(result.required_events) + ")" +
+          ". Required N: " + result.required_n.toFixed(result.display_decimals) + " (round up: " + Math.ceil(result.required_n) + ")" +
+          ". Missingness-adjusted N: " + result.missingness_adjusted_n.toFixed(result.display_decimals) + " (round up: " + Math.ceil(result.missingness_adjusted_n) + ").</p>";
+      }
+
+      function modelReadinessTeachingMessage() {
+        return [
+          "A dataset can pass technical checks but still be statistically unsuitable.",
+          "Small toy datasets are for import and code testing only.",
+          "Use larger probabilistic simulations for model testing, and use real-study analyses only after protocol, data, and statistical review."
+        ].join(" ");
+      }
+
+      function recommendedNextSteps() {
+        var status = readinessStatus();
+        var steps = [];
+
+        if (isDescriptiveQuestionType() && activePlanUsesSurvival()) {
+          steps.push("Choose one active aim: descriptive treatment-pattern study, survival association study, or two separate aims.");
+        }
+        if (status.level === "red") steps.push("Resolve missing required variables and codebook validation issues.");
+        if (status.level === "purple") steps.push("Discuss timing, causal, survival, or mediator warnings with methods support.");
+        if (status.level === "yellow") steps.push("Revise assumptions before using outputs as teaching examples.");
+        steps.push("Use generated CSV and R code for import and model-readiness training only.");
+        steps.push("Do not use the teaching power estimate as final statistical justification.");
+
+        return steps;
+      }
+
+      function selectedAnalysisPlan() {
+        var inferredEndpoint = inferEndpointVariables();
+        var primaryOutcome = getValue("primaryOutcomeVar") === "Not specified"
+          ? inferredEndpoint.primaryOutcomeVar
+          : getValue("primaryOutcomeVar");
+        var survivalTime = getValue("survivalTimeVar") === "Not specified"
+          ? inferredEndpoint.survivalTimeVar
+          : getValue("survivalTimeVar");
+
+        return {
+          analysis_target: getValue("analysisTarget"),
+          primary_exposure_variable: getValue("primaryExposureVar"),
+          primary_outcome_variable: primaryOutcome,
+          survival_time_variable: survivalTime,
+          endpoint_variables: inferredEndpoint.endpointVariables,
+          adjustment_variables: splitAdjustmentVars(getValue("adjustmentVars")),
+          endpoint_type: getValue("endpointType"),
+          effect_size: getValue("effectSize"),
+          baseline_assumption: getValue("baseline"),
+          alpha: getValue("alpha"),
+          power: getValue("power"),
+          missingness: getValue("missingness")
+        };
+      }
+
+      function recommendedDescriptiveTreatmentPatternPlan() {
+        return {
+          analysis_target: "descriptive",
+          primary_descriptive_measure: "rt_received",
+          secondary_descriptive_measures: [
+            "sabr_timing_group",
+            "days_mdt_to_rt",
+            "rt_intent",
+            "rt_dose_gy",
+            "rt_fractions"
+          ],
+          primary_exposure_variable: "Not applicable",
+          primary_outcome_variable: "rt_received",
+          survival_time_variable: "Not applicable",
+          endpoint_variables: ["rt_received"],
+          adjustment_variables: [],
+          endpoint_type: "Binary treatment-pattern endpoint",
+          effect_size: "Not applicable",
+          baseline_assumption: "Expected proportion receiving SABR from literature or registry feasibility review",
+          alpha: "Not applicable",
+          power: "Not applicable",
+          missingness: getValue("missingness")
+        };
+      }
+
+      function survivalAssociationAlternative() {
+        return {
+          study_identity: {
+            question_type: "Association / prognostic",
+            study_pathway: "Registry-Based Outcome Study"
+          },
+          picots: {
+            research_question: "Among patients with oligometastatic NSCLC identified from Nordic registry and hospital data, is receipt or timing of SABR associated with overall survival?",
+            exposure_or_intervention: "SABR receipt and/or SABR timing from MDT decision date",
+            comparator: "No SABR, or SABR later than 90 days from MDT decision depending on the selected analysis",
+            primary_outcome: "Overall survival",
+            time_zero: "MDT decision date or metastatic diagnosis date, pre-specified before analysis",
+            followup: "From time zero until death, censoring, or end of follow-up"
+          },
+          analysis_plan: {
+            analysis_target: "survival",
+            primary_exposure_variable: "sabr_timing_group or rt_received, depending on the target estimand",
+            primary_outcome_variable: "os_event",
+            survival_time_variable: "os_days",
+            adjustment_variables: ["age_dx", "sex", "ecog_ps", "metastasis_count"],
+            endpoint_type: "Time-to-event / survival",
+            methods_review_required: true
+          }
+        };
+      }
+
+      function analysisPlanForConcept() {
+        if (isDescriptiveQuestionType() && activePlanUsesSurvival()) {
+          return {
+            conflict_resolution_required: true,
+            active_selected_plan: selectedAnalysisPlan(),
+            recommended_plan_for_current_question: recommendedDescriptiveTreatmentPatternPlan(),
+            survival_association_alternative_if_intended: survivalAssociationAlternative()
+          };
+        }
+
+        if (isDescriptiveQuestionType() && activeQuestionLooksTreatmentPattern()) {
+          return recommendedDescriptiveTreatmentPatternPlan();
+        }
+
+        return selectedAnalysisPlan();
+      }
+
+      function loadedPresetSummary() {
+        var active = [];
+        var optional = [];
+
+        loadedPresetNames.forEach(function (name) {
+          var label = prettyPresetName(name);
+          var isSurveyPreset = name === "surveyVars";
+          var surveyIsActive = getValue("studyPathway").toLowerCase().indexOf("survey") >= 0 ||
+            getValue("questionType").toLowerCase().indexOf("survey") >= 0 ||
+            getValue("questionType").toLowerCase().indexOf("mixed") >= 0;
+
+          if (isSurveyPreset && !surveyIsActive) {
+            optional.push(label);
+          } else {
+            active.push(label);
+          }
+        });
+
+        return {
+          active: active,
+          optional_or_inactive: optional
+        };
+      }
+
+      function conceptObject() {
+        return {
+          metadata: {
+            tool: "NTOG Study Design & Simulation Builder",
+            version: "v0.9",
+            purpose: "Training tool for moving from clinical idea to PICOTS, codebook, simulated data, design checks, and starter R code.",
+            teaches: [
+              "PICOTS structure",
+              "codebook thinking",
+              "endpoint-variable mismatch",
+              "descriptive versus survival-analysis conflicts",
+              "time-zero alignment",
+              "immortal-time bias risk",
+              "missing-variable checks",
+              "model-readiness versus technical code execution",
+              "separation between toy simulation and real analysis"
+            ],
+            safety_note: "This tool is for education and early study design only. It does not replace protocol development, ethics review, data permissions, statistical review, patient-level data governance, or clinical judgement.",
+            data_entry_warning: "Do not enter patient-level, identifiable, confidential, or unpublished sensitive data."
+          },
+          study_identity: {
+            working_title: getValue("title"),
+            disease_area: getValue("diseaseArea"),
+            question_type: getValue("questionType"),
+            study_pathway: getValue("studyPathway")
+          },
+          picots: {
+            research_question: getValue("question"),
+            population: getValue("population"),
+            exposure_or_intervention: getValue("exposure"),
+            comparator: getValue("comparator"),
+            primary_outcome: getValue("endpoint"),
+            time_zero: getValue("timeZero"),
+            followup: getValue("followup"),
+            data_source: getValue("dataSource")
+          },
+          variable_plan: {
+            loaded_presets: loadedPresetSummary(),
+            codebook_rows: endpointAwareCodebookRows()
+          },
+          analysis_plan: analysisPlanForConcept(),
+          design_checks: {
+            readiness_status: readinessStatus(),
+            codebook_validation_issues: validateCodebook(),
+            warnings: designWarningTexts(),
+            model_readiness_message: modelReadinessTeachingMessage()
+          },
+          power_scenario: calculatePowerScenario(),
+          recommended_next_steps: recommendedNextSteps()
+        };
+      }
+
+      function generateConceptJson() {
+        return JSON.stringify(conceptObject(), null, 2);
+      }
+
+      function detailsBlock(key, label, text) {
+        copyStore[key] = text;
+        return "<details><summary>" + escapeHtml(label) + "</summary>" +
+          "<button type='button' class='copy-btn' data-copy-key='" + escapeHtml(key) + "'>Copy</button>" +
+          "<pre>" + escapeHtml(text) + "</pre></details>";
+      }
+
+      function outputGrid(rows) {
+        return "<div class='output-grid'>" + rows.map(function (row) {
+          var value = String(row[1]);
+          var isHtml = value.indexOf("<details>") === 0 || value.indexOf("<ul") === 0 || value.indexOf("<div") === 0 || value.indexOf("<p") === 0;
+          return "<div>" + escapeHtml(row[0]) + "</div><div>" + (isHtml ? value : escapeHtml(value)) + "</div>";
+        }).join("") + "</div>";
+      }
+
+      function copyText(text, button) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            button.textContent = "Copied";
+            setTimeout(function () { button.textContent = "Copy"; }, 1000);
+          }).catch(function () {
+            fallbackCopy(text, button);
+          });
+        } else {
+          fallbackCopy(text, button);
+        }
+      }
+
+      function fallbackCopy(text, button) {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          document.execCommand("copy");
+          button.textContent = "Copied";
+        } catch (error) {
+          button.textContent = "Copy failed";
+        }
+
+        document.body.removeChild(textarea);
+        setTimeout(function () { button.textContent = "Copy"; }, 1200);
+      }
+
+      function generateOutputs() {
+        var status = readinessStatus();
+        var warnings = designChecks();
+        var conceptJson = generateConceptJson();
+        var codebookCsv = generateCodebookCsv();
+        var toyCsv = generateToySimulatedCsv();
+        var largeCsv = generateLargeTeachingCsv(300);
+        var rCode = generateRCode();
+        var powerResult = JSON.stringify(calculatePowerScenario(), null, 2);
+
+        copyStore = {};
+        byId("statusBanner").innerHTML =
+          "<span class='status " + status.level + "'>" + escapeHtml(status.label) + "</span>" +
+          "<p><strong>Next step:</strong> " + escapeHtml(status.message) + "</p>";
+
+        byId("output").innerHTML = outputGrid([
+          ["Key warnings", warningListHtml(warnings)],
+          ["Model-readiness note", "<div class='model-readiness-note'>" + escapeHtml(modelReadinessTeachingMessage()) + "</div>"],
+          ["Concept JSON", detailsBlock("concept_json", "Copy this JSON into the Federated Dataset Builder", conceptJson)],
+          ["Federated handoff", "<p class='hint'>Next step: generate outputs, open the Concept JSON panel, copy the JSON, then open the <a href='federated-dataset-builder.html'>Federated Dataset &amp; Visualisation Builder</a> and paste it into the Concept JSON field.</p>"],
+          ["Codebook CSV", detailsBlock("codebook_csv", "Show codebook.csv", codebookCsv)],
+          ["Toy simulated CSV", detailsBlock("toy_csv", "Show 12-row toy study_data.csv", toyCsv)],
+          ["Larger teaching simulated CSV", detailsBlock("large_csv", "Show 300-row teaching study_data.csv", largeCsv)],
+          ["R starter code", detailsBlock("r_code", "Show R starter code", rCode)],
+          ["Power scenario result", detailsBlock("power_result", "Show power scenario result", powerResult)]
+        ]);
+
+        Array.from(byId("output").querySelectorAll(".copy-btn")).forEach(function (button) {
+          button.addEventListener("click", function () {
+            copyText(copyStore[button.getAttribute("data-copy-key")] || "", button);
+          });
+        });
+
+        byId("outputCard").classList.remove("hidden");
+      }
+
+      function wireEvents() {
+        Array.from(document.querySelectorAll(".preset-btn")).forEach(function (button) {
+          button.addEventListener("click", function () {
+            loadVariablePreset(button.getAttribute("data-preset"));
+          });
+        });
+
+        [
+          "title",
+          "diseaseArea",
+          "questionType",
+          "question",
+          "population",
+          "exposure",
+          "comparator",
+          "endpoint",
+          "timeZero",
+          "followup",
+          "dataSource",
+          "studyPathway",
+          "variableCodebook",
+          "analysisTarget",
+          "primaryExposureVar",
+          "primaryOutcomeVar",
+          "survivalTimeVar",
+          "adjustmentVars",
+          "endpointType",
+          "effectSize",
+          "baseline",
+          "alpha",
+          "power",
+          "missingness",
+          "powerHr",
+          "powerAlpha",
+          "powerTarget",
+          "powerEventProportion",
+          "powerMissingness",
+          "allocationProportion"
+        ].forEach(function (id) {
+          var el = byId(id);
+          if (!el) return;
+
+          el.addEventListener("input", function () {
+            renderCodebookPreview();
+            renderAdjustmentPreview();
+            renderEndpointInferencePreview();
+            renderDesignChecks();
+            renderPowerPreview();
+          });
+
+          el.addEventListener("change", function () {
+            renderCodebookPreview();
+            renderAdjustmentPreview();
+            renderEndpointInferencePreview();
+            renderDesignChecks();
+            renderPowerPreview();
+          });
+        });
+
+        byId("calculatePowerBtn").addEventListener("click", renderPowerPreview);
+        byId("inferEndpointBtn").addEventListener("click", applyEndpointInference);
+        byId("generateBtn").addEventListener("click", generateOutputs);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        wireEvents();
+        loadVariablePreset("coreLung");
+        loadVariablePreset("oligoRT");
+        renderEndpointInferencePreview();
+        renderPowerPreview();
+        renderDesignChecks();
+      });
+    })();
+  </script>
+</body>
+</html>

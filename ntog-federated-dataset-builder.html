@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Educational NTOG federated dataset and visualisation builder for synthetic country datasets, aggregate federated outputs, and R visualisation scripts." />
+  <title>NTOG Federated Dataset &amp; Visualisation Builder</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #52606d;
+      --soft-muted: #697586;
+      --line: #e5e7eb;
+      --panel: #ffffff;
+      --page: #ffffff;
+      --brand: #102a43;
+      --brand-2: #1f4e79;
+      --brand-3: #2f80a7;
+      --soft-blue: #f0f7fb;
+      --soft-blue-line: #d7eaf3;
+      --slate: #334155;
+      --green-bg: #dcfce7;
+      --green-fg: #166534;
+      --yellow-bg: #fef3c7;
+      --yellow-fg: #92400e;
+      --purple-bg: #f3e8ff;
+      --purple-fg: #6b21a8;
+      --red-bg: #fee2e2;
+      --red-fg: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Open Sans", Arial, sans-serif;
+      background: var(--page);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .navbar-brand {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .container {
+      width: min(100% - 32px, 1140px);
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    .nav-container {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .navbar-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brand);
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--brand-2);
+      color: #ffffff;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .nav-menu-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .navbar-toggler {
+      display: none;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      color: var(--brand);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .nav-link,
+    .nav-dropdown summary {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0.5rem 0.75rem;
+      color: var(--slate);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 650;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .nav-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-dropdown summary::after {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 0.45rem;
+      margin-top: -0.2rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active,
+    .nav-dropdown summary:hover,
+    .nav-dropdown[open] summary {
+      color: var(--brand);
+      background: #edf5fa;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 230px;
+      display: grid;
+      gap: 2px;
+      padding: 0.45rem;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      background: #ffffff;
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.55rem 0.75rem;
+      color: var(--slate);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a.active {
+      background: var(--soft-blue);
+      color: var(--brand);
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 7rem 0 4.5rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #102a43 0%, #1f4e79 55%, #2f80a7 100%);
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.10), transparent 22%);
+      pointer-events: none;
+    }
+
+    .page-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      margin: 0 0 1rem;
+      max-width: 920px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .lead-narrow {
+      max-width: 850px;
+      margin: 0 0 1.25rem;
+      font-size: 1.18rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.7rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero-button.primary {
+      background: #ffffff;
+      color: var(--brand);
+    }
+
+    .hero-button.secondary {
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: #ffffff;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 3rem 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+      color: var(--brand);
+    }
+
+    .section-intro {
+      max-width: 900px;
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 11px;
+      border: 1px solid #d9e2ec;
+      border-radius: 0.6rem;
+      font: inherit;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 180px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    button,
+    .file-action {
+      border: 0;
+      background: var(--brand-2);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 0.55rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin: 4px 6px 4px 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover,
+    .file-action:hover {
+      background: var(--brand);
+    }
+
+    button.secondary {
+      background: var(--slate);
+    }
+
+    button.subtle {
+      background: #edf5fa;
+      color: var(--brand);
+    }
+
+    button.copy-btn,
+    button.download-btn {
+      background: #475569;
+      font-size: 0.88rem;
+      padding: 8px 10px;
+    }
+
+    button.copy-btn:hover,
+    button.download-btn:hover {
+      background: var(--slate);
+    }
+
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 0.6rem;
+      max-height: 430px;
+      overflow: auto;
+    }
+
+    .output-details {
+      border: 1px solid #d9e2ec;
+      border-radius: 0.75rem;
+      padding: 10px 12px;
+      background: #fbfdff;
+      margin: 10px 0;
+    }
+
+    .output-details summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--brand-2);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hint,
+    .muted-note {
+      color: var(--soft-muted);
+      font-size: 0.93rem;
+    }
+
+    .small-list {
+      margin-top: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .small-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .pass {
+      color: var(--green-fg);
+      font-weight: 800;
+    }
+
+    .fail {
+      color: var(--red-fg);
+      font-weight: 800;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .green {
+      background: var(--green-bg);
+      color: var(--green-fg);
+    }
+
+    .yellow {
+      background: var(--yellow-bg);
+      color: var(--yellow-fg);
+    }
+
+    .purple {
+      background: var(--purple-bg);
+      color: var(--purple-fg);
+    }
+
+    .red {
+      background: var(--red-bg);
+      color: var(--red-fg);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .notice {
+      background: var(--soft-blue);
+      border-color: var(--soft-blue-line);
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 8px 14px;
+    }
+
+    .output-grid div:nth-child(odd) {
+      color: var(--slate);
+      font-weight: 800;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 1rem;
+    }
+
+    .chart-panel {
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      background: #ffffff;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 44px 1fr 64px;
+      gap: 10px;
+      align-items: center;
+      margin: 0.55rem 0;
+      font-size: 0.92rem;
+    }
+
+    .bar-track {
+      height: 16px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--brand-3);
+      border-radius: 999px;
+    }
+
+    .stacked-bar {
+      display: flex;
+      height: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .seg-early {
+      background: #2f80a7;
+    }
+
+    .seg-late {
+      background: #7c3aed;
+    }
+
+    .seg-none {
+      background: #94a3b8;
+    }
+
+    .seg-missing {
+      background: #f59e0b;
+    }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: 90px repeat(5, 1fr);
+      gap: 4px;
+      align-items: stretch;
+      font-size: 0.78rem;
+    }
+
+    .tile {
+      padding: 0.35rem;
+      border-radius: 0.35rem;
+      text-align: center;
+      background: #edf5fa;
+      color: var(--brand);
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tile.label {
+      justify-content: flex-start;
+      text-align: left;
+      background: #ffffff;
+      color: var(--slate);
+      font-weight: 700;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus,
+    a:focus,
+    summary:focus {
+      outline: 3px solid rgba(21, 94, 117, 0.35);
+      outline-offset: 2px;
+    }
+
+    .site-footer {
+      background: #111827;
+      color: #ffffff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-logo-link {
+      width: 56px;
+      height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--brand-2);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-decoration: none;
+      margin-bottom: 0.8rem;
+    }
+
+    .site-footer p {
+      margin: 0.35rem 0;
+    }
+
+    .site-footer a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @media (max-width: 920px) {
+      .nav-container {
+        align-items: flex-start;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .navbar-toggler {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 3px;
+        padding-top: 8px;
+      }
+
+      .nav-menu-toggle:checked ~ .nav-menu {
+        display: flex;
+      }
+
+      .nav-link,
+      .nav-dropdown summary {
+        width: 100%;
+      }
+
+      .dropdown-menu {
+        position: static;
+        min-width: 0;
+        box-shadow: none;
+        margin: 0 0 0.35rem 0.75rem;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .page-hero {
+        padding: 5rem 0 3rem;
+      }
+
+      main {
+        padding: 2rem 16px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .output-grid,
+      .chart-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tile-grid {
+        grid-template-columns: 78px repeat(5, minmax(46px, 1fr));
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="container nav-container">
+      <a class="navbar-brand" href="/">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>NTOG</span>
+      </a>
+
+      <input class="nav-menu-toggle" type="checkbox" id="navMenuToggle" aria-label="Toggle navigation menu" />
+      <label class="navbar-toggler" for="navMenuToggle" aria-label="Toggle navigation menu">Menu</label>
+
+      <div class="nav-menu">
+        <details class="nav-dropdown">
+          <summary>About Us</summary>
+          <div class="dropdown-menu">
+            <a href="about.html">About Us</a>
+            <a href="mission.html">Mission</a>
+            <a href="history.html">History</a>
+            <a href="steering-committee.html">Steering Committee</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Research</summary>
+          <div class="dropdown-menu">
+            <a href="research.html">Research Overview</a>
+            <a href="ongoing-projects.html">Ongoing Projects</a>
+            <a href="publications.html">Publications</a>
+            <a href="collaborations.html">Collaborations</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Events</summary>
+          <div class="dropdown-menu">
+            <a href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a>
+            <a href="upcoming-events.html">Upcoming Events</a>
+            <a href="past-events.html">Past Events</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Clinical Resources</summary>
+          <div class="dropdown-menu">
+            <a href="guidelines.html">Clinical Guidelines</a>
+            <a href="protocols.html">Protocols</a>
+            <a href="tools.html" class="active">Tools</a>
+          </div>
+        </details>
+
+        <details class="nav-dropdown">
+          <summary>Get Involved</summary>
+          <div class="dropdown-menu">
+            <a href="expert.html">Expert Network</a>
+            <a href="collaboration.html">Collaboration Opportunities</a>
+            <a href="volunteer.html">Volunteer</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="news.html">Research News</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Clinical resources</span>
+      <h1>NTOG Federated Dataset &amp; Visualisation Builder</h1>
+      <p class="lead-narrow">
+        A sister teaching tool that starts from a structured Concept JSON and turns it into a common data model, synthetic country datasets, aggregate federated outputs, and R visualisation scripts.
+      </p>
+      <div class="hero-actions">
+        <a class="hero-button primary" href="#conceptInputHeading">Paste Concept JSON</a>
+        <a class="hero-button secondary" href="study-design-builder.html">Back to Study Design Builder</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card notice" aria-labelledby="teachingHeading">
+      <h2 id="teachingHeading">Federated dataset specification</h2>
+      <p>
+        The specification describes how a structured study concept is converted into synthetic country-level datasets, local aggregate outputs, pooled summary tables, and R visualisation code.
+      </p>
+      <p>
+        The teaching workflow follows a federated principle: patient-level rows remain local, and only aggregate summaries are pooled. In this prototype, all data are synthetic and generated in the browser for education.
+      </p>
+      <p>
+        A federated study is not built by collecting everything first and thinking later. It is built by defining a common question, common variables, local derivation rules, local checks, allowed outputs, and pooled summaries before data extraction.
+      </p>
+    </section>
+
+    <section class="card" aria-labelledby="conceptInputHeading">
+      <h2 id="conceptInputHeading">1. Study concept input</h2>
+      <p class="section-intro">
+        Paste the Concept JSON from the <a href="study-design-builder.html">Study Design &amp; Simulation Builder</a>.
+        This page uses that structured input to generate a federated-style teaching project.
+      </p>
+      <label for="conceptJson">Concept JSON</label>
+      <textarea id="conceptJson" spellcheck="false"></textarea>
+      <div class="grid-3">
+        <button id="loadExampleBtn" type="button" class="secondary">Load example concept</button>
+        <button id="validateBtn" type="button" class="subtle">Validate concept</button>
+        <button id="generateBtn" type="button">Generate federated pathway</button>
+      </div>
+      <div id="conceptStatus" class="hint">Example concept loaded on page start.</div>
+    </section>
+
+    <section class="card" aria-labelledby="generationHeading">
+      <h2 id="generationHeading">2. Country dataset generation assumptions</h2>
+      <p class="section-intro">
+        These editable teaching assumptions define denominators, centre counts, practice-pattern heterogeneity, missingness, and the random seed.
+      </p>
+      <label for="countrySpecJson">Country generation specification</label>
+      <textarea id="countrySpecJson" spellcheck="false"></textarea>
+      <details class="output-details">
+        <summary>What this section controls</summary>
+        <p class="hint">
+          The synthetic countries are intentionally different. This teaches that federated studies must pre-specify local denominators, missingness patterns, coding rules, and allowed aggregate outputs before analysis.
+        </p>
+      </details>
+    </section>
+
+    <section id="outputCard" class="card hidden" aria-labelledby="outputHeading">
+      <h2 id="outputHeading">Generated federated project</h2>
+      <div id="statusBanner"></div>
+      <div id="validationOutput"></div>
+      <div id="visualPreview"></div>
+      <div id="output"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/" class="footer-logo-link" aria-label="NTOG home">N</a>
+    <p>&copy; 2026 Nordic Thoracic Oncology Group</p>
+    <p class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </p>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var NL = String.fromCharCode(10);
+    var generatedFiles = {};
+
+    var DEFAULT_CONCEPT = {
+      metadata: {
+        tool: "NTOG Study Design & Simulation Builder",
+        version: "v0.9",
+        purpose: "Training tool for moving from clinical idea to PICOTS, codebook, simulated data, design checks, and starter R code.",
+        teaches: [
+          "PICOTS structure",
+          "codebook thinking",
+          "endpoint-variable mismatch",
+          "descriptive versus survival-analysis conflicts",
+          "time-zero alignment",
+          "immortal-time bias risk",
+          "missing-variable checks",
+          "model-readiness versus technical code execution",
+          "separation between toy simulation and real analysis"
+        ],
+        safety_note: "This tool is for education and early study design only. It does not replace protocol development, ethics review, data permissions, statistical review, patient-level data governance, or clinical judgement.",
+        data_entry_warning: "Do not enter patient-level, identifiable, confidential, or unpublished sensitive data."
+      },
+      study_identity: {
+        working_title: "Oligometastatic NSCLC and SABR treatment patterns in Nordic clinical practice",
+        disease_area: "NSCLC",
+        question_type: "Descriptive",
+        study_pathway: "Registry-Based Outcome Study"
+      },
+      picots: {
+        research_question: "How many patients with oligometastatic NSCLC received SABR in Nordic clinical practice?",
+        population: "Patients with oligometastatic NSCLC identified from Nordic registry and hospital data.",
+        exposure_or_intervention: "SABR or other local ablative radiotherapy.",
+        comparator: "Not specified",
+        primary_outcome: "Receipt of SABR / local ablative radiotherapy as a treatment-pattern endpoint",
+        time_zero: "Date of metastatic diagnosis or MDT decision date",
+        followup: "12 months from time zero",
+        data_source: "Cancer registry, hospital records, radiotherapy information system"
+      },
+      variable_plan: {
+        loaded_presets: {
+          active: ["core lung variables", "oligometastatic radiotherapy variables"],
+          optional_or_inactive: []
+        },
+        codebook_rows: [
+          row("patient_id", "Study patient ID", "id", "identifier", "anonymous sequential ID", "study_database", "patient_id", "generate anonymous sequential ID"),
+          row("country", "Country", "categorical", "feasibility", "DK=Denmark, FI=Finland, IS=Iceland, NO=Norway, SE=Sweden, 9=missing", "registry", "country", "harmonise Nordic country code"),
+          row("centre_id", "Centre ID", "categorical", "feasibility", "local coded centre identifier", "local_EHR", "centre", "pseudonymise centre"),
+          row("diagnosis_date", "Date of diagnosis", "date", "timing", "yyyy-mm-dd", "cancer_registry", "diagnosis_date", "harmonise date"),
+          row("age_dx", "Age at diagnosis", "continuous", "confounder", "years", "cancer_registry", "birth_date + diagnosis_date", "calculate age at diagnosis"),
+          row("sex", "Sex", "categorical", "confounder", "1=female, 2=male, 3=other, 9=missing", "population_registry", "sex", "harmonise coding"),
+          row("ecog_ps", "ECOG performance status", "ordinal", "confounder", "0,1,2,3,4,9=missing", "local_EHR", "ECOG/WHO_PS", "map to ECOG 0-4"),
+          row("histology", "Histology", "categorical", "confounder", "adenocarcinoma, squamous, NSCLC_NOS, other, 9=missing", "cancer_registry", "morphology", "harmonise histology"),
+          row("stage_dx", "Stage at diagnosis", "categorical", "confounder", "I, II, III, IV, 9=missing", "cancer_registry", "stage", "harmonise to I-IV"),
+          row("systemic_tx", "Systemic treatment", "categorical", "exposure_confounder", "chemo, immunotherapy, targeted, chemo_io, none, other, 9=missing", "oncology_EHR", "systemic_treatment", "harmonise regimen class"),
+          row("time_zero_date", "Time zero date", "date", "timing", "yyyy-mm-dd", "derived", "time_zero", "derive from study definition"),
+          row("os_days", "Overall survival time", "continuous", "outcome_time", "days from time zero to death or censoring", "derived", "os_days", "calculate days"),
+          row("os_event", "Death event", "binary", "outcome_event", "0=alive/censored, 1=dead", "population_registry", "death_date", "1 if death date present"),
+          row("metastasis_count", "Number of metastases", "integer", "confounder", "integer count, 99=missing", "imaging/EHR", "metastasis_count", "extract count"),
+          row("mdt_decision_date", "MDT decision date", "date", "timing", "yyyy-mm-dd", "MDT_system", "MDT_date", "harmonise date"),
+          row("response_before_rt", "Response before radiotherapy", "categorical", "mediator_selection", "CR, PR, SD, PD, not_assessed, 9=missing", "imaging/EHR", "response", "do not adjust blindly"),
+          row("rt_received", "Radiotherapy received", "binary", "exposure", "0=no, 1=yes, 9=missing", "radiotherapy_system", "rt_course", "derive eligible course"),
+          row("rt_start_date", "Radiotherapy start date", "date", "timing_exposure", "yyyy-mm-dd", "radiotherapy_system", "rt_start", "harmonise date"),
+          row("days_mdt_to_rt", "Days from MDT to radiotherapy", "integer", "timing_exposure", "days, blank if no RT", "derived", "rt_start_date - mdt_decision_date", "calculate date difference"),
+          row("sabr_timing_group", "SABR timing group", "categorical", "exposure", "early_90d, late_gt90d, not_received, missing", "derived", "days_mdt_to_rt", "early_90d if days_mdt_to_rt <= 90; missing if rt_received is missing"),
+          row("landmark_eligible_90d", "90-day landmark eligible", "binary", "design_filter", "0=no, 1=yes", "derived", "os_days", "1 if os_days > 90"),
+          row("rt_intent", "Radiotherapy intent", "categorical", "exposure_definition", "ablative, consolidation, oligoprogression, palliative, mixed, 9=missing", "radiotherapy_system", "intent", "harmonise intent"),
+          row("rt_dose_gy", "Radiotherapy dose", "continuous", "exposure_detail", "total dose in Gy", "radiotherapy_system", "dose", "total dose"),
+          row("rt_fractions", "Radiotherapy fractions", "integer", "exposure_detail", "number of fractions", "radiotherapy_system", "fractions", "count fractions")
+        ]
+      },
+      analysis_plan: {
+        analysis_target: "descriptive",
+        primary_descriptive_measure: "rt_received",
+        secondary_descriptive_measures: ["sabr_timing_group", "days_mdt_to_rt", "rt_intent", "rt_dose_gy", "rt_fractions"],
+        primary_exposure_variable: "Not applicable",
+        primary_outcome_variable: "rt_received",
+        survival_time_variable: "Not applicable",
+        endpoint_variables: ["rt_received"],
+        adjustment_variables: [],
+        endpoint_type: "Binary treatment-pattern endpoint",
+        effect_size: "Not applicable",
+        baseline_assumption: "Expected proportion receiving SABR from literature or registry feasibility review",
+        alpha: "Not applicable",
+        power: "Not applicable",
+        missingness: "10%"
+      },
+      design_checks: {
+        readiness_status: {
+          level: "yellow",
+          label: "revise assumptions",
+          message: "Review warnings before using generated examples."
+        },
+        codebook_validation_issues: [],
+        warnings: [
+          "Endpoint text is not automatically a data column. Choose or generate a matching endpoint variable such as rt_received, os_event, or primary_score."
+        ],
+        model_readiness_message: "A dataset can pass technical checks but still be statistically unsuitable. Small toy datasets are for import and code testing only. Use larger probabilistic simulations for model testing, and use real-study analyses only after protocol, data, and statistical review."
+      },
+      power_scenario: {
+        label: "Teaching estimate only. Not final statistical justification.",
+        applies_to_current_analysis_plan: false,
+        reason_not_applicable: "The active study question is descriptive. HR-based survival power estimates apply only if the study is changed to a survival comparison.",
+        scenario_type: "future_survival_comparison_training_example",
+        display_decimals: 1,
+        hr: 0.75,
+        alpha: 0.05,
+        power: 0.8,
+        expected_event_proportion: 0.45,
+        missingness: 0.1,
+        allocation_proportion: 0.5,
+        required_events: 379.4,
+        required_n: 843,
+        missingness_adjusted_n: 936.7
+      },
+      recommended_next_steps: [
+        "Revise assumptions before using outputs as teaching examples.",
+        "Use generated CSV and R code for import and model-readiness training only.",
+        "Do not use the teaching power estimate as final statistical justification."
+      ]
+    };
+
+    var DEFAULT_COUNTRY_SPEC = {
+      country_dataset_generation: {
+        random_seed: 20260510,
+        countries: {
+          DK: {
+            n_patients: 120,
+            n_centres: 4,
+            sabr_probability: 0.42,
+            median_days_mdt_to_rt: 55,
+            ecog_missingness: 0.10,
+            metastasis_count_missingness: 0.08
+          },
+          FI: {
+            n_patients: 100,
+            n_centres: 5,
+            sabr_probability: 0.36,
+            median_days_mdt_to_rt: 62,
+            ecog_missingness: 0.18,
+            metastasis_count_missingness: 0.12
+          },
+          IS: {
+            n_patients: 30,
+            n_centres: 1,
+            sabr_probability: 0.33,
+            median_days_mdt_to_rt: 70,
+            ecog_missingness: 0.22,
+            metastasis_count_missingness: 0.15
+          },
+          NO: {
+            n_patients: 90,
+            n_centres: 4,
+            sabr_probability: 0.39,
+            median_days_mdt_to_rt: 58,
+            ecog_missingness: 0.14,
+            metastasis_count_missingness: 0.10
+          },
+          SE: {
+            n_patients: 140,
+            n_centres: 6,
+            sabr_probability: 0.45,
+            median_days_mdt_to_rt: 50,
+            ecog_missingness: 0.09,
+            metastasis_count_missingness: 0.07
+          }
+        }
+      }
+    };
+
+    function row(name, label, type, role, coding, registrySource, registryVariable, transformationRule) {
+      return {
+        name: name,
+        label: label,
+        type: type,
+        role: role,
+        coding: coding,
+        registry_source: registrySource,
+        registry_variable: registryVariable,
+        transformation_rule: transformationRule
+      };
+    }
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function escapeHtml(text) {
+      var map = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#039;",
+        "\"": "&quot;"
+      };
+
+      return String(text).split("").map(function (c) {
+        return map[c] || c;
+      }).join("");
+    }
+
+    function csvEscape(value) {
+      var text = String(value == null ? "" : value);
+      var quoted = text.indexOf(",") >= 0 || text.indexOf(NL) >= 0 || text.indexOf("\"") >= 0;
+      return quoted ? "\"" + text.split("\"").join("\"\"") + "\"" : text;
+    }
+
+    function cleanVariableName(name) {
+      var text = String(name || "").toLowerCase();
+      text = text.split("").map(function (c) {
+        return "abcdefghijklmnopqrstuvwxyz0123456789_".indexOf(c) >= 0 ? c : "_";
+      }).join("");
+
+      while (text.indexOf("__") >= 0) text = text.split("__").join("_");
+      while (text.charAt(0) === "_") text = text.slice(1);
+      while (text.charAt(text.length - 1) === "_") text = text.slice(0, -1);
+
+      return text || "unnamed_variable";
+    }
+
+    function parseJsonTextarea(id) {
+      var text = byId(id).value.trim();
+      if (!text) {
+        throw new Error("JSON input is empty.");
+      }
+
+      return JSON.parse(text);
+    }
+
+    function parseConceptJson() {
+      return parseJsonTextarea("conceptJson");
+    }
+
+    function validateCountrySpecShape(countrySpec) {
+      if (!countrySpec || !countrySpec.country_dataset_generation) {
+        throw new Error("Country spec must include country_dataset_generation.");
+      }
+
+      var countries = countrySpec.country_dataset_generation.countries;
+
+      if (!countries || !Object.keys(countries).length) {
+        throw new Error("Country spec must include at least one country.");
+      }
+
+      Object.keys(countries).forEach(function (country) {
+        var cfg = countries[country] || {};
+
+        if (Number(cfg.n_patients) < 0) {
+          throw new Error(country + " n_patients must be non-negative.");
+        }
+
+        if (Number(cfg.n_centres) < 1) {
+          throw new Error(country + " n_centres must be at least 1.");
+        }
+
+        ["sabr_probability", "ecog_missingness", "metastasis_count_missingness"].forEach(function (key) {
+          var value = Number(cfg[key]);
+
+          if (!isFinite(value) || value < 0 || value > 1) {
+            throw new Error(country + " " + key + " must be between 0 and 1.");
+          }
+        });
+      });
+    }
+
+    function parseCountrySpecJson() {
+      var parsed = parseJsonTextarea("countrySpecJson");
+      validateCountrySpecShape(parsed);
+      return parsed;
+    }
+
+    function getCodebookRows(concept) {
+      var rawRows = [];
+
+      if (concept && concept.variable_plan) {
+        if (Array.isArray(concept.variable_plan.codebook_rows)) {
+          rawRows = concept.variable_plan.codebook_rows;
+        } else if (Array.isArray(concept.variable_plan.codebook)) {
+          rawRows = concept.variable_plan.codebook;
+        }
+      }
+
+      return rawRows.map(function (r) {
+        return {
+          name: cleanVariableName(r.name || r.variable_name),
+          label: r.label || "Not specified",
+          type: r.type || "Not specified",
+          role: r.role || "Not specified",
+          coding: typeof r.coding === "object" ? JSON.stringify(r.coding) : (r.coding || "Not specified"),
+          registry_source: r.registry_source || "Not specified",
+          registry_variable: r.registry_variable || "Not specified",
+          transformation_rule: r.transformation_rule || "Not specified"
+        };
+      });
+    }
+
+    function rowsToCsv(rows, columns) {
+      return columns.join(",") + NL + rows.map(function (r) {
+        return columns.map(function (c) {
+          return csvEscape(r[c]);
+        }).join(",");
+      }).join(NL) + NL;
+    }
+
+    function generateCodebookCsv(concept) {
+      var columns = [
+        "name",
+        "label",
+        "type",
+        "role",
+        "coding",
+        "registry_source",
+        "registry_variable",
+        "transformation_rule"
+      ];
+
+      return rowsToCsv(getCodebookRows(concept), columns);
+    }
+
+    function getCountryCodes(countrySpec) {
+      validateCountrySpecShape(countrySpec);
+      return Object.keys(countrySpec.country_dataset_generation.countries || {});
+    }
+
+    function buildCommonDataModelSpec(concept, countrySpec) {
+      var analysisPlan = (concept && concept.analysis_plan) || {};
+      var primaryDescriptiveMeasure = analysisPlan.primary_descriptive_measure || "rt_received";
+      var countries = getCountryCodes(countrySpec);
+      var requiredVariables = [
+        "patient_id",
+        "country",
+        "centre_id",
+        "age_dx",
+        "sex",
+        "ecog_ps",
+        "metastasis_count",
+        "mdt_decision_date",
+        "rt_received",
+        "rt_start_date",
+        "days_mdt_to_rt",
+        "sabr_timing_group",
+        "rt_intent",
+        "rt_dose_gy",
+        "rt_fractions"
+      ];
+      var optionalVariables = ["os_days", "os_event", "landmark_eligible_90d"];
+      var codebookRows = getCodebookRows(concept);
+      var schemaRows = requiredVariables.concat(optionalVariables).map(function (name) {
+        var found = codebookRows.filter(function (r) { return r.name === name; })[0] || {};
+
+        return {
+          name: name,
+          label: found.label || readableLabel(name),
+          type: found.type || inferTypeFromName(name),
+          role: name === primaryDescriptiveMeasure ? "primary_descriptive_measure" : (found.role || "Not specified"),
+          coding: codingObjectForVariable(name, found.coding),
+          required: requiredVariables.indexOf(name) >= 0,
+          allowed_missingness_teaching_default: defaultMissingnessForVariable(name)
+        };
+      });
+
+      return {
+        dataset_level: "synthetic_country_level_patient_rows",
+        countries: countries,
+        required_variables: requiredVariables,
+        optional_variables: optionalVariables,
+        primary_descriptive_measure: primaryDescriptiveMeasure,
+        secondary_descriptive_measures: analysisPlan.secondary_descriptive_measures || [
+          "sabr_timing_group",
+          "days_mdt_to_rt",
+          "rt_intent",
+          "rt_dose_gy",
+          "rt_fractions"
+        ],
+        variable_schema: schemaRows
+      };
+    }
+
+    function readableLabel(name) {
+      return String(name || "").split("_").map(function (part) {
+        return part.charAt(0).toUpperCase() + part.slice(1);
+      }).join(" ");
+    }
+
+    function inferTypeFromName(name) {
+      if (name.indexOf("date") >= 0) return "date";
+      if (name.indexOf("days") >= 0 || name.indexOf("dose") >= 0) return "continuous";
+      if (name.indexOf("received") >= 0 || name.indexOf("event") >= 0 || name.indexOf("eligible") >= 0) return "binary";
+      if (name.indexOf("count") >= 0 || name.indexOf("fractions") >= 0) return "integer";
+      return "categorical";
+    }
+
+    function codingObjectForVariable(name, fallback) {
+      if (name === "rt_received") return { "0": "no", "1": "yes", "9": "missing" };
+      if (name === "sex") return { "1": "female", "2": "male", "3": "other", "9": "missing" };
+      if (name === "ecog_ps") return { "0": "fully active", "1": "restricted strenuous activity", "2": "ambulatory", "3": "limited self-care", "4": "disabled", "9": "missing" };
+      if (name === "sabr_timing_group") return { early_90d: "RT within 90 days", late_gt90d: "RT after 90 days", not_received: "No RT", missing: "RT receipt missing" };
+      if (name === "landmark_eligible_90d") return { "0": "no", "1": "yes" };
+      return fallback || "See codebook";
+    }
+
+    function defaultMissingnessForVariable(name) {
+      if (name === "ecog_ps") return 0.15;
+      if (name === "metastasis_count") return 0.10;
+      if (name === "rt_received") return 0.05;
+      if (name === "rt_start_date" || name === "days_mdt_to_rt") return 0;
+      return 0.05;
+    }
+
+    function buildDerivedVariablesSpec() {
+      return [
+        {
+          name: "days_mdt_to_rt",
+          requires: ["mdt_decision_date", "rt_start_date"],
+          rule: "rt_start_date - mdt_decision_date in days",
+          if_no_rt: "blank"
+        },
+        {
+          name: "sabr_timing_group",
+          requires: ["rt_received", "days_mdt_to_rt"],
+          rule: "early_90d if rt_received=1 and days_mdt_to_rt<=90; late_gt90d if rt_received=1 and days_mdt_to_rt>90; not_received if rt_received=0; missing if rt_received is missing"
+        },
+        {
+          name: "landmark_eligible_90d",
+          requires: ["os_days"],
+          rule: "1 if os_days > 90; otherwise 0"
+        }
+      ];
+    }
+
+    function buildFederatedOutputsSpec() {
+      return {
+        principle: "Only aggregate country-level summaries are pooled.",
+        country_outputs: [
+          {
+            name: "country_denominator_summary",
+            columns: ["country", "n_patients", "n_centres"]
+          },
+          {
+            name: "sabr_receipt_summary",
+            columns: ["country", "n_patients", "n_sabr", "percent_sabr"]
+          },
+          {
+            name: "sabr_timing_summary",
+            columns: ["country", "early_90d", "late_gt90d", "not_received", "missing"]
+          },
+          {
+            name: "rt_detail_summary",
+            columns: ["country", "median_days_mdt_to_rt", "median_dose_gy", "median_fractions"]
+          },
+          {
+            name: "missingness_summary",
+            columns: ["country", "variable", "missing_n", "missing_percent"]
+          }
+        ]
+      };
+    }
+
+    function buildRAnalysisSpec(countrySpec) {
+      var countries = getCountryCodes(countrySpec);
+
+      return {
+        mode: "teaching_federated_style",
+        input_files: countries.map(function (country) {
+          return country + "_study_data.csv";
+        }),
+        local_country_scripts: [
+          "01_country_summaries.R"
+        ],
+        pooled_scripts: [
+          "02_pool_country_outputs.R",
+          "03_visualise_outputs.R"
+        ],
+        default_outputs: countries.map(function (country) {
+          return country + "_country_summary.csv";
+        }).concat(countries.map(function (country) {
+          return country + "_missingness_summary.csv";
+        })).concat([
+          "pooled_sabr_summary.csv",
+          "pooled_missingness_summary.csv",
+          "forest_plot_data.csv"
+        ])
+      };
+    }
+
+    function buildVisualisationsSpec() {
+      return [
+        {
+          name: "sabr_receipt_by_country",
+          type: "bar_chart",
+          x: "country",
+          y: "percent_sabr",
+          source: "sabr_receipt_summary.csv",
+          title: "Synthetic SABR receipt by country"
+        },
+        {
+          name: "sabr_timing_by_country",
+          type: "stacked_bar_chart",
+          x: "country",
+          fill: "sabr_timing_group",
+          y: "n",
+          source: "sabr_timing_summary.csv",
+          title: "Synthetic SABR timing groups by country"
+        },
+        {
+          name: "missingness_by_country",
+          type: "tile_plot",
+          x: "variable",
+          y: "country",
+          fill: "missing_percent",
+          source: "missingness_summary.csv",
+          title: "Synthetic missingness by variable and country"
+        }
+      ];
+    }
+
+    function buildValidationChecksSpec() {
+      return [
+        {
+          id: "primary_measure_exists",
+          level: "error",
+          rule: "primary_descriptive_measure must exist in codebook"
+        },
+        {
+          id: "country_variable_exists",
+          level: "error",
+          rule: "country must exist in codebook"
+        },
+        {
+          id: "descriptive_survival_mismatch",
+          level: "warning",
+          rule: "if question_type is Descriptive, survival outputs must be labelled as alternative teaching outputs"
+        },
+        {
+          id: "small_country_n",
+          level: "warning",
+          rule: "country n < 30 may give unstable teaching estimates"
+        },
+        {
+          id: "high_missingness",
+          level: "warning",
+          rule: "missingness > 30% should be highlighted in output"
+        }
+      ];
+    }
+
+    function buildFederatedDatasetSpec(concept, countrySpec) {
+      concept = concept || {};
+
+      var studyConcept = {
+        study_identity: concept.study_identity || {},
+        picots: concept.picots || {},
+        variable_plan: concept.variable_plan || {},
+        analysis_plan: concept.analysis_plan || {},
+        design_checks: concept.design_checks || {},
+        recommended_next_steps: concept.recommended_next_steps || []
+      };
+
+      return {
+        metadata: {
+          tool: "NTOG Federated Dataset & Visualisation Builder",
+          version: "v0.1",
+          purpose: "Teaching tool for converting a study concept into a federated-style synthetic dataset specification, aggregate outputs, and R visualisation pathway.",
+          safety_note: "Synthetic browser-side teaching output only. Do not use with patient-level, identifiable, confidential, or unpublished sensitive data."
+        },
+        source_study_concept: studyConcept,
+        common_data_model: buildCommonDataModelSpec(concept, countrySpec),
+        country_dataset_generation: countrySpec.country_dataset_generation,
+        derived_variables: buildDerivedVariablesSpec(),
+        federated_outputs: buildFederatedOutputsSpec(),
+        r_analysis: buildRAnalysisSpec(countrySpec),
+        visualisations: buildVisualisationsSpec(),
+        validation_checks: buildValidationChecksSpec(),
+        teaching_notes: [
+          "Patient-level rows are generated separately by country to preserve the teaching model of local data remaining local.",
+          "Only aggregate outputs are pooled in the federated summary step.",
+          "This descriptive treatment-pattern example uses rt_received as the primary descriptive measure.",
+          "Survival variables may be carried as optional teaching variables but are not the active primary aim unless the concept is revised.",
+          "All outputs are synthetic and intended for training, import testing, and workflow review only."
+        ]
+      };
+    }
+
+    function validateFederatedSpec(spec) {
+      var errors = [];
+      var warnings = [];
+      var names = spec.common_data_model.variable_schema.map(function (r) { return r.name; });
+      var concept = spec.source_study_concept;
+      var primary = spec.common_data_model.primary_descriptive_measure;
+      var countries = spec.country_dataset_generation.countries || {};
+
+      if (names.indexOf(primary) < 0) {
+        errors.push("Primary descriptive measure is missing from the common data model: " + primary);
+      }
+
+      if (names.indexOf("country") < 0) {
+        errors.push("Required country variable is missing from the common data model.");
+      }
+
+      if (String(concept.study_identity.question_type || "").toLowerCase() === "descriptive" &&
+          String(concept.analysis_plan.analysis_target || "").toLowerCase().indexOf("survival") >= 0) {
+        warnings.push("Question type is descriptive, but analysis target is survival. Survival outputs must be labelled as alternative teaching outputs.");
+      }
+
+      Object.keys(countries).forEach(function (country) {
+        var cfg = countries[country];
+        if (Number(cfg.n_patients) < 30) {
+          warnings.push(country + " has fewer than 30 synthetic patients; teaching estimates may be unstable.");
+        }
+        ["ecog_missingness", "metastasis_count_missingness"].forEach(function (key) {
+          if (Number(cfg[key]) > 0.30) {
+            warnings.push(country + " has high " + key + " (" + Math.round(Number(cfg[key]) * 100) + "%).");
+          }
+        });
+      });
+
+      if (String(concept.picots.primary_outcome || "").toLowerCase().indexOf("sabr") >= 0 &&
+          primary !== "rt_received") {
+        warnings.push("PICOTS outcome mentions SABR, but the primary descriptive measure is not rt_received.");
+      }
+
+      return {
+        errors: errors,
+        warnings: warnings,
+        status: classifyValidationStatus(errors, warnings)
+      };
+    }
+
+    function classifyValidationStatus(errors, warnings) {
+      if (errors.length) {
+        return {
+          level: "red",
+          label: "not ready",
+          message: "Fix required specification errors before generating teaching outputs."
+        };
+      }
+
+      if (warnings.length) {
+        return {
+          level: "yellow",
+          label: "revise assumptions",
+          message: "Review warnings before using the generated teaching pathway."
+        };
+      }
+
+      return {
+        level: "green",
+        label: "teaching pathway ready",
+        message: "Proceed with synthetic country data and aggregate federated outputs."
+      };
+    }
+
+    function createRng(seed) {
+      var state = Number(seed) || 1;
+      state = state % 2147483647;
+      if (state <= 0) state += 2147483646;
+
+      return function () {
+        state = state * 16807 % 2147483647;
+        return (state - 1) / 2147483646;
+      };
+    }
+
+    function randomNormal(rng, mean, sd) {
+      var u = Math.max(rng(), 0.000001);
+      var v = Math.max(rng(), 0.000001);
+      var z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+      return mean + sd * z;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function weightedChoice(rng, choices) {
+      var total = choices.reduce(function (sum, item) {
+        return sum + item.weight;
+      }, 0);
+      var draw = rng() * total;
+      var running = 0;
+
+      for (var i = 0; i < choices.length; i++) {
+        running += choices[i].weight;
+        if (draw <= running) return choices[i].value;
+      }
+
+      return choices[choices.length - 1].value;
+    }
+
+    function isoDateFromDayOffset(dayOffset) {
+      var d = new Date(Date.UTC(2024, 0, 1));
+      d.setUTCDate(d.getUTCDate() + dayOffset);
+      return d.toISOString().slice(0, 10);
+    }
+
+    function addDaysIso(iso, days) {
+      var d = new Date(iso + "T00:00:00Z");
+      d.setUTCDate(d.getUTCDate() + Number(days));
+      return d.toISOString().slice(0, 10);
+    }
+
+    function daysBetweenIso(startIso, endIso) {
+      var start = new Date(startIso + "T00:00:00Z");
+      var end = new Date(endIso + "T00:00:00Z");
+      return Math.round((end.getTime() - start.getTime()) / 86400000);
+    }
+
+    function logit(p) {
+      p = clamp(p, 0.01, 0.99);
+      return Math.log(p / (1 - p));
+    }
+
+    function invLogit(x) {
+      return 1 / (1 + Math.exp(-x));
+    }
+
+    function generateCountryRows(country, cfg, rng) {
+      var rows = [];
+      var centreCount = Number(cfg.n_centres) || 1;
+      var countryOffsets = { DK: 35, FI: -5, IS: -30, NO: 10, SE: 45 };
+      var n = Number(cfg.n_patients) || 0;
+
+      for (var i = 0; i < n; i++) {
+        var patientId = country + "-" + String(i + 1).padStart(4, "0");
+        var centreId = country + "_C" + String((i % centreCount) + 1);
+        var age = Math.round(clamp(randomNormal(rng, 66, 9), 38, 89));
+        var sex = rng() < 0.49 ? 1 : 2;
+        var ecogMissing = rng() < Number(cfg.ecog_missingness || 0);
+        var ecog = ecogMissing ? 9 : weightedChoice(rng, [
+          { value: 0, weight: 0.20 },
+          { value: 1, weight: 0.38 },
+          { value: 2, weight: 0.27 },
+          { value: 3, weight: 0.12 },
+          { value: 4, weight: 0.03 }
+        ]);
+        var metastasisMissing = rng() < Number(cfg.metastasis_count_missingness || 0);
+        var metastasisCount = metastasisMissing ? 99 : weightedChoice(rng, [
+          { value: 1, weight: 0.30 },
+          { value: 2, weight: 0.27 },
+          { value: 3, weight: 0.21 },
+          { value: 4, weight: 0.14 },
+          { value: 5, weight: 0.08 }
+        ]);
+        var mdtDate = isoDateFromDayOffset(Math.floor(rng() * 365));
+        var patientLogit = logit(Number(cfg.sabr_probability || 0.4));
+
+        if (age >= 75) patientLogit -= 0.25;
+        if (ecog === 0 || ecog === 1) patientLogit += 0.20;
+        if (ecog >= 3 && ecog < 9) patientLogit -= 0.42;
+        if (metastasisCount >= 4 && metastasisCount < 99) patientLogit -= 0.28;
+        if (metastasisMissing || ecogMissing) patientLogit -= 0.05;
+
+        var rtMissing = rng() < 0.02;
+        var rtReceived = rtMissing ? 9 : (rng() < invLogit(patientLogit) ? 1 : 0);
+        var daysMdtToRt = "";
+        var rtStartDate = "";
+        var timingGroup = "not_received";
+        var rtIntent = "none";
+        var rtDose = "";
+        var rtFractions = "";
+
+        if (rtReceived === 1) {
+          daysMdtToRt = Math.round(clamp(randomNormal(rng, Number(cfg.median_days_mdt_to_rt || 60), 24), 8, 180));
+          rtStartDate = addDaysIso(mdtDate, daysMdtToRt);
+          timingGroup = daysMdtToRt <= 90 ? "early_90d" : "late_gt90d";
+          rtIntent = weightedChoice(rng, [
+            { value: "ablative", weight: 0.50 },
+            { value: "consolidation", weight: 0.20 },
+            { value: "oligoprogression", weight: 0.18 },
+            { value: "palliative", weight: 0.09 },
+            { value: "mixed", weight: 0.03 }
+          ]);
+          rtDose = randomNormal(rng, 50, 7).toFixed(1);
+          rtFractions = weightedChoice(rng, [
+            { value: 3, weight: 0.22 },
+            { value: 5, weight: 0.47 },
+            { value: 8, weight: 0.16 },
+            { value: 10, weight: 0.15 }
+          ]);
+        }
+
+        var prognosisPenalty = 0;
+        prognosisPenalty += Math.max(0, age - 65) * 5;
+        prognosisPenalty += ecog >= 0 && ecog < 9 ? ecog * 55 : 40;
+        prognosisPenalty += metastasisCount >= 1 && metastasisCount < 99 ? metastasisCount * 22 : 35;
+        var rtNoiseBenefit = rtReceived === 1 ? 25 + rng() * 70 : 0;
+        var osDays = Math.round(clamp(520 + (countryOffsets[country] || 0) - prognosisPenalty + rtNoiseBenefit + randomNormal(rng, 0, 190), 35, 1400));
+        var eventProbability = clamp(0.36 + (age >= 75 ? 0.10 : 0) + (ecog >= 3 && ecog < 9 ? 0.14 : 0) + (metastasisCount >= 4 && metastasisCount < 99 ? 0.08 : 0) - (rtReceived === 1 ? 0.04 : 0), 0.12, 0.86);
+        var osEvent = rng() < eventProbability ? 1 : 0;
+        var landmarkEligible = osDays > 90 ? 1 : 0;
+
+        rows.push({
+          patient_id: patientId,
+          country: country,
+          centre_id: centreId,
+          age_dx: age,
+          sex: sex,
+          ecog_ps: ecog,
+          metastasis_count: metastasisCount,
+          mdt_decision_date: mdtDate,
+          rt_received: rtReceived,
+          rt_start_date: rtStartDate,
+          days_mdt_to_rt: daysMdtToRt,
+          sabr_timing_group: rtMissing ? "missing" : timingGroup,
+          rt_intent: rtIntent,
+          rt_dose_gy: rtDose,
+          rt_fractions: rtFractions,
+          os_days: osDays,
+          os_event: osEvent,
+          landmark_eligible_90d: landmarkEligible
+        });
+      }
+
+      return rows;
+    }
+
+    function generateSyntheticCountryData(spec) {
+      var generation = spec.country_dataset_generation;
+      var rng = createRng(generation.random_seed || 20260510);
+      var result = {};
+
+      Object.keys(generation.countries).forEach(function (country) {
+        result[country] = generateCountryRows(country, generation.countries[country], rng);
+      });
+
+      return result;
+    }
+
+    function median(values) {
+      var clean = values.filter(function (v) {
+        return v !== "" && v != null && !isNaN(Number(v));
+      }).map(Number).sort(function (a, b) { return a - b; });
+
+      if (!clean.length) return "";
+      var mid = Math.floor(clean.length / 2);
+      return clean.length % 2 ? clean[mid] : (clean[mid - 1] + clean[mid]) / 2;
+    }
+
+    function round1(value) {
+      if (value === "" || value == null || isNaN(Number(value))) return "";
+      return Math.round(Number(value) * 10) / 10;
+    }
+
+    function isMissingValue(value) {
+      return value === "" || value == null || value === 9 || value === 99 || value === "9" || value === "99" || value === "missing";
+    }
+
+    function summariseCountryData(countryData, spec) {
+      var required = spec.common_data_model.required_variables;
+      var denominatorRows = [];
+      var receiptRows = [];
+      var timingRows = [];
+      var detailRows = [];
+      var missingnessRows = [];
+      var countrySummaryFiles = {};
+      var countryMissingnessFiles = {};
+
+      Object.keys(countryData).forEach(function (country) {
+        var rows = countryData[country];
+        var n = rows.length;
+        var centres = unique(rows.map(function (r) { return r.centre_id; })).length;
+        var nSabr = rows.filter(function (r) { return r.rt_received === 1; }).length;
+        var early = rows.filter(function (r) { return r.sabr_timing_group === "early_90d"; }).length;
+        var late = rows.filter(function (r) { return r.sabr_timing_group === "late_gt90d"; }).length;
+        var notReceived = rows.filter(function (r) { return r.sabr_timing_group === "not_received"; }).length;
+        var missingTiming = rows.filter(function (r) { return r.sabr_timing_group === "missing"; }).length;
+        var percentSabr = n ? round1(nSabr / n * 100) : 0;
+
+        denominatorRows.push({
+          country: country,
+          n_patients: n,
+          n_centres: centres
+        });
+
+        receiptRows.push({
+          country: country,
+          n_patients: n,
+          n_sabr: nSabr,
+          percent_sabr: percentSabr
+        });
+
+        timingRows.push({
+          country: country,
+          early_90d: early,
+          late_gt90d: late,
+          not_received: notReceived,
+          missing: missingTiming
+        });
+
+        detailRows.push({
+          country: country,
+          median_days_mdt_to_rt: round1(median(rows.map(function (r) { return r.days_mdt_to_rt; }))),
+          median_dose_gy: round1(median(rows.map(function (r) { return r.rt_dose_gy; }))),
+          median_fractions: round1(median(rows.map(function (r) { return r.rt_fractions; })))
+        });
+
+        var countryMissingnessRows = [];
+
+        required.forEach(function (variable) {
+          var missing = rows.filter(function (r) {
+            return isMissingValue(r[variable]);
+          }).length;
+
+          var missingnessRow = {
+            country: country,
+            variable: variable,
+            missing_n: missing,
+            missing_percent: n ? round1(missing / n * 100) : 0
+          };
+
+          missingnessRows.push(missingnessRow);
+          countryMissingnessRows.push(missingnessRow);
+        });
+
+        countryMissingnessFiles[country + "_missingness_summary.csv"] = rowsToCsv(
+          countryMissingnessRows,
+          ["country", "variable", "missing_n", "missing_percent"]
+        );
+
+        countrySummaryFiles[country + "_country_summary.csv"] = rowsToCsv([
+          {
+            country: country,
+            n_patients: n,
+            n_centres: centres,
+            n_sabr: nSabr,
+            percent_sabr: percentSabr,
+            early_90d: early,
+            late_gt90d: late,
+            not_received: notReceived,
+            missing: missingTiming
+          }
+        ], ["country", "n_patients", "n_centres", "n_sabr", "percent_sabr", "early_90d", "late_gt90d", "not_received", "missing"]);
+      });
+
+      var totalPatients = receiptRows.reduce(function (sum, r) { return sum + Number(r.n_patients); }, 0);
+      var totalSabr = receiptRows.reduce(function (sum, r) { return sum + Number(r.n_sabr); }, 0);
+      var pooledSummaryRows = [
+        {
+          total_patients: totalPatients,
+          total_sabr: totalSabr,
+          pooled_percent_sabr: totalPatients ? round1(totalSabr / totalPatients * 100) : 0
+        }
+      ];
+      var forestRows = receiptRows.map(function (r) {
+        var p = Number(r.n_patients) ? Number(r.n_sabr) / Number(r.n_patients) : 0;
+        var se = Math.sqrt(Math.max(0.000001, p * (1 - p) / Math.max(1, Number(r.n_patients))));
+        return {
+          country: r.country,
+          estimate_percent: round1(p * 100),
+          lower_95_percent: round1(clamp((p - 1.96 * se) * 100, 0, 100)),
+          upper_95_percent: round1(clamp((p + 1.96 * se) * 100, 0, 100)),
+          plot_type: "receipt_proportion_interval"
+        };
+      });
+
+      return {
+        country_denominator_summary: denominatorRows,
+        sabr_receipt_summary: receiptRows,
+        sabr_timing_summary: timingRows,
+        rt_detail_summary: detailRows,
+        missingness_summary: missingnessRows,
+        pooled_sabr_summary: pooledSummaryRows,
+        forest_plot_data: forestRows,
+        country_summary_files: countrySummaryFiles,
+        country_missingness_files: countryMissingnessFiles
+      };
+    }
+
+    function unique(values) {
+      var seen = {};
+      var out = [];
+
+      values.forEach(function (value) {
+        if (!seen[value]) {
+          seen[value] = true;
+          out.push(value);
+        }
+      });
+
+      return out;
+    }
+
+    function countryDataToCsv(rows) {
+      return rowsToCsv(rows, [
+        "patient_id",
+        "country",
+        "centre_id",
+        "age_dx",
+        "sex",
+        "ecog_ps",
+        "metastasis_count",
+        "mdt_decision_date",
+        "rt_received",
+        "rt_start_date",
+        "days_mdt_to_rt",
+        "sabr_timing_group",
+        "rt_intent",
+        "rt_dose_gy",
+        "rt_fractions",
+        "os_days",
+        "os_event",
+        "landmark_eligible_90d"
+      ]);
+    }
+
+    function generateReadme(spec) {
+      return [
+        "# NTOG federated teaching project",
+        "",
+        "This browser-generated project is synthetic and for education only.",
+        "",
+        "## Teaching principle",
+        "",
+        "Patient-level rows stay local in the country datasets. Only aggregate summaries are pooled.",
+        "",
+        "## Source concept",
+        "",
+        "- Working title: " + (spec.source_study_concept.study_identity.working_title || "Not specified"),
+        "- Question type: " + (spec.source_study_concept.study_identity.question_type || "Not specified"),
+        "- Active analysis target: " + (spec.source_study_concept.analysis_plan.analysis_target || "Not specified"),
+        "- Primary descriptive measure: " + spec.common_data_model.primary_descriptive_measure,
+        "",
+        "## Suggested project structure",
+        "",
+        "federated_teaching_project/",
+        "  README_teaching_notes.md",
+        "  study_concept.json",
+        "  federated_dataset_spec.json",
+        "  codebook.csv",
+        "  synthetic_country_data/",
+        "    DK_study_data.csv",
+        "    FI_study_data.csv",
+        "    IS_study_data.csv",
+        "    NO_study_data.csv",
+        "    SE_study_data.csv",
+        "  country_outputs/",
+        "    DK_country_summary.csv",
+        "    DK_missingness_summary.csv",
+        "    FI_country_summary.csv",
+        "    FI_missingness_summary.csv",
+        "    IS_country_summary.csv",
+        "    IS_missingness_summary.csv",
+        "    NO_country_summary.csv",
+        "    NO_missingness_summary.csv",
+        "    SE_country_summary.csv",
+        "    SE_missingness_summary.csv",
+        "  pooled_outputs/",
+        "    pooled_sabr_summary.csv",
+        "    pooled_missingness_summary.csv",
+        "    forest_plot_data.csv",
+        "  R/",
+        "    01_country_summaries.R",
+        "    02_pool_country_outputs.R",
+        "    03_visualise_outputs.R",
+        "",
+        "## Safety",
+        "",
+        "Do not enter patient-level, identifiable, confidential, or unpublished sensitive data.",
+        "Do not use these synthetic outputs as statistical justification for a real study."
+      ].join(NL) + NL;
+    }
+
+    function rVector(values) {
+      return "c(" + values.map(function (value) {
+        return JSON.stringify(value);
+      }).join(", ") + ")";
+    }
+
+    function generateCountrySummaryR(spec) {
+      var countries = spec.common_data_model.countries;
+      var required = spec.common_data_model.required_variables;
+
+      return [
+        "library(readr)",
+        "library(dplyr)",
+        "",
+        "# Synthetic teaching script generated from federated_dataset_spec.json.",
+        "# Patient-level rows are read locally by country; only aggregate outputs should be pooled.",
+        "",
+        "countries <- " + rVector(countries),
+        "required_variables <- " + rVector(required),
+        "",
+        "dir.create(\"country_outputs\", showWarnings = FALSE)",
+        "",
+        "check_required_variables <- function(data, country) {",
+        "  missing_variables <- setdiff(required_variables, names(data))",
+        "  if (length(missing_variables) > 0) {",
+        "    stop(paste(country, \"is missing required variable(s):\", paste(missing_variables, collapse = \", \")))",
+        "  }",
+        "}",
+        "",
+        "make_missingness <- function(country_data, country_code) {",
+        "  bind_rows(lapply(required_variables, function(variable) {",
+        "    values <- country_data[[variable]]",
+        "    values_chr <- as.character(values)",
+        "    missing <- is.na(values) | values_chr == \"\" | values_chr %in% c(\"9\", \"99\", \"missing\")",
+        "    tibble(",
+        "      country = country_code,",
+        "      variable = variable,",
+        "      missing_n = sum(missing),",
+        "      missing_percent = round(mean(missing) * 100, 1)",
+        "    )",
+        "  }))",
+        "}",
+        "",
+        "summarise_one_country <- function(country_code) {",
+        "  file <- file.path(\"synthetic_country_data\", paste0(country_code, \"_study_data.csv\"))",
+        "  country_data <- read_csv(file, show_col_types = FALSE)",
+        "  check_required_variables(country_data, country_code)",
+        "",
+        "  n_patients <- nrow(country_data)",
+        "  n_sabr <- sum(country_data$rt_received == 1, na.rm = TRUE)",
+        "  country_summary <- country_data %>%",
+        "    summarise(",
+        "      country = country_code,",
+        "      n_patients = n(),",
+        "      n_centres = n_distinct(centre_id),",
+        "      n_sabr = sum(rt_received == 1, na.rm = TRUE),",
+        "      percent_sabr = round(n_sabr / n_patients * 100, 1),",
+        "      early_90d = sum(sabr_timing_group == \"early_90d\", na.rm = TRUE),",
+        "      late_gt90d = sum(sabr_timing_group == \"late_gt90d\", na.rm = TRUE),",
+        "      not_received = sum(sabr_timing_group == \"not_received\", na.rm = TRUE),",
+        "      missing = sum(sabr_timing_group == \"missing\", na.rm = TRUE),",
+        "      median_days_mdt_to_rt = round(median(days_mdt_to_rt, na.rm = TRUE), 1),",
+        "      median_dose_gy = round(median(rt_dose_gy, na.rm = TRUE), 1),",
+        "      median_fractions = round(median(rt_fractions, na.rm = TRUE), 1)",
+        "    )",
+        "",
+        "  country_missingness <- make_missingness(country_data, country_code)",
+        "  write_csv(country_summary, file.path(\"country_outputs\", paste0(country_code, \"_country_summary.csv\")))",
+        "  write_csv(country_missingness, file.path(\"country_outputs\", paste0(country_code, \"_missingness_summary.csv\")))",
+        "  country_summary",
+        "}",
+        "",
+        "all_country_summaries <- bind_rows(lapply(countries, summarise_one_country))",
+        "write_csv(all_country_summaries, file.path(\"country_outputs\", \"all_country_summaries.csv\"))"
+      ].join(NL) + NL;
+    }
+
+    function generatePoolOutputsR(spec) {
+      return [
+        "library(readr)",
+        "library(dplyr)",
+        "",
+        "# Pool only approved aggregate outputs.",
+        "dir.create(\"pooled_outputs\", showWarnings = FALSE)",
+        "",
+        "summary_files <- list.files(",
+        "  \"country_outputs\",",
+        "  pattern = \"^[A-Z]{2}_country_summary\\\\.csv$\",",
+        "  full.names = TRUE",
+        ")",
+        "country_summaries <- bind_rows(lapply(summary_files, read_csv, show_col_types = FALSE))",
+        "",
+        "pooled_sabr_summary <- country_summaries %>%",
+        "  summarise(",
+        "    total_patients = sum(n_patients),",
+        "    total_sabr = sum(n_sabr),",
+        "    pooled_percent_sabr = round(total_sabr / total_patients * 100, 1)",
+        "  )",
+        "",
+        "write_csv(pooled_sabr_summary, file.path(\"pooled_outputs\", \"pooled_sabr_summary.csv\"))",
+        "",
+        "missingness_files <- list.files(",
+        "  \"country_outputs\",",
+        "  pattern = \"^[A-Z]{2}_missingness_summary\\\\.csv$\",",
+        "  full.names = TRUE",
+        ")",
+        "pooled_missingness_summary <- bind_rows(lapply(missingness_files, read_csv, show_col_types = FALSE))",
+        "write_csv(pooled_missingness_summary, file.path(\"pooled_outputs\", \"pooled_missingness_summary.csv\"))",
+        "",
+        "forest_plot_data <- country_summaries %>%",
+        "  mutate(",
+        "    p = n_sabr / n_patients,",
+        "    se = sqrt(p * (1 - p) / n_patients),",
+        "    estimate_percent = round(p * 100, 1),",
+        "    lower_95_percent = round(pmax(0, (p - 1.96 * se) * 100), 1),",
+        "    upper_95_percent = round(pmin(100, (p + 1.96 * se) * 100), 1),",
+        "    plot_type = \"receipt_proportion_interval\"",
+        "  ) %>%",
+        "  select(country, estimate_percent, lower_95_percent, upper_95_percent, plot_type)",
+        "",
+        "write_csv(forest_plot_data, file.path(\"pooled_outputs\", \"forest_plot_data.csv\"))"
+      ].join(NL) + NL;
+    }
+
+    function generateVisualiseR() {
+      return [
+        "library(readr)",
+        "library(dplyr)",
+        "library(tidyr)",
+        "library(ggplot2)",
+        "",
+        "# Visualisation script for aggregate synthetic outputs.",
+        "dir.create(\"figures\", showWarnings = FALSE)",
+        "",
+        "country_summaries <- read_csv(file.path(\"country_outputs\", \"all_country_summaries.csv\"), show_col_types = FALSE)",
+        "missingness <- read_csv(file.path(\"pooled_outputs\", \"pooled_missingness_summary.csv\"), show_col_types = FALSE)",
+        "forest_plot_data <- read_csv(file.path(\"pooled_outputs\", \"forest_plot_data.csv\"), show_col_types = FALSE)",
+        "",
+        "p_receipt <- ggplot(country_summaries, aes(x = country, y = percent_sabr)) +",
+        "  geom_col(fill = \"#2f80a7\") +",
+        "  labs(",
+        "    title = \"Synthetic SABR receipt by country\",",
+        "    x = \"Country\",",
+        "    y = \"Patients receiving SABR (%)\"",
+        "  ) +",
+        "  theme_minimal(base_size = 12)",
+        "",
+        "ggsave(file.path(\"figures\", \"sabr_receipt_by_country.png\"), p_receipt, width = 7, height = 4, dpi = 150)",
+        "",
+        "timing_long <- country_summaries %>%",
+        "  select(country, early_90d, late_gt90d, not_received, missing) %>%",
+        "  tidyr::pivot_longer(cols = c(early_90d, late_gt90d, not_received, missing), names_to = \"sabr_timing_group\", values_to = \"n\")",
+        "",
+        "p_timing <- ggplot(timing_long, aes(x = country, y = n, fill = sabr_timing_group)) +",
+        "  geom_col() +",
+        "  labs(",
+        "    title = \"Synthetic SABR timing groups by country\",",
+        "    x = \"Country\",",
+        "    y = \"Synthetic patients\",",
+        "    fill = \"Timing group\"",
+        "  ) +",
+        "  theme_minimal(base_size = 12)",
+        "",
+        "ggsave(file.path(\"figures\", \"sabr_timing_by_country.png\"), p_timing, width = 7, height = 4, dpi = 150)",
+        "",
+        "p_missing <- ggplot(missingness, aes(x = variable, y = country, fill = missing_percent)) +",
+        "  geom_tile(color = \"white\") +",
+        "  scale_fill_gradient(low = \"#edf5fa\", high = \"#991b1b\") +",
+        "  labs(",
+        "    title = \"Synthetic missingness by variable and country\",",
+        "    x = \"Variable\",",
+        "    y = \"Country\",",
+        "    fill = \"Missing (%)\"",
+        "  ) +",
+        "  theme_minimal(base_size = 12) +",
+        "  theme(axis.text.x = element_text(angle = 45, hjust = 1))",
+        "",
+        "ggsave(file.path(\"figures\", \"missingness_by_country.png\"), p_missing, width = 9, height = 5, dpi = 150)",
+        "",
+        "p_interval <- ggplot(forest_plot_data, aes(y = country, x = estimate_percent)) +",
+        "  geom_point(size = 2.8, color = \"#1f4e79\") +",
+        "  geom_errorbar(",
+        "    aes(xmin = lower_95_percent, xmax = upper_95_percent),",
+        "    width = 0.2,",
+        "    orientation = \"y\",",
+        "    color = \"#1f4e79\"",
+        "  ) +",
+        "  labs(",
+        "    title = \"Synthetic SABR receipt proportions with approximate 95% intervals\",",
+        "    x = \"SABR receipt (%)\",",
+        "    y = \"Country\"",
+        "  ) +",
+        "  theme_minimal(base_size = 12)",
+        "",
+        "ggsave(file.path(\"figures\", \"sabr_receipt_interval_plot.png\"), p_interval, width = 7, height = 4, dpi = 150)"
+      ].join(NL) + NL;
+    }
+
+    function buildGeneratedFiles(concept, spec, countryData, summaries) {
+      var files = {};
+      files["README_teaching_notes.md"] = generateReadme(spec);
+      files["study_concept.json"] = JSON.stringify(spec.source_study_concept, null, 2);
+      files["federated_dataset_spec.json"] = JSON.stringify(spec, null, 2);
+      files["codebook.csv"] = generateCodebookCsv(concept);
+
+      Object.keys(countryData).forEach(function (country) {
+        files[country + "_study_data.csv"] = countryDataToCsv(countryData[country]);
+      });
+
+      Object.keys(summaries.country_summary_files).forEach(function (fileName) {
+        files[fileName] = summaries.country_summary_files[fileName];
+      });
+
+      Object.keys(summaries.country_missingness_files).forEach(function (fileName) {
+        files[fileName] = summaries.country_missingness_files[fileName];
+      });
+
+      files["country_denominator_summary.csv"] = rowsToCsv(summaries.country_denominator_summary, ["country", "n_patients", "n_centres"]);
+      files["sabr_receipt_summary.csv"] = rowsToCsv(summaries.sabr_receipt_summary, ["country", "n_patients", "n_sabr", "percent_sabr"]);
+      files["sabr_timing_summary.csv"] = rowsToCsv(summaries.sabr_timing_summary, ["country", "early_90d", "late_gt90d", "not_received", "missing"]);
+      files["rt_detail_summary.csv"] = rowsToCsv(summaries.rt_detail_summary, ["country", "median_days_mdt_to_rt", "median_dose_gy", "median_fractions"]);
+      files["missingness_summary.csv"] = rowsToCsv(summaries.missingness_summary, ["country", "variable", "missing_n", "missing_percent"]);
+      files["pooled_sabr_summary.csv"] = rowsToCsv(summaries.pooled_sabr_summary, ["total_patients", "total_sabr", "pooled_percent_sabr"]);
+      files["pooled_missingness_summary.csv"] = files["missingness_summary.csv"];
+      files["forest_plot_data.csv"] = rowsToCsv(summaries.forest_plot_data, ["country", "estimate_percent", "lower_95_percent", "upper_95_percent", "plot_type"]);
+      files["01_country_summaries.R"] = generateCountrySummaryR(spec);
+      files["02_pool_country_outputs.R"] = generatePoolOutputsR(spec);
+      files["03_visualise_outputs.R"] = generateVisualiseR();
+
+      return files;
+    }
+
+    function detailsBlock(fileName, label) {
+      return [
+        "<details class='output-details'>",
+        "<summary>" + escapeHtml(label) + " <span class='hint'>(" + escapeHtml(fileName) + ")</span></summary>",
+        "<button type='button' class='copy-btn' data-file='" + escapeHtml(fileName) + "'>Copy</button>",
+        "<button type='button' class='download-btn' data-file='" + escapeHtml(fileName) + "'>Download</button>",
+        "<pre>" + escapeHtml(generatedFiles[fileName] || "") + "</pre>",
+        "</details>"
+      ].join("");
+    }
+
+    function renderValidation(validation) {
+      var html = [];
+      html.push("<div class='output-grid'>");
+      html.push("<div>Errors</div><div>" + (validation.errors.length ? "<ul class='small-list'>" + validation.errors.map(function (e) { return "<li>" + escapeHtml(e) + "</li>"; }).join("") + "</ul>" : "No specification errors detected.") + "</div>");
+      html.push("<div>Warnings</div><div>" + (validation.warnings.length ? "<ul class='small-list'>" + validation.warnings.map(function (w) { return "<li>" + escapeHtml(w) + "</li>"; }).join("") + "</ul>" : "No automatic warnings detected.") + "</div>");
+      html.push("</div>");
+      byId("validationOutput").innerHTML = html.join("");
+    }
+
+    function renderCharts(summaries) {
+      var receipt = summaries.sabr_receipt_summary;
+      var timing = summaries.sabr_timing_summary;
+      var missingness = summaries.missingness_summary.filter(function (r) {
+        return ["ecog_ps", "metastasis_count", "rt_received", "days_mdt_to_rt"].indexOf(r.variable) >= 0;
+      });
+      var countries = receipt.map(function (r) { return r.country; });
+      var html = [];
+
+      html.push("<h3>Browser visual preview</h3>");
+      html.push("<div class='chart-grid'>");
+      html.push("<div class='chart-panel' role='img' aria-label='Bar chart showing synthetic SABR receipt percentage by country'><h3>Synthetic SABR receipt</h3>");
+      receipt.forEach(function (r) {
+        html.push("<div class='bar-row'><strong>" + escapeHtml(r.country) + "</strong><div class='bar-track'><div class='bar-fill' style='width:" + clamp(Number(r.percent_sabr), 0, 100) + "%'></div></div><span>" + escapeHtml(r.percent_sabr) + "%</span></div>");
+      });
+      html.push("</div>");
+
+      html.push("<div class='chart-panel' role='img' aria-label='Stacked bar chart showing synthetic SABR timing groups by country, including missing timing'><h3>Synthetic timing groups</h3>");
+      timing.forEach(function (r) {
+        var total = Number(r.early_90d) + Number(r.late_gt90d) + Number(r.not_received) + Number(r.missing);
+        var earlyPct = total ? Number(r.early_90d) / total * 100 : 0;
+        var latePct = total ? Number(r.late_gt90d) / total * 100 : 0;
+        var nonePct = total ? Number(r.not_received) / total * 100 : 0;
+        var missingPct = total ? Number(r.missing) / total * 100 : 0;
+        html.push("<div class='bar-row'><strong>" + escapeHtml(r.country) + "</strong><div class='stacked-bar'><span class='seg-early' style='width:" + earlyPct + "%'></span><span class='seg-late' style='width:" + latePct + "%'></span><span class='seg-none' style='width:" + nonePct + "%'></span><span class='seg-missing' style='width:" + missingPct + "%'></span></div><span>" + total + "</span></div>");
+      });
+      html.push("<p class='hint'>Blue = early_90d, purple = late_gt90d, grey = not_received, amber = missing.</p></div>");
+
+      html.push("<div class='chart-panel' role='img' aria-label='Tile plot showing selected synthetic missingness percentages by variable and country'><h3>Selected missingness</h3><div class='tile-grid'>");
+      html.push("<div class='tile label'>Variable</div>");
+      countries.forEach(function (country) {
+        html.push("<div class='tile label'>" + escapeHtml(country) + "</div>");
+      });
+      ["ecog_ps", "metastasis_count", "rt_received", "days_mdt_to_rt"].forEach(function (variable) {
+        html.push("<div class='tile label'>" + escapeHtml(variable) + "</div>");
+        countries.forEach(function (country) {
+          var cell = missingness.filter(function (r) {
+            return r.country === country && r.variable === variable;
+          })[0] || { missing_percent: 0 };
+          var pct = Number(cell.missing_percent);
+          var shade = pct > 20 ? "#fee2e2" : (pct > 10 ? "#fef3c7" : "#edf5fa");
+          html.push("<div class='tile' style='background:" + shade + "'>" + escapeHtml(pct) + "%</div>");
+        });
+      });
+      html.push("</div></div>");
+
+      html.push("<div class='chart-panel'><h3>Visualisation pathway</h3><ul class='small-list'>");
+      html.push("<li>Bar chart: SABR receipt by country.</li>");
+      html.push("<li>Stacked bar chart: timing group by country.</li>");
+      html.push("<li>Tile plot: missingness by variable and country.</li>");
+      html.push("<li>Interval plot: country SABR receipt proportions with approximate 95% intervals.</li>");
+      html.push("</ul></div>");
+      html.push("</div>");
+
+      byId("visualPreview").innerHTML = html.join("");
+    }
+
+    function renderOutputs(files) {
+      var groups = [
+        {
+          title: "Project specifications",
+          files: [
+            ["README_teaching_notes.md", "Teaching README"],
+            ["study_concept.json", "Study concept specification"],
+            ["federated_dataset_spec.json", "Federated dataset specification"],
+            ["codebook.csv", "Common codebook CSV"]
+          ]
+        },
+        {
+          title: "Synthetic country patient-row files",
+          files: [
+            ["DK_study_data.csv", "Denmark synthetic rows"],
+            ["FI_study_data.csv", "Finland synthetic rows"],
+            ["IS_study_data.csv", "Iceland synthetic rows"],
+            ["NO_study_data.csv", "Norway synthetic rows"],
+            ["SE_study_data.csv", "Sweden synthetic rows"]
+          ]
+        },
+        {
+          title: "Local aggregate country outputs",
+          files: [
+            ["DK_country_summary.csv", "Denmark country summary"],
+            ["DK_missingness_summary.csv", "Denmark missingness summary"],
+            ["FI_country_summary.csv", "Finland country summary"],
+            ["FI_missingness_summary.csv", "Finland missingness summary"],
+            ["IS_country_summary.csv", "Iceland country summary"],
+            ["IS_missingness_summary.csv", "Iceland missingness summary"],
+            ["NO_country_summary.csv", "Norway country summary"],
+            ["NO_missingness_summary.csv", "Norway missingness summary"],
+            ["SE_country_summary.csv", "Sweden country summary"],
+            ["SE_missingness_summary.csv", "Sweden missingness summary"]
+          ]
+        },
+        {
+          title: "Approved aggregate outputs",
+          files: [
+            ["country_denominator_summary.csv", "Country denominator summary"],
+            ["sabr_receipt_summary.csv", "SABR receipt summary"],
+            ["sabr_timing_summary.csv", "SABR timing summary"],
+            ["rt_detail_summary.csv", "Radiotherapy detail summary"],
+            ["missingness_summary.csv", "Missingness summary"],
+            ["pooled_sabr_summary.csv", "Pooled SABR summary"],
+            ["pooled_missingness_summary.csv", "Pooled missingness summary"],
+            ["forest_plot_data.csv", "Receipt interval plot data"]
+          ]
+        },
+        {
+          title: "R analysis and visualisation scripts",
+          files: [
+            ["01_country_summaries.R", "Country-level summary R"],
+            ["02_pool_country_outputs.R", "Pool aggregate outputs R"],
+            ["03_visualise_outputs.R", "Visualise aggregate outputs R"]
+          ]
+        }
+      ];
+      var html = [];
+
+      groups.forEach(function (group) {
+        html.push("<h3>" + escapeHtml(group.title) + "</h3>");
+        group.files.forEach(function (item) {
+          if (files[item[0]] != null) {
+            html.push(detailsBlock(item[0], item[1]));
+          }
+        });
+      });
+
+      byId("output").innerHTML = html.join("");
+    }
+
+    function generateFederatedPathway() {
+      try {
+        var concept = parseConceptJson();
+        var countrySpec = parseCountrySpecJson();
+        var spec = buildFederatedDatasetSpec(concept, countrySpec);
+        var validation = validateFederatedSpec(spec);
+        var countryData = generateSyntheticCountryData(spec);
+        var summaries = summariseCountryData(countryData, spec);
+        generatedFiles = buildGeneratedFiles(concept, spec, countryData, summaries);
+
+        byId("statusBanner").innerHTML =
+          "<span class='status " + validation.status.level + "'>" + escapeHtml(validation.status.label) + "</span>" +
+          "<p><strong>Next step:</strong> " + escapeHtml(validation.status.message) + "</p>";
+
+        renderValidation(validation);
+        renderCharts(summaries);
+        renderOutputs(generatedFiles);
+        byId("outputCard").classList.remove("hidden");
+        byId("conceptStatus").textContent = "Generated federated pathway from valid JSON.";
+      } catch (error) {
+        byId("conceptStatus").innerHTML = "<span class='fail'>Generation failed: " + escapeHtml(error.message) + "</span>";
+      }
+    }
+
+    function validateConceptOnly() {
+      try {
+        var concept = parseConceptJson();
+        var countrySpec = parseCountrySpecJson();
+        var spec = buildFederatedDatasetSpec(concept, countrySpec);
+        var validation = validateFederatedSpec(spec);
+        var count = getCodebookRows(concept).length;
+        byId("conceptStatus").innerHTML =
+          "<span class='" + (validation.errors.length ? "fail" : "pass") + "'>" +
+          escapeHtml(count + " codebook rows found. " + validation.errors.length + " error(s), " + validation.warnings.length + " warning(s).") +
+          "</span>";
+      } catch (error) {
+        byId("conceptStatus").innerHTML = "<span class='fail'>Validation failed: " + escapeHtml(error.message) + "</span>";
+      }
+    }
+
+    function copyFile(fileName, button) {
+      var text = generatedFiles[fileName] || "";
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          setButtonMessage(button, "Copied");
+        }).catch(function () {
+          fallbackCopy(text, button);
+        });
+      } else {
+        fallbackCopy(text, button);
+      }
+    }
+
+    function fallbackCopy(text, button) {
+      var temp = document.createElement("textarea");
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+
+      try {
+        document.execCommand("copy");
+        setButtonMessage(button, "Copied");
+      } catch (error) {
+        setButtonMessage(button, "Copy failed");
+      }
+
+      document.body.removeChild(temp);
+    }
+
+    function setButtonMessage(button, message) {
+      var original = button.textContent;
+      button.textContent = message;
+      setTimeout(function () {
+        button.textContent = original;
+      }, 1100);
+    }
+
+    function downloadFile(fileName) {
+      var text = generatedFiles[fileName] || "";
+      var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function loadExampleConcept() {
+      byId("conceptJson").value = JSON.stringify(DEFAULT_CONCEPT, null, 2);
+      byId("conceptStatus").textContent = "Example concept loaded.";
+    }
+
+    function loadExampleCountrySpec() {
+      byId("countrySpecJson").value = JSON.stringify(DEFAULT_COUNTRY_SPEC, null, 2);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      loadExampleConcept();
+      loadExampleCountrySpec();
+
+      byId("loadExampleBtn").addEventListener("click", function () {
+        loadExampleConcept();
+        loadExampleCountrySpec();
+      });
+
+      byId("validateBtn").addEventListener("click", validateConceptOnly);
+      byId("generateBtn").addEventListener("click", generateFederatedPathway);
+      byId("outputCard").addEventListener("click", function (event) {
+        var target = event.target;
+        if (target.classList.contains("copy-btn")) {
+          copyFile(target.getAttribute("data-file"), target);
+        }
+        if (target.classList.contains("download-btn")) {
+          downloadFile(target.getAttribute("data-file"));
+        }
+      });
+
+      generateFederatedPathway();
+    });
+  })();
+  </script>
+</body>
+</html>
