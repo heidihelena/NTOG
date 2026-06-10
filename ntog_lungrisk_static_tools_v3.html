@@ -9,12 +9,12 @@
   <meta name="keywords" content="NTOG experimental lung screening model, never smoker lung cancer risk, former smoker lung cancer risk, pulmonary nodule risk calculator, PLCOm2012 formula, HUNT lung cancer">
   <meta name="msvalidate.01" content="F887DD5018BA9A9629A7F4D2F04A2891">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+  <meta name="author" content="Heidi Andersén (Vahtian)">
   <link rel="canonical" href="https://ntog.org/tools.html">
 
   <meta property="og:title" content="NTOG Experimental Lung Screening and Nodule Risk Hub">
   <meta property="og:description" content="Educational browser-only survey and calculators comparing published lung cancer screening and nodule models with non-validated NTOG research scores for Nordic screening">
-  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta property="og:image" content="https://ntog.org/og-image.png">
   <meta property="og:url" content="https://ntog.org/tools.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NTOG Experimental Lung Screening and Nodule Risk Hub">
   <meta name="twitter:description" content="Educational survey and calculators for screening criteria, PLCOm2012, HUNT, Brock, Mayo, Herder, VDT, and experimental NTOG literature-weighted risk scores.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta name="twitter:image" content="https://ntog.org/og-image.png">
 
   <link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
   <link rel="stylesheet" href="/css/fonts.css">
@@ -404,6 +404,76 @@
       text-decoration: underline;
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "NTOG Experimental Lung Screening and Nodule Risk Hub",
+  "description": "Browser-only NTOG educational and research prototype comparing published lung cancer screening criteria, PLCOm2012, HUNT, Brock, Mayo, Herder, VDT, guideline-reading",
+  "url": "https://ntog.org/tools.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Nordic Thoracic Oncology Group",
+    "url": "https://ntog.org"
+  },
+  "publisher": {
+    "@type": "MedicalOrganization",
+    "name": "Nordic Thoracic Oncology Group",
+    "alternateName": "NTOG",
+    "url": "https://ntog.org"
+  },
+  "dateModified": "2026-06-10",
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Lung cancer"
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Clinician"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "affiliation": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Tampere University",
+        "url": "https://www.tuni.fi/en"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Turku",
+        "url": "https://www.utu.fi/en"
+      }
+    ],
+    "knowsAbout": [
+      "Lung cancer",
+      "Thoracic oncology",
+      "Cancer registries",
+      "Multidisciplinary team"
+    ],
+    "description": "Thoracic/lung oncology clinician-scientist; clinical lead of the Finnish lung cancer registry. Editor and lead author of NTOG clinical content.",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ],
+    "identifier": "https://orcid.org/0000-0001-5923-5865"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "version": "3.0",
+  "identifier": "https://doi.org/10.5281/zenodo.20632838",
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.20632838"
+  ]
+}
+</script>
 </head>
 <body>
   <a class="visually-hidden-focusable" href="#lung-risk-tool">Skip to calculator</a>
@@ -411,19 +481,13 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-  <img
-    src="/ntog-logo.svg"
-    alt=""
-    width="34"
-    height="34"
-    aria-hidden="true"
-  >
-  <span>NTOG</span>
-</a>
+        <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+        <span>NTOG</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
@@ -442,7 +506,7 @@
               <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
               <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
               <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
-              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Research Collaborations</a></li>
             </ul>
           </li>
 
@@ -450,17 +514,40 @@
             <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
             <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
               <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/programme.html">Programme</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/call-for-abstracts.html">Call for Abstracts</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/sponsors.html">Sponsorship &amp; Exhibition</a></li>
               <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
               <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
               <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/guidelines/nodule-management.html">Nodule Management</a></li>
               <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
-              <li><a class="dropdown-item active" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+            <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+              <li><a class="dropdown-item" href="/tools.html">All tools</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">MDT &amp; pathway</h6></li>
+              <li><a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a></li>
+              <li><a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a></li>
+              <li><a class="dropdown-item" href="/mdt.html">MDT free-text form</a></li>
+              <li><h6 class="dropdown-header">Screening &amp; nodule risk</h6></li>
+              <li><a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a></li>
+              <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
+              <li><h6 class="dropdown-header">Treatment value</h6></li>
+              <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
+              <li><h6 class="dropdown-header">Research builders</h6></li>
+              <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
+              <li><a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a></li>
             </ul>
           </li>
 
@@ -493,6 +580,8 @@
       </div>
     </div>
   </header>
+  <!--ntog-byline-inserted-->
+  <div class="container"><p class="text-muted" style="font-size:.9rem;margin:1.1rem 0 -0.4rem;"><strong>Author:</strong> <a href="/editor.html">Heidi Andersén, MD, PhD</a> — Docent, Tampere University; Clinical Lecturer, University of Turku · Clinical lead, Finnish lung cancer registry · Last reviewed 10 June 2026</p></div>
 
   <main>
     <section class="section-block" id="overview">
@@ -726,6 +815,7 @@
               <h2 class="h4">Screening and person-level models</h2>
               <div class="readiness-block mb-3"><h3 class="h6 mb-2">Readiness</h3><div id="readinessOut" class="d-flex flex-column gap-2" aria-live="polite"></div></div>
               <div id="screeningResults" aria-live="polite"></div>
+              <div id="eligibilityResults" class="mt-3" aria-live="polite"></div>
             </div>
           </div>
           <div class="col-lg-4">
@@ -983,9 +1073,12 @@ E: summed literature modifier points, cap 20</code></article></div>
     </section>
   </main>
 
-    <footer class="bg-dark text-white py-4 mt-0">
+    
+  <!--ntog-cite-inserted-->
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Experimental Lung Screening and Nodule Risk Hub</em> (v3.0). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632838" style="color:#1f4e79;">doi:10.5281/zenodo.20632838</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
+  <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
 
       <p class="small mb-2">
         Tool source code licensed under
@@ -1004,6 +1097,7 @@ E: summed literature modifier points, cap 20</code></article></div>
       </p>
 
       <p class="mb-0">
+        <a href="/copyright.html" class="text-white me-3">Copyright &amp; Licensing</a>
         <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
       </p>
@@ -2952,9 +3046,69 @@ E: summed literature modifier points, cap 20</code></article></div>
         if (jsonBox) jsonBox.value = json;
       }
 
+      function renderCategoricalEligibility(data) {
+        const el = $("eligibilityResults");
+        if (!el) return;
+        const p = data.person || {};
+        const s = data.smoking || {};
+        const age = p.age_years;
+        const status = s.status;
+        const py = s.pack_years;
+        const cigs = s.cigarettes_per_day;
+        const ys = s.years_smoked;
+
+        let quit = null;
+        if (status === "current") quit = 0;
+        else if (status === "former") {
+          if (s.years_since_quit_raw !== null && s.years_since_quit_raw !== undefined) quit = s.years_since_quit_raw;
+          else if (age !== null && s.age_quit !== null && age !== undefined && s.age_quit !== undefined && age >= s.age_quit) quit = age - s.age_quit;
+        }
+
+        function verdict(eligible, missing) {
+          if (missing) return { t: "Insufficient data", c: "#8a6d00", bg: "#fff7d6" };
+          return eligible
+            ? { t: "Eligible", c: "#1e7d34", bg: "#e7f4ea" }
+            : { t: "Not eligible", c: "#555", bg: "#ececec" };
+        }
+        function uspstf2021() {
+          if (status === "never") return verdict(false);
+          if (age == null || py == null || quit == null) return verdict(false, true);
+          return verdict(age >= 50 && age <= 80 && py >= 20 && quit <= 15);
+        }
+        function uspstf2013() {
+          if (status === "never") return verdict(false);
+          if (age == null || py == null || quit == null) return verdict(false, true);
+          return verdict(age >= 55 && age <= 80 && py >= 30 && quit <= 15);
+        }
+        function nelson() {
+          if (status === "never") return verdict(false);
+          if (age == null || quit == null || cigs == null || ys == null) return verdict(false, true);
+          const intensity = (cigs > 10 && ys > 30) || (cigs > 15 && ys > 25);
+          return verdict(age >= 50 && age <= 75 && quit <= 10 && intensity);
+        }
+
+        const rows = [
+          ["USPSTF 2021", "age 50–80, ≥20 pack-years, current or quit ≤15 y", uspstf2021()],
+          ["USPSTF 2013 / NLST", "age 55–80, ≥30 pack-years, current or quit ≤15 y", uspstf2013()],
+          ["NELSON (trial)", "age 50–75, quit ≤10 y, >10/day×>30 y or >15/day×>25 y", nelson()]
+        ];
+
+        el.innerHTML =
+          '<h3 class="h6 mb-2">Categorical eligibility</h3>' +
+          rows.map(function (r) {
+            return '<div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.3rem 0;border-bottom:1px solid #eee">' +
+              '<span><strong>' + r[0] + '</strong><br><span class="muted-note" style="font-size:.78rem">' + r[1] + '</span></span>' +
+              '<span style="white-space:nowrap;font-weight:700;font-size:.78rem;padding:.15rem .5rem;border-radius:999px;color:' +
+              r[2].c + ';background:' + r[2].bg + '">' + r[2].t + '</span>' +
+              '</div>';
+          }).join("") +
+          '<p class="muted-note" style="font-size:.78rem;margin-top:.5rem">Educational comparison of categorical screening criteria, not NTOG recommendations. National programmes define their own eligibility. Compare with the risk-model thresholds above &mdash; the two approaches select overlapping but not identical groups.</p>';
+      }
+
       function runCalculations() {
         const exportData = buildExport();
         render(exportData);
+        renderCategoricalEligibility(exportData);
         return exportData;
       }
 

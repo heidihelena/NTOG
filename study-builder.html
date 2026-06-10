@@ -7,7 +7,7 @@
   <title>NTOG Study Design &amp; Simulation Builder v0.9</title>
   <title>Study Design Builder | Nordic Thoracic Oncology Group</title>
   <meta name="description" content="Interactive NTOG tool for designing pan-Nordic thoracic oncology studies, with QI-aligned outcomes and structured JSON export.">
-  <link rel="canonical" href="https://www.ntog.org/ntog-study-builder.html">
+  <link rel="canonical" href="https://ntog.org/ntog-study-builder.html">
   
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
@@ -570,6 +570,76 @@
       }
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "NTOG Study Design & Simulation Builder v0.9",
+  "description": "Educational NTOG study design and simulation builder for PICOTS, codebooks, simulated data, design checks, and starter R code.",
+  "url": "https://ntog.org/ntog-study-builder.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Nordic Thoracic Oncology Group",
+    "url": "https://ntog.org"
+  },
+  "publisher": {
+    "@type": "MedicalOrganization",
+    "name": "Nordic Thoracic Oncology Group",
+    "alternateName": "NTOG",
+    "url": "https://ntog.org"
+  },
+  "dateModified": "2026-06-10",
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Lung cancer"
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Clinician"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "affiliation": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Tampere University",
+        "url": "https://www.tuni.fi/en"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Turku",
+        "url": "https://www.utu.fi/en"
+      }
+    ],
+    "knowsAbout": [
+      "Lung cancer",
+      "Thoracic oncology",
+      "Cancer registries",
+      "Multidisciplinary team"
+    ],
+    "description": "Thoracic/lung oncology clinician-scientist; clinical lead of the Finnish lung cancer registry. Editor and lead author of NTOG clinical content.",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ],
+    "identifier": "https://orcid.org/0000-0001-5923-5865"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "version": "0.9",
+  "identifier": "https://doi.org/10.5281/zenodo.20632738",
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.20632738"
+  ]
+}
+</script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -578,59 +648,86 @@
         <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
         <span>NTOG</span>
       </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <input class="nav-menu-toggle" type="checkbox" id="navMenuToggle" aria-label="Toggle navigation menu" />
-      <label class="navbar-toggler" for="navMenuToggle" aria-label="Toggle navigation menu">Menu</label>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="/about.html">About Us</a></li>
+              <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
+              <li><a class="dropdown-item" href="/history.html">History</a></li>
+              <li><a class="dropdown-item" href="/steering-committee.html">Steering Committee</a></li>
+            </ul>
+          </li>
 
-      <div class="nav-menu">
-        <details class="nav-dropdown">
-          <summary>About Us</summary>
-          <div class="dropdown-menu">
-            <a href="about.html">About Us</a>
-            <a href="mission.html">Mission</a>
-            <a href="history.html">History</a>
-            <a href="steering-committee.html">Steering Committee</a>
-          </div>
-        </details>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+              <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
+              <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
+              <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Research Collaborations</a></li>
+            </ul>
+          </li>
 
-        <details class="nav-dropdown">
-          <summary>Research</summary>
-          <div class="dropdown-menu">
-            <a href="research.html">Research Overview</a>
-            <a href="ongoing-projects.html">Ongoing Projects</a>
-            <a href="publications.html">Publications</a>
-            <a href="collaborations.html">Collaborations</a>
-          </div>
-        </details>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
+            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+              <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/programme.html">Programme</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/call-for-abstracts.html">Call for Abstracts</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/sponsors.html">Sponsorship &amp; Exhibition</a></li>
+              <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
+              <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
+            </ul>
+          </li>
 
-        <details class="nav-dropdown">
-          <summary>Events</summary>
-          <div class="dropdown-menu">
-            <a href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a>
-            <a href="upcoming-events.html">Upcoming Events</a>
-            <a href="past-events.html">Past Events</a>
-          </div>
-        </details>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/guidelines/nodule-management.html">Nodule Management</a></li>
+              <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
+            </ul>
+          </li>
 
-        <details class="nav-dropdown">
-          <summary>Clinical Resources</summary>
-          <div class="dropdown-menu">
-            <a href="guidelines.html">Clinical Guidelines</a>
-            <a href="protocols.html">Protocols</a>
-            <a class="active" href="tools.html">Tools</a>
-          </div>
-        </details>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+            <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+              <li><a class="dropdown-item" href="/tools.html">All tools</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">MDT &amp; pathway</h6></li>
+              <li><a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a></li>
+              <li><a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a></li>
+              <li><a class="dropdown-item" href="/mdt.html">MDT free-text form</a></li>
+              <li><h6 class="dropdown-header">Screening &amp; nodule risk</h6></li>
+              <li><a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a></li>
+              <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
+              <li><h6 class="dropdown-header">Treatment value</h6></li>
+              <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
+              <li><h6 class="dropdown-header">Research builders</h6></li>
+              <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
+              <li><a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a></li>
+            </ul>
+          </li>
 
-        <details class="nav-dropdown">
-          <summary>Get Involved</summary>
-          <div class="dropdown-menu">
-            <a href="expert.html">Expert Network</a>
-            <a href="collaboration.html">Collaboration Opportunities</a>
-            <a href="volunteer.html">Volunteer</a>
-          </div>
-        </details>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
+            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+              <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
+              <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
+              <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
+            </ul>
+          </li>
 
-        <a class="nav-link" href="news.html">Research News</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/news.html">Research News</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -647,6 +744,8 @@
       </div>
     </div>
   </header>
+  <!--ntog-byline-inserted-->
+  <div class="container"><p class="text-muted" style="font-size:.9rem;margin:1.1rem 0 -0.4rem;"><strong>Author:</strong> <a href="/editor.html">Heidi Andersén, MD, PhD</a> — Docent, Tampere University; Clinical Lecturer, University of Turku · Clinical lead, Finnish lung cancer registry · Last reviewed 10 June 2026</p></div>
 
   <main>
     <section class="card" aria-labelledby="trainingNoticeHeading">
@@ -848,6 +947,29 @@
       </div>
     </section>
 
+    <section class="card" aria-labelledby="estimandHeading">
+      <h2 id="estimandHeading">Estimand &amp; modern design considerations</h2>
+      <p class="section-intro">Define <em>what</em> you are estimating before choosing how to analyse it. These are standard expectations for contemporary lung cancer study design.</p>
+
+      <h3>Estimand framework (ICH E9(R1))</h3>
+      <p>State the estimand as five attributes, so the objective and the analysis match:</p>
+      <ul>
+        <li><strong>Treatment</strong> condition(s) being compared.</li>
+        <li><strong>Population</strong> &mdash; the target patients.</li>
+        <li><strong>Variable / endpoint</strong> measured per patient.</li>
+        <li><strong>Intercurrent events</strong> (treatment switch, subsequent therapy, death) and the strategy for handling each.</li>
+        <li><strong>Population-level summary</strong> (e.g. hazard ratio, difference in restricted mean survival, risk difference).</li>
+      </ul>
+
+      <h3>Non-proportional hazards &amp; RMST</h3>
+      <p>The hazard ratio and the log-rank test assume proportional hazards. With immunotherapy, survival curves often separate late and plateau, or cross &mdash; the assumption fails, and a single HR (and a sample size powered on it) can mislead. Consider <strong>restricted mean survival time (RMST)</strong>, landmark or milestone survival, or weighted log-rank approaches, and power the study accordingly.</p>
+
+      <h3>Registry / observational designs: target trial emulation</h3>
+      <p>For non-randomised, registry-based questions, specify the <strong>protocol of the target trial</strong> you are emulating &mdash; eligibility, treatment strategies, assignment, <strong>time zero</strong>, outcome, and estimand. This is the standard way to avoid time-zero and immortal-time bias in registry studies.</p>
+
+      <p class="hint">Education and early design only; this does not replace formal statistical review.</p>
+    </section>
+
     <section class="card" aria-labelledby="checksHeading">
       <h2 id="checksHeading">Study design checks</h2>
       <div id="liveDesignChecks" class="hint">Design checks will update as assumptions change.</div>
@@ -907,15 +1029,19 @@
     </section>
   </main>
 
+  
+  <!--ntog-cite-inserted-->
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Study Design & Simulation Builder</em> (v0.9). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632738" style="color:#1f4e79;">doi:10.5281/zenodo.20632738</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
   <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
       <a href="/" class="footer-logo-link" aria-label="NTOG home">
         <img src="/ntog-logo.svg" alt="Nordic Thoracic Oncology Group logo" width="56" height="56" loading="lazy">
       </a>
 
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
 
       <p class="mb-0">
+        <a href="/copyright.html" class="text-white me-3">Copyright &amp; Licensing</a>
         <a href="privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="terms-of-service.html" class="text-white">Terms of Service</a>
       </p>

@@ -20,20 +20,20 @@
   <meta name="description" content="Educational NTOG page explaining treatment value concepts in thoracic oncology, including overall survival, hazard ratio, absolute benefit, NNT, NNH, QALY, cost, uncertainty, and worked examples.">
   <meta name="keywords" content="NTOG, treatment value, lung cancer, overall survival, hazard ratio, absolute benefit, NNT, NNH, QALY, cost effectiveness, thoracic oncology, shared decision making, health economics, evidence interpretation">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
-  <link rel="canonical" href="https://ntog.org/decision-tool.html">
+  <meta name="author" content="Heidi Andersén (Vahtian)">
+  <link rel="canonical" href="https://ntog.org/decision-tools.html">
 
   <meta property="og:title" content="Understanding Treatment Value | NTOG">
   <meta property="og:description" content="Educational page explaining key treatment value concepts and examples for thoracic oncology evidence.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
-  <meta property="og:url" content="https://ntog.org/decision-tool.html">
+  <meta property="og:image" content="https://ntog.org/og-image.png">
+  <meta property="og:url" content="https://ntog.org/decision-tools.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Understanding Treatment Value | NTOG">
   <meta name="twitter:description" content="Educational page explaining treatment value concepts in thoracic oncology evidence.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta name="twitter:image" content="https://ntog.org/og-image.png">
 
   <link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
   <link rel="stylesheet" href="/css/fonts.css">
@@ -230,21 +230,79 @@
       text-decoration: underline;
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Understanding Treatment Value",
+  "description": "Educational NTOG page explaining treatment value concepts in thoracic oncology, including overall survival, hazard ratio, absolute benefit, NNT, NNH, QALY, cost, uncertainty, and worked examples.",
+  "url": "https://ntog.org/decision-tools.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Nordic Thoracic Oncology Group",
+    "url": "https://ntog.org"
+  },
+  "publisher": {
+    "@type": "MedicalOrganization",
+    "name": "Nordic Thoracic Oncology Group",
+    "alternateName": "NTOG",
+    "url": "https://ntog.org"
+  },
+  "dateModified": "2026-06-10",
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Lung cancer"
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Clinician"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "affiliation": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Tampere University",
+        "url": "https://www.tuni.fi/en"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Turku",
+        "url": "https://www.utu.fi/en"
+      }
+    ],
+    "knowsAbout": [
+      "Lung cancer",
+      "Thoracic oncology",
+      "Cancer registries",
+      "Multidisciplinary team"
+    ],
+    "description": "Thoracic/lung oncology clinician-scientist; clinical lead of the Finnish lung cancer registry. Editor and lead author of NTOG clinical content.",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ],
+    "identifier": "https://orcid.org/0000-0001-5923-5865"
+  }
+}
+</script>
 </head>
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-  <img
-    src="/ntog-logo.svg"
-    alt=""
-    width="34"
-    height="34"
-    aria-hidden="true"
-  >
-  <span>NTOG</span>
-</a>
+        <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+        <span>NTOG</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -267,7 +325,7 @@
               <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
               <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
               <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
-              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Research Collaborations</a></li>
             </ul>
           </li>
 
@@ -275,17 +333,40 @@
             <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
             <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
               <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/programme.html">Programme</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/call-for-abstracts.html">Call for Abstracts</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/sponsors.html">Sponsorship &amp; Exhibition</a></li>
               <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
               <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
               <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/guidelines/nodule-management.html">Nodule Management</a></li>
               <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
-              <li><a class="dropdown-item" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+            <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+              <li><a class="dropdown-item" href="/tools.html">All tools</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">MDT &amp; pathway</h6></li>
+              <li><a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a></li>
+              <li><a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a></li>
+              <li><a class="dropdown-item" href="/mdt.html">MDT free-text form</a></li>
+              <li><h6 class="dropdown-header">Screening &amp; nodule risk</h6></li>
+              <li><a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a></li>
+              <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
+              <li><h6 class="dropdown-header">Treatment value</h6></li>
+              <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
+              <li><h6 class="dropdown-header">Research builders</h6></li>
+              <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
+              <li><a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a></li>
             </ul>
           </li>
 
@@ -317,6 +398,8 @@
       </div>
     </div>
   </header>
+  <!--ntog-byline-inserted-->
+  <div class="container"><p class="text-muted" style="font-size:.9rem;margin:1.1rem 0 -0.4rem;"><strong>Author:</strong> <a href="/editor.html">Heidi Andersén, MD, PhD</a> — Docent, Tampere University; Clinical Lecturer, University of Turku · Clinical lead, Finnish lung cancer registry · Last reviewed 10 June 2026</p></div>
 
   <div class="anchor-nav">
     <div class="container d-flex flex-wrap">
@@ -443,6 +526,26 @@
               <p class="muted-note mb-0">A valid trial can still be poorly applicable to an individual patient.</p>
             </div>
           </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Value framework</span>
+              <h3>ESMO-MCBS</h3>
+              <p><strong>Meaning:</strong> The ESMO Magnitude of Clinical Benefit Scale grades the clinical benefit of a cancer treatment on a standardised, peer-reviewed European scale.</p>
+              <p><strong>Scale:</strong> Curative intent A to C; non-curative 5 to 1. Grades A and B, or 5 and 4, denote substantial benefit.</p>
+              <p class="muted-note mb-0">Use it to anchor <em>how much</em> benefit, rather than relying on a single number such as the hazard ratio.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="term-card">
+              <span class="term-label">Patient outcome</span>
+              <h3>Patient-reported outcome, PRO</h3>
+              <p><strong>Meaning:</strong> Outcomes reported directly by the patient, such as symptoms, function, and health-related quality of life, without clinician interpretation.</p>
+              <p><strong>Examples:</strong> EORTC QLQ-C30 and QLQ-LC13, time to symptom deterioration, symptom burden.</p>
+              <p class="muted-note mb-0">PROs capture benefit and harm that survival numbers miss, and are central to value in non-curative settings.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -486,6 +589,46 @@
                 </table>
               </div>
               <p class="muted-note mt-3 mb-0">Both scenarios may have a similar relative improvement, but their practical meaning is different.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="hr-limits">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>When the hazard ratio can mislead</h2>
+            <p class="lead">The hazard ratio assumes the relative effect is roughly constant over time (proportional hazards). Modern thoracic oncology often breaks this assumption.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p><strong>Non-proportional hazards.</strong> With immunotherapy, survival curves often separate late and then plateau, leaving a long-term surviving &ldquo;tail&rdquo;. With some treatments the curves can even cross. A single hazard ratio averages effects that change over time and can understate or overstate the true benefit.</p>
+              <ul class="mb-3">
+                <li><strong>Read the curve shape</strong>, not only the HR: early separation, late plateau, or crossing.</li>
+                <li>Report <strong>landmark survival</strong> (for example 2-year and 5-year) and the <strong>median</strong> alongside the HR.</li>
+                <li>Consider <strong>restricted mean survival time (RMST)</strong>, which does not assume proportional hazards and gives an absolute difference in time.</li>
+              </ul>
+              <p class="muted-note mb-0"><strong>Teaching point:</strong> an HR of 0.70 from curves that cross means something very different from an HR of 0.70 with a durable plateau. The number alone is not enough.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="value-frameworks">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <h2>Standardised value frameworks</h2>
+            <p class="lead">Structured frameworks make &ldquo;how much benefit&rdquo; reproducible and comparable across treatments, instead of relying on one statistic.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="content-card">
+              <p><strong>ESMO-MCBS (v1.1).</strong> The European Society for Medical Oncology Magnitude of Clinical Benefit Scale grades benefit using survival gain, the hazard ratio with its confidence interval, quality of life, and toxicity &mdash; separately for curative (A to C) and non-curative (5 to 1) settings.</p>
+              <p><strong>ASCO Value Framework.</strong> A North American net-health-benefit score combining clinical benefit, toxicity, and optionally cost; less commonly used in European practice.</p>
+              <p class="muted-note mb-0">These NTOG teaching tools are <em>not</em> the ESMO-MCBS. They illustrate the same components so that a published MCBS grade can be read critically.</p>
             </div>
           </div>
         </div>
@@ -724,8 +867,9 @@
     loading="lazy"
   >
 </a>
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
       <p class="mb-0">
+        <a href="/copyright.html" class="text-white me-3">Copyright &amp; Licensing</a>
         <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
       </p>

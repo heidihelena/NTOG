@@ -49,13 +49,13 @@
   <meta name="description" content="NTOG educational treatment value discussion compass for thoracic oncology. Structure benefit, toxicity, quality of life, evidence certainty, patient goals, treatment burden, cost, and uncertainty without acting as a QALY calculator or recommendation engine.">
   <meta name="keywords" content="NTOG treatment value discussion, thoracic oncology value tool, lung cancer treatment benefit, toxicity, overall survival, hazard ratio, NNT, NNH, patient goals, quality of life, cost, uncertainty, ASCO Value Framework, ESMO MCBS, health technology assessment">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
-  <link rel="canonical" href="https://ntog.org/decision-tool.html">
+  <meta name="author" content="Heidi Andersén (Vahtian)">
+  <link rel="canonical" href="https://ntog.org/decision-tool-v2.html">
 
   <meta property="og:title" content="Treatment Value Discussion Compass | NTOG">
   <meta property="og:description" content="Educational compass for discussing benefit, harm, quality of life, cost, patient goals, and uncertainty in thoracic oncology evidence. Not a QALY counter and not a recommendation engine.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
-  <meta property="og:url" content="https://ntog.org/decision-tool.html">
+  <meta property="og:image" content="https://ntog.org/og-image.png">
+  <meta property="og:url" content="https://ntog.org/decision-tool-v2.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nordic Thoracic Oncology Group">
   <meta property="og:locale" content="en_GB">
@@ -63,23 +63,43 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Treatment Value Discussion Compass | NTOG">
   <meta name="twitter:description" content="Educational thoracic oncology value discussion tool for benefit, harm, quality of life, evidence, patient goals, and cost.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/heidihelena/NTOG/main/Copenhagen.png">
+  <meta name="twitter:image" content="https://ntog.org/og-image.png">
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "NTOG Treatment Value Discussion Compass",
-    "url": "https://ntog.org/decision-tool.html",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "Any",
-    "description": "Educational treatment value discussion tool for thoracic oncology evidence. It supports structured reflection on benefit, harms, evidence certainty, patient goals, burden, cost, and uncertainty without producing a clinical recommendation.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Nordic Thoracic Oncology Group"
-    }
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "NTOG Treatment Value Discussion Compass",
+  "url": "https://ntog.org/decision-tool-v2.html",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "description": "Educational treatment value discussion tool for thoracic oncology evidence. It supports structured reflection on benefit, harms, evidence certainty, patient goals, burden, cost, and uncertainty without producing a clinical recommendation.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nordic Thoracic Oncology Group"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "softwareVersion": "2.0",
+  "creator": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ]
+  },
+  "identifier": "https://doi.org/10.5281/zenodo.20632451",
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.20632451"
+  ]
+}
+</script>
 
   <link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
   <link rel="stylesheet" href="/css/fonts.css">
@@ -385,15 +405,9 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-  <img
-    src="/ntog-logo.svg"
-    alt=""
-    width="34"
-    height="34"
-    aria-hidden="true"
-  >
-  <span>NTOG</span>
-</a>
+        <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+        <span>NTOG</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -416,7 +430,7 @@
               <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
               <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
               <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
-              <li><a class="dropdown-item" href="/collaborations.html">Collaborations</a></li>
+              <li><a class="dropdown-item" href="/collaborations.html">Research Collaborations</a></li>
             </ul>
           </li>
 
@@ -424,17 +438,40 @@
             <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
             <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
               <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/programme.html">Programme</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/call-for-abstracts.html">Call for Abstracts</a></li>
+              <li><a class="dropdown-item" href="/ntog2027/sponsors.html">Sponsorship &amp; Exhibition</a></li>
               <li><a class="dropdown-item" href="/upcoming-events.html">Upcoming Events</a></li>
               <li><a class="dropdown-item" href="/past-events.html">Past Events</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
               <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
+              <li><a class="dropdown-item" href="/guidelines/nodule-management.html">Nodule Management</a></li>
               <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
-              <li><a class="dropdown-item" href="/tools.html">Tools</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+            <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
+              <li><a class="dropdown-item" href="/tools.html">All tools</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><h6 class="dropdown-header">MDT &amp; pathway</h6></li>
+              <li><a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a></li>
+              <li><a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a></li>
+              <li><a class="dropdown-item" href="/mdt.html">MDT free-text form</a></li>
+              <li><h6 class="dropdown-header">Screening &amp; nodule risk</h6></li>
+              <li><a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a></li>
+              <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
+              <li><h6 class="dropdown-header">Treatment value</h6></li>
+              <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
+              <li><h6 class="dropdown-header">Research builders</h6></li>
+              <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
+              <li><a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a></li>
             </ul>
           </li>
 
@@ -650,7 +687,7 @@
                   <div class="col-md-6">
                     <label for="osHr" class="form-label">OS hazard ratio</label>
                     <input type="number" min="0.01" max="5" step="0.01" id="osHr" class="form-control" placeholder="Example: 0.72">
-                    <div class="form-text">Relative effect. Interpreted with absolute benefit.</div>
+                    <div class="form-text">Relative effect; assumes proportional hazards. Read with the absolute benefit and the curve shape (see note below).</div>
                   </div>
 
                   <div class="col-md-6">
@@ -664,6 +701,10 @@
                     <input type="number" min="1" step="1" id="nnt" class="form-control" placeholder="Example: 14">
                     <div class="form-text">At the same time point as the absolute benefit.</div>
                   </div>
+                </div>
+
+                <div class="mt-3 p-3" style="border-left:4px solid #1f4e79;background:#eef6fb;border-radius:6px;font-size:.95rem">
+                  <strong>Hazard ratio caveat.</strong> The HR assumes proportional hazards. With immunotherapy, survival curves often separate late and plateau (a long-term &ldquo;tail&rdquo;); some curves cross. In those cases read landmark survival (for example 2- and 5-year), the median, and ideally restricted mean survival time (RMST) rather than the HR alone. The Compass weights the <em>absolute</em> benefit directly, so enter it whenever available. For a standardised benefit grade, compare with the <a href="/decision-tools.html#value-frameworks">ESMO-MCBS</a>.
                 </div>
 
                 <h3 class="tool-section-title">3. Harm and tolerability</h3>
@@ -937,6 +978,9 @@
     </section>
   </main>
 
+  
+  <!--ntog-cite-inserted-->
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Treatment Value Discussion Compass</em> (v2.0). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632451" style="color:#1f4e79;">doi:10.5281/zenodo.20632451</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
   <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
       <a href="/" class="footer-logo-link" aria-label="NTOG home">
@@ -948,8 +992,9 @@
     loading="lazy"
   >
 </a>
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
       <p class="mb-0">
+        <a href="/copyright.html" class="text-white me-3">Copyright &amp; Licensing</a>
         <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
         <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
       </p>
@@ -1358,7 +1403,7 @@
 
    <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
+      <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
       <p class="small mb-2">
   Tool source code licensed under
   <a href="/LICENSE" class="text-white">Apache License 2.0</a>.

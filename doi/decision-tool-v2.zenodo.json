@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "title": "NTOG Treatment Value Discussion Compass v2.0",
+    "upload_type": "software",
+    "description": "<p>NTOG educational treatment value discussion compass for thoracic oncology. Structure benefit, toxicity, quality of life, evidence certainty, patient goals, treatment burden, cost, and uncertainty without acting as a QALY calculator or recommendation engine.</p><p>Browser-only, single-file tool; runs locally with no server and no patient data transmitted.</p><p><strong>Disclaimer.</strong> Author/developer disclosure: Heidi Andersén is clinical lead of the Finnish lung cancer registry and founder of Vahtian, which provides the independent software engine behind this tool. Clinical content is editorially independent. University and registry affiliations are for identification only and do not imply endorsement. This tool is educational decision-support, NOT a medical device, and does not issue clinical recommendations.</p>",
+    "creators": [
+      {
+        "name": "Andersén, Heidi",
+        "orcid": "0000-0001-5923-5865",
+        "affiliation": "Tampere University; University of Turku, Finland"
+      }
+    ],
+    "access_right": "open",
+    "license": "cc-by-nc-4.0",
+    "version": "2.0",
+    "language": "eng",
+    "keywords": [
+      "lung cancer",
+      "thoracic oncology",
+      "Nordic Thoracic Oncology Group",
+      "NTOG",
+      "clinical decision support",
+      "oncology",
+      "treatment value",
+      "shared decision making",
+      "hazard ratio",
+      "quality of life",
+      "ESMO-MCBS"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://ntog.org/decision-tool-v2.html",
+        "relation": "isIdenticalTo",
+        "scheme": "url",
+        "resource_type": "software"
+      },
+      {
+        "identifier": "https://ntog.org/",
+        "relation": "isPartOf",
+        "scheme": "url"
+      }
+    ],
+    "notes": "Author/developer disclosure: Heidi Andersén is clinical lead of the Finnish lung cancer registry and founder of Vahtian, which provides the independent software engine behind this tool. Clinical content is editorially independent. University and registry affiliations are for identification only and do not imply endorsement. This tool is educational decision-support, NOT a medical device, and does not issue clinical recommendations.",
+    "publisher": "Nordic Thoracic Oncology Group (NTOG)"
+  }
+}

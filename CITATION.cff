@@ -1,27 +1,17 @@
 cff-version: 1.2.0
-message: "If you use this tool, cite this software release and cite each underlying validated model separately."
-title: "NTOG LungRisk Educational and Research Hub"
-version: "0.3.0"
-date-released: "2026-05-03"
+message: "If you use an NTOG tool, please cite it using the metadata in doi/<tool>.zenodo.json and the tool's own DOI once minted."
+title: "NTOG Lung Cancer Clinical & Research Tools"
+abstract: "A collection of browser-only, single-file educational and research tools for thoracic oncology by the Nordic Thoracic Oncology Group (NTOG). Each tool is archived and citable with its own DOI on Zenodo."
 type: software
 authors:
-  - family-names: "Andersen"
+  - family-names: "Andersén"
     given-names: "Heidi"
-    affiliation: "Nordic Thoracic Oncology Group"
-  - name: "Nordic Thoracic Oncology Group"
+    orcid: "https://orcid.org/0000-0001-5923-5865"
+    affiliation: "Tampere University; University of Turku, Finland"
+license: "CC-BY-NC-4.0"
 url: "https://ntog.org/tools.html"
-repository-code: "https://github.com/heidihelena/NTOG"
-license: "Apache-2.0"
-abstract: "Educational and research software for side-by-side comparison of lung cancer screening eligibility criteria, person-level risk models, pulmonary nodule malignancy models, management frameworks, and experimental NTOG research scores."
 keywords:
-  - lung cancer screening
-  - pulmonary nodules
-  - PLCOm2012
-  - HUNT
-  - Brock model
-  - Mayo model
-  - Herder model
-  - NELSON
-  - Lung-RADS
-  - BTS
-  - Fleischner
+  - lung cancer
+  - thoracic oncology
+  - clinical decision support
+  - NTOG

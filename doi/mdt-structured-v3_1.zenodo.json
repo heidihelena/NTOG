@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "NTOG Lung Cancer MDT Structured Form v3.1",
+    "upload_type": "software",
+    "description": "<p>Structured lung cancer MDT form for local browser use, registry extraction, TNM staging support, CCI calculation, and itemised G8 screening.</p><p>Browser-only, single-file tool; runs locally with no server and no patient data transmitted.</p><p><strong>Disclaimer.</strong> Author/developer disclosure: Heidi Andersén is clinical lead of the Finnish lung cancer registry and founder of Vahtian, which provides the independent software engine behind this tool. Clinical content is editorially independent. University and registry affiliations are for identification only and do not imply endorsement. This tool is educational decision-support, NOT a medical device, and does not issue clinical recommendations.</p>",
+    "creators": [
+      {
+        "name": "Andersén, Heidi",
+        "orcid": "0000-0001-5923-5865",
+        "affiliation": "Tampere University; University of Turku, Finland"
+      }
+    ],
+    "access_right": "open",
+    "license": "cc-by-nc-4.0",
+    "version": "3.1",
+    "language": "eng",
+    "keywords": [
+      "lung cancer",
+      "thoracic oncology",
+      "Nordic Thoracic Oncology Group",
+      "NTOG",
+      "clinical decision support",
+      "oncology",
+      "multidisciplinary team",
+      "MDT",
+      "TNM staging",
+      "Charlson Comorbidity Index",
+      "G8 screening",
+      "cancer registry"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://ntog.org/mdt-structured-v3_1.html",
+        "relation": "isIdenticalTo",
+        "scheme": "url",
+        "resource_type": "software"
+      },
+      {
+        "identifier": "https://ntog.org/",
+        "relation": "isPartOf",
+        "scheme": "url"
+      }
+    ],
+    "notes": "Author/developer disclosure: Heidi Andersén is clinical lead of the Finnish lung cancer registry and founder of Vahtian, which provides the independent software engine behind this tool. Clinical content is editorially independent. University and registry affiliations are for identification only and do not imply endorsement. This tool is educational decision-support, NOT a medical device, and does not issue clinical recommendations.",
+    "publisher": "Nordic Thoracic Oncology Group (NTOG)"
+  }
+}

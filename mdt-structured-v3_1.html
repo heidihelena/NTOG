@@ -420,6 +420,76 @@
     #summary { background: #fff; border: none; padding: 0; font-size: 10pt; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "NTOG Lung Cancer MDT Structured Form v3.1",
+  "description": "Structured lung cancer MDT form for local browser use, registry extraction, TNM staging support, CCI calculation, and itemised G8 screening.",
+  "url": "https://ntog.org/mdt-structured-v3_1.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Nordic Thoracic Oncology Group",
+    "url": "https://ntog.org"
+  },
+  "publisher": {
+    "@type": "MedicalOrganization",
+    "name": "Nordic Thoracic Oncology Group",
+    "alternateName": "NTOG",
+    "url": "https://ntog.org"
+  },
+  "dateModified": "2026-06-10",
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Lung cancer"
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Clinician"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "affiliation": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Tampere University",
+        "url": "https://www.tuni.fi/en"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Turku",
+        "url": "https://www.utu.fi/en"
+      }
+    ],
+    "knowsAbout": [
+      "Lung cancer",
+      "Thoracic oncology",
+      "Cancer registries",
+      "Multidisciplinary team"
+    ],
+    "description": "Thoracic/lung oncology clinician-scientist; clinical lead of the Finnish lung cancer registry. Editor and lead author of NTOG clinical content.",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ],
+    "identifier": "https://orcid.org/0000-0001-5923-5865"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "version": "3.1",
+  "identifier": "https://doi.org/10.5281/zenodo.20632341",
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.20632341"
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -2407,9 +2477,12 @@ updateDerived();
 if (new URLSearchParams(window.location.search).has('test') || window.location.hash === '#test') runUnitTests();
 </script>
 
-<footer class="site-footer">
+
+  <!--ntog-cite-inserted-->
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Lung Cancer MDT Structured Form</em> (v3.1). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632341" style="color:#1f4e79;">doi:10.5281/zenodo.20632341</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
+  <footer class="site-footer">
   <p class="disclaimer-footer">
-    &copy; 2026 Heidi Andersen. Source code authored by Heidi Andersen.
+    Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.
     Structured preparation tool for education and research use.
     Version ntog_lung_mdt_structured_v3_1.
   </p>

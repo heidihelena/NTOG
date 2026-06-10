@@ -3,19 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lung Cancer MDT — Open Form | Nordic Thoracic Oncology Group</title>
-<meta name="description" content="Educational lung cancer MDT checklist (open free-text form) adapted for Nordic use by NTOG, with a Nordic language selector (English, Finnish, Swedish, Norwegian, Danish, Icelandic). Runs locally in the browser and does not store data.">
+<title>Lung Cancer MDT — Structured (mini) | Nordic Thoracic Oncology Group</title>
+<meta name="description" content="Compact structured lung cancer MDT preparation form covering the same items as the open NTOG form, with coded fields and a Nordic language selector (English, Finnish, Swedish, Norwegian, Danish, Icelandic). Runs locally; no data is stored.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Heidi Andersén (Vahtian)">
-<link rel="canonical" href="https://ntog.org/mdt.html">
+<link rel="canonical" href="https://ntog.org/mdt-structured-mini.html">
 <link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:title" content="Lung Cancer MDT Checklist | Nordic Thoracic Oncology Group">
-<meta property="og:description" content="Browser-based educational lung cancer MDT checklist adapted for Nordic use by NTOG. Runs locally in the browser and does not store data.">
-<meta property="og:url" content="https://ntog.org/mdt.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
 <link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/styles.css">
@@ -34,7 +29,7 @@
   legend { font-weight: 700; padding: 0 .5em; color: var(--ntog-blue-dark); }
   label { display: block; margin: .4em 0 .15em; font-weight: 600; }
   input, select, textarea { width: 100%; box-sizing: border-box; padding: .45em; font-size: 1em; border: 1px solid #bbb; border-radius: 4px; background: #fff; }
-  textarea { min-height: 3em; resize: vertical; }
+  textarea { min-height: 2.6em; resize: vertical; }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
   .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; }
   .hint { font-size: .86em; color: var(--muted); font-weight: 400; }
@@ -45,12 +40,21 @@
   button { padding: .65em 1.2em; font-size: 1em; border-radius: 6px; border: 1px solid var(--ntog-blue); background: var(--ntog-blue); color: #fff; cursor: pointer; }
   button.secondary { background: #fff; color: var(--ntog-blue); }
   #summary { white-space: pre-wrap; background: #f5f5f5; padding: 1em; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; margin-top: 1em; border: 1px solid #ddd; }
+  /* top bar */
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1em; flex-wrap: wrap; border-bottom: 3px solid var(--ntog-blue); padding-bottom: .6em; margin-bottom: 1em; }
   .topbar .brand { font-weight: 800; color: var(--ntog-blue); font-size: 1.1em; text-decoration: none; }
   .lang-wrap { display: flex; align-items: center; gap: .5em; }
   .lang-wrap label { margin: 0; font-weight: 600; font-size: .9em; }
   .lang-wrap select { width: auto; padding: .35em .5em; }
-  @media (max-width: 760px) { .row, .row3 { grid-template-columns: 1fr; } }
+  /* structured grids */
+  .check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .35em .9em; margin: .3em 0; }
+  .check-grid label { font-weight: 400; display: flex; align-items: center; gap: .45em; margin: 0; }
+  .check-grid input { width: auto; }
+  .bm-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.4fr; gap: .5em .8em; align-items: center; }
+  .bm-grid .bm-head { font-weight: 700; color: var(--ntog-blue-dark); font-size: .85em; border-bottom: 1px solid var(--ntog-border); padding-bottom: .2em; }
+  .bm-grid label { margin: 0; }
+  .bm-grid input, .bm-grid select { padding: .35em; }
+  @media (max-width: 760px) { .row, .row3 { grid-template-columns: 1fr; } .bm-grid { grid-template-columns: 1fr; } .bm-grid .bm-head { display: none; } }
   @media print {
     form > fieldset, form > h2, .privacy, .disclaimer, .button-row, #missing, .topbar, .intro-text { display: none; }
     body { margin: 1em; max-width: none; font-size: 11pt; }
@@ -62,8 +66,8 @@
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "Lung Cancer MDT",
-  "description": "Educational lung cancer MDT checklist (open free-text form) adapted for Nordic use by NTOG, with a Nordic language selector (English, Finnish, Swedish, Norwegian, Danish, Icelandic). Runs locally in the browser and does not store data.",
-  "url": "https://ntog.org/mdt.html",
+  "description": "Compact structured lung cancer MDT preparation form covering the same items as the open NTOG form, with coded fields and a Nordic language selector (English, Finnish, Swedish, Norwegian, Danish, Icelandic). Runs locally; no data is stored.",
+  "url": "https://ntog.org/mdt-structured-mini.html",
   "inLanguage": "en",
   "isPartOf": {
     "@type": "WebSite",
@@ -118,7 +122,13 @@
       "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
     ],
     "identifier": "https://orcid.org/0000-0001-5923-5865"
-  }
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "version": "1.0",
+  "identifier": "https://doi.org/10.5281/zenodo.20632237",
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.20632237"
+  ]
 }
 </script>
 </head>
@@ -132,8 +142,8 @@
   </div>
 </div>
 
-<h1 data-i18n="app.title.open">Lung cancer MDT — open form</h1>
-<p class="hint intro-text" data-i18n="app.intro.open">A browser tool for lung cancer MDT preparation using free-text fields.</p>
+<h1 data-i18n="app.title.mini">Lung cancer MDT — structured (mini)</h1>
+<p class="hint intro-text" data-i18n="app.intro.mini">A compact, structured browser tool for lung cancer MDT preparation.</p>
 
 <div class="privacy"><strong>🔒</strong> <span data-i18n="app.privacy">Privacy notice.</span></div>
 <div class="disclaimer"><span data-i18n="app.disclaimer">Use notice.</span></div>
@@ -184,11 +194,18 @@
   <h2 data-i18n="sec.comorbidity">Comorbidity and medication</h2>
   <fieldset>
     <label data-i18n="f.comorbidities">Significant comorbidities</label>
-    <textarea name="comorbidities"></textarea>
-    <label data-i18n="f.prevCancer">Previous cancers and surgeries</label>
-    <textarea name="prevCancer"></textarea>
-    <label><span data-i18n="f.anticoag">Anticoagulation and immunosuppression</span> <span class="hint" data-i18n="h.anticoag">drug, indication, pausing</span></label>
-    <textarea name="anticoag"></textarea>
+    <div class="check-grid">
+      <label><input type="checkbox" name="cm" value="cm.copd"><span data-i18n="cm.copd">COPD</span></label>
+      <label><input type="checkbox" name="cm" value="cm.asthma"><span data-i18n="cm.asthma">Asthma</span></label>
+      <label><input type="checkbox" name="cm" value="cm.ild"><span data-i18n="cm.ild">ILD / pulmonary fibrosis</span></label>
+      <label><input type="checkbox" name="cm" value="cm.cvd"><span data-i18n="cm.cvd">Cardiovascular disease</span></label>
+      <label><input type="checkbox" name="cm" value="cm.autoimmune"><span data-i18n="cm.autoimmune">Autoimmune disease</span></label>
+      <label><input type="checkbox" name="cm" value="cm.diabetes"><span data-i18n="cm.diabetes">Diabetes</span></label>
+      <label><input type="checkbox" name="cm" value="cm.renal"><span data-i18n="cm.renal">Renal disease</span></label>
+    </div>
+    <label data-i18n="cm.otherText">Other comorbidities (specify)</label><input type="text" name="comorbOther">
+    <label data-i18n="f.prevCancer">Previous cancers and surgeries</label><input type="text" name="prevCancer">
+    <label><span data-i18n="f.anticoag">Anticoagulation and immunosuppression</span> <span class="hint" data-i18n="h.anticoag">drug, indication, pausing</span></label><input type="text" name="anticoag">
   </fieldset>
 
   <h2 data-i18n="sec.functional">Functional status</h2>
@@ -204,8 +221,7 @@
     </select>
     <label><span data-i18n="f.g8">G8 score</span> <span class="hint" data-i18n="h.g8">geriatric screening, 0 to 17</span></label>
     <input type="number" name="g8" min="0" max="17" step="0.5">
-    <label data-i18n="f.performance">Performance / exercise capacity</label>
-    <textarea name="performance"></textarea>
+    <label data-i18n="f.performance">Performance / exercise capacity</label><input type="text" name="performance">
   </fieldset>
 
   <h2 data-i18n="sec.lungfn">Lung function</h2>
@@ -344,7 +360,23 @@
   <h2 data-i18n="sec.pathology">Pathology</h2>
   <fieldset>
     <label><span data-i18n="f.diagSample">Diagnostic sample</span> <span class="hint" data-i18n="h.diagSample">site, method, date</span></label><input type="text" name="diagSample">
-    <label data-i18n="f.histology">Histology / cytology</label><input type="text" name="histology">
+    <label data-i18n="f.histology">Histology / cytology</label>
+    <select name="histology">
+      <option value="" data-i18n="o.select">Select</option>
+      <option value="hist.adeno" data-i18n="hist.adeno">Adenocarcinoma</option>
+      <option value="hist.squamous" data-i18n="hist.squamous">Squamous cell carcinoma</option>
+      <option value="hist.adenosquamous" data-i18n="hist.adenosquamous">Adenosquamous carcinoma</option>
+      <option value="hist.largeCell" data-i18n="hist.largeCell">Large cell carcinoma</option>
+      <option value="hist.sarcomatoid" data-i18n="hist.sarcomatoid">Sarcomatoid carcinoma</option>
+      <option value="hist.sclc" data-i18n="hist.sclc">Small cell carcinoma</option>
+      <option value="hist.lcnec" data-i18n="hist.lcnec">LCNEC (large cell neuroendocrine)</option>
+      <option value="hist.carcinoidTypical" data-i18n="hist.carcinoidTypical">Carcinoid, typical</option>
+      <option value="hist.carcinoidAtypical" data-i18n="hist.carcinoidAtypical">Carcinoid, atypical</option>
+      <option value="hist.mesothelioma" data-i18n="hist.mesothelioma">Pleural mesothelioma</option>
+      <option value="hist.nsclcNos" data-i18n="hist.nsclcNos">NSCLC, not otherwise specified</option>
+      <option value="hist.otherPending" data-i18n="hist.otherPending">Other / pending</option>
+    </select>
+    <label data-i18n="f.detail">Detail / subtype</label><input type="text" name="histDetail">
     <label data-i18n="f.diameter">Largest tumour diameter (cm)</label><input type="number" name="diameter" step="0.1">
     <label data-i18n="f.staging">Staging investigations and findings</label><textarea name="staging"></textarea>
     <label data-i18n="f.tnmEdition">TNM edition</label>
@@ -389,38 +421,15 @@
       <option value="o.plasma" data-i18n="o.plasma">Plasma / ctDNA</option>
       <option value="o.both" data-i18n="o.both">Tissue + plasma</option>
     </select>
-
-    <label data-i18n="f.drivers">Driver alterations (actionable)</label>
+    <label data-i18n="f.molecular">Molecular alterations</label>
     <p class="hint" data-i18n="h.molecularSubtypes">Specify actionable subtypes.</p>
-    <div class="row">
-      <div><label data-i18n="f.egfr">EGFR</label><input type="text" name="egfr"></div>
-      <div><label data-i18n="f.alk">ALK fusion</label><input type="text" name="alk"></div>
+    <div class="bm-grid">
+      <div class="bm-head" data-i18n="f.molecular">Marker</div>
+      <div class="bm-head" data-i18n="o.select">Status</div>
+      <div class="bm-head" data-i18n="f.detail">Detail / subtype</div>
+      <!-- rows injected by script -->
     </div>
-    <div class="row">
-      <div><label data-i18n="f.ros1">ROS1 fusion</label><input type="text" name="ros1"></div>
-      <div><label data-i18n="f.braf">BRAF</label><input type="text" name="braf"></div>
-    </div>
-    <div class="row">
-      <div><label data-i18n="f.kras">KRAS</label><input type="text" name="kras"></div>
-      <div><label data-i18n="f.met">MET</label><input type="text" name="met"></div>
-    </div>
-    <div class="row">
-      <div><label data-i18n="f.ret">RET fusions</label><input type="text" name="ret"></div>
-      <div><label data-i18n="f.her2">ERBB2 / HER2</label><input type="text" name="her2"></div>
-    </div>
-    <div class="row">
-      <div><label data-i18n="f.ntrk">NTRK1 to 3 fusions</label><input type="text" name="ntrk"></div>
-      <div><label data-i18n="f.nrg1">NRG1 fusion</label><input type="text" name="nrg1"></div>
-    </div>
-
-    <label data-i18n="f.ioResistance">Immunotherapy / resistance markers</label>
-    <div class="row3">
-      <div><label data-i18n="f.stk11">STK11 / LKB1</label><input type="text" name="stk11"></div>
-      <div><label data-i18n="f.keap1">KEAP1</label><input type="text" name="keap1"></div>
-      <div><label data-i18n="f.smarca4">SMARCA4</label><input type="text" name="smarca4"></div>
-    </div>
-
-    <label data-i18n="f.otherNgs">Other NGS findings</label><textarea name="otherNgs"></textarea>
+    <label data-i18n="f.otherNgs">Other NGS findings</label><input type="text" name="otherNgs">
   </fieldset>
 
   <h2 data-i18n="sec.preference">Patient preference</h2>
@@ -459,7 +468,10 @@
   <pre id="summary"></pre>
 </form>
 
-<footer class="bg-dark text-white py-4 mt-4" style="border-radius:8px">
+
+  <!--ntog-cite-inserted-->
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Lung Cancer MDT — Structured (mini)</em> (v1.0). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632237" style="color:#1f4e79;">doi:10.5281/zenodo.20632237</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
+  <footer class="bg-dark text-white py-4 mt-4" style="border-radius:8px">
   <div class="container text-center">
     <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
     <p class="small mb-2" data-i18n="app.disclaimer">Educational and research use only.</p>
@@ -477,6 +489,40 @@
   "use strict";
   var T = window.MDTI18N;
 
+  // Biomarker rows — driver alterations + immunotherapy/resistance markers
+  var DRIVERS = [
+    { name: "egfr", key: "f.egfr" }, { name: "alk", key: "f.alk" }, { name: "ros1", key: "f.ros1" },
+    { name: "braf", key: "f.braf" }, { name: "kras", key: "f.kras" }, { name: "met", key: "f.met" },
+    { name: "ret", key: "f.ret" }, { name: "her2", key: "f.her2" }, { name: "ntrk", key: "f.ntrk" },
+    { name: "nrg1", key: "f.nrg1" }
+  ];
+  var RES = [
+    { name: "stk11", key: "f.stk11" }, { name: "keap1", key: "f.keap1" }, { name: "smarca4", key: "f.smarca4" }
+  ];
+  var MARKERS = DRIVERS.concat(RES);
+  var STATUS = ["bm.notTested", "bm.negative", "bm.positive", "bm.pending"];
+
+  var grid = document.querySelector(".bm-grid");
+  function addSub(key) {
+    var d = document.createElement("div");
+    d.setAttribute("data-i18n", key); d.textContent = key;
+    d.style.cssText = "grid-column:1/-1;font-weight:700;color:var(--ntog-blue-dark);margin-top:.4em;font-size:.9em";
+    grid.appendChild(d);
+  }
+  function addRow(m) {
+    var lbl = document.createElement("label"); lbl.setAttribute("data-i18n", m.key); lbl.textContent = m.key;
+    var sel = document.createElement("select"); sel.name = "bm_" + m.name;
+    STATUS.forEach(function (s) {
+      var o = document.createElement("option"); o.value = s; o.setAttribute("data-i18n", s); o.textContent = s;
+      sel.appendChild(o);
+    });
+    var det = document.createElement("input"); det.type = "text"; det.name = "bmd_" + m.name;
+    grid.appendChild(lbl); grid.appendChild(sel); grid.appendChild(det);
+  }
+  addSub("f.drivers"); DRIVERS.forEach(addRow);
+  addSub("f.ioResistance"); RES.forEach(addRow);
+
+  // BMI auto-calc
   var w = document.getElementById("weight"), h = document.getElementById("height"), b = document.getElementById("bmi");
   function recalcBmi() {
     var W = parseFloat(w.value), H = parseFloat(h.value);
@@ -487,21 +533,26 @@
   var f = document.getElementById("mdtForm");
   function v(name) { var el = f.elements[name]; return el && el.value ? el.value.trim() : ""; }
   function sel(name) { var val = v(name); return val ? T.t(val) : ""; }
+  function checks(name) {
+    return Array.prototype.filter.call(f.elements[name] || [], function (e) { return e.checked; })
+      .map(function (e) { return T.t(e.value); }).join(", ");
+  }
   function L(key) { return T.t(key); }
-  function line(key, val) { return L(key) + ": " + (val || ""); }
 
   var importantFields = ["meetingDate", "presenter", "age", "sex", "smokingStatus", "ecog", "ctDate", "ctFindings", "histology", "cTNM1"];
-
-  var MARKERS = ["egfr", "alk", "ros1", "braf", "kras", "met", "ret", "her2", "ntrk", "nrg1", "stk11", "keap1", "smarca4"];
 
   function buildSummary() {
     var missing = importantFields.filter(function (n) { return !v(n); });
     document.getElementById("missing").textContent = missing.length
       ? L("msg.missing") + " " + missing.map(function (n) { return L("f." + n) || n; }).join(", ") : "";
 
+    var comorb = [checks("cm"), v("comorbOther")].filter(Boolean).join("; ");
     var bm = MARKERS.map(function (m) {
-      return v(m) ? (L("f." + m) + ": " + v(m)) : "";
+      var st = sel("bm_" + m.name), d = v("bmd_" + m.name);
+      return (st || d) ? (L(m.key) + ": " + [st, d].filter(Boolean).join(" ")) : "";
     }).filter(Boolean);
+
+    function line(key, val) { return L(key) + ": " + (val || ""); }
 
     var lines = [
       L("sum.title"), L("sum.note"), "",
@@ -512,7 +563,7 @@
       L("f.smokingStatus") + ": " + sel("smokingStatus") + ", " + v("packYears") + " " + L("f.packYears") + ", " + L("f.quitYears") + ": " + v("quitYears"),
       L("f.weight") + " / " + L("f.height") + " / " + L("f.bmi") + ": " + v("weight") + " / " + v("height") + " / " + v("bmi"), "",
       L("sec.comorbidity").toUpperCase(),
-      line("f.comorbidities", v("comorbidities")),
+      line("f.comorbidities", comorb),
       line("f.prevCancer", v("prevCancer")),
       line("f.anticoag", v("anticoag")), "",
       L("sec.functional").toUpperCase(),
@@ -539,7 +590,7 @@
       line("f.otherImaging", v("otherImaging")), "",
       L("sec.pathology").toUpperCase(),
       line("f.diagSample", v("diagSample")),
-      line("f.histology", v("histology")),
+      L("f.histology") + ": " + sel("histology") + (v("histDetail") ? " (" + v("histDetail") + ")" : ""),
       line("f.diameter", v("diameter") ? v("diameter") + " cm" : ""),
       line("f.staging", v("staging")),
       line("f.cTNM1", v("cTNM1") + (v("tnmEdition") ? "  [" + sel("tnmEdition") + "]" : "")), "",
@@ -576,6 +627,7 @@
     f.reset(); document.getElementById("summary").textContent = ""; document.getElementById("missing").textContent = ""; recalcBmi();
   });
 
+  // re-render summary in the new language if it is already shown
   window.addEventListener("mdt:langchange", function () {
     if (document.getElementById("summary").textContent) showSummary();
   });
