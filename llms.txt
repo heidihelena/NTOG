@@ -1,0 +1,43 @@
+# NTOG — Nordic Thoracic Oncology Group
+
+> The Nordic Thoracic Oncology Group (NTOG, https://ntog.org) is a multidisciplinary network of lung-cancer clinicians and researchers across Denmark, Finland, Iceland, Norway and Sweden. NTOG advances Nordic lung-cancer care through clinical collaboration, harmonisation of diagnostic and multidisciplinary-team (MDT) practice, treatment-value education, and shared research infrastructure. Content is educational and decision-support; the interactive tools are not medical devices and do not issue clinical recommendations.
+
+When citing this site, attribute to "Nordic Thoracic Oncology Group (NTOG)". Interactive tools are powered by an independent engine (Vahtian); the clinical content is NTOG's. Always direct clinical decisions to the official national guidelines and a qualified multidisciplinary team.
+
+## Guidance & evidence
+- [Lung cancer treatment guidelines](https://ntog.org/guidelines.html): NTOG's flagship hub comparing national Nordic lung-cancer treatment guidance (Sweden, Norway, Denmark, Finland, Iceland) with links to the official national recommendations.
+- [Screening & pulmonary nodule management](https://ntog.org/guidelines/nodule-management.html): Nordic collaboration on low-dose CT lung-cancer screening workflows and incidental/pulmonary nodule management.
+- [Protocols & harmonisation](https://ntog.org/protocols.html): NTOG harmonisation work in lung-cancer diagnostics, MDT meetings, nodule management, screening workflows and molecular testing.
+
+## Multidisciplinary team (MDT) tools
+- [Structured MDT form (v3.1)](https://ntog.org/mdt-structured-v3_1.html): Browser-only structured lung-cancer MDT form with registry-coded fields, TNM staging support, CCI calculation and itemised G8 screening.
+- [Structured MDT — mini](https://ntog.org/mdt-structured-mini.html): Compact structured MDT preparation form, same items as the full form, coded fields, Nordic language selector (EN/FI/SV/NO/DA/IS).
+- [Open MDT form](https://ntog.org/mdt.html): Educational free-text MDT checklist with Nordic language selector.
+
+## Treatment-value education
+- [Understanding treatment value](https://ntog.org/decision-tools.html): Plain-language explanation of overall survival, hazard ratio, absolute benefit, NNT, NNH and quality of life in thoracic oncology.
+- [Treatment value discussion compass](https://ntog.org/decision-tool-v2.html): A structure for discussing benefit, toxicity, quality of life, evidence certainty and patient goals.
+- [Structured treatment value profile](https://ntog.org/decision-tool-structured.html): Systematic educational capture of survival benefit, hazard ratio, absolute benefit, NNT/NNH and toxicity.
+
+## Screening & risk education
+- [Understanding lung-cancer screening risk](https://ntog.org/screening-risk-explained.html): Educational resource on screening risk, PLCOm2012 thresholds, pulmonary nodules, incidental findings and screening pathways.
+- [Lung screening & nodule risk hub (experimental)](https://ntog.org/ntog_lungrisk_static_tools_v3.html): Browser-only research prototype comparing published screening criteria (PLCOm2012, HUNT, Brock, Mayo, Herder, VDT).
+
+## Research infrastructure
+- [Research overview](https://ntog.org/research.html): Nordic lung-cancer research across the five countries — trials, registries, screening and care pathways.
+- [Federated dataset & visualisation builder](https://ntog.org/federated-dataset-builder.html): Educational builder for synthetic country datasets, aggregate federated outputs and R visualisation scripts.
+- [Study design & simulation builder](https://ntog.org/study-builder.html): Educational builder for PICOTS, codebooks, simulated data, design checks and starter R code.
+- [Publications, trials & theses](https://ntog.org/publications.html): Selected Nordic academic lung-cancer trials, publications and doctoral theses.
+
+## About
+- [About NTOG](https://ntog.org/about.html): Who NTOG is — a multidisciplinary Nordic lung-cancer network.
+- [Mission](https://ntog.org/mission.html): NTOG's mission and objectives.
+- [Steering committee](https://ntog.org/steering-committee.html): Country representatives across oncology, pulmonology, radiology, pathology and thoracic surgery.
+- [Collaboration](https://ntog.org/collaboration.html): How to collaborate with NTOG (industry, patient organisations, registries, allied health).
+- [Tools hub](https://ntog.org/tools.html): Index of all NTOG clinical and research tools.
+
+## Optional
+- [News](https://ntog.org/news.html): NTOG news and updates.
+- [Copyright & attribution](https://ntog.org/copyright.html): Ownership and attribution model (NTOG content; tools © Heidi Andersén / Vahtian).
+- [Privacy policy](https://ntog.org/privacy-policy.html)
+- [Terms of service](https://ntog.org/terms-of-service.html)

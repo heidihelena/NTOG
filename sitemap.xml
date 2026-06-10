@@ -1,140 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Home Page -->
   <url>
-    <loc>https://www.ntog.org/</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://ntog.org/</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>1.0</priority>
   </url>
-
-  <!-- About Section -->
   <url>
-    <loc>https://www.ntog.org/about</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/about.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/mission</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/history</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/collaboration.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/steering-committee</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/collaborations.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
-
-  <!-- Research Section -->
   <url>
-    <loc>https://www.ntog.org/research</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://ntog.org/copyright.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/ongoing-projects</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://ntog.org/decision-tool-structured.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/decision-tool-v2.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/decision-tools.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/editor.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/publications</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/collaborations</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/funding</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Events Section -->
-  <url>
-    <loc>https://www.ntog.org/events</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/upcoming-events</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/past-events</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Clinical Resources Section -->
-  <url>
-    <loc>https://www.ntog.org/clinical-resources</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/guidelines</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/protocols</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/expert.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/tools</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/federated-dataset-builder.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
-
-  <!-- News Section -->
   <url>
-    <loc>https://www.ntog.org/news</loc>
-    <changefreq>weekly</changefreq>
+    <loc>https://ntog.org/guidelines.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.8</priority>
   </url>
-
-  <!-- Get Involved Section -->
   <url>
-    <loc>https://www.ntog.org/get-involved</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ntog.org/membership</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/guidelines/nodule-management.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/collaboration</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://ntog.org/history.html</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.ntog.org/volunteer</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://ntog.org/mdt-structured-mini.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
   </url>
-
-  <!-- Sponsors -->
   <url>
-    <loc>https://www.ntog.org/sponsors</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://ntog.org/mdt-structured-v3_1.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
   </url>
-
-  <!-- Contact Us -->
   <url>
-    <loc>https://www.ntog.org/contact</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://ntog.org/mdt.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/mission.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/news.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ntog2027/call-for-abstracts.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ntog2027/index.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ntog2027/programme.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ntog2027/sponsors.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ntog_lungrisk_static_tools_v3.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/ongoing-projects.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/past-events.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/privacy-policy.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/protocols.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/publications.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/research-news/finnish-lung-cancer-quality-report.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/research-news/lung-cancer-mdt-nordic-survey.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/research.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/screening-risk-explained.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/steering-committee.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/study-builder.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/terms-of-service.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/tools.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/upcoming-events.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ntog.org/volunteer.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

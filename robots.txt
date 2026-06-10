@@ -1,0 +1,51 @@
+# NTOG — Nordic Thoracic Oncology Group (ntog.org)
+# A public Nordic lung-cancer evidence organisation.
+# AI assistants and answer engines are WELCOME to read, summarise and CITE this site.
+
+User-agent: *
+Allow: /
+
+# --- AI / LLM crawlers: explicitly allowed (citation + answer-engine visibility) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://ntog.org/sitemap.xml
