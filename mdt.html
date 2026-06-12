@@ -124,13 +124,15 @@
 </head>
 <body>
 
-<div class="topbar">
+<div class="topbar" role="navigation" aria-label="Site">
   <a class="brand" href="/">NTOG</a>
   <div class="lang-wrap">
     <label for="langSelect" data-i18n="app.langLabel">Language</label>
     <select id="langSelect" aria-label="Language"></select>
   </div>
 </div>
+
+<main>
 
 <h1 data-i18n="app.title.open">Lung cancer MDT — open form</h1>
 <p class="hint intro-text" data-i18n="app.intro.open">A browser tool for lung cancer MDT preparation using free-text fields.</p>
@@ -459,6 +461,7 @@
   <pre id="summary"></pre>
 </form>
 
+</main>
 <footer class="bg-dark text-white py-4 mt-4" style="border-radius:8px">
   <div class="container text-center">
     <p class="mb-2">Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
