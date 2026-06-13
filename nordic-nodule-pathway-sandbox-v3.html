@@ -348,6 +348,7 @@
     <button class="tab-btn" data-tab="single" aria-selected="true">1. Single Nodule</button>
     <button class="tab-btn" data-tab="cohort" aria-selected="false">2. Cohort Simulation</button>
     <button class="tab-btn" data-tab="pathways" aria-selected="false">3. Pathway Comparison</button>
+    <button class="tab-btn" data-tab="axes" aria-selected="false">4. Information Axes</button>
   </nav>
 
   <section id="tab-single" class="tab-panel active" aria-labelledby="single tab">
@@ -617,6 +618,46 @@
       <h2>Harm-weight sensitivity <span class="subtle" style="font-weight:600;">— is the lowest-harm pathway stable?</span></h2>
       <p class="subtle">Because the harm weights are subjective, each weight is independently halved and doubled while the others stay fixed. If the lowest-total-harm pathway changes, the harm-based ranking depends on that weight.</p>
       <div id="harmSensitivity" class="table-wrap"></div>
+    </div>
+  </section>
+
+  <section id="tab-axes" class="tab-panel" aria-labelledby="axes tab">
+    <div class="card">
+      <h2>Information axes — what does an orthogonal test add?</h2>
+      <p class="subtle">Imaging + clinical risk (CRS) has a discrimination ceiling. This panel asks what a genuinely <em>orthogonal</em> information axis would buy: a blood protein panel (4MP-like) or a deep-learning CT model (Sybil-like). Set each axis's standalone discrimination and how redundant it is with CRS, then see the gain for everyone versus only the contested grey zone. Educational simulation on the synthetic cohort, calibrated to published numbers (4MP AUROC ~0.74; Sybil ~0.86) — not real performance.</p>
+      <div class="grid two">
+        <div class="card" style="box-shadow:none;">
+          <h3>Protein panel (4MP-like)</h3>
+          <div class="form-row checkline"><input id="axisProteinOn" type="checkbox" checked><label for="axisProteinOn">Include protein axis</label></div>
+          <div class="form-row"><label for="axisProteinAuc">Standalone AUROC <output id="axisProteinAucOut"></output></label><input id="axisProteinAuc" type="range" min="0.55" max="0.90" step="0.01" value="0.74"></div>
+          <div class="form-row"><label for="axisProteinRho">Redundancy with CRS — 0 = orthogonal <output id="axisProteinRhoOut"></output></label><input id="axisProteinRho" type="range" min="0" max="0.9" step="0.05" value="0.30"></div>
+        </div>
+        <div class="card" style="box-shadow:none;">
+          <h3>Deep-learning CT (Sybil-like)</h3>
+          <div class="form-row checkline"><input id="axisSybilOn" type="checkbox" checked><label for="axisSybilOn">Include DL-CT axis</label></div>
+          <div class="form-row"><label for="axisSybilAuc">Standalone AUROC <output id="axisSybilAucOut"></output></label><input id="axisSybilAuc" type="range" min="0.70" max="0.95" step="0.01" value="0.86"></div>
+          <div class="form-row"><label for="axisSybilRho">Redundancy with CRS — shares imaging <output id="axisSybilRhoOut"></output></label><input id="axisSybilRho" type="range" min="0" max="0.9" step="0.05" value="0.60"></div>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row"><label for="axisContestPct">Contested grey zone — % of cohort by CRS <output id="axisContestPctOut"></output></label><input id="axisContestPct" type="range" min="10" max="80" step="5" value="40"></div>
+        <div class="form-row"><label for="axisSpec">Operating specificity for sensitivity / complementarity <output id="axisSpecOut"></output></label><input id="axisSpec" type="range" min="0.70" max="0.95" step="0.01" value="0.85"></div>
+      </div>
+      <div class="btn-row"><button class="btn" id="axisRun">Compute information axes</button></div>
+    </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <h2>Discrimination ladder</h2>
+      <div id="axisLadder" class="table-wrap"></div>
+    </div>
+    <div class="card" style="margin-top:1rem;">
+      <h2>Complementarity at the chosen specificity</h2>
+      <p class="subtle">Among true malignancies: who does each axis catch, and how many does a new axis catch that the others miss?</p>
+      <div id="axisComplementarity" class="table-wrap"></div>
+    </div>
+    <div class="card" style="margin-top:1rem;">
+      <h2>Guideline takeaway</h2>
+      <div id="axisTakeaway" class="notice"></div>
     </div>
   </section>
 
@@ -2351,14 +2392,154 @@ function syncDiameterVolume(source) {
   }
   syncDiameterVolume.lock = false;
 }
+// ---- Information-axes module: orthogonal-axis value for guideline planning ----
+function zscores(arr) {
+  const n = arr.length || 1;
+  const m = arr.reduce((s, v) => s + v, 0) / n;
+  const sd = Math.sqrt(arr.reduce((s, v) => s + (v - m) * (v - m), 0) / n) || 1;
+  return arr.map(v => (v - m) / sd);
+}
+function fracRanks(arr) {
+  const order = arr.map((v, i) => [v, i]).sort((a, b) => a[0] - b[0]);
+  const r = new Array(arr.length);
+  const d = (arr.length - 1) || 1;
+  order.forEach((p, k) => { r[p[1]] = k / d; });
+  return r;
+}
+// Synthesise a per-patient axis score with a target standalone AUROC against the
+// real labels and a target redundancy (correlation) with the CRS signal zc.
+function synthAxis(zc, y, targetAuc, rho, rng) {
+  const orth = Math.sqrt(Math.max(0, 1 - rho * rho));
+  const eps = zc.map(() => rng.normal(0, 1));
+  const sig = y.map(v => v ? 0.5 : -0.5);
+  const score = (beta) => zc.map((z, i) => rho * z + orth * (beta * sig[i] + eps[i]));
+  let lo = 0, hi = 30;
+  for (let k = 0; k < 40; k++) {
+    const mid = (lo + hi) / 2;
+    if (aucByRank(score(mid), y) < targetAuc) lo = mid; else hi = mid;
+  }
+  return score((lo + hi) / 2);
+}
+function updateAxisLabels() {
+  const set = (id, val) => { const o = $(id + 'Out'); if (o) o.textContent = val; };
+  set('axisProteinAuc', (+$('axisProteinAuc').value).toFixed(2));
+  set('axisProteinRho', (+$('axisProteinRho').value).toFixed(2));
+  set('axisSybilAuc', (+$('axisSybilAuc').value).toFixed(2));
+  set('axisSybilRho', (+$('axisSybilRho').value).toFixed(2));
+  set('axisContestPct', $('axisContestPct').value + '%');
+  set('axisSpec', (+$('axisSpec').value).toFixed(2));
+}
+function renderAxes() {
+  const lad = $('axisLadder'), comp = $('axisComplementarity'), take = $('axisTakeaway');
+  if (!lad) return;
+  if (!state.cohort || !state.cohort.length) {
+    lad.innerHTML = ''; comp.innerHTML = '';
+    take.innerHTML = 'Run a cohort first on tab 2 (Cohort Simulation), then return here.';
+    return;
+  }
+  updateAxisLabels();
+  const cohort = state.cohort;
+  const y = cohort.map(p => !!p.malignant);
+  const crs = cohort.map(p => p.crs);
+  const zc = zscores(crs);
+  const aucCrs = aucByRank(crs, y);
+  const rng = makeRng((((state.params && state.params.seed) || 42) + 707070) >>> 0);
+  const useP = $('axisProteinOn').checked, useS = $('axisSybilOn').checked;
+  const aP = +$('axisProteinAuc').value, rP = +$('axisProteinRho').value;
+  const aS = +$('axisSybilAuc').value, rS = +$('axisSybilRho').value;
+  const spec = +$('axisSpec').value, pctC = +$('axisContestPct').value / 100;
+
+  const zP = useP ? zscores(synthAxis(zc, y, aP, rP, rng)) : null;
+  const zS = useS ? zscores(synthAxis(zc, y, aS, rS, rng)) : null;
+
+  const sorted = [...crs].sort((a, b) => a - b);
+  const q = (p) => sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(p * (sorted.length - 1))))];
+  const qlo = q(0.5 - pctC / 2), qhi = q(0.5 + pctC / 2);
+  const contested = crs.map(v => v >= qlo && v <= qhi);
+  const fracTested = contested.filter(Boolean).length / cohort.length;
+  const rcrs = fracRanks(crs);
+
+  const weightedCombo = (parts) => {
+    const w = parts.map(p => Math.max(1e-6, p.auc - 0.5));
+    return crs.map((_, i) => parts.reduce((acc, p, j) => acc + w[j] * p.z[i], 0));
+  };
+
+  const ladder = [['CRS alone (imaging + clinical)', aucCrs, '—']];
+  let comboAllAuc = aucCrs, unionExtra = 0;
+  if (useP) {
+    const all = weightedCombo([{ z: zc, auc: aucCrs }, { z: zP, auc: aP }]);
+    ladder.push(['CRS + protein (all nodules)', aucByRank(all, y), '100%']);
+    const rall = fracRanks(all);
+    const hyb = crs.map((_, i) => contested[i] ? rall[i] : rcrs[i]);
+    ladder.push([`CRS + protein (contested ${(fracTested * 100).toFixed(0)}% only)`, aucByRank(hyb, y), `${(fracTested * 100).toFixed(0)}%`]);
+  }
+  if (useS) {
+    const all = weightedCombo([{ z: zc, auc: aucCrs }, { z: zS, auc: aS }]);
+    ladder.push(['CRS + DL-CT (all nodules)', aucByRank(all, y), '100%']);
+  }
+  if (useP && useS) {
+    const all = weightedCombo([{ z: zc, auc: aucCrs }, { z: zP, auc: aP }, { z: zS, auc: aS }]);
+    comboAllAuc = aucByRank(all, y);
+    ladder.push(['All three axes', comboAllAuc, '100%']);
+  }
+
+  const minA = 0.5, maxA = 1.0;
+  lad.innerHTML = '<table><thead><tr><th>Model</th><th>AUROC</th><th>Testing burden</th></tr></thead><tbody>' +
+    ladder.map(r => {
+      const w = Math.max(0, Math.min(100, (r[1] - minA) / (maxA - minA) * 100));
+      return `<tr><td>${esc(r[0])}</td><td><span style="display:inline-block;height:0.7rem;width:${w * 1.4}px;max-width:160px;background:#1f4e79;border-radius:3px;vertical-align:middle;margin-right:0.45rem;"></span>${fmt(r[1], 3)}</td><td>${esc(r[2])}</td></tr>`;
+    }).join('') + '</tbody></table>';
+
+  const caught = (score) => {
+    const ben = score.filter((v, i) => !y[i]).sort((a, b) => a - b);
+    const thr = ben[Math.min(ben.length - 1, Math.round(spec * (ben.length - 1)))];
+    const set = new Set();
+    score.forEach((v, i) => { if (y[i] && v >= thr) set.add(i); });
+    return set;
+  };
+  const nmal = y.filter(Boolean).length || 1;
+  const setC = caught(crs);
+  const setP = useP ? caught(zP) : new Set();
+  const setS = useS ? caught(zS) : new Set();
+  const union = new Set([...setC, ...setP, ...setS]);
+  unionExtra = union.size - setC.size;
+  const onlyP = [...setP].filter(i => !setC.has(i) && !setS.has(i)).length;
+  const onlyS = [...setS].filter(i => !setC.has(i) && !setP.has(i)).length;
+  comp.innerHTML = `<table><thead><tr><th>At ${(spec * 100).toFixed(0)}% specificity</th><th>Sensitivity</th><th>Malignancies caught (of ${nmal})</th></tr></thead><tbody>` +
+    `<tr><td>CRS alone</td><td>${pct(setC.size / nmal, 1)}</td><td>${setC.size}</td></tr>` +
+    (useP ? `<tr><td>Protein panel</td><td>${pct(setP.size / nmal, 1)}</td><td>${setP.size} <span class="subtle">(${onlyP} that CRS &amp; CT miss)</span></td></tr>` : '') +
+    (useS ? `<tr><td>DL-CT</td><td>${pct(setS.size / nmal, 1)}</td><td>${setS.size} <span class="subtle">(${onlyS} that the others miss)</span></td></tr>` : '') +
+    `<tr><td><strong>Any axis (union)</strong></td><td><strong>${pct(union.size / nmal, 1)}</strong></td><td><strong>${union.size}</strong></td></tr>` +
+    '</tbody></table>';
+
+  let msg = `On this synthetic cohort (n=${cohort.length}, ${pct(nmal / cohort.length, 0)} malignant), CRS alone reaches AUROC <strong>${fmt(aucCrs, 3)}</strong>. `;
+  if (useP) {
+    const allRow = ladder.find(r => r[0].startsWith('CRS + protein (all'));
+    const conRow = ladder.find(r => r[0].includes('contested'));
+    const gAll = allRow[1] - aucCrs, gCon = conRow[1] - aucCrs;
+    msg += `Adding the protein panel everywhere lifts it to <strong>${fmt(allRow[1], 3)}</strong> (+${fmt(gAll, 3)}); applying it to only the contested ${(fracTested * 100).toFixed(0)}% recovers <strong>${gAll > 1e-4 ? pct(gCon / gAll, 0) : '0%'}</strong> of that gain at ${(fracTested * 100).toFixed(0)}% testing burden. `;
+  }
+  if (useP && useS) {
+    msg += `All three axes together reach <strong>${fmt(comboAllAuc, 3)}</strong>, and at ${(spec * 100).toFixed(0)}% specificity the axes jointly catch <strong>${unionExtra}</strong> malignancies that CRS alone misses. `;
+  }
+  msg += 'Guideline implication: a new axis is worth most when it is orthogonal (low redundancy with imaging) and is deployed on the contested grey zone rather than the whole cohort.';
+  take.innerHTML = msg;
+}
+
 function setupEvents() {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       $('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'axes') renderAxes();
     });
   });
+  ['axisProteinOn','axisProteinAuc','axisProteinRho','axisSybilOn','axisSybilAuc','axisSybilRho','axisContestPct','axisSpec'].forEach(id => {
+    const el = $(id);
+    if (el) { el.addEventListener('input', renderAxes); el.addEventListener('change', renderAxes); }
+  });
+  if ($('axisRun')) $('axisRun').addEventListener('click', renderAxes);
   $('singleDiameter').addEventListener('input', () => { syncDiameterVolume('diameter'); recalcSingle(); });
   $('singleVolume').addEventListener('input', () => { syncDiameterVolume('volume'); recalcSingle(); });
   ['singlePriorVolume','singleInterval','singleType','singlePet','singleCount','singleAge','singleSex','singleSpic','singleUpper','singleEmphysema','singleFamily'].forEach(id => {
