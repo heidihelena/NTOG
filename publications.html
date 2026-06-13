@@ -739,7 +739,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const verificationStatusFromSource = (sourceType, doiIsbnText) => {
     const id = cleanText(doiIsbnText).toLowerCase();
 
-    if (id.includes("doi.org") || id.includes("doi:") || id.includes("isbn")) {
+    // Detect a DOI/ISBN by its identifier syntax rather than by matching a
+    // hostname substring (a bare "doi.org" substring can appear anywhere in a
+    // URL and is not a reliable host check).
+    const hasDoi = /\b10\.\d{4,9}\/\S+/.test(id) || /\bdoi:\s*\S+/.test(id);
+    const hasIsbn = /\bisbn\b/.test(id);
+
+    if (hasDoi || hasIsbn) {
       return "Identifier listed; source verification still required";
     }
 
