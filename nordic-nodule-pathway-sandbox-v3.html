@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Browser-only tool: block all network egress and framing. No CDN, fetch, or external resources. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; font-src 'self'; frame-ancestors 'self'">
+
+<title>Nordic Nodule Pathway Sandbox v3 | NTOG</title>
+<link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta name="description" content="Standalone educational NTOG sandbox for pulmonary nodule pathway development: composite risk scoring, Brock 2013 (PanCan) and Herder PET update, volume doubling time, synthetic cohort simulation, ROC/AUC, Euclidean grey-zone geometry, four-centroid mixture decomposition, gap-population analysis and decision-boundary robustness. Educational and research-planning only; not a medical device.">
+<meta name="keywords" content="pulmonary nodule, lung cancer screening, Brock model, Herder, volume doubling time, clinical pathway, gap population, grey zone, decision support, Nordic guideline, NTOG">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Heidi Andersén (Vahtian)">
+<link rel="canonical" href="https://ntog.org/nordic-nodule-pathway-sandbox-v3.html">
+
+<meta property="og:title" content="Nordic Nodule Pathway Sandbox v3 | NTOG">
+<meta property="og:description" content="A transparent, browser-only sandbox for nodule pathway development: gap-population analysis, grey-zone geometry, four-centroid mixture decomposition and boundary robustness. Educational; not a medical device.">
+<meta property="og:image" content="https://ntog.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nordic Thoracic Oncology Group logo and site title">
+<meta property="og:url" content="https://ntog.org/nordic-nodule-pathway-sandbox-v3.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nordic Thoracic Oncology Group">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nordic Nodule Pathway Sandbox v3 | NTOG">
+<meta name="twitter:description" content="Browser-only NTOG sandbox for pulmonary nodule pathway development. Educational; not a medical device.">
+<meta name="twitter:image" content="https://ntog.org/og-image.png">
+<meta name="twitter:image:alt" content="Nordic Thoracic Oncology Group logo and site title">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Nordic Nodule Pathway Sandbox v3",
+  "description": "Browser-only educational sandbox for pulmonary nodule pathway development: composite risk scoring, synthetic cohort simulation, ROC/AUC, Euclidean grey-zone geometry, four-centroid mixture decomposition, gap-population analysis and decision-boundary robustness. Not a medical device.",
+  "url": "https://ntog.org/nordic-nodule-pathway-sandbox-v3.html",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "name": "Nordic Thoracic Oncology Group", "url": "https://ntog.org" },
+  "publisher": { "@type": "MedicalOrganization", "name": "Nordic Thoracic Oncology Group", "alternateName": "NTOG", "url": "https://ntog.org" },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "identifier": "https://doi.org/10.5281/zenodo.20632838",
+  "sameAs": "https://doi.org/10.5281/zenodo.20632838",
+  "dateModified": "2026-06-13",
+  "about": { "@type": "MedicalCondition", "name": "Lung cancer" },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Clinician" },
+  "author": {
+    "@type": "Person",
+    "name": "Heidi Andersén",
+    "honorificSuffix": "MD, PhD",
+    "jobTitle": "Docent, Tampere University; Clinical Lecturer, University of Turku",
+    "affiliation": [
+      { "@type": "CollegeOrUniversity", "name": "Tampere University", "url": "https://www.tuni.fi/en" },
+      { "@type": "CollegeOrUniversity", "name": "University of Turku", "url": "https://www.utu.fi/en" }
+    ],
+    "knowsAbout": ["Lung cancer", "Thoracic oncology", "Cancer registries", "Multidisciplinary team"],
+    "description": "Thoracic/lung oncology clinician-scientist; clinical lead of the Finnish lung cancer registry. Editor and lead author of NTOG clinical content.",
+    "url": "https://ntog.org/editor.html",
+    "sameAs": [
+      "https://orcid.org/0000-0001-5923-5865",
+      "https://www.linkedin.com/in/heidihelena/",
+      "https://researchportal.tuni.fi/en/persons/heidi-andersen/",
+      "https://www.utu.fi/en/people/heidi-andersen",
+      "https://www.webofscience.com/wos/author/record/AAM-8114-2021"
+    ],
+    "identifier": "https://orcid.org/0000-0001-5923-5865"
+  }
+}
+</script>
+<style>
+  :root {
+    --navy: #102a43;
+    --blue: #1f4e79;
+    --cyan: #2f80a7;
+    --bg: #f5f8fb;
+    --card: #ffffff;
+    --ink: #1f2933;
+    --muted: #52606d;
+    --line: #d9e2ec;
+    --soft: #eef5f9;
+    --accent: #7ad151;
+    --vir0: #440154;
+    --vir1: #3b528b;
+    --vir2: #21918c;
+    --vir3: #5ec962;
+    --vir4: #fde725;
+    --ok-blue: #0072B2;
+    --ok-orange: #D55E00;
+    --ok-sky: #56B4E9;
+    --ok-green: #009E73;
+    --ok-yellow: #F0E442;
+    --ok-purple: #CC79A7;
+    --ok-black: #111827;
+    --shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+  }
+  button, input, select, textarea { font: inherit; }
+  .banner {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff6d6;
+    color: #4a3b00;
+    border-bottom: 1px solid #ead891;
+    padding: 0.65rem 1rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--cyan) 100%);
+    color: #fff;
+    padding: 2.6rem 1rem 2.2rem;
+  }
+  .wrap { max-width: 1380px; margin: 0 auto; }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .brand-mark {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.35);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+  .brand-title { font-size: 1.05rem; font-weight: 800; letter-spacing: 0.04em; }
+  .eyebrow {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    margin-bottom: 0.9rem;
+  }
+  h1, h2, h3, h4 { margin: 0 0 0.6rem; line-height: 1.15; color: inherit; }
+  h1 { font-size: clamp(2rem, 5vw, 4rem); max-width: 1050px; }
+  .lead { max-width: 980px; color: rgba(255,255,255,0.88); font-size: 1.08rem; }
+  main { padding: 1rem; }
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+    max-width: 1380px;
+  }
+  .tab-btn {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--navy);
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 800;
+  }
+  .tab-btn[aria-selected="true"] {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+  }
+  .tab-panel { display: none; max-width: 1380px; margin: 0 auto 2rem; }
+  .tab-panel.active { display: block; }
+  .grid { display: grid; gap: 1rem; }
+  .grid.two { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+  .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+  }
+  .card h2 { color: var(--navy); font-size: 1.4rem; }
+  .card h3 { color: var(--navy); font-size: 1.05rem; }
+  .subtle { color: var(--muted); font-size: 0.93rem; }
+  .small { font-size: 0.86rem; }
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .form-grid.one { grid-template-columns: 1fr; }
+  .form-row { display: flex; flex-direction: column; gap: 0.28rem; }
+  label { font-weight: 800; color: #243b53; font-size: 0.9rem; }
+  input[type="number"], input[type="text"], select {
+    width: 100%;
+    border: 1px solid #bcccdc;
+    border-radius: 0.65rem;
+    padding: 0.55rem 0.65rem;
+    background: #fff;
+    color: var(--ink);
+  }
+  input[type="range"] { width: 100%; accent-color: var(--blue); }
+  .checkline { display: flex; align-items: center; gap: 0.5rem; padding-top: 1.65rem; }
+  .checkline input { width: 1.1rem; height: 1.1rem; }
+  .btn-row { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; }
+  .btn {
+    border: 0;
+    background: var(--blue);
+    color: #fff;
+    border-radius: 0.75rem;
+    padding: 0.72rem 1rem;
+    cursor: pointer;
+    font-weight: 850;
+  }
+  .btn.secondary { background: #e5eef5; color: var(--navy); border: 1px solid #c9d6e2; }
+  .btn:focus-visible, .tab-btn:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 3px solid #f0e442;
+    outline-offset: 2px;
+  }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0.75rem; }
+  .metric {
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 0.8rem;
+    background: #fbfdff;
+    min-height: 82px;
+  }
+  .metric .k { color: var(--muted); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+  .metric .v { color: var(--navy); font-weight: 900; font-size: 1.35rem; margin-top: 0.2rem; }
+  .metric .s { color: var(--muted); font-size: 0.82rem; }
+  .tier {
+    border-radius: 0.85rem;
+    padding: 0.85rem;
+    background: #eef5f9;
+    border: 1px solid #d5e5ef;
+  }
+  .svgbox {
+    width: 100%;
+    min-height: 240px;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    background: #fff;
+    overflow: hidden;
+  }
+  .svgbox svg { display: block; width: 100%; height: auto; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; background: #fff; }
+  th, td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #e5eaf0; text-align: left; vertical-align: top; }
+  th { background: #eef5f9; color: var(--navy); font-size: 0.85rem; }
+  tr:last-child td { border-bottom: 0; }
+  details {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 0.85rem 1rem;
+  }
+  details > summary {
+    cursor: pointer;
+    color: var(--navy);
+    font-weight: 900;
+  }
+  details .details-body { margin-top: 1rem; }
+  .adv-table input { min-width: 82px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+    margin: 0.15rem;
+  }
+  .legend-dot { width: 0.7rem; height: 0.7rem; display: inline-block; border-radius: 50%; }
+  .notice {
+    background: #f2fbf7;
+    border: 1px solid #bde7d4;
+    border-radius: 0.9rem;
+    padding: 0.85rem;
+    color: #174c38;
+  }
+  .warn {
+    background: #fff8e8;
+    border-color: #efd89a;
+    color: #5a4300;
+  }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .split-output { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr); gap: 1rem; }
+  .kbd {
+    border: 1px solid #bcccdc;
+    background: #f8fafc;
+    border-radius: 0.4rem;
+    padding: 0.05rem 0.35rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+  }
+  footer { max-width: 1380px; margin: 1.5rem auto 2rem; color: var(--muted); font-size: 0.9rem; padding: 0 1rem; }
+  @media (max-width: 1120px) {
+    .grid.two, .grid.three, .grid.four, .split-output { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 720px) {
+    main { padding: 0.65rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr; }
+    .checkline { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="banner">Educational and research-planning use only. Not a medical device. Brock model is not validated for Nordic populations.</div>
+<header>
+  <div class="wrap">
+    <a class="brand" href="/" style="text-decoration:none;color:inherit;" aria-label="Nordic Thoracic Oncology Group — home">
+      <div class="brand-mark" aria-hidden="true">N</div>
+      <div>
+        <div class="brand-title">NTOG</div>
+        <div class="subtle" style="color: rgba(255,255,255,0.72);">Nordic Thoracic Oncology Group</div>
+      </div>
+    </a>
+    <div class="eyebrow">Nordic Nodule Pathway Sandbox v3</div>
+    <h1>Continuous risk, AUC, Euclidean grey-zone mapping, multicentre uncertainty, and pathway comparison</h1>
+    <p class="lead">A standalone browser sandbox for working-group discussion. The synthetic cohort assumptions are editable and are not empirical Nordic registry estimates.</p>
+    <nav aria-label="NTOG site" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem 1.1rem;font-weight:700;font-size:0.95rem;">
+      <a href="/" style="color:#fff;">NTOG home</a>
+      <a href="/tools.html" style="color:#fff;">All tools</a>
+      <a href="/ntog_lungrisk_static_tools_v3.html" style="color:#fff;">LungRisk hub</a>
+      <a href="/guidelines/nodule-management.html" style="color:#fff;">Nodule management</a>
+      <a href="#cite" style="color:#fff;">Cite this tool</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs" aria-label="Sandbox sections">
+    <button class="tab-btn" data-tab="single" aria-selected="true">1. Single Nodule</button>
+    <button class="tab-btn" data-tab="cohort" aria-selected="false">2. Cohort Simulation</button>
+    <button class="tab-btn" data-tab="pathways" aria-selected="false">3. Pathway Comparison</button>
+  </nav>
+
+  <section id="tab-single" class="tab-panel active" aria-labelledby="single tab">
+    <div class="grid two">
+      <div class="card">
+        <h2>Single nodule inputs</h2>
+        <p class="subtle">Diameter and volume are linked as a sphere. Brock uses diameter. The growth component uses volume.</p>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="singleDiameter">Nodule diameter (mm)</label>
+            <input id="singleDiameter" type="number" min="3" max="30" step="0.1" value="8">
+          </div>
+          <div class="form-row">
+            <label for="singleVolume">Nodule volume (mm3)</label>
+            <input id="singleVolume" type="number" min="14" max="14000" step="1" value="268">
+          </div>
+          <div class="form-row">
+            <label for="singlePriorVolume">Prior volume (mm3), optional</label>
+            <input id="singlePriorVolume" type="number" min="14" max="14000" step="1" placeholder="blank if no prior scan">
+          </div>
+          <div class="form-row">
+            <label for="singleInterval">Scan interval (days)</label>
+            <input id="singleInterval" type="number" min="30" max="1500" step="1" value="365">
+          </div>
+          <div class="form-row">
+            <label for="singleType">Nodule type</label>
+            <select id="singleType">
+              <option>Solid</option>
+              <option>Part-solid</option>
+              <option>Non-solid (GGO)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="singlePet">PET avidity, optional</label>
+            <select id="singlePet">
+              <option value="">Not entered</option>
+              <option value="none">None</option>
+              <option value="faint">Faint</option>
+              <option value="moderate">Moderate</option>
+              <option value="intense">Intense</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="singleCount">Nodule count</label>
+            <input id="singleCount" type="number" min="1" max="20" step="1" value="1">
+          </div>
+          <div class="form-row">
+            <label for="singleAge">Age (years)</label>
+            <input id="singleAge" type="number" min="40" max="85" step="1" value="65">
+          </div>
+          <div class="form-row">
+            <label for="singleSex">Sex</label>
+            <select id="singleSex"><option value="female">Female</option><option value="male">Male</option></select>
+          </div>
+          <div class="form-row checkline">
+            <input id="singleSpic" type="checkbox">
+            <label for="singleSpic">Spiculation</label>
+          </div>
+          <div class="form-row checkline">
+            <input id="singleUpper" type="checkbox" checked>
+            <label for="singleUpper">Upper lobe location</label>
+          </div>
+          <div class="form-row checkline">
+            <input id="singleEmphysema" type="checkbox">
+            <label for="singleEmphysema">Emphysema present</label>
+          </div>
+          <div class="form-row checkline">
+            <input id="singleFamily" type="checkbox">
+            <label for="singleFamily">Family history lung cancer</label>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="singleRecalc">Recalculate single nodule</button>
+          <button class="btn secondary" id="singleReset">Reset example</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Single nodule output</h2>
+        <div class="split-output">
+          <div>
+            <div id="singleGauge" class="svgbox" aria-label="Composite risk score gauge"></div>
+            <div class="metric-grid" style="margin-top: 0.8rem;">
+              <div class="metric"><div class="k">CRS</div><div class="v" id="outCrs">-</div><div class="s" id="outFormula">-</div></div>
+              <div class="metric"><div class="k">Brock 2013</div><div class="v" id="outBrock">-</div><div class="s">PanCan score, not Nordic-validated</div></div>
+              <div class="metric"><div class="k">Herder post-PET</div><div class="v" id="outHerder">-</div><div class="s">Computed only if PET entered</div></div>
+              <div class="metric"><div class="k">VDT band</div><div class="v" id="outVdt">-</div><div class="s" id="outVdtCi">-</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="tier">
+              <h3>CRS action tier</h3>
+              <p id="outTier" style="margin-top:0.4rem;">-</p>
+            </div>
+            <div class="tier" style="margin-top:0.8rem;">
+              <h3>Position in cohort feature space</h3>
+              <p id="outDistance" class="subtle">Run a cohort simulation to populate malignant and benign centroids.</p>
+            </div>
+            <div class="tier" style="margin-top:0.8rem;">
+              <h3>Why this tier</h3>
+              <div id="outWhy" class="subtle">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-cohort" class="tab-panel" aria-labelledby="cohort tab">
+    <div class="grid two">
+      <div class="card">
+        <h2>Cohort parameters</h2>
+        <div class="form-grid">
+          <div class="form-row"><label for="cohortN">Cohort size <output id="cohortNOut"></output></label><input id="cohortN" type="range" min="500" max="10000" step="100" value="2000"></div>
+          <div class="form-row"><label for="prevalence">Malignancy prevalence (%) <output id="prevalenceOut"></output></label><input id="prevalence" type="range" min="1" max="50" step="0.5" value="8"></div>
+          <div class="form-row"><label for="meanMalVdt">Mean malignant VDT (days) <output id="meanMalVdtOut"></output></label><input id="meanMalVdt" type="range" min="60" max="500" step="5" value="180"></div>
+          <div class="form-row"><label for="sdMalLogVdt">SD malignant log-VDT <output id="sdMalLogVdtOut"></output></label><input id="sdMalLogVdt" type="range" min="0.1" max="1.2" step="0.05" value="0.5"></div>
+          <div class="form-row"><label for="meanBenVdt">Mean benign VDT (days) <output id="meanBenVdtOut"></output></label><input id="meanBenVdt" type="range" min="400" max="3000" step="25" value="1200"></div>
+          <div class="form-row"><label for="sdBenLogVdt">SD benign log-VDT <output id="sdBenLogVdtOut"></output></label><input id="sdBenLogVdt" type="range" min="0.1" max="1.5" step="0.05" value="0.6"></div>
+          <div class="form-row"><label for="inflamShare">Inflammatory-spike benigns (%) <output id="inflamShareOut"></output></label><input id="inflamShare" type="range" min="0" max="30" step="1" value="9"></div>
+          <div class="form-row"><label for="measurementCv">Measurement CV per volume (%) <output id="measurementCvOut"></output></label><input id="measurementCv" type="range" min="5" max="25" step="1" value="14"></div>
+          <div class="form-row"><label for="noPriorShare">No prior scan (%) <output id="noPriorShareOut"></output></label><input id="noPriorShare" type="range" min="0" max="60" step="1" value="25"></div>
+          <div class="form-row"><label for="cohortSeed">Random seed</label><input id="cohortSeed" type="number" step="1" value="42"></div>
+          <div class="form-row"><label for="operatingThreshold">Operating CRS threshold <output id="operatingThresholdOut"></output></label><input id="operatingThreshold" type="range" min="0.01" max="0.90" step="0.01" value="0.35"></div>
+          <div class="form-row"><label for="greyLow">Grey-zone lower r <output id="greyLowOut"></output></label><input id="greyLow" type="range" min="0.20" max="0.55" step="0.01" value="0.40"></div>
+          <div class="form-row"><label for="greyHigh">Grey-zone upper r <output id="greyHighOut"></output></label><input id="greyHigh" type="range" min="0.45" max="0.80" step="0.01" value="0.60"></div>
+          <div class="form-row"><label for="kernelTau">Multicentre kernel bandwidth tau <output id="kernelTauOut"></output></label><input id="kernelTau" type="range" min="0.20" max="4.00" step="0.05" value="1.10"></div>
+          <div class="form-row"><label for="robustN">Boundary perturbations per patient <output id="robustNOut"></output></label><input id="robustN" type="range" min="0" max="120" step="10" value="40"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="runSimulation">Re-run simulation</button>
+          <button class="btn secondary" id="exportResults">Export results JSON</button>
+          <span id="simStatus" class="subtle" role="status"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Advanced cohort settings</h2>
+        <p class="subtle">These defaults are plausible synthetic Nordic-mixed-cohort priors for sandbox discussion, not empirical Nordic registry data. Type probabilities are normalised internally if they do not sum to 1.</p>
+        <details>
+          <summary>Edit class-conditional distributions</summary>
+          <div class="details-body table-wrap">
+            <table class="adv-table">
+              <thead><tr><th>Feature</th><th>Malignant</th><th>Benign</th></tr></thead>
+              <tbody>
+                <tr><td>log10 volume mu</td><td><input id="adv_m_logv_mu" type="number" step="0.01" value="2.7"></td><td><input id="adv_b_logv_mu" type="number" step="0.01" value="2.2"></td></tr>
+                <tr><td>log10 volume SD</td><td><input id="adv_m_logv_sd" type="number" step="0.01" value="0.45"></td><td><input id="adv_b_logv_sd" type="number" step="0.01" value="0.50"></td></tr>
+                <tr><td>Type probabilities, solid / part-solid / GGO</td><td><input id="adv_m_type_solid" type="number" step="0.01" value="0.55"> <input id="adv_m_type_part" type="number" step="0.01" value="0.30"> <input id="adv_m_type_ggo" type="number" step="0.01" value="0.15"></td><td><input id="adv_b_type_solid" type="number" step="0.01" value="0.80"> <input id="adv_b_type_part" type="number" step="0.01" value="0.10"> <input id="adv_b_type_ggo" type="number" step="0.01" value="0.10"></td></tr>
+                <tr><td>Spiculation probability</td><td><input id="adv_m_spic" type="number" step="0.01" value="0.45"></td><td><input id="adv_b_spic" type="number" step="0.01" value="0.10"></td></tr>
+                <tr><td>Upper lobe probability</td><td><input id="adv_m_upper" type="number" step="0.01" value="0.65"></td><td><input id="adv_b_upper" type="number" step="0.01" value="0.40"></td></tr>
+                <tr><td>Nodule count Poisson lambda plus 1</td><td><input id="adv_m_count_lam" type="number" step="0.1" value="2"></td><td><input id="adv_b_count_lam" type="number" step="0.1" value="3"></td></tr>
+                <tr><td>Age mu / SD</td><td><input id="adv_m_age_mu" type="number" step="0.1" value="68"> <input id="adv_m_age_sd" type="number" step="0.1" value="8"></td><td><input id="adv_b_age_mu" type="number" step="0.1" value="62"> <input id="adv_b_age_sd" type="number" step="0.1" value="10"></td></tr>
+                <tr><td>Female probability</td><td><input id="adv_m_female" type="number" step="0.01" value="0.55"></td><td><input id="adv_b_female" type="number" step="0.01" value="0.50"></td></tr>
+                <tr><td>Emphysema probability</td><td><input id="adv_m_emph" type="number" step="0.01" value="0.45"></td><td><input id="adv_b_emph" type="number" step="0.01" value="0.20"></td></tr>
+                <tr><td>Family history probability</td><td><input id="adv_m_family" type="number" step="0.01" value="0.20"></td><td><input id="adv_b_family" type="number" step="0.01" value="0.10"></td></tr>
+                <tr><td>Pack-years Gamma shape / scale</td><td><input id="adv_m_pack_shape" type="number" step="0.1" value="2.5"> <input id="adv_m_pack_scale" type="number" step="0.1" value="18"></td><td><input id="adv_b_pack_shape" type="number" step="0.1" value="2.0"> <input id="adv_b_pack_scale" type="number" step="0.1" value="14"></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem;">
+      <div class="card">
+        <h2>ROC and AUC for CRS</h2>
+        <div id="rocSummary" class="metric-grid"></div>
+        <div id="rocSvg" class="svgbox" style="margin-top:0.8rem;"></div>
+      </div>
+      <div class="card">
+        <h2>Euclidean grey-zone summary</h2>
+        <div id="distanceSummary" class="metric-grid"></div>
+        <div id="greyComposition" class="notice" style="margin-top:0.8rem;"></div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem;">
+      <div class="card">
+        <h2>Multicentre centroid decomposition</h2>
+        <p class="subtle">We adapt the local-centroid decomposition principle from multicentric calculus to a clinical feature space, replacing complex polynomial roots with empirically estimated clinical centroids and holomorphic basis functions with Gaussian kernel weights. This yields a soft mixture score that inherits the interpretability and numerical stability properties of the multicentric framework without requiring the full holomorphic machinery.</p>
+        <div id="multiCentroidSummary" class="metric-grid"></div>
+        <div id="multiCentroidBars" class="svgbox" style="margin-top:0.8rem;"></div>
+      </div>
+      <div class="card">
+        <h2>Boundary robustness under measurement noise</h2>
+        <p class="subtle">Each patient is perturbed using the configured volume CV. Prior and current volumes are both perturbed when a prior scan exists. Pathway decisions are then reclassified to estimate decision fragility.</p>
+        <div id="fragilitySummary" class="notice"></div>
+        <div id="fragilitySvg" class="svgbox" style="margin-top:0.8rem;"></div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:1rem;">
+      <div class="card">
+        <h2>Feature-space PCA scatter</h2>
+        <p class="subtle">Feature vector: z(log10 current volume), z(G(VDT)), and unnormalised Brock_P. Triangles mark no-prior-scan patients.</p>
+        <div id="scatterSvg" class="svgbox"></div>
+      </div>
+      <div class="card">
+        <h2>Distance-ratio histogram</h2>
+        <p class="subtle">r = distance to malignant centroid / (distance to malignant + distance to benign). r near 0.5 is the grey zone.</p>
+        <div id="histSvg" class="svgbox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-pathways" class="tab-panel" aria-labelledby="pathways tab">
+    <div class="grid two">
+      <div class="card">
+        <h2>Built-in pathway controls</h2>
+        <div class="form-grid">
+          <div class="form-row"><label for="pathBrockThreshold">Brock-only threshold</label><input id="pathBrockThreshold" type="number" min="0.01" max="0.80" step="0.01" value="0.10"></div>
+          <div class="form-row"><label for="pathCrsThreshold">CRS threshold</label><input id="pathCrsThreshold" type="number" min="0.01" max="0.95" step="0.01" value="0.35"></div>
+          <div class="form-row"><label for="growLowerVdt">GrowCAT VDT lower (days)</label><input id="growLowerVdt" type="number" min="30" max="400" step="10" value="100"></div>
+          <div class="form-row"><label for="growUpperVdt">GrowCAT VDT upper (days)</label><input id="growUpperVdt" type="number" min="120" max="1200" step="10" value="600"></div>
+          <div class="form-row"><label for="growVolThreshold">GrowCAT volume threshold (mm3)</label><input id="growVolThreshold" type="number" min="50" max="2000" step="10" value="300"></div>
+          <div class="form-row"><label for="growPctThreshold">GrowCAT growth threshold (%)</label><input id="growPctThreshold" type="number" min="5" max="100" step="1" value="25"></div>
+          <div class="form-row"><label for="hybridBrockLow">Hybrid Brock low threshold</label><input id="hybridBrockLow" type="number" min="0.01" max="0.60" step="0.01" value="0.10"></div>
+          <div class="form-row"><label for="hybridGThreshold">Hybrid G(VDT) threshold</label><input id="hybridGThreshold" type="number" min="0.05" max="0.90" step="0.05" value="0.40"></div>
+          <div class="form-row"><label for="hybridBrockHigh">Hybrid Brock high override</label><input id="hybridBrockHigh" type="number" min="0.05" max="0.95" step="0.01" value="0.30"></div>
+        </div>
+        <div class="btn-row"><button class="btn" id="updatePathways">Update pathway comparison</button></div>
+      </div>
+      <div class="card">
+        <h2>Custom pathway editor</h2>
+        <p class="subtle">No free-text code is executed. The rule is an OR-combination of validated numeric fields.</p>
+        <div class="form-grid">
+          <div class="form-row"><label for="customBrock">Brock_P threshold</label><input id="customBrock" type="number" min="0" max="1" step="0.01" value="0.12"></div>
+          <div class="form-row"><label for="customVdtLow">VDT lower threshold (days)</label><input id="customVdtLow" type="number" min="30" max="1000" step="10" value="100"></div>
+          <div class="form-row"><label for="customVdtHigh">VDT upper threshold (days)</label><input id="customVdtHigh" type="number" min="40" max="1500" step="10" value="500"></div>
+          <div class="form-row"><label for="customVolume">Volume threshold (mm3)</label><input id="customVolume" type="number" min="14" max="14000" step="10" value="500"></div>
+          <div class="form-row checkline"><input id="customNonMonotonic" type="checkbox" checked><label for="customNonMonotonic">Use non-monotonic G(VDT) &gt; 0.4 instead of VDT range</label></div>
+          <div class="form-row checkline"><input id="customSubsolid" type="checkbox" checked><label for="customSubsolid">Subsolid progression override</label></div>
+        </div>
+        <div id="customValidation" class="subtle" style="margin-top:0.7rem;"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <h2>Pathway performance table</h2>
+      <div id="pathwayTable" class="table-wrap"></div>
+    </div>
+    <div class="grid two" style="margin-top:1rem;">
+      <div class="card">
+        <h2>Expected total harm</h2>
+        <p class="subtle">Harm weights are explicit and subjective. They are intended for sensitivity discussion, not clinical valuation.</p>
+        <div id="harmSvg" class="svgbox"></div>
+      </div>
+      <div class="card">
+        <h2>Threshold sensitivity sweep</h2>
+        <p class="subtle">Brock and CRS sweep their score thresholds. GrowCAT sweeps the upper VDT bound with the lower bound fixed. Hybrid sweeps its low Brock threshold.</p>
+        <div id="sweepSvg" class="svgbox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-panel active" style="display:block; max-width:1380px; margin: 0 auto;">
+    <details>
+      <summary>Model assumptions and limitations</summary>
+      <div class="details-body">
+        <ul>
+          <li><strong>Brock-Nordic validation gap.</strong> The Brock 2013 PanCan score is used because it is a published continuous nodule model. It is not validated for Nordic populations and must not be treated as a Nordic clinical decision rule.</li>
+          <li><strong>Synthetic cohort caveat.</strong> The cohort generator uses editable, class-conditional assumptions for guideline-planning experiments. It is not a registry emulator.</li>
+          <li><strong>Inflammatory-spike model.</strong> Very rapid benign growth is explicitly simulated, and G(VDT) is non-monotonic so VDT below about 100 days is not automatically high risk.</li>
+          <li><strong>Measurement-noise assumption.</strong> Volume uncertainty is modelled as lognormal CV-based noise applied to both prior and current volumes before observed VDT is calculated.</li>
+          <li><strong>Harm-weight subjectivity.</strong> CT, PET, biopsy, false-positive biopsy, missed malignancy, and indeterminate penalties are explicit weights for comparison only.</li>
+          <li><strong>Multicentre adaptation caveat.</strong> The four-centroid mixture is inspired by multicentric numerical representation, but it is not holomorphic calculus and is not a validated clinical classifier.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+</main>
+
+<footer id="cite" style="background:#102a43;color:#fff;padding:2.2rem 1rem;margin-top:2rem;">
+  <div style="max-width:900px;margin:0 auto;text-align:center;line-height:1.55;">
+    <a href="/" aria-label="NTOG home" style="display:inline-block;margin-bottom:0.6rem;">
+      <img src="/ntog-logo.svg" alt="Nordic Thoracic Oncology Group logo" width="56" height="56" loading="lazy" style="background:rgba(255,255,255,0.08);border-radius:50%;padding:6px;">
+    </a>
+    <p style="margin:0.45rem 0;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Nordic Nodule Pathway Sandbox</em> (v3.0), part of the <em>NTOG Experimental Lung Screening &amp; Nodule Risk Hub</em>. Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632838" rel="noopener noreferrer" style="color:#7ad1ff;">doi:10.5281/zenodo.20632838</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" style="color:#7ad1ff;">CC BY-NC 4.0</a>.</p>
+    <p style="margin:0.45rem 0;">Tool &amp; content &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
+    <p style="margin:0.45rem 0;font-size:0.85rem;color:rgba(255,255,255,0.75);">Educational and research-planning use only. Not a medical device, diagnostic tool, autonomous clinical decision system, or substitute for national guidelines, MDT review, clinical judgment, or patient preference. The Brock 2013 (PanCan) model is not validated for Nordic populations.</p>
+    <p style="margin:0.45rem 0;font-size:0.85rem;color:rgba(255,255,255,0.85);"><strong>Standalone file.</strong> No CDN, package manager, or network calls — all calculations, SVG plots, styles and interface code are inline and run in your browser.</p>
+    <p style="margin:0.6rem 0 0;">
+      <a href="/copyright.html" style="color:#fff;margin:0 0.6rem;">Copyright &amp; Licensing</a>
+      <a href="/privacy-policy.html" style="color:#fff;margin:0 0.6rem;">Privacy Policy</a>
+      <a href="/terms-of-service.html" style="color:#fff;margin:0 0.6rem;">Terms of Service</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/*
+  Nordic Nodule Pathway Sandbox v3.
+  This file is self-contained and intentionally avoids external dependencies.
+
+  Brock coefficient block:
+  McWilliams A et al., NEJM 2013;369:910-919, Table 2, Model 2b.
+  The equation below uses the requested published transform:
+  ((diameter_mm / 10) ^ -0.5) - 1.58113883, age centered at 62, and nodule count centered at 4.
+
+  Multicentre centroid extension:
+  Nevanlinna O, Vesanen T. Multicentric representation of piecewise constant holomorphic functions and Hermite interpolation. 2025.
+  The paper represents piecewise holomorphic functions by local-centre Lagrange basis functions and coefficient series in a new polynomial variable, with bounded numerical error accumulation for the multicentric representation.
+  This sandbox does not implement holomorphic functional calculus. It adapts the local-centre principle to a clinical feature space by replacing complex roots with empirical clinical centroids and replacing holomorphic basis functions with Gaussian kernel weights.
+*/
+
+const BROCK = Object.freeze({
+  intercept: -6.7892,
+  age: 0.0287,
+  female: 0.6011,
+  family: 0.2961,
+  emphysema: 0.2953,
+  size: -5.3854,
+  sizeCenter: 1.58113883,
+  nonsolid: -0.1276,
+  partsolid: 0.3770,
+  upper: 0.6581,
+  count: -0.0824,
+  spiculation: 0.7729
+});
+
+/* Herder GJM et al., Chest 2005;128:2490-2496. PET avidity-specific likelihood ratios. */
+const HERDER_LR = Object.freeze({ none: 0.07, faint: 0.78, moderate: 3.7, intense: 7.1 });
+
+const HARM_WEIGHTS = Object.freeze({
+  routine: 1,
+  close: 2,
+  pet: 3,
+  biopsyTP: 7,
+  biopsyFP: 11,
+  missed: 12,
+  indeterminate: 2
+});
+
+const HARM_LABELS = Object.freeze({
+  routine: 'Routine CT',
+  close: 'Close surveillance',
+  pet: 'PET-CT pathway',
+  biopsyTP: 'Biopsy true positive',
+  biopsyFP: 'Benign biopsy false positive',
+  missed: 'Missed malignancy',
+  indeterminate: 'Indeterminate'
+});
+
+const HARM_COLORS = Object.freeze({
+  routine: '#9ecae1',
+  close: '#56B4E9',
+  pet: '#009E73',
+  biopsyTP: '#0072B2',
+  biopsyFP: '#D55E00',
+  missed: '#CC79A7',
+  indeterminate: '#999999'
+});
+
+const state = {
+  cohort: [],
+  params: null,
+  advanced: null,
+  stats: null,
+  roc: null,
+  rocBand: null,
+  mainAucCi: null,
+  pathways: null,
+  robustness: null,
+  exportBlobUrl: null
+};
+
+const $ = (id) => document.getElementById(id);
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const finiteOr = (v, fallback) => Number.isFinite(v) ? v : fallback;
+const fmt = (v, digits = 2) => Number.isFinite(v) ? v.toFixed(digits) : '-';
+const pct = (v, digits = 1) => Number.isFinite(v) ? (100 * v).toFixed(digits) + '%' : '-';
+const logistic = (x) => 1 / (1 + Math.exp(-x));
+const logit = (p) => Math.log(p / (1 - p));
+const mean = (arr) => arr.length ? arr.reduce((a,b) => a + b, 0) / arr.length : NaN;
+function sd(arr) {
+  if (arr.length < 2) return 0;
+  const m = mean(arr);
+  return Math.sqrt(arr.reduce((s, x) => s + (x - m) * (x - m), 0) / (arr.length - 1));
+}
+function quantile(sorted, q) {
+  if (!sorted.length) return NaN;
+  const pos = (sorted.length - 1) * q;
+  const lo = Math.floor(pos), hi = Math.ceil(pos);
+  if (lo === hi) return sorted[lo];
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
+}
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+}
+
+function diameterToVolume(d) {
+  const r = d / 2;
+  return (4 / 3) * Math.PI * r * r * r;
+}
+function volumeToDiameter(v) {
+  return 2 * Math.pow((3 * v) / (4 * Math.PI), 1 / 3);
+}
+
+function mulberry32(seed) {
+  let t = seed >>> 0;
+  return function() {
+    t += 0x6D2B79F5;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function makeRng(seed) {
+  const rand = mulberry32((Number(seed) || 0) >>> 0);
+  let spare = null;
+  return {
+    rand,
+    normal(mu = 0, sigma = 1) {
+      if (spare !== null) {
+        const z = spare;
+        spare = null;
+        return mu + sigma * z;
+      }
+      let u = 0, v = 0;
+      while (u <= Number.EPSILON) u = rand();
+      while (v <= Number.EPSILON) v = rand();
+      const mag = Math.sqrt(-2 * Math.log(u));
+      const z0 = mag * Math.cos(2 * Math.PI * v);
+      spare = mag * Math.sin(2 * Math.PI * v);
+      return mu + sigma * z0;
+    }
+  };
+}
+function poisson(lambda, rng) {
+  lambda = Math.max(0, lambda);
+  const L = Math.exp(-lambda);
+  let k = 0, p = 1;
+  do { k++; p *= rng.rand(); } while (p > L);
+  return k - 1;
+}
+function gammaSample(shape, scale, rng) {
+  shape = Math.max(0.0001, shape);
+  scale = Math.max(0.0001, scale);
+  if (shape < 1) {
+    const u = rng.rand();
+    return gammaSample(shape + 1, scale, rng) * Math.pow(u, 1 / shape);
+  }
+  const d = shape - 1 / 3;
+  const c = 1 / Math.sqrt(9 * d);
+  while (true) {
+    const x = rng.normal();
+    let v = 1 + c * x;
+    if (v <= 0) continue;
+    v = v * v * v;
+    const u = rng.rand();
+    if (u < 1 - 0.0331 * Math.pow(x, 4)) return scale * d * v;
+    if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return scale * d * v;
+  }
+}
+
+function typeCoefficient(type) {
+  if (type === 'Part-solid') return BROCK.partsolid;
+  if (type === 'Non-solid (GGO)') return BROCK.nonsolid;
+  return 0;
+}
+
+function brockLogOdds(x) {
+  const diameter = clamp(Number(x.diameterMm), 0.1, 100);
+  const sizeTerm = Math.pow(diameter / 10, -0.5) - BROCK.sizeCenter;
+  const typeTerm = typeCoefficient(x.type);
+  return BROCK.intercept +
+    BROCK.age * (Number(x.age) - 62) +
+    (x.sex === 'female' ? BROCK.female : 0) +
+    (x.familyHistory ? BROCK.family : 0) +
+    (x.emphysema ? BROCK.emphysema : 0) +
+    BROCK.size * sizeTerm +
+    typeTerm +
+    (x.upperLobe ? BROCK.upper : 0) +
+    BROCK.count * (Number(x.noduleCount) - 4) +
+    (x.spiculation ? BROCK.spiculation : 0);
+}
+function brockProbability(x) {
+  return logistic(brockLogOdds(x));
+}
+
+function computeVdt(priorVolume, currentVolume, intervalDays) {
+  const v1 = Number(priorVolume), v2 = Number(currentVolume), t = Number(intervalDays);
+  if (!Number.isFinite(v1) || !Number.isFinite(v2) || !Number.isFinite(t) || v1 <= 0 || v2 <= 0 || t <= 0) {
+    return { hasPrior: false, stable: false, vdt: null };
+  }
+  if (v2 <= v1) return { hasPrior: true, stable: true, vdt: Infinity };
+  return { hasPrior: true, stable: false, vdt: (t * Math.LN2) / Math.log(v2 / v1) };
+}
+
+/*
+  Non-monotonic growth risk G(VDT). This is not a cancer biology model.
+  It encodes the prompt rule that very rapid growth is often inflammatory.
+*/
+function growthRiskFromVdt(vdt) {
+  if (!Number.isFinite(vdt) || vdt <= 0) return 0.05;
+  if (vdt >= 1000) return 0.05;
+  if (vdt >= 200) {
+    const t = (Math.log(vdt) - Math.log(200)) / (Math.log(1000) - Math.log(200));
+    return 0.85 + t * (0.05 - 0.85);
+  }
+  if (vdt >= 100) return 0.85;
+  if (vdt >= 30) {
+    const t = (Math.log(vdt) - Math.log(30)) / (Math.log(100) - Math.log(30));
+    return 0.30 + t * (0.85 - 0.30);
+  }
+  return 0.05;
+}
+
+function herderProbability(brockPrior, avidity) {
+  if (!avidity || HERDER_LR[avidity] === undefined) return null;
+  const p = clamp(brockPrior, 1e-9, 1 - 1e-9);
+  const postOdds = (p / (1 - p)) * HERDER_LR[avidity];
+  return postOdds / (1 + postOdds);
+}
+
+function compositeRisk(brockP, herderP, g, hasPrior, hasPet) {
+  if (hasPet && hasPrior) return { value: 0.5 * herderP + 0.5 * g, formula: '0.5 x Herder_P + 0.5 x G(VDT)' };
+  if (hasPrior) return { value: 0.6 * brockP + 0.4 * g, formula: '0.6 x Brock_P + 0.4 x G(VDT)' };
+  if (hasPet) return { value: herderP, formula: 'Herder_P' };
+  return { value: brockP, formula: 'Brock_P' };
+}
+
+function actionTier(crs) {
+  if (crs < 0.05) return 'Routine surveillance, extended interval';
+  if (crs < 0.15) return 'Standard surveillance interval';
+  if (crs < 0.35) return 'Closer surveillance +/- PET-CT';
+  if (crs < 0.65) return 'MDT discussion; PET-CT / biopsy considered';
+  return 'Urgent MDT; biopsy or resection';
+}
+
+function viridisColor(t) {
+  const stops = [
+    [0.00, [68, 1, 84]],
+    [0.25, [59, 82, 139]],
+    [0.50, [33, 145, 140]],
+    [0.75, [94, 201, 98]],
+    [1.00, [253, 231, 37]]
+  ];
+  t = clamp(t, 0, 1);
+  for (let i = 0; i < stops.length - 1; i++) {
+    const [p0, c0] = stops[i], [p1, c1] = stops[i + 1];
+    if (t >= p0 && t <= p1) {
+      const u = (t - p0) / (p1 - p0);
+      const c = c0.map((v, j) => Math.round(v + u * (c1[j] - v)));
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+  }
+  return 'rgb(253,231,37)';
+}
+
+function renderGauge(crs) {
+  const w = 680, h = 190, x0 = 42, y0 = 80, bw = 595, bh = 28;
+  const markerX = x0 + clamp(crs, 0, 1) * bw;
+  let bars = '';
+  const n = 120;
+  for (let i = 0; i < n; i++) {
+    const x = x0 + i * bw / n;
+    bars += `<rect x="${x}" y="${y0}" width="${bw / n + 0.5}" height="${bh}" fill="${viridisColor(i / (n - 1))}"/>`;
+  }
+  const ticks = [0, 0.05, 0.15, 0.35, 0.65, 1].map(t => {
+    const x = x0 + t * bw;
+    return `<line x1="${x}" y1="${y0 + bh}" x2="${x}" y2="${y0 + bh + 10}" stroke="#102a43"/><text x="${x}" y="${y0 + bh + 28}" text-anchor="middle" font-size="12" fill="#52606d">${t.toFixed(t === 1 ? 0 : 2)}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="CRS gauge ${fmt(crs,3)}">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <text x="${x0}" y="32" font-size="18" font-weight="800" fill="#102a43">Composite Risk Score</text>
+    <text x="${x0}" y="55" font-size="13" fill="#52606d">Viridis scale, continuous 0 to 1</text>
+    <g clip-path="url(#gclip)">${bars}</g>
+    <defs><clipPath id="gclip"><rect x="${x0}" y="${y0}" width="${bw}" height="${bh}" rx="12"/></clipPath></defs>
+    <rect x="${x0}" y="${y0}" width="${bw}" height="${bh}" rx="12" fill="none" stroke="#1f2933"/>
+    ${ticks}
+    <path d="M ${markerX} ${y0 - 12} L ${markerX - 8} ${y0 - 1} L ${markerX + 8} ${y0 - 1} Z" fill="#111827"/>
+    <line x1="${markerX}" y1="${y0}" x2="${markerX}" y2="${y0 + bh}" stroke="#111827" stroke-width="2"/>
+    <text x="${markerX}" y="${y0 - 20}" text-anchor="middle" font-size="15" font-weight="900" fill="#111827">${fmt(crs,3)}</text>
+  </svg>`;
+}
+
+function readSingleInputs() {
+  return {
+    diameterMm: clamp(Number($('singleDiameter').value), 3, 30),
+    volume: clamp(Number($('singleVolume').value), 14, 14000),
+    priorVolume: $('singlePriorVolume').value === '' ? null : clamp(Number($('singlePriorVolume').value), 14, 14000),
+    intervalDays: clamp(Number($('singleInterval').value), 30, 1500),
+    type: $('singleType').value,
+    spiculation: $('singleSpic').checked,
+    upperLobe: $('singleUpper').checked,
+    noduleCount: clamp(Math.round(Number($('singleCount').value)), 1, 20),
+    age: clamp(Number($('singleAge').value), 40, 85),
+    sex: $('singleSex').value,
+    emphysema: $('singleEmphysema').checked,
+    familyHistory: $('singleFamily').checked,
+    pet: $('singlePet').value
+  };
+}
+
+function vdtEnvelope(prior, current, interval, cv = 0.14, n = 500) {
+  if (!(prior > 0 && current > 0 && interval > 0)) return null;
+  const seed = (Math.round(prior * 13 + current * 17 + interval * 19) >>> 0);
+  const rng = makeRng(seed);
+  const vals = [];
+  let stable = 0;
+  for (let i = 0; i < n; i++) {
+    const v1 = prior * Math.exp(rng.normal(0, cv));
+    const v2 = current * Math.exp(rng.normal(0, cv));
+    if (v2 <= v1) { stable++; continue; }
+    vals.push((interval * Math.LN2) / Math.log(v2 / v1));
+  }
+  vals.sort((a,b) => a - b);
+  return { low: quantile(vals, 0.05), high: quantile(vals, 0.95), stableShare: stable / n, finiteN: vals.length };
+}
+
+function contributionRationale(x, brockP, g, herderP, crsInfo) {
+  const diameter = clamp(Number(x.diameterMm), 0.1, 100);
+  const sizeTerm = Math.pow(diameter / 10, -0.5) - BROCK.sizeCenter;
+  const terms = [
+    { label: 'Nodule size transform', value: BROCK.size * sizeTerm },
+    { label: 'Age above/below 62', value: BROCK.age * (x.age - 62) },
+    { label: 'Nodule count centred at 4', value: BROCK.count * (x.noduleCount - 4) },
+    { label: 'Female sex', value: x.sex === 'female' ? BROCK.female : 0 },
+    { label: 'Spiculation', value: x.spiculation ? BROCK.spiculation : 0 },
+    { label: 'Upper lobe', value: x.upperLobe ? BROCK.upper : 0 },
+    { label: 'Family history', value: x.familyHistory ? BROCK.family : 0 },
+    { label: 'Emphysema', value: x.emphysema ? BROCK.emphysema : 0 },
+    { label: x.type, value: typeCoefficient(x.type) }
+  ];
+  if (Number.isFinite(g)) terms.push({ label: 'Growth-risk component G(VDT)', value: 0.4 * (g - 0.05) });
+  if (Number.isFinite(herderP)) terms.push({ label: 'PET Bayesian update', value: herderP - brockP });
+  const top = terms.filter(t => Math.abs(t.value) > 0.0005).sort((a,b) => Math.abs(b.value) - Math.abs(a.value)).slice(0, 6);
+  if (!top.length) return '<span class="subtle">No dominant positive modifiers beyond the intercept.</span>';
+  return top.map(t => `<span class="pill">${esc(t.label)}: ${t.value >= 0 ? '+' : ''}${fmt(t.value, 3)}</span>`).join(' ');
+}
+
+function singleFeaturePosition(x, brockP, g, hasPrior) {
+  if (!state.stats) return 'Run a cohort simulation to populate malignant and benign centroids.';
+  const logv = Math.log10(clamp(x.volume, 14, 14000));
+  const zLog = (logv - state.stats.meanLogVol) / state.stats.sdLogVol;
+  const zG = hasPrior ? (g - state.stats.meanG) / state.stats.sdG : 0;
+  const f = [zLog, zG, brockP];
+  const dM = euclidean(f, state.stats.centroidM);
+  const dB = euclidean(f, state.stats.centroidB);
+  const r = dM / (dM + dB);
+  const closer = dM < dB ? 'malignant centroid' : 'benign centroid';
+  let mcText = '';
+  if (state.stats.centroids4) {
+    const weights = gaussianKernelWeights(f, state.stats.centroids4, state.params?.kernelTau || 1.10);
+    mcText = `<br><br><strong>Four-centroid Gaussian weights:</strong> malignant ${pct(weights[0],1)}, ordinary benign ${pct(weights[1],1)}, inflammatory benign ${pct(weights[2],1)}, no-prior ${pct(weights[3],1)}.`;
+  }
+  return `Closer to the <strong>${closer}</strong>. Distance to malignant centroid ${fmt(dM, 3)}, distance to benign centroid ${fmt(dB, 3)}. Distance ratio r = <strong>${fmt(r, 3)}</strong> (0 = malignant centroid, 1 = benign centroid, about 0.5 = grey zone).${mcText}`;
+}
+
+function recalcSingle() {
+  const x = readSingleInputs();
+  const brockP = brockProbability(x);
+  const vdtInfo = computeVdt(x.priorVolume, x.volume, x.intervalDays);
+  const hasPrior = vdtInfo.hasPrior;
+  const g = hasPrior ? growthRiskFromVdt(vdtInfo.vdt) : null;
+  const herderP = herderProbability(brockP, x.pet);
+  const hasPet = herderP !== null;
+  const crsInfo = compositeRisk(brockP, herderP, g, hasPrior, hasPet);
+
+  $('singleGauge').innerHTML = renderGauge(crsInfo.value);
+  $('outCrs').textContent = fmt(crsInfo.value, 3);
+  $('outFormula').textContent = crsInfo.formula;
+  $('outBrock').textContent = pct(brockP, 1);
+  $('outHerder').textContent = herderP === null ? 'not entered' : pct(herderP, 1);
+
+  if (!hasPrior) {
+    $('outVdt').textContent = 'No prior';
+    $('outVdtCi').textContent = 'G(VDT) undefined, CRS falls back according to PET availability.';
+  } else if (vdtInfo.stable) {
+    $('outVdt').textContent = 'stable / shrinking';
+    const env = vdtEnvelope(x.priorVolume, x.volume, x.intervalDays);
+    $('outVdtCi').textContent = env ? `Monte Carlo: ${pct(env.stableShare, 0)} stable or shrinking with 14% CV on both volumes.` : '-';
+  } else {
+    const env = vdtEnvelope(x.priorVolume, x.volume, x.intervalDays);
+    $('outVdt').textContent = `${fmt(vdtInfo.vdt, 0)} days`;
+    $('outVdtCi').textContent = env && env.finiteN > 10 ? `5th-95th percentile ${fmt(env.low,0)}-${fmt(env.high,0)} days; ${pct(env.stableShare,0)} stable/shrinking samples.` : 'Monte Carlo envelope not stable enough to summarise.';
+  }
+  $('outTier').innerHTML = `<strong>${esc(actionTier(crsInfo.value))}</strong>`;
+  $('outDistance').innerHTML = singleFeaturePosition(x, brockP, g, hasPrior);
+  $('outWhy').innerHTML = contributionRationale(x, brockP, g, herderP, crsInfo);
+}
+
+function normaliseTriplet(a, b, c) {
+  a = Math.max(0, Number(a)); b = Math.max(0, Number(b)); c = Math.max(0, Number(c));
+  const s = a + b + c;
+  if (s <= 0) return [1, 0, 0];
+  return [a / s, b / s, c / s];
+}
+function readNum(id, fallback) {
+  const v = Number($(id).value);
+  return Number.isFinite(v) ? v : fallback;
+}
+function getAdvancedSettings() {
+  const mt = normaliseTriplet(readNum('adv_m_type_solid', 0.55), readNum('adv_m_type_part', 0.30), readNum('adv_m_type_ggo', 0.15));
+  const bt = normaliseTriplet(readNum('adv_b_type_solid', 0.80), readNum('adv_b_type_part', 0.10), readNum('adv_b_type_ggo', 0.10));
+  return {
+    note: 'Plausible synthetic Nordic-mixed-cohort priors, not empirical Nordic registry data.',
+    malignant: {
+      logvMu: readNum('adv_m_logv_mu', 2.7), logvSd: Math.max(0.01, readNum('adv_m_logv_sd', 0.45)), type: mt,
+      spic: clamp(readNum('adv_m_spic', 0.45), 0, 1), upper: clamp(readNum('adv_m_upper', 0.65), 0, 1), countLambda: Math.max(0, readNum('adv_m_count_lam', 2)),
+      ageMu: readNum('adv_m_age_mu', 68), ageSd: Math.max(0.1, readNum('adv_m_age_sd', 8)), female: clamp(readNum('adv_m_female', 0.55), 0, 1),
+      emph: clamp(readNum('adv_m_emph', 0.45), 0, 1), family: clamp(readNum('adv_m_family', 0.20), 0, 1),
+      packShape: Math.max(0.1, readNum('adv_m_pack_shape', 2.5)), packScale: Math.max(0.1, readNum('adv_m_pack_scale', 18))
+    },
+    benign: {
+      logvMu: readNum('adv_b_logv_mu', 2.2), logvSd: Math.max(0.01, readNum('adv_b_logv_sd', 0.50)), type: bt,
+      spic: clamp(readNum('adv_b_spic', 0.10), 0, 1), upper: clamp(readNum('adv_b_upper', 0.40), 0, 1), countLambda: Math.max(0, readNum('adv_b_count_lam', 3)),
+      ageMu: readNum('adv_b_age_mu', 62), ageSd: Math.max(0.1, readNum('adv_b_age_sd', 10)), female: clamp(readNum('adv_b_female', 0.50), 0, 1),
+      emph: clamp(readNum('adv_b_emph', 0.20), 0, 1), family: clamp(readNum('adv_b_family', 0.10), 0, 1),
+      packShape: Math.max(0.1, readNum('adv_b_pack_shape', 2.0)), packScale: Math.max(0.1, readNum('adv_b_pack_scale', 14))
+    }
+  };
+}
+function readCohortParams() {
+  return {
+    n: Math.round(readNum('cohortN', 2000)),
+    prevalence: readNum('prevalence', 8) / 100,
+    meanMalVdt: readNum('meanMalVdt', 180),
+    sdMalLogVdt: readNum('sdMalLogVdt', 0.5),
+    meanBenVdt: readNum('meanBenVdt', 1200),
+    sdBenLogVdt: readNum('sdBenLogVdt', 0.6),
+    inflamShare: readNum('inflamShare', 9) / 100,
+    cv: readNum('measurementCv', 14) / 100,
+    noPriorShare: readNum('noPriorShare', 25) / 100,
+    seed: Math.round(readNum('cohortSeed', 42)),
+    threshold: readNum('operatingThreshold', 0.35),
+    greyLow: readNum('greyLow', 0.40),
+    greyHigh: readNum('greyHigh', 0.60),
+    kernelTau: clamp(readNum('kernelTau', 1.10), 0.20, 4.00),
+    robustN: Math.round(clamp(readNum('robustN', 40), 0, 120))
+  };
+}
+function sampleType(prob, rng) {
+  const u = rng.rand();
+  if (u < prob[0]) return 'Solid';
+  if (u < prob[0] + prob[1]) return 'Part-solid';
+  return 'Non-solid (GGO)';
+}
+
+function simulateCohort(params, adv) {
+  const rng = makeRng(params.seed);
+  const cohort = [];
+  const minLog = Math.log10(14), maxLog = Math.log10(14000);
+  for (let i = 0; i < params.n; i++) {
+    const malignant = rng.rand() < params.prevalence;
+    const cfg = malignant ? adv.malignant : adv.benign;
+
+    const logV1 = clamp(rng.normal(cfg.logvMu, cfg.logvSd), minLog, maxLog);
+    const v1True = Math.pow(10, logV1);
+    let trueVdt, inflammatory = false;
+    if (malignant) {
+      trueVdt = Math.exp(rng.normal(Math.log(params.meanMalVdt), params.sdMalLogVdt));
+    } else if (rng.rand() < params.inflamShare) {
+      inflammatory = true;
+      trueVdt = Math.exp(rng.normal(Math.log(50), 0.3));
+    } else {
+      trueVdt = Math.exp(rng.normal(Math.log(params.meanBenVdt), params.sdBenLogVdt));
+    }
+
+    const v2True = v1True * Math.pow(2, 365 / trueVdt);
+    const v1Obs = v1True * Math.exp(rng.normal(0, params.cv));
+    const v2ObsRaw = v2True * Math.exp(rng.normal(0, params.cv));
+    const hasPrior = rng.rand() >= params.noPriorShare;
+    const currentVolume = clamp(v2ObsRaw, 14, 14000);
+    const currentDiameter = clamp(volumeToDiameter(currentVolume), 3, 30);
+    const vdtInfo = hasPrior ? computeVdt(v1Obs, v2ObsRaw, 365) : { hasPrior: false, stable: false, vdt: null };
+    const observedVdt = hasPrior ? vdtInfo.vdt : null;
+    const g = hasPrior ? growthRiskFromVdt(observedVdt) : null;
+    const growthPct = hasPrior ? ((v2ObsRaw - v1Obs) / v1Obs) * 100 : null;
+
+    const patient = {
+      id: i + 1,
+      malignant,
+      inflammatory,
+      trueVdt,
+      v1True,
+      v2True,
+      priorVolumeObserved: hasPrior ? v1Obs : null,
+      currentVolumeObservedRaw: v2ObsRaw,
+      volume: currentVolume,
+      diameterMm: currentDiameter,
+      hasPrior,
+      observedVdt,
+      stableOrShrinking: hasPrior ? vdtInfo.stable : false,
+      g,
+      growthPct,
+      type: sampleType(cfg.type, rng),
+      spiculation: rng.rand() < cfg.spic,
+      upperLobe: rng.rand() < cfg.upper,
+      noduleCount: clamp(poisson(cfg.countLambda, rng) + 1, 1, 20),
+      age: clamp(rng.normal(cfg.ageMu, cfg.ageSd), 40, 85),
+      sex: rng.rand() < cfg.female ? 'female' : 'male',
+      emphysema: rng.rand() < cfg.emph,
+      familyHistory: rng.rand() < cfg.family,
+      packYears: gammaSample(cfg.packShape, cfg.packScale, rng)
+    };
+    patient.brock = brockProbability(patient);
+    patient.crs = patient.hasPrior ? (0.6 * patient.brock + 0.4 * patient.g) : patient.brock;
+    patient.subsolid = patient.type !== 'Solid';
+    // The prompt includes subsolid growth of the solid component, but no separate solid-component variable is generated.
+    // In this synthetic cohort, that pathway trigger is represented as subsolid status plus >=25% observed volume growth
+    // and an observed VDT in the suspicious 100-1000 day interval.
+    patient.subsolidProgression = patient.hasPrior && patient.subsolid && patient.growthPct >= 25 && Number.isFinite(patient.observedVdt) && patient.observedVdt >= 100 && patient.observedVdt <= 1000;
+    cohort.push(patient);
+  }
+  return cohort;
+}
+
+function squaredEuclidean(a, b) {
+  let s = 0;
+  for (let i = 0; i < a.length; i++) s += (a[i] - b[i]) * (a[i] - b[i]);
+  return s;
+}
+function euclidean(a, b) {
+  return Math.sqrt(squaredEuclidean(a, b));
+}
+
+/*
+  Clinical multicentre decomposition.
+  The paper motivating v3 uses several local centres and stable coefficient functions rather than one global high-degree representation.
+  Here the centres are empirical clinical centroids in the 3D feature space.
+  Gaussian kernel weights replace holomorphic basis functions and give a soft local-centre mixture.
+*/
+function gaussianKernelWeights(feature, centers, tau) {
+  const safeTau = Math.max(0.05, Number(tau) || 1);
+  const d2 = centers.map(c => squaredEuclidean(feature, c.vector));
+  const minD2 = Math.min(...d2);
+  const denom = 2 * safeTau * safeTau;
+  const raw = d2.map(v => Math.exp(-(v - minD2) / denom));
+  const total = raw.reduce((a, b) => a + b, 0) || 1;
+  return raw.map(w => w / total);
+}
+function normalizedEntropy(weights) {
+  const h = -weights.reduce((s, w) => w > 0 ? s + w * Math.log(w) : s, 0);
+  return h / Math.log(weights.length || 2);
+}
+function vectorMean(points) {
+  const p = points[0]?.length || 0;
+  const out = Array(p).fill(0);
+  if (!points.length) return out;
+  for (const row of points) for (let j = 0; j < p; j++) out[j] += row[j];
+  for (let j = 0; j < p; j++) out[j] /= points.length;
+  return out;
+}
+function computePca3(points) {
+  const p = 3, n = points.length;
+  const mu = vectorMean(points);
+  let cov = Array.from({length: p}, () => Array(p).fill(0));
+  for (const row of points) {
+    const x = row.map((v, j) => v - mu[j]);
+    for (let i = 0; i < p; i++) for (let j = 0; j < p; j++) cov[i][j] += x[i] * x[j];
+  }
+  for (let i = 0; i < p; i++) for (let j = 0; j < p; j++) cov[i][j] /= Math.max(1, n - 1);
+
+  function matVec(m, v) {
+    return m.map(row => row.reduce((s, val, i) => s + val * v[i], 0));
+  }
+  function norm(v) { return Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1; }
+  function power(m, seedVec) {
+    let v = seedVec.slice();
+    for (let it = 0; it < 80; it++) {
+      const mv = matVec(m, v);
+      const nm = norm(mv);
+      v = mv.map(x => x / nm);
+    }
+    const mv = matVec(m, v);
+    const val = v.reduce((s, x, i) => s + x * mv[i], 0);
+    return { value: val, vector: v };
+  }
+  const pc1 = power(cov, [1, 0.3, 0.1]);
+  const cov2 = cov.map((row, i) => row.map((val, j) => val - pc1.value * pc1.vector[i] * pc1.vector[j]));
+  let pc2 = power(cov2, [0.2, 1, 0.4]);
+  const dot12 = pc2.vector.reduce((s, x, i) => s + x * pc1.vector[i], 0);
+  pc2.vector = pc2.vector.map((x, i) => x - dot12 * pc1.vector[i]);
+  const n2 = norm(pc2.vector);
+  pc2.vector = pc2.vector.map(x => x / n2);
+  return { mean: mu, pc1: pc1.vector, pc2: pc2.vector, lambda1: pc1.value, lambda2: pc2.value };
+}
+function projectPca(f, pca) {
+  const x = f.map((v, i) => v - pca.mean[i]);
+  return [
+    x.reduce((s, v, i) => s + v * pca.pc1[i], 0),
+    x.reduce((s, v, i) => s + v * pca.pc2[i], 0)
+  ];
+}
+
+function averageMulticentreWeights(patients) {
+  const keys = ['malignant', 'benign', 'inflammatory', 'noPrior'];
+  const out = Object.fromEntries(keys.map(k => [k, 0]));
+  if (!patients.length) return out;
+  for (const p of patients) for (const k of keys) out[k] += p.mcWeights[k];
+  for (const k of keys) out[k] /= patients.length;
+  return out;
+}
+
+function computeFeatureSpace(cohort, greyLow, greyHigh, kernelTau = 1.10) {
+  const logs = cohort.map(p => Math.log10(p.volume));
+  const gs = cohort.filter(p => p.hasPrior && Number.isFinite(p.g)).map(p => p.g);
+  const meanLogVol = mean(logs), sdLogVol = sd(logs) || 1;
+  const meanG = Number.isFinite(mean(gs)) ? mean(gs) : 0.05;
+  const sdG = sd(gs) || 1;
+
+  for (const p of cohort) {
+    const zLog = (Math.log10(p.volume) - meanLogVol) / sdLogVol;
+    const zG = p.hasPrior ? ((p.g - meanG) / sdG) : 0;
+    p.feature = [zLog, zG, p.brock];
+  }
+
+  const allFeatures = cohort.map(p => p.feature);
+  const globalCentroid = vectorMean(allFeatures);
+  const mal = cohort.filter(p => p.malignant).map(p => p.feature);
+  const ben = cohort.filter(p => !p.malignant).map(p => p.feature);
+  const centroidM = mal.length ? vectorMean(mal) : globalCentroid;
+  const centroidB = ben.length ? vectorMean(ben) : globalCentroid;
+
+  let intraM = 0, intraB = 0, mCount = 0, bCount = 0;
+  for (const p of cohort) {
+    p.dM = euclidean(p.feature, centroidM);
+    p.dB = euclidean(p.feature, centroidB);
+    const denom = p.dM + p.dB;
+    p.r = denom > 0 ? p.dM / denom : 0.5;
+    p.grey = p.r >= greyLow && p.r <= greyHigh;
+    if (p.malignant) { intraM += p.dM; mCount++; } else { intraB += p.dB; bCount++; }
+  }
+
+  // Four local clinical centres for the v3 multicentre extension.
+  // M: true malignant centroid.
+  // B: ordinary benign centroid, excluding inflammatory spikes and no-prior cases when possible.
+  // I: inflammatory benign centroid, representing very rapid benign growth.
+  // N: no-prior-scan centroid, representing single-timepoint uncertainty.
+  const ordinaryBenignPts = cohort.filter(p => !p.malignant && !p.inflammatory && p.hasPrior).map(p => p.feature);
+  const inflammatoryPts = cohort.filter(p => !p.malignant && p.inflammatory).map(p => p.feature);
+  const noPriorPts = cohort.filter(p => !p.hasPrior).map(p => p.feature);
+  const centers = [
+    { key: 'malignant', label: 'Malignant', vector: centroidM, n: mal.length, color: '#D55E00' },
+    { key: 'benign', label: 'Ordinary benign', vector: ordinaryBenignPts.length ? vectorMean(ordinaryBenignPts) : centroidB, n: ordinaryBenignPts.length, color: '#0072B2' },
+    { key: 'inflammatory', label: 'Inflammatory benign', vector: inflammatoryPts.length ? vectorMean(inflammatoryPts) : centroidB, n: inflammatoryPts.length, color: '#E69F00' },
+    { key: 'noPrior', label: 'No prior scan', vector: noPriorPts.length ? vectorMean(noPriorPts) : globalCentroid, n: noPriorPts.length, color: '#009E73' }
+  ];
+
+  for (const p of cohort) {
+    const weights = gaussianKernelWeights(p.feature, centers, kernelTau);
+    p.mcWeights = {
+      malignant: weights[0],
+      benign: weights[1],
+      inflammatory: weights[2],
+      noPrior: weights[3]
+    };
+    p.mcMalignant = weights[0];
+    p.mcEntropy = normalizedEntropy(weights);
+    p.mcMaxWeight = Math.max(...weights);
+    const maxIndex = weights.indexOf(p.mcMaxWeight);
+    p.mcWinner = centers[maxIndex].key;
+    p.mcDistances = centers.map(c => euclidean(p.feature, c.vector));
+  }
+
+  const pca = computePca3(allFeatures);
+  for (const p of cohort) p.pc = projectPca(p.feature, pca);
+  const centroidMpc = projectPca(centroidM, pca);
+  const centroidBpc = projectPca(centroidB, pca);
+  const greyPatients = cohort.filter(p => p.grey);
+  const greyMal = greyPatients.filter(p => p.malignant);
+  const greyBen = greyPatients.filter(p => !p.malignant);
+
+  const groupSpecs = [
+    { key: 'all', label: 'All patients', patients: cohort },
+    { key: 'trueMalignant', label: 'True malignant', patients: cohort.filter(p => p.malignant) },
+    { key: 'trueBenign', label: 'True benign', patients: cohort.filter(p => !p.malignant) },
+    { key: 'grey', label: 'Euclidean grey zone', patients: greyPatients },
+    { key: 'inflammatory', label: 'Inflammatory benigns', patients: cohort.filter(p => !p.malignant && p.inflammatory) },
+    { key: 'noPrior', label: 'No-prior cases', patients: cohort.filter(p => !p.hasPrior) }
+  ];
+  const mcGroups = groupSpecs.map(g => ({
+    key: g.key,
+    label: g.label,
+    n: g.patients.length,
+    weights: averageMulticentreWeights(g.patients),
+    meanMaxWeight: g.patients.length ? mean(g.patients.map(p => p.mcMaxWeight)) : NaN,
+    meanEntropy: g.patients.length ? mean(g.patients.map(p => p.mcEntropy)) : NaN
+  }));
+  const mcAuc = aucByRank(cohort.map(p => p.mcMalignant), cohort.map(p => p.malignant));
+  const highEntropyShare = cohort.length ? cohort.filter(p => p.mcEntropy >= 0.75).length / cohort.length : NaN;
+  const meanMaxWeight = cohort.length ? mean(cohort.map(p => p.mcMaxWeight)) : NaN;
+  const meanEntropy = cohort.length ? mean(cohort.map(p => p.mcEntropy)) : NaN;
+  const greyMeanWeights = averageMulticentreWeights(greyPatients);
+
+  const comp = {
+    n: greyPatients.length,
+    share: greyPatients.length / cohort.length,
+    malInsideShare: mCount ? greyMal.length / mCount : NaN,
+    benInsideShare: bCount ? greyBen.length / bCount : NaN,
+    subsolid: greyPatients.length ? greyPatients.filter(p => p.subsolid).length / greyPatients.length : NaN,
+    noPrior: greyPatients.length ? greyPatients.filter(p => !p.hasPrior).length / greyPatients.length : NaN,
+    inflammatoryBenign: greyPatients.length ? greyPatients.filter(p => !p.malignant && p.inflammatory).length / greyPatients.length : NaN,
+    brockBand: greyPatients.length ? greyPatients.filter(p => p.brock >= 0.10 && p.brock <= 0.30).length / greyPatients.length : NaN
+  };
+
+  return {
+    meanLogVol, sdLogVol, meanG, sdG, centroidM, centroidB,
+    centroidMpc, centroidBpc, pca,
+    interCentroid: euclidean(centroidM, centroidB),
+    intraM: mCount ? intraM / mCount : NaN,
+    intraB: bCount ? intraB / bCount : NaN,
+    greyComposition: comp,
+    greyLow, greyHigh,
+    centroids4: centers,
+    multicentre: {
+      tau: kernelTau,
+      centers,
+      groups: mcGroups,
+      auc: mcAuc,
+      meanMaxWeight,
+      meanEntropy,
+      highEntropyShare,
+      greyMeanWeights,
+      highEntropyThreshold: 0.75
+    }
+  };
+}
+
+function aucByRank(scores, labels) {
+  const n = scores.length;
+  const rows = scores.map((s, i) => ({ s, y: labels[i] ? 1 : 0 })).sort((a,b) => a.s - b.s);
+  let rankSumPos = 0, pos = 0, neg = 0, i = 0;
+  while (i < n) {
+    let j = i + 1;
+    while (j < n && rows[j].s === rows[i].s) j++;
+    const avgRank = (i + 1 + j) / 2;
+    for (let k = i; k < j; k++) {
+      if (rows[k].y) { rankSumPos += avgRank; pos++; } else neg++;
+    }
+    i = j;
+  }
+  if (!pos || !neg) return NaN;
+  return (rankSumPos - pos * (pos + 1) / 2) / (pos * neg);
+}
+function rocFromScores(scores, labels) {
+  const rows = scores.map((score, i) => ({ score, label: labels[i] ? 1 : 0 })).sort((a,b) => b.score - a.score);
+  const pos = labels.filter(Boolean).length;
+  const neg = labels.length - pos;
+  let tp = 0, fp = 0, i = 0;
+  const pts = [{ fpr: 0, tpr: 0, threshold: Infinity, tp: 0, fp: 0 }];
+  while (i < rows.length) {
+    const th = rows[i].score;
+    while (i < rows.length && rows[i].score === th) {
+      if (rows[i].label) tp++; else fp++;
+      i++;
+    }
+    pts.push({ fpr: neg ? fp / neg : 0, tpr: pos ? tp / pos : 0, threshold: th, tp, fp });
+  }
+  if (pts[pts.length - 1].fpr < 1 || pts[pts.length - 1].tpr < 1) pts.push({ fpr: 1, tpr: 1, threshold: -Infinity, tp: pos, fp: neg });
+  let auc = 0;
+  for (let k = 1; k < pts.length; k++) {
+    const dx = pts[k].fpr - pts[k - 1].fpr;
+    auc += dx * (pts[k].tpr + pts[k - 1].tpr) / 2;
+  }
+  let youden = pts[0], best = -Infinity;
+  for (const p of pts) {
+    const y = p.tpr - p.fpr;
+    if (y > best) { best = y; youden = p; }
+  }
+  return { points: pts, auc, youden, pos, neg };
+}
+function metricsAtThreshold(scores, labels, threshold) {
+  let tp = 0, fp = 0, tn = 0, fn = 0;
+  for (let i = 0; i < scores.length; i++) {
+    const pred = scores[i] > threshold;
+    if (labels[i] && pred) tp++;
+    else if (!labels[i] && pred) fp++;
+    else if (!labels[i] && !pred) tn++;
+    else fn++;
+  }
+  return metricsFromCounts(tp, fp, tn, fn);
+}
+function metricsFromCounts(tp, fp, tn, fn) {
+  return {
+    tp, fp, tn, fn,
+    sensitivity: (tp + fn) ? tp / (tp + fn) : NaN,
+    specificity: (tn + fp) ? tn / (tn + fp) : NaN,
+    ppv: (tp + fp) ? tp / (tp + fp) : NaN,
+    npv: (tn + fn) ? tn / (tn + fn) : NaN
+  };
+}
+function interpolateTpr(points, fpr) {
+  if (fpr <= 0) return 0;
+  for (let i = 1; i < points.length; i++) {
+    if (points[i].fpr >= fpr) {
+      const a = points[i - 1], b = points[i];
+      const dx = b.fpr - a.fpr;
+      if (dx <= 1e-12) return Math.max(a.tpr, b.tpr);
+      const t = (fpr - a.fpr) / dx;
+      return a.tpr + t * (b.tpr - a.tpr);
+    }
+  }
+  return 1;
+}
+function bootstrapAucAndBand(scores, labels, seed, nBoot = 1000, withBand = false) {
+  const posScores = [], negScores = [];
+  for (let i = 0; i < scores.length; i++) (labels[i] ? posScores : negScores).push(scores[i]);
+  const grid = Array.from({length: 101}, (_, i) => i / 100);
+  if (!posScores.length || !negScores.length) {
+    return { low: NaN, high: NaN, aucs: [], band: withBand ? grid.map(fpr => ({ fpr, low: NaN, high: NaN })) : undefined };
+  }
+  const rng = makeRng(seed);
+  const aucs = [];
+  const bandVals = withBand ? grid.map(() => []) : null;
+  for (let b = 0; b < nBoot; b++) {
+    const bsScores = new Array(scores.length);
+    const bsLabels = new Array(scores.length);
+    let idx = 0;
+    for (let i = 0; i < posScores.length; i++) { bsScores[idx] = posScores[Math.floor(rng.rand() * posScores.length)]; bsLabels[idx] = 1; idx++; }
+    for (let i = 0; i < negScores.length; i++) { bsScores[idx] = negScores[Math.floor(rng.rand() * negScores.length)]; bsLabels[idx] = 0; idx++; }
+    aucs.push(aucByRank(bsScores, bsLabels));
+    if (withBand) {
+      const roc = rocFromScores(bsScores, bsLabels);
+      for (let g = 0; g < grid.length; g++) bandVals[g].push(interpolateTpr(roc.points, grid[g]));
+    }
+  }
+  aucs.sort((a,b) => a - b);
+  const out = { low: quantile(aucs, 0.025), high: quantile(aucs, 0.975), aucs };
+  if (withBand) {
+    out.band = grid.map((fpr, i) => {
+      bandVals[i].sort((a,b) => a - b);
+      return { fpr, low: quantile(bandVals[i], 0.025), high: quantile(bandVals[i], 0.975) };
+    });
+  }
+  return out;
+}
+
+function renderMetricGrid(metrics) {
+  return metrics.map(m => `<div class="metric"><div class="k">${esc(m.k)}</div><div class="v">${esc(m.v)}</div><div class="s">${esc(m.s || '')}</div></div>`).join('');
+}
+
+function renderRoc(roc, ci, selectedMetrics, selectedThreshold) {
+  const w = 720, h = 470, m = {l: 62, r: 25, t: 28, b: 58};
+  const pw = w - m.l - m.r, ph = h - m.t - m.b;
+  const x = fpr => m.l + fpr * pw;
+  const y = tpr => m.t + (1 - tpr) * ph;
+  const curve = roc.points.map((p, i) => `${i ? 'L' : 'M'} ${x(p.fpr)} ${y(p.tpr)}`).join(' ');
+  const band = ci?.band ? (() => {
+    const top = ci.band.map((p, i) => `${i ? 'L' : 'M'} ${x(p.fpr)} ${y(p.high)}`).join(' ');
+    const bot = ci.band.slice().reverse().map(p => `L ${x(p.fpr)} ${y(p.low)}`).join(' ');
+    return `<path d="${top} ${bot} Z" fill="#56B4E9" opacity="0.22"/>`;
+  })() : '';
+  const ypt = roc.youden;
+  const opPoint = rocFromScores(state.cohort.map(p => p.crs), state.cohort.map(p => p.malignant)).points.reduce((best, p) => Math.abs(p.threshold - selectedThreshold) < Math.abs(best.threshold - selectedThreshold) ? p : best, {threshold: Infinity, fpr:0, tpr:0});
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="ROC curve">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <line x1="${m.l}" y1="${m.t + ph}" x2="${m.l + pw}" y2="${m.t + ph}" stroke="#52606d"/>
+    <line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${m.t + ph}" stroke="#52606d"/>
+    ${[0,0.25,0.5,0.75,1].map(v => `<line x1="${x(v)}" y1="${m.t}" x2="${x(v)}" y2="${m.t + ph}" stroke="#e5e7eb"/><line x1="${m.l}" y1="${y(v)}" x2="${m.l + pw}" y2="${y(v)}" stroke="#e5e7eb"/><text x="${x(v)}" y="${m.t + ph + 24}" text-anchor="middle" font-size="12" fill="#52606d">${v.toFixed(2)}</text><text x="${m.l - 12}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="#52606d">${v.toFixed(2)}</text>`).join('')}
+    <path d="M ${x(0)} ${y(0)} L ${x(1)} ${y(1)}" stroke="#9aa5b1" stroke-dasharray="5 5"/>
+    ${band}
+    <path d="${curve}" fill="none" stroke="#0072B2" stroke-width="3"/>
+    <circle cx="${x(ypt.fpr)}" cy="${y(ypt.tpr)}" r="6" fill="#D55E00" stroke="#fff" stroke-width="2"/>
+    <rect x="${x(opPoint.fpr) - 6}" y="${y(opPoint.tpr) - 6}" width="12" height="12" fill="#009E73" stroke="#fff" stroke-width="2"/>
+    <text x="${m.l + pw / 2}" y="${h - 15}" text-anchor="middle" font-size="14" fill="#102a43" font-weight="800">False-positive rate (1 - specificity)</text>
+    <text transform="translate(18 ${m.t + ph / 2}) rotate(-90)" text-anchor="middle" font-size="14" fill="#102a43" font-weight="800">Sensitivity</text>
+    <text x="${m.l}" y="20" font-size="15" fill="#102a43" font-weight="900">AUC ${fmt(roc.auc, 3)} (${fmt(ci.low,3)}-${fmt(ci.high,3)})</text>
+    <text x="${m.l + 245}" y="20" font-size="12" fill="#52606d">circle = Youden, square = selected threshold ${fmt(selectedThreshold,2)}</text>
+  </svg>`;
+}
+
+function renderScatter(cohort, stats) {
+  const w = 760, h = 520, m = {l: 50, r: 24, t: 30, b: 58};
+  const pw = w - m.l - m.r, ph = h - m.t - m.b;
+  const sampleMax = 3500;
+  const step = Math.max(1, Math.ceil(cohort.length / sampleMax));
+  const pts = cohort.filter((_, i) => i % step === 0);
+  const xs = cohort.map(p => p.pc[0]).concat([stats.centroidMpc[0], stats.centroidBpc[0]]);
+  const ys = cohort.map(p => p.pc[1]).concat([stats.centroidMpc[1], stats.centroidBpc[1]]);
+  let xmin = Math.min(...xs), xmax = Math.max(...xs), ymin = Math.min(...ys), ymax = Math.max(...ys);
+  const xpad = (xmax - xmin || 1) * 0.08, ypad = (ymax - ymin || 1) * 0.08;
+  xmin -= xpad; xmax += xpad; ymin -= ypad; ymax += ypad;
+  const x = v => m.l + (v - xmin) / (xmax - xmin) * pw;
+  const y = v => m.t + (1 - (v - ymin) / (ymax - ymin)) * ph;
+  const grey = cohort.filter(p => p.grey).map(p => p.pc);
+  let ellipse = '';
+  if (grey.length > 2) {
+    const gx = grey.map(p => p[0]), gy = grey.map(p => p[1]);
+    const gxmin = Math.min(...gx), gxmax = Math.max(...gx), gymin = Math.min(...gy), gymax = Math.max(...gy);
+    ellipse = `<ellipse cx="${x((gxmin + gxmax) / 2)}" cy="${y((gymin + gymax) / 2)}" rx="${Math.max(8, Math.abs(x(gxmax) - x(gxmin)) / 2)}" ry="${Math.max(8, Math.abs(y(gymax) - y(gymin)) / 2)}" fill="#999999" opacity="0.13" stroke="#777" stroke-dasharray="5 4"/>`;
+  }
+  const marks = pts.map(p => {
+    const px = x(p.pc[0]), py = y(p.pc[1]);
+    const color = p.malignant ? '#D55E00' : '#0072B2';
+    const opacity = p.grey ? 0.85 : 0.42;
+    if (p.hasPrior) return `<circle cx="${px}" cy="${py}" r="3.1" fill="${color}" opacity="${opacity}"/>`;
+    return `<path d="M ${px} ${py - 4.2} L ${px + 4.2} ${py + 3.8} L ${px - 4.2} ${py + 3.8} Z" fill="${color}" opacity="${opacity}"/>`;
+  }).join('');
+  function diamond(cx, cy, fill) {
+    return `<path d="M ${cx} ${cy - 11} L ${cx + 11} ${cy} L ${cx} ${cy + 11} L ${cx - 11} ${cy} Z" fill="${fill}" stroke="#111827" stroke-width="1.5"/>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="PCA scatter of feature space">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    ${[0,0.25,0.5,0.75,1].map(v => `<line x1="${m.l + v*pw}" y1="${m.t}" x2="${m.l + v*pw}" y2="${m.t + ph}" stroke="#edf2f7"/><line x1="${m.l}" y1="${m.t + v*ph}" x2="${m.l + pw}" y2="${m.t + v*ph}" stroke="#edf2f7"/>`).join('')}
+    ${ellipse}
+    ${marks}
+    ${diamond(x(stats.centroidMpc[0]), y(stats.centroidMpc[1]), '#D55E00')}
+    ${diamond(x(stats.centroidBpc[0]), y(stats.centroidBpc[1]), '#0072B2')}
+    <line x1="${m.l}" y1="${m.t + ph}" x2="${m.l + pw}" y2="${m.t + ph}" stroke="#52606d"/>
+    <line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${m.t + ph}" stroke="#52606d"/>
+    <text x="${m.l + pw/2}" y="${h - 18}" text-anchor="middle" font-size="14" font-weight="800" fill="#102a43">PC1 of 3D feature space</text>
+    <text transform="translate(18 ${m.t + ph/2}) rotate(-90)" text-anchor="middle" font-size="14" font-weight="800" fill="#102a43">PC2</text>
+    <text x="${m.l}" y="20" font-size="13" fill="#52606d">${step > 1 ? 'Display sample: every ' + step + 'th patient. ' : ''}Grey-zone ellipse spans current r thresholds.</text>
+    <g transform="translate(${w - 260}, ${m.t + 8})" font-size="12" fill="#243b53">
+      <circle cx="0" cy="0" r="4" fill="#D55E00"/><text x="12" y="4">Malignant</text>
+      <circle cx="0" cy="22" r="4" fill="#0072B2"/><text x="12" y="26">Benign</text>
+      <path d="M 0 40 L 5 49 L -5 49 Z" fill="#111827"/><text x="12" y="49">No prior scan shape</text>
+      <path d="M 0 68 L 8 76 L 0 84 L -8 76 Z" fill="#777"/><text x="12" y="81">Centroids</text>
+    </g>
+  </svg>`;
+}
+
+function renderHistogram(cohort, greyLow, greyHigh) {
+  const w = 720, h = 430, m = {l: 58, r: 22, t: 30, b: 58};
+  const pw = w - m.l - m.r, ph = h - m.t - m.b;
+  const bins = 30;
+  const mal = Array(bins).fill(0), ben = Array(bins).fill(0);
+  for (const p of cohort) {
+    const idx = clamp(Math.floor(p.r * bins), 0, bins - 1);
+    (p.malignant ? mal : ben)[idx]++;
+  }
+  const maxc = Math.max(...mal, ...ben, 1);
+  const x = r => m.l + r * pw;
+  const y = c => m.t + ph - (c / maxc) * ph;
+  const barw = pw / bins;
+  let bars = '';
+  for (let i = 0; i < bins; i++) {
+    const bx = m.l + i * barw;
+    bars += `<rect x="${bx}" y="${y(ben[i])}" width="${barw * 0.86}" height="${m.t + ph - y(ben[i])}" fill="#0072B2" opacity="0.45"/>`;
+    bars += `<rect x="${bx + barw * 0.18}" y="${y(mal[i])}" width="${barw * 0.64}" height="${m.t + ph - y(mal[i])}" fill="#D55E00" opacity="0.62"/>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Distance ratio histogram">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <rect x="${x(greyLow)}" y="${m.t}" width="${x(greyHigh) - x(greyLow)}" height="${ph}" fill="#999" opacity="0.16"/>
+    ${bars}
+    <line x1="${m.l}" y1="${m.t + ph}" x2="${m.l + pw}" y2="${m.t + ph}" stroke="#52606d"/>
+    <line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${m.t + ph}" stroke="#52606d"/>
+    ${[0,0.2,0.4,0.6,0.8,1].map(v => `<line x1="${x(v)}" y1="${m.t + ph}" x2="${x(v)}" y2="${m.t + ph + 7}" stroke="#52606d"/><text x="${x(v)}" y="${m.t + ph + 25}" text-anchor="middle" font-size="12" fill="#52606d">${v.toFixed(1)}</text>`).join('')}
+    <text x="${m.l + pw/2}" y="${h - 14}" text-anchor="middle" font-size="14" font-weight="800" fill="#102a43">Distance ratio r</text>
+    <text transform="translate(18 ${m.t + ph/2}) rotate(-90)" text-anchor="middle" font-size="14" font-weight="800" fill="#102a43">Count</text>
+    <g transform="translate(${w - 210}, ${m.t + 8})" font-size="12" fill="#243b53">
+      <rect x="0" y="-8" width="12" height="12" fill="#D55E00" opacity="0.62"/><text x="18" y="2">Malignant</text>
+      <rect x="0" y="16" width="12" height="12" fill="#0072B2" opacity="0.45"/><text x="18" y="26">Benign</text>
+      <rect x="0" y="40" width="12" height="12" fill="#999" opacity="0.16"/><text x="18" y="50">Grey-zone band</text>
+    </g>
+  </svg>`;
+}
+
+function renderMulticentreBars(stats) {
+  const mc = stats.multicentre;
+  const keys = ['malignant','benign','inflammatory','noPrior'];
+  const colors = Object.fromEntries(mc.centers.map(c => [c.key, c.color]));
+  const labels = Object.fromEntries(mc.centers.map(c => [c.key, c.label]));
+  const groups = mc.groups.filter(g => g.n > 0);
+  const w = 760, h = 86 + groups.length * 44, m = {l: 160, r: 24, t: 34, b: 36};
+  const pw = w - m.l - m.r;
+  let rows = '';
+  groups.forEach((g, i) => {
+    const y = m.t + i * 44;
+    let x0 = m.l;
+    rows += `<text x="${m.l - 12}" y="${y + 19}" text-anchor="end" font-size="12" font-weight="800" fill="#243b53">${esc(g.label)}</text>`;
+    for (const k of keys) {
+      const ww = (g.weights[k] || 0) * pw;
+      if (ww > 0.5) rows += `<rect x="${x0}" y="${y}" width="${ww}" height="24" fill="${colors[k]}" opacity="0.78"><title>${labels[k]} ${pct(g.weights[k],1)}</title></rect>`;
+      if (ww > 46) rows += `<text x="${x0 + ww / 2}" y="${y + 16}" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">${pct(g.weights[k],0)}</text>`;
+      x0 += ww;
+    }
+    rows += `<text x="${m.l + pw + 8}" y="${y + 17}" font-size="11" fill="#52606d">n=${g.n}</text>`;
+  });
+  const legend = keys.map((k, i) => `<g transform="translate(${m.l + i * 135}, ${h - 22})"><rect width="12" height="12" fill="${colors[k]}" opacity="0.78"/><text x="18" y="11" font-size="11" fill="#243b53">${labels[k]}</text></g>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Mean multicentre Gaussian kernel weights">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <text x="${m.l}" y="20" font-size="14" font-weight="900" fill="#102a43">Mean Gaussian kernel weights by subgroup</text>
+    ${rows}
+    ${legend}
+  </svg>`;
+}
+
+function renderFragilityChart(robustness) {
+  const rowsData = robustness?.byPathway || [];
+  if (!rowsData.length) return '<div class="subtle" style="padding:1rem;">Boundary perturbation disabled.</div>';
+  const w = 760, h = 110 + rowsData.length * 48, m = {l: 178, r: 30, t: 34, b: 54};
+  const pw = w - m.l - m.r;
+  let rows = '';
+  rowsData.forEach((r, i) => {
+    const y = m.t + i * 48;
+    const stable = Math.max(0, 1 - r.unstableShare);
+    const unstable = Math.max(0, r.unstableShare - r.highFragilityShare);
+    const high = r.highFragilityShare;
+    let x0 = m.l;
+    rows += `<text x="${m.l - 10}" y="${y + 22}" text-anchor="end" font-size="12" fill="#243b53" font-weight="800">${esc(r.name.replace(' (v1 thresholds)','').replace(' (v2 composite)',''))}</text>`;
+    const parts = [
+      {v: stable, c: '#9ecae1', label: 'Stable'},
+      {v: unstable, c: '#E69F00', label: 'Unstable'},
+      {v: high, c: '#D55E00', label: 'High fragility'}
+    ];
+    for (const part of parts) {
+      const ww = part.v * pw;
+      if (ww > 0.5) rows += `<rect x="${x0}" y="${y}" width="${ww}" height="28" fill="${part.c}" opacity="0.82"><title>${part.label}: ${pct(part.v,1)}</title></rect>`;
+      if (ww > 55) rows += `<text x="${x0 + ww / 2}" y="${y + 19}" text-anchor="middle" font-size="10" fill="#102a43" font-weight="900">${pct(part.v,0)}</text>`;
+      x0 += ww;
+    }
+    rows += `<text x="${m.l + pw + 8}" y="${y + 19}" font-size="11" fill="#52606d">mean flip ${pct(r.meanFlipShare,1)}</text>`;
+  });
+  const legend = `<g transform="translate(${m.l}, ${h - 28})"><rect width="12" height="12" fill="#9ecae1" opacity="0.82"/><text x="18" y="11" font-size="11" fill="#243b53">Stable</text><rect x="92" width="12" height="12" fill="#E69F00" opacity="0.82"/><text x="110" y="11" font-size="11" fill="#243b53">Unstable 0.10-0.90</text><rect x="250" width="12" height="12" fill="#D55E00" opacity="0.82"/><text x="268" y="11" font-size="11" fill="#243b53">High fragility 0.40-0.60</text></g>`;
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Pathway boundary robustness">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <text x="${m.l}" y="20" font-size="14" font-weight="900" fill="#102a43">Refer probability under volume-noise perturbation</text>
+    ${rows}
+    ${legend}
+  </svg>`;
+}
+
+function renderCohortOutputs() {
+  const cohort = state.cohort, stats = state.stats, params = state.params;
+  const labels = cohort.map(p => p.malignant);
+  const scores = cohort.map(p => p.crs);
+  const roc = state.roc;
+  const ci = state.mainAucCi;
+  const youdenMetrics = metricsFromCounts(roc.youden.tp, roc.youden.fp, roc.neg - roc.youden.fp, roc.pos - roc.youden.tp);
+  const selectedMetrics = metricsAtThreshold(scores, labels, params.threshold);
+  $('rocSummary').innerHTML = renderMetricGrid([
+    { k: 'AUC', v: `${fmt(roc.auc,3)}`, s: `95% CI ${fmt(ci.low,3)}-${fmt(ci.high,3)}` },
+    { k: 'Youden threshold', v: `${fmt(roc.youden.threshold,3)}`, s: `Sens ${pct(youdenMetrics.sensitivity,1)}, Spec ${pct(youdenMetrics.specificity,1)}` },
+    { k: `At CRS > ${fmt(params.threshold,2)}`, v: `Sens ${pct(selectedMetrics.sensitivity,0)}`, s: `Spec ${pct(selectedMetrics.specificity,0)}, PPV ${pct(selectedMetrics.ppv,0)}, NPV ${pct(selectedMetrics.npv,0)}` },
+    { k: 'Cases', v: `${labels.filter(Boolean).length}/${cohort.length}`, s: 'True malignant / total' }
+  ]);
+  $('rocSvg').innerHTML = renderRoc(roc, ci, selectedMetrics, params.threshold);
+
+  const comp = stats.greyComposition;
+  $('distanceSummary').innerHTML = renderMetricGrid([
+    { k: 'Inter-centroid distance', v: fmt(stats.interCentroid, 3), s: 'Higher means better separability' },
+    { k: 'Mean intra-class distance', v: `${fmt(stats.intraM,2)} / ${fmt(stats.intraB,2)}`, s: 'Malignant / benign' },
+    { k: 'Grey-zone patients', v: `${comp.n}`, s: `${pct(comp.share,1)} of cohort` },
+    { k: 'Cases inside grey zone', v: `${pct(comp.malInsideShare,1)}`, s: `Benigns inside ${pct(comp.benInsideShare,1)}` }
+  ]);
+  $('greyComposition').innerHTML = `<strong>Grey-zone composition:</strong> subsolid ${pct(comp.subsolid,1)}, no prior scan ${pct(comp.noPrior,1)}, inflammatory-spike benigns ${pct(comp.inflammatoryBenign,1)}, Brock_P 0.10-0.30 band ${pct(comp.brockBand,1)}.`;
+
+  const mc = stats.multicentre;
+  $('multiCentroidSummary').innerHTML = renderMetricGrid([
+    { k: 'MC malignant-score AUC', v: fmt(mc.auc, 3), s: 'AUC of Gaussian weight assigned to malignant centroid' },
+    { k: 'Kernel bandwidth tau', v: fmt(mc.tau, 2), s: 'Larger tau softens all centre assignments' },
+    { k: 'Mean max centre weight', v: pct(mc.meanMaxWeight, 1), s: 'Higher means clearer local-centre anchoring' },
+    { k: 'High-entropy share', v: pct(mc.highEntropyShare, 1), s: 'Entropy >= 0.75 across four centres' },
+    { k: 'Grey-zone M weight', v: pct(mc.greyMeanWeights.malignant, 1), s: 'Mean malignant-centre weight inside Euclidean grey zone' },
+    { k: 'Grey-zone inflammatory weight', v: pct(mc.greyMeanWeights.inflammatory, 1), s: 'Mean inflammatory-centre weight inside Euclidean grey zone' }
+  ]);
+  $('multiCentroidBars').innerHTML = renderMulticentreBars(stats);
+
+  const rob = state.robustness;
+  if (rob && rob.byPathway && rob.byPathway.length) {
+    const crsRob = rob.byPathway.find(r => r.name === 'C. CRS (v2 composite)') || rob.byPathway[0];
+    const top = rob.mostFragile || crsRob;
+    $('fragilitySummary').innerHTML = `<strong>${rob.reps} perturbations per patient.</strong> Most high-fragility pathway: ${esc(top.name)} (${pct(top.highFragilityShare,1)} high-fragility, ${pct(top.unstableShare,1)} unstable). CRS unstable share ${pct(crsRob.unstableShare,1)} with ${crsRob.fragileMalignantCount} malignant and ${crsRob.fragileBenignCount} benign cases in the unstable boundary band.`;
+  } else {
+    $('fragilitySummary').innerHTML = '<strong>Boundary perturbation disabled.</strong> Set perturbations per patient above zero and re-run or update pathways.';
+  }
+  $('fragilitySvg').innerHTML = renderFragilityChart(rob);
+
+  $('scatterSvg').innerHTML = renderScatter(cohort, stats);
+  $('histSvg').innerHTML = renderHistogram(cohort, params.greyLow, params.greyHigh);
+}
+
+function readPathwayConfig() {
+  return {
+    brockThreshold: clamp(readNum('pathBrockThreshold', 0.10), 0.001, 0.999),
+    crsThreshold: clamp(readNum('pathCrsThreshold', 0.35), 0.001, 0.999),
+    growLowerVdt: Math.max(1, readNum('growLowerVdt', 100)),
+    growUpperVdt: Math.max(2, readNum('growUpperVdt', 600)),
+    growVolThreshold: Math.max(1, readNum('growVolThreshold', 300)),
+    growPctThreshold: readNum('growPctThreshold', 25),
+    hybridBrockLow: clamp(readNum('hybridBrockLow', 0.10), 0.001, 0.999),
+    hybridGThreshold: clamp(readNum('hybridGThreshold', 0.40), 0.001, 0.999),
+    hybridBrockHigh: clamp(readNum('hybridBrockHigh', 0.30), 0.001, 0.999),
+    customBrock: clamp(readNum('customBrock', 0.12), 0, 1),
+    customVdtLow: Math.max(1, readNum('customVdtLow', 100)),
+    customVdtHigh: Math.max(2, readNum('customVdtHigh', 500)),
+    customVolume: clamp(readNum('customVolume', 500), 14, 14000),
+    customNonMonotonic: $('customNonMonotonic').checked,
+    customSubsolid: $('customSubsolid').checked
+  };
+}
+
+function growcatScore(p, cfg) {
+  if (!p.hasPrior || !Number.isFinite(p.observedVdt)) return p.volume > cfg.growVolThreshold ? 0.25 : 0;
+  const lower = cfg.growLowerVdt, upper = Math.max(cfg.growUpperVdt, lower + 1);
+  const mid = Math.sqrt(lower * upper);
+  const windowScore = Math.exp(-Math.abs(Math.log(p.observedVdt / mid)) / 0.8);
+  const growthScore = (p.volume > cfg.growVolThreshold && p.growthPct >= cfg.growPctThreshold) ? 1 : Math.min(1, Math.max(0, p.growthPct / Math.max(1, cfg.growPctThreshold)) * 0.5);
+  const subScore = p.subsolidProgression ? 1 : 0;
+  return Math.max(windowScore, growthScore, subScore);
+}
+
+function classifyPathway(p, name, cfg) {
+  let refer = false, action = 'routine', indeterminate = false, score = 0;
+  if (name === 'A. GrowCAT (v1 thresholds)') {
+    const lower = cfg.growLowerVdt, upper = Math.max(cfg.growUpperVdt, lower + 1);
+    score = growcatScore(p, cfg);
+    if (!p.hasPrior) {
+      indeterminate = true;
+    } else {
+      refer = (Number.isFinite(p.observedVdt) && p.observedVdt >= lower && p.observedVdt <= upper) ||
+              (p.volume > cfg.growVolThreshold && p.growthPct >= cfg.growPctThreshold) ||
+              p.subsolidProgression;
+      action = refer ? ((Number.isFinite(p.observedVdt) && p.observedVdt >= 100 && p.observedVdt <= 200) || p.volume > 1000 ? 'biopsy' : 'pet') : (p.volume > cfg.growVolThreshold ? 'close' : 'routine');
+    }
+  } else if (name === 'B. Brock-only') {
+    score = p.brock;
+    refer = p.brock > cfg.brockThreshold;
+    action = refer ? (p.brock > 0.30 ? 'biopsy' : 'pet') : (p.brock > cfg.brockThreshold / 2 ? 'close' : 'routine');
+  } else if (name === 'C. CRS (v2 composite)') {
+    score = p.crs;
+    refer = p.crs > cfg.crsThreshold;
+    action = refer ? (p.crs >= 0.65 ? 'biopsy' : 'pet') : (p.crs >= 0.05 ? 'close' : 'routine');
+  } else if (name === 'D. Hybrid Nordic draft') {
+    const gOK = p.hasPrior && Number.isFinite(p.g) && p.g > cfg.hybridGThreshold;
+    score = Math.max(p.brock / cfg.hybridBrockHigh, (gOK ? p.g : 0), p.subsolidProgression ? 1.1 : 0);
+    refer = (p.brock > cfg.hybridBrockLow && gOK) || p.brock > cfg.hybridBrockHigh || p.subsolidProgression;
+    action = refer ? (p.brock > cfg.hybridBrockHigh || p.crs >= 0.65 ? 'biopsy' : 'pet') : (p.brock > 0.05 || p.subsolid ? 'close' : 'routine');
+  } else if (name === 'Custom rule') {
+    const lo = Math.min(cfg.customVdtLow, cfg.customVdtHigh), hi = Math.max(cfg.customVdtLow, cfg.customVdtHigh);
+    const vdtHit = p.hasPrior && Number.isFinite(p.observedVdt) && (cfg.customNonMonotonic ? p.g > 0.4 : (p.observedVdt >= lo && p.observedVdt <= hi));
+    const volHit = p.volume > cfg.customVolume;
+    const subHit = cfg.customSubsolid && p.subsolidProgression;
+    score = Math.max(cfg.customBrock > 0 ? p.brock / cfg.customBrock : p.brock, vdtHit ? 1 : 0, volHit ? p.volume / cfg.customVolume : 0, subHit ? 1.1 : 0);
+    refer = (cfg.customBrock > 0 && p.brock > cfg.customBrock) || vdtHit || volHit || subHit;
+    action = refer ? (p.crs >= 0.65 || p.volume > 1000 ? 'biopsy' : 'pet') : (p.brock > 0.05 || p.subsolid ? 'close' : 'routine');
+  }
+  return { refer, action, indeterminate, score };
+}
+
+function perturbPatientForDecision(p, rng, cv) {
+  const q = Object.assign({}, p);
+  let prior = p.priorVolumeObserved;
+  let current = p.currentVolumeObservedRaw;
+  if (p.hasPrior && prior > 0) prior = prior * Math.exp(rng.normal(0, cv));
+  if (current > 0) current = current * Math.exp(rng.normal(0, cv));
+  q.currentVolumeObservedRaw = current;
+  q.volume = clamp(current, 14, 14000);
+  q.diameterMm = clamp(volumeToDiameter(q.volume), 3, 30);
+  q.priorVolumeObserved = p.hasPrior ? prior : null;
+  const vdtInfo = p.hasPrior ? computeVdt(prior, current, 365) : { hasPrior: false, stable: false, vdt: null };
+  q.observedVdt = p.hasPrior ? vdtInfo.vdt : null;
+  q.stableOrShrinking = p.hasPrior ? vdtInfo.stable : false;
+  q.g = p.hasPrior ? growthRiskFromVdt(q.observedVdt) : null;
+  q.growthPct = p.hasPrior ? ((current - prior) / prior) * 100 : null;
+  q.brock = brockProbability(q);
+  q.crs = q.hasPrior ? (0.6 * q.brock + 0.4 * q.g) : q.brock;
+  q.subsolidProgression = q.hasPrior && q.subsolid && q.growthPct >= 25 && Number.isFinite(q.observedVdt) && q.observedVdt >= 100 && q.observedVdt <= 1000;
+  return q;
+}
+
+/*
+  Boundary robustness layer.
+  This is a measurement-error sensitivity analysis for threshold pathways.
+  It repeatedly perturbs both timepoint volumes, recomputes VDT, G(VDT), Brock through diameter, CRS, and pathway decisions.
+  The output is not a clinical probability. It is a decision fragility estimate for guideline discussion.
+*/
+function computeBoundaryRobustness(cohort, params, cfg) {
+  const reps = Math.max(0, Math.round(params.robustN || 0));
+  const names = ['A. GrowCAT (v1 thresholds)', 'B. Brock-only', 'C. CRS (v2 composite)', 'D. Hybrid Nordic draft', 'Custom rule'];
+  if (!reps) {
+    return { reps, byPathway: [], note: 'Boundary perturbation disabled.' };
+  }
+  const rng = makeRng(((params.seed || 0) + 990001) >>> 0);
+  const accum = Object.fromEntries(names.map(name => [name, {
+    name,
+    unstable: 0,
+    highFragility: 0,
+    fragileMalignant: 0,
+    fragileBenign: 0,
+    flipSum: 0,
+    referProbSum: 0,
+    maxReferProb: 0,
+    minReferProb: 1
+  }]));
+
+  for (const p of cohort) {
+    const base = Object.fromEntries(names.map(name => [name, classifyPathway(p, name, cfg).refer]));
+    const referCounts = Object.fromEntries(names.map(name => [name, 0]));
+    const flipCounts = Object.fromEntries(names.map(name => [name, 0]));
+    for (let r = 0; r < reps; r++) {
+      const q = perturbPatientForDecision(p, rng, params.cv);
+      for (const name of names) {
+        const ref = classifyPathway(q, name, cfg).refer;
+        if (ref) referCounts[name]++;
+        if (ref !== base[name]) flipCounts[name]++;
+      }
+    }
+    for (const name of names) {
+      const rp = referCounts[name] / reps;
+      const fp = flipCounts[name] / reps;
+      const a = accum[name];
+      a.referProbSum += rp;
+      a.flipSum += fp;
+      a.maxReferProb = Math.max(a.maxReferProb, rp);
+      a.minReferProb = Math.min(a.minReferProb, rp);
+      const unstable = rp >= 0.10 && rp <= 0.90;
+      const high = rp >= 0.40 && rp <= 0.60;
+      if (unstable) {
+        a.unstable++;
+        if (p.malignant) a.fragileMalignant++; else a.fragileBenign++;
+      }
+      if (high) a.highFragility++;
+    }
+  }
+  const n = cohort.length || 1;
+  const byPathway = names.map(name => {
+    const a = accum[name];
+    return {
+      name,
+      reps,
+      unstableShare: a.unstable / n,
+      highFragilityShare: a.highFragility / n,
+      fragileMalignantCount: a.fragileMalignant,
+      fragileBenignCount: a.fragileBenign,
+      meanFlipShare: a.flipSum / n,
+      meanReferProbability: a.referProbSum / n,
+      minReferProbability: a.minReferProb,
+      maxReferProbability: a.maxReferProb
+    };
+  });
+  const mostFragile = byPathway.slice().sort((a, b) => b.highFragilityShare - a.highFragilityShare)[0];
+  return { reps, byPathway, mostFragile };
+}
+
+function harmForPatient(p, cls) {
+  if (cls.indeterminate) return { category: 'indeterminate', harm: HARM_WEIGHTS.indeterminate };
+  if (cls.refer) {
+    if (cls.action === 'biopsy') return p.malignant ? { category: 'biopsyTP', harm: HARM_WEIGHTS.biopsyTP } : { category: 'biopsyFP', harm: HARM_WEIGHTS.biopsyFP };
+    return { category: 'pet', harm: HARM_WEIGHTS.pet };
+  }
+  if (p.malignant) return { category: 'missed', harm: HARM_WEIGHTS.missed };
+  if (cls.action === 'close') return { category: 'close', harm: HARM_WEIGHTS.close };
+  return { category: 'routine', harm: HARM_WEIGHTS.routine };
+}
+
+function evaluatePathway(name, cohort, cfg) {
+  const scores = [], labels = [];
+  let tp = 0, fp = 0, tn = 0, fn = 0;
+  const harm = { routine:0, close:0, pet:0, biopsyTP:0, biopsyFP:0, missed:0, indeterminate:0 };
+  let referred = 0, referredGrey = 0, detected = 0;
+  for (const p of cohort) {
+    const cls = classifyPathway(p, name, cfg);
+    const h = harmForPatient(p, cls);
+    harm[h.category] += h.harm;
+    scores.push(cls.score);
+    labels.push(p.malignant);
+    if (cls.refer) {
+      referred++;
+      if (p.grey) referredGrey++;
+      if (p.malignant) { tp++; detected++; } else fp++;
+    } else {
+      if (p.malignant) fn++; else tn++;
+    }
+  }
+  const metrics = metricsFromCounts(tp, fp, tn, fn);
+  const auc = aucByRank(scores, labels);
+  const totalHarm = Object.values(harm).reduce((a,b) => a + b, 0);
+  const roc = rocFromScores(scores, labels);
+  return {
+    name, scores, labels, metrics, auc, roc,
+    threshold: thresholdForName(name, cfg),
+    optimalThreshold: roc.youden.threshold,
+    harm, totalHarm,
+    greyZoneShare: referred ? referredGrey / referred : NaN,
+    harmPerDetected: detected ? totalHarm / detected : Infinity,
+    detected
+  };
+}
+function thresholdForName(name, cfg) {
+  if (name.startsWith('B.')) return cfg.brockThreshold;
+  if (name.startsWith('C.')) return cfg.crsThreshold;
+  if (name.startsWith('A.')) return `${cfg.growLowerVdt}-${cfg.growUpperVdt} d; ${cfg.growVolThreshold} mm3`;
+  if (name.startsWith('D.')) return `${cfg.hybridBrockLow} + G>${cfg.hybridGThreshold}; high ${cfg.hybridBrockHigh}`;
+  return `Brock ${cfg.customBrock}; V ${cfg.customVolume}`;
+}
+
+function validateCustom(cfg) {
+  const notes = [];
+  if (cfg.customVdtLow >= cfg.customVdtHigh) notes.push('VDT lower is not below upper; values will be internally ordered.');
+  if (cfg.customBrock === 0 && !cfg.customNonMonotonic && cfg.customVolume >= 14000 && !cfg.customSubsolid) notes.push('Custom rule may classify almost nobody.');
+  $('customValidation').textContent = notes.length ? notes.join(' ') : 'Custom rule fields are valid.';
+}
+
+function computePathwayResults(withBootstrap = true) {
+  if (!state.cohort.length) return null;
+  const cfg = readPathwayConfig();
+  validateCustom(cfg);
+  const names = ['A. GrowCAT (v1 thresholds)', 'B. Brock-only', 'C. CRS (v2 composite)', 'D. Hybrid Nordic draft', 'Custom rule'];
+  const results = names.map(name => evaluatePathway(name, state.cohort, cfg));
+  if (withBootstrap) {
+    results.forEach((res, i) => {
+      const ci = bootstrapAucAndBand(res.scores, res.labels, (state.params.seed + 5000 + i * 101) >>> 0, 1000, false);
+      res.aucCi = { low: ci.low, high: ci.high };
+    });
+  } else if (state.pathways?.results) {
+    for (const res of results) {
+      const old = state.pathways.results.find(r => r.name === res.name);
+      if (old?.aucCi && (res.name === 'B. Brock-only' || res.name === 'C. CRS (v2 composite)')) res.aucCi = old.aucCi;
+    }
+  }
+  state.pathways = { config: cfg, results };
+  state.robustness = computeBoundaryRobustness(state.cohort, state.params, cfg);
+  renderPathwayOutputs();
+  if (state.roc && state.stats) renderCohortOutputs();
+  return state.pathways;
+}
+
+function renderPathwayOutputs() {
+  const results = state.pathways.results;
+  const rows = results.map(r => {
+    const rb = state.robustness?.byPathway?.find(x => x.name === r.name);
+    return `<tr>
+      <td><strong>${esc(r.name)}</strong><br><span class="subtle">Threshold: ${esc(r.threshold)}</span></td>
+      <td>${fmt(r.auc,3)}${r.aucCi ? `<br><span class="subtle">95% CI ${fmt(r.aucCi.low,3)}-${fmt(r.aucCi.high,3)}</span>` : ''}</td>
+      <td>${pct(r.metrics.sensitivity,1)}</td>
+      <td>${pct(r.metrics.specificity,1)}</td>
+      <td>${pct(r.metrics.ppv,1)}</td>
+      <td>${pct(r.metrics.npv,1)}</td>
+      <td>${pct(r.greyZoneShare,1)}</td>
+      <td>${rb ? pct(rb.unstableShare,1) : '-'}</td>
+      <td>${fmt(r.totalHarm,0)}</td>
+      <td>${Number.isFinite(r.harmPerDetected) ? fmt(r.harmPerDetected,1) : 'not detected'}</td>
+    </tr>`;
+  }).join('');
+  $('pathwayTable').innerHTML = `<table><thead><tr><th>Pathway</th><th>AUC</th><th>Sensitivity</th><th>Specificity</th><th>PPV</th><th>NPV</th><th>Grey-zone share among referred</th><th>Boundary unstable share</th><th>Total harm</th><th>Harm per detected malignancy</th></tr></thead><tbody>${rows}</tbody></table>`;
+  $('harmSvg').innerHTML = renderHarmChart(results);
+  $('sweepSvg').innerHTML = renderSweepChart(state.cohort, state.pathways.config);
+}
+
+function renderHarmChart(results) {
+  const w = 760, h = 470, m = {l: 178, r: 26, t: 30, b: 42};
+  const pw = w - m.l - m.r, rowH = 48;
+  const maxTotal = Math.max(...results.map(r => r.totalHarm), 1);
+  const cats = ['routine','close','pet','biopsyTP','biopsyFP','missed','indeterminate'];
+  let bars = '';
+  results.forEach((r, i) => {
+    const y = m.t + i * rowH;
+    let x0 = m.l;
+    bars += `<text x="${m.l - 10}" y="${y + 22}" text-anchor="end" font-size="12" fill="#243b53" font-weight="800">${esc(r.name.replace(' (v1 thresholds)','').replace(' (v2 composite)',''))}</text>`;
+    for (const c of cats) {
+      const ww = r.harm[c] / maxTotal * pw;
+      if (ww > 0) bars += `<rect x="${x0}" y="${y}" width="${ww}" height="28" fill="${HARM_COLORS[c]}"><title>${HARM_LABELS[c]}: ${fmt(r.harm[c],0)}</title></rect>`;
+      x0 += ww;
+    }
+    bars += `<text x="${m.l + r.totalHarm / maxTotal * pw + 6}" y="${y + 20}" font-size="12" fill="#52606d">${fmt(r.totalHarm,0)}</text>`;
+  });
+  const legend = cats.map((c, i) => `<g transform="translate(${m.l + (i % 3) * 175}, ${h - 68 + Math.floor(i / 3) * 22})"><rect width="12" height="12" fill="${HARM_COLORS[c]}"/><text x="18" y="11" font-size="11" fill="#243b53">${HARM_LABELS[c]}</text></g>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Stacked harm bar chart">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    ${bars}
+    <line x1="${m.l}" y1="${m.t + results.length * rowH + 4}" x2="${m.l + pw}" y2="${m.t + results.length * rowH + 4}" stroke="#52606d"/>
+    <text x="${m.l}" y="20" font-size="14" font-weight="900" fill="#102a43">Expected total harm units by pathway</text>
+    ${legend}
+  </svg>`;
+}
+
+function pathwayHarmAt(name, cohort, cfgOverride) {
+  const res = evaluatePathway(name, cohort, cfgOverride);
+  return { harm: res.totalHarm, sens: res.metrics.sensitivity, threshold: thresholdForName(name, cfgOverride) };
+}
+function renderSweepChart(cohort, baseCfg) {
+  const series = [];
+  const crs = [], brock = [], grow = [], hybrid = [];
+  for (let i = 0; i <= 30; i++) {
+    const t = 0.05 + i * (0.85 / 30);
+    crs.push({ x: t, ...pathwayHarmAt('C. CRS (v2 composite)', cohort, {...baseCfg, crsThreshold: t}) });
+  }
+  for (let i = 0; i <= 30; i++) {
+    const t = 0.02 + i * (0.48 / 30);
+    brock.push({ x: t, ...pathwayHarmAt('B. Brock-only', cohort, {...baseCfg, brockThreshold: t}) });
+  }
+  for (let i = 0; i <= 30; i++) {
+    const upper = 200 + i * (800 / 30);
+    grow.push({ x: upper, ...pathwayHarmAt('A. GrowCAT (v1 thresholds)', cohort, {...baseCfg, growUpperVdt: upper}) });
+  }
+  for (let i = 0; i <= 30; i++) {
+    const t = 0.03 + i * (0.37 / 30);
+    hybrid.push({ x: t, ...pathwayHarmAt('D. Hybrid Nordic draft', cohort, {...baseCfg, hybridBrockLow: t}) });
+  }
+  series.push({ name:'CRS threshold', data: crs, color:'#009E73' });
+  series.push({ name:'Brock threshold', data: brock, color:'#0072B2' });
+  series.push({ name:'GrowCAT upper VDT', data: grow, color:'#D55E00' });
+  series.push({ name:'Hybrid low Brock', data: hybrid, color:'#CC79A7' });
+
+  const w = 760, h = 470, m = {l: 58, r: 58, t: 34, b: 68};
+  const plotW = (w - m.l - m.r - 28) / 2, ph = h - m.t - m.b;
+  const allH = series.flatMap(s => s.data.map(d => d.harm));
+  const maxH = Math.max(...allH, 1), minH = Math.min(...allH, 0);
+  function linePath(data, metric, x0) {
+    const xs = data.map(d => d.x), xmin = Math.min(...xs), xmax = Math.max(...xs);
+    const x = v => x0 + (v - xmin) / (xmax - xmin) * plotW;
+    const y = metric === 'harm' ? (v => m.t + (1 - (v - minH) / (maxH - minH || 1)) * ph) : (v => m.t + (1 - v) * ph);
+    return data.map((d, i) => `${i ? 'L':'M'} ${x(d.x)} ${y(d[metric])}`).join(' ');
+  }
+  const leftX = m.l, rightX = m.l + plotW + 58;
+  const harmLines = series.map(s => `<path d="${linePath(s.data, 'harm', leftX)}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`).join('');
+  const sensLines = series.map(s => `<path d="${linePath(s.data, 'sens', rightX)}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`).join('');
+  const legend = series.map((s, i) => `<g transform="translate(${m.l + i * 170}, ${h - 28})"><line x1="0" y1="0" x2="18" y2="0" stroke="${s.color}" stroke-width="3"/><text x="24" y="4" font-size="11" fill="#243b53">${esc(s.name)}</text></g>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Harm and sensitivity threshold sweeps">
+    <rect width="${w}" height="${h}" fill="#fff"/>
+    <text x="${leftX}" y="22" font-size="14" font-weight="900" fill="#102a43">Harm vs threshold</text>
+    <text x="${rightX}" y="22" font-size="14" font-weight="900" fill="#102a43">Sensitivity vs threshold</text>
+    ${[0,0.25,0.5,0.75,1].map(v => `<line x1="${leftX}" y1="${m.t + v*ph}" x2="${leftX + plotW}" y2="${m.t + v*ph}" stroke="#edf2f7"/><line x1="${rightX}" y1="${m.t + v*ph}" x2="${rightX + plotW}" y2="${m.t + v*ph}" stroke="#edf2f7"/>`).join('')}
+    <rect x="${leftX}" y="${m.t}" width="${plotW}" height="${ph}" fill="none" stroke="#52606d"/>
+    <rect x="${rightX}" y="${m.t}" width="${plotW}" height="${ph}" fill="none" stroke="#52606d"/>
+    ${harmLines}${sensLines}
+    <text x="${leftX + plotW/2}" y="${h - 50}" text-anchor="middle" font-size="12" fill="#52606d">Threshold axis scaled per pathway</text>
+    <text x="${rightX + plotW/2}" y="${h - 50}" text-anchor="middle" font-size="12" fill="#52606d">Threshold axis scaled per pathway</text>
+    ${legend}
+  </svg>`;
+}
+
+function runSimulation() {
+  const status = $('simStatus');
+  status.textContent = 'Running simulation and CRS 1000-resample bootstrap...';
+  const start = performance.now();
+  setTimeout(() => {
+    const params = readCohortParams();
+    if (params.greyLow >= params.greyHigh) {
+      params.greyLow = Math.min(params.greyLow, 0.40);
+      params.greyHigh = Math.max(params.greyHigh, 0.60);
+      $('greyLow').value = params.greyLow;
+      $('greyHigh').value = params.greyHigh;
+      updateRangeLabels();
+    }
+    const adv = getAdvancedSettings();
+    const cohort = simulateCohort(params, adv);
+    const stats = computeFeatureSpace(cohort, params.greyLow, params.greyHigh, params.kernelTau);
+    const labels = cohort.map(p => p.malignant);
+    const scores = cohort.map(p => p.crs);
+    const roc = rocFromScores(scores, labels);
+    const ci = bootstrapAucAndBand(scores, labels, (params.seed + 123456) >>> 0, 1000, true);
+    state.params = params;
+    state.advanced = adv;
+    state.cohort = cohort;
+    state.stats = stats;
+    state.roc = roc;
+    state.mainAucCi = { low: ci.low, high: ci.high };
+    state.rocBand = ci.band;
+    state.mainAucCi.band = ci.band;
+    state.robustness = null;
+    computePathwayResults(false);
+    recalcSingle();
+    const elapsed = performance.now() - start;
+    status.textContent = `Simulation complete. n=${params.n}, malignant=${labels.filter(Boolean).length}, elapsed ${fmt(elapsed / 1000, 2)} s.`;
+  }, 20);
+}
+
+function ensurePathwayBootstrapCis() {
+  if (!state.pathways || !state.pathways.results) return;
+  let changed = false;
+  state.pathways.results.forEach((res, i) => {
+    if (!res.aucCi) {
+      const ci = bootstrapAucAndBand(res.scores, res.labels, (state.params.seed + 5000 + i * 101) >>> 0, 1000, false);
+      res.aucCi = { low: ci.low, high: ci.high };
+      changed = true;
+    }
+  });
+  if (changed) renderPathwayOutputs();
+}
+
+function exportResults() {
+  if (!state.cohort.length) runSimulation();
+  ensurePathwayBootstrapCis();
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    disclaimer: 'Educational and research-planning use only. Not a medical device. Brock model is not validated for Nordic populations.',
+    cohortParameters: state.params,
+    classConditionalDistributions: state.advanced,
+    aucCrs: { auc: state.roc?.auc, ci95: state.mainAucCi ? [state.mainAucCi.low, state.mainAucCi.high] : null, youdenThreshold: state.roc?.youden?.threshold },
+    centroidCoordinates: { malignant: state.stats?.centroidM, benign: state.stats?.centroidB },
+    multicentreCentroids: state.stats?.centroids4?.map(c => ({ key: c.key, label: c.label, n: c.n, vector: c.vector })),
+    multicentreSummary: state.stats?.multicentre ? {
+      tau: state.stats.multicentre.tau,
+      auc: state.stats.multicentre.auc,
+      meanMaxWeight: state.stats.multicentre.meanMaxWeight,
+      meanEntropy: state.stats.multicentre.meanEntropy,
+      highEntropyShare: state.stats.multicentre.highEntropyShare,
+      greyMeanWeights: state.stats.multicentre.greyMeanWeights,
+      groups: state.stats.multicentre.groups
+    } : null,
+    boundaryRobustness: state.robustness,
+    interCentroidDistance: state.stats?.interCentroid,
+    meanIntraClassDistance: { malignant: state.stats?.intraM, benign: state.stats?.intraB },
+    greyZone: { lower: state.params?.greyLow, upper: state.params?.greyHigh, composition: state.stats?.greyComposition },
+    pathways: state.pathways?.results.map(r => ({
+      name: r.name,
+      auc: r.auc,
+      ci95: r.aucCi ? [r.aucCi.low, r.aucCi.high] : null,
+      operatingThreshold: r.threshold,
+      youdenOptimalThreshold: r.optimalThreshold,
+      metrics: r.metrics,
+      greyZoneShareAmongReferred: r.greyZoneShare,
+      harmBreakdown: r.harm,
+      totalHarm: r.totalHarm,
+      harmPerDetectedMalignancy: r.harmPerDetected
+    })) || []
+  };
+  const blob = new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' });
+  if (state.exportBlobUrl) URL.revokeObjectURL(state.exportBlobUrl);
+  state.exportBlobUrl = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = state.exportBlobUrl;
+  a.download = 'nordic_nodule_pathway_sandbox_v3_results.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function updateRangeLabels() {
+  const ids = ['cohortN','prevalence','meanMalVdt','sdMalLogVdt','meanBenVdt','sdBenLogVdt','inflamShare','measurementCv','noPriorShare','operatingThreshold','greyLow','greyHigh','kernelTau','robustN'];
+  for (const id of ids) {
+    const out = $(id + 'Out');
+    if (!out) continue;
+    const val = $(id).value;
+    out.textContent = id.includes('Threshold') || id.includes('grey') || id.includes('sd') ? val : val;
+  }
+}
+function syncDiameterVolume(source) {
+  if (syncDiameterVolume.lock) return;
+  syncDiameterVolume.lock = true;
+  if (source === 'diameter') {
+    const d = clamp(Number($('singleDiameter').value), 3, 30);
+    $('singleVolume').value = Math.round(diameterToVolume(d));
+  } else {
+    const v = clamp(Number($('singleVolume').value), 14, 14000);
+    $('singleDiameter').value = fmt(volumeToDiameter(v), 1);
+  }
+  syncDiameterVolume.lock = false;
+}
+function setupEvents() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      $('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+  $('singleDiameter').addEventListener('input', () => { syncDiameterVolume('diameter'); recalcSingle(); });
+  $('singleVolume').addEventListener('input', () => { syncDiameterVolume('volume'); recalcSingle(); });
+  ['singlePriorVolume','singleInterval','singleType','singlePet','singleCount','singleAge','singleSex','singleSpic','singleUpper','singleEmphysema','singleFamily'].forEach(id => {
+    $(id).addEventListener('input', recalcSingle);
+    $(id).addEventListener('change', recalcSingle);
+  });
+  $('singleRecalc').addEventListener('click', recalcSingle);
+  $('singleReset').addEventListener('click', () => {
+    $('singleDiameter').value = 8; syncDiameterVolume('diameter');
+    $('singlePriorVolume').value = '';
+    $('singleInterval').value = 365;
+    $('singleType').value = 'Solid'; $('singlePet').value = '';
+    $('singleCount').value = 1; $('singleAge').value = 65; $('singleSex').value = 'female';
+    $('singleSpic').checked = false; $('singleUpper').checked = true; $('singleEmphysema').checked = false; $('singleFamily').checked = false;
+    recalcSingle();
+  });
+  ['cohortN','prevalence','meanMalVdt','sdMalLogVdt','meanBenVdt','sdBenLogVdt','inflamShare','measurementCv','noPriorShare','operatingThreshold','greyLow','greyHigh','kernelTau','robustN'].forEach(id => $(id).addEventListener('input', () => {
+    updateRangeLabels();
+    if (state.cohort.length && ['operatingThreshold','greyLow','greyHigh','kernelTau','robustN'].includes(id)) {
+      const p = readCohortParams();
+      if (id === 'operatingThreshold') {
+        state.params.threshold = p.threshold;
+        renderCohortOutputs();
+      } else if (id === 'robustN') {
+        state.params.robustN = p.robustN;
+        computePathwayResults(false);
+      } else {
+        state.params.greyLow = p.greyLow; state.params.greyHigh = p.greyHigh; state.params.kernelTau = p.kernelTau;
+        state.stats = computeFeatureSpace(state.cohort, p.greyLow, p.greyHigh, p.kernelTau);
+        computePathwayResults(false);
+        recalcSingle();
+      }
+    }
+  }));
+  $('runSimulation').addEventListener('click', runSimulation);
+  $('exportResults').addEventListener('click', exportResults);
+  $('updatePathways').addEventListener('click', () => computePathwayResults(true));
+  ['pathBrockThreshold','pathCrsThreshold','growLowerVdt','growUpperVdt','growVolThreshold','growPctThreshold','hybridBrockLow','hybridGThreshold','hybridBrockHigh','customBrock','customVdtLow','customVdtHigh','customVolume','customNonMonotonic','customSubsolid'].forEach(id => {
+    $(id).addEventListener('input', () => { if (state.cohort.length) computePathwayResults(false); });
+    $(id).addEventListener('change', () => { if (state.cohort.length) computePathwayResults(false); });
+  });
+}
+
+setupEvents();
+updateRangeLabels();
+syncDiameterVolume('diameter');
+recalcSingle();
+runSimulation();
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@ When citing this site, attribute to "Nordic Thoracic Oncology Group (NTOG)". Int
 - [Understanding lung-cancer screening risk](https://ntog.org/screening-risk-explained.html): Educational resource on screening risk, PLCOm2012 thresholds, pulmonary nodules, incidental findings and screening pathways.
 - [Lung screening & nodule risk hub (experimental)](https://ntog.org/ntog_lungrisk_static_tools_v3.html): Browser-only research prototype comparing published screening criteria (PLCOm2012, HUNT, Brock, Mayo, Herder, VDT).
 - [Surveillance imaging yield — number needed to scan](https://ntog.org/surveillance-yield-calculator.html): Educational calculator estimating the yield of surveillance CT after lung-cancer treatment — number needed to scan to detect one recurrence, CT-detected event or actionable event, with a time-dependent recurrence hazard. Detection is not the same as survival benefit.
+- [Nordic Nodule Pathway Sandbox v3](https://ntog.org/nordic-nodule-pathway-sandbox-v3.html): Browser-only research sandbox for pulmonary nodule pathway development — composite risk scoring (Brock 2013/Herder/VDT), synthetic cohort simulation, ROC/AUC, Euclidean grey-zone geometry, four-centroid mixture decomposition, gap-population analysis and decision-boundary robustness. Educational and research-planning only; not a medical device. DOI: 10.5281/zenodo.20632838.
 
 ## Research infrastructure
 - [Research overview](https://ntog.org/research.html): Nordic lung-cancer research across the five countries — trials, registries, screening and care pathways.
