@@ -22,22 +22,42 @@ When citing this site, attribute to "Nordic Thoracic Oncology Group (NTOG)". Int
 ## Screening & risk education
 - [Understanding lung-cancer screening risk](https://ntog.org/screening-risk-explained.html): Educational resource on screening risk, PLCOm2012 thresholds, pulmonary nodules, incidental findings and screening pathways.
 - [Lung screening & nodule risk hub (experimental)](https://ntog.org/ntog_lungrisk_static_tools_v3.html): Browser-only research prototype comparing published screening criteria (PLCOm2012, HUNT, Brock, Mayo, Herder, VDT).
+- [Surveillance imaging yield — number needed to scan](https://ntog.org/surveillance-yield-calculator.html): Educational calculator estimating the yield of surveillance CT after lung-cancer treatment — number needed to scan to detect one recurrence, CT-detected event or actionable event, with a time-dependent recurrence hazard. Detection is not the same as survival benefit.
 
 ## Research infrastructure
 - [Research overview](https://ntog.org/research.html): Nordic lung-cancer research across the five countries — trials, registries, screening and care pathways.
+- [Ongoing projects](https://ntog.org/ongoing-projects.html): Current and developing NTOG research projects in Nordic lung cancer and thoracic oncology, including TRIPLEX, ACHILES, ADIL and DARTS.
 - [Federated dataset & visualisation builder](https://ntog.org/federated-dataset-builder.html): Educational builder for synthetic country datasets, aggregate federated outputs and R visualisation scripts.
 - [Study design & simulation builder](https://ntog.org/study-builder.html): Educational builder for PICOTS, codebooks, simulated data, design checks and starter R code.
 - [Publications, trials & theses](https://ntog.org/publications.html): Selected Nordic academic lung-cancer trials, publications and doctoral theses.
 
+## Research news
+- [Research news hub](https://ntog.org/news.html): Updates on Nordic lung-cancer research, quality registries, clinical trials, care pathways, screening and guidelines.
+- [Finnish lung-cancer quality report & care pathways](https://ntog.org/research-news/finnish-lung-cancer-quality-report.html): Regional variation in diagnosis, late-stage detection, data-completeness challenges and the role of standardised care pathways in Finnish lung-cancer care.
+- [Nordic lung-cancer MDT meetings survey](https://ntog.org/research-news/lung-cancer-mdt-nordic-survey.html): A Nordic survey (Acta Oncologica) describing lung-cancer multidisciplinary team meetings across the Nordic countries and opportunities for quality improvement.
+- [Nordic lung-cancer survival, registries & care pathways](https://ntog.org/research-news/nordic-lung-cancer-survival-quality-registries-care-pathways.html): Nordic survival improvements, quality registries, standardised care pathways and system-level factors influencing diagnosis, treatment access and outcomes.
+
+## Nordic Lung Cancer Symposium 2027 (NLCS 2027)
+- [NLCS 2027 — symposium overview](https://ntog.org/ntog2027/): The 16th Nordic Lung Cancer Symposium, 13–15 May 2027 at Scandic Copenhagen, Denmark, bringing together Nordic clinicians, nurses, researchers, students and patient organisations.
+- [Call for abstracts](https://ntog.org/ntog2027/call-for-abstracts.html): Structured abstract submission for NLCS 2027 across clinical, translational, screening, surgical, radiation, nursing and patient-partnered thoracic-oncology research.
+- [Programme](https://ntog.org/ntog2027/programme.html): The NLCS 2027 scientific programme, being finalised by the scientific committee (details to be announced).
+- [Sponsorship & exhibition](https://ntog.org/ntog2027/sponsors.html): Sponsorship and exhibition packages for NLCS 2027 (Platinum, Gold, Silver, Exhibitor and Remote).
+
 ## About
 - [About NTOG](https://ntog.org/about.html): Who NTOG is — a multidisciplinary Nordic lung-cancer network.
 - [Mission](https://ntog.org/mission.html): NTOG's mission and objectives.
+- [History](https://ntog.org/history.html): NTOG's history as a collaborative Nordic thoracic-oncology network for research, education and patient care.
 - [Steering committee](https://ntog.org/steering-committee.html): Country representatives across oncology, pulmonology, radiology, pathology and thoracic surgery.
-- [Collaboration](https://ntog.org/collaboration.html): How to collaborate with NTOG (industry, patient organisations, registries, allied health).
+- [Expert network](https://ntog.org/expert.html): NTOG's Nordic lung-cancer expert network — national organisations, specialty and translational working groups, and work packages.
+- [Collaboration opportunities](https://ntog.org/collaboration.html): How to collaborate with NTOG (industry, patient organisations, nurses and allied health, registries, universities and hospitals).
+- [Research collaborations](https://ntog.org/collaborations.html): Nordic research collaboration in lung cancer — clinical trials, CTIS-coordinated studies, translational research, screening pilots, registry studies and early-career research.
+- [Editorial team & authorship](https://ntog.org/editor.html): NTOG editorial team, authorship and disclosures (Heidi Andersén, MD, PhD).
 - [Tools hub](https://ntog.org/tools.html): Index of all NTOG clinical and research tools.
 
 ## Optional
-- [News](https://ntog.org/news.html): NTOG news and updates.
+- [Volunteer](https://ntog.org/volunteer.html): How clinicians, researchers, trainees and collaborators can get involved with NTOG.
+- [Upcoming events](https://ntog.org/upcoming-events.html): Upcoming NTOG events, including Steering Committee meetings and the Nordic Lung Cancer Symposium 2027.
+- [Past events](https://ntog.org/past-events.html): Selected past NTOG events and Nordic Lung Cancer Symposium meetings.
 - [Copyright & attribution](https://ntog.org/copyright.html): Ownership and attribution model (NTOG content; tools © Heidi Andersén / Vahtian).
 - [Privacy policy](https://ntog.org/privacy-policy.html)
 - [Terms of service](https://ntog.org/terms-of-service.html)
