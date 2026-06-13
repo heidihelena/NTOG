@@ -2432,6 +2432,9 @@ function updateAxisLabels() {
 function renderAxes() {
   const lad = $('axisLadder'), comp = $('axisComplementarity'), take = $('axisTakeaway');
   if (!lad) return;
+  if ((!state.cohort || !state.cohort.length) && typeof runSimulation === 'function') {
+    runSimulation();   // auto-generate the default cohort so the panel always has data
+  }
   if (!state.cohort || !state.cohort.length) {
     lad.innerHTML = ''; comp.innerHTML = '';
     take.innerHTML = 'Run a cohort first on tab 2 (Cohort Simulation), then return here.';
@@ -2523,6 +2526,7 @@ function renderAxes() {
     msg += `All three axes together reach <strong>${fmt(comboAllAuc, 3)}</strong>, and at ${(spec * 100).toFixed(0)}% specificity the axes jointly catch <strong>${unionExtra}</strong> malignancies that CRS alone misses. `;
   }
   msg += 'Guideline implication: a new axis is worth most when it is orthogonal (low redundancy with imaging) and is deployed on the contested grey zone rather than the whole cohort.';
+  msg += ` <span class="subtle">· recomputed ${new Date().toLocaleTimeString()}</span>`;
   take.innerHTML = msg;
 }
 
@@ -2539,7 +2543,11 @@ function setupEvents() {
     const el = $(id);
     if (el) { el.addEventListener('input', renderAxes); el.addEventListener('change', renderAxes); }
   });
-  if ($('axisRun')) $('axisRun').addEventListener('click', renderAxes);
+  if ($('axisRun')) $('axisRun').addEventListener('click', () => {
+    const b = $('axisRun'); const label = b.textContent;
+    b.textContent = 'Computing…';
+    requestAnimationFrame(() => { renderAxes(); b.textContent = label; });
+  });
   $('singleDiameter').addEventListener('input', () => { syncDiameterVolume('diameter'); recalcSingle(); });
   $('singleVolume').addEventListener('input', () => { syncDiameterVolume('volume'); recalcSingle(); });
   ['singlePriorVolume','singleInterval','singleType','singlePet','singleCount','singleAge','singleSex','singleSpic','singleUpper','singleEmphysema','singleFamily'].forEach(id => {
