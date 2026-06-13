@@ -44,8 +44,7 @@
   "isPartOf": { "@type": "WebSite", "name": "Nordic Thoracic Oncology Group", "url": "https://ntog.org" },
   "publisher": { "@type": "MedicalOrganization", "name": "Nordic Thoracic Oncology Group", "alternateName": "NTOG", "url": "https://ntog.org" },
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
-  "identifier": "https://doi.org/10.5281/zenodo.20632838",
-  "sameAs": "https://doi.org/10.5281/zenodo.20632838",
+  "version": "3.0.0",
   "dateModified": "2026-06-13",
   "about": { "@type": "MedicalCondition", "name": "Lung cancer" },
   "audience": { "@type": "MedicalAudience", "audienceType": "Clinician" },
@@ -331,7 +330,7 @@
         <div class="subtle" style="color: rgba(255,255,255,0.72);">Nordic Thoracic Oncology Group</div>
       </div>
     </a>
-    <div class="eyebrow">Nordic Nodule Pathway Sandbox v3</div>
+    <div class="eyebrow">Nordic Nodule Pathway Sandbox · v3.0.0</div>
     <h1>Continuous risk, AUC, Euclidean grey-zone mapping, multicentre uncertainty, and pathway comparison</h1>
     <p class="lead">A standalone browser sandbox for working-group discussion. The synthetic cohort assumptions are editable and are not empirical Nordic registry estimates.</p>
     <nav aria-label="NTOG site" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.4rem 1.1rem;font-weight:700;font-size:0.95rem;">
@@ -528,7 +527,7 @@
     <div class="grid two" style="margin-top:1rem;">
       <div class="card">
         <h2>Multicentre centroid decomposition</h2>
-        <p class="subtle">We adapt the local-centroid decomposition principle from multicentric calculus to a clinical feature space, replacing complex polynomial roots with empirically estimated clinical centroids and holomorphic basis functions with Gaussian kernel weights. This yields a soft mixture score that inherits the interpretability and numerical stability properties of the multicentric framework without requiring the full holomorphic machinery.</p>
+        <p class="subtle">Each patient is described by its Gaussian-kernel proximity to four clinical centroids (malignant, ordinary benign, inflammatory benign, no prior scan), giving a soft local-centroid mixture score. The aim is to make ambiguous cases more interpretable, not to create a validated classifier.</p>
         <div id="multiCentroidSummary" class="metric-grid"></div>
         <div id="multiCentroidBars" class="svgbox" style="margin-top:0.8rem;"></div>
       </div>
@@ -602,6 +601,23 @@
         <div id="sweepSvg" class="svgbox"></div>
       </div>
     </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <h2>Gap population <span class="subtle" style="font-weight:600;">— who is reclassified between two pathways</span></h2>
+      <p class="subtle">The gap population is the set of patients whose referral eligibility changes when one pathway replaces another. Two pathways can have similar AUC or sensitivity while moving different patients in or out of eligibility; this panel describes who those patients are.</p>
+      <div class="form-grid" style="max-width:680px;">
+        <div class="form-row"><label for="gapA">Pathway A</label><select id="gapA"></select></div>
+        <div class="form-row"><label for="gapB">Pathway B</label><select id="gapB"></select></div>
+      </div>
+      <div id="gapSummary" class="notice" style="margin-top:0.8rem;"></div>
+      <div id="gapTable" class="table-wrap" style="margin-top:0.8rem;"></div>
+    </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <h2>Harm-weight sensitivity <span class="subtle" style="font-weight:600;">— is the lowest-harm pathway stable?</span></h2>
+      <p class="subtle">Because the harm weights are subjective, each weight is independently halved and doubled while the others stay fixed. If the lowest-total-harm pathway changes, the harm-based ranking depends on that weight.</p>
+      <div id="harmSensitivity" class="table-wrap"></div>
+    </div>
   </section>
 
   <section class="tab-panel active" style="display:block; max-width:1380px; margin: 0 auto;">
@@ -614,7 +630,7 @@
           <li><strong>Inflammatory-spike model.</strong> Very rapid benign growth is explicitly simulated, and G(VDT) is non-monotonic so VDT below about 100 days is not automatically high risk.</li>
           <li><strong>Measurement-noise assumption.</strong> Volume uncertainty is modelled as lognormal CV-based noise applied to both prior and current volumes before observed VDT is calculated.</li>
           <li><strong>Harm-weight subjectivity.</strong> CT, PET, biopsy, false-positive biopsy, missed malignancy, and indeterminate penalties are explicit weights for comparison only.</li>
-          <li><strong>Multicentre adaptation caveat.</strong> The four-centroid mixture is inspired by multicentric numerical representation, but it is not holomorphic calculus and is not a validated clinical classifier.</li>
+          <li><strong>Four-centroid mixture caveat.</strong> The local-centroid mixture is an exploratory interpretability aid for ambiguous cases. It is not a validated clinical classifier.</li>
         </ul>
       </div>
     </details>
@@ -626,7 +642,7 @@
     <a href="/" aria-label="NTOG home" style="display:inline-block;margin-bottom:0.6rem;">
       <img src="/ntog-logo.svg" alt="Nordic Thoracic Oncology Group logo" width="56" height="56" loading="lazy" style="background:rgba(255,255,255,0.08);border-radius:50%;padding:6px;">
     </a>
-    <p style="margin:0.45rem 0;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Nordic Nodule Pathway Sandbox</em> (v3.0), part of the <em>NTOG Experimental Lung Screening &amp; Nodule Risk Hub</em>. Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632838" rel="noopener noreferrer" style="color:#7ad1ff;">doi:10.5281/zenodo.20632838</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" style="color:#7ad1ff;">CC BY-NC 4.0</a>.</p>
+    <p style="margin:0.45rem 0;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Nordic Nodule Pathway Sandbox</em> (v3.0.0). Nordic Thoracic Oncology Group; 2026. <a href="https://ntog.org/nordic-nodule-pathway-sandbox-v3.html" rel="noopener noreferrer" style="color:#7ad1ff;">ntog.org/nordic-nodule-pathway-sandbox-v3.html</a> — archived release &amp; DOI to follow. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" style="color:#7ad1ff;">CC BY-NC 4.0</a>.</p>
     <p style="margin:0.45rem 0;">Tool &amp; content &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
     <p style="margin:0.45rem 0;font-size:0.85rem;color:rgba(255,255,255,0.75);">Educational and research-planning use only. Not a medical device, diagnostic tool, autonomous clinical decision system, or substitute for national guidelines, MDT review, clinical judgment, or patient preference. The Brock 2013 (PanCan) model is not validated for Nordic populations.</p>
     <p style="margin:0.45rem 0;font-size:0.85rem;color:rgba(255,255,255,0.85);"><strong>Standalone file.</strong> No CDN, package manager, or network calls — all calculations, SVG plots, styles and interface code are inline and run in your browser.</p>
@@ -650,11 +666,13 @@
   The equation below uses the requested published transform:
   ((diameter_mm / 10) ^ -0.5) - 1.58113883, age centered at 62, and nodule count centered at 4.
 
-  Multicentre centroid extension:
-  Nevanlinna O, Vesanen T. Multicentric representation of piecewise constant holomorphic functions and Hermite interpolation. 2025.
-  The paper represents piecewise holomorphic functions by local-centre Lagrange basis functions and coefficient series in a new polynomial variable, with bounded numerical error accumulation for the multicentric representation.
-  This sandbox does not implement holomorphic functional calculus. It adapts the local-centre principle to a clinical feature space by replacing complex roots with empirical clinical centroids and replacing holomorphic basis functions with Gaussian kernel weights.
+  Four-centroid local mixture:
+  Each patient is scored by Gaussian-kernel proximity to four empirical clinical centroids
+  (malignant, ordinary benign, inflammatory benign, no prior scan), giving a soft local mixture.
 */
+
+const TOOL_VERSION = '3.0.0';
+const PATHWAY_NAMES = ['A. GrowCAT (v1 thresholds)', 'B. Brock-only', 'C. CRS (v2 composite)', 'D. Hybrid Nordic draft', 'Custom rule'];
 
 const BROCK = Object.freeze({
   intercept: -6.7892,
@@ -1170,10 +1188,9 @@ function euclidean(a, b) {
 }
 
 /*
-  Clinical multicentre decomposition.
-  The paper motivating v3 uses several local centres and stable coefficient functions rather than one global high-degree representation.
-  Here the centres are empirical clinical centroids in the 3D feature space.
-  Gaussian kernel weights replace holomorphic basis functions and give a soft local-centre mixture.
+  Clinical four-centroid decomposition.
+  Each patient is represented by Gaussian-kernel proximity to several empirical clinical centroids
+  in the 3D feature space, giving a soft local-centre mixture rather than a single global score.
 */
 function gaussianKernelWeights(feature, centers, tau) {
   const safeTau = Math.max(0.05, Number(tau) || 1);
@@ -1895,11 +1912,13 @@ function evaluatePathway(name, cohort, cfg) {
   const scores = [], labels = [];
   let tp = 0, fp = 0, tn = 0, fn = 0;
   const harm = { routine:0, close:0, pet:0, biopsyTP:0, biopsyFP:0, missed:0, indeterminate:0 };
+  const harmCounts = { routine:0, close:0, pet:0, biopsyTP:0, biopsyFP:0, missed:0, indeterminate:0 };
   let referred = 0, referredGrey = 0, detected = 0;
   for (const p of cohort) {
     const cls = classifyPathway(p, name, cfg);
     const h = harmForPatient(p, cls);
     harm[h.category] += h.harm;
+    harmCounts[h.category] += 1;
     scores.push(cls.score);
     labels.push(p.malignant);
     if (cls.refer) {
@@ -1918,7 +1937,7 @@ function evaluatePathway(name, cohort, cfg) {
     name, scores, labels, metrics, auc, roc,
     threshold: thresholdForName(name, cfg),
     optimalThreshold: roc.youden.threshold,
-    harm, totalHarm,
+    harm, harmCounts, totalHarm,
     greyZoneShare: referred ? referredGrey / referred : NaN,
     harmPerDetected: detected ? totalHarm / detected : Infinity,
     detected
@@ -1963,6 +1982,141 @@ function computePathwayResults(withBootstrap = true) {
   return state.pathways;
 }
 
+function shortPath(name) {
+  return name.replace(' (v1 thresholds)', '').replace(' (v2 composite)', '');
+}
+
+// Gap population: patients whose referral eligibility differs between two pathways.
+function computeGapPopulation(cohort, cfg, nameA, nameB) {
+  const aOnly = [], bOnly = [];
+  for (const p of cohort) {
+    const ra = classifyPathway(p, nameA, cfg).refer;
+    const rb = classifyPathway(p, nameB, cfg).refer;
+    if (ra && !rb) aOnly.push(p);
+    else if (rb && !ra) bOnly.push(p);
+  }
+  const gap = aOnly.concat(bOnly);
+  return {
+    nameA, nameB, n: cohort.length,
+    gapN: gap.length, gapShare: cohort.length ? gap.length / cohort.length : 0,
+    aOnly, bOnly, gap,
+    aOnlyMal: aOnly.filter(p => p.malignant).length,
+    bOnlyMal: bOnly.filter(p => p.malignant).length,
+    profile: gapProfile(gap)
+  };
+}
+
+function gapProfile(list) {
+  const n = list.length;
+  if (!n) return null;
+  const mean = (f) => list.reduce((s, p) => s + f(p), 0) / n;
+  const share = (f) => list.filter(f).length / n;
+  return {
+    n,
+    malignantShare: share(p => p.malignant),
+    meanAge: mean(p => p.age),
+    femaleShare: share(p => p.sex === 'female'),
+    subsolidShare: share(p => p.subsolid),
+    noPriorShare: share(p => !p.hasPrior),
+    spiculationShare: share(p => p.spiculation),
+    upperLobeShare: share(p => p.upperLobe),
+    emphysemaShare: share(p => p.emphysema),
+    meanBrock: mean(p => p.brock),
+    meanCrs: mean(p => p.crs)
+  };
+}
+
+function allPairwiseGaps() {
+  if (!state.pathways || !state.cohort.length) return [];
+  const cfg = state.pathways.config, out = [];
+  for (let i = 0; i < PATHWAY_NAMES.length; i++) {
+    for (let j = i + 1; j < PATHWAY_NAMES.length; j++) {
+      const g = computeGapPopulation(state.cohort, cfg, PATHWAY_NAMES[i], PATHWAY_NAMES[j]);
+      out.push({ a: PATHWAY_NAMES[i], b: PATHWAY_NAMES[j], gapN: g.gapN, gapShare: g.gapShare,
+        aOnly: g.aOnly.length, bOnly: g.bOnly.length, aOnlyMalignant: g.aOnlyMal, bOnlyMalignant: g.bOnlyMal });
+    }
+  }
+  return out;
+}
+
+function ensureGapSelects() {
+  const selA = $('gapA'), selB = $('gapB');
+  if (!selA || !selB || selA.options.length) return;
+  const opts = PATHWAY_NAMES.map(n => `<option value="${esc(n)}">${esc(shortPath(n))}</option>`).join('');
+  selA.innerHTML = opts;
+  selB.innerHTML = opts;
+  selA.value = 'B. Brock-only';
+  selB.value = 'C. CRS (v2 composite)';
+  selA.addEventListener('change', renderGapPopulation);
+  selB.addEventListener('change', renderGapPopulation);
+}
+
+function renderGapPopulation() {
+  if (!state.pathways || !state.cohort.length) return;
+  const selA = $('gapA'), selB = $('gapB');
+  if (!selA || !selB) return;
+  const nameA = selA.value, nameB = selB.value;
+  if (nameA === nameB) {
+    $('gapSummary').innerHTML = 'Select two different pathways to see the gap population.';
+    $('gapTable').innerHTML = '';
+    return;
+  }
+  const g = computeGapPopulation(state.cohort, state.pathways.config, nameA, nameB);
+  const a = esc(shortPath(nameA)), b = esc(shortPath(nameB));
+  $('gapSummary').innerHTML = `<strong>${g.gapN} of ${g.n} patients (${pct(g.gapShare, 1)})</strong> are reclassified between <strong>${a}</strong> and <strong>${b}</strong>. ` +
+    `Referred by ${a} only: ${g.aOnly.length} (${g.aOnlyMal} malignant). Referred by ${b} only: ${g.bOnly.length} (${g.bOnlyMal} malignant).`;
+  const pr = g.profile;
+  if (!pr) { $('gapTable').innerHTML = '<p class="subtle">No patients are reclassified between these two pathways.</p>'; return; }
+  $('gapTable').innerHTML = `<table><thead><tr><th>Gap-population profile (n=${g.gapN})</th><th>Value</th></tr></thead><tbody>` +
+    `<tr><td>Malignant share</td><td>${pct(pr.malignantShare, 1)}</td></tr>` +
+    `<tr><td>Mean age</td><td>${fmt(pr.meanAge, 1)}</td></tr>` +
+    `<tr><td>Female</td><td>${pct(pr.femaleShare, 1)}</td></tr>` +
+    `<tr><td>Subsolid</td><td>${pct(pr.subsolidShare, 1)}</td></tr>` +
+    `<tr><td>No prior scan</td><td>${pct(pr.noPriorShare, 1)}</td></tr>` +
+    `<tr><td>Spiculation</td><td>${pct(pr.spiculationShare, 1)}</td></tr>` +
+    `<tr><td>Upper lobe</td><td>${pct(pr.upperLobeShare, 1)}</td></tr>` +
+    `<tr><td>Emphysema</td><td>${pct(pr.emphysemaShare, 1)}</td></tr>` +
+    `<tr><td>Mean Brock_P</td><td>${fmt(pr.meanBrock, 3)}</td></tr>` +
+    `<tr><td>Mean CRS</td><td>${fmt(pr.meanCrs, 3)}</td></tr>` +
+    `</tbody></table>`;
+}
+
+// One-way harm-weight sensitivity: halve and double each weight, recompute the lowest-harm pathway.
+function computeHarmSensitivity(results) {
+  const cats = Object.keys(HARM_WEIGHTS);
+  const totalUnder = (weights) => results.map(r => ({
+    name: r.name,
+    total: cats.reduce((s, c) => s + (r.harmCounts ? r.harmCounts[c] * weights[c] : 0), 0)
+  }));
+  const lowest = (totals) => totals.slice().sort((a, b) => a.total - b.total)[0].name;
+  const baseWinner = lowest(totalUnder(HARM_WEIGHTS));
+  const scenarios = [];
+  for (const cat of cats) {
+    for (const factor of [0.5, 2]) {
+      const w = Object.assign({}, HARM_WEIGHTS);
+      w[cat] = HARM_WEIGHTS[cat] * factor;
+      const winner = lowest(totalUnder(w));
+      scenarios.push({ cat, factor, winner, changed: winner !== baseWinner });
+    }
+  }
+  return { baseWinner, scenarios };
+}
+
+function renderHarmSensitivity() {
+  const el = $('harmSensitivity');
+  if (!el || !state.pathways) return;
+  const s = computeHarmSensitivity(state.pathways.results);
+  const changed = s.scenarios.filter(x => x.changed);
+  const rows = s.scenarios.map(sc =>
+    `<tr><td>${esc(HARM_LABELS[sc.cat] || sc.cat)}</td><td>${sc.factor}&times;</td><td>${esc(shortPath(sc.winner))}</td><td>${sc.changed ? 'changed' : 'stable'}</td></tr>`
+  ).join('');
+  el.innerHTML = `<p class="subtle" style="margin:0.2rem 0 0.6rem;">Baseline lowest-harm pathway: <strong>${esc(shortPath(s.baseWinner))}</strong>. ` +
+    (changed.length
+      ? `The lowest-harm pathway changes under ${changed.length} of ${s.scenarios.length} one-way weight perturbations — the harm ranking is sensitive to those weights.`
+      : `The lowest-harm pathway is stable across all ${s.scenarios.length} one-way weight perturbations.`) +
+    `</p><table><thead><tr><th>Harm weight perturbed</th><th>Factor</th><th>Lowest-harm pathway</th><th>Ranking</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
 function renderPathwayOutputs() {
   const results = state.pathways.results;
   const rows = results.map(r => {
@@ -1983,6 +2137,9 @@ function renderPathwayOutputs() {
   $('pathwayTable').innerHTML = `<table><thead><tr><th>Pathway</th><th>AUC</th><th>Sensitivity</th><th>Specificity</th><th>PPV</th><th>NPV</th><th>Grey-zone share among referred</th><th>Boundary unstable share</th><th>Total harm</th><th>Harm per detected malignancy</th></tr></thead><tbody>${rows}</tbody></table>`;
   $('harmSvg').innerHTML = renderHarmChart(results);
   $('sweepSvg').innerHTML = renderSweepChart(state.cohort, state.pathways.config);
+  ensureGapSelects();
+  renderGapPopulation();
+  renderHarmSensitivity();
 }
 
 function renderHarmChart(results) {
@@ -2121,9 +2278,14 @@ function exportResults() {
   if (!state.cohort.length) runSimulation();
   ensurePathwayBootstrapCis();
   const summary = {
+    tool: 'Nordic Nodule Pathway Sandbox',
+    version: TOOL_VERSION,
+    toolUrl: 'https://ntog.org/nordic-nodule-pathway-sandbox-v3.html',
     generatedAt: new Date().toISOString(),
+    seed: state.params?.seed,
     disclaimer: 'Educational and research-planning use only. Not a medical device. Brock model is not validated for Nordic populations.',
     cohortParameters: state.params,
+    pathwayConfig: state.pathways?.config,
     classConditionalDistributions: state.advanced,
     aucCrs: { auc: state.roc?.auc, ci95: state.mainAucCi ? [state.mainAucCi.low, state.mainAucCi.high] : null, youdenThreshold: state.roc?.youden?.threshold },
     centroidCoordinates: { malignant: state.stats?.centroidM, benign: state.stats?.centroidB },
@@ -2150,9 +2312,12 @@ function exportResults() {
       metrics: r.metrics,
       greyZoneShareAmongReferred: r.greyZoneShare,
       harmBreakdown: r.harm,
+      harmCounts: r.harmCounts,
       totalHarm: r.totalHarm,
       harmPerDetectedMalignancy: r.harmPerDetected
-    })) || []
+    })) || [],
+    gapPopulations: allPairwiseGaps(),
+    harmSensitivity: state.pathways ? computeHarmSensitivity(state.pathways.results) : null
   };
   const blob = new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' });
   if (state.exportBlobUrl) URL.revokeObjectURL(state.exportBlobUrl);
