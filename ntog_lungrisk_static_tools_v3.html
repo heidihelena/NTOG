@@ -545,6 +545,8 @@
               <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
               <li><h6 class="dropdown-header">Treatment value &amp; follow-up</h6></li>
               <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
+              <li><a class="dropdown-item" href="/decision-tool-v2.html">Treatment value discussion compass</a></li>
+              <li><a class="dropdown-item" href="/decision-tool-structured.html">Structured treatment value profile</a></li>
               <li><a class="dropdown-item" href="/surveillance-yield-calculator.html">Surveillance yield (NNS)</a></li>
               <li><h6 class="dropdown-header">Research builders</h6></li>
               <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
@@ -1191,13 +1193,23 @@ E: summed literature modifier points, cap 20</code></article></div>
       const isYes = (id) => getValue(id) === "yes";
 
       const uuid = () => {
-        if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+        const cryptoObj = window.crypto || window.msCrypto;
+        if (cryptoObj?.randomUUID) return cryptoObj.randomUUID();
 
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
-          const random = Math.random() * 16 | 0;
-          const value = char === "x" ? random : (random & 0x3 | 0x8);
-          return value.toString(16);
-        });
+        // Cryptographically secure RFC 4122 v4 fallback (no Math.random in this
+        // session-identifier path).
+        const bytes = new Uint8Array(16);
+        cryptoObj.getRandomValues(bytes);
+        bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
+        bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant 10xx
+        const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, "0"));
+        return (
+          hex.slice(0, 4).join("") + "-" +
+          hex.slice(4, 6).join("") + "-" +
+          hex.slice(6, 8).join("") + "-" +
+          hex.slice(8, 10).join("") + "-" +
+          hex.slice(10, 16).join("")
+        );
       };
 
       const daysBetween = (olderDate, newerDate) => {
