@@ -1,11 +1,20 @@
 """Three-axis nodule-malignancy simulation: clinical (CRS-like) + protein (4MP-like)
 + Sybil (deep-learning CT). Synthetic illustration calibrated to published AUCs
-(Brock/CRS ~0.72; 4MP/proteomics ~0.74, Guida 2018 / Feng 2023; Sybil ~0.88,
+(Brock/CRS ~0.72; 4MP/proteomics ~0.74, Guida 2018 / Feng 2023; Sybil ~0.86,
 Mikhael 2023). NOT real performance. Shows (a) the discrimination ceiling and how
 each orthogonal axis lifts it, (b) the contested-tail strategy (protein only on
 the grey zone), and (c) a Venn of which malignancies each axis uniquely catches.
+
+NOTE: orthogonality and additivity are BUILT INTO the data-generating process;
+the AUROC numbers are bookkeeping of that structure, not evidence that real
+assays are orthogonal. Single-axis AUROCs are calibrated INPUTS; only the
+all-three value is emergent (and is itself determined by the assumed independence).
+
+Outputs are written next to this script (../data, ../figures) so the package is
+self-contained and reproducible (seed 42).
 """
 import json
+from pathlib import Path
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_predict, StratifiedKFold
@@ -15,7 +24,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn3
 
-rng = np.random.default_rng(42)
+HERE = Path(__file__).resolve().parent
+DATA = HERE.parent / "data"; FIGS = HERE.parent / "figures"
+DATA.mkdir(exist_ok=True); FIGS.mkdir(exist_ok=True)
+
+SEED = 42
+rng = np.random.default_rng(SEED)
 N = 6000
 
 # --- Orthogonal latent components (each an independent axis of information) ---
@@ -29,7 +43,7 @@ logit = -1.8 + 1.0*C + 1.2*Uc + 1.4*Up + 1.3*Us
 Y = (rng.uniform(size=N) < 1/(1+np.exp(-logit))).astype(int)
 
 # Each modality sees common + its own unique signal; calibrate added noise so the
-# single-axis AUROC matches the published anchors (CRS 0.72; 4MP 0.74; Sybil 0.88).
+# single-axis AUROC matches the published anchors (CRS 0.72; 4MP 0.74; Sybil 0.86).
 ec, ep, es = rng.normal(size=N), rng.normal(size=N), rng.normal(size=N)
 def calibrate(clean, e, target):
     lo, hi = 0.02, 6.0
@@ -112,10 +126,10 @@ for b, v in zip(bars, vals):
 ax.set_xlim(0.5, 1.0)
 ax.set_xlabel("Cross-validated AUROC vs latent malignancy")
 ax.set_title("Breaking the 0.72 ceiling: orthogonal axes for nodule malignancy\n"
-             "Synthetic illustration calibrated to literature (CRS~0.72; 4MP~0.74; Sybil~0.88) — not real performance",
+             "Synthetic illustration calibrated to literature (CRS~0.72; 4MP~0.74; Sybil~0.86) — not real performance",
              fontsize=10)
 plt.tight_layout()
-plt.savefig("/tmp/axes_run/axis_ladder.png", dpi=140)
+plt.savefig(str(FIGS / "fig1_discrimination_ladder.png"), dpi=140)
 plt.close()
 
 # ===================== Figure B: Venn of malignancies caught =====================
@@ -130,7 +144,7 @@ ax.set_title(f"Malignant nodules caught by each axis at fixed 85% specificity\n"
              f"Synthetic illustration — each axis uniquely catches cancers the others miss",
              fontsize=10)
 plt.tight_layout()
-plt.savefig("/tmp/axes_run/axis_venn.png", dpi=140)
+plt.savefig(str(FIGS / "fig2_complementarity_venn.png"), dpi=140)
 plt.close()
 
 # ===================== console summary =====================
@@ -153,14 +167,14 @@ print(f"  missed by all three:          {nmal-len(union)}")
 
 json.dump({"ladder": ladder, "sensitivity_at_85spec": sens, "frac_tested_contested": frac_tested,
            "prevalence": prevalence, "n": N, "n_malignant": nmal},
-          open("/tmp/axes_run/summary.json", "w"), indent=2)
+          open(DATA / "three_axis_summary.json", "w"), indent=2)
 
 # Export the three-axis cohort for epinet's honest harness.
 import csv as _csv
-with open("/tmp/axes_run/nodes_axes.csv", "w", newline="") as f:
+with open(DATA / "three_axis_cohort.csv", "w", newline="") as f:
     w = _csv.writer(f); w.writerow(["ID", "Outcome", "clinical", "protein", "sybil"])
     for i in range(N):
         w.writerow([f"nod_{i}", int(Y[i]), f"{clinical[i]:.4f}", f"{protein[i]:.4f}", f"{sybil[i]:.4f}"])
-with open("/tmp/axes_run/edges_axes.csv", "w", newline="") as f:
+with open(DATA / "three_axis_edges.csv", "w", newline="") as f:
     f.write("SourceID,TargetID,Relationship,Weight\n")
-print("\nwrote nodes_axes.csv for epinet")
+print(f"\nwrote {DATA/'three_axis_cohort.csv'} (seed {SEED}) for downstream validation")
