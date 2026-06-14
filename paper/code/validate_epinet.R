@@ -1,4 +1,4 @@
-# Gold-standard, independent validation of EpiNet's outputs on the three-axis
+# Independent statistical cross-check of EpiNet's outputs on the three-axis
 # synthetic cohort, using the clinical-prediction-model reference stack:
 #   rms (Frank Harrell) + pROC + dcurves
 #

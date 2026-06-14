@@ -83,7 +83,7 @@ print(f"  EpiNet honest RF: 0.855 (iter mean 0.849)")
 print("\n=== 3. Calibration — independent (EpiNet: Brier 0.131, slope 1.154, intercept ~0) ===")
 p = np.clip(oof["RandomForest"], 1e-6, 1 - 1e-6)
 lp = np.log(p / (1 - p))
-slope = LogisticRegression(max_iter=1000).fit(lp.reshape(-1, 1), y).coef_[0, 0]
+slope = LogisticRegression(max_iter=1000, penalty=None, solver="lbfgs").fit(lp.reshape(-1, 1), y).coef_[0, 0]
 # calibration-in-the-large intercept: 1-D Newton on intercept with offset=lp
 a = 0.0
 for _ in range(50):
@@ -98,17 +98,17 @@ print(f"  EpiNet apparent/iteration slope 1.154 vs CV (out-of-fold) slope {slope
 def cal_slope(model, Xtr, ytr, Xte, yte):
     model.fit(Xtr, ytr)
     pte = np.clip(model.predict_proba(Xte)[:, 1], 1e-6, 1 - 1e-6)
-    return LogisticRegression(max_iter=1000).fit(np.log(pte / (1 - pte)).reshape(-1, 1), yte).coef_[0, 0]
+    return LogisticRegression(max_iter=1000, penalty=None, solver="lbfgs").fit(np.log(pte / (1 - pte)).reshape(-1, 1), yte).coef_[0, 0]
 base = RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0)
 apparent = cal_slope(base, X, y, X, y)
 rng_b = np.random.default_rng(0); opt = []
-for _ in range(200):
+for _ in range(500):
     idx = rng_b.integers(0, n, n)
     s_boot = cal_slope(RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0), X[idx], y[idx], X[idx], y[idx])
     s_orig = cal_slope(RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0), X[idx], y[idx], X, y)
     opt.append(s_boot - s_orig)
 corrected = apparent - np.mean(opt)
-print(f"  RF calibration slope: apparent {apparent:.3f} | optimism-corrected (B=200) {corrected:.3f}")
+print(f"  RF calibration slope: apparent {apparent:.3f} | optimism-corrected (B=500) {corrected:.3f}")
 print(f"  -> headline honest slope is the optimism-corrected value; EpiNet 1.15 is apparent/iteration-based.")
 
 # ---------- 4. Decision curve / net benefit (dcurves) ----------
@@ -129,7 +129,7 @@ except Exception as e:
 # ---------- 5. Counterfactual flip-distance vs EpiNet contestability ----------
 print("\n=== 5. Counterfactual flip-distance (compare EpiNet mean ~1.42 SD; leverage sybil>protein>clinical) ===")
 Z = (X - X.mean(0)) / X.std(0)
-clf = LogisticRegression(max_iter=1000).fit(Z, y)
+clf = LogisticRegression(max_iter=1000, penalty=None, solver="lbfgs").fit(Z, y)
 w = clf.coef_[0]; b = clf.intercept_[0]
 margin = (Z @ w + b) / np.linalg.norm(w)          # signed distance to boundary, SD units
 print(f"  [closed-form linear margin]  mean |flip-distance| = {np.abs(margin).mean():.3f} SD  (EpiNet ~1.42)")
@@ -166,7 +166,7 @@ except Exception as e:
 print("\n=== 6. Label-permutation null (does the model beat chance?) ===")
 score, perm_scores, pval = permutation_test_score(
     LogisticRegression(max_iter=1000), X, y, scoring="roc_auc",
-    cv=StratifiedKFold(5, shuffle=True, random_state=1), n_permutations=200, random_state=0)
+    cv=StratifiedKFold(5, shuffle=True, random_state=1), n_permutations=500, random_state=0)
 print(f"  observed AUROC {score:.3f} | permuted-null mean {perm_scores.mean():.3f} | p = {pval:.4f}")
 print("  NOTE: the null is rejected because real signal IS present — but it tests signal-vs-chance,")
 print("  NOT whether the three axes are genuinely orthogonal. Orthogonality is a design assumption here.")
