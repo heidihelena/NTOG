@@ -6,14 +6,16 @@ calibration Brier 0.131, slope 1.154, intercept ~0; contestability flip-distance
 mean ~1.42 SD; feature value-of-information sybil 0.41 > protein 0.31 > clinical 0.28.
 """
 import warnings; warnings.filterwarnings("ignore")
+from pathlib import Path
 import numpy as np, pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_predict, StratifiedKFold
+from sklearn.model_selection import cross_val_predict, StratifiedKFold, permutation_test_score
 from sklearn.metrics import roc_auc_score, brier_score_loss
 from scipy import stats
 
-df = pd.read_csv("/tmp/manuscript/data/three_axis_cohort.csv")
+DATA = Path(__file__).resolve().parent.parent / "data"      # self-contained, relative
+df = pd.read_csv(DATA / "three_axis_cohort.csv")
 y = df["Outcome"].to_numpy().astype(int)
 feats = ["clinical", "protein", "sybil"]
 X = df[feats].to_numpy()
@@ -88,7 +90,26 @@ for _ in range(50):
     pi = 1 / (1 + np.exp(-(a + lp))); g = np.sum(y - pi); hh = -np.sum(pi * (1 - pi))
     if hh == 0: break
     a -= g / hh
-print(f"  Brier {brier_score_loss(y, oof['RandomForest']):.3f} | slope {slope:.3f} | intercept {a:+.3f}")
+print(f"  out-of-fold (CV) calibration: Brier {brier_score_loss(y, oof['RandomForest']):.3f} | slope {slope:.3f} | intercept {a:+.3f}")
+print(f"  EpiNet apparent/iteration slope 1.154 vs CV (out-of-fold) slope {slope:.3f} — same direction check below")
+
+# ---------- 3b. Apparent vs optimism-corrected calibration slope (Harrell bootstrap) ----------
+# Resolves the 1.15-vs-0.94 question with the same logic rms::validate() uses.
+def cal_slope(model, Xtr, ytr, Xte, yte):
+    model.fit(Xtr, ytr)
+    pte = np.clip(model.predict_proba(Xte)[:, 1], 1e-6, 1 - 1e-6)
+    return LogisticRegression(max_iter=1000).fit(np.log(pte / (1 - pte)).reshape(-1, 1), yte).coef_[0, 0]
+base = RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0)
+apparent = cal_slope(base, X, y, X, y)
+rng_b = np.random.default_rng(0); opt = []
+for _ in range(200):
+    idx = rng_b.integers(0, n, n)
+    s_boot = cal_slope(RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0), X[idx], y[idx], X[idx], y[idx])
+    s_orig = cal_slope(RandomForestClassifier(n_estimators=300, max_depth=10, random_state=0), X[idx], y[idx], X, y)
+    opt.append(s_boot - s_orig)
+corrected = apparent - np.mean(opt)
+print(f"  RF calibration slope: apparent {apparent:.3f} | optimism-corrected (B=200) {corrected:.3f}")
+print(f"  -> headline honest slope is the optimism-corrected value; EpiNet 1.15 is apparent/iteration-based.")
 
 # ---------- 4. Decision curve / net benefit (dcurves) ----------
 print("\n=== 4. Decision curve — net benefit (dcurves), three thresholds ===")
@@ -140,5 +161,14 @@ try:
         print("  [DiCE] no counterfactuals returned")
 except Exception as e:
     print("  DiCE failed (closed-form result stands):", repr(e)[:160])
+
+# ---------- 6. Permutation null (signal vs chance) — note what it does and does NOT test ----------
+print("\n=== 6. Label-permutation null (does the model beat chance?) ===")
+score, perm_scores, pval = permutation_test_score(
+    LogisticRegression(max_iter=1000), X, y, scoring="roc_auc",
+    cv=StratifiedKFold(5, shuffle=True, random_state=1), n_permutations=200, random_state=0)
+print(f"  observed AUROC {score:.3f} | permuted-null mean {perm_scores.mean():.3f} | p = {pval:.4f}")
+print("  NOTE: the null is rejected because real signal IS present — but it tests signal-vs-chance,")
+print("  NOT whether the three axes are genuinely orthogonal. Orthogonality is a design assumption here.")
 
 print("\nDone.")

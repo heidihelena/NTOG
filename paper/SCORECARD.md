@@ -20,15 +20,16 @@ and a gold-standard R script (`rms` + `pROC` + `dcurves`; `code/validate_epinet.
 - **Calibration is in the same neighbourhood** (Brier matches; both slopes near 1). The slope difference (1.15 vs 0.94) is implementation-dependent (RandomForest configuration, CV fold seeds, probability handling); `rms::validate()` with optimism correction is the definitive arbiter and is included in the R script.
 - **The contestability ranking validates independently** — the conclusion you would act on (CT highest value-of-information, then protein, then clinical) is reproduced by a different method. Absolute flip-distance differs because EpiNet uses nearest-centroid over more features while the cross-check uses a linear boundary over the three axes — same construct, different geometry.
 - **DiCE** corroborates that minimal counterfactuals exist at single-digit-SD distances (its `random` search is not minimal-distance, hence 3.2 SD).
+- **The contestability value-of-information ranking is illustrative**, not biological — it reflects standardized model coefficients on synthetic data; the same caveat applies to the ranking magnitudes.
+- **A label-permutation null** (`permutation_test_score`) rejects chance (real signal is present). Note this tests signal-versus-chance only; it does **not** validate that the three axes are orthogonal — orthogonality is built into the generator, not an output.
 
 ## How to reproduce
 ```bash
-# Python cross-check (this repo's venv or any sklearn env)
+# from paper/code/ — paths are relative and self-contained
+python three_axis_simulation.py            # regenerates ../data/three_axis_cohort.csv + figures (seed 42)
 pip install dcurves dice-ml
-python code/validate_epinet.py
-
-# Gold-standard R cross-check
-Rscript code/validate_epinet.R data/three_axis_cohort.csv
+python validate_epinet.py                  # Python cross-check (reads ../data/three_axis_cohort.csv)
+Rscript validate_epinet.R ../data/three_axis_cohort.csv   # gold-standard cross-check
 ```
 
 *All data are synthetic and calibrated to published discrimination figures; absolute
