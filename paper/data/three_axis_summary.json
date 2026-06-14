@@ -1,0 +1,21 @@
+{
+  "ladder": {
+    "Clinical only (CRS-like)": 0.7198602875363617,
+    "Protein only (4MP-like)": 0.7399276963526517,
+    "Sybil only (DL CT)": 0.8258933765943164,
+    "Clinical + Protein (contested 40% only)": 0.7488171291116581,
+    "Clinical + Protein (all)": 0.7778355057059745,
+    "Clinical + Sybil (all)": 0.8264593589169837,
+    "All three axes": 0.8572230924144103
+  },
+  "sensitivity_at_85spec": {
+    "Clinical": 0.42134146341463413,
+    "Protein": 0.43597560975609756,
+    "Sybil": 0.6158536585365854,
+    "Any of three (union)": 0.7847560975609756
+  },
+  "frac_tested_contested": 0.4,
+  "prevalence": 0.2733333333333333,
+  "n": 6000,
+  "n_malignant": 1640
+}
