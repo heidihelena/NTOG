@@ -4,6 +4,7 @@
 
 User-agent: *
 Allow: /
+Disallow: /paper/   # working draft materials, not for indexing
 
 # --- AI / LLM crawlers: explicitly allowed (citation + answer-engine visibility) ---
 User-agent: GPTBot
