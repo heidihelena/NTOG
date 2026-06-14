@@ -18,9 +18,10 @@ figures; absolute AUROCs are not real performance.**
 
 ## Reproduce
 ```bash
-pip install numpy pandas scikit-learn matplotlib matplotlib-venn dcurves dice-ml
-python code/three_axis_simulation.py        # cohort + figures
-python code/validate_epinet.py              # independent validation
-Rscript code/validate_epinet.R data/three_axis_cohort.csv   # gold-standard cross-check
+pip install -r code/requirements.txt        # core + optional (dcurves, dice-ml)
+python code/three_axis_simulation.py        # cohort + figures (seed 42)
+python code/validate_epinet.py              # independent Python cross-check
+Rscript code/validate_epinet.R data/three_axis_cohort.csv   # independent R cross-check (rms + pROC + dcurves)
 ```
+The Python and R cross-checks are an **independent statistical cross-check on the same synthetic cohort** — *not* external clinical validation. Bootstrap B = 500 in both.
 EpiNet itself: https://github.com/heidihelena/epinet · Sandbox: https://ntog.org/nordic-nodule-pathway-sandbox-v3.html

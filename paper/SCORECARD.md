@@ -3,17 +3,17 @@
 EpiNet's headline outputs on the three-axis synthetic cohort (`data/three_axis_cohort.csv`,
 n = 6,000, malignant prevalence 0.27) were re-derived with a **separate stack** —
 scikit-learn + a from-scratch DeLong + `dcurves` + `DiCE` (Python; `code/validate_epinet.py`),
-and a gold-standard R script (`rms` + `pROC` + `dcurves`; `code/validate_epinet.R`).
+and an independent statistical cross-check in R (`rms` + `pROC` + `dcurves`; `code/validate_epinet.R`).
 
 | EpiNet reported | Independent tool | Independent result | Verdict |
 |---|---|---|---|
 | Combined AUROC **0.855** (iter mean 0.849) | sklearn 5-fold CV + DeLong | RF **0.846** (0.835–0.856); Logistic **0.857** (0.847–0.867) | ✅ EpiNet inside the independent CI |
 | Single-axis AUROC 0.72 / 0.74 / 0.83 | DeLong (from scratch) | 0.720 / 0.740 / 0.826 — match sklearn exactly | ✅ exact |
 | Calibration **Brier 0.131** | sklearn | **0.135** | ✅ agree |
-| Calibration **slope 1.15** (apparent/iteration) | CV + optimism-corrected bootstrap (B=200) | CV **0.94**, optimism-corrected **0.84** | ⚠️ corrected/CV both <1 (mild *over*-confidence) — *opposite direction* to 1.15; report all three |
+| Calibration **slope 1.15** (apparent/iteration) | CV + optimism-corrected bootstrap (B=500) | CV **0.94**, optimism-corrected **0.84** | ⚠️ corrected/CV both <1 (mild *over*-confidence) — *opposite direction* to 1.15; report all three |
 | Contestability value-of-information **sybil > protein > clinical** (0.41/0.31/0.28) | closed-form linear margin | **sybil > protein > clinical** (0.59/0.29/0.12) | ✅ same ranking (illustrative, not biological) |
 | Flip-distance mean **~1.42 SD** | closed-form margin / DiCE | **1.04 SD** / DiCE 3.1 SD | ✅ same order of magnitude |
-| *(signal vs chance)* | `permutation_test_score` | observed 0.857 vs null mean 0.500, **p = 0.005** | ✅ beats chance — but does **not** test orthogonality |
+| *(signal vs chance)* | `permutation_test_score` | observed 0.857 vs null mean 0.500, **p = 0.002** (500 perm) | ✅ beats chance — but does **not** test orthogonality |
 | *(not computed by EpiNet)* clinical utility | **dcurves** net benefit | model beats treat-all/none across thresholds (Δ +0.08 at p=0.20; +0.17 at p=0.30) | ✅ new independent confirmation (Fig 5) |
 
 ## Interpretation
@@ -30,7 +30,7 @@ and a gold-standard R script (`rms` + `pROC` + `dcurves`; `code/validate_epinet.
 python three_axis_simulation.py            # regenerates ../data/three_axis_cohort.csv + figures (seed 42)
 pip install dcurves dice-ml
 python validate_epinet.py                  # Python cross-check (reads ../data/three_axis_cohort.csv)
-Rscript validate_epinet.R ../data/three_axis_cohort.csv   # gold-standard cross-check
+Rscript validate_epinet.R ../data/three_axis_cohort.csv   # independent statistical cross-check (rms+pROC+dcurves)
 ```
 
 *All data are synthetic and calibrated to published discrimination figures; absolute

@@ -1,7 +1,7 @@
 """Three-axis nodule-malignancy simulation: clinical (CRS-like) + protein (4MP-like)
 + Sybil (deep-learning CT). Synthetic illustration calibrated to published AUCs
 (Brock/CRS ~0.72; 4MP/proteomics ~0.74, Guida 2018 / Feng 2023; Sybil ~0.86,
-Mikhael 2023). NOT real performance. Shows (a) the discrimination ceiling and how
+Mikhael 2023). NOT real performance. Shows (a) the simulated clinical-only level and how
 each orthogonal axis lifts it, (b) the contested-tail strategy (protein only on
 the grey zone), and (c) a Venn of which malignancies each axis uniquely catches.
 
@@ -46,6 +46,9 @@ Y = (rng.uniform(size=N) < 1/(1+np.exp(-logit))).astype(int)
 # single-axis AUROC matches the published anchors (CRS 0.72; 4MP 0.74; Sybil 0.86).
 ec, ep, es = rng.normal(size=N), rng.normal(size=N), rng.normal(size=N)
 def calibrate(clean, e, target):
+    # NB: this uses the FULL synthetic outcome vector Y to tune the noise level,
+    # so the standalone single-axis AUROCs are DESIGN TARGETS of the simulated
+    # dataset, not evaluated/discovered performance.
     lo, hi = 0.02, 6.0
     for _ in range(45):
         mid = (lo + hi) / 2
@@ -84,11 +87,12 @@ frac_tested = contested.mean()
 hybrid = pc.copy()
 hybrid[contested] = pcp[contested]                 # add protein only where contested
 
+contested_key = f"Clinical + Protein (contested {frac_tested*100:.0f}% only)"
 ladder = {
     "Clinical only (CRS-like)":        auc(pc),
     "Protein only (4MP-like)":         auc(pp),
     "Sybil only (DL CT)":              auc(ps),
-    f"Clinical + Protein (contested {frac_tested*100:.0f}% only)": auc(hybrid),
+    contested_key:                     auc(hybrid),
     "Clinical + Protein (all)":        auc(pcp),
     "Clinical + Sybil (all)":          auc(pcs),
     "All three axes":                  auc(pall),
@@ -120,12 +124,12 @@ for k in labels:
     else: colors.append("#7a8aa0")
 bars = ax.barh(labels, vals, color=colors)
 ax.axvline(ladder["Clinical only (CRS-like)"], color="#7a8aa0", ls="--", lw=1)
-ax.text(ladder["Clinical only (CRS-like)"]+0.002, -0.4, "imaging+clinical ceiling", color="#5a6a80", fontsize=8)
+ax.text(ladder["Clinical only (CRS-like)"]+0.002, -0.4, "simulated clinical-only level", color="#5a6a80", fontsize=8)
 for b, v in zip(bars, vals):
     ax.text(v+0.003, b.get_y()+b.get_height()/2, f"{v:.3f}", va="center", fontsize=9, fontweight="bold")
 ax.set_xlim(0.5, 1.0)
 ax.set_xlabel("Cross-validated AUROC vs latent malignancy")
-ax.set_title("Breaking the 0.72 ceiling: orthogonal axes for nodule malignancy\n"
+ax.set_title("Lifting the simulated clinical-only level under an orthogonality assumption\n"
              "Synthetic illustration calibrated to literature (CRS~0.72; 4MP~0.74; Sybil~0.86) — not real performance",
              fontsize=10)
 plt.tight_layout()
@@ -153,7 +157,7 @@ print("AUROC ladder (5-fold cross-validated):")
 for k, vv in ladder.items():
     print(f"  {k:42s} {vv:.3f}")
 print(f"\nContested-tail strategy: protein measured on {frac_tested*100:.0f}% of nodules "
-      f"(clinical grey zone)\n  recovers {(ladder['Clinical + Protein (contested %d%% only)'%round(frac_tested*100)]-ladder['Clinical only (CRS-like)']):.3f} "
+      f"(clinical grey zone)\n  recovers {(ladder[contested_key]-ladder['Clinical only (CRS-like)']):.3f} "
       f"of the {(ladder['Clinical + Protein (all)']-ladder['Clinical only (CRS-like)']):.3f} AUC gain from testing everyone.")
 print("\nSensitivity at 85% specificity (single axis):")
 for k, vv in sens.items():

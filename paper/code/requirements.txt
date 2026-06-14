@@ -1,0 +1,14 @@
+# Core (simulation + Python cross-check)
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+matplotlib-venn
+
+# Optional validation extras
+dcurves        # decision-curve / net benefit
+dice-ml        # counterfactual flip-distance
+
+# R cross-check (validate_epinet.R) — install in R, not pip:
+#   install.packages(c("rms", "pROC", "dcurves"))
