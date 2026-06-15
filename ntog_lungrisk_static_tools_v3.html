@@ -2737,14 +2737,9 @@ E: summed literature modifier points, cap 20</code></article></div>
           application_backend: false,
           application_cookies_set_by_this_code: false,
           application_local_storage: false,
-          external_assets_loaded: true,
-          external_asset_hosts: [
-            "fonts.googleapis.com",
-            "fonts.gstatic.com",
-            "cdn.jsdelivr.net",
-            "raw.githubusercontent.com"
-          ],
-          external_asset_note: "External asset hosts may receive request metadata such as IP address, user agent, referrer, and timing unless assets are self-hosted.",
+          external_assets_loaded: false,
+          external_asset_hosts: [],
+          external_asset_note: "All assets (CSS, JavaScript and fonts) are served from the same origin (ntog.org); no third-party hosts receive requests from this page.",
           json_export_generated_in_browser: true
         };
       }
