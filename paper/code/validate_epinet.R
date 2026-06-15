@@ -10,7 +10,16 @@
 #   in particular rms::validate() settles the calibration-slope question that
 #   differed between EpiNet (1.15) and the quick sklearn recalibration (0.94).
 #
-# Requires: install.packages(c("rms","pROC","dcurves"))
+# Requires: rms, pROC, dcurves (auto-installed below if missing).
+
+# --- Ensure required packages (install once from CRAN if absent) ----------------
+.required <- c("rms", "pROC", "dcurves")
+.missing  <- .required[!vapply(.required, requireNamespace, logical(1), quietly = TRUE)]
+if (length(.missing)) {
+  message("Installing missing R packages: ", paste(.missing, collapse = ", "),
+          "  (first install of 'rms' pulls Hmisc/SparseM/quantreg/polspline and may take a few minutes)")
+  install.packages(.missing, repos = "https://cloud.r-project.org")
+}
 
 suppressPackageStartupMessages({ library(rms); library(pROC); library(dcurves) })
 
