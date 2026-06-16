@@ -1,0 +1,41 @@
+name: No external assets
+
+# Fails the build if any HTML/CSS file loads a resource from a third-party host.
+# Protects the site-wide "browser-only, never reaches out" guarantee against
+# regressions (e.g. someone re-adding a CDN <script> or Google Fonts <link>).
+# Same-origin (/css, /js, ntog.org) and anchor <a href> navigation are allowed.
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+# Least privilege: this job only reads the checked-out code.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for external resource loads
+        run: |
+          # Resource-LOADING patterns pointing at an external https/protocol-relative host:
+          #   <script src=...>, <link ...href=...(css|js|font)>, <img>, <iframe>,
+          #   CSS @import, and url(...) in CSS. Excludes <a href> (navigation),
+          #   <link rel="canonical">/og/twitter (metadata), and same-origin ntog.org.
+          # Any external <link href> is flagged; the only legitimate one is the
+          # same-origin rel="canonical" (https://ntog.org/...), excluded below.
+          pattern='<script[^>]+src="(https?:)?//|<link[^>]+href="(https?:)?//|<img[^>]+src="(https?:)?//|<iframe[^>]+src="(https?:)?//|@import[^;]*["'\''(]\s*(https?:)?//|url\(\s*["'\'']?(https?:)?//'
+
+          matches=$(grep -rinE "$pattern" --include='*.html' --include='*.css' . \
+                      | grep -viE 'href="https://ntog\.org' || true)
+
+          if [ -n "$matches" ]; then
+            echo "::error::External resource load(s) detected. Self-host the asset — the site must never reach out to a third party."
+            echo "$matches"
+            exit 1
+          fi
+          echo "OK — no external resource loads found in any HTML/CSS file."
