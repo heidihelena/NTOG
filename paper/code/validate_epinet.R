@@ -6,9 +6,12 @@
 #
 # Reproduces, with optimism-corrected bootstrap validation, what EpiNet reports:
 #   discrimination (C / AUROC), calibration (slope, intercept, Brier), and
-#   decision-curve net benefit. This is the reviewer-favourite cross-check;
-#   in particular rms::validate() settles the calibration-slope question that
-#   differed between EpiNet (1.15) and the quick sklearn recalibration (0.94).
+#   decision-curve net benefit. This is the reviewer-favourite cross-check.
+#   NOTE: rms::validate() here fits a LOGISTIC (lrm) three-axis model and reports
+#   its optimism-corrected calibration slope (~1.0). This is NOT the same model as
+#   EpiNet's RandomForest, so it characterizes the logistic model's calibration —
+#   it does not "settle" the RF's method-dependent slope (1.15 apparent / ~0.83
+#   corrected). Report the two models separately.
 #
 # Requires: rms, pROC, dcurves (auto-installed below if missing).
 
@@ -66,11 +69,14 @@ dev.off(); cat("  wrote calibration_rms.pdf\n")
 cat("\n=== 4. Decision curve — net benefit (dcurves) ===\n")
 d$model <- p
 dc <- dca(Outcome ~ model, data = d, thresholds = seq(0, 0.5, by = 0.01))
-print(as.data.frame(dc)[as.data.frame(dc)$variable == "model" &
-        round(as.data.frame(dc)$threshold, 2) %in% c(0.10, 0.20, 0.30),
-      c("threshold","net_benefit")])
+# dcurves stores the table in dc$dca (as.data.frame(dc) is not supported across versions).
+nb <- dc$dca
+print(nb[nb$variable == "model" & round(nb$threshold, 2) %in% c(0.10, 0.20, 0.30),
+         c("threshold", "net_benefit")])
 pdf("decision_curve_rms.pdf", width = 7, height = 5); plot(dc); dev.off()
 cat("  wrote decision_curve_rms.pdf\n")
 
-cat("\nDone. Compare against EpiNet: AUROC ~0.855, Brier 0.131, slope ~1.15,\n",
-    "and the Python cross-check (RF 0.846 / Logistic 0.857, Brier 0.135, slope 0.94).\n")
+cat("\nDone. EpiNet (RF): AUROC ~0.855, Brier 0.131, apparent slope 1.15.\n",
+    "Python cross-check (RF): AUROC 0.846, Brier 0.135, CV slope 0.94, optimism-corrected ~0.83.\n",
+    "This R run (logistic lrm): optimism-corrected C ~0.857, Brier ~0.130, calibration slope ~1.00.\n",
+    "=> calibration is model-dependent: logistic ~ideal; RF mildly over-confident.\n")

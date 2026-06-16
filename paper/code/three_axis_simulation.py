@@ -130,10 +130,11 @@ for b, v in zip(bars, vals):
 ax.set_xlim(0.5, 1.0)
 ax.set_xlabel("Cross-validated AUROC vs latent malignancy")
 ax.set_title("Lifting the simulated clinical-only level under an orthogonality assumption\n"
-             "Synthetic illustration calibrated to literature (CRS~0.72; 4MP~0.74; Sybil~0.86) — not real performance",
-             fontsize=10)
+             "Synthetic illustration — calibrated to literature; not real performance",
+             fontsize=9)
 plt.tight_layout()
-plt.savefig(str(FIGS / "fig1_discrimination_ladder.png"), dpi=140)
+plt.subplots_adjust(top=0.86)   # headroom so the two-line title is never clipped
+plt.savefig(str(FIGS / "fig1_discrimination_ladder.png"), dpi=140, bbox_inches="tight")
 plt.close()
 
 # ===================== Figure B: Venn of malignancies caught =====================
