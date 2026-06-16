@@ -197,17 +197,42 @@ Synthetic data only; no patient information. Evaluation on clinical/registry dat
 
 ---
 
-## References (to be completed/formatted)
-1. McWilliams A, Tammemagi MC, Mayo JR, *et al.* Probability of cancer in pulmonary nodules detected on first screening CT. *N Engl J Med.* 2013;369:910–919.
-2. Swensen SJ, *et al.* (Mayo model). *Arch Intern Med.* 1997.
-3. Herder GJ, *et al.* Clinical prediction model … added value of 18F-FDG PET. *Chest.* 2005;128:2490–2496.
-4. Guida F, … **Johansson M**, *et al.* Assessment of Lung Cancer Risk on the Basis of a Biomarker Panel of Circulating Proteins. *JAMA Oncol.* 2018. doi:10.1001/jamaoncol.2018.2078.
-5. Feng X, … **Johansson M**, *et al.* Lung cancer risk discrimination of prediagnostic proteomics measurements compared with existing prediction tools. *J Natl Cancer Inst.* 2023. doi:10.1093/jnci/djad071.
-6. Khodayari Moez E, … Hung RJ, *et al.* Circulating proteome for pulmonary nodule malignancy. *J Natl Cancer Inst.* 2023. doi:10.1093/jnci/djad122.
-7. Mikhael PG, *et al.* Sybil: A Validated Deep Learning Model to Predict Future Lung Cancer Risk From a Single Low-Dose Chest CT. *J Clin Oncol.* 2023. doi:10.1200/JCO.22.01345.
-8. Vickers AJ, Elkin EB. Decision curve analysis. *Med Decis Making.* 2006. *(for net-benefit framing)*
-9. Riley RD, *et al.* Minimum sample size for developing a multivariable prediction model. *(for the ~14k robustness estimate)*
-10. EpiNet — the Epistemic Network toolkit. https://github.com/heidihelena/epinet. Zenodo. doi:10.5281/zenodo.20681072.
-11. NTOG. Nordic Nodule Pathway Sandbox v3. https://ntog.org/nordic-nodule-pathway-sandbox-v3.html.
+## References
+1. McWilliams A, Tammemägi MC, Mayo JR, et al. Probability of cancer in pulmonary nodules detected on first screening CT. *N Engl J Med.* 2013;369(10):910–919. doi:10.1056/NEJMoa1214726
+2. Swensen SJ, Silverstein MD, Ilstrup DM, Schleck CD, Edell ES. The probability of malignancy in solitary pulmonary nodules: application to small radiologically indeterminate nodules. *Arch Intern Med.* 1997;157(8):849–855. doi:10.1001/archinte.1997.00440290031002
+3. Herder GJ, van Tinteren H, Golding RP, et al. Clinical prediction model to characterize pulmonary nodules: validation and added value of 18F-FDG PET. *Chest.* 2005;128(4):2490–2496. doi:10.1378/chest.128.4.2490
+4. Guida F, Sun N, Bantis LE, … **Johansson M**, et al. Assessment of lung cancer risk on the basis of a biomarker panel of circulating proteins. *JAMA Oncol.* 2018;4(10):e182078. doi:10.1001/jamaoncol.2018.2078
+5. Feng X, Wu WY-Y, Onwuka JU, … **Johansson M**, et al. Lung cancer risk discrimination of prediagnostic proteomics measurements compared with existing prediction tools. *J Natl Cancer Inst.* 2023;115(9):1050–1059. doi:10.1093/jnci/djad071
+6. Khodayari Moez E, Warkentin MT, Brhane Y, … Hung RJ, et al. Circulating proteome for pulmonary nodule malignancy. *J Natl Cancer Inst.* 2023;115(9):1060–1070. doi:10.1093/jnci/djad122
+7. Mikhael PG, Wohlwend J, Yala A, et al. Sybil: a validated deep learning model to predict future lung cancer risk from a single low-dose chest computed tomography. *J Clin Oncol.* 2023;41(12):2191–2200. doi:10.1200/JCO.22.01345
+8. Vickers AJ, Elkin EB. Decision curve analysis: a novel method for evaluating prediction models. *Med Decis Making.* 2006;26(6):565–574. doi:10.1177/0272989X06295361
+9. Riley RD, Snell KIE, Ensor J, et al. Minimum sample size for developing a multivariable prediction model: PART II — binary and time-to-event outcomes. *Stat Med.* 2019;38(7):1276–1296. doi:10.1002/sim.7992
+10. Harrell FE Jr. *Regression Modeling Strategies.* 2nd ed. Springer; 2015. (`rms` R package.)
+11. EpiNet — the Epistemic Network toolkit. Zenodo. doi:10.5281/zenodo.20681072. https://github.com/heidihelena/epinet
+12. Andersén HH. Nordic Nodule Pathway Sandbox v3. Nordic Thoracic Oncology Group; 2026. https://ntog.org/nordic-nodule-pathway-sandbox-v3.html *(archived release & DOI to follow)*
 
-*(Sources retrieved via PubMed; please verify each DOI and complete author lists/volume/pages at submission.)*
+*References verified via PubMed; please re-confirm volume/issue/page numbers and complete the truncated author lists (4–7) to journal style before submission. The sandbox Zenodo DOI is pending deposit.*
+
+---
+
+## Declarations
+
+**Availability of data and code.** All synthetic data, code (`three_axis_simulation.py`, `validate_epinet.py`, `validate_epinet.R`), figures, and the validation scorecard are in the `paper/` directory of the project repository (https://github.com/heidihelena/NTOG/tree/main/paper). The interactive sandbox is at https://ntog.org/nordic-nodule-pathway-sandbox-v3.html; EpiNet at https://github.com/heidihelena/epinet (Zenodo doi:10.5281/zenodo.20681072). **No patient-level or human-participant data were used** — all cohorts are synthetic.
+
+**Ethics approval and consent to participate.** Not applicable: the study uses synthetic data only; no human participants, samples, or patient records were involved.
+
+**Consent for publication.** Not applicable.
+
+**Competing interests.** The interactive tools are powered by an independent engine (Vahtian; H.H.A.). The authors declare no other competing interests. *[confirm/complete]*
+
+**Funding.** *[to be completed]*
+
+**Authors' contributions.** H.H.A. conceived the framework, implemented the tools and simulations, performed the analyses, and wrote the manuscript. *[complete per ICMJE for all authors]*
+
+**Acknowledgements.** Independent methodological and code review informed the calibration, reproducibility, and positioning of this work.
+
+---
+
+## Notes for submission
+
+**Target venue.** Primary: *BMC Medical Informatics and Decision Making* (a decision-analytic methods/simulation framework with reproducible code — matches the positioning above; structured abstract and Declarations already in BMC form). Optional companion: *SoftwareX* metapaper describing the sandbox + EpiNet artifacts. Frame the title/abstract as a **methods/simulation** contribution, never as clinical validation (see Positioning).
