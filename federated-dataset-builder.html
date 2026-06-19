@@ -30,7 +30,7 @@
       --panel: #ffffff;
       --page: #ffffff;
       --brand: #102a43;
-      --brand-2: #1f4e79;
+      --brand-2: #003580;
       --brand-3: #2f80a7;
       --soft-blue: #f0f7fb;
       --soft-blue-line: #d7eaf3;
@@ -945,7 +945,7 @@
 
   
   <!--ntog-cite-inserted-->
-  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Federated Dataset & Visualisation Builder</em> (v1.0). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632632" style="color:#1f4e79;">doi:10.5281/zenodo.20632632</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#1f4e79;">CC BY-NC 4.0</a>.</div>
+  <div style="max-width:900px;margin:1.5rem auto;padding:0 1rem;font-size:.85rem;color:#5f6d80;line-height:1.5;font-family:system-ui,-apple-system,sans-serif;"><strong>Cite this tool:</strong> Andersén HH. <em>NTOG Federated Dataset & Visualisation Builder</em> (v1.0). Zenodo; 2026. <a href="https://doi.org/10.5281/zenodo.20632632" style="color:#003580;">doi:10.5281/zenodo.20632632</a>. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" style="color:#003580;">CC BY-NC 4.0</a>.</div>
   <footer class="bg-dark text-white py-4 mt-0">
     <div class="container text-center">
       <a href="/" class="footer-logo-link" aria-label="NTOG home">
@@ -2210,12 +2210,12 @@
         "ggsave(file.path(\"figures\", \"missingness_by_country.png\"), p_missing, width = 9, height = 5, dpi = 150)",
         "",
         "p_interval <- ggplot(forest_plot_data, aes(y = country, x = estimate_percent)) +",
-        "  geom_point(size = 2.8, color = \"#1f4e79\") +",
+        "  geom_point(size = 2.8, color = \"#003580\") +",
         "  geom_errorbar(",
         "    aes(xmin = lower_95_percent, xmax = upper_95_percent),",
         "    width = 0.2,",
         "    orientation = \"y\",",
-        "    color = \"#1f4e79\"",
+        "    color = \"#003580\"",
         "  ) +",
         "  labs(",
         "    title = \"Synthetic SABR receipt proportions with approximate 95% intervals\",",

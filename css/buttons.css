@@ -1,8 +1,8 @@
 /* Button utilities and Bootstrap overrides */
 
 :root {
-  --primary-color: #1f4e79;
-  --primary-color-hover: #163a5a;
+  --primary-color: #003580;
+  --primary-color-hover: #002a5c;
   --secondary-color: #2f7d46;
   --accent-red: #c60c30;
   --button-focus-ring: rgba(31, 78, 121, 0.35);
