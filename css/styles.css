@@ -2,6 +2,10 @@
   --primary-color: #1f4e79;
   --primary-color-hover: #163a5a;
 
+  /* Finnish-flag blue, used for the navbar accent line (more saturated than
+     the slate --primary-color so it reads as a crisp brand stripe). */
+  --nordic-blue: #003580;
+
   --hero-background-dark: #041827;
   --hero-background-mid: #071f35;
   --hero-background-accent: #163a5a;
@@ -125,7 +129,7 @@ strong {
 /* Regular navbar */
 .navbar {
   background: #ffffff !important;
-  border-bottom: 4px solid var(--primary-color);
+  border-bottom: 4px solid var(--nordic-blue);
   box-shadow: 0 6px 18px rgba(31, 78, 121, 0.08);
 }
 
