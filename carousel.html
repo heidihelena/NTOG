@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTOG Carousel Builder</title>
+<link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Montserrat";src:url("/fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");font-weight:100 900;font-display:swap;}
+@font-face{font-family:"Open Sans";src:url("/fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf") format("truetype");font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --navy:#003580; --navy-h:#002a5c; --red:#c8102e; --ink:#252525;
+    --grey:#6e767e; --soft:#f7f7f8; --bd:#e5e7eb; --tint:#eff3fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Open Sans",Arial,sans-serif;color:var(--ink);background:var(--soft);}
+  header{background:#fff;border-bottom:4px solid var(--navy);padding:.7rem 1.2rem;display:flex;align-items:center;gap:.6rem;}
+  header img{width:30px;height:30px;}
+  header h1{font-family:"Montserrat",sans-serif;font-weight:800;font-size:1.1rem;margin:0;color:var(--navy);letter-spacing:.01em;}
+  header .sub{font-size:.82rem;color:var(--grey);margin-left:auto;}
+  .wrap{display:flex;gap:1.5rem;padding:1.5rem;align-items:flex-start;flex-wrap:wrap;}
+  .panel{flex:1 1 360px;min-width:340px;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:1.2rem 1.3rem;box-shadow:0 10px 25px rgba(15,23,42,.05);}
+  .preview{flex:1 1 420px;min-width:360px;position:sticky;top:1.5rem;text-align:center;}
+  canvas{width:100%;max-width:440px;height:auto;border:1px solid var(--bd);border-radius:12px;box-shadow:0 14px 35px rgba(15,23,42,.12);background:#fff;}
+  h2{font-family:"Montserrat",sans-serif;font-weight:700;font-size:1rem;color:var(--navy);margin:0 0 .8rem;}
+  label{display:block;font-weight:600;font-size:.82rem;margin:.7rem 0 .25rem;}
+  input,textarea,select{width:100%;font-family:inherit;font-size:.9rem;padding:.5rem .6rem;border:1px solid var(--bd);border-radius:8px;background:#fff;color:var(--ink);}
+  textarea{resize:vertical;line-height:1.4;}
+  .hint{font-size:.74rem;color:var(--grey);margin:.2rem 0 0;}
+  .row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .row > *{flex:1;}
+  .btn{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.85rem;border:0;border-radius:999px;padding:.55rem 1.1rem;cursor:pointer;background:var(--navy);color:#fff;transition:background .15s;}
+  .btn:hover{background:var(--navy-h);}
+  .btn.sec{background:#fff;color:var(--navy);border:1.5px solid var(--navy);}
+  .btn.sec:hover{background:var(--tint);}
+  .btn.ghost{background:transparent;color:var(--grey);border:1.5px solid var(--bd);}
+  .btn.sm{padding:.35rem .7rem;font-size:.78rem;}
+  .toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0 1rem;}
+  .slidechips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0;}
+  .chip{font-size:.78rem;font-weight:700;padding:.3rem .7rem;border-radius:999px;border:1.5px solid var(--bd);background:#fff;cursor:pointer;color:var(--grey);}
+  .chip.on{border-color:var(--navy);color:var(--navy);background:var(--tint);}
+  .seg{display:inline-flex;border:1.5px solid var(--bd);border-radius:999px;overflow:hidden;}
+  .seg button{border:0;background:#fff;padding:.4rem .9rem;font:inherit;font-weight:700;font-size:.82rem;cursor:pointer;color:var(--grey);}
+  .seg button.on{background:var(--navy);color:#fff;}
+  .seg.red button.on{background:var(--red);}
+  .note{background:var(--tint);border:1px solid #d7e0ef;border-radius:10px;padding:.6rem .8rem;font-size:.8rem;color:#33415c;margin-top:1rem;}
+  fieldset{border:1px solid var(--bd);border-radius:10px;margin:.6rem 0 0;padding:.6rem .8rem;}
+  legend{font-weight:700;font-size:.8rem;color:var(--navy);padding:0 .4rem;}
+</style>
+</head>
+<body>
+<header>
+  <img src="/ntog-logo.svg" alt="NTOG">
+  <h1>Carousel Builder</h1>
+  <span class="sub">On-brand LinkedIn / Instagram slides · 1080×1350 · runs in your browser</span>
+</header>
+
+<div class="wrap">
+  <!-- CONTROLS -->
+  <div class="panel">
+    <h2>Deck</h2>
+    <div class="row">
+      <div>
+        <label>Theme</label>
+        <div class="seg" id="themeSeg">
+          <button data-theme="navy" class="on">Standard · Navy</button>
+          <button data-theme="red">2027 · Red</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="slidechips" id="slideChips"></div>
+    <div class="toolbar">
+      <button class="btn sm sec" id="addSlide">+ Slide</button>
+      <button class="btn sm ghost" id="dupSlide">Duplicate</button>
+      <button class="btn sm ghost" id="delSlide">Delete</button>
+    </div>
+
+    <h2 style="margin-top:1.2rem;">Slide</h2>
+    <label>Layout</label>
+    <select id="layout">
+      <option value="cover">Cover</option>
+      <option value="content">Content (bullets)</option>
+      <option value="closing">Closing / CTA</option>
+    </select>
+
+    <label>Eyebrow (small label)</label>
+    <input id="eyebrow" maxlength="40" placeholder="e.g. COLOUR USAGE">
+
+    <label>Title</label>
+    <textarea id="title" rows="2" placeholder="Slide headline"></textarea>
+
+    <label>Lead / subtitle</label>
+    <textarea id="lead" rows="2" placeholder="Supporting line"></textarea>
+
+    <fieldset id="bulletsField">
+      <legend>Bullets — one per line, "Head | description"</legend>
+      <textarea id="bullets" rows="5" placeholder="Navy is the canvas | Dark hero or white&#10;Red is one accent | Never a wall of red"></textarea>
+    </fieldset>
+
+    <fieldset id="ctaField">
+      <legend>Call to action</legend>
+      <input id="cta" maxlength="40" placeholder="ntog.org">
+    </fieldset>
+
+    <div class="toolbar" style="margin-top:1.2rem;">
+      <button class="btn" id="dlOne">Download this slide</button>
+      <button class="btn sec" id="dlAll">Download all</button>
+    </div>
+    <div class="note">Tip: keep titles short and lead lines to one idea. Red is reserved for the 2027 theme and single accents — structure with navy + greys.</div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview">
+    <canvas id="cv" width="2160" height="2700"></canvas>
+    <p class="hint" id="pageInfo"></p>
+  </div>
+</div>
+
+<script>
+const S = 2, W = 1080, H = 1350, M = 80;             // base units; canvas is 2×
+const C = {ink:"#252525", grey:"#6e767e", soft:"#f7f7f8", bd:"#e5e7eb",
+           navy:"#003580", navyTint:"#eff3fa", red:"#c8102e", redTint:"#fbecee", white:"#ffffff"};
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+
+// transparent brand logo, embedded so canvas export works offline
+const LOGO_SVG = `<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="r" x1="190" y1="400" x2="520" y2="190" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E6001F"/><stop offset="1" stop-color="#C8102E"/></linearGradient><linearGradient id="y" x1="520" y1="190" x2="835" y2="430" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD21A"/><stop offset="1" stop-color="#F2B400"/></linearGradient><linearGradient id="b" x1="210" y1="500" x2="850" y2="760" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057B8"/><stop offset="0.55" stop-color="#004B9B"/><stop offset="1" stop-color="#002F63"/></linearGradient><linearGradient id="b2" x1="330" y1="810" x2="700" y2="810" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057B8"/><stop offset="1" stop-color="#004B9B"/></linearGradient></defs><g fill="none" stroke-width="126"><path d="M 222 418 A 305 305 0 0 1 501 207" stroke="url(#r)"/><path d="M 539 208 A 305 305 0 0 1 805 428" stroke="url(#y)"/><path d="M 810 449 A 305 305 0 0 1 696 756" stroke="url(#b)"/><path d="M 665 776 A 305 305 0 0 1 360 776" stroke="url(#b2)"/><path d="M 324 753 A 305 305 0 0 1 211 471" stroke="url(#b)"/></g></svg>`;
+const logoImg = new Image();
+let logoReady = false;
+logoImg.onload = () => { logoReady = true; render(); };
+logoImg.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(LOGO_SVG);
+
+// ---- state ----
+let theme = "navy";
+let slides = [
+  {layout:"cover", eyebrow:"Brand carousel", title:"NTOG\nCarousel Builder", lead:"Nordic Thoracic Oncology Group", bullets:"", cta:"ntog.org"},
+  {layout:"content", eyebrow:"How to use colour", title:"Navy structures, red accents", lead:"",
+   bullets:"Navy is the canvas | Dark hero gradient or white; navy for headings & primary buttons.\nRed is one accent | The 2027 theme, or a single focal word. Never a wall of red.\nGreys do the structure | Section greys, hairlines and ink carry the layout.", cta:""},
+  {layout:"closing", eyebrow:"Find out more", title:"One Nordic home for lung-cancer guidance, tools & research", lead:"", bullets:"", cta:"ntog.org"}
+];
+let idx = 0;
+const accent = () => theme === "red" ? C.red : C.navy;
+const accentTint = () => theme === "red" ? C.redTint : C.navyTint;
+
+// ---- canvas helpers (base units) ----
+function font(family, weight, size){ ctx.font = `${weight} ${size}px "${family}"`; }
+function rr(x,y,w,h,r){ ctx.beginPath(); ctx.roundRect(x,y,w,h,r); }
+function wrap(text, maxW){
+  const out=[];
+  text.split("\n").forEach(par=>{
+    const words=par.split(" "); let line="";
+    words.forEach(w=>{
+      const t=line?line+" "+w:w;
+      if(ctx.measureText(t).width>maxW && line){ out.push(line); line=w; } else line=t;
+    });
+    out.push(line);
+  });
+  return out;
+}
+function eyebrow(x,y,txt){
+  if(!txt) return y;
+  font("Montserrat",700,14);
+  const t=txt.toUpperCase().split("").join(" ");
+  ctx.letterSpacing="2px";
+  const tw=ctx.measureText(t).width, h=46;
+  rr(x,y,tw+34,h,h/2);
+  ctx.fillStyle=accentTint(); ctx.fill();
+  ctx.lineWidth=2; ctx.strokeStyle=accent(); ctx.stroke();
+  ctx.fillStyle=accent(); ctx.textBaseline="middle"; ctx.fillText(t,x+17,y+h/2+1);
+  ctx.letterSpacing="0px"; ctx.textBaseline="alphabetic";
+  return y+h;
+}
+function bulletSq(x,cy,color,size=12){ rr(x,cy-size/2,size,size,3); ctx.fillStyle=color; ctx.fill(); }
+function footer(n){
+  font("Open Sans",600,14); ctx.fillStyle=C.grey; ctx.textBaseline="alphabetic";
+  ctx.fillText("ntog.org", M, H-44);
+  const s=String(n+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
+  ctx.fillText(s, W-M-ctx.measureText(s).width, H-44);
+}
+
+// ---- layouts ----
+function drawCover(s,n){
+  if(logoReady) ctx.drawImage(logoImg, M, 150, 150, 150);
+  let y=eyebrow(M,360,s.eyebrow)+44;
+  font("Montserrat",800,84); ctx.fillStyle=accent(); ctx.textBaseline="top";
+  wrap(s.title||"",W-2*M).forEach(l=>{ ctx.fillText(l,M,y); y+=92; });
+  y+=14;
+  if(s.lead){ font("Open Sans",600,24); ctx.fillStyle=C.ink; wrap(s.lead,W-2*M).forEach(l=>{ctx.fillText(l,M,y);y+=34;}); }
+  // accent rule
+  ctx.fillStyle=accent(); ctx.fillRect(M, H-150, 110, 8);
+  if(s.cta){ font("Montserrat",700,24); ctx.fillStyle=accent(); const t=s.cta+" →"; ctx.fillText(t, W-M-ctx.measureText(t).width, H-168); }
+  ctx.textBaseline="alphabetic"; footer(n);
+}
+function drawContent(s,n){
+  let y=eyebrow(M,150,s.eyebrow)+40;
+  font("Montserrat",800,48); ctx.fillStyle=C.ink; ctx.textBaseline="top";
+  wrap(s.title||"",W-2*M).forEach(l=>{ ctx.fillText(l,M,y); y+=58; });
+  y+=24;
+  if(s.lead){ font("Open Sans",400,22); ctx.fillStyle=C.grey; wrap(s.lead,W-2*M).forEach(l=>{ctx.fillText(l,M,y);y+=32;}); y+=18; }
+  const items=(s.bullets||"").split("\n").map(b=>b.trim()).filter(Boolean);
+  items.forEach((raw,i)=>{
+    if(i){ ctx.strokeStyle=C.bd; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(M,y-18); ctx.lineTo(W-M,y-18); ctx.stroke(); }
+    const [head,...rest]=raw.split("|"); const body=rest.join("|").trim();
+    bulletSq(M, y+18, accent(), 13);
+    font("Montserrat",700,26); ctx.fillStyle=accent(); ctx.textBaseline="top"; ctx.fillText(head.trim(), M+40, y);
+    let yy=y+44;
+    if(body){ font("Open Sans",400,20); ctx.fillStyle="#464c52"; wrap(body,W-2*M-40).forEach(l=>{ctx.fillText(l,M+40,yy);yy+=28;}); }
+    y=yy+34;
+  });
+  ctx.textBaseline="alphabetic"; footer(n);
+}
+function drawClosing(s,n){
+  let y=eyebrow(M,360,s.eyebrow)+44;
+  font("Montserrat",800,60); ctx.fillStyle=accent(); ctx.textBaseline="top";
+  wrap(s.title||"",W-2*M).forEach(l=>{ ctx.fillText(l,M,y); y+=72; });
+  y+=30;
+  if(s.lead){ font("Open Sans",400,24); ctx.fillStyle=C.grey; wrap(s.lead,W-2*M).forEach(l=>{ctx.fillText(l,M,y);y+=34;}); }
+  if(s.cta){
+    font("Montserrat",700,30); const t=s.cta+"  →"; const tw=ctx.measureText(t).width;
+    rr(M, H-300, tw+72, 96, 48); ctx.fillStyle=accent(); ctx.fill();
+    ctx.fillStyle="#fff"; ctx.textBaseline="middle"; ctx.fillText(t, M+36, H-300+50);
+  }
+  if(logoReady) ctx.drawImage(logoImg, W-M-120, 150, 120, 120);
+  ctx.textBaseline="alphabetic"; footer(n);
+}
+
+function render(){
+  ctx.setTransform(S,0,0,S,0,0);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=C.white; ctx.fillRect(0,0,W,H);
+  const s=slides[idx];
+  if(s.layout==="cover") drawCover(s,idx);
+  else if(s.layout==="closing") drawClosing(s,idx);
+  else drawContent(s,idx);
+  document.getElementById("pageInfo").textContent = `Slide ${idx+1} of ${slides.length} — ${s.layout}`;
+}
+
+// ---- UI binding ----
+const $=id=>document.getElementById(id);
+function syncForm(){
+  const s=slides[idx];
+  $("layout").value=s.layout; $("eyebrow").value=s.eyebrow||""; $("title").value=s.title||"";
+  $("lead").value=s.lead||""; $("bullets").value=s.bullets||""; $("cta").value=s.cta||"";
+  $("bulletsField").style.display = s.layout==="content" ? "" : "none";
+  $("ctaField").style.display = (s.layout==="cover"||s.layout==="closing") ? "" : "none";
+  renderChips();
+}
+function renderChips(){
+  const c=$("slideChips"); c.innerHTML="";
+  slides.forEach((s,i)=>{
+    const b=document.createElement("button");
+    b.className="chip"+(i===idx?" on":""); b.textContent=(i+1)+" · "+s.layout;
+    b.onclick=()=>{idx=i;syncForm();render();}; c.appendChild(b);
+  });
+}
+function bind(id,key){ $(id).addEventListener("input",e=>{ slides[idx][key]=e.target.value; if(key==="layout")syncForm(); render(); }); }
+["eyebrow","title","lead","bullets","cta"].forEach(k=>bind(k,k));
+$("layout").addEventListener("change",e=>{ slides[idx].layout=e.target.value; syncForm(); render(); });
+
+$("themeSeg").addEventListener("click",e=>{
+  const btn=e.target.closest("button"); if(!btn)return;
+  theme=btn.dataset.theme;
+  [...$("themeSeg").children].forEach(b=>b.classList.toggle("on",b===btn));
+  $("themeSeg").classList.toggle("red", theme==="red");
+  render();
+});
+$("addSlide").onclick=()=>{ slides.splice(idx+1,0,{layout:"content",eyebrow:"",title:"New slide",lead:"",bullets:"Point one | detail\nPoint two | detail",cta:""}); idx++; syncForm(); render(); };
+$("dupSlide").onclick=()=>{ slides.splice(idx+1,0,JSON.parse(JSON.stringify(slides[idx]))); idx++; syncForm(); render(); };
+$("delSlide").onclick=()=>{ if(slides.length>1){ slides.splice(idx,1); idx=Math.max(0,idx-1); syncForm(); render(); } };
+
+function exportSlide(i){
+  const keep=idx; idx=i; render();
+  return new Promise(res=>cv.toBlob(b=>{
+    const a=document.createElement("a"); a.href=URL.createObjectURL(b);
+    a.download=`ntog-${theme}-slide-${String(i+1).padStart(2,"0")}.png`; a.click();
+    URL.revokeObjectURL(a.href); idx=keep; render(); res();
+  },"image/png"));
+}
+$("dlOne").onclick=()=>exportSlide(idx);
+$("dlAll").onclick=async()=>{ for(let i=0;i<slides.length;i++){ await exportSlide(i); await new Promise(r=>setTimeout(r,350)); } };
+
+document.fonts.ready.then(()=>{ syncForm(); render(); });
+syncForm(); render();
+</script>
+</body>
+</html>

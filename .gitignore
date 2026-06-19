@@ -27,3 +27,6 @@ ntog2027/programme.json
 # local-only social-banner generator (renders og-image.png); not deployed
 og-image.html
 og-image-2027.html
+
+# local-only carousel generators (render slide PNGs/PDFs); not deployed
+brand-carousel/
