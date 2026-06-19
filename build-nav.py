@@ -1,137 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#!/usr/bin/env python3
+"""Single source of truth for the NTOG primary navbar.
 
-  <title>Page Not Found | Nordic Thoracic Oncology Group</title>
-  <meta name="description" content="The requested page could not be found on the Nordic Thoracic Oncology Group website.">
-  <meta name="robots" content="noindex, follow">
-  <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+The same navbar lives in every page. To change the menu, edit the CANON
+string below and run, from the repo root:
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    python3 build-nav.py
 
-  <link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/fonts.css">
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/buttons.css">
-  <link rel="stylesheet" href="/css/hero.css">
-  <link rel="stylesheet" href="/css/nav.css">
+It replaces the <nav class="navbar ...>...</nav> block in every page that
+has one (idempotent / re-runnable). Active-state highlighting and the red
+2027 theme are handled at runtime (js/scripts.js + body.ntog2027), so the
+stamped markup is byte-identical on every page.
+"""
+import re, glob, sys
 
-  <style>
-    body {
-      font-family: "Open Sans", Arial, sans-serif;
-      color: #1f2933;
-      background: #ffffff;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    .navbar-brand {
-      font-family: "Montserrat", Arial, sans-serif;
-    }
-
-    .page-hero {
-      position: relative;
-      overflow: hidden;
-      
-      color: #ffffff;
-      padding: 7rem 0 4.5rem;
-      margin-top: 56px;
-    }
-
-    .page-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
-        radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.10), transparent 22%);
-      pointer-events: none;
-    }
-
-    .page-hero .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 1rem;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .lead-narrow {
-      max-width: 820px;
-      font-size: 1.18rem;
-      line-height: 1.7;
-    }
-
-    .section-block {
-      padding: 3.5rem 0;
-    }
-
-    .link-card {
-      height: 100%;
-      padding: 1.25rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 1rem;
-      background: #ffffff;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .link-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
-    }
-
-    .link-card h2 {
-      font-size: 1.15rem;
-      margin-bottom: 0.75rem;
-      color: #102a43;
-    }
-
-    .link-card p {
-      margin-bottom: 0;
-      color: #52606d;
-    }
-
-    .link-card a {
-      text-decoration: none;
-    }
-
-    .error-code {
-      font-size: clamp(4rem, 14vw, 9rem);
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      opacity: 0.2;
-    }
-
-    footer a {
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+CANON = '''  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="/">
         <img src="/ntog-logo.svg" alt="" width="34" height="34" aria-hidden="true">
@@ -238,87 +120,31 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav>'''
 
-  <header class="page-hero">
-    <div class="container">
-      <span class="eyebrow">404 error</span>
-      <div class="error-code" aria-hidden="true">404</div>
-      <h1 class="display-5 fw-bold mb-3">Page not found</h1>
-      <p class="lead-narrow mb-4">
-        The page may have been moved, renamed, or removed. Use the links below to return to the main NTOG content.
-      </p>
-      <div class="d-flex flex-column flex-sm-row gap-3">
-        <a href="/" class="btn btn-light btn-lg">Go to homepage</a>
-        <a href="/research.html" class="btn btn-outline-light btn-lg">View research overview</a>
-      </div>
-    </div>
-  </header>
+NAV_RE = re.compile(r'[ \t]*<nav class="navbar.*?</nav>', re.DOTALL)
 
-  <main>
-    <section class="section-block">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-md-6 col-xl-3">
-            <div class="link-card">
-              <h2><a href="/research.html">Research</a></h2>
-              <p>Review NTOG research areas, ongoing projects, publications, and collaborations.</p>
-            </div>
-          </div>
+def main():
+    files = []
+    for pat in ['*.html', 'ntog2027/*.html', 'research-news/*.html', 'guidelines/*.html']:
+        files += glob.glob(pat)
+    files = sorted(set(files))
+    changed, skipped = [], []
+    for f in files:
+        src = open(f, encoding='utf-8').read()
+        navs = NAV_RE.findall(src)
+        if 'navbarNav' not in src or not navs:
+            continue
+        navbar_count = src.count('<nav class="navbar')
+        if navbar_count > 1:
+            print("!! %s: %d navbars — SKIPPED for safety" % (f, navbar_count))
+            skipped.append(f)
+            continue
+        new = NAV_RE.sub(lambda m: CANON, src, count=1)
+        if new != src:
+            open(f, 'w', encoding='utf-8').write(new)
+            changed.append(f)
+    print(f"\nstamped {len(changed)} files; skipped {len(skipped)}")
 
-          <div class="col-md-6 col-xl-3">
-            <div class="link-card">
-              <h2><a href="/guidelines.html">Clinical resources</a></h2>
-              <p>Find Nordic guideline links, protocols, tools, and clinical reference material.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xl-3">
-            <div class="link-card">
-              <h2><a href="/upcoming-events.html">Events</a></h2>
-              <p>See upcoming NTOG meetings, symposia, and Nordic thoracic oncology events.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xl-3">
-            <div class="link-card">
-              <h2><a href="mailto:info@ntog.org">Contact</a></h2>
-              <p>Contact NTOG if you were looking for a specific page or document.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-5">
-          <p class="mb-1"><strong>Common destinations</strong></p>
-          <p class="mb-0">
-            <a href="/about.html">About NTOG</a> ·
-            <a href="/steering-committee.html">Steering Committee</a> ·
-            <a href="/publications.html">Publications</a> ·
-            <a href="/expert.html">Expert Network</a> ·
-            <a href="/volunteer.html">Volunteer</a>
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-dark text-white py-4 mt-0">
-    <div class="container text-center">
-      <a href="/" class="footer-logo-link" aria-label="NTOG home">
-        <img src="/ntog-logo.svg" alt="Nordic Thoracic Oncology Group logo" width="56" height="56" loading="lazy">
-      </a>
-
-      <p class="mb-2">&copy; 2026 Nordic Thoracic Oncology Group</p>
-
-      <p class="mb-0">
-        <a href="/copyright.html" class="text-white me-3">Copyright &amp; Licensing</a>
-        <a href="/privacy-policy.html" class="text-white me-3">Privacy Policy</a>
-        <a href="/terms-of-service.html" class="text-white">Terms of Service</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="/js/bootstrap5.3.8/bootstrap.bundle.min.js" defer></script>
-  <script src="/js/scripts.js" defer></script>
-</body>
-</html>
+if __name__ == '__main__':
+    main()

@@ -273,8 +273,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
-            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <a class="nav-link" href="/about.html">About Us</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="About Us submenu"></button>
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/about.html">About Us</a></li>
               <li><a class="dropdown-item" href="/mission.html">Mission</a></li>
               <li><a class="dropdown-item" href="/history.html">History</a></li>
@@ -283,8 +284,9 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="researchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
-            <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+            <a class="nav-link" href="/research.html">Research</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Research submenu"></button>
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/research.html">Research Overview</a></li>
               <li><a class="dropdown-item" href="/ongoing-projects.html">Ongoing Projects</a></li>
               <li><a class="dropdown-item" href="/publications.html">Publications</a></li>
@@ -293,8 +295,9 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Events</a>
-            <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+            <a class="nav-link" href="/upcoming-events.html">Events</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Events submenu"></button>
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/ntog2027/">Nordic Lung Cancer Symposium 2027</a></li>
               <li><a class="dropdown-item" href="/ntog2027/programme.html">Programme</a></li>
               <li><a class="dropdown-item" href="/ntog2027/call-for-abstracts.html">Call for Abstracts</a></li>
@@ -305,8 +308,9 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clinical Resources</a>
-            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+            <a class="nav-link" href="/guidelines.html">Clinical Resources</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Clinical Resources submenu"></button>
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/guidelines.html">Clinical Guidelines</a></li>
               <li><a class="dropdown-item" href="/guidelines/nodule-management.html">Nodule Management</a></li>
               <li><a class="dropdown-item" href="/protocols.html">Protocols</a></li>
@@ -314,32 +318,43 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
-            <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
-              <li><a class="dropdown-item" href="/tools.html">All tools</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><h6 class="dropdown-header">MDT &amp; pathway</h6></li>
-              <li><a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a></li>
-              <li><a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a></li>
-              <li><a class="dropdown-item" href="/mdt.html">MDT free-text form</a></li>
-              <li><h6 class="dropdown-header">Screening &amp; nodule risk</h6></li>
-              <li><a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a></li>
-              <li><a class="dropdown-item" href="/nordic-nodule-pathway-sandbox-v3.html">Nodule pathway sandbox</a></li>
-              <li><a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a></li>
-              <li><h6 class="dropdown-header">Treatment value &amp; follow-up</h6></li>
-              <li><a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a></li>
-              <li><a class="dropdown-item" href="/decision-tool-v2.html">Treatment value discussion compass</a></li>
-              <li><a class="dropdown-item" href="/decision-tool-structured.html">Structured treatment value profile</a></li>
-              <li><a class="dropdown-item" href="/surveillance-yield-calculator.html">Surveillance yield (NNS)</a></li>
-              <li><h6 class="dropdown-header">Research builders</h6></li>
-              <li><a class="dropdown-item" href="/study-builder.html">Study design builder</a></li>
-              <li><a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a></li>
-            </ul>
+            <a class="nav-link" href="/tools.html">Tools</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Tools submenu"></button>
+            <div class="dropdown-menu dropdown-menu-end mega-menu">
+              <div class="mega-grid">
+                <div class="mega-col">
+                  <h6 class="mega-head">MDT &amp; pathway</h6>
+                  <a class="dropdown-item" href="/mdt-structured-v3_1.html">MDT structured form (v3.1)</a>
+                  <a class="dropdown-item" href="/mdt-structured-mini.html">MDT structured (mini)</a>
+                  <a class="dropdown-item" href="/mdt.html">MDT free-text form</a>
+                </div>
+                <div class="mega-col">
+                  <h6 class="mega-head">Screening &amp; nodule risk</h6>
+                  <a class="dropdown-item" href="/ntog_lungrisk_static_tools_v3.html">LungRisk hub</a>
+                  <a class="dropdown-item" href="/nordic-nodule-pathway-sandbox-v3.html">Nodule pathway sandbox</a>
+                  <a class="dropdown-item" href="/screening-risk-explained.html">Screening risk explained</a>
+                </div>
+                <div class="mega-col">
+                  <h6 class="mega-head">Treatment value &amp; follow-up</h6>
+                  <a class="dropdown-item" href="/decision-tools.html">Understanding treatment value</a>
+                  <a class="dropdown-item" href="/decision-tool-v2.html">Treatment value discussion compass</a>
+                  <a class="dropdown-item" href="/decision-tool-structured.html">Structured treatment value profile</a>
+                  <a class="dropdown-item" href="/surveillance-yield-calculator.html">Surveillance yield (NNS)</a>
+                </div>
+                <div class="mega-col">
+                  <h6 class="mega-head">Research builders</h6>
+                  <a class="dropdown-item" href="/study-builder.html">Study design builder</a>
+                  <a class="dropdown-item" href="/federated-dataset-builder.html">Federated dataset builder</a>
+                </div>
+              </div>
+              <div class="mega-foot"><a href="/tools.html">View all tools &rarr;</a></div>
+            </div>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Get Involved</a>
-            <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+            <a class="nav-link" href="/volunteer.html">Get Involved</a>
+            <button type="button" class="nav-link nav-caret dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Get Involved submenu"></button>
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/expert.html">Expert Network</a></li>
               <li><a class="dropdown-item" href="/collaboration.html">Collaboration Opportunities</a></li>
               <li><a class="dropdown-item" href="/volunteer.html">Volunteer</a></li>
