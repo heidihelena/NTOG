@@ -1,0 +1,135 @@
+/* ==========================================================================
+   NTOG primary navigation
+   --------------------------------------------------------------------------
+   Split dropdowns : the parent label links to its hub page; a small caret
+                     button toggles the submenu. This gives one-tap access to
+                     each hub on mobile instead of "tap to expand, then tap".
+   Mega-menu       : the Tools dropdown is a grouped, multi-column panel.
+   Loaded on every page. The red Copenhagen 2027 theme needs nothing extra
+   here: `body.ntog2027` remaps --primary-color to the event red (styles.css),
+   and the rules below consume that variable.
+   ========================================================================== */
+
+/* --- Split parent: keep the hub link and its caret on one row ------------- */
+.navbar .nav-item.dropdown {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* The hub link is a normal link (no caret of its own) */
+.navbar .nav-item.dropdown > .nav-link:first-child::after {
+  display: none;
+}
+
+/* Caret toggle button hugs the label */
+.navbar .nav-caret {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0.5rem 0.45rem;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+}
+
+.navbar .nav-caret::after {
+  margin-left: 0;
+}
+
+.navbar .nav-caret:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 0.3rem;
+}
+
+/* --- Mega-menu (Tools) ---------------------------------------------------- */
+.mega-head {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.mega-grid > .mega-col > .mega-head:first-child {
+  margin-top: 0;
+}
+
+.mega-menu .dropdown-item {
+  white-space: normal;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.mega-foot {
+  margin-top: 0.65rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--ntog-grey-border, #e5e7eb);
+}
+
+.mega-foot a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.mega-foot a:hover {
+  text-decoration: underline;
+}
+
+/* --- Desktop (expanded navbar) ------------------------------------------- */
+@media (min-width: 992px) {
+  .navbar .mega-menu {
+    right: 0;
+    left: auto;
+    width: min(640px, 92vw);
+    padding: 1rem 1.25rem 0.85rem;
+  }
+
+  .mega-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem 2rem;
+  }
+}
+
+/* --- Mobile (collapsed navbar) ------------------------------------------- */
+@media (max-width: 991.98px) {
+  /* Label + caret share row 1; the submenu wraps to its own full-width row. */
+  .navbar .nav-item.dropdown {
+    flex-wrap: wrap;
+  }
+
+  .navbar .nav-item.dropdown > .nav-link:first-child {
+    flex: 1 1 auto;
+  }
+
+  .navbar .nav-caret {
+    padding: 0.5rem 0.9rem;
+  }
+
+  .navbar .nav-item.dropdown > .dropdown-menu,
+  .navbar .nav-item.dropdown > .mega-menu {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  /* Stack the mega-menu like a normal collapsed dropdown: in-flow, full width,
+     flat (the desktop card chrome and static positioning don't belong here). */
+  .navbar .mega-menu {
+    position: static !important;
+    width: 100%;
+    margin: 0;
+    padding: 0.25rem 0 0.5rem;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .mega-grid {
+    display: block;
+  }
+}

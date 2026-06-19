@@ -44,6 +44,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* Active-state highlighting for the Bootstrap navbar.
+     The same nav markup is stamped into every page, so the current section is
+     marked here from the URL instead of being hardcoded per file. */
+  (function () {
+    const here = window.location.pathname.replace(/\/index\.html$/, "/");
+    const topItems = document.querySelectorAll("#navbarNav .navbar-nav > .nav-item");
+
+    topItems.forEach(function (li) {
+      const hub = li.querySelector(".nav-link");
+      if (!hub) return;
+
+      let active = false;
+      li.querySelectorAll("a[href]").forEach(function (a) {
+        const href = a.getAttribute("href");
+        if (!href || href === "#") return;
+
+        let p;
+        try {
+          p = new URL(href, window.location.origin).pathname;
+        } catch (e) {
+          return;
+        }
+        p = p.replace(/\/index\.html$/, "/");
+
+        if (p === here) {
+          active = true;
+        } else if (p !== "/" && p.endsWith("/") && here.indexOf(p) === 0) {
+          /* Section match, e.g. "/ntog2027/" highlights "/ntog2027/programme.html". */
+          active = true;
+        }
+      });
+
+      if (active) {
+        hub.classList.add("active");
+        hub.setAttribute("aria-current", "page");
+      }
+    });
+  })();
+
   /* Smooth scroll for same-page anchor links only.
      Does not interfere with Bootstrap dropdown toggles or empty href="#" controls.
   */
