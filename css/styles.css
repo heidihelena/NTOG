@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #1f4e79;
-  --primary-color-hover: #163a5a;
+  --primary-color: #003580;
+  --primary-color-hover: #002a5c;
 
   /* Finnish-flag blue, used for the navbar accent line (more saturated than
      the slate --primary-color so it reads as a crisp brand stripe). */
@@ -238,7 +238,7 @@ strong {
 }
 
 footer.bg-dark {
-  background: linear-gradient(135deg, #071f35 0%, #163a5a 55%, #1f4e79 100%) !important;
+  background: linear-gradient(135deg, #071f35 0%, #163a5a 55%, #003580 100%) !important;
 }
 
 .footer-logo-link img {
