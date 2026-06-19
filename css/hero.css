@@ -5,9 +5,10 @@
 
 :root {
   --text-light: #ffffff;
-  --hero-background-dark: #102a43;
-  --network-primary-color: #1f4e79;
-  --hero-background-accent: #2f80a7;
+  /* Darker navy hero palette, matching the shared .hero tokens in styles.css. */
+  --hero-background-dark: #041827;
+  --network-primary-color: #071f35;
+  --hero-background-accent: #163a5a;
 }
 
 .hero {
