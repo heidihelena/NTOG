@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abstract Book Builder | NLCS 2027 | NTOG</title>
+<meta name="description" content="A browser-based tool that turns submitted abstracts (CSV or JSON) into a browsable, searchable and printable digital abstract book for the Nordic Lung Cancer Symposium 2027. Runs entirely in your browser; no data is uploaded.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
+<style>
+  /* Self-hosted brand fonts (variable; cover all weights) */
+  @font-face{font-family:"Montserrat";src:url("/fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");font-weight:100 900;font-display:swap;}
+  @font-face{font-family:"Open Sans";src:url("/fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf") format("truetype");font-weight:100 900;font-display:swap;}
+  :root {
+    --dk-red: #c8102e;
+    --dk-red-dark: #74101f;
+    --dk-red-deep: #260006;
+    --dk-red-soft: #fff1f3;
+    --dk-red-border: #f2b8c2;
+    --ink: #1f2933;
+    --muted: #52606d;
+    --faint: #697586;
+    --line: #e5e7eb;
+    --grey: #6c727a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Open Sans", "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: #f6f7f8;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4 { font-family: "Montserrat", Arial, sans-serif; }
+
+  a { color: var(--dk-red-dark); }
+
+  /* ---------- App chrome ---------- */
+  .app-header {
+    background: linear-gradient(135deg, var(--dk-red-deep) 0%, var(--dk-red-dark) 55%, var(--dk-red) 100%);
+    color: #fff;
+    padding: 1.5rem 1.25rem;
+  }
+  .app-header .wrap { max-width: 1100px; margin: 0 auto; }
+  .app-header h1 { margin: 0 0 0.3rem; font-size: 1.5rem; }
+  .app-header p { margin: 0; opacity: 0.92; font-size: 0.95rem; max-width: 760px; }
+  .app-header .eyebrow {
+    display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; opacity: 0.85; margin-bottom: 0.4rem;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+
+  .panel {
+    background: #fff; border: 1px solid var(--line); border-radius: 0.85rem;
+    box-shadow: 0 8px 22px rgba(15,23,42,0.05); padding: 1.4rem; margin: 1.25rem auto;
+  }
+  .panel > h2 { margin-top: 0; font-size: 1.15rem; color: var(--dk-red-dark); }
+  .panel .step {
+    display: inline-block; width: 1.6rem; height: 1.6rem; line-height: 1.6rem; text-align: center;
+    background: var(--dk-red); color: #fff; border-radius: 50%; font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 700; font-size: 0.9rem; margin-right: 0.5rem;
+  }
+
+  .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .grow { flex: 1 1 auto; }
+
+  label.fld { display: block; font-size: 0.8rem; font-weight: 700; color: var(--faint); margin-bottom: 0.2rem; }
+  input[type=text], textarea, select {
+    width: 100%; padding: 0.5rem 0.6rem; border: 1px solid var(--line); border-radius: 0.5rem;
+    font: inherit; color: var(--ink); background: #fff;
+  }
+  textarea { min-height: 110px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+    border: 1px solid var(--dk-red); background: var(--dk-red); color: #fff;
+    padding: 0.5rem 1rem; border-radius: 0.5rem; font: inherit; font-weight: 700; text-decoration: none;
+  }
+  .btn:hover { background: var(--dk-red-dark); border-color: var(--dk-red-dark); }
+  .btn.ghost { background: #fff; color: var(--dk-red-dark); }
+  .btn.ghost:hover { background: var(--dk-red-soft); }
+  .btn.grey { background: var(--grey); border-color: var(--grey); color: #fff; }
+  .btn.grey:hover { filter: brightness(0.92); }
+  .btn.sm { padding: 0.35rem 0.7rem; font-size: 0.85rem; }
+
+  .dropzone {
+    border: 2px dashed var(--dk-red-border); border-radius: 0.75rem; background: var(--dk-red-soft);
+    padding: 1.5rem; text-align: center; color: var(--muted); cursor: pointer;
+  }
+  .dropzone.drag { background: #ffe3e8; border-color: var(--dk-red); }
+
+  .hint { color: var(--faint); font-size: 0.85rem; }
+  .pill {
+    display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.75rem;
+    font-weight: 700; background: var(--dk-red-soft); color: var(--dk-red-dark);
+  }
+  .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+
+  .stats { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 0.5rem 0 0; }
+  .stat b { font-family: "Montserrat", Arial, sans-serif; font-size: 1.35rem; color: var(--dk-red-dark); display: block; }
+  .stat span { font-size: 0.8rem; color: var(--faint); }
+
+  .toolbar { position: sticky; top: 0; z-index: 5; background: #fff; border: 1px solid var(--line);
+    border-radius: 0.75rem; padding: 0.75rem; margin: 1.25rem auto; box-shadow: 0 6px 16px rgba(15,23,42,0.06); }
+
+  .alert { border-radius: 0.6rem; padding: 0.7rem 0.9rem; font-size: 0.9rem; margin-top: 0.75rem; }
+  .alert.err { background: var(--dk-red-soft); border: 1px solid var(--dk-red-border); color: var(--dk-red-dark); }
+  .alert.ok  { background: #eef7ed; border: 1px solid #cfe6cb; color: #2f6b2a; }
+
+  .hidden { display: none !important; }
+
+  /* ---------- The abstract book ---------- */
+  #book { background: #fff; border: 1px solid var(--line); border-radius: 0.85rem; padding: 0; overflow: hidden; }
+  /* readable measure: centre the book content in a comfortable column */
+  .book-inner { padding: 2.5rem 2.75rem; max-width: 50rem; margin: 0 auto; }
+
+  .book-cover {
+    background: linear-gradient(135deg, var(--dk-red-deep) 0%, var(--dk-red-dark) 55%, var(--dk-red) 100%);
+    color: #fff; padding: 3.5rem 2.75rem; text-align: center;
+  }
+  .book-cover .ev { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
+  .book-cover h1 { font-size: 2rem; margin: 0.5rem 0; }
+  .book-cover .sub { font-size: 1.1rem; opacity: 0.95; }
+  .book-cover .meta { margin-top: 1.25rem; font-size: 0.95rem; opacity: 0.92; }
+
+  .book-section-title { color: var(--dk-red-dark); border-bottom: 3px solid var(--dk-red); padding-bottom: 0.3rem; margin-top: 2.5rem; }
+  .book-inner > h2:first-child { margin-top: 0; }
+
+  .toc-group { margin-bottom: 1.25rem; }
+  .toc-group h3 { color: var(--ink); font-size: 1.02rem; margin: 1rem 0 0.4rem; }
+  .toc-item { display: flex; gap: 0.6rem; padding: 0.2rem 0; border-bottom: 1px dotted var(--line); font-size: 0.92rem; }
+  .toc-item .n { color: var(--dk-red-dark); font-weight: 700; min-width: 2.2rem; }
+  .toc-item a { text-decoration: none; color: var(--ink); }
+  .toc-item a:hover { color: var(--dk-red-dark); text-decoration: underline; }
+  .toc-item .pa { color: var(--faint); }
+
+  .abstract { padding: 1.9rem 0; border-bottom: 1px solid var(--line); }
+  .abstract:last-child { border-bottom: none; }
+  .abstract h3 { line-height: 1.3; }
+  .abstract .a-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .abstract .a-num { font-family: "Montserrat", Arial, sans-serif; font-weight: 700; color: var(--dk-red-dark); font-size: 1.05rem; }
+  .a-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 0.1rem 0.5rem; border-radius: 999px; color: #fff; background: var(--grey); }
+  .a-type.oral { background: var(--dk-red); }
+  .a-type.poster { background: var(--grey); }
+  .abstract h3 { margin: 0.35rem 0 0.4rem; font-size: 1.12rem; color: var(--ink); }
+  .a-authors { margin: 0 0 0.2rem; font-size: 0.95rem; }
+  .a-authors .pres { font-weight: 700; text-decoration: underline; }
+  .a-affil { margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--muted); }
+  .a-affil sup, .a-authors sup { color: var(--dk-red-dark); }
+  .a-body { font-size: 1.02rem; line-height: 1.65; }
+  .a-body p { margin: 0 0 0.6rem; }
+  .a-body .lab { font-weight: 700; color: var(--dk-red-dark); }
+  .a-foot { font-size: 0.82rem; color: var(--faint); margin-top: 0.5rem; }
+
+  /* ---------- Figures & tables (max 3 per abstract) ---------- */
+  .a-figs { display: grid; gap: 0.9rem; margin: 0.9rem 0 0.4rem; }
+  .a-fig { margin: 0; border: 1px solid var(--line); border-radius: 0.6rem; overflow: hidden; background: #fff; }
+  .a-fig img { display: block; width: 100%; height: auto; }
+  .a-fig .tbl-wrap { overflow-x: auto; }
+  .a-fig table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  .a-fig th, .a-fig td { border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; }
+  .a-fig thead th { background: var(--dk-red-soft); color: var(--dk-red-dark); }
+  .a-fig figcaption { padding: 0.45rem 0.7rem; font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--line); }
+  .a-fig figcaption .fnum { font-weight: 700; color: var(--dk-red-dark); }
+
+  /* ---------- Per-abstract social share ---------- */
+  .a-share { margin-top: 0.6rem; }
+  .a-share .btn { font-size: 0.8rem; padding: 0.3rem 0.7rem; }
+  .a-cat { font-size: 0.8rem; color: var(--faint); }
+
+  .index-cols { columns: 2; column-gap: 2.5rem; font-size: 0.9rem; }
+  .index-cols div { break-inside: avoid; padding: 0.12rem 0; }
+  .index-cols .nm { color: var(--ink); }
+  .index-cols .ns { color: var(--dk-red-dark); font-weight: 700; }
+
+  footer.app-foot { text-align: center; color: var(--faint); font-size: 0.85rem; padding: 2rem 1rem 3rem; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    body { background: #fff; }
+    .app-header, .panel, .toolbar, footer.app-foot, .no-print { display: none !important; }
+    #book { border: none; border-radius: 0; box-shadow: none; }
+    .book-inner { padding: 0; }
+    .wrap { max-width: none; padding: 0; }
+    .book-cover { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+    .book-section-title { break-before: page; }
+    .abstract { break-inside: avoid; }
+    a { color: var(--ink); text-decoration: none; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Abstract Book Builder",
+  "description": "A browser-based tool that turns submitted abstracts (CSV or JSON) into a browsable, searchable and printable digital abstract book for the Nordic Lung Cancer Symposium 2027. Runs entirely in your browser; no data is uploaded.",
+  "url": "https://ntog.org/ntog2027/abstract-book-builder.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Nordic Thoracic Oncology Group",
+    "url": "https://ntog.org"
+  },
+  "publisher": {
+    "@type": "MedicalOrganization",
+    "name": "Nordic Thoracic Oncology Group",
+    "alternateName": "NTOG",
+    "url": "https://ntog.org"
+  },
+  "dateModified": "2026-06-10"
+}
+</script>
+</head>
+<body>
+
+<header class="app-header no-print">
+  <div class="wrap">
+    <span class="eyebrow"><a href="/" style="color:inherit;text-decoration:underline">NTOG</a> · NLCS 2027 organiser tool</span>
+    <h1>Abstract Book Builder</h1>
+    <p>Turn submitted abstracts (a CSV or JSON export from your submission form) into a browsable,
+       searchable and printable digital abstract book. Everything runs in your browser — no data is
+       uploaded anywhere. This tool is for symposium organisers; it is not a clinical or medical device.</p>
+  </div>
+</header>
+
+<main>
+
+<div class="wrap">
+
+  <!-- STEP 1: data -->
+  <section class="panel no-print" id="panel-data">
+    <h2><span class="step">1</span>Load submitted abstracts</h2>
+    <div class="dropzone" id="dropzone">
+      <strong>Drop a CSV / TSV / JSON file here</strong> or click to choose a file.
+      <div class="hint" style="margin-top:.4rem">Your file never leaves this computer.</div>
+      <input type="file" id="fileInput" accept=".csv,.tsv,.json,.txt" class="hidden">
+    </div>
+
+    <div class="row" style="margin-top:0.9rem">
+      <button class="btn ghost sm" id="btnSample">Load sample data</button>
+      <button class="btn ghost sm" id="btnTemplate">Download CSV template</button>
+      <button class="btn ghost sm" id="btnLoadProject">Load saved project (.json)</button>
+      <input type="file" id="projectInput" accept=".json" class="hidden">
+      <span class="hint">or paste below ↓</span>
+    </div>
+
+    <div style="margin-top:0.75rem">
+      <label class="fld" for="pasteArea">Paste CSV or JSON</label>
+      <textarea id="pasteArea" placeholder="Paste your CSV (with a header row) or a JSON array of abstracts…"></textarea>
+      <div class="row" style="margin-top:0.5rem">
+        <button class="btn sm" id="btnParse">Parse pasted data</button>
+      </div>
+    </div>
+    <div id="dataMsg"></div>
+  </section>
+
+  <!-- STEP 2: mapping -->
+  <section class="panel no-print hidden" id="panel-map">
+    <h2><span class="step">2</span>Map columns</h2>
+    <p class="hint">We auto-matched columns by name. Adjust any mapping if needed. Only <b>Title</b> is required.</p>
+    <div class="map-grid" id="mapGrid"></div>
+    <div class="row" style="margin-top:1rem">
+      <button class="btn" id="btnBuild">Build abstract book →</button>
+    </div>
+  </section>
+
+  <!-- STEP 3: conference meta -->
+  <section class="panel no-print hidden" id="panel-meta">
+    <h2><span class="step">3</span>Book details</h2>
+    <div class="map-grid">
+      <div><label class="fld">Symposium title</label><input type="text" id="m-title" value="16th Nordic Lung Cancer Symposium"></div>
+      <div><label class="fld">Subtitle</label><input type="text" id="m-sub" value="Abstract Book"></div>
+      <div><label class="fld">Dates</label><input type="text" id="m-dates" value="13–15 May 2027"></div>
+      <div><label class="fld">Venue</label><input type="text" id="m-venue" value="Scandic Copenhagen, Denmark"></div>
+      <div><label class="fld">Organiser</label><input type="text" id="m-org" value="Nordic Thoracic Oncology Group (NTOG)"></div>
+      <div><label class="fld">Editors / committee</label><input type="text" id="m-editors" value="Scientific Committee, NLCS 2027"></div>
+    </div>
+    <div style="margin-top:0.75rem">
+      <label class="fld">Editorial note (front matter)</label>
+      <input type="text" id="m-note" value="Abstracts are reproduced as submitted. The scientific committee is not responsible for the content of individual abstracts.">
+    </div>
+    <div class="row" style="margin-top:0.75rem">
+      <label style="display:flex;gap:.4rem;align-items:center;font-size:.9rem"><input type="checkbox" id="m-renumber" checked> Renumber abstracts sequentially</label>
+      <label style="display:flex;gap:.4rem;align-items:center;font-size:.9rem"><input type="checkbox" id="m-structured" checked> Show structured headings (Background / Methods / Results / Conclusions)</label>
+    </div>
+  </section>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar no-print hidden" id="toolbar">
+    <div class="row">
+      <input type="text" id="search" class="grow" placeholder="Search title, author, keyword…" style="min-width:200px">
+      <select id="filterCat" style="width:auto"><option value="">All categories</option></select>
+      <select id="filterType" style="width:auto">
+        <option value="">All types</option><option value="oral">Oral</option><option value="poster">Poster</option>
+      </select>
+      <select id="sortBy" style="width:auto">
+        <option value="number">Sort: number</option>
+        <option value="title">Sort: title</option>
+        <option value="category">Sort: category</option>
+        <option value="presenting">Sort: presenting author</option>
+      </select>
+    </div>
+    <div class="row" style="margin-top:0.6rem">
+      <button class="btn sm" id="btnPrint">🖨 Print / Save as PDF</button>
+      <button class="btn ghost sm" id="btnExportHtml">Export standalone book (.html)</button>
+      <button class="btn ghost sm" id="btnSaveProject">Save project (.json)</button>
+      <button class="btn grey sm" id="btnReset">Start over</button>
+      <div class="stats grow" id="stats" style="justify-content:flex-end"></div>
+    </div>
+  </div>
+
+  <!-- THE BOOK -->
+  <div id="book" class="hidden"></div>
+
+</div>
+
+</main>
+<footer class="app-foot no-print">
+  NTOG Abstract Book Builder · runs locally in your browser · part of the NLCS 2027 organiser toolkit.<br>
+  Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.<br>
+  <a href="/copyright.html" style="color:inherit">Copyright &amp; Licensing</a>
+</footer>
+
+<script>
+"use strict";
+(function () {
+
+  /* ============ Field definitions ============ */
+  var FIELDS = [
+    { key: "number",            label: "Abstract number" },
+    { key: "category",          label: "Category / theme" },
+    { key: "type",              label: "Type (oral/poster)" },
+    { key: "title",             label: "Title *" },
+    { key: "authors",           label: "Authors" },
+    { key: "affiliations",      label: "Affiliations" },
+    { key: "presenting_author", label: "Presenting author" },
+    { key: "keywords",          label: "Keywords" },
+    { key: "background",        label: "Background" },
+    { key: "methods",           label: "Methods" },
+    { key: "results",           label: "Results" },
+    { key: "conclusions",       label: "Conclusions" },
+    { key: "body",              label: "Abstract body (if not structured)" },
+    { key: "coi",               label: "Conflicts of interest" },
+    { key: "funding",           label: "Funding" },
+    { key: "figure1",           label: "Figure/table 1 (image URL · data-URI · or table)" },
+    { key: "figure1_caption",   label: "Figure/table 1 caption" },
+    { key: "figure2",           label: "Figure/table 2" },
+    { key: "figure2_caption",   label: "Figure/table 2 caption" },
+    { key: "figure3",           label: "Figure/table 3" },
+    { key: "figure3_caption",   label: "Figure/table 3 caption" }
+  ];
+
+  var TEMPLATE_COLS = FIELDS.map(function (f) { return f.key; });
+
+  var SAMPLE = [
+    {number:"",category:"Lung cancer screening",type:"oral",title:"Uptake and yield of a regional low-dose CT lung screening pilot",
+      authors:"Andersén H; Saghir Z; Example A",affiliations:"1. Dept of Oncology, Example University Hospital, Copenhagen, Denmark; 2. Dept of Respiratory Medicine, Example Hospital, Helsinki, Finland",
+      presenting_author:"Andersén H",keywords:"screening; low-dose CT; uptake",
+      background:"Nordic lung cancer screening pilots are expanding, but real-world uptake varies.",
+      methods:"We analysed invitations, participation and cancer detection across 12 months in a regional pilot.",
+      results:"Participation was 54%. The cancer detection rate was 1.4%, with 71% of cancers in stage I–II.",
+      conclusions:"Regional implementation is feasible; targeted outreach may improve uptake in under-served groups.",
+      coi:"None declared",funding:"Regional research fund",
+      figure1:"Group|Invited|Participation|Detection rate\nFull cohort|12,400|54%|1.4%\nEver-smokers 55-74|6,800|61%|1.8%",
+      figure1_caption:"Participation and cancer detection across the 12-month regional pilot."},
+    {number:"",category:"Pulmonary nodule management",type:"poster",title:"Model–threshold coupling in pulmonary nodule pathways",
+      authors:"Example B; Andersén H",affiliations:"1. Dept of Radiology, Example Hospital, Oslo, Norway",
+      presenting_author:"Example B",keywords:"nodule; Brock model; pathway",
+      background:"Pathway eligibility depends on both risk model and threshold choice.",
+      methods:"A synthetic cohort sandbox compared candidate pathways and quantified the gap population.",
+      results:"Pathways with similar AUC reclassified up to 10% of patients near the decision boundary.",
+      conclusions:"Gap-population analysis clarifies the consequences of model selection for guideline groups.",
+      coi:"None declared",funding:"None"},
+    {number:"",category:"Stage III NSCLC",type:"oral",title:"Real-world outcomes after concurrent chemoradiotherapy in stage III NSCLC",
+      authors:"Example C; Example D; Saghir Z",affiliations:"1. Dept of Oncology, Example University Hospital, Stockholm, Sweden",
+      presenting_author:"Example C",keywords:"NSCLC; chemoradiotherapy; outcomes",
+      background:"Consolidation immunotherapy changed the stage III standard of care.",
+      methods:"Retrospective Nordic multicentre cohort, 2019–2024.",
+      results:"Median overall survival was not reached at 24 months in the consolidation group.",
+      conclusions:"Nordic real-world outcomes align with pivotal trials, with manageable toxicity.",
+      coi:"Advisory board, unrelated",funding:"Academic"}
+  ];
+
+  /* ============ State ============ */
+  var state = { rows: [], headers: [], map: {}, built: [] };
+
+  /* ============ Helpers ============ */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+    return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]; }); }
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); }
+  function show(id) { $(id).classList.remove("hidden"); }
+  function hide(id) { $(id).classList.add("hidden"); }
+  function download(name, text, mime) {
+    var blob = new Blob([text], { type: mime || "text/plain;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+  function msg(html, ok) {
+    $("dataMsg").innerHTML = '<div class="alert ' + (ok ? "ok" : "err") + '">' + html + '</div>';
+  }
+
+  /* ============ CSV / TSV parser (RFC-4180-ish) ============ */
+  function detectDelim(text) {
+    var firstLine = text.split(/\r?\n/)[0] || "";
+    var tabs = (firstLine.match(/\t/g) || []).length;
+    var commas = (firstLine.match(/,/g) || []).length;
+    var semis = (firstLine.match(/;/g) || []).length;
+    if (tabs >= commas && tabs >= semis && tabs > 0) return "\t";
+    if (semis > commas) return ";";
+    return ",";
+  }
+  function parseDelimited(text, delim) {
+    var rows = [], row = [], field = "", i = 0, inQ = false, c;
+    text = text.replace(/^﻿/, "");
+    while (i < text.length) {
+      c = text[i];
+      if (inQ) {
+        if (c === '"') {
+          if (text[i+1] === '"') { field += '"'; i += 2; continue; }
+          inQ = false; i++; continue;
+        }
+        field += c; i++; continue;
+      }
+      if (c === '"') { inQ = true; i++; continue; }
+      if (c === delim) { row.push(field); field = ""; i++; continue; }
+      if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; i++; continue; }
+      if (c === "\r") { i++; continue; }
+      field += c; i++;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (v) { return String(v).trim() !== ""; }); });
+  }
+  function rowsToObjects(grid) {
+    if (!grid.length) return { headers: [], rows: [] };
+    var headers = grid[0].map(function (h) { return String(h).trim(); });
+    var rows = grid.slice(1).map(function (r) {
+      var o = {};
+      headers.forEach(function (h, idx) { o[h] = (r[idx] != null ? String(r[idx]).trim() : ""); });
+      return o;
+    });
+    return { headers: headers, rows: rows };
+  }
+
+  /* ============ Ingest ============ */
+  function ingestText(text) {
+    text = (text || "").trim();
+    if (!text) { msg("Nothing to parse — the input is empty."); return; }
+    var data;
+    if (text[0] === "[" || text[0] === "{") {
+      try {
+        var json = JSON.parse(text);
+        var arr = Array.isArray(json) ? json : (json.abstracts || json.rows || []);
+        if (!Array.isArray(arr) || !arr.length) throw new Error("No abstract array found in JSON.");
+        var hs = []; arr.forEach(function (o) { Object.keys(o).forEach(function (k) { if (hs.indexOf(k) < 0) hs.push(k); }); });
+        data = { headers: hs, rows: arr };
+      } catch (e) { msg("Could not read JSON: " + esc(e.message)); return; }
+    } else {
+      var delim = detectDelim(text);
+      data = rowsToObjects(parseDelimited(text, delim));
+      if (!data.rows.length) { msg("No data rows found. Make sure the first row contains column headers."); return; }
+    }
+    state.headers = data.headers;
+    state.rows = data.rows;
+    autoMap();
+    buildMapUI();
+    show("panel-map"); show("panel-meta");
+    msg("Loaded <b>" + data.rows.length + "</b> rows with <b>" + data.headers.length + "</b> columns. Check the mapping below.", true);
+    $("panel-map").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function autoMap() {
+    var norm = function (s) { return String(s).toLowerCase().replace(/[^a-z0-9]/g, ""); };
+    var aliases = {
+      number: ["number","no","id","abstractnumber","abstractno","ref"],
+      category: ["category","theme","topic","track","subject"],
+      type: ["type","format","presentationtype","oralposter","preference"],
+      title: ["title","abstracttitle"],
+      authors: ["authors","author","authorlist"],
+      affiliations: ["affiliations","affiliation","institutions","institution"],
+      presenting_author: ["presentingauthor","presenter","presenting","correspondingauthor"],
+      keywords: ["keywords","keyword","tags"],
+      background: ["background","introduction","intro","aim","aims","objective","objectives"],
+      methods: ["methods","method","methodology"],
+      results: ["results","result","findings"],
+      conclusions: ["conclusions","conclusion","summary"],
+      body: ["body","abstract","abstracttext","text","content"],
+      coi: ["coi","conflict","conflicts","conflictofinterest","disclosure","disclosures"],
+      funding: ["funding","grant","grants","support"],
+      figure1: ["figure1","fig1","image1","img1","table1","tab1"],
+      figure1_caption: ["figure1caption","fig1caption","caption1","fig1cap"],
+      figure2: ["figure2","fig2","image2","img2","table2","tab2"],
+      figure2_caption: ["figure2caption","fig2caption","caption2","fig2cap"],
+      figure3: ["figure3","fig3","image3","img3","table3","tab3"],
+      figure3_caption: ["figure3caption","fig3caption","caption3","fig3cap"]
+    };
+    state.map = {};
+    var used = {};
+    FIELDS.forEach(function (f) {
+      var al = aliases[f.key] || [f.key];
+      for (var h = 0; h < state.headers.length; h++) {
+        var nh = norm(state.headers[h]);
+        if (used[state.headers[h]]) continue;
+        if (al.indexOf(nh) >= 0) { state.map[f.key] = state.headers[h]; used[state.headers[h]] = true; return; }
+      }
+    });
+  }
+
+  function buildMapUI() {
+    var grid = $("mapGrid"); grid.innerHTML = "";
+    FIELDS.forEach(function (f) {
+      var wrap = document.createElement("div");
+      var opts = '<option value="">— none —</option>' + state.headers.map(function (h) {
+        return '<option value="' + esc(h) + '"' + (state.map[f.key] === h ? " selected" : "") + ">" + esc(h) + "</option>";
+      }).join("");
+      wrap.innerHTML = '<label class="fld">' + esc(f.label) + '</label><select data-field="' + f.key + '">' + opts + "</select>";
+      grid.appendChild(wrap);
+    });
+    grid.querySelectorAll("select").forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        var k = sel.getAttribute("data-field");
+        if (sel.value) state.map[k] = sel.value; else delete state.map[k];
+      });
+    });
+  }
+
+  /* ============ Build the book model ============ */
+  function val(row, key) {
+    var col = state.map[key];
+    return col ? (row[col] || "") : "";
+  }
+
+  function buildModel() {
+    if (!state.map.title) { alert("Please map the Title column — it is required."); return false; }
+    var renumber = $("m-renumber").checked;
+    state.built = state.rows.map(function (row, i) {
+      var t = (val(row, "type") || "").toLowerCase();
+      var type = /poster/.test(t) ? "poster" : (/oral/.test(t) ? "oral" : (t || ""));
+      return {
+        number: renumber ? (i + 1) : (val(row, "number") || (i + 1)),
+        category: val(row, "category") || "Uncategorised",
+        type: type,
+        title: val(row, "title"),
+        authors: val(row, "authors"),
+        affiliations: val(row, "affiliations"),
+        presenting: val(row, "presenting_author"),
+        keywords: val(row, "keywords"),
+        background: val(row, "background"),
+        methods: val(row, "methods"),
+        results: val(row, "results"),
+        conclusions: val(row, "conclusions"),
+        body: val(row, "body"),
+        coi: val(row, "coi"),
+        funding: val(row, "funding"),
+        figures: [1,2,3].map(function (n) {
+          var s = val(row, "figure" + n);
+          return s ? { src: s, cap: val(row, "figure" + n + "_caption") } : null;
+        }).filter(Boolean)
+      };
+    });
+    return true;
+  }
+
+  /* ============ Rendering ============ */
+  function meta() {
+    return {
+      title: $("m-title").value, sub: $("m-sub").value, dates: $("m-dates").value,
+      venue: $("m-venue").value, org: $("m-org").value, editors: $("m-editors").value, note: $("m-note").value
+    };
+  }
+
+  function authorsHtml(a, presenting) {
+    if (!a.authors) return "";
+    var parts = a.authors.split(/\s*;\s*/).filter(Boolean);
+    return parts.map(function (nm) {
+      var isPres = presenting && nm.trim() && presenting.trim() &&
+        nm.trim().toLowerCase().indexOf(presenting.trim().toLowerCase()) === 0;
+      return isPres ? '<span class="pres">' + esc(nm) + "</span>" : esc(nm);
+    }).join(", ");
+  }
+
+  function pipeTable(v) {
+    var rows = v.split(/\r?\n/).filter(function (l) { return l.trim(); })
+                .map(function (l) { return l.split("|").map(function (c) { return c.trim(); }); });
+    if (!rows.length) return "";
+    var t = "<table><thead><tr>" + rows[0].map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    rows.slice(1).forEach(function (r) { t += "<tr>" + r.map(function (c) { return "<td>" + esc(c) + "</td>"; }).join("") + "</tr>"; });
+    return t + "</tbody></table>";
+  }
+  function figureHtml(f, n) {
+    var v = String(f.src || "").trim(); if (!v) return "";
+    var isImg = /^data:image\//i.test(v) || /^https?:\/\/.+\.(png|jpe?g|gif|webp|svg)(\?|#|$)/i.test(v);
+    var isTableHtml = /<table[\s>]/i.test(v);
+    var isPipe = !isImg && !isTableHtml && v.indexOf("|") >= 0 && /\r?\n/.test(v);
+    var isTable = isTableHtml || isPipe, inner;
+    if (isImg)            inner = '<img src="' + esc(v) + '" alt="' + esc(f.cap || ("Figure " + n)) + '" loading="lazy">';
+    else if (isTableHtml) inner = '<div class="tbl-wrap">' + v + "</div>";          // organiser-supplied table HTML
+    else if (isPipe)      inner = '<div class="tbl-wrap">' + pipeTable(v) + "</div>";
+    else                  inner = '<img src="' + esc(v) + '" alt="' + esc(f.cap || ("Figure " + n)) + '" loading="lazy">';
+    var cap = f.cap ? '<figcaption><span class="fnum">' + (isTable ? "Table " : "Figure ") + n + ".</span> " + esc(f.cap) + "</figcaption>" : "";
+    return '<figure class="a-fig">' + inner + cap + "</figure>";
+  }
+
+  function abstractHtml(a, structured, forExport) {
+    var h = '<div class="abstract" id="abs-' + a.number + '">';
+    h += '<div class="a-head"><span class="a-num">#' + esc(a.number) + "</span>";
+    if (a.type) h += '<span class="a-type ' + esc(a.type) + '">' + esc(a.type) + "</span>";
+    h += '<span class="a-cat">' + esc(a.category) + "</span></div>";
+    h += "<h3>" + esc(a.title) + "</h3>";
+    if (a.authors) h += '<p class="a-authors">' + authorsHtml(a, a.presenting) + "</p>";
+    if (a.affiliations) h += '<p class="a-affil">' + esc(a.affiliations) + "</p>";
+
+    h += '<div class="a-body">';
+    var hasStruct = a.background || a.methods || a.results || a.conclusions;
+    if (structured && hasStruct) {
+      if (a.background)   h += '<p><span class="lab">Background:</span> ' + esc(a.background) + "</p>";
+      if (a.methods)      h += '<p><span class="lab">Methods:</span> ' + esc(a.methods) + "</p>";
+      if (a.results)      h += '<p><span class="lab">Results:</span> ' + esc(a.results) + "</p>";
+      if (a.conclusions)  h += '<p><span class="lab">Conclusions:</span> ' + esc(a.conclusions) + "</p>";
+    } else if (a.body) {
+      h += "<p>" + esc(a.body) + "</p>";
+    } else if (hasStruct) {
+      [a.background,a.methods,a.results,a.conclusions].filter(Boolean).forEach(function (p) { h += "<p>" + esc(p) + "</p>"; });
+    }
+    h += "</div>";
+
+    // figures / tables — capped at 3
+    if (a.figures && a.figures.length) {
+      h += '<div class="a-figs">';
+      a.figures.slice(0, 3).forEach(function (f, i) { h += figureHtml(f, i + 1); });
+      h += "</div>";
+    }
+
+    if (a.keywords) h += '<p class="a-foot"><b>Keywords:</b> ' + esc(a.keywords) + "</p>";
+    var foot = [];
+    if (a.coi) foot.push("<b>Conflicts of interest:</b> " + esc(a.coi));
+    if (a.funding) foot.push("<b>Funding:</b> " + esc(a.funding));
+    if (foot.length) h += '<p class="a-foot">' + foot.join(" &nbsp;·&nbsp; ") + "</p>";
+    if (!forExport) h += '<div class="a-share no-print"><button class="btn ghost sm" data-share="' + esc(a.number) + '">↗ Social card (PNG)</button></div>';
+    h += "</div>";
+    return h;
+  }
+
+  function groupByCategory(list) {
+    var groups = {}, order = [];
+    list.forEach(function (a) {
+      if (!groups[a.category]) { groups[a.category] = []; order.push(a.category); }
+      groups[a.category].push(a);
+    });
+    return order.map(function (c) { return { category: c, items: groups[c] }; });
+  }
+
+  function authorIndex(list) {
+    var idx = {};
+    list.forEach(function (a) {
+      (a.authors ? a.authors.split(/\s*;\s*/) : []).forEach(function (nm) {
+        nm = nm.trim(); if (!nm) return;
+        if (!idx[nm]) idx[nm] = [];
+        if (idx[nm].indexOf(a.number) < 0) idx[nm].push(a.number);
+      });
+    });
+    return Object.keys(idx).sort(function (x, y) { return x.localeCompare(y); })
+      .map(function (nm) { return { name: nm, nums: idx[nm] }; });
+  }
+
+  function currentView() {
+    var q = ($("search").value || "").toLowerCase().trim();
+    var fc = $("filterCat").value, ft = $("filterType").value, sb = $("sortBy").value;
+    var list = state.built.slice();
+    if (fc) list = list.filter(function (a) { return a.category === fc; });
+    if (ft) list = list.filter(function (a) { return a.type === ft; });
+    if (q) list = list.filter(function (a) {
+      return (a.title + " " + a.authors + " " + a.keywords + " " + a.category).toLowerCase().indexOf(q) >= 0;
+    });
+    list.sort(function (a, b) {
+      if (sb === "title") return a.title.localeCompare(b.title);
+      if (sb === "category") return a.category.localeCompare(b.category) || (a.number - b.number);
+      if (sb === "presenting") return (a.presenting || "").localeCompare(b.presenting || "");
+      return (parseInt(a.number, 10) || 0) - (parseInt(b.number, 10) || 0);
+    });
+    return list;
+  }
+
+  function bookHtml(list, forExport) {
+    var m = meta(), structured = $("m-structured").checked;
+    var groups = groupByCategory(list);
+    var html = "";
+
+    // Cover
+    html += '<div class="book-cover"><div class="ev">' + esc(m.org) + "</div>";
+    html += "<h1>" + esc(m.title) + "</h1><div class=\"sub\">" + esc(m.sub) + "</div>";
+    html += '<div class="meta">' + esc(m.dates) + " &nbsp;·&nbsp; " + esc(m.venue) + "</div></div>";
+
+    html += '<div class="book-inner">';
+
+    // Front matter
+    html += '<h2 class="book-section-title">Foreword</h2>';
+    html += "<p>" + esc(m.note) + "</p>";
+    html += "<p class=\"a-cat\">Editors: " + esc(m.editors) + " · " + list.length + " abstracts</p>";
+
+    // TOC
+    html += '<h2 class="book-section-title">Contents</h2>';
+    groups.forEach(function (g) {
+      html += '<div class="toc-group"><h3>' + esc(g.category) + " <span class='a-cat'>(" + g.items.length + ")</span></h3>";
+      g.items.forEach(function (a) {
+        html += '<div class="toc-item"><span class="n">#' + esc(a.number) + "</span>";
+        html += '<a href="#abs-' + a.number + '">' + esc(a.title) + "</a>";
+        if (a.presenting) html += ' <span class="pa">— ' + esc(a.presenting) + "</span>";
+        html += "</div>";
+      });
+      html += "</div>";
+    });
+
+    // Abstracts by category
+    groups.forEach(function (g) {
+      html += '<h2 class="book-section-title">' + esc(g.category) + "</h2>";
+      g.items.forEach(function (a) { html += abstractHtml(a, structured, forExport); });
+    });
+
+    // Author index
+    var ai = authorIndex(list);
+    if (ai.length) {
+      html += '<h2 class="book-section-title">Author index</h2><div class="index-cols">';
+      ai.forEach(function (e) {
+        html += '<div><span class="nm">' + esc(e.name) + '</span> <span class="ns">' + e.nums.join(", ") + "</span></div>";
+      });
+      html += "</div>";
+    }
+
+    html += "</div>"; // book-inner
+    return html;
+  }
+
+  function renderStats() {
+    var b = state.built;
+    var cats = {}; b.forEach(function (a) { cats[a.category] = 1; });
+    var oral = b.filter(function (a) { return a.type === "oral"; }).length;
+    var poster = b.filter(function (a) { return a.type === "poster"; }).length;
+    $("stats").innerHTML =
+      '<div class="stat"><b>' + b.length + "</b><span>abstracts</span></div>" +
+      '<div class="stat"><b>' + Object.keys(cats).length + "</b><span>categories</span></div>" +
+      '<div class="stat"><b>' + oral + "</b><span>oral</span></div>" +
+      '<div class="stat"><b>' + poster + "</b><span>poster</span></div>";
+  }
+
+  function populateFilters() {
+    var cats = {}; state.built.forEach(function (a) { cats[a.category] = 1; });
+    var sel = $("filterCat");
+    sel.innerHTML = '<option value="">All categories</option>' +
+      Object.keys(cats).sort().map(function (c) { return '<option value="' + esc(c) + '">' + esc(c) + "</option>"; }).join("");
+  }
+
+  function refresh() {
+    var list = currentView();
+    $("book").innerHTML = bookHtml(list, false);
+    renderStats();
+  }
+
+  function build() {
+    if (!buildModel()) return;
+    populateFilters();
+    show("toolbar"); show("book");
+    refresh();
+    $("toolbar").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* ============ Exports ============ */
+  function exportStandalone() {
+    var list = currentView();
+    var inner = bookHtml(list, true);
+    var css = document.querySelector("style").textContent;
+    var doc = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\">" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+      "<title>" + esc(meta().title) + " — " + esc(meta().sub) + "</title><style>" + css +
+      "\n#book{max-width:900px;margin:0 auto;}body{background:#fff;}</style></head><body>" +
+      '<div id="book">' + inner + "</div></body></html>";
+    download(slug(meta().title || "abstract-book") + ".html", doc, "text/html;charset=utf-8");
+  }
+
+  function saveProject() {
+    var proj = { v: 1, headers: state.headers, rows: state.rows, map: state.map,
+      meta: { title:$("m-title").value, sub:$("m-sub").value, dates:$("m-dates").value, venue:$("m-venue").value,
+        org:$("m-org").value, editors:$("m-editors").value, note:$("m-note").value,
+        renumber:$("m-renumber").checked, structured:$("m-structured").checked } };
+    download(slug(meta().title || "abstract-book") + "-project.json", JSON.stringify(proj, null, 2), "application/json");
+  }
+  function loadProject(text) {
+    try {
+      var p = JSON.parse(text);
+      state.headers = p.headers || []; state.rows = p.rows || []; state.map = p.map || {};
+      if (p.meta) {
+        $("m-title").value = p.meta.title || ""; $("m-sub").value = p.meta.sub || "";
+        $("m-dates").value = p.meta.dates || ""; $("m-venue").value = p.meta.venue || "";
+        $("m-org").value = p.meta.org || ""; $("m-editors").value = p.meta.editors || ""; $("m-note").value = p.meta.note || "";
+        $("m-renumber").checked = !!p.meta.renumber; $("m-structured").checked = !!p.meta.structured;
+      }
+      buildMapUI(); show("panel-map"); show("panel-meta"); build();
+      msg("Project loaded.", true);
+    } catch (e) { msg("Could not load project: " + esc(e.message)); }
+  }
+
+  function templateCsv() {
+    var head = TEMPLATE_COLS.join(",");
+    var ex = SAMPLE.map(function (o) {
+      return TEMPLATE_COLS.map(function (c) {
+        var v = String(o[c] == null ? "" : o[c]);
+        return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+      }).join(",");
+    }).join("\n");
+    return head + "\n" + ex + "\n";
+  }
+
+  function reset() {
+    state = { rows: [], headers: [], map: {}, built: [] };
+    $("pasteArea").value = ""; $("dataMsg").innerHTML = "";
+    hide("panel-map"); hide("panel-meta"); hide("toolbar"); hide("book");
+    $("book").innerHTML = "";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ============ Wiring ============ */
+  function readFile(file, cb) {
+    var r = new FileReader();
+    r.onload = function () { cb(r.result); };
+    r.readAsText(file);
+  }
+
+  $("dropzone").addEventListener("click", function () { $("fileInput").click(); });
+  $("fileInput").addEventListener("change", function (e) {
+    if (e.target.files[0]) readFile(e.target.files[0], ingestText);
+  });
+  ["dragover","dragenter"].forEach(function (ev) {
+    $("dropzone").addEventListener(ev, function (e) { e.preventDefault(); $("dropzone").classList.add("drag"); });
+  });
+  ["dragleave","drop"].forEach(function (ev) {
+    $("dropzone").addEventListener(ev, function (e) { e.preventDefault(); $("dropzone").classList.remove("drag"); });
+  });
+  $("dropzone").addEventListener("drop", function (e) {
+    if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0], ingestText);
+  });
+
+  $("btnParse").addEventListener("click", function () { ingestText($("pasteArea").value); });
+  $("btnSample").addEventListener("click", function () {
+    state.headers = TEMPLATE_COLS.slice(); state.rows = SAMPLE.map(function (o) { var c = {}; TEMPLATE_COLS.forEach(function (k) { c[k] = o[k] || ""; }); return c; });
+    autoMap(); buildMapUI(); show("panel-map"); show("panel-meta");
+    msg("Loaded <b>" + SAMPLE.length + "</b> sample abstracts.", true);
+    $("panel-map").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  $("btnTemplate").addEventListener("click", function () { download("nlcs2027-abstract-template.csv", templateCsv(), "text/csv;charset=utf-8"); });
+  $("btnBuild").addEventListener("click", build);
+  $("btnReset").addEventListener("click", reset);
+  $("btnPrint").addEventListener("click", function () { window.print(); });
+  $("btnExportHtml").addEventListener("click", exportStandalone);
+  $("btnSaveProject").addEventListener("click", saveProject);
+  $("btnLoadProject").addEventListener("click", function () { $("projectInput").click(); });
+  $("projectInput").addEventListener("change", function (e) { if (e.target.files[0]) readFile(e.target.files[0], loadProject); });
+
+  ["search","filterCat","filterType","sortBy"].forEach(function (id) {
+    $(id).addEventListener("input", refresh);
+    $(id).addEventListener("change", refresh);
+  });
+  ["m-title","m-sub","m-dates","m-venue","m-org","m-editors","m-note","m-renumber","m-structured"].forEach(function (id) {
+    $(id).addEventListener("input", function () { if (!$("book").classList.contains("hidden")) refresh(); });
+    $(id).addEventListener("change", function () { if (!$("book").classList.contains("hidden")) { if (id==="m-renumber") buildModel(); refresh(); } });
+  });
+
+  /* ============ Per-abstract social card (1080×1350 PNG) ============ */
+  var _logo = new Image(), _logoOK = false;
+  _logo.onload = function () { _logoOK = true; };
+  _logo.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+    '<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="r" x1="190" y1="400" x2="520" y2="190" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E6001F"/><stop offset="1" stop-color="#C8102E"/></linearGradient><linearGradient id="y" x1="520" y1="190" x2="835" y2="430" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD21A"/><stop offset="1" stop-color="#F2B400"/></linearGradient><linearGradient id="b" x1="210" y1="500" x2="850" y2="760" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057B8"/><stop offset="0.55" stop-color="#004B9B"/><stop offset="1" stop-color="#002F63"/></linearGradient><linearGradient id="b2" x1="330" y1="810" x2="700" y2="810" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0057B8"/><stop offset="1" stop-color="#004B9B"/></linearGradient></defs><g fill="none" stroke-width="126"><path d="M 222 418 A 305 305 0 0 1 501 207" stroke="url(#r)"/><path d="M 539 208 A 305 305 0 0 1 805 428" stroke="url(#y)"/><path d="M 810 449 A 305 305 0 0 1 696 756" stroke="url(#b)"/><path d="M 665 776 A 305 305 0 0 1 360 776" stroke="url(#b2)"/><path d="M 324 753 A 305 305 0 0 1 211 471" stroke="url(#b)"/></g></svg>');
+
+  function cardWrap(ctx, text, maxW) {
+    var words = String(text || "").split(/\s+/), lines = [], line = "";
+    words.forEach(function (w) { var t = line ? line + " " + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t; });
+    if (line) lines.push(line); return lines;
+  }
+  function shareCard(num) {
+    var a = null, i;
+    for (i = 0; i < state.built.length; i++) if (String(state.built[i].number) === String(num)) { a = state.built[i]; break; }
+    if (!a) return;
+    // include the first data-URI image figure on the card (external URLs are skipped — they would taint the canvas)
+    var figSrc = null;
+    (a.figures || []).some(function (f) { var v = String(f.src || ""); if (/^data:image\//i.test(v)) { figSrc = v; return true; } return false; });
+    if (figSrc) { var im = new Image(); im.onload = function () { drawCard(a, num, im); }; im.onerror = function () { drawCard(a, num, null); }; im.src = figSrc; }
+    else drawCard(a, num, null);
+  }
+  function drawCard(a, num, fig) {
+    var S = 2, W = 1080, H = 1350, P = 84;
+    var cv = document.createElement("canvas"); cv.width = W * S; cv.height = H * S;
+    var ctx = cv.getContext("2d"); ctx.setTransform(S, 0, 0, S, 0, 0); ctx.textBaseline = "top";
+    var g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, "#260006"); g.addColorStop(0.55, "#74101f"); g.addColorStop(1, "#c8102e");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.font = "700 22px Montserrat"; ctx.letterSpacing = "2px";
+    var eb = "NLCS 2027 · COPENHAGEN", ew = ctx.measureText(eb).width;
+    ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(P, P, ew + 44, 50, 25); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.fillText(eb, P + 22, P + 15); ctx.letterSpacing = "0px";
+    var y = P + 116;
+    ctx.font = '700 24px "Open Sans"'; ctx.fillStyle = "#f8d2d9";
+    ctx.fillText((a.category || "") + (a.type ? "  ·  " + a.type.toUpperCase() : ""), P, y); y += 58;
+    ctx.font = "800 60px Montserrat"; ctx.fillStyle = "#fff";
+    cardWrap(ctx, a.title, W - 2 * P).slice(0, 4).forEach(function (l) { ctx.fillText(l, P, y); y += 70; });
+    y += 14;
+    if (a.presenting) { ctx.font = '600 28px "Open Sans"'; ctx.fillStyle = "#f8d2d9"; ctx.fillText(a.presenting, P, y); y += 50; }
+    var key = a.conclusions || a.results || a.body || "";
+    if (key) {
+      y += 22; ctx.font = '400 30px "Open Sans"'; ctx.fillStyle = "#fff";
+      var lines = cardWrap(ctx, key, W - 2 * P), max = fig ? 3 : 5;
+      if (lines.length > max) { lines = lines.slice(0, max); lines[max - 1] = lines[max - 1] + "…"; }
+      lines.forEach(function (l) { ctx.fillText(l, P, y); y += 44; });
+    }
+    var ch = 96, cyF = H - P - ch;
+    if (fig && fig.width) {                          // data-URI figure, scaled to fit between text and footer
+      var top = y + 24, bottom = cyF - 36, maxW = W - 2 * P, maxH = bottom - top;
+      if (maxH > 140) {
+        var r = Math.min(maxW / fig.width, maxH / fig.height), dw = fig.width * r, dh = fig.height * r, dx = P + (maxW - dw) / 2;
+        ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(dx - 10, top - 10, dw + 20, dh + 20, 16); ctx.fill();
+        ctx.drawImage(fig, dx, top, dw, dh);
+      }
+    }
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(P, cyF, ch, ch, 20); ctx.fill();
+    if (_logoOK) ctx.drawImage(_logo, P + 14, cyF + 14, ch - 28, ch - 28);
+    ctx.font = "700 26px Montserrat"; ctx.fillStyle = "#fff"; ctx.fillText("ntog.org/ntog2027", P + ch + 28, cyF + 18);
+    ctx.font = '600 22px "Open Sans"'; ctx.fillStyle = "#f8d2d9"; ctx.fillText("#NLCS2027", P + ch + 28, cyF + 54);
+    cv.toBlob(function (blob) {
+      var u = URL.createObjectURL(blob), el = document.createElement("a");
+      el.href = u; el.download = "nlcs2027-abstract-" + slug(String(num)) + ".png"; el.click();
+      setTimeout(function () { URL.revokeObjectURL(u); }, 1000);
+    }, "image/png");
+  }
+  $("book").addEventListener("click", function (e) {
+    var btn = e.target.closest ? e.target.closest("[data-share]") : null;
+    if (btn) { e.preventDefault(); shareCard(btn.getAttribute("data-share")); }
+  });
+
+})();
+</script>
+</body>
+</html>
