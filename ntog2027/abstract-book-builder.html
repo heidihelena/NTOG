@@ -940,8 +940,7 @@
         ctx.drawImage(fig, dx, top, dw, dh);
       }
     }
-    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(P, cyF, ch, ch, 20); ctx.fill();
-    if (_logoOK) ctx.drawImage(_logo, P + 14, cyF + 14, ch - 28, ch - 28);
+    if (_logoOK) ctx.drawImage(_logo, P, cyF, ch, ch);   // NTOG logo on its transparent background — no chip
     ctx.font = "700 26px Montserrat"; ctx.fillStyle = "#fff"; ctx.fillText("ntog.org/ntog2027", P + ch + 28, cyF + 18);
     ctx.font = '600 22px "Open Sans"'; ctx.fillStyle = "#f8d2d9"; ctx.fillText("#NLCS2027", P + ch + 28, cyF + 54);
     cv.toBlob(function (blob) {
