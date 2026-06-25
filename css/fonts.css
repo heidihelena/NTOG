@@ -1,31 +1,35 @@
+/* Self-hosted variable fonts. One file per family covers the full weight
+   range (100-900), which fixes the previous 404s for the non-existent
+   static weight files and removes the failed font requests. */
+
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
-  font-weight: 400;
+  src: url("../fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/OpenSans-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+  src: url("../fonts/open-sans/OpenSans-Italic-VariableFont_wdth%2Cwght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Open Sans";
-  src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
-  font-weight: 700;
+  font-family: "Montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Montserrat";
-  src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
+  src: url("../fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
   font-display: swap;
 }
