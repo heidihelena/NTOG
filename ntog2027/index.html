@@ -146,6 +146,48 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Sponsors */
+    .sponsor-tier__label {
+      margin: 0 0 1.25rem;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #697586;
+    }
+
+    .sponsor-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .sponsor-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 2rem;
+      min-width: 220px;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .sponsor-logo:hover,
+    .sponsor-logo:focus-visible {
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .sponsor-logo img {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
+    }
   </style>
 <script type="application/ld+json">
 {
@@ -605,6 +647,33 @@
               <p>Dr. Zaigham Saghir serves as Scientific Committee Lead for the 16th Nordic Lung Cancer Symposium, a role held by a representative of the host country.</p>
               <p class="mb-0">The scientific committee will develop the programme and select abstracts for oral and poster presentations.</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block bg-light" id="sponsors">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2>Sponsors &amp; partners</h2>
+            <p class="lead mb-0">We thank the partners supporting the 16th Nordic Lung Cancer Symposium.</p>
+          </div>
+          <div class="align-self-lg-end">
+            <a href="/ntog2027/sponsors.html" class="btn btn-event">Sponsorship &amp; Exhibition</a>
+          </div>
+        </div>
+
+        <div class="sponsor-tier">
+          <p class="sponsor-tier__label">Gold Sponsor</p>
+          <div class="sponsor-grid">
+            <a class="sponsor-logo"
+               href="https://beonemedicines.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="BeOne Medicines — visit beonemedicines.com (opens in a new tab)">
+              <img src="/ntog2027/logos/beone-medicines.png" alt="BeOne Medicines" width="2400" height="483" loading="lazy">
+            </a>
           </div>
         </div>
       </div>
