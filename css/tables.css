@@ -53,6 +53,10 @@ table thead tr,
 
 table thead th,
 .table thead th {
+  /* Set the navy background on the cell itself, not just the row, so it
+     beats Bootstrap's per-cell (.table > * > *) background. Without this the
+     white header text renders on a white cell — fails WCAG 1.4.3 contrast. */
+  background-color: var(--primary-color);
   color: #ffffff;
   font-weight: 700;
   border-color: var(--primary-color);
