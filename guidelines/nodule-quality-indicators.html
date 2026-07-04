@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nodule-Pathway Quality Indicators — draft for review | NTOG</title>
+<meta name="description" content="Draft Nordic quality indicators for the pulmonary nodule management pathway, with proposed per-country registry capture and data-quality ratings, published by NTOG for public review. Candidate indicators, not finalised.">
+<meta name="robots" content="noindex, follow">
+<meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
+<link rel="canonical" href="https://ntog.org/guidelines/nodule-quality-indicators.html">
+<link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="/css/bootstrap5.3.8/bootstrap.min.css">
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{--navy:#1f4e79;--navy-d:#163a5a;--ink:#252525;--muted:#5f6d80;--line:#e5e7eb;
+    --red:#c0392b;--amber:#d9a441;--green:#1e7d34;}
+  body{font-family:"Open Sans",-apple-system,system-ui,sans-serif;color:var(--ink);}
+  h1,h2,h3,.brand{font-family:"Montserrat",Arial,sans-serif;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:3px solid var(--navy);padding:.7rem 1rem;}
+  .topbar .brand{font-weight:800;color:var(--navy);text-decoration:none;font-size:1.1rem;}
+  .topbar .crumb{color:var(--muted);font-size:.9rem;} .topbar .crumb a{color:var(--navy);text-decoration:none;}
+  .hero{background:linear-gradient(135deg,#041827,#163a5a);color:#fff;padding:2rem 1rem;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1rem;}
+  .badge-nc{display:inline-block;border:1px solid rgba(255,255,255,.6);border-radius:999px;padding:.2rem .7rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+  .note{background:#fff7d6;border:1px solid #e0c200;border-radius:8px;padding:.9rem 1.1rem;margin:1.4rem auto;font-size:.92rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:.4rem 1.3rem;margin:1rem 0 .3rem;font-size:.82rem;color:var(--muted);}
+  .legend .rag{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;vertical-align:middle;margin-right:.3rem;}
+  .sect{color:var(--navy-d);border-bottom:2px solid var(--navy);padding-bottom:.25rem;margin:2rem 0 1rem;font-size:1.15rem;}
+  .qi{border:1px solid var(--line);border-radius:11px;padding:1rem 1.1rem;margin-bottom:.9rem;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.04);}
+  .qi-head{display:flex;gap:.6rem;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;}
+  .qi h3{font-size:1.02rem;margin:0;}
+  .qi .num{font-family:"Montserrat";font-weight:700;color:#fff;background:var(--navy);border-radius:6px;padding:.15rem .5rem;font-size:.78rem;margin-right:.5rem;}
+  .rag-pill{font-size:.72rem;font-weight:700;padding:.15rem .55rem;border-radius:999px;white-space:nowrap;}
+  .rag-red{background:#fde7ea;color:#a11;} .rag-amber{background:#fff4d6;color:#8a6d00;} .rag-green{background:#e7f4ea;color:#1e7d34;}
+  .defn{font-size:.9rem;margin:.55rem 0 .4rem;color:#333;}
+  .defn b{color:var(--navy-d);}
+  .meta{font-size:.82rem;color:var(--muted);margin:.35rem 0 0;}
+  .caps{margin-top:.5rem;display:flex;gap:.3rem;flex-wrap:wrap;align-items:center;}
+  .caps .lbl{font-size:.78rem;color:var(--muted);margin-right:.15rem;}
+  .cap{font-size:.74rem;font-weight:700;padding:.1rem .5rem;border-radius:6px;border:1px solid var(--line);}
+  .cap-yes{background:#e7f4ea;color:#1e7d34;border-color:#bfe3c8;}
+  .cap-no{background:#f4f5f6;color:#9aa2ac;}
+  .cta{background:#eef6fb;border:1px solid #b9d6e8;border-radius:12px;padding:1.3rem 1.4rem;margin:2rem auto;text-align:center;}
+  .cta h2{margin:0 0 .4rem;color:var(--navy-d);}
+  .btn-li{display:inline-block;background:#0a66c2;color:#fff;border-radius:8px;padding:.6rem 1.3rem;font-weight:700;text-decoration:none;margin-top:.6rem;}
+  footer{background:#212529;color:#fff;padding:1.5rem 1rem;margin-top:2rem;text-align:center;font-size:.85rem;}
+  footer a{color:#fff;}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Nordic Lung Cancer Nodule-Pathway Quality Indicators (draft for review)",
+  "description": "Draft Nordic quality indicators for the pulmonary nodule management pathway, with proposed per-country registry capture and data-quality ratings, published by NTOG for public review.",
+  "url": "https://ntog.org/guidelines/nodule-quality-indicators.html",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "name": "Nordic Thoracic Oncology Group", "url": "https://ntog.org" },
+  "publisher": { "@type": "MedicalOrganization", "name": "Nordic Thoracic Oncology Group", "alternateName": "NTOG", "url": "https://ntog.org" },
+  "dateModified": "2026-07-04",
+  "about": { "@type": "MedicalCondition", "name": "Lung cancer" },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Clinician" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Candidate nodule-pathway quality indicators",
+    "numberOfItems": 10,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Structured pulmonary nodule registry / pathway data completeness" },
+      { "@type": "ListItem", "position": 2, "name": "Structured radiology-report completeness for pulmonary nodules" },
+      { "@type": "ListItem", "position": 3, "name": "Timely follow-up CT for indeterminate pulmonary nodules" },
+      { "@type": "ListItem", "position": 4, "name": "Time from pulmonary nodule detection to definitive outcome" },
+      { "@type": "ListItem", "position": 5, "name": "Guideline-concordant pulmonary nodule management" },
+      { "@type": "ListItem", "position": 6, "name": "Potential over-investigation of low-risk pulmonary nodules" },
+      { "@type": "ListItem", "position": 7, "name": "Cancer yield of invasive pulmonary nodule diagnostics" },
+      { "@type": "ListItem", "position": 8, "name": "Benign resection rate after pulmonary nodule work-up" },
+      { "@type": "ListItem", "position": 9, "name": "Complication rate of invasive pulmonary nodule diagnostics" },
+      { "@type": "ListItem", "position": 10, "name": "Stage I–II proportion among nodule-detected lung cancers" }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="topbar" role="navigation" aria-label="Breadcrumb">
+  <a class="brand" href="/">NTOG</a>
+  <span class="crumb"><a href="/guidelines.html">Clinical Guidelines</a> › <a href="/guidelines/quality-indicators.html">Quality Indicator Bank</a> › Nodule pathway</span>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge-nc">NTOG · Nordic consensus · Draft for review</span>
+    <h1 class="fw-bold mt-2 mb-2">Nodule-pathway quality indicators</h1>
+    <p class="mb-0" style="max-width:820px;opacity:.92">Candidate quality indicators for the pulmonary nodule management pathway, each with its definition and a <strong>proposed</strong> mapping to what the Nordic registries currently capture. This is the first pathway in the NTOG Quality Indicator Bank; low-dose CT screening indicators follow as a separate set (they need a dedicated screening registry to supply the invited/screened denominator).</p>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <p class="note"><strong>Draft for public review — proposed mapping, not verified.</strong> The per-country capture and the data-quality rating on each indicator are NTOG's <em>proposed</em> reading of published registry documentation. They are what this public review is meant to confirm or correct — not asserted fact. The <strong>Danish Lung Nodule Registry</strong> is used as the Nordic reference model; for the other countries, national nodule-pathway capture is largely developmental.</p>
+
+  <div class="legend">
+    <span><strong>Data quality (proposed):</strong></span>
+    <span><span class="rag" style="background:var(--green)"></span>Green — ready for benchmarking</span>
+    <span><span class="rag" style="background:var(--amber)"></span>Amber — partial / developmental</span>
+    <span><span class="rag" style="background:var(--red)"></span>Red — infrastructure not yet in place</span>
+  </div>
+  <div class="legend">
+    <span><strong>Currently captured (proposed):</strong></span>
+    <span><span class="cap cap-yes">DK</span> captured / derivable</span>
+    <span><span class="cap cap-no">FI</span> not yet captured nationally</span>
+  </div>
+
+  <!-- Layer 1 -->
+  <h2 class="sect">Layer 1 · Diagnostic completeness (foundational data quality)</h2>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 1</span>Structured pulmonary nodule registry / pathway data completeness</h3><span class="rag-pill rag-red">Data quality: Red</span></div>
+    <p class="defn"><b>Numerator:</b> Nodules entering a structured pathway with the minimum recommended fields completed (detection route, index CT, type, size/volume, location, risk category, recommended next step, planned follow-up, outcome).</p>
+    <p class="defn"><b>Denominator:</b> Nodules that should enter a structured nodule pathway — indeterminate incidental nodules and, where implemented, screen-detected nodules.</p>
+    <p class="meta">Foundational: must be adequate before downstream nodule indicators can be compared. Denmark is the only country clearly starting a dedicated registry.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 2</span>Structured radiology-report completeness for pulmonary nodules</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Nodule CT reports with all mandatory structured fields complete (type, size/volume, location, number, baseline/new, growth or VDT, risk category, next step, follow-up interval).</p>
+    <p class="defn"><b>Denominator:</b> CT reports identifying indeterminate nodules that enter a pathway or require surveillance / work-up.</p>
+    <p class="meta">Structured reporting is a prerequisite for timeliness, over-investigation, yield and complication indicators.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <!-- Layer 6 -->
+  <h2 class="sect">Layer 6 · Pathway timeliness</h2>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 3</span>Timely follow-up CT for indeterminate pulmonary nodules</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Patients with indeterminate nodules who receive the follow-up CT within the guideline-defined surveillance window for their nodule type, size/volume, growth pattern and risk category.</p>
+    <p class="defn"><b>Denominator:</b> Patients with indeterminate nodules for whom CT surveillance is recommended.</p>
+    <p class="meta">Long planned surveillance of subsolid nodules is guideline-concordant, not delay.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 4</span>Time from pulmonary nodule detection to definitive outcome</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Measure:</b> Median days (with IQR) from first recorded nodule detection to definitive outcome — benign/stable discharge, escalation to work-up, or lung cancer diagnosis.</p>
+    <p class="defn"><b>Denominator:</b> Indeterminate nodules entering a structured follow-up or diagnostic pathway.</p>
+    <p class="meta">Reported as time-to-event, not a single proportion; subsolid-nodule surveillance is not counted as delay.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <!-- Layer 4 -->
+  <h2 class="sect">Layer 4 · Care process</h2>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 5</span>Guideline-concordant pulmonary nodule management</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Nodules managed according to the agreed recommendation for their type, size/volume, growth and risk category — or with a documented justified deviation.</p>
+    <p class="defn"><b>Denominator:</b> Indeterminate nodules with enough data to assign a guideline category.</p>
+    <p class="meta">Report concordant, justified deviation, non-concordant escalation and non-concordant under-investigation separately.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 6</span>Potential over-investigation of low-risk pulmonary nodules</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Low-risk nodules receiving investigations beyond the guideline pathway without documented justification (PET-CT, invasive biopsy, surgery, or unusually intensive CT surveillance).</p>
+    <p class="defn"><b>Denominator:</b> Low-risk nodules for which surveillance or no further follow-up is recommended.</p>
+    <p class="meta">Pair with cancer yield and complications to show the benefit–harm and cost balance of the pathway.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <!-- Layer 5 -->
+  <h2 class="sect">Layer 5 · Outcomes</h2>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 7</span>Cancer yield of invasive pulmonary nodule diagnostics</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Invasive nodule procedures that yield a malignant diagnosis (primary lung cancer; other malignancy reported separately if agreed).</p>
+    <p class="defn"><b>Denominator:</b> All invasive diagnostic procedures performed for indeterminate nodules (CT-guided biopsy, bronchoscopy/navigational, EBUS for nodule work-up, surgical diagnostic biopsy).</p>
+    <p class="meta">Denominator quality is the limiting factor — the procedure indication must be recorded as "indeterminate nodule". Also report non-diagnostic and repeat-procedure rates.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 8</span>Benign resection rate after pulmonary nodule work-up</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Surgical resections for indeterminate nodules where final pathology shows benign disease / no malignancy.</p>
+    <p class="defn"><b>Denominator:</b> All surgical resections performed for indeterminate nodules (with secondary reporting per all nodules entering the pathway).</p>
+    <p class="meta">Interpret alongside cancer yield, complications, stage shift and over-investigation.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 9</span>Complication rate of invasive pulmonary nodule diagnostics</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Invasive nodule procedures followed by a clinically significant complication within the agreed window (pneumothorax needing chest drain, major bleeding/haemoptysis, air embolism, unplanned admission, procedure-related death).</p>
+    <p class="defn"><b>Denominator:</b> All invasive diagnostic procedures performed for indeterminate nodules.</p>
+    <p class="meta">Best reported prospectively from the start of structured nodule/screening capture; report separate rates for any / significant complication, admission, chest drain and 30-day mortality.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-no">FI</span><span class="cap cap-no">IS</span><span class="cap cap-no">NO</span><span class="cap cap-no">SE</span></div>
+  </div>
+
+  <div class="qi">
+    <div class="qi-head"><h3><span class="num">QI 10</span>Stage I–II proportion among nodule-detected lung cancers</h3><span class="rag-pill rag-amber">Data quality: Amber</span></div>
+    <p class="defn"><b>Numerator:</b> Nodule-detected lung cancers diagnosed at stage I or II (agreed TNM edition).</p>
+    <p class="defn"><b>Denominator:</b> All incident lung cancers identified through a nodule pathway or nodule-surveillance programme.</p>
+    <p class="meta"><strong>The stage-shift signal for screening.</strong> Stage is captured across all five registries — the weak point is the harmonised "nodule-detected" route flag. Report missing / unknown stage separately.</p>
+    <div class="caps"><span class="lbl">Captured:</span><span class="cap cap-yes">DK</span><span class="cap cap-yes">FI</span><span class="cap cap-yes">IS</span><span class="cap cap-yes">NO</span><span class="cap cap-yes">SE</span></div>
+  </div>
+
+  <div class="cta">
+    <h2>Review these indicators with us</h2>
+    <p class="mb-0" style="max-width:660px;margin:0 auto;color:var(--navy-d)">Are the definitions right? Is the proposed per-country capture and data-quality rating accurate for your registry? Tell us — especially country leads. We rate and discuss openly on LinkedIn.</p>
+    <a class="btn-li" href="https://www.linkedin.com/groups/10015253/" target="_blank" rel="noopener">Review &amp; discuss on LinkedIn</a>
+  </div>
+
+  <p class="text-muted" style="font-size:.82rem">Reference model: Danish Lung Nodule Registry (part of the Danish Lung Cancer Registry). Frameworks referenced across indicators: Fleischner 2017, BTS 2015, Lung-RADS, NELSON-derived nodule categories, and the Nordic incidental pulmonary nodule guideline-adherence survey. Candidate indicators — not finalised NTOG standards.</p>
+
+</div>
+</main>
+
+<footer>
+  <p class="mb-1"><strong>Quality indicator bank &copy; Nordic Thoracic Oncology Group</strong> (Nordic consensus).</p>
+  <p class="mb-0"><a href="/guidelines/quality-indicators.html">Quality Indicator Bank</a> · <a href="/guidelines.html">Clinical Guidelines</a> · <a href="/copyright.html">Copyright &amp; licensing</a></p>
+</footer>
+
+</body>
+</html>
