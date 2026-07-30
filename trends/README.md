@@ -31,6 +31,10 @@ The snapshot keeps the app reproducible and available if the upstream service
 is temporarily unavailable. Refresh it deliberately after reviewing upstream
 version and schema changes:
 
+The public SourceVahti MCP service is linked as the research companion for
+provenance-first machine access. The chart itself intentionally renders this
+versioned snapshot rather than making a live remote request on every session.
+
 ```bash
 Rscript scripts/refresh_nordcan_data.R
 Rscript tests/testthat.R

@@ -127,7 +127,7 @@ ui <- page_navbar(
             ),
             div(
               class = "hero-badge",
-              span("Powered by"),
+              span("MCP companion"),
               a(
                 "SourceVahti",
                 href = "https://sourcevahti.vahtian.com/",
