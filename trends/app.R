@@ -18,13 +18,13 @@ app_theme <- bs_theme(
   version = 5,
   bg = "#f5f7f8",
   fg = "#14283b",
-  primary = "#006b75",
-  secondary = "#f26b4f",
+  primary = "#0057b8",
+  secondary = "#ffd21a",
   base_font = font_google("Open Sans"),
   heading_font = font_google("Montserrat"),
-  "navbar-bg" = "#102a43",
-  "navbar-light-color" = "#ffffff",
-  "navbar-light-hover-color" = "#ffffff"
+  "navbar-bg" = "#ffffff",
+  "navbar-light-color" = "#002f63",
+  "navbar-light-hover-color" = "#003580"
 )
 
 metric_card <- function(title, value_output, note) {
@@ -39,10 +39,19 @@ metric_card <- function(title, value_output, note) {
 ui <- page_navbar(
   title = div(
     class = "brand-lockup",
-    span(class = "brand-mark", "NTOG"),
+    tags$img(
+      class = "brand-logo",
+      src = "ntog-logo.svg",
+      alt = "",
+      width = "42",
+      height = "42",
+      `aria-hidden` = "true"
+    ),
+    span(class = "brand-name", "NTOG"),
     span(class = "brand-title", "Nordic Lung Cancer Trends")
   ),
   id = "page",
+  fillable = FALSE,
   theme = app_theme,
   header = tagList(
     tags$head(
@@ -309,10 +318,33 @@ ui <- page_navbar(
       )
     )
   ),
-  footer = div(
+  footer = tags$footer(
     class = "app-footer",
-    span("Nordic Thoracic Oncology Group"),
-    span("Research use · Verify outputs against the cited source")
+    div(
+      class = "app-footer-inner",
+      a(
+        class = "footer-logo-link",
+        href = "https://ntog.org/",
+        `aria-label` = "NTOG home",
+        tags$img(
+          src = "ntog-logo.svg",
+          alt = "Nordic Thoracic Oncology Group logo",
+          width = "56",
+          height = "56"
+        )
+      ),
+      p("Tools © 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use."),
+      p(
+        class = "footer-links",
+        a("Copyright & Licensing", href = "https://ntog.org/copyright.html"),
+        a("Privacy Policy", href = "https://ntog.org/privacy-policy.html"),
+        a("Terms of Service", href = "https://ntog.org/terms-of-service.html")
+      ),
+      p(
+        class = "footer-research-note",
+        "Research use · Verify outputs against the cited source"
+      )
+    )
   )
 )
 

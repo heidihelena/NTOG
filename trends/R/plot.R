@@ -1,9 +1,9 @@
 COUNTRY_COLOURS <- c(
-  Denmark = "#cf4b37",
-  Finland = "#007f73",
+  Denmark = "#c8102e",
+  Finland = "#003580",
   Iceland = "#7257a5",
-  Norway = "#1967a3",
-  Sweden = "#d69500"
+  Norway = "#0057b8",
+  Sweden = "#d9a900"
 )
 
 make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
