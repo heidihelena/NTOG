@@ -16,6 +16,16 @@ rate_label <- function(statistic) {
   label
 }
 
+measure_label <- function(measure) {
+  switch(
+    measure,
+    Incidence = "Incidence",
+    Mortality = "Mortality",
+    MIR = "M:I ratio (MIR)",
+    stop("Unsupported measure: ", measure)
+  )
+}
+
 NORDCAN_TREND_URL <- paste0(
   "https://nordcan.iarc.fr/en/dataviz/trends?",
   "cancers=160&key=asr_n&populations=208_246_352_578_752&",
@@ -106,6 +116,12 @@ filter_trends <- function(
   if (!statistic %in% unname(RATE_LABELS)) {
     stop("Unsupported rate definition: ", statistic)
   }
+  if (identical(measure, "MIR")) {
+    return(calculate_mir(data, sex, countries, years, statistic))
+  }
+  if (!measure %in% c("Incidence", "Mortality")) {
+    stop("Unsupported measure: ", measure)
+  }
 
   data |>
     dplyr::filter(
@@ -123,6 +139,89 @@ filter_trends <- function(
     dplyr::arrange(.data$country, .data$year)
 }
 
+calculate_mir <- function(
+    data,
+    sex,
+    countries,
+    years,
+    statistic = "asr_nordic_2000") {
+  if (!statistic %in% unname(RATE_LABELS)) {
+    stop("Unsupported rate definition: ", statistic)
+  }
+
+  matching_rows <- data |>
+    dplyr::filter(
+      .data$sex == .env$sex,
+      .data$country %in% .env$countries,
+      dplyr::between(.data$year, .env$years[[1]], .env$years[[2]])
+    )
+
+  join_keys <- c(
+    "country_code", "country", "sex_code", "sex", "year", "cancer_id",
+    "cancer", "icd10", "source_version", "retrieved_at"
+  )
+
+  incidence <- matching_rows |>
+    dplyr::filter(.data$measure == "Incidence") |>
+    dplyr::transmute(
+      country_code = .data$country_code,
+      country = .data$country,
+      sex_code = .data$sex_code,
+      sex = .data$sex,
+      year = .data$year,
+      cancer_id = .data$cancer_id,
+      cancer = .data$cancer,
+      icd10 = .data$icd10,
+      source_version = .data$source_version,
+      retrieved_at = .data$retrieved_at,
+      incidence_rate = .data[[statistic]],
+      incidence_count = .data$count,
+      incidence_population = .data$population,
+      incidence_source_url = .data$source_url
+    )
+
+  mortality <- matching_rows |>
+    dplyr::filter(.data$measure == "Mortality") |>
+    dplyr::transmute(
+      country_code = .data$country_code,
+      country = .data$country,
+      sex_code = .data$sex_code,
+      sex = .data$sex,
+      year = .data$year,
+      cancer_id = .data$cancer_id,
+      cancer = .data$cancer,
+      icd10 = .data$icd10,
+      source_version = .data$source_version,
+      retrieved_at = .data$retrieved_at,
+      mortality_rate = .data[[statistic]],
+      mortality_count = .data$count,
+      mortality_population = .data$population,
+      mortality_source_url = .data$source_url
+    )
+
+  dplyr::inner_join(incidence, mortality, by = join_keys) |>
+    dplyr::filter(
+      !is.na(.data$incidence_rate),
+      !is.na(.data$mortality_rate),
+      .data$incidence_rate > 0
+    ) |>
+    dplyr::mutate(
+      measure_code = 2L,
+      measure = "MIR",
+      rate = .data$mortality_rate / .data$incidence_rate,
+      rate_definition = paste0(
+        "MIR using ",
+        rate_label(statistic),
+        " mortality and incidence rates"
+      ),
+      standard_population = standard_population_for(statistic),
+      unit = "ratio",
+      source_url = NORDCAN_TREND_URL
+    ) |>
+    dplyr::filter(is.finite(.data$rate)) |>
+    dplyr::arrange(.data$country, .data$year)
+}
+
 standard_population_for <- function(statistic) {
   switch(
     statistic,
@@ -135,7 +234,10 @@ standard_population_for <- function(statistic) {
   )
 }
 
-rate_unit <- function(statistic) {
+rate_unit <- function(statistic, measure = "Mortality") {
+  if (identical(measure, "MIR")) {
+    return("Ratio: mortality rate ÷ incidence rate")
+  }
   if (identical(statistic, "crude_rate")) {
     "Crude rate per 100,000 person-years"
   } else {
