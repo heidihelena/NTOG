@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ntog-trends
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: trends
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    autoDeployTrigger: checksPass
+    domains:
+      - trends.ntog.org

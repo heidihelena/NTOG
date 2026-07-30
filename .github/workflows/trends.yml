@@ -1,0 +1,53 @@
+name: Nordic lung trends
+
+on:
+  pull_request:
+    paths:
+      - "trends/**"
+      - "render.yaml"
+      - ".github/workflows/trends.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "trends/**"
+      - "render.yaml"
+      - ".github/workflows/trends.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  r-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: trends
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::bslib
+            any::dplyr
+            any::ggplot2
+            any::jsonlite
+            any::readr
+            any::scales
+            any::shiny
+            any::testthat
+      - name: Run tests
+        run: Rscript tests/testthat.R
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: trends
+          push: false
