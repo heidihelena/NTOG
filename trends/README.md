@@ -46,8 +46,9 @@ declared in [`data/release_manifest.json`](data/release_manifest.json), checks
 each dataset's row count and SHA-256 checksum, then precomputes MIR. This keeps
 interactions responsive and makes a shared URL reproducible.
 
-The interface uses a browser-native font stack. App startup therefore has no
-dependency on Google Fonts or another remote asset host.
+The interface self-hosts NTOG's Open Sans and Montserrat variable-font assets
+under `www/fonts/`. App startup therefore has no dependency on Google Fonts or
+another remote asset host.
 
 Release `ntog-lung-trends-2026-07-30` contains:
 

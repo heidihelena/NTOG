@@ -1,3 +1,39 @@
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/open-sans/OpenSans-Italic-VariableFont_wdth%2Cwght.ttf")
+    format("truetype");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --ntog-navy: #003580;
   --ntog-navy-dark: #002a5c;
@@ -10,11 +46,12 @@
   --swedish-yellow-dark: #f2b400;
   --ntog-mist: #eef6fb;
   --ntog-muted: #607587;
-  --ntog-heading-font: "Avenir Next", "Segoe UI", sans-serif;
+  --ntog-heading-font: "Montserrat", Arial, sans-serif;
 }
 
 body {
   background: #f5f7f8;
+  font-family: "Open Sans", Arial, sans-serif;
 }
 
 .navbar.navbar-default {
