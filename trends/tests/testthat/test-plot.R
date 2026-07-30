@@ -23,6 +23,32 @@ test_that("presentation plot can be rendered as a 16:9 PNG", {
   expect_gt(file.info(output)$size, 1000)
 })
 
+test_that("vector SVG export preserves the plot", {
+  skip_if_not_installed("svglite")
+  result <- filter_trends(
+    trend_data,
+    "Mortality",
+    "Female",
+    NORDIC_COUNTRIES,
+    c(2000, 2024),
+    "asr_nordic_2000"
+  )
+  input <- list(
+    measure = "Mortality",
+    sex = "Female",
+    countries = NORDIC_COUNTRIES,
+    years = c(2000, 2024),
+    statistic = "asr_nordic_2000"
+  )
+  output <- tempfile(fileext = ".svg")
+
+  export_plot(output, "svg", result, input)
+
+  expect_true(file.exists(output))
+  expect_gt(file.info(output)$size, 1000)
+  expect_match(readLines(output, n = 1), "xml")
+})
+
 test_that("vector PDF and citation exports retain presentation provenance", {
   result <- filter_trends(
     trend_data,
@@ -49,6 +75,73 @@ test_that("vector PDF and citation exports retain presentation provenance", {
   expect_true(any(grepl("ICD-10 C33–C34", methods, fixed = TRUE)))
   expect_true(any(grepl("Nordic standard population 2000", methods, fixed = TRUE)))
   expect_true(any(grepl("accessed 30 July 2026", methods, fixed = TRUE)))
+})
+
+test_that("editable PowerPoint export contains a presentation", {
+  skip_if_not_installed("officer")
+  skip_if_not_installed("rvg")
+  result <- filter_trends(
+    trend_data,
+    "Mortality",
+    "Female",
+    c("Finland", "Sweden"),
+    c(2000, 2024),
+    "asr_nordic_2000"
+  )
+  input <- list(
+    measure = "Mortality",
+    sex = "Female",
+    countries = c("Finland", "Sweden"),
+    years = c(2000, 2024),
+    statistic = "asr_nordic_2000"
+  )
+  output <- tempfile(fileext = ".pptx")
+
+  export_pptx(output, result, input)
+
+  expect_true(file.exists(output))
+  expect_gt(file.info(output)$size, 1000)
+  expect_s3_class(officer::read_pptx(output), "rpptx")
+})
+
+test_that("research pack carries figure, data, methods and provenance", {
+  skip_if_not_installed("officer")
+  skip_if_not_installed("rvg")
+  skip_if_not_installed("svglite")
+  skip_if_not_installed("zip")
+  result <- filter_trends(
+    trend_data,
+    "Mortality",
+    "Female",
+    c("Finland", "Sweden"),
+    c(2000, 2024),
+    "asr_nordic_2000"
+  )
+  input <- list(
+    measure = "Mortality",
+    sex = "Female",
+    countries = c("Finland", "Sweden"),
+    years = c(2000, 2024),
+    statistic = "asr_nordic_2000"
+  )
+  output <- tempfile(fileext = ".zip")
+
+  export_research_bundle(output, result, input, release_manifest)
+  contents <- utils::unzip(output, list = TRUE)$Name
+
+  expect_setequal(
+    contents,
+    c(
+      "figure-16x9.png",
+      "figure-vector.pdf",
+      "figure-vector.svg",
+      "selected-observations.csv",
+      "editable-chart.pptx",
+      "methods-and-citation.txt",
+      "selection-and-provenance.json",
+      "data-release-manifest.json"
+    )
+  )
 })
 
 test_that("MIR plot and methods state the ratio and its limitations", {

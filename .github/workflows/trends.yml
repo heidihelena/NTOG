@@ -32,15 +32,25 @@ jobs:
         with:
           packages: |
             any::bslib
+            any::digest
             any::dplyr
             any::ggplot2
             any::jsonlite
+            any::officer
             any::readr
+            any::rvg
             any::scales
             any::shiny
+            any::svglite
             any::testthat
+            any::zip
+      - name: Verify reviewed release
+        run: Rscript scripts/verify_release.R
       - name: Run tests
         run: Rscript tests/testthat.R
+      - name: Load Shiny application
+        run: |
+          Rscript -e 'loaded <- source("app.R"); stopifnot(inherits(loaded$value, "shiny.appobj"))'
 
   docker-build:
     runs-on: ubuntu-latest

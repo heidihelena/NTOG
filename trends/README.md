@@ -1,99 +1,124 @@
-# NTOG Nordic Lung Cancer Trends
+# NTOG Nordic Lung Cancer Trends 2.0
 
-An interactive R Shiny application for exploring lung-cancer incidence,
-mortality and mortality-to-incidence ratio (MIR) trends in Denmark, Finland,
-Iceland, Norway and Sweden.
+An R Shiny research application for exploring lung-cancer incidence,
+mortality and mortality-to-incidence ratio (MIR) in Denmark, Finland, Iceland,
+Norway and Sweden.
 
-The app is designed for researchers who need to:
+The scope is intentionally narrow: **lung cancer only, ICD-10 C33-C34**.
+NORDCAN remains the primary outcome source. WHO tobacco-use estimates add
+risk-factor context, while Eurostat provides an independent check of one
+directly comparable mortality definition. These sources are never silently
+merged.
 
-- compare annual national trajectories by sex;
-- derive MIR from matched mortality and incidence rates;
-- distinguish crude and age-standardised rate definitions;
-- retain source, version, cancer definition and retrieval metadata;
-- export 16:9 PNG or vector PDF figures for presentations;
-- download the exact selected observations and a matching methods citation.
+## Research workflow
+
+- **Explore** compares annual national trajectories by sex and epidemiological
+  rate definition.
+- **Compare** indexes countries to 100 at their first selected year, displays
+  female and male series together, and calculates the latest population sex
+  gap.
+- **Country profile** keeps one country's NORDCAN outcome, WHO context and
+  Eurostat source distinction together.
+- **Context & sources** shows WHO modelled current tobacco-use prevalence with
+  95% uncertainty intervals and projection status, plus a NORDCAN–Eurostat
+  European-2013-standardised mortality check.
+- **Methods & source** states definitions, comparability limits and provenance.
+- **Create shareable URL** serialises the complete selection into the URL.
+
+Presentation exports include PNG, vector PDF, editable PowerPoint, selected CSV
+and a methods citation. The research pack is a ZIP containing all of those plus
+SVG, selection/provenance JSON and the exact data-release manifest.
 
 Mortality is the default cross-country view. NORDCAN reports that Swedish
 lung-cancer incidence is not directly comparable with incidence in the other
 Nordic countries and recommends mortality for comparisons.
 
 MIR is calculated as the selected mortality rate divided by the corresponding
-incidence rate for the same country, sex, year and cancer entity. It is a crude
-population indicator, not individual risk, survival or case-fatality. Age
-structure, screening, registry quality, lead-time bias and competing mortality
-can distort comparisons. MIR also inherits the known Swedish incidence
-comparability limitation described by NORDCAN.
+incidence rate for the same country, sex, year, cancer entity and rate
+definition. It is a crude population indicator, not individual risk, survival
+or case-fatality. Age structure, screening, registry quality, lead-time bias
+and competing mortality can distort comparisons.
 
-## Data
+## Reviewed data release
 
-The frozen snapshot contains 1,298 annual observations for lung cancer
-(ICD-10 C33-C34) from 1960 through 2024, where available:
+The app makes no live upstream requests. It starts from the immutable release
+declared in [`data/release_manifest.json`](data/release_manifest.json), checks
+each dataset's row count and SHA-256 checksum, then precomputes MIR. This keeps
+interactions responsive and makes a shared URL reproducible.
 
-- NORDCAN version 9.6 (30 June 2026)
-- accessed 30 July 2026
-- five national populations
-- male and female series
-- incidence and mortality
-- crude, World, European 1976, European 2013 and Nordic 2000 rates
+Release `ntog-lung-trends-2026-07-30` contains:
 
-The snapshot keeps the app reproducible and available if the upstream service
-is temporarily unavailable. Refresh it deliberately after reviewing upstream
-version and schema changes:
+| Dataset | Role | Rows | Coverage |
+| --- | --- | ---: | --- |
+| NORDCAN 9.6 | Primary cancer outcomes | 1,298 | 1960–2024 where published |
+| WHO GHO `M_Est_tob_curr_std` | Risk-factor context | 150 | 2000–2025, ten published points per country/sex |
+| Eurostat `HLTH_CD_ASDR2` | Independent mortality source check | 195 | 2011–2023 |
 
-The public SourceVahti MCP service is linked as the research companion for
-provenance-first machine access. The chart itself intentionally renders this
-versioned snapshot rather than making a live remote request on every session.
+All three cover the five Nordic countries. NORDCAN contains female and male
+lung-cancer incidence and mortality with crude, World, European 1976,
+European 2013 and Nordic 2000 rate definitions. WHO values are modelled
+age-standardised estimates for people aged 15 years and over, with uncertainty
+bounds; the latest values may be projections. Eurostat values use underlying
+cause of death C33-C34 and the European Standard Population 2013.
+
+WHO risk-factor trends and cancer outcomes can differ in timing by decades.
+Their national ecological relationship is contextual, not a causal estimate.
+Differences between NORDCAN and Eurostat can reflect source scope, production
+and revision workflows; agreement is a source check, not proof of equivalence.
+
+## Run and verify locally
+
+From `trends/`:
 
 ```bash
-Rscript scripts/refresh_nordcan_data.R
+Rscript scripts/verify_release.R
 Rscript tests/testthat.R
-```
-
-## Run locally
-
-From this directory:
-
-```bash
 R -e 'shiny::runApp(".", port = 3838, host = "127.0.0.1")'
 ```
 
 Then open <http://127.0.0.1:3838>.
 
-Required R packages are `shiny`, `bslib`, `dplyr`, `ggplot2`, `readr`,
-`scales`, `jsonlite`, and `testthat` for tests.
+Required R packages are `shiny`, `bslib`, `digest`, `dplyr`, `ggplot2`,
+`readr`, `scales`, `jsonlite`, `officer`, `rvg`, `svglite` and `zip`;
+`testthat` is used by the test suite. The Docker image installs the complete
+set.
+
+## Updating a release
+
+Upstream refreshes happen in SourceVahti, never during an app session.
+
+1. Generate narrow, source-specific snapshots with the SourceVahti adapters
+   and preserve the official source responses for audit.
+2. Review cancer definition, population, sex, unit, rate definition, standard
+   population, uncertainty/status fields, release date and citation URL.
+3. Copy only approved files into `data/`.
+4. Create a new release ID; update paths, row counts, SHA-256 checksums and
+   source versions in `data/release_manifest.json`.
+5. Run `Rscript scripts/verify_release.R` and `Rscript tests/testthat.R`.
+6. Review visual changes and provenance in a pull request before deployment.
+
+`scripts/refresh_nordcan_data.R` remains the NORDCAN extraction helper. WHO and
+Eurostat snapshots are generated by
+`sourcevahti/scripts/refresh_context_snapshots.py`.
 
 ## Deploy on Render
 
-Create a new **Web Service** from `heidihelena/NTOG`:
+The repository Blueprint creates the Docker service. Manual configuration uses:
 
 | Setting | Value |
-|---|---|
+| --- | --- |
 | Runtime | Docker |
 | Root Directory | `trends` |
 | Dockerfile Path | `./Dockerfile` |
 | Health Check Path | `/` |
 
-No build or start command is required because the Dockerfile supplies both. The
-container reads Render's `PORT` environment variable and binds to `0.0.0.0`.
-Once the service is live, add `trends.ntog.org` as its custom domain. Render
-will display the exact canonical hostname to use at the DNS provider.
-
-At Cloudflare, create this record only after Render shows the service target:
-
-| Type | Name | Target | Proxy |
-|---|---|---|---|
-| CNAME | `trends` | exact Render hostname, e.g. `ntog-trends.onrender.com` | DNS only |
-
-Do not enter the example target until the Render service with that hostname
-actually exists. Add the custom domain in Render, wait for verification and
-certificate issuance, and then test `https://trends.ntog.org/`.
-
-The repository's `render.yaml` provides the same settings as a Render
-Blueprint, including the `trends` monorepo root and Frankfurt region.
+The container reads Render's `PORT` and binds to `0.0.0.0`. The public custom
+domain is `trends.ntog.org`; its DNS-only CNAME points to the canonical hostname
+shown by Render, currently `ntog-trends.onrender.com`.
 
 ## Licensing and attribution
 
-Application code is licensed under Apache-2.0 under the NTOG repository
-licence. NORDCAN data retain their source terms and attribution. Generated
-figures and methods files include the recommended NORDCAN reference and access
-date.
+Application code is Apache-2.0 under the NTOG repository licence. Source data
+retain their publisher terms and attribution. Every research pack carries the
+source versions, citation URLs, retrieval date, schema version and selected
+epidemiological definition.

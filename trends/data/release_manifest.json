@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0.0",
+  "release_id": "ntog-lung-trends-2026-07-30",
+  "released_at": "2026-07-30",
+  "scope": {
+    "health_topic": "Lung cancer",
+    "cancer_definition": "Malignant neoplasms of trachea, bronchus and lung",
+    "icd10": "C33-C34",
+    "countries": ["Denmark", "Finland", "Iceland", "Norway", "Sweden"]
+  },
+  "sourcevahti_schema_version": "0.3.0",
+  "datasets": [
+    {
+      "id": "nordcan_lung_trends",
+      "role": "primary_cancer_outcomes",
+      "path": "data/nordcan_lung_trends_9_6.csv",
+      "rows": 1298,
+      "sha256": "5e9d9e5c86e923fd5d84320d8262ff15f2f410a56af56dd18ac35eb7a2f05420",
+      "source": "NORDCAN",
+      "source_version": "9.6",
+      "source_release_date": "2026-06-30",
+      "retrieved_at": "2026-07-30",
+      "citation_url": "https://nordcan.iarc.fr/en/database"
+    },
+    {
+      "id": "who_gho_tobacco_use",
+      "role": "risk_factor_context",
+      "path": "data/who_gho_tobacco_use_2026_01_15.csv",
+      "rows": 150,
+      "sha256": "7a4b4a47e893a0898f5a24d3f52ffa9b316a126044a2acc1e6f82a07f85bc814",
+      "source": "WHO Global Health Observatory",
+      "source_version": "M_Est_tob_curr_std updated 2026-01-15",
+      "source_release_date": "2026-01-15",
+      "retrieved_at": "2026-07-30",
+      "citation_url": "https://www.who.int/data/gho/indicator-metadata-registry/imr-details/prevalence-of-current-tobacco-use-among-persons-aged-15-years-and-older-age-standardized"
+    },
+    {
+      "id": "eurostat_lung_mortality",
+      "role": "independent_mortality_source_check",
+      "path": "data/eurostat_lung_mortality_2026_06_08.csv",
+      "rows": 195,
+      "sha256": "5a3d6e5d5fe11cfb6006ded066bb71d63277daf0c660cac5dbfc0ad45735b291",
+      "source": "Eurostat",
+      "source_version": "HLTH_CD_ASDR2 updated 2026-06-08",
+      "source_release_date": "2026-06-08",
+      "retrieved_at": "2026-07-30",
+      "citation_url": "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_cdeath_sims.htm"
+    }
+  ]
+}

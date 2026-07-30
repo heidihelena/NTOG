@@ -30,3 +30,6 @@ og-image-2027.html
 
 # local-only carousel generators (render slide PNGs/PDFs); not deployed
 brand-carousel/
+
+# R's default graphics device may create this during local test runs
+Rplots.pdf
