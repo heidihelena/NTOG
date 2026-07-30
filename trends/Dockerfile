@@ -2,12 +2,17 @@ FROM rocker/shiny:4.4.2
 
 RUN install2.r --error --skipinstalled \
     bslib \
+    digest \
     dplyr \
     ggplot2 \
     jsonlite \
+    officer \
     readr \
+    rvg \
     scales \
-    testthat
+    svglite \
+    testthat \
+    zip
 
 COPY . /srv/shiny-server/
 

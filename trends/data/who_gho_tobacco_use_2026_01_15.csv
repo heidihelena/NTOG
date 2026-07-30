@@ -1,0 +1,151 @@
+country_code,country,sex_code,sex,year,value,lower_bound,upper_bound,status,note,updated_at
+DNK,Denmark,SEX_BTSX,all,2000,38.3,31.2,45.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2005,31.8,26.4,37.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2007,29.6,24.5,34.7,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2010,26.4,21.7,31.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2015,22.0,18.2,25.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2020,18.2,15.2,21.3,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2022,17.0,14.2,19.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2023,16.3,13.5,19.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2024,15.7,12.9,18.6,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_BTSX,all,2025,15.2,12.4,18.1,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2000,35.7,29.0,42.3,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2005,29.8,24.4,35.3,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2007,27.7,23.1,32.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2010,24.7,20.1,29.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2015,20.7,17.6,23.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2020,17.2,14.3,20.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2022,16.2,13.5,18.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2023,15.5,12.9,18.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2024,15.0,12.3,17.6,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_FMLE,female,2025,14.5,11.4,17.5,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2000,40.9,33.3,48.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2005,33.7,28.3,39.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2007,31.4,25.8,37.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2010,28.1,23.3,32.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2015,23.3,18.9,27.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2020,19.3,16.0,22.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2022,17.9,14.9,20.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2023,17.2,14.0,20.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2024,16.5,13.6,19.5,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+DNK,Denmark,SEX_MLE,male,2025,16.0,13.4,18.6,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2000,39.0,31.9,46.0,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2005,34.4,28.5,40.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2007,32.8,27.4,38.1,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2010,30.3,24.8,35.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2015,26.8,21.7,31.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2020,23.7,19.6,27.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2022,22.4,18.4,26.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2023,21.8,17.7,25.9,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2024,21.4,17.6,25.2,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_BTSX,all,2025,20.9,17.0,24.8,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2000,29.8,24.5,35.0,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2005,26.7,22.5,30.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2007,25.5,21.6,29.4,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2010,23.7,19.1,28.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2015,21.4,17.8,25.0,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2020,19.2,16.4,21.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2022,18.2,15.4,21.1,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2023,17.8,14.7,20.9,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2024,17.4,14.5,20.4,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_FMLE,female,2025,17.1,14.0,20.2,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2000,48.2,39.4,56.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2005,42.1,34.6,49.6,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2007,40.0,33.2,46.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2010,36.8,30.4,43.1,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2015,32.3,25.7,38.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2020,28.2,22.9,33.5,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2022,26.5,21.5,31.6,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2023,25.9,20.8,31.0,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2024,25.3,20.6,30.0,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+FIN,Finland,SEX_MLE,male,2025,24.6,19.9,29.3,projected,The most recent national survey was conducted in 2022. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2000,31.1,26.1,36.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2005,24.0,20.1,28.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2007,21.7,18.1,25.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2010,18.6,15.7,21.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2015,14.4,12.1,16.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2020,11.3,9.3,13.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2022,10.2,8.2,12.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2023,9.7,8.0,11.3,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2024,9.2,7.6,10.8,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_BTSX,all,2025,8.7,7.2,10.2,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2000,29.7,25.2,34.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2005,23.1,19.5,26.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2007,20.8,17.1,24.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2010,18.0,15.0,20.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2015,14.0,11.9,16.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2020,11.0,9.1,12.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2022,9.9,8.0,11.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2023,9.4,7.9,11.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2024,9.0,7.4,10.6,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_FMLE,female,2025,8.6,7.1,10.1,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2000,32.4,27.0,37.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2005,25.0,20.7,29.3,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2007,22.6,19.0,26.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2010,19.2,16.3,22.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2015,14.9,12.3,17.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2020,11.6,9.5,13.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2022,10.4,8.5,12.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2023,9.9,8.2,11.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2024,9.4,7.7,11.0,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+ISL,Iceland,SEX_MLE,male,2025,8.9,7.4,10.4,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2000,45.3,38.9,51.7,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2005,34.9,29.1,40.7,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2007,31.4,26.8,36.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2010,26.8,22.8,30.9,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2015,20.8,17.5,24.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2020,16.0,13.4,18.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2022,14.4,12.0,16.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2023,13.7,11.3,16.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2024,12.9,10.9,15.0,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_BTSX,all,2025,12.3,10.3,14.3,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2000,44.9,38.1,51.7,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2005,34.0,28.0,40.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2007,30.3,26.0,34.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2010,25.7,21.8,29.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2015,19.4,16.2,22.6,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2020,14.6,12.1,17.1,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2022,13.1,11.1,15.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2023,12.4,10.2,14.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2024,11.6,9.8,13.4,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_FMLE,female,2025,11.0,9.1,12.9,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2000,45.7,39.7,51.8,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2005,35.7,30.1,41.4,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2007,32.6,27.5,37.7,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2010,28.0,23.8,32.2,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2015,22.2,18.8,25.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2020,17.3,14.6,20.0,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2022,15.7,12.9,18.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2023,15.0,12.5,17.5,modelled_estimate,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2024,14.2,11.9,16.6,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+NOR,Norway,SEX_MLE,male,2025,13.6,11.4,15.7,projected,Tobacco use estimates are not available. Tobacco smoking estimates are substituted for missing tobacco use estimates. The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2000,49.5,38.5,60.5,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2005,40.8,32.9,48.8,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2007,38.1,30.6,45.6,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2010,33.9,27.6,40.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2015,28.2,22.7,33.6,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2020,23.5,19.0,27.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2022,21.8,17.8,25.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2023,21.0,16.8,25.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2024,20.3,16.3,24.2,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_BTSX,all,2025,19.5,15.5,23.5,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2000,43.2,33.7,52.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2005,34.3,27.2,41.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2007,31.4,25.0,37.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2010,27.5,22.7,32.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2015,21.9,17.9,25.9,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2020,17.6,14.4,20.7,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2022,16.0,13.0,19.0,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2023,15.3,12.3,18.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2024,14.6,11.8,17.5,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_FMLE,female,2025,13.9,11.5,16.4,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2000,55.8,43.4,68.3,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2005,47.4,38.6,56.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2007,44.8,36.2,53.4,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2010,40.3,32.4,48.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2015,34.4,27.5,41.4,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2020,29.3,23.7,35.0,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2022,27.5,22.6,32.4,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2023,26.8,21.3,32.2,modelled_estimate,,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2024,25.9,20.9,30.9,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00
+SWE,Sweden,SEX_MLE,male,2025,25.0,19.5,30.5,projected,The most recent national survey was conducted in 2023. This is a projection.,2026-01-15T18:43:44.287+01:00

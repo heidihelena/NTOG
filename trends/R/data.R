@@ -112,11 +112,25 @@ filter_trends <- function(
     sex,
     countries,
     years,
-    statistic = "asr_nordic_2000") {
+    statistic = "asr_nordic_2000",
+    mir_cache = NULL) {
   if (!statistic %in% unname(RATE_LABELS)) {
     stop("Unsupported rate definition: ", statistic)
   }
   if (identical(measure, "MIR")) {
+    if (!is.null(mir_cache)) {
+      return(
+        mir_cache |>
+          dplyr::filter(
+            .data$statistic == .env$statistic,
+            .data$sex == .env$sex,
+            .data$country %in% .env$countries,
+            dplyr::between(.data$year, .env$years[[1]], .env$years[[2]])
+          ) |>
+          dplyr::select(-"statistic") |>
+          dplyr::arrange(.data$country, .data$year)
+      )
+    }
     return(calculate_mir(data, sex, countries, years, statistic))
   }
   if (!measure %in% c("Incidence", "Mortality")) {
@@ -137,6 +151,28 @@ filter_trends <- function(
     ) |>
     dplyr::filter(!is.na(.data$rate)) |>
     dplyr::arrange(.data$country, .data$year)
+}
+
+build_mir_cache <- function(data) {
+  years <- range(data$year)
+  dplyr::bind_rows(lapply(
+    unname(RATE_LABELS),
+    function(statistic) {
+      dplyr::bind_rows(lapply(
+        c("Female", "Male"),
+        function(sex) {
+          calculate_mir(
+            data,
+            sex = sex,
+            countries = NORDIC_COUNTRIES,
+            years = years,
+            statistic = statistic
+          ) |>
+            dplyr::mutate(statistic = statistic)
+        }
+      ))
+    }
+  ))
 }
 
 calculate_mir <- function(
