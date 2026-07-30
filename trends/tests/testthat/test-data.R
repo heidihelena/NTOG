@@ -28,4 +28,15 @@ test_that("invalid schemas and definitions fail loudly", {
     ),
     "Unsupported rate definition"
   )
+  expect_error(
+    filter_trends(
+      trend_data,
+      "Case fatality",
+      "Female",
+      "Finland",
+      c(2000, 2024),
+      "asr_nordic_2000"
+    ),
+    "Unsupported measure"
+  )
 })

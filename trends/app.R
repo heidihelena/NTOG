@@ -18,13 +18,13 @@ app_theme <- bs_theme(
   version = 5,
   bg = "#f5f7f8",
   fg = "#14283b",
-  primary = "#006b75",
-  secondary = "#f26b4f",
+  primary = "#0057b8",
+  secondary = "#ffd21a",
   base_font = font_google("Open Sans"),
   heading_font = font_google("Montserrat"),
-  "navbar-bg" = "#102a43",
-  "navbar-light-color" = "#ffffff",
-  "navbar-light-hover-color" = "#ffffff"
+  "navbar-bg" = "#ffffff",
+  "navbar-light-color" = "#002f63",
+  "navbar-light-hover-color" = "#003580"
 )
 
 metric_card <- function(title, value_output, note) {
@@ -39,17 +39,26 @@ metric_card <- function(title, value_output, note) {
 ui <- page_navbar(
   title = div(
     class = "brand-lockup",
-    span(class = "brand-mark", "NTOG"),
+    tags$img(
+      class = "brand-logo",
+      src = "ntog-logo.svg",
+      alt = "",
+      width = "42",
+      height = "42",
+      `aria-hidden` = "true"
+    ),
+    span(class = "brand-name", "NTOG"),
     span(class = "brand-title", "Nordic Lung Cancer Trends")
   ),
   id = "page",
+  fillable = FALSE,
   theme = app_theme,
   header = tagList(
     tags$head(
       tags$meta(
         name = "description",
         content = paste(
-          "Explore Nordic lung cancer incidence and mortality trends",
+          "Explore Nordic lung cancer incidence, mortality and MIR trends",
           "with presentation-ready exports and explicit provenance."
         )
       ),
@@ -72,7 +81,11 @@ ui <- page_navbar(
           radioButtons(
             "measure",
             "Measure",
-            choices = c("Mortality" = "Mortality", "Incidence" = "Incidence"),
+            choices = c(
+              "Mortality" = "Mortality",
+              "Incidence" = "Incidence",
+              "M:I ratio" = "MIR"
+            ),
             selected = "Mortality",
             inline = TRUE
           ),
@@ -147,7 +160,7 @@ ui <- page_navbar(
             metric_card(
               "Nordic spread",
               textOutput("rate_spread", inline = TRUE),
-              "Highest minus lowest rate"
+              textOutput("spread_note", inline = TRUE)
             ),
             metric_card(
               "Series selected",
@@ -238,6 +251,14 @@ ui <- page_navbar(
             tags$dt("Crude rate"),
             tags$dd(
               "Observed events divided by the population, expressed per 100,000."
+            ),
+            tags$dt("Mortality-to-incidence ratio (MIR)"),
+            tags$dd(
+              "The mortality rate divided by the incidence rate for the same",
+              "country, sex, year, cancer entity and rate definition. Values near",
+              "1.0 indicate deaths are nearly as frequent as diagnoses; lower",
+              "values may be consistent with better survival, earlier diagnosis",
+              "or more effective treatment, but MIR cannot distinguish the cause."
             )
           )
         ),
@@ -246,12 +267,18 @@ ui <- page_navbar(
           p(
             "NORDCAN advises using mortality rather than incidence when",
             "comparing Sweden with other Nordic countries for lung cancer.",
-            "The incidence view remains available for within-country exploration",
-            "and displays this limitation prominently."
+            "The incidence and MIR views remain available for exploration and",
+            "display this limitation prominently."
           ),
           p(
             "National coding, classification and registration practices can vary",
             "over time. Statistical patterns do not by themselves establish causes."
+          ),
+          p(
+            "MIR is a crude population indicator, not an individual risk measure",
+            "and not case-fatality. People dying in one year are not necessarily",
+            "the people diagnosed in that year. Age structure, screening, registry",
+            "quality, lead-time bias and competing mortality can distort comparisons."
           )
         )
       ),
@@ -291,10 +318,33 @@ ui <- page_navbar(
       )
     )
   ),
-  footer = div(
+  footer = tags$footer(
     class = "app-footer",
-    span("Nordic Thoracic Oncology Group"),
-    span("Research use · Verify outputs against the cited source")
+    div(
+      class = "app-footer-inner",
+      a(
+        class = "footer-logo-link",
+        href = "https://ntog.org/",
+        `aria-label` = "NTOG home",
+        tags$img(
+          src = "ntog-logo.svg",
+          alt = "Nordic Thoracic Oncology Group logo",
+          width = "56",
+          height = "56"
+        )
+      ),
+      p("Tools © 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use."),
+      p(
+        class = "footer-links",
+        a("Copyright & Licensing", href = "https://ntog.org/copyright.html"),
+        a("Privacy Policy", href = "https://ntog.org/privacy-policy.html"),
+        a("Terms of Service", href = "https://ntog.org/terms-of-service.html")
+      ),
+      p(
+        class = "footer-research-note",
+        "Research use · Verify outputs against the cited source"
+      )
+    )
   )
 )
 
@@ -313,7 +363,26 @@ server <- function(input, output, session) {
   })
 
   output$method_note <- renderUI({
-    if (identical(input$measure, "Incidence")) {
+    if (identical(input$measure, "MIR")) {
+      div(
+        class = "method-note warning",
+        div(class = "note-icon", "i"),
+        div(
+          strong("Population indicator — interpret cautiously"),
+          p(
+            "MIR = mortality rate ÷ incidence rate. A value near 1.0 means deaths",
+            "are nearly as frequent as new diagnoses in that period, but MIR is",
+            "not survival, individual risk or case-fatality."
+          ),
+          p(
+            "A lower MIR may be consistent with better survival, earlier diagnosis",
+            "or more effective treatment, but cannot identify which. MIR also",
+            "inherits limitations in both component rates, including NORDCAN's",
+            "Swedish incidence comparability caveat."
+          )
+        )
+      )
+    } else if (identical(input$measure, "Incidence")) {
       div(
         class = "method-note warning",
         div(class = "note-icon", "!"),
@@ -342,7 +411,7 @@ server <- function(input, output, session) {
   })
 
   output$chart_heading <- renderText({
-    paste(input$measure, "·", input$sex, "·", rate_label(input$statistic))
+    paste(measure_label(input$measure), "·", input$sex, "·", rate_label(input$statistic))
   })
 
   output$trend_plot <- renderPlot({
@@ -369,7 +438,16 @@ server <- function(input, output, session) {
     if (nrow(latest) < 2) {
       return("—")
     }
-    number(max(latest$rate) - min(latest$rate), accuracy = 0.1)
+    accuracy <- if (identical(input$measure, "MIR")) 0.01 else 0.1
+    number(max(latest$rate) - min(latest$rate), accuracy = accuracy)
+  })
+
+  output$spread_note <- renderText({
+    if (identical(input$measure, "MIR")) {
+      "Highest minus lowest ratio"
+    } else {
+      "Highest minus lowest rate"
+    }
   })
 
   output$series_count <- renderText({
@@ -377,17 +455,20 @@ server <- function(input, output, session) {
   })
 
   output$unit_text <- renderText({
-    rate_unit(input$statistic)
+    rate_unit(input$statistic, input$measure)
   })
 
   output$latest_table <- renderTable({
-    latest_summary() |>
+    accuracy <- if (identical(input$measure, "MIR")) 0.01 else 0.1
+    table <- latest_summary() |>
       transmute(
         Country = country,
         Year = year,
-        Rate = number(rate, accuracy = 0.1),
+        Value = number(rate, accuracy = accuracy),
         `Change from first selected year` = format_change(change_pct)
       )
+    names(table)[[3]] <- if (identical(input$measure, "MIR")) "MIR" else "Rate"
+    table
   }, striped = TRUE, bordered = FALSE, spacing = "s", align = "lrrr")
 
   output$download_png <- downloadHandler(

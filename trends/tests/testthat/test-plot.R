@@ -50,3 +50,36 @@ test_that("vector PDF and citation exports retain presentation provenance", {
   expect_true(any(grepl("Nordic standard population 2000", methods, fixed = TRUE)))
   expect_true(any(grepl("accessed 30 July 2026", methods, fixed = TRUE)))
 })
+
+test_that("MIR plot and methods state the ratio and its limitations", {
+  result <- filter_trends(
+    trend_data,
+    "MIR",
+    "Female",
+    NORDIC_COUNTRIES,
+    c(2000, 2024),
+    "asr_nordic_2000"
+  )
+  input <- list(
+    measure = "MIR",
+    sex = "Female",
+    countries = NORDIC_COUNTRIES,
+    years = c(2000, 2024),
+    statistic = "asr_nordic_2000"
+  )
+  plot <- make_trend_plot(
+    result,
+    "MIR",
+    "Female",
+    "ASR (Nordic 2000)",
+    c(2000, 2024)
+  )
+  methods <- build_methods_text(input)
+
+  expect_s3_class(plot, "ggplot")
+  expect_equal(plot$labels$title, "Mortality-to-incidence ratio for lung cancer")
+  expect_match(plot$labels$caption, "not case-fatality")
+  expect_true(any(grepl("MIR formula", methods, fixed = TRUE)))
+  expect_true(any(grepl("not case-fatality", methods, fixed = TRUE)))
+  expect_true(any(grepl("lead-time bias", methods, fixed = TRUE)))
+})

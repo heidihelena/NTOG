@@ -1,11 +1,13 @@
 # NTOG Nordic Lung Cancer Trends
 
-An interactive R Shiny application for exploring lung-cancer incidence and
-mortality trends in Denmark, Finland, Iceland, Norway and Sweden.
+An interactive R Shiny application for exploring lung-cancer incidence,
+mortality and mortality-to-incidence ratio (MIR) trends in Denmark, Finland,
+Iceland, Norway and Sweden.
 
 The app is designed for researchers who need to:
 
 - compare annual national trajectories by sex;
+- derive MIR from matched mortality and incidence rates;
 - distinguish crude and age-standardised rate definitions;
 - retain source, version, cancer definition and retrieval metadata;
 - export 16:9 PNG or vector PDF figures for presentations;
@@ -14,6 +16,13 @@ The app is designed for researchers who need to:
 Mortality is the default cross-country view. NORDCAN reports that Swedish
 lung-cancer incidence is not directly comparable with incidence in the other
 Nordic countries and recommends mortality for comparisons.
+
+MIR is calculated as the selected mortality rate divided by the corresponding
+incidence rate for the same country, sex, year and cancer entity. It is a crude
+population indicator, not individual risk, survival or case-fatality. Age
+structure, screening, registry quality, lead-time bias and competing mortality
+can distort comparisons. MIR also inherits the known Swedish incidence
+comparability limitation described by NORDCAN.
 
 ## Data
 

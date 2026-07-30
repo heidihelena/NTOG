@@ -1,16 +1,26 @@
 COUNTRY_COLOURS <- c(
-  Denmark = "#cf4b37",
-  Finland = "#007f73",
+  Denmark = "#c8102e",
+  Finland = "#003580",
   Iceland = "#7257a5",
-  Norway = "#1967a3",
-  Sweden = "#d69500"
+  Norway = "#0057b8",
+  Sweden = "#d9a900"
 )
 
 make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
+  is_mir <- identical(measure, "MIR")
   latest <- data |>
     dplyr::group_by(.data$country) |>
     dplyr::slice_max(.data$year, n = 1, with_ties = FALSE) |>
     dplyr::ungroup()
+
+  reference_line <- if (is_mir) {
+    geom_hline(
+      yintercept = 1,
+      colour = "#8a99a6",
+      linewidth = 0.55,
+      linetype = "dashed"
+    )
+  }
 
   ggplot(data, aes(
     x = .data$year,
@@ -18,6 +28,7 @@ make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
     colour = .data$country,
     group = .data$country
   )) +
+    reference_line +
     geom_line(linewidth = 1.15, lineend = "round") +
     geom_point(
       data = latest,
@@ -33,21 +44,38 @@ make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
       expand = expansion(mult = c(0.01, 0.02))
     ) +
     scale_y_continuous(
-      labels = label_number(accuracy = 1),
+      labels = label_number(accuracy = if (is_mir) 0.1 else 1),
       breaks = breaks_pretty(n = 6),
       expand = expansion(mult = c(0, 0.08))
     ) +
     labs(
       x = NULL,
-      y = paste0(statistic_label, "\nper 100,000 person-years"),
+      y = if (is_mir) {
+        paste0("Mortality-to-incidence ratio\nusing ", statistic_label)
+      } else {
+        paste0(statistic_label, "\nper 100,000 person-years")
+      },
       colour = NULL,
-      title = paste(measure, "from lung cancer"),
+      title = if (is_mir) {
+        "Mortality-to-incidence ratio for lung cancer"
+      } else {
+        paste(measure, "from lung cancer")
+      },
       subtitle = paste(sex, "·", min(data$year), "to", max(data$year)),
-      caption = paste(
-        "Lung (ICD-10 C33-C34)  |  NORDCAN 9.6",
-        "accessed 30 July 2026  |  nordcan.iarc.fr",
-        sep = "  ·  "
-      )
+      caption = if (is_mir) {
+        paste(
+          "MIR = mortality rate / incidence rate",
+          "population indicator, not case-fatality",
+          "NORDCAN 9.6, accessed 30 July 2026",
+          sep = "  ·  "
+        )
+      } else {
+        paste(
+          "Lung (ICD-10 C33-C34)  |  NORDCAN 9.6",
+          "accessed 30 July 2026  |  nordcan.iarc.fr",
+          sep = "  ·  "
+        )
+      }
     ) +
     theme_minimal(base_family = "sans", base_size = 12) +
     theme(
