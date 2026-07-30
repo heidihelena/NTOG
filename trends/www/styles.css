@@ -10,6 +10,7 @@
   --swedish-yellow-dark: #f2b400;
   --ntog-mist: #eef6fb;
   --ntog-muted: #607587;
+  --ntog-heading-font: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 body {
@@ -61,7 +62,7 @@ body {
 
 .brand-name {
   color: var(--ntog-navy-dark);
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: 1rem;
   font-weight: 750;
   letter-spacing: 0.02em;
@@ -70,7 +71,7 @@ body {
 .brand-title {
   border-left: 1px solid #d0d7df;
   color: var(--ntog-navy);
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: 0.93rem;
   font-weight: 650;
   padding-left: 0.8rem;
@@ -97,7 +98,7 @@ body {
 .control-heading h2,
 .card h2 {
   color: var(--ntog-ink);
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: 1.16rem;
   font-weight: 700;
   margin: 0.18rem 0 1rem;
@@ -190,7 +191,7 @@ body {
 
 .hero-panel h1,
 .methods-page h1 {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-weight: 700;
 }
 
@@ -220,7 +221,7 @@ body {
 
 .hero-badge a {
   color: #fff;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -297,7 +298,7 @@ body {
 
 .metric-value {
   color: var(--ntog-ink);
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: 1.65rem;
   font-weight: 700;
   line-height: 1.15;
@@ -460,7 +461,7 @@ dd {
 }
 
 .section-intro h1 {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--ntog-heading-font);
   font-size: clamp(1.55rem, 2.6vw, 2.3rem);
   font-weight: 700;
   letter-spacing: -0.03em;

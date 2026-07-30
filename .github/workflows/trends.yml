@@ -60,4 +60,27 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           context: trends
+          load: true
           push: false
+          tags: ntog-trends:smoke
+      - name: Verify container opens its HTTP port
+        run: |
+          container_id="$(docker run --detach \
+            --env PORT=3838 \
+            --publish 127.0.0.1:3838:3838 \
+            ntog-trends:smoke)"
+          trap 'docker rm --force "$container_id" >/dev/null' EXIT
+
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:3838/ >/dev/null; then
+              exit 0
+            fi
+            if [ "$(docker inspect --format '{{.State.Running}}' "$container_id")" != "true" ]; then
+              docker logs "$container_id"
+              exit 1
+            fi
+            sleep 1
+          done
+
+          docker logs "$container_id"
+          exit 1

@@ -33,8 +33,8 @@ app_theme <- bs_theme(
   fg = "#14283b",
   primary = "#0057b8",
   secondary = "#ffd21a",
-  base_font = font_google("Open Sans"),
-  heading_font = font_google("Montserrat"),
+  base_font = font_collection("system-ui", "Segoe UI", "sans-serif"),
+  heading_font = font_collection("Avenir Next", "Segoe UI", "sans-serif"),
   "navbar-bg" = "#ffffff",
   "navbar-light-color" = "#002f63",
   "navbar-light-hover-color" = "#003580"
