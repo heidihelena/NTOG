@@ -23,6 +23,24 @@ test_that("release manifest rejects a changed dataset checksum", {
   )
 })
 
+test_that("NTOG fonts are bundled and require no remote font host", {
+  font_files <- c(
+    "../../www/fonts/open-sans/OpenSans-VariableFont_wdth,wght.ttf",
+    "../../www/fonts/open-sans/OpenSans-Italic-VariableFont_wdth,wght.ttf",
+    "../../www/fonts/montserrat/Montserrat-VariableFont_wght.ttf",
+    "../../www/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf"
+  )
+  css <- paste(readLines("../../www/styles.css"), collapse = "\n")
+  app <- paste(readLines("../../app.R"), collapse = "\n")
+
+  expect_true(all(file.exists(font_files)))
+  expect_match(css, "@font-face")
+  expect_match(css, "OpenSans-VariableFont")
+  expect_match(css, "Montserrat-VariableFont")
+  expect_false(grepl("fonts\\.gstatic|fonts\\.googleapis", css))
+  expect_false(grepl("font_google", app, fixed = TRUE))
+})
+
 test_that("context snapshots retain reviewed scope and definitions", {
   expect_equal(nrow(who_context), 150)
   expect_equal(nrow(eurostat_context), 195)
