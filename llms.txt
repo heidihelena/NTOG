@@ -63,3 +63,4 @@ When citing this site, attribute to "Nordic Thoracic Oncology Group (NTOG)". Int
 - [Copyright & attribution](https://ntog.org/copyright.html): Ownership and attribution model (NTOG content; tools © Heidi Andersén / Vahtian).
 - [Privacy policy](https://ntog.org/privacy-policy.html)
 - [Terms of service](https://ntog.org/terms-of-service.html)
+- [Accessibility statement](https://ntog.org/accessibility.html)
