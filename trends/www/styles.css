@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Open Sans";
-  src: url("fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf")
-    format("truetype");
+  src: url("fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.woff2")
+    format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -9,8 +9,8 @@
 
 @font-face {
   font-family: "Open Sans";
-  src: url("fonts/open-sans/OpenSans-Italic-VariableFont_wdth%2Cwght.ttf")
-    format("truetype");
+  src: url("fonts/open-sans/OpenSans-Italic-VariableFont_wdth%2Cwght.woff2")
+    format("woff2");
   font-style: italic;
   font-weight: 100 900;
   font-display: swap;
@@ -18,8 +18,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("fonts/montserrat/Montserrat-VariableFont_wght.ttf")
-    format("truetype");
+  src: url("fonts/montserrat/Montserrat-VariableFont_wght.woff2")
+    format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -27,8 +27,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf")
-    format("truetype");
+  src: url("fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff2")
+    format("woff2");
   font-style: italic;
   font-weight: 100 900;
   font-display: swap;
