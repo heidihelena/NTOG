@@ -131,6 +131,16 @@ ui <- function(request) {
             choices = RATE_LABELS,
             selected = "asr_nordic_2000"
           ),
+          div(
+            class = "apply-block",
+            actionButton(
+              "apply_view",
+              "Show this selection",
+              icon = icon("arrow-right"),
+              class = "btn-apply"
+            ),
+            uiOutput("apply_state")
+          ),
           bookmarkButton(
             label = "Create shareable URL",
             icon = icon("link"),
@@ -700,32 +710,47 @@ server <- function(input, output, session) {
     )
   })
 
-  debounced_years <- debounce(reactive(input$years), 250)
-
-  selected_data <- reactive({
-    req(input$countries)
-
-    filter_trends(
-      trend_data,
+  pending_view <- reactive({
+    list(
       measure = input$measure,
       sex = input$sex,
       countries = input$countries,
-      years = debounced_years(),
-      statistic = input$statistic,
+      years = input$years,
+      statistic = input$statistic
+    )
+  })
+
+  view_state <- reactive({
+    req(input$countries)
+    pending_view()
+  }) |>
+    bindEvent(input$apply_view, ignoreNULL = FALSE)
+
+  output$apply_state <- renderUI({
+    if (identical(pending_view(), view_state())) {
+      span(class = "apply-note applied", "Showing this selection")
+    } else {
+      span(class = "apply-note changed", "Selection changed, not shown yet")
+    }
+  })
+
+  selected_data <- reactive({
+    view <- view_state()
+
+    filter_trends(
+      trend_data,
+      measure = view$measure,
+      sex = view$sex,
+      countries = view$countries,
+      years = view$years,
+      statistic = view$statistic,
       mir_cache = mir_cache
     )
   }) |>
-    bindCache(
-      input$measure,
-      input$sex,
-      input$countries,
-      debounced_years(),
-      input$statistic,
-      cache = "app"
-    )
+    bindCache(view_state(), cache = "app")
 
   output$method_note <- renderUI({
-    if (identical(input$measure, "MIR")) {
+    if (identical(view_state()$measure, "MIR")) {
       div(
         class = "method-note warning",
         div(class = "note-icon", "i"),
@@ -744,7 +769,7 @@ server <- function(input, output, session) {
           )
         )
       )
-    } else if (identical(input$measure, "Incidence")) {
+    } else if (identical(view_state()$measure, "Incidence")) {
       div(
         class = "method-note warning",
         div(class = "note-icon", "!"),
@@ -773,39 +798,25 @@ server <- function(input, output, session) {
   })
 
   output$chart_heading <- renderText({
-    paste(measure_label(input$measure), "·", input$sex, "·", rate_label(input$statistic))
+    paste(measure_label(view_state()$measure), "·", view_state()$sex, "·", rate_label(view_state()$statistic))
   })
 
   output$trend_plot <- renderPlot({
     validate(need(nrow(selected_data()) > 0, "No observations match this view."))
     make_trend_plot(
       selected_data(),
-      measure = input$measure,
-      sex = input$sex,
-      statistic_label = rate_label(input$statistic),
-      year_range = debounced_years()
+      measure = view_state()$measure,
+      sex = view_state()$sex,
+      statistic_label = rate_label(view_state()$statistic),
+      year_range = view_state()$years
     )
   }, res = 120) |>
-    bindCache(
-      input$measure,
-      input$sex,
-      input$countries,
-      debounced_years(),
-      input$statistic,
-      cache = "app"
-    )
+    bindCache(view_state(), cache = "app")
 
   latest_summary <- reactive({
     summarise_latest(selected_data())
   }) |>
-    bindCache(
-      input$measure,
-      input$sex,
-      input$countries,
-      debounced_years(),
-      input$statistic,
-      cache = "app"
-    )
+    bindCache(view_state(), cache = "app")
 
   output$latest_year <- renderText({
     latest_common_year(selected_data())
@@ -816,12 +827,12 @@ server <- function(input, output, session) {
     if (nrow(latest) < 2) {
       return("—")
     }
-    accuracy <- if (identical(input$measure, "MIR")) 0.01 else 0.1
+    accuracy <- if (identical(view_state()$measure, "MIR")) 0.01 else 0.1
     number(max(latest$rate) - min(latest$rate), accuracy = accuracy)
   })
 
   output$spread_note <- renderText({
-    if (identical(input$measure, "MIR")) {
+    if (identical(view_state()$measure, "MIR")) {
       "Highest minus lowest ratio"
     } else {
       "Highest minus lowest rate"
@@ -833,11 +844,11 @@ server <- function(input, output, session) {
   })
 
   output$unit_text <- renderText({
-    rate_unit(input$statistic, input$measure)
+    rate_unit(view_state()$statistic, view_state()$measure)
   })
 
   output$latest_table <- renderTable({
-    accuracy <- if (identical(input$measure, "MIR")) 0.01 else 0.1
+    accuracy <- if (identical(view_state()$measure, "MIR")) 0.01 else 0.1
     table <- latest_summary() |>
       transmute(
         Country = country,
@@ -845,7 +856,7 @@ server <- function(input, output, session) {
         Value = number(rate, accuracy = accuracy),
         `Change from first selected year` = format_change(change_pct)
       )
-    names(table)[[3]] <- if (identical(input$measure, "MIR")) "MIR" else "Rate"
+    names(table)[[3]] <- if (identical(view_state()$measure, "MIR")) "MIR" else "Rate"
     table
   }, striped = TRUE, bordered = FALSE, spacing = "s", align = "lrrr")
 
@@ -1100,15 +1111,7 @@ server <- function(input, output, session) {
     release_label(release_manifest)
   })
 
-  export_state <- reactive({
-    list(
-      measure = input$measure,
-      sex = input$sex,
-      countries = input$countries,
-      years = debounced_years(),
-      statistic = input$statistic
-    )
-  })
+  export_state <- view_state
 
   output$download_png <- downloadHandler(
     filename = function() export_filename(export_state(), "png"),
