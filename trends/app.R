@@ -670,13 +670,20 @@ ui <- function(request) {
       p("Tools © 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use."),
       p(
         class = "footer-links",
+        a("NTOG home", href = "https://ntog.org/"),
         a("Copyright & Licensing", href = "https://ntog.org/copyright.html"),
         a("Privacy Policy", href = "https://ntog.org/privacy-policy.html"),
-        a("Terms of Service", href = "https://ntog.org/terms-of-service.html")
+        a("Terms of Service", href = "https://ntog.org/terms-of-service.html"),
+        a(
+          "SourceVahti",
+          href = "https://sourcevahti.vahtian.com/",
+          target = "_blank",
+          rel = "noopener"
+        )
       ),
       p(
         class = "footer-research-note",
-        "Research use · Verify outputs against the cited source"
+        "Research use · Check outputs against the cited source"
       )
     )
   )
