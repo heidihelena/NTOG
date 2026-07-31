@@ -233,6 +233,60 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(255, 210, 26, 0.45);
 }
 
+.apply-block {
+  border-top: 1px solid #edf1f3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.btn-apply {
+  background: var(--swedish-yellow);
+  border: 1px solid var(--swedish-yellow-dark);
+  border-radius: 0.4rem;
+  color: var(--ntog-navy-dark);
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.6rem 0.9rem;
+  width: 100%;
+}
+
+.btn-apply:hover {
+  background: var(--swedish-yellow-dark);
+  border-color: var(--swedish-yellow-dark);
+  color: var(--ntog-navy-dark);
+}
+
+.btn-apply:focus-visible {
+  outline: 3px solid var(--ntog-navy);
+  outline-offset: 2px;
+}
+
+.apply-note {
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.apply-note.applied {
+  color: var(--ntog-muted);
+}
+
+.apply-note.changed {
+  color: var(--ntog-navy);
+}
+
+.apply-note.changed::before {
+  background: var(--swedish-yellow);
+  border-radius: 50%;
+  content: "";
+  display: inline-block;
+  height: 0.55rem;
+  margin-right: 0.4rem;
+  width: 0.55rem;
+}
+
 .sidebar-help {
   align-items: flex-start;
   background: #eef6fb;
