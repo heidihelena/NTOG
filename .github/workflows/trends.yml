@@ -56,6 +56,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate Render Blueprint paths
+        run: ruby trends/scripts/verify_render_blueprint.rb
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6
         with:
@@ -84,22 +86,3 @@ jobs:
 
           docker logs "$container_id"
           exit 1
-
-  deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [r-tests, docker-build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ask Render to build this commit
-        env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
-        run: |
-          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
-            echo "No RENDER_DEPLOY_HOOK secret set, so nothing was triggered."
-            echo "Add the service's deploy hook URL as a repository secret to"
-            echo "make merges to main reach trends.ntog.org."
-            exit 0
-          fi
-          curl --fail --silent --show-error --output /dev/null \
-            --request POST "$RENDER_DEPLOY_HOOK"
-          echo "Render deploy triggered."

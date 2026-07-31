@@ -4,15 +4,12 @@ services:
     runtime: docker
     plan: free
     region: frankfurt
-    # Render resolves these from the repository root, not from rootDir, so
-    # they have to name the subdirectory themselves.
-    dockerfilePath: ./trends/Dockerfile
-    dockerContext: ./trends
+    # Docker paths are relative to rootDir for a monorepo service. Keep all
+    # three fields together or Render can look for trends/trends/Dockerfile.
+    rootDir: trends
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /
     autoDeployTrigger: checksPass
-    buildFilters:
-      paths:
-        - trends/**
-        - render.yaml
     domains:
       - trends.ntog.org
