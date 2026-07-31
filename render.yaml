@@ -4,10 +4,15 @@ services:
     runtime: docker
     plan: free
     region: frankfurt
-    rootDir: trends
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
+    # Render resolves these from the repository root, not from rootDir, so
+    # they have to name the subdirectory themselves.
+    dockerfilePath: ./trends/Dockerfile
+    dockerContext: ./trends
     healthCheckPath: /
     autoDeployTrigger: checksPass
+    buildFilters:
+      paths:
+        - trends/**
+        - render.yaml
     domains:
       - trends.ntog.org
