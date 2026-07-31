@@ -114,11 +114,17 @@ The repository Blueprint creates the Docker service. Manual configuration uses:
 | Runtime | Docker |
 | Root Directory | `trends` |
 | Dockerfile Path | `./Dockerfile` |
+| Docker Build Context | `.` |
 | Health Check Path | `/` |
 
 The container reads Render's `PORT` and binds to `0.0.0.0`. The public custom
 domain is `trends.ntog.org`; its DNS-only CNAME points to the canonical hostname
 shown by Render, currently `ntog-trends.onrender.com`.
+
+Dockerfile Path and Docker Build Context are relative to Root Directory. Do not
+combine `Root Directory = trends` with `./trends/Dockerfile`, because Render
+would resolve that as `trends/trends/Dockerfile`. The Blueprint uses Render's
+native `checksPass` autodeploy; no separate deploy-hook secret is required.
 
 ## Licensing and attribution
 
