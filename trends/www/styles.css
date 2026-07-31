@@ -470,6 +470,19 @@ body {
   padding: 1.15rem 1.3rem 0.85rem;
 }
 
+.chart-card .shiny-plot-output {
+  aspect-ratio: 16 / 9;
+  height: auto !important;
+  min-height: 240px;
+  width: 100%;
+}
+
+.chart-card .shiny-plot-output img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .chart-card .card-header > div {
   align-items: center;
   display: flex;
@@ -713,6 +726,42 @@ dd {
 }
 
 @media (max-width: 900px) {
+  .bslib-sidebar-layout {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto;
+  }
+
+  .bslib-sidebar-layout > .sidebar {
+    grid-area: 1 / 1 / 2 / 2 !important;
+    max-width: none;
+    width: auto;
+  }
+
+  .bslib-sidebar-layout > .main {
+    grid-area: 2 / 1 / 3 / 2 !important;
+    padding-top: 1rem;
+  }
+
+  .bslib-sidebar-layout > .collapse-toggle {
+    display: none;
+  }
+
+  .bslib-sidebar-layout > .sidebar .sidebar-content {
+    column-gap: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bslib-sidebar-layout > .sidebar .sidebar-content > .control-heading,
+  .bslib-sidebar-layout > .sidebar .sidebar-content > .sidebar-help {
+    grid-column: 1 / -1;
+  }
+
+  .bslib-sidebar-layout > .sidebar .sidebar-content > .btn {
+    align-self: start;
+    margin-top: 1rem;
+  }
+
   .metric-grid {
     grid-template-columns: 1fr;
   }

@@ -86,7 +86,7 @@ ui <- function(request) {
       layout_sidebar(
         sidebar = sidebar(
           width = 318,
-          open = "always",
+          open = list(desktop = "open", mobile = "always-above"),
           div(
             class = "control-heading",
             span(class = "eyebrow", "VIEW"),
@@ -219,7 +219,7 @@ ui <- function(request) {
                 )
               )
             ),
-            plotOutput("trend_plot", height = "560px")
+            plotOutput("trend_plot", height = "100%")
           ),
           layout_columns(
             col_widths = c(7, 5),
@@ -276,7 +276,7 @@ ui <- function(request) {
       layout_sidebar(
         sidebar = sidebar(
           width = 300,
-          open = "always",
+          open = list(desktop = "open", mobile = "always-above"),
           radioButtons(
             "compare_measure",
             "Measure",
@@ -342,7 +342,7 @@ ui <- function(request) {
               span(class = "eyebrow", "RELATIVE CHANGE"),
               h2("Country trajectories indexed to 100")
             ),
-            plotOutput("index_plot", height = "510px")
+            plotOutput("index_plot", height = "100%")
           ),
           layout_columns(
             col_widths = c(8, 4),
@@ -352,7 +352,7 @@ ui <- function(request) {
                 span(class = "eyebrow", "SEX COMPARISON"),
                 h2("Female and male trajectories")
               ),
-              plotOutput("sex_plot", height = "450px")
+              plotOutput("sex_plot", height = "100%")
             ),
             card(
               class = "data-card",
@@ -383,7 +383,7 @@ ui <- function(request) {
       layout_sidebar(
         sidebar = sidebar(
           width = 300,
-          open = "always",
+          open = list(desktop = "open", mobile = "always-above"),
           selectInput(
             "profile_country",
             "Country",
@@ -425,7 +425,7 @@ ui <- function(request) {
               span(class = "eyebrow", "NORDCAN OUTCOME"),
               h2(textOutput("profile_heading", inline = TRUE))
             ),
-            plotOutput("profile_plot", height = "520px")
+            plotOutput("profile_plot", height = "100%")
           ),
           layout_columns(
             col_widths = c(6, 6),
@@ -466,7 +466,7 @@ ui <- function(request) {
       layout_sidebar(
         sidebar = sidebar(
           width = 300,
-          open = "always",
+          open = list(desktop = "open", mobile = "always-above"),
           radioButtons(
             "context_sex",
             "Sex",
@@ -518,7 +518,7 @@ ui <- function(request) {
               span(class = "eyebrow", "WHO GHO"),
               h2("Current tobacco-use prevalence")
             ),
-            plotOutput("who_context_plot", height = "540px")
+            plotOutput("who_context_plot", height = "100%")
           ),
           card(
             class = "data-card",
