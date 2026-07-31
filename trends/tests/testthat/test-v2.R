@@ -199,3 +199,28 @@ test_that("research metadata carries selection and immutable release", {
   expect_true(file.exists(output))
   expect_match(paste(readLines(output), collapse = "\n"), release_manifest$release_id)
 })
+
+test_that("non-ASCII labels survive a session that starts without a UTF-8 locale", {
+  original <- Sys.getlocale("LC_CTYPE")
+  on.exit(suppressWarnings(Sys.setlocale("LC_CTYPE", original)), add = TRUE)
+
+  skip_if(
+    !nzchar(suppressWarnings(Sys.setlocale("LC_CTYPE", "C"))),
+    "This platform has no C locale to start from."
+  )
+
+  expect_true(ensure_utf8_locale())
+  expect_true(l10n_info()[["UTF-8"]])
+
+  methods <- build_methods_text(
+    list(
+      measure = "Mortality",
+      sex = "Female",
+      countries = NORDIC_COUNTRIES,
+      years = c(1980, 2024),
+      statistic = "asr_nordic_2000"
+    )
+  )
+
+  expect_true(any(grepl("ICD-10 C33–C34", methods, fixed = TRUE)))
+})
