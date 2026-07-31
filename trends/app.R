@@ -5,6 +5,9 @@ library(readr)
 library(scales)
 library(shiny)
 
+source("R/locale.R", local = TRUE)
+ensure_utf8_locale()
+
 source("R/release.R", local = TRUE)
 source("R/data.R", local = TRUE)
 source("R/context.R", local = TRUE)

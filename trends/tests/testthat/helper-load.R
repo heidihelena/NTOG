@@ -3,6 +3,9 @@ library(ggplot2)
 library(readr)
 library(scales)
 
+source("../../R/locale.R")
+ensure_utf8_locale()
+
 source("../../R/release.R")
 source("../../R/data.R")
 source("../../R/context.R")
