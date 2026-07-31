@@ -25,10 +25,10 @@ test_that("release manifest rejects a changed dataset checksum", {
 
 test_that("NTOG fonts are bundled and require no remote font host", {
   font_files <- c(
-    "../../www/fonts/open-sans/OpenSans-VariableFont_wdth,wght.ttf",
-    "../../www/fonts/open-sans/OpenSans-Italic-VariableFont_wdth,wght.ttf",
-    "../../www/fonts/montserrat/Montserrat-VariableFont_wght.ttf",
-    "../../www/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf"
+    "../../www/fonts/open-sans/OpenSans-VariableFont_wdth,wght.woff2",
+    "../../www/fonts/open-sans/OpenSans-Italic-VariableFont_wdth,wght.woff2",
+    "../../www/fonts/montserrat/Montserrat-VariableFont_wght.woff2",
+    "../../www/fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff2"
   )
   css <- paste(readLines("../../www/styles.css"), collapse = "\n")
   app <- paste(readLines("../../app.R"), collapse = "\n")
