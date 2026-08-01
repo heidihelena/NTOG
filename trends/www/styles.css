@@ -674,11 +674,9 @@ dd {
 }
 
 .footer-logo-link img {
-  background: #fff;
-  border-radius: 50%;
   display: inline-block;
   height: 56px;
-  padding: 6px;
+  margin-bottom: 0.75rem;
   width: 56px;
 }
 

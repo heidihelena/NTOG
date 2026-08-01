@@ -238,7 +238,7 @@ ui <- function(request) {
               class = "provenance-card",
               card_header(
                 span(class = "eyebrow", "PROVENANCE"),
-                h2("Carry the source with you")
+                h2("Sources and definitions")
               ),
               p(
                 "Every export includes the cancer definition, rate definition,",
