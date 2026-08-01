@@ -210,6 +210,14 @@ test_that("research metadata carries selection and immutable release", {
   write_selection_metadata(output, input, release_manifest)
 
   expect_equal(metadata$cancer$icd10, "C33-C34")
+  expect_equal(
+    names(metadata$visual_encoding$country_identity),
+    NORDIC_COUNTRIES
+  )
+  expect_equal(
+    metadata$visual_encoding$country_identity$Sweden$linetype,
+    "longdash"
+  )
   expect_equal(metadata$release$release_id, release_manifest$release_id)
   expect_true(file.exists(output))
   expect_match(paste(readLines(output), collapse = "\n"), release_manifest$release_id)

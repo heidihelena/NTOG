@@ -1,3 +1,52 @@
+test_that("Nordic countries keep a fixed colour and form identity", {
+  expect_equal(
+    COUNTRY_IDENTITIES$country,
+    c("Denmark", "Finland", "Iceland", "Norway", "Sweden")
+  )
+  expect_equal(
+    unname(COUNTRY_COLOURS),
+    c("#C8102E", "#0057B8", "#24987C", "#7A71E1", "#B3731E")
+  )
+  expect_equal(unname(COUNTRY_SHAPES), c(16, 15, 17, 18, 8))
+  expect_equal(
+    unname(COUNTRY_LINETYPES),
+    c("solid", "dashed", "dotted", "dotdash", "longdash")
+  )
+  expect_length(unique(COUNTRY_COLOURS), 5)
+  expect_length(unique(COUNTRY_SHAPES), 5)
+  expect_length(unique(COUNTRY_LINETYPES), 5)
+
+  result <- filter_trends(
+    trend_data,
+    "Mortality",
+    "Female",
+    c("Finland", "Sweden"),
+    c(2000, 2024),
+    "asr_nordic_2000"
+  )
+  plot <- make_trend_plot(
+    result,
+    "Mortality",
+    "Female",
+    "ASR (Nordic 2000)",
+    c(2000, 2024)
+  )
+  built <- ggplot_build(plot)
+
+  expect_equal(
+    built$plot$scales$get_scales("colour")$map(c("Finland", "Sweden")),
+    c("#0057B8", "#B3731E")
+  )
+  expect_equal(
+    built$plot$scales$get_scales("shape")$map(c("Finland", "Sweden")),
+    c(15, 8)
+  )
+  expect_equal(
+    built$plot$scales$get_scales("linetype")$map(c("Finland", "Sweden")),
+    c("dashed", "longdash")
+  )
+})
+
 test_that("presentation plot can be rendered as a 16:9 PNG", {
   result <- filter_trends(
     trend_data,

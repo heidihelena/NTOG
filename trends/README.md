@@ -29,6 +29,26 @@ Presentation exports include PNG, vector PDF, editable PowerPoint, selected CSV
 and a methods citation. The research pack is a ZIP containing all of those plus
 SVG, selection/provenance JSON and the exact data-release manifest.
 
+## Country graph identity
+
+Every country keeps the same colour, endpoint marker and line type across the
+Explore, Compare and WHO context charts, including filtered views and exported
+figures. Colour is therefore never the only country cue.
+
+| Country | Colour | Marker | Line type |
+| --- | --- | --- | --- |
+| Denmark | `#C8102E` | Circle | Solid |
+| Finland | `#0057B8` | Square | Dashed |
+| Iceland | `#24987C` | Triangle | Dotted |
+| Norway | `#7A71E1` | Diamond | Dash-dot |
+| Sweden | `#B3731E` | Star | Long-dash |
+
+The red and blue are exact NTOG logo anchors. Sweden uses a darker gold rather
+than the bright logo yellow so thin marks remain visible against white. The
+five colours were audited with PaletteCore for line use on white; the audit
+emits no package-threshold warnings. These diagnostics are design checks, not
+universal human-performance guarantees.
+
 Mortality is the default cross-country view. NORDCAN reports that Swedish
 lung-cancer incidence is not directly comparable with incidence in the other
 Nordic countries and recommends mortality for comparisons.
