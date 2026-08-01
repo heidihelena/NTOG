@@ -1,10 +1,37 @@
-COUNTRY_COLOURS <- c(
-  Denmark = "#c8102e",
-  Finland = "#003580",
-  Iceland = "#7257a5",
-  Norway = "#0057b8",
-  Sweden = "#d9a900"
+COUNTRY_IDENTITIES <- data.frame(
+  country = c("Denmark", "Finland", "Iceland", "Norway", "Sweden"),
+  colour = c("#C8102E", "#0057B8", "#24987C", "#7A71E1", "#B3731E"),
+  marker = c("circle", "square", "triangle", "diamond", "star"),
+  shape = c(16, 15, 17, 18, 8),
+  linetype = c("solid", "dashed", "dotted", "dotdash", "longdash"),
+  stringsAsFactors = FALSE
 )
+
+COUNTRY_COLOURS <- setNames(
+  COUNTRY_IDENTITIES$colour,
+  COUNTRY_IDENTITIES$country
+)
+COUNTRY_SHAPES <- setNames(
+  COUNTRY_IDENTITIES$shape,
+  COUNTRY_IDENTITIES$country
+)
+COUNTRY_LINETYPES <- setNames(
+  COUNTRY_IDENTITIES$linetype,
+  COUNTRY_IDENTITIES$country
+)
+
+country_identity_metadata <- function() {
+  records <- lapply(seq_len(nrow(COUNTRY_IDENTITIES)), function(index) {
+    identity <- COUNTRY_IDENTITIES[index, , drop = FALSE]
+    list(
+      colour = identity$colour[[1]],
+      marker = identity$marker[[1]],
+      ggplot_shape = identity$shape[[1]],
+      linetype = identity$linetype[[1]]
+    )
+  })
+  setNames(records, COUNTRY_IDENTITIES$country)
+}
 
 make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
   is_mir <- identical(measure, "MIR")
@@ -29,15 +56,20 @@ make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
     group = .data$country
   )) +
     reference_line +
-    geom_line(linewidth = 1.15, lineend = "round") +
+    geom_line(
+      aes(linetype = .data$country),
+      linewidth = 1.15,
+      lineend = "round"
+    ) +
     geom_point(
       data = latest,
-      size = 2.8,
-      stroke = 0.8,
-      shape = 21,
-      fill = "white"
+      aes(shape = .data$country),
+      size = 3.1,
+      stroke = 0.9
     ) +
     scale_colour_manual(values = COUNTRY_COLOURS, drop = FALSE) +
+    scale_shape_manual(values = COUNTRY_SHAPES, drop = FALSE) +
+    scale_linetype_manual(values = COUNTRY_LINETYPES, drop = FALSE) +
     scale_x_continuous(
       breaks = scales::breaks_pretty(n = 8),
       limits = year_range,
@@ -56,6 +88,8 @@ make_trend_plot <- function(data, measure, sex, statistic_label, year_range) {
         paste0(statistic_label, "\nper 100,000 person-years")
       },
       colour = NULL,
+      shape = NULL,
+      linetype = NULL,
       title = if (is_mir) {
         "Mortality-to-incidence ratio for lung cancer"
       } else {
@@ -131,15 +165,20 @@ make_index_plot <- function(data, measure, sex, statistic_label, year_range) {
       linewidth = 0.55,
       linetype = "dashed"
     ) +
-    geom_line(linewidth = 1.15, lineend = "round") +
+    geom_line(
+      aes(linetype = .data$country),
+      linewidth = 1.15,
+      lineend = "round"
+    ) +
     geom_point(
       data = latest,
-      size = 2.8,
-      stroke = 0.8,
-      shape = 21,
-      fill = "white"
+      aes(shape = .data$country),
+      size = 3.1,
+      stroke = 0.9
     ) +
     scale_colour_manual(values = COUNTRY_COLOURS, drop = FALSE) +
+    scale_shape_manual(values = COUNTRY_SHAPES, drop = FALSE) +
+    scale_linetype_manual(values = COUNTRY_LINETYPES, drop = FALSE) +
     scale_x_continuous(
       breaks = scales::breaks_pretty(n = 8),
       limits = year_range,
@@ -154,6 +193,8 @@ make_index_plot <- function(data, measure, sex, statistic_label, year_range) {
       x = NULL,
       y = "Index\n(first selected year = 100)",
       colour = NULL,
+      shape = NULL,
+      linetype = NULL,
       title = paste(measure_label(measure), "relative change"),
       subtitle = paste(
         sex,
@@ -239,18 +280,26 @@ make_who_context_plot <- function(data, sex, year_range) {
       colour = NA,
       show.legend = FALSE
     ) +
-    geom_line(linewidth = 1.05, lineend = "round") +
+    geom_line(
+      aes(linetype = .data$country),
+      linewidth = 1.05,
+      lineend = "round"
+    ) +
     geom_point(
       data = latest,
-      aes(shape = .data$status),
-      size = 2.9,
-      stroke = 0.8,
-      fill = "white"
+      aes(shape = .data$country, alpha = .data$status),
+      size = 3.1,
+      stroke = 0.9
     ) +
     scale_colour_manual(values = COUNTRY_COLOURS, drop = FALSE) +
     scale_fill_manual(values = COUNTRY_COLOURS, drop = FALSE) +
+    scale_linetype_manual(values = COUNTRY_LINETYPES, drop = FALSE) +
     scale_shape_manual(
-      values = c(modelled_estimate = 21, projected = 24),
+      values = COUNTRY_SHAPES,
+      drop = FALSE
+    ) +
+    scale_alpha_manual(
+      values = c(modelled_estimate = 1, projected = 0.55),
       labels = c(modelled_estimate = "Modelled estimate", projected = "Projection")
     ) +
     scale_x_continuous(
@@ -268,6 +317,8 @@ make_who_context_plot <- function(data, sex, year_range) {
       y = "Current tobacco use\nage-standardised (%)",
       colour = NULL,
       shape = NULL,
+      linetype = NULL,
+      alpha = "Latest point status",
       title = "WHO tobacco-use context",
       subtitle = paste(sex, "· shaded bands are 95% uncertainty intervals"),
       caption = paste(

@@ -121,6 +121,20 @@ build_methods_text <- function(input, manifest = NULL) {
       character(0)
     },
     "",
+    "Country graph identity",
+    "----------------------",
+    vapply(
+      seq_len(nrow(COUNTRY_IDENTITIES)),
+      function(index) {
+        identity <- COUNTRY_IDENTITIES[index, , drop = FALSE]
+        paste0(
+          identity$country[[1]], ": ", identity$colour[[1]], ", ",
+          identity$marker[[1]], ", ", identity$linetype[[1]]
+        )
+      },
+      character(1)
+    ),
+    "",
     "Recommended source reference",
     "----------------------------",
     source_reference,
@@ -205,6 +219,9 @@ selection_metadata <- function(input, manifest) {
     cancer = list(
       name = "Lung cancer",
       icd10 = "C33-C34"
+    ),
+    visual_encoding = list(
+      country_identity = country_identity_metadata()
     ),
     release = manifest,
     application = "https://trends.ntog.org/",
