@@ -41,6 +41,21 @@ test_that("NTOG fonts are bundled and require no remote font host", {
   expect_false(grepl("font_google", app, fixed = TRUE))
 })
 
+test_that("research copy is formal and the footer logo stays transparent", {
+  css <- paste(readLines("../../www/styles.css"), collapse = "\n")
+  app <- paste(readLines("../../app.R"), collapse = "\n")
+  footer_logo_rule <- regmatches(
+    css,
+    regexpr("\\.footer-logo-link img\\s*\\{[^}]*\\}", css, perl = TRUE)
+  )
+
+  expect_false(grepl("Carry the source with you", app, fixed = TRUE))
+  expect_match(app, "Sources and definitions", fixed = TRUE)
+  expect_length(footer_logo_rule, 1)
+  expect_false(grepl("background", footer_logo_rule, fixed = TRUE))
+  expect_false(grepl("padding", footer_logo_rule, fixed = TRUE))
+})
+
 test_that("context snapshots retain reviewed scope and definitions", {
   expect_equal(nrow(who_context), 150)
   expect_equal(nrow(eurostat_context), 195)
