@@ -149,6 +149,25 @@
       font-weight: 700;
     }
 
+    .tier-card__soldout {
+      display: inline-block;
+      margin-top: 0.6rem;
+      margin-right: 0.4rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #74101f;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tier-card--sold .tier-card__price {
+      opacity: 0.75;
+    }
+
     .tier-card__body {
       padding: 1.3rem 1.5rem 1.5rem;
       flex: 1 1 auto;
@@ -506,10 +525,11 @@
         <div class="tier-grid">
 
           <!-- Platinum -->
-          <div class="tier-card tier-card--platinum">
+          <div class="tier-card tier-card--platinum tier-card--sold">
             <div class="tier-card__head">
               <h3 class="tier-card__name">Platinum Sponsor</h3>
               <p class="tier-card__price">DKK 125,000 <small>excl. 25% VAT</small></p>
+              <span class="tier-card__soldout">Sold out</span>
               <span class="tier-card__limit">Maximum 1 sponsor</span>
             </div>
             <div class="tier-card__body">
