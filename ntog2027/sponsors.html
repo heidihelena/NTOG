@@ -249,6 +249,16 @@
       max-width: 260px;
       height: auto;
     }
+
+    /* Square marks: cap the mark smaller than a wordmark so it reads at the same
+       optical size, and fix the card to the wordmark-card footprint
+       (side padding + image cap + borders) so the tiers stay aligned. */
+    .sponsor-logo--square {
+      width: calc(4rem + 260px + 2px);
+      max-width: 100%;
+    }
+
+    .sponsor-logo--square img { max-width: 80px; }
   </style>
 <script type="application/ld+json">
 {
@@ -494,6 +504,19 @@
                rel="noopener noreferrer"
                aria-label="Immedica Pharma AB — visit immedica.com (opens in a new tab)">
               <img src="/ntog2027/logos/immedica-pharma.png" alt="Immedica Pharma AB" width="1341" height="364" loading="lazy">
+            </a>
+          </div>
+        </div>
+
+        <div class="sponsor-tier">
+          <p class="sponsor-tier__label">Exhibitor</p>
+          <div class="sponsor-grid">
+            <a class="sponsor-logo sponsor-logo--square"
+               href="https://www.bayer.dk"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Bayer — visit bayer.dk (opens in a new tab)">
+              <img src="/ntog2027/logos/bayer.svg" alt="Bayer" width="289" height="289" loading="lazy">
             </a>
           </div>
         </div>
