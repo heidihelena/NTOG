@@ -492,11 +492,11 @@ function regBlock(id){
   }).join('');
   return `<table class="regtab"><tr><th>Registry</th><th>Status</th><th>Reference in the national report</th><th>Report year</th></tr>${rows}</table>`+REGLEGEND;
 }
-const REGLEGEND='<p class="reglegend"><b>Published</b> — the registry publishes this as an indicator in its national report. '+
- '<b>Data held</b> — the registry holds the data but publishes no indicator. '+
- '<b>No data</b> — the registry reports no data for this. '+
- '<b>Not assessed</b> — not yet checked for this registry (this is not evidence of absence).</p>'+
- '<p class="regprov">Provisional. Compiled from the most recent national registry reports available at the time of assessment; the report year is stated per cell because it differs between registries. A registry row is matched to this indicator only where the measured concept is the same — where the registry uses a different denominator this is stated explicitly, and those figures are not directly comparable. Country leads have not yet checked these entries.</p>';
+const REGLEGEND='<p class="reglegend"><b>Published</b>: the registry publishes this as an indicator in its national report. '+
+ '<b>Data held</b>: the registry holds the data but publishes no indicator. '+
+ '<b>No data</b>: the registry reports no data for this. '+
+ '<b>Not assessed</b>: not yet checked for this registry. This is not evidence of absence.</p>'+
+ '<p class="regprov">Provisional. Compiled from the most recent national registry reports available at the time of assessment. The report year is stated per cell because it differs between registries. A registry row is matched to this indicator only where the measured concept is the same. Where the registry uses a different denominator this is stated explicitly, and those figures are not directly comparable. Country leads have not yet checked these entries.</p>';
 function showDetail(e){const d=document.getElementById("evdetail"); d.classList.add("open");
   d.innerHTML=`<div style="font-size:.7rem;color:var(--muted);font-weight:700">${e.id}${e.core?' · CORE SET':''}</div>
     <h3 style="margin:2px 0 8px;color:var(--navy-d)">${e.name}</h3>
