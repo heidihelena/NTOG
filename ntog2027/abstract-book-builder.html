@@ -514,7 +514,7 @@
       results: ["results","result","findings"],
       conclusions: ["conclusions","conclusion","summary"],
       body: ["body","abstract","abstracttext","text","content"],
-      coi: ["coi","conflict","conflicts","conflictofinterest","disclosure","disclosures"],
+      coi: ["coi","conflict","conflicts","conflictofinterest","conflictsofinterest","disclosure","disclosures"],
       funding: ["funding","grant","grants","support"],
       figure1: ["figure1","fig1","image1","img1","table1","tab1"],
       figure1_caption: ["figure1caption","fig1caption","caption1","fig1cap"],
@@ -524,7 +524,7 @@
       figure3_caption: ["figure3caption","fig3caption","caption3","fig3cap"],
       poster_file: ["posterfile","poster","posterpdf","posterurl","eposter","eposterfile","posterlink"],
       poster_thumb: ["posterthumb","posterthumbnail","thumb","thumbnail","posterimage","preview"],
-      publish_consent: ["publishconsent","consent","consenttopublish","publishonline","permission","posterconsent"]
+      publish_consent: ["publishconsent","consent","consenttopublish","consenttopublishonline","publishonline","permission","posterconsent"]
     };
     state.map = {};
     var used = {};
@@ -1018,6 +1018,7 @@
       '@font-face{font-family:"Open Sans";src:url("/fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf") format("truetype");font-weight:100 900;font-display:swap}',
       ":root{--dk-red:#c8102e;--dk-red-dark:#74101f;--dk-red-deep:#260006;--dk-red-soft:#fff1f3;--dk-red-border:#f2b8c2;--ink:#1f2933;--muted:#52606d;--faint:#697586;--line:#e5e7eb}",
       "*{box-sizing:border-box}",
+      "[hidden]{display:none !important}",   // .card sets display:flex, which would otherwise beat the hidden attribute
       'body{margin:0;font-family:"Open Sans","Segoe UI",Arial,sans-serif;color:var(--ink);background:#f6f7f8;line-height:1.55}',
       'h1,h2,h3{font-family:"Montserrat",Arial,sans-serif}',
       "a{color:var(--dk-red-dark)}",
@@ -1127,12 +1128,15 @@
     var enc = new TextEncoder(), parts = [], central = [], offset = 0;
     function u16(v) { return [v & 255, (v >>> 8) & 255]; }
     function u32(v) { return [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]; }
+    var now = new Date();
+    var dosTime = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+    var dosDate = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
     files.forEach(function (f) {
       var name = enc.encode(f.name), data = enc.encode(f.text), crc = crc32(data);
-      var local = u32(0x04034b50).concat(u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+      var local = u32(0x04034b50).concat(u16(20), u16(0x0800), u16(0), u16(dosTime), u16(dosDate),
         u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0));
       parts.push(new Uint8Array(local), name, data);
-      central.push(new Uint8Array(u32(0x02014b50).concat(u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+      central.push(new Uint8Array(u32(0x02014b50).concat(u16(20), u16(20), u16(0x0800), u16(0), u16(dosTime), u16(dosDate),
         u32(crc), u32(data.length), u32(data.length), u16(name.length),
         u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset))), name);
       offset += local.length + name.length + data.length;
