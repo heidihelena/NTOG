@@ -81,6 +81,19 @@ a `README.txt`.
 were left out. With no such column mapped, everything in the current view is exported, so map
 the column, or filter by hand, before publishing anyone's poster.
 
+## Test data
+
+`abstract-testdata.csv` is a synthetic 18-row export shaped like a real form download:
+form-style column headers, quoted fields, Nordic diacritics, long author lists, two rows
+without publish consent, three without a poster file, two groups submitting the same title,
+and one title long enough to be truncated in the filename. Every author, institution and
+funder in it is an invented placeholder, and every number is made up. Nothing in the file
+is a real submission.
+
+Use it to check the builder after a change: drop it on the dropzone, build, then export both
+the book and the gallery. The expected result is 18 abstracts in, 16 landing pages out, 2 held
+back for missing consent.
+
 ## Notes
 
 - The builder is an **organiser tool** (`noindex`). It is not a clinical or medical device.
