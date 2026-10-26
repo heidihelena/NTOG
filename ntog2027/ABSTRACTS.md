@@ -60,12 +60,12 @@ Get a ready-made header row by opening the builder and clicking **Download CSV t
 
 ## Building the e-poster gallery
 
-The same data also exports a small public **e-poster gallery** — a searchable index plus one
+The same data also exports a small public **e-poster gallery**: a searchable index plus one
 landing page per abstract, the page a QR code on a printed poster can point at.
 
 1. Build the book as above, then use the toolbar filters to pick what should be public
    (e.g. type = poster).
-2. Set **Gallery base URL** in *Book details* — it fills the `canonical` and `og:url` tags.
+2. Set **Gallery base URL** in *Book details*. It fills the `canonical` and `og:url` tags.
 3. Click **Export e-poster gallery (.zip)**.
 4. Unzip into a served folder, e.g. `ntog2027/posters/`, so the gallery is at
    `ntog.org/ntog2027/posters/`.
@@ -78,7 +78,7 @@ a `README.txt`.
 
 **Consent gate.** If a `publish_consent` column is mapped, only rows whose value reads as yes
 (`yes`, `y`, `true`, `1`, `x`, `ok`, `ja`, `kyllä`) are exported, and the export reports how many
-were left out. With no such column mapped, everything in the current view is exported — so map
+were left out. With no such column mapped, everything in the current view is exported, so map
 the column, or filter by hand, before publishing anyone's poster.
 
 ## Notes
