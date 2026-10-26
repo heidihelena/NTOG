@@ -83,7 +83,7 @@ the column, or filter by hand, before publishing anyone's poster.
 
 ## Test data
 
-`abstract-testdata.csv` is a synthetic 18-row export shaped like a real form download:
+`.testdata/abstract-testdata.csv` is a synthetic 18-row export shaped like a real form download:
 form-style column headers, quoted fields, Nordic diacritics, long author lists, two rows
 without publish consent, three without a poster file, two groups submitting the same title,
 and one title long enough to be truncated in the filename. Every author, institution and
@@ -93,6 +93,10 @@ is a real submission.
 Use it to check the builder after a change: drop it on the dropzone, build, then export both
 the book and the gallery. The expected result is 18 abstracts in, 16 landing pages out, 2 held
 back for missing consent.
+
+It sits in a dot-prefixed folder on purpose. GitHub Pages skips dotfiles and dot-folders at any
+depth, so the fixture stays out of the published site: `ntog.org/ntog2027/.testdata/…` returns
+404, the same way `/.github/…` does. Keep it there, and keep any future fixture there too.
 
 ## Notes
 
