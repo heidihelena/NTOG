@@ -297,6 +297,10 @@
       <label class="fld">Editorial note (front matter)</label>
       <input type="text" id="m-note" value="Abstracts are reproduced as submitted. The scientific committee is not responsible for the content of individual abstracts.">
     </div>
+    <div style="margin-top:0.75rem">
+      <label class="fld">Gallery base URL (canonical links in the e-poster gallery)</label>
+      <input type="text" id="m-galurl" value="https://ntog.org/ntog2027/posters/">
+    </div>
     <div class="row" style="margin-top:0.75rem">
       <label style="display:flex;gap:.4rem;align-items:center;font-size:.9rem"><input type="checkbox" id="m-renumber" checked> Renumber abstracts sequentially</label>
       <label style="display:flex;gap:.4rem;align-items:center;font-size:.9rem"><input type="checkbox" id="m-structured" checked> Show structured headings (Background / Methods / Results / Conclusions)</label>
@@ -321,6 +325,7 @@
     <div class="row" style="margin-top:0.6rem">
       <button class="btn sm" id="btnPrint">🖨 Print / Save as PDF</button>
       <button class="btn ghost sm" id="btnExportHtml">Export standalone book (.html)</button>
+      <button class="btn ghost sm" id="btnExportGallery">Export e-poster gallery (.zip)</button>
       <button class="btn ghost sm" id="btnSaveProject">Save project (.json)</button>
       <button class="btn grey sm" id="btnReset">Start over</button>
       <div class="stats grow" id="stats" style="justify-content:flex-end"></div>
@@ -365,7 +370,10 @@
     { key: "figure2",           label: "Figure/table 2" },
     { key: "figure2_caption",   label: "Figure/table 2 caption" },
     { key: "figure3",           label: "Figure/table 3" },
-    { key: "figure3_caption",   label: "Figure/table 3 caption" }
+    { key: "figure3_caption",   label: "Figure/table 3 caption" },
+    { key: "poster_file",       label: "Poster file (PDF/image URL or path)" },
+    { key: "poster_thumb",      label: "Poster thumbnail (image URL or path)" },
+    { key: "publish_consent",   label: "Consent to publish poster online" }
   ];
 
   var TEMPLATE_COLS = FIELDS.map(function (f) { return f.key; });
@@ -378,7 +386,7 @@
       methods:"We analysed invitations, participation and cancer detection across 12 months in a regional pilot.",
       results:"Participation was 54%. The cancer detection rate was 1.4%, with 71% of cancers in stage I–II.",
       conclusions:"Regional implementation is feasible; targeted outreach may improve uptake in under-served groups.",
-      coi:"None declared",funding:"Regional research fund",
+      coi:"None declared",funding:"Regional research fund",publish_consent:"yes",
       figure1:"Group|Invited|Participation|Detection rate\nFull cohort|12,400|54%|1.4%\nEver-smokers 55-74|6,800|61%|1.8%",
       figure1_caption:"Participation and cancer detection across the 12-month regional pilot."},
     {number:"",category:"Pulmonary nodule management",type:"poster",title:"Model–threshold coupling in pulmonary nodule pathways",
@@ -388,7 +396,8 @@
       methods:"A synthetic cohort sandbox compared candidate pathways and quantified the gap population.",
       results:"Pathways with similar AUC reclassified up to 10% of patients near the decision boundary.",
       conclusions:"Gap-population analysis clarifies the consequences of model selection for guideline groups.",
-      coi:"None declared",funding:"None"},
+      coi:"None declared",funding:"None",
+      poster_file:"files/p2-nodule-pathways.pdf",poster_thumb:"files/p2-nodule-pathways.png",publish_consent:"yes"},
     {number:"",category:"Stage III NSCLC",type:"oral",title:"Real-world outcomes after concurrent chemoradiotherapy in stage III NSCLC",
       authors:"Example C; Example D; Saghir Z",affiliations:"1. Dept of Oncology, Example University Hospital, Stockholm, Sweden",
       presenting_author:"Example C",keywords:"NSCLC; chemoradiotherapy; outcomes",
@@ -396,7 +405,7 @@
       methods:"Retrospective Nordic multicentre cohort, 2019–2024.",
       results:"Median overall survival was not reached at 24 months in the consolidation group.",
       conclusions:"Nordic real-world outcomes align with pivotal trials, with manageable toxicity.",
-      coi:"Advisory board, unrelated",funding:"Academic"}
+      coi:"Advisory board, unrelated",funding:"Academic",publish_consent:"yes"}
   ];
 
   /* ============ State ============ */
@@ -505,14 +514,17 @@
       results: ["results","result","findings"],
       conclusions: ["conclusions","conclusion","summary"],
       body: ["body","abstract","abstracttext","text","content"],
-      coi: ["coi","conflict","conflicts","conflictofinterest","disclosure","disclosures"],
+      coi: ["coi","conflict","conflicts","conflictofinterest","conflictsofinterest","disclosure","disclosures"],
       funding: ["funding","grant","grants","support"],
       figure1: ["figure1","fig1","image1","img1","table1","tab1"],
       figure1_caption: ["figure1caption","fig1caption","caption1","fig1cap"],
       figure2: ["figure2","fig2","image2","img2","table2","tab2"],
       figure2_caption: ["figure2caption","fig2caption","caption2","fig2cap"],
       figure3: ["figure3","fig3","image3","img3","table3","tab3"],
-      figure3_caption: ["figure3caption","fig3caption","caption3","fig3cap"]
+      figure3_caption: ["figure3caption","fig3caption","caption3","fig3cap"],
+      poster_file: ["posterfile","poster","posterpdf","posterurl","eposter","eposterfile","posterlink"],
+      poster_thumb: ["posterthumb","posterthumbnail","thumb","thumbnail","posterimage","preview"],
+      publish_consent: ["publishconsent","consent","consenttopublish","consenttopublishonline","publishonline","permission","posterconsent"]
     };
     state.map = {};
     var used = {};
@@ -572,6 +584,9 @@
         body: val(row, "body"),
         coi: val(row, "coi"),
         funding: val(row, "funding"),
+        posterFile: val(row, "poster_file"),
+        posterThumb: val(row, "poster_thumb"),
+        consent: val(row, "publish_consent"),
         figures: [1,2,3].map(function (n) {
           var s = val(row, "figure" + n);
           return s ? { src: s, cap: val(row, "figure" + n + "_caption") } : null;
@@ -585,7 +600,8 @@
   function meta() {
     return {
       title: $("m-title").value, sub: $("m-sub").value, dates: $("m-dates").value,
-      venue: $("m-venue").value, org: $("m-org").value, editors: $("m-editors").value, note: $("m-note").value
+      venue: $("m-venue").value, org: $("m-org").value, editors: $("m-editors").value, note: $("m-note").value,
+      galurl: $("m-galurl").value
     };
   }
 
@@ -797,10 +813,379 @@
     download(slug(meta().title || "abstract-book") + ".html", doc, "text/html;charset=utf-8");
   }
 
+  /* ============ e-poster gallery ============ */
+  /* Exports a small static site: index.html + one landing page per abstract +
+     gallery.css + README.txt, packed into a ZIP (stored, no compression, so the
+     builder stays dependency-free). Poster PDFs/images are NOT packed: they are
+     referenced by the path given in the poster_file column. */
+
+  var YES_RE = /^(y|yes|true|1|x|ok|ja|jah|kyllä|kylla|já)$/i;
+
+  function consentOk(a) {
+    if (!state.map.publish_consent) return true;          // no consent column supplied, nothing to gate on
+    return YES_RE.test(String(a.consent || "").trim());
+  }
+
+  function posterFileName(a) {
+    return "p-" + slug(String(a.number)) + "-" + slug(a.title).slice(0, 60) + ".html";
+  }
+
+  function fileOf(a) { return a._file || posterFileName(a); }
+
+  function galleryBase() {
+    var u = String(meta().galurl || "").trim();
+    return u ? u.replace(/\/+$/, "") + "/" : "";
+  }
+
+  function plain(s, max) {
+    var t = String(s == null ? "" : s).replace(/\s+/g, " ").trim();
+    return t.length > max ? t.slice(0, max - 1).replace(/\s\S*$/, "") + "…" : t;
+  }
+
+  function citationLine(a, m) {
+    var bits = [];
+    if (a.authors) bits.push(a.authors.split(/\s*;\s*/).join(", ") + ".");
+    bits.push(a.title.replace(/\.*$/, "") + ".");
+    bits.push([m.title, m.venue, m.dates].filter(Boolean).join(", ") + ".");
+    bits.push("Abstract #" + a.number + ".");
+    return bits.join(" ");
+  }
+
+  function posterEmbed(a) {
+    var v = String(a.posterFile || "").trim();
+    if (!v) return '<p class="no-poster">The poster file for this presentation is not available online.</p>';
+    var h = '<div class="poster-view">';
+    if (/\.pdf(\?|#|$)/i.test(v)) {
+      h += '<object data="' + esc(v) + '" type="application/pdf">' +
+           '<p>This browser cannot show the poster inline. <a href="' + esc(v) + '">Open the poster file</a>.</p></object>';
+    } else if (/\.(png|jpe?g|gif|webp|svg)(\?|#|$)/i.test(v)) {
+      h += '<img src="' + esc(v) + '" alt="Poster for: ' + esc(a.title) + '" loading="lazy">';
+    } else {
+      h += '<p><a href="' + esc(v) + '">Open the poster file</a></p>';
+    }
+    return h + "</div>" + '<p class="dl"><a class="g-btn" href="' + esc(v) + '" download>Download poster</a></p>';
+  }
+
+  function posterPage(a, m, prev, next) {
+    var structured = $("m-structured").checked;
+    var base = galleryBase();
+    var desc = plain(a.background || a.body || a.conclusions || a.title, 200);
+    var thumb = String(a.posterThumb || "").trim();
+
+    var head = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      "<title>" + esc(plain(a.title, 90)) + " | " + esc(m.title) + "</title>" +
+      '<meta name="description" content="' + esc(desc) + '">' +
+      '<meta property="og:type" content="article">' +
+      '<meta property="og:title" content="' + esc(plain(a.title, 90)) + '">' +
+      '<meta property="og:description" content="' + esc(desc) + '">';
+    if (base) head += '<link rel="canonical" href="' + esc(base + fileOf(a)) + '">' +
+                      '<meta property="og:url" content="' + esc(base + fileOf(a)) + '">';
+    if (/^https?:\/\//i.test(thumb)) head += '<meta property="og:image" content="' + esc(thumb) + '">';
+    head += '<link rel="stylesheet" href="gallery.css"></head><body class="poster-page">';
+
+    var h = head;
+    h += '<header class="g-head"><div class="g-wrap">' +
+         '<a class="g-back" href="index.html">← All e-posters</a>' +
+         '<div class="g-ev">' + esc(m.org) + "</div>" +
+         "<h1>" + esc(m.title) + "</h1>" +
+         '<p class="g-sub">' + esc([m.dates, m.venue].filter(Boolean).join(" · ")) + "</p>" +
+         "</div></header>";
+
+    h += '<main class="g-wrap g-main">';
+    h += '<div class="a-head"><span class="a-num">#' + esc(a.number) + "</span>";
+    if (a.type) h += '<span class="a-type ' + esc(a.type) + '">' + esc(a.type) + "</span>";
+    h += '<span class="a-cat">' + esc(a.category) + "</span></div>";
+    h += "<h2 class=\"p-title\">" + esc(a.title) + "</h2>";
+    if (a.authors) h += '<p class="a-authors">' + authorsHtml(a, a.presenting) + "</p>";
+    if (a.affiliations) h += '<p class="a-affil">' + esc(a.affiliations) + "</p>";
+
+    h += posterEmbed(a);
+
+    h += '<section class="p-abstract"><h3>Abstract</h3>';
+    var hasStruct = a.background || a.methods || a.results || a.conclusions;
+    if (structured && hasStruct) {
+      if (a.background)  h += '<p><span class="lab">Background:</span> ' + esc(a.background) + "</p>";
+      if (a.methods)     h += '<p><span class="lab">Methods:</span> ' + esc(a.methods) + "</p>";
+      if (a.results)     h += '<p><span class="lab">Results:</span> ' + esc(a.results) + "</p>";
+      if (a.conclusions) h += '<p><span class="lab">Conclusions:</span> ' + esc(a.conclusions) + "</p>";
+    } else if (a.body) {
+      h += "<p>" + esc(a.body) + "</p>";
+    } else if (hasStruct) {
+      [a.background, a.methods, a.results, a.conclusions].filter(Boolean).forEach(function (p) { h += "<p>" + esc(p) + "</p>"; });
+    }
+    h += "</section>";
+
+    if (a.figures && a.figures.length) {
+      h += '<div class="a-figs">';
+      a.figures.slice(0, 3).forEach(function (f, i) { h += figureHtml(f, i + 1); });
+      h += "</div>";
+    }
+
+    if (a.keywords) h += '<p class="a-foot"><b>Keywords:</b> ' + esc(a.keywords) + "</p>";
+    var foot = [];
+    if (a.coi) foot.push("<b>Conflicts of interest:</b> " + esc(a.coi));
+    if (a.funding) foot.push("<b>Funding:</b> " + esc(a.funding));
+    if (foot.length) h += '<p class="a-foot">' + foot.join(" &nbsp;·&nbsp; ") + "</p>";
+
+    h += '<section class="p-cite"><h3>Cite this abstract</h3><p>' + esc(citationLine(a, m)) + "</p></section>";
+
+    h += '<nav class="p-nav">';
+    h += prev ? '<a href="' + esc(fileOf(prev)) + '">← #' + esc(prev.number) + "</a>" : "<span></span>";
+    h += '<a href="index.html">All e-posters</a>';
+    h += next ? '<a href="' + esc(fileOf(next)) + '">#' + esc(next.number) + " →</a>" : "<span></span>";
+    h += "</nav>";
+
+    h += "</main>";
+    h += '<footer class="g-foot"><div class="g-wrap"><p>' + esc(m.note) + "</p>" +
+         "<p>" + esc(m.org) + " · " + esc(m.editors) + "</p></div></footer>";
+    h += "</body></html>";
+    return h;
+  }
+
+  function galleryIndex(list, m) {
+    var base = galleryBase();
+    var cats = {}; list.forEach(function (a) { cats[a.category] = 1; });
+    var desc = "Browse the e-posters presented at " + plain(m.title, 80) + ".";
+
+    var h = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      "<title>E-posters | " + esc(m.title) + "</title>" +
+      '<meta name="description" content="' + esc(desc) + '">' +
+      '<meta property="og:title" content="E-posters, ' + esc(plain(m.title, 80)) + '">' +
+      '<meta property="og:description" content="' + esc(desc) + '">';
+    if (base) h += '<link rel="canonical" href="' + esc(base) + '">';
+    h += '<link rel="stylesheet" href="gallery.css"></head><body>';
+
+    h += '<header class="g-head"><div class="g-wrap">' +
+         '<div class="g-ev">' + esc(m.org) + "</div>" +
+         "<h1>E-posters</h1>" +
+         '<p class="g-sub">' + esc(m.title) + " · " + esc([m.dates, m.venue].filter(Boolean).join(" · ")) + "</p>" +
+         "</div></header>";
+
+    h += '<div class="g-wrap g-main">';
+    h += '<div class="g-filters">' +
+         '<input type="search" id="g-q" placeholder="Search title, author, keyword…">' +
+         '<select id="g-cat"><option value="">All categories</option>' +
+         Object.keys(cats).sort().map(function (c) { return '<option value="' + esc(c) + '">' + esc(c) + "</option>"; }).join("") +
+         "</select>" +
+         '<select id="g-type"><option value="">All types</option><option value="poster">Poster</option><option value="oral">Oral</option></select>' +
+         '<span id="g-count" class="g-count"></span></div>';
+
+    h += '<div class="g-grid">';
+    list.forEach(function (a) {
+      var search = plain([a.title, a.authors, a.keywords, a.category, a.presenting].join(" "), 400).toLowerCase();
+      var thumb = String(a.posterThumb || "").trim();
+      h += '<a class="card" href="' + esc(fileOf(a)) + '"' +
+           ' data-cat="' + esc(a.category) + '" data-type="' + esc(a.type) + '"' +
+           ' data-search="' + esc(search) + '">';
+      var fallback = '<span class="c-ph">#' + esc(a.number) + "</span>";
+      h += '<span class="c-thumb">' + (thumb
+            ? '<img src="' + esc(thumb) + '" alt="" loading="lazy" data-fb="' + esc(fallback) +
+              '" onerror="this.parentNode.innerHTML=this.getAttribute(\'data-fb\')">'
+            : fallback) + "</span>";
+      h += '<span class="c-body">';
+      h += '<span class="c-meta"><b>#' + esc(a.number) + "</b>";
+      if (a.type) h += '<em class="a-type ' + esc(a.type) + '">' + esc(a.type) + "</em>";
+      h += "</span>";
+      h += '<span class="c-title">' + esc(a.title) + "</span>";
+      if (a.presenting) h += '<span class="c-pres">' + esc(a.presenting) + "</span>";
+      h += '<span class="c-cat">' + esc(a.category) + "</span>";
+      h += "</span></a>";
+    });
+    h += "</div><p class=\"g-empty\" id=\"g-empty\" hidden>No e-posters match that search.</p></div>";
+
+    h += '<footer class="g-foot"><div class="g-wrap"><p>' + esc(m.note) + "</p>" +
+         "<p>" + esc(m.org) + " · " + esc(m.editors) + "</p></div></footer>";
+
+    h += "<script>(function(){" +
+      "var q=document.getElementById('g-q'),c=document.getElementById('g-cat'),t=document.getElementById('g-type')," +
+      "n=document.getElementById('g-count'),e=document.getElementById('g-empty')," +
+      "cards=[].slice.call(document.querySelectorAll('.card'));" +
+      "function f(){var s=(q.value||'').toLowerCase().trim(),cv=c.value,tv=t.value,k=0;" +
+      "cards.forEach(function(el){var ok=(!cv||el.getAttribute('data-cat')===cv)&&(!tv||el.getAttribute('data-type')===tv)&&" +
+      "(!s||el.getAttribute('data-search').indexOf(s)>=0);el.hidden=!ok;if(ok)k++;});" +
+      "n.textContent=k+(k===1?' e-poster':' e-posters');e.hidden=k>0;}" +
+      "[q,c,t].forEach(function(el){el.addEventListener('input',f);el.addEventListener('change',f);});f();" +
+      "})();<\/script>";
+    h += "</body></html>";
+    return h;
+  }
+
+  function galleryCss() {
+    return [
+      '@font-face{font-family:"Montserrat";src:url("/fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");font-weight:100 900;font-display:swap}',
+      '@font-face{font-family:"Open Sans";src:url("/fonts/open-sans/OpenSans-VariableFont_wdth%2Cwght.ttf") format("truetype");font-weight:100 900;font-display:swap}',
+      ":root{--dk-red:#c8102e;--dk-red-dark:#74101f;--dk-red-deep:#260006;--dk-red-soft:#fff1f3;--dk-red-border:#f2b8c2;--ink:#1f2933;--muted:#52606d;--faint:#697586;--line:#e5e7eb}",
+      "*{box-sizing:border-box}",
+      "[hidden]{display:none !important}",   // .card sets display:flex, which would otherwise beat the hidden attribute
+      'body{margin:0;font-family:"Open Sans","Segoe UI",Arial,sans-serif;color:var(--ink);background:#f6f7f8;line-height:1.55}',
+      'h1,h2,h3{font-family:"Montserrat",Arial,sans-serif}',
+      "a{color:var(--dk-red-dark)}",
+      ".g-wrap{max-width:1100px;margin:0 auto;padding:0 1.25rem}",
+      ".g-head{background:linear-gradient(135deg,var(--dk-red-deep) 0%,var(--dk-red-dark) 55%,var(--dk-red) 100%);color:#fff;padding:1.6rem 0}",
+      ".g-head h1{margin:.3rem 0 .2rem;font-size:1.6rem}",
+      ".g-head .g-ev{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}",
+      ".g-head .g-sub{margin:0;opacity:.92;font-size:.95rem}",
+      ".g-back{display:inline-block;color:#fff;text-decoration:none;font-size:.85rem;opacity:.9;margin-bottom:.6rem}",
+      ".g-back:hover{text-decoration:underline}",
+      ".g-main{padding-top:1.5rem;padding-bottom:2.5rem}",
+      ".g-filters{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;background:#fff;border:1px solid var(--line);border-radius:.75rem;padding:.75rem;box-shadow:0 6px 16px rgba(15,23,42,.06)}",
+      ".g-filters input,.g-filters select{padding:.5rem .6rem;border:1px solid var(--line);border-radius:.5rem;font:inherit;color:var(--ink);background:#fff}",
+      ".g-filters input{flex:1 1 220px;min-width:180px}",
+      ".g-count{margin-left:auto;font-size:.85rem;color:var(--faint)}",
+      ".g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin-top:1.25rem}",
+      ".card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:.85rem;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 6px 16px rgba(15,23,42,.05)}",
+      ".card:hover{border-color:var(--dk-red-border)}",
+      ".c-thumb{display:flex;aspect-ratio:4/3;background:var(--dk-red-soft);overflow:hidden;align-items:center;justify-content:center}",
+      ".c-thumb img{width:100%;height:100%;object-fit:cover}",
+      '.c-ph{font-family:"Montserrat",Arial,sans-serif;font-weight:700;font-size:1.6rem;color:var(--dk-red-border)}',
+      ".c-body{display:block;padding:.85rem 1rem 1rem}",
+      ".c-meta{display:flex;gap:.5rem;align-items:center;font-size:.78rem;color:var(--faint);margin-bottom:.35rem}",
+      '.c-title{display:block;font-family:"Montserrat",Arial,sans-serif;font-weight:600;font-size:.98rem;line-height:1.35;margin-bottom:.35rem}',
+      ".c-pres{display:block;font-size:.85rem;color:var(--muted)}",
+      ".c-cat{display:block;font-size:.78rem;color:var(--faint);margin-top:.3rem}",
+      ".g-empty{text-align:center;color:var(--faint);margin-top:2rem}",
+      ".a-head{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;font-size:.8rem;color:var(--faint)}",
+      '.a-num{font-family:"Montserrat",Arial,sans-serif;font-weight:700;color:var(--dk-red-dark)}',
+      ".a-type{font-style:normal;text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;font-weight:700;padding:.1rem .45rem;border-radius:999px;background:var(--dk-red-soft);color:var(--dk-red-dark)}",
+      ".a-type.oral{background:#eef2ff;color:#3730a3}",
+      ".poster-page .g-main{background:#fff;border:1px solid var(--line);border-radius:.85rem;max-width:860px;margin:1.5rem auto;padding:1.75rem 2rem 2rem}",
+      ".p-title{margin:.5rem 0 .4rem;font-size:1.4rem;line-height:1.3}",
+      ".a-authors{margin:.2rem 0;font-size:.95rem}",
+      ".a-authors .pres{font-weight:700;text-decoration:underline}",
+      ".a-affil{margin:.2rem 0 1rem;font-size:.85rem;color:var(--muted)}",
+      ".poster-view{border:1px solid var(--line);border-radius:.6rem;overflow:hidden;background:#fafafa;margin:1rem 0 .6rem}",
+      ".poster-view object{display:block;width:100%;height:min(80vh,900px);border:0}",
+      ".poster-view img{display:block;width:100%;height:auto}",
+      ".no-poster{background:var(--dk-red-soft);border:1px solid var(--dk-red-border);color:var(--dk-red-dark);border-radius:.6rem;padding:.7rem .9rem;font-size:.9rem}",
+      ".dl{margin:0 0 1.25rem}",
+      ".g-btn{display:inline-block;background:var(--dk-red);color:#fff;border-radius:.5rem;padding:.5rem 1rem;font-weight:700;text-decoration:none}",
+      ".g-btn:hover{background:var(--dk-red-dark)}",
+      ".p-abstract h3,.p-cite h3{font-size:1rem;color:var(--dk-red-dark);margin:1.4rem 0 .4rem}",
+      ".p-abstract .lab{font-weight:700;color:var(--dk-red-dark)}",
+      ".a-figs{display:grid;gap:.9rem;margin:1rem 0}",
+      ".a-fig{margin:0;border:1px solid var(--line);border-radius:.6rem;overflow:hidden;background:#fff}",
+      ".a-fig img{display:block;width:100%;height:auto}",
+      ".a-fig .tbl-wrap{overflow-x:auto}",
+      ".a-fig table{border-collapse:collapse;width:100%;font-size:.88rem}",
+      ".a-fig th,.a-fig td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left}",
+      ".a-fig thead th{background:var(--dk-red-soft);color:var(--dk-red-dark)}",
+      ".a-fig figcaption{padding:.45rem .7rem;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line)}",
+      ".a-fig figcaption .fnum{font-weight:700;color:var(--dk-red-dark)}",
+      ".a-foot{font-size:.85rem;color:var(--muted);margin:.4rem 0}",
+      ".p-cite p{font-size:.88rem;color:var(--muted);background:#f6f7f8;border-radius:.5rem;padding:.6rem .8rem}",
+      ".p-nav{display:flex;justify-content:space-between;gap:1rem;margin-top:1.75rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem}",
+      ".g-foot{border-top:1px solid var(--line);background:#fff;padding:1.25rem 0;font-size:.82rem;color:var(--faint)}",
+      ".g-foot p{margin:.2rem 0}",
+      "@media (max-width:640px){.poster-page .g-main{padding:1.25rem;border-radius:0;border-left:0;border-right:0}.poster-view object{height:70vh}}"
+    ].join("\n");
+  }
+
+  function galleryReadme(m, list, skipped) {
+    return [
+      m.title + ": e-poster gallery",
+      "",
+      "Generated by the NTOG Abstract Book Builder. Static files only; no backend.",
+      "",
+      "Contents",
+      "  index.html      the searchable gallery",
+      "  p-<n>-<slug>.html  one landing page per abstract (" + list.length + " pages)",
+      "  gallery.css     shared stylesheet",
+      "",
+      "Deploying",
+      "  1. Copy every file in this ZIP into the site folder you want to serve, e.g.",
+      "     ntog2027/posters/ so the gallery is at " + (galleryBase() || "https://ntog.org/ntog2027/posters/"),
+      "  2. Poster PDFs and thumbnails are NOT in this ZIP. Upload them to the paths",
+      "     given in the poster_file / poster_thumb columns (e.g. posters/files/p2.pdf).",
+      "  3. The pages reference the site fonts at /fonts/... and fall back to system",
+      "     fonts if you host the gallery somewhere else.",
+      "",
+      "Consent",
+      skipped
+        ? "  " + skipped + " abstract(s) were left out because the publish-consent column was not a yes."
+        : (state.map.publish_consent
+            ? "  Every included abstract has a yes in the publish-consent column."
+            : "  No publish-consent column was mapped, so every abstract in the current view was included."),
+      "  Only publish a poster when the presenting author has agreed to it being public.",
+      "",
+      "Note: pages are indexable. Do not deploy before abstracts are final."
+    ].join("\n");
+  }
+
+  /* --- minimal stored (uncompressed) ZIP writer --- */
+  var CRC_TABLE = (function () {
+    var t = [], c, n, k;
+    for (n = 0; n < 256; n++) { c = n; for (k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); t[n] = c >>> 0; }
+    return t;
+  })();
+  function crc32(bytes) {
+    var c = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+  function makeZip(files) {
+    var enc = new TextEncoder(), parts = [], central = [], offset = 0;
+    function u16(v) { return [v & 255, (v >>> 8) & 255]; }
+    function u32(v) { return [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]; }
+    var now = new Date();
+    var dosTime = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+    var dosDate = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
+    files.forEach(function (f) {
+      var name = enc.encode(f.name), data = enc.encode(f.text), crc = crc32(data);
+      var local = u32(0x04034b50).concat(u16(20), u16(0x0800), u16(0), u16(dosTime), u16(dosDate),
+        u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0));
+      parts.push(new Uint8Array(local), name, data);
+      central.push(new Uint8Array(u32(0x02014b50).concat(u16(20), u16(20), u16(0x0800), u16(0), u16(dosTime), u16(dosDate),
+        u32(crc), u32(data.length), u32(data.length), u16(name.length),
+        u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset))), name);
+      offset += local.length + name.length + data.length;
+    });
+    var cdSize = central.reduce(function (n, p) { return n + p.length; }, 0);
+    var end = new Uint8Array(u32(0x06054b50).concat(u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(cdSize), u32(offset), u16(0)));
+    return new Blob(parts.concat(central, [end]), { type: "application/zip" });
+  }
+  function downloadBlob(name, blob) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+
+  function exportGallery() {
+    var view = currentView();
+    var list = view.filter(consentOk);
+    var skipped = view.length - list.length;
+    if (!list.length) {
+      msg(skipped
+        ? "No abstracts to export: all " + skipped + " in the current view lack a yes in the publish-consent column."
+        : "No abstracts in the current view to export.");
+      return;
+    }
+    var m = meta(), used = {}, files = [];
+    list.forEach(function (a) {                       // keep filenames unique even on duplicate numbers/titles
+      var base = posterFileName(a), n = base, i = 2;
+      while (used[n]) { n = base.replace(/\.html$/, "") + "-" + (i++) + ".html"; }
+      used[n] = 1; a._file = n;
+    });
+    list.forEach(function (a, i) {
+      files.push({ name: a._file, text: posterPage(a, m, list[i - 1] || null, list[i + 1] || null) });
+    });
+    files.push({ name: "index.html", text: galleryIndex(list, m) });
+    files.push({ name: "gallery.css", text: galleryCss() });
+    files.push({ name: "README.txt", text: galleryReadme(m, list, skipped) });
+    list.forEach(function (a) { delete a._file; });
+    downloadBlob(slug(m.title || "e-poster-gallery") + "-eposters.zip", makeZip(files));
+    msg("Gallery exported: " + list.length + " landing page(s)" +
+        (skipped ? ", " + skipped + " left out for missing publish consent" : "") + ".", true);
+  }
+
   function saveProject() {
     var proj = { v: 1, headers: state.headers, rows: state.rows, map: state.map,
       meta: { title:$("m-title").value, sub:$("m-sub").value, dates:$("m-dates").value, venue:$("m-venue").value,
         org:$("m-org").value, editors:$("m-editors").value, note:$("m-note").value,
+        galurl:$("m-galurl").value,
         renumber:$("m-renumber").checked, structured:$("m-structured").checked } };
     download(slug(meta().title || "abstract-book") + "-project.json", JSON.stringify(proj, null, 2), "application/json");
   }
@@ -812,6 +1197,7 @@
         $("m-title").value = p.meta.title || ""; $("m-sub").value = p.meta.sub || "";
         $("m-dates").value = p.meta.dates || ""; $("m-venue").value = p.meta.venue || "";
         $("m-org").value = p.meta.org || ""; $("m-editors").value = p.meta.editors || ""; $("m-note").value = p.meta.note || "";
+        if (p.meta.galurl != null) $("m-galurl").value = p.meta.galurl;
         $("m-renumber").checked = !!p.meta.renumber; $("m-structured").checked = !!p.meta.structured;
       }
       buildMapUI(); show("panel-map"); show("panel-meta"); build();
@@ -871,6 +1257,7 @@
   $("btnReset").addEventListener("click", reset);
   $("btnPrint").addEventListener("click", function () { window.print(); });
   $("btnExportHtml").addEventListener("click", exportStandalone);
+  $("btnExportGallery").addEventListener("click", exportGallery);
   $("btnSaveProject").addEventListener("click", saveProject);
   $("btnLoadProject").addEventListener("click", function () { $("projectInput").click(); });
   $("projectInput").addEventListener("change", function (e) { if (e.target.files[0]) readFile(e.target.files[0], loadProject); });
