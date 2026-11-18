@@ -37,9 +37,11 @@ Fillout, etc.). Use **one column per field** below. The builder auto-matches the
 | `body`              | no       | Use instead of the four structured sections if you prefer free text. |
 | `coi`               | no       | Conflicts of interest. |
 | `funding`           | no       | Funding statement. |
-| `poster_file`       | no       | Path or URL to the poster PDF/image, e.g. `files/p12.pdf`. E-poster gallery only. |
-| `poster_thumb`      | no       | Path or URL to a thumbnail image for the gallery card. |
-| `publish_consent`   | no       | `yes` if the presenting author agreed to the poster being public. Gates the gallery export. |
+| `presented_before`  | no       | Where and when the work was presented before. Shown as "Previously presented". Blank or `No` shows nothing. |
+| `poster_file`       | no       | Path or URL to the 16:9 digital abstract (PNG or PDF), e.g. `files/a12.png`. Gallery only. |
+| `poster_thumb`      | no       | Thumbnail for the gallery card. Leave empty when the file is an image: it is reused. |
+| `publish_consent`   | no       | Any value starting with yes (`Yes, confirmed`) counts. Gates the gallery export. |
+| `decision`          | no       | Committee column: `oral`, `poster`, `accepted` or `rejected`. Gates the gallery export and fills `type` when no type column exists. |
 
 \* Not technically required by the tool (only `title` is), but recommended for a complete book.
 
@@ -58,28 +60,54 @@ Get a ready-made header row by opening the builder and clicking **Download CSV t
      e.g. `ntog.org/ntog2027/abstract-book/` for attendees.
    - **Save project (.json)** — reload later to continue editing.
 
-## Building the e-poster gallery
+## The NLCS 2027 form export
 
-The same data also exports a small public **e-poster gallery**: a searchable index plus one
+The live Google Form maps without setup. Its headers are matched as follows:
+
+| Form question | Builder field |
+|---|---|
+| Presenting author — full name | `presenting_author` |
+| All authors in order, with affiliations (…) | `authors` (one free-text line, shown as written) |
+| Title | `title` |
+| Topic (choose the closest) | `category` |
+| Abstract: Background · Methods · Results · Conclusions (…) | `body` (section labels are set off automatically) |
+| Conflicts of interest / disclosures (…) | `coi` |
+| Has this work been presented before? … | `presented_before` |
+| The presenting author will attend and present … | `publish_consent` |
+
+Email, Affiliation / institution and Country are not mapped and never reach the book or the gallery.
+
+Add two columns to the response sheet before exporting:
+
+- **Decision**: `oral`, `poster` or `rejected`, filled in after the committee review.
+- **Digital abstract file**: where the emailed 16:9 slide will live, e.g. `files/a12.png`.
+
+The raw export and a saved project (.json) contain author email addresses. Keep both on your own
+machine. Only the exported gallery files go into the repository.
+
+## Building the digital abstract gallery
+
+The same data also exports a small public **digital abstract gallery**: a searchable index plus one
 landing page per abstract, the page a QR code on a printed poster can point at.
 
-1. Build the book as above, then use the toolbar filters to pick what should be public
-   (e.g. type = poster).
+1. Build the book as above. Use the toolbar filters if only part should be public.
 2. Set **Gallery base URL** in *Book details*. It fills the `canonical` and `og:url` tags.
-3. Click **Export e-poster gallery (.zip)**.
-4. Unzip into a served folder, e.g. `ntog2027/posters/`, so the gallery is at
-   `ntog.org/ntog2027/posters/`.
-5. Upload the poster PDFs and thumbnails yourself, to the paths given in `poster_file` /
-   `poster_thumb`. They are **not** in the ZIP.
+3. Click **Export digital abstract gallery (.zip)**.
+4. Unzip into a served folder, e.g. `ntog2027/abstracts/`, so the gallery is at
+   `ntog.org/ntog2027/abstracts/`.
+5. Upload the 16:9 files yourself, to the paths given in the file column. They are **not** in the ZIP.
 
-The ZIP contains `index.html` (search + category/type filters), `p-<number>-<slug>.html` per
-abstract (abstract, poster viewer, download link, citation line, prev/next), `gallery.css` and
+The ZIP contains `index.html` (search + topic/type filters), `a-<number>-<slug>.html` per
+abstract (abstract, 16:9 viewer, download link, citation line, prev/next), `gallery.css` and
 a `README.txt`.
 
+**Decision gate.** If a `decision` column is mapped, only rows starting with `oral`, `poster`,
+`accept` or a yes are exported. `rejected` and blank rows are left out, and the export reports how many.
+
 **Consent gate.** If a `publish_consent` column is mapped, only rows whose value reads as yes
-(`yes`, `y`, `true`, `1`, `x`, `ok`, `ja`, `kyllä`) are exported, and the export reports how many
+(`yes`, `Yes, confirmed`, `y`, `true`, `1`, `x`, `ok`, `ja`, `kyllä`) are exported, and the export reports how many
 were left out. With no such column mapped, everything in the current view is exported, so map
-the column, or filter by hand, before publishing anyone's poster.
+the column, or filter by hand, before publishing anyone's digital abstract.
 
 ## Test data
 
@@ -90,7 +118,11 @@ and one title long enough to be truncated in the filename. Every author, institu
 funder in it is an invented placeholder, and every number is made up. Nothing in the file
 is a real submission.
 
-Use it to check the builder after a change: drop it on the dropzone, build, then export both
+`.testdata/form-export-testdata.csv` is a second synthetic file, six rows, with the exact headers of
+the live NLCS 2027 form plus the two organiser columns. Expected result: 6 abstracts in, 4 landing
+pages out, 2 held back by the decision gate (one `Rejected`, one blank).
+
+Use them to check the builder after a change: drop it on the dropzone, build, then export both
 the book and the gallery. The expected result is 18 abstracts in, 16 landing pages out, 2 held
 back for missing consent.
 
