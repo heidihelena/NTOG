@@ -139,6 +139,10 @@
       font-size: 0.95rem;
     }
 
+    /* no blue on 2027 pages: content links use the red theme */
+    main a:not(.btn) { color:#c8102e; }
+    main a:not(.btn):hover { color:#74101f; }
+
     footer a {
       text-decoration: none;
     }
@@ -266,10 +270,10 @@
     },
     {
       "@type": "Question",
-      "name": "Is abstract submission open, and when does registration open for NLCS 2027?",
+      "name": "Are registration and abstract submission open for NLCS 2027?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration and fees will be announced later."
+        "text": "Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration is open, with early-bird fees until 15 February 2027."
       }
     },
     {
@@ -450,7 +454,7 @@
 
         <div class="hero-actions">
        <a href="#abstracts" class="btn btn-light">Abstract information</a>
-       <a href="#registration" class="btn btn-event">Registration status</a>
+       <a href="https://na.eventscloud.com/nlcs2027" class="btn btn-event" rel="noopener">Register</a>
         </div>
 
         <div class="hero-badges">
@@ -527,7 +531,7 @@
         </div>
 
         <div class="status-note mt-4">
-          <strong>Status:</strong> Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration and fees will be announced later.
+          <strong>Status:</strong> Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration is open, with early-bird fees until 15 February 2027.
         </div>
       </div>
     </section>
@@ -650,12 +654,31 @@
         <div class="row g-4 align-items-start">
           <div class="col-lg-5">
             <h2>Registration and practical information</h2>
-            <p class="lead">Registration will open when the practical arrangements are finalised.</p>
+            <p class="lead">Registration is open. Early-bird fees apply until 15 February 2027.</p>
+            <a class="btn btn-event" href="https://na.eventscloud.com/nlcs2027" rel="noopener">Register for NLCS 2027</a>
           </div>
           <div class="col-lg-7">
+            <div class="content-card mb-4">
+              <h3 class="h5">Registration fees</h3>
+              <div class="table-responsive">
+                <table class="table align-middle mb-2">
+                  <thead>
+                    <tr><th scope="col">Category</th><th scope="col" class="text-end">Early bird<br><span class="fw-normal">until 15 Feb 2027</span></th><th scope="col" class="text-end">Regular<br><span class="fw-normal">from 16 Feb 2027</span></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row" class="fw-normal">Healthcare professional</th><td class="text-end">DKK 3,500</td><td class="text-end">DKK 4,000</td></tr>
+                    <tr><th scope="row" class="fw-normal">Healthcare professional under 35 years</th><td class="text-end">DKK 2,500</td><td class="text-end">DKK 3,000</td></tr>
+                    <tr><th scope="row" class="fw-normal">Sponsors and exhibitors</th><td class="text-end" colspan="2">DKK 4,375</td></tr>
+                    <tr><th scope="row" class="fw-normal">Congress dinner (optional)</th><td class="text-end" colspan="2">DKK 399 per person</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="muted-note">Fees as listed on the registration site, which has the current prices and terms. Registration is handled by The Meeting Planners. Questions: <a href="mailto:reg@meetingplanners.dk">reg@meetingplanners.dk</a>.</p>
+              <a class="btn btn-event" href="https://na.eventscloud.com/nlcs2027" rel="noopener">Register for NLCS 2027</a>
+            </div>
             <div class="content-card">
               <ul class="compact-list">
-                <li><strong>Registration:</strong> Opening later.</li>
+                <li><strong>Registration:</strong> <a href="https://na.eventscloud.com/nlcs2027" rel="noopener">Open on the registration site</a>.</li>
                 <li><strong>Programme:</strong> <a href="/ntog2027/programme.html">Preliminary programme published</a>.</li>
                 <li><strong>Abstract submission:</strong> Open until 19 March 2027.</li>
                 <li><strong>Language:</strong> English.</li>
@@ -814,8 +837,8 @@
             <p>It is a multidisciplinary Nordic meeting for oncologists, pulmonologists, thoracic surgeons, radiologists, pathologists, nuclear medicine physicians, radiotherapists and palliative care specialists, as well as nurses, allied health professionals, researchers and students.</p>
           </div>
           <div class="col-lg-6">
-            <h3 class="h5">Is abstract submission open, and when does registration open for NLCS 2027?</h3>
-            <p>Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration and fees will be announced later.</p>
+            <h3 class="h5">Are registration and abstract submission open for NLCS 2027?</h3>
+            <p>Abstract submission is open until 19 March 2027, 23:59 CET. The preliminary programme is published. Registration is open, with early-bird fees until 15 February 2027.</p>
           </div>
           <div class="col-lg-6">
             <h3 class="h5">What are the scientific themes of NLCS 2027?</h3>
