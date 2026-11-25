@@ -50,6 +50,7 @@
     .timeline { list-style:none; margin:0; padding:0; }
     .timeline li { padding:.6rem 0; border-bottom:1px dashed #e5e7eb; display:flex; justify-content:space-between; gap:1rem; }
     .timeline li:last-child { border-bottom:0; }
+    .timeline.rates li { flex-wrap:wrap; gap:.15rem 1rem; }
     .timeline .when { color:#74101f; font-weight:700; white-space:nowrap; }
     .topic-list { columns:2; column-gap:2rem; margin:0; padding-left:1.1rem; }
     .topic-list li { margin-bottom:.5rem; break-inside:avoid; }
@@ -309,14 +310,31 @@
       <div class="container">
         <span class="status-pill">Accommodation</span>
         <h2 class="mt-3 mb-2">Where to stay</h2>
-        <p class="muted-note" style="max-width:760px">The simplest option is the congress hotel, <strong>Scandic Copenhagen</strong>, at the venue itself. If you prefer to stay elsewhere, the hotels below are all within an easy walk or one transit stop. Distances are approximate. Please book early and confirm availability and rates directly. NTOG is not affiliated with these hotels; they are listed only as a convenience.</p>
+        <p class="muted-note" style="max-width:760px">The organisers suggest two hotels for delegates. Rooms at both are booked in the <a href="https://na.eventscloud.com/nlcs2027" rel="noopener">registration form</a>, at the rates below.</p>
 
-        <div class="content-card mt-3" style="border-top:5px solid #c8102e">
-          <h3 class="h5">Congress hotel</h3>
-          <p class="mb-0"><strong>Scandic Copenhagen</strong>, at the venue (Vester Søgade 6). The most convenient choice; the <a href="https://na.eventscloud.com/nlcs2027" rel="noopener">registration form</a> lets you book a room here.</p>
+        <div class="row g-4 mt-1">
+          <div class="col-md-6"><div class="content-card" style="border-top:5px solid #c8102e">
+            <h3 class="h5 mb-1">Scandic Copenhagen</h3>
+            <p class="muted-note mb-3">Four-star · the venue · Vester Søgade 6, 1601 Copenhagen V</p>
+            <ul class="timeline rates mb-3">
+              <li><span>Single room, with breakfast</span><span class="when">DKK 1,650 per night</span></li>
+              <li><span>Double room, with breakfast</span><span class="when">DKK 1,850 per night</span></li>
+            </ul>
+            <p class="muted-note mb-0">Modern hotel by the lakes, within walking distance of the central station. <a href="https://www.scandichotels.com/en/hotels/scandic-copenhagen" rel="noopener">Hotel website</a></p>
+          </div></div>
+          <div class="col-md-6"><div class="content-card" style="border-top:5px solid #c8102e">
+            <h3 class="h5 mb-1">Scandic Webers</h3>
+            <p class="muted-note mb-3">Four-star · ~5 min walk from the venue · Vesterbrogade 11B, 1610 Copenhagen V</p>
+            <ul class="timeline rates mb-3">
+              <li><span>Single room, with breakfast</span><span class="when">DKK 1,500 per night</span></li>
+              <li><span>Double room, with breakfast</span><span class="when">DKK 1,700 per night</span></li>
+            </ul>
+            <p class="muted-note mb-0">1880s building in Vesterbro, a few minutes’ walk from Tivoli, the central station and Strøget. A few bicycles for guests. <a href="https://www.scandichotels.com/en/hotels/scandic-webers" rel="noopener">Hotel website</a></p>
+          </div></div>
         </div>
 
-        <h3 class="h5 mt-4 mb-3">Hotels within easy reach</h3>
+        <h3 class="h5 mt-5 mb-2">Other hotels nearby</h3>
+        <p class="muted-note mb-3" style="max-width:760px">If you prefer to stay elsewhere, these are within a walk or one transit stop. Distances are approximate. Book directly with the hotel. NTOG is not affiliated with these hotels; they are listed only as a convenience.</p>
         <div class="row g-4">
           <div class="col-md-4"><div class="content-card">
             <h3 class="h6">Full-service</h3>
@@ -329,7 +347,6 @@
           <div class="col-md-4"><div class="content-card">
             <h3 class="h6">Mid-range</h3>
             <ul class="muted-note mb-0">
-              <li><strong>Scandic Webers</strong>, Vesterbrogade · ~5 min walk · bookable in the registration form</li>
               <li><strong>Absalon Hotel</strong>, Vesterbro / Central · ~15 min</li>
               <li><strong>Andersen Boutique Hotel</strong>, Vesterbro · ~15 min</li>
             </ul>
