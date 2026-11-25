@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Programme | 16th Nordic Lung Cancer Symposium 2027 | NTOG</title>
-  <meta name="description" content="The scientific programme for the 16th Nordic Lung Cancer Symposium (NLCS 2027), 13-15 May 2027, Scandic Copenhagen, is being finalised. Details to be announced.">
+  <meta name="description" content="The scientific programme for the 16th Nordic Lung Cancer Symposium (NLCS 2027), 13-15 May 2027, Scandic Copenhagen: lung cancer screening, early-stage, locally advanced and stage IV NSCLC, Nordic trials and parallel tracks.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Nordic Thoracic Oncology Group (NTOG)">
   <link rel="canonical" href="https://ntog.org/ntog2027/programme.html">
@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <meta property="og:title" content="Programme | 16th Nordic Lung Cancer Symposium 2027">
-  <meta property="og:description" content="The NLCS 2027 scientific programme is being finalised. Copenhagen, 13 to 15 May 2027.">
+  <meta property="og:description" content="Preliminary scientific programme for NLCS 2027. Copenhagen, 13 to 15 May 2027.">
   <meta property="og:image" content="https://ntog.org/og-image-2027.png">
   <meta property="og:url" content="https://ntog.org/ntog2027/programme.html">
   <meta property="og:type" content="website">
@@ -41,6 +41,30 @@
     .timeline li { padding:.6rem 0; border-bottom:1px dashed #e5e7eb; display:flex; justify-content:space-between; gap:1rem; }
     .timeline li:last-child { border-bottom:0; }
     .timeline .when { color:#74101f; font-weight:700; white-space:nowrap; }
+    .prog-jump { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .prog-jump a { border:1px solid #f2b8c2; border-radius:999px; padding:.35rem .9rem; font-weight:700; font-size:.9rem; text-decoration:none; background:#fff1f3; color:#74101f !important; }
+    .prog-day { margin-bottom:3rem; scroll-margin-top:5.5rem; }
+    .prog-day > h2 { border-bottom:3px solid #c8102e; padding-bottom:.5rem; margin-bottom:1.25rem; }
+    .prog-block { border:1px solid #e5e7eb; border-top:5px solid #c8102e; border-radius:.75rem; background:#fff; padding:1.25rem 1.25rem .75rem; margin-bottom:1rem; }
+    .prog-block h3 { font-size:1.15rem; margin:0 0 .75rem; color:#260006; }
+    .prog-track { border-top-color:#74101f; margin-bottom:0; }
+    .prog-meta { display:flex; flex-wrap:wrap; gap:.75rem; align-items:baseline; margin:0 0 .4rem; }
+    .prog-tracks-head { margin:1.25rem 0 .75rem; }
+    .prog-time { color:#74101f; font-weight:700; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .prog-kind { font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#52606d; }
+    .prog-list { list-style:none; margin:0; padding:0; }
+    .prog-list li { display:flex; gap:1rem; padding:.45rem 0; border-top:1px dashed #e5e7eb; }
+    .prog-list .t { flex:0 0 7.25rem; color:#52606d; font-weight:600; font-size:.92rem; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .prog-list .prog-sub { font-weight:700; color:#260006; }
+    .prog-break { display:flex; gap:1rem; align-items:baseline; background:#f3f4f6; border-radius:.75rem; padding:.75rem 1.25rem; margin:1rem 0; }
+    .prog-break.prog-industry { background:#fff; border:1px dashed #9aa5b1; }
+    .prog-break.prog-social { background:#fff1f3; border:1px solid #f2b8c2; }
+    .prog-break .prog-time { flex:0 0 7.25rem; }
+    .prog-note { display:block; color:#3e4c59; font-size:.92rem; }
+    @media (max-width:575.98px) {
+      .prog-list li, .prog-break { flex-direction:column; gap:.1rem; }
+      .prog-list .t, .prog-break .prog-time { flex:none; }
+    }
     /* no blue on 2027 pages: content links use the red theme */
     main a:not(.btn) { color:#c8102e; }
     main a:not(.btn):hover { color:#74101f; }
@@ -52,7 +76,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Programme",
-  "description": "The scientific programme for the 16th Nordic Lung Cancer Symposium (NLCS 2027), 13 to 15 May 2027, Scandic Copenhagen, is being finalised by the scientific committee. Details to be announced.",
+  "description": "Preliminary scientific programme for the 16th Nordic Lung Cancer Symposium (NLCS 2027), 13 to 15 May 2027, Scandic Copenhagen. Sessions, times and titles may change.",
   "url": "https://ntog.org/ntog2027/programme.html",
   "inLanguage": "en",
   "isPartOf": {
@@ -66,7 +90,7 @@
     "alternateName": "NTOG",
     "url": "https://ntog.org"
   },
-  "dateModified": "2026-06-10"
+  "dateModified": "2026-11-25"
 }
 </script>
 <script type="application/ld+json">
@@ -215,9 +239,9 @@
           <span class="eyebrow">13 to 15 May 2027 · Scandic Copenhagen, Denmark</span>
           <h1>Scientific Programme</h1>
           <p class="hero-lead">
-            The scientific committee is building the programme for the 16th Nordic Lung Cancer
-            Symposium. Plenary sessions, scientific tracks, abstract sessions and speakers will
-            be announced here as they are confirmed.
+            Preliminary programme for the 16th Nordic Lung Cancer Symposium: plenary sessions
+            on screening, early-stage, locally advanced and stage IV NSCLC, Nordic trial
+            collaboration, and parallel tracks on Friday and Saturday.
           </p>
           <div class="hero-actions">
             <a href="/ntog2027/call-for-abstracts.html" class="btn btn-light">Call for abstracts</a>
@@ -233,33 +257,230 @@
   </header>
 
   <main>
-    <section class="section-block">
+    <section class="section-block pb-0">
       <div class="container">
-        <div class="row g-4 align-items-start">
-          <div class="col-lg-6">
-            <span class="status-pill">Programme — to be announced</span>
-            <h2 class="mt-3">Being finalised</h2>
-            <p class="lead">The full scientific programme is not yet published.</p>
-            <p class="muted-note mb-0">
-              This page will be updated with the confirmed schedule. In the meantime, the best way
-              to take part is to submit an abstract — accepted abstracts shape the scientific
-              sessions and appear in the digital abstract book.
-            </p>
-          </div>
-          <div class="col-lg-6">
-            <div class="content-card">
-              <h2 class="h5">Indicative milestones</h2>
-              <ul class="timeline">
-                <li><span>Call for abstracts</span><span class="when">Open now</span></li>
-                <li><span>Abstract submission deadline</span><span class="when">19 March 2027</span></li>
-                <li><span>Notification of acceptance</span><span class="when">16 April 2027</span></li>
-                <li><span>Preliminary programme published</span><span class="when">To be confirmed</span></li>
-                <li><span>Symposium</span><span class="when">13–15 May 2027</span></li>
-              </ul>
-              <p class="muted-note mb-0 mt-3">Dates are indicative and will be confirmed by the scientific committee.</p>
-            </div>
-          </div>
-        </div>
+        <span class="status-pill">Preliminary programme</span>
+        <h2 class="mt-3">Three days in Copenhagen</h2>
+        <p class="lead">Sessions, times and titles may change. Speakers will be added as they are confirmed.</p>
+        <p class="muted-note">Venue: Scandic Copenhagen, Vester Søgade 6, Copenhagen, Denmark. Abstract submission is open until 19 March 2027 – selected abstracts are presented on Saturday.</p>
+        <nav class="prog-jump" aria-label="Programme days">
+          <a href="#thursday">Thursday 13 May</a>
+          <a href="#friday">Friday 14 May</a>
+          <a href="#saturday">Saturday 15 May</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section-block pt-4">
+      <div class="container">
+<section class="prog-day" id="thursday" aria-labelledby="thursday-h">
+<h2 id="thursday-h">Thursday 13 May</h2>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">10.30 – 12.30</span><span class="prog-kind">Plenary session</span></p>
+<h3>Lung cancer screening – status and implementation</h3>
+<ul class="prog-list">
+<li><span class="t">10.30 – 10.45</span><span>Welcome, programme overview</span></li>
+<li><span class="t">10.45 – 10.55</span><span>The Finnish experience</span></li>
+<li><span class="t">10.55 – 11.05</span><span>The Swedish experience</span></li>
+<li><span class="t">11.05 – 11.15</span><span>The Norwegian experience</span></li>
+<li><span class="t">11.15 – 11.25</span><span>The Danish experience</span></li>
+<li><span class="t">11.25 – 11.40</span><span>Health-system priorities for implementing lung cancer screening in the Nordic countries</span></li>
+<li><span class="t">11.40 – 12.10</span><span>Managing incidental findings in a lung cancer screening programme – British experience</span></li>
+<li><span class="t">12.10 – 12.30</span><span>Panel discussion – Joint Nordic screening protocol – window of opportunity</span></li>
+</ul>
+</div>
+<div class="prog-break "><span class="prog-time">12.30 – 13.30</span><span><strong>Lunch, exhibition and poster viewing</strong></span></div>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">13.30 – 15.30</span><span class="prog-kind">Plenary session</span></p>
+<h3>Early-stage NSCLC</h3>
+<ul class="prog-list">
+<li><span class="t">13.30 – 13.45</span><span>Stage I – which resection to choose?</span></li>
+<li><span class="t">13.45 – 14.00</span><span>Robotic surgery for early-stage NSCLC. What are the advantages?</span></li>
+<li><span class="t">14.00 – 14.15</span><span>SBRT – recent advances</span></li>
+<li><span class="t">14.15 – 14.30</span><span>The role of ablative therapy – patient selection and results</span></li>
+<li><span class="t">14.30 – 14.40</span><span>STRADOS trial</span></li>
+<li><span class="t">14.40 – 14.50</span><span>ASTEROID trial</span></li>
+<li><span class="t">14.50 – 15.05</span><span>Multifocal lung adenocarcinoma – identification and management</span></li>
+<li><span class="t">15.05 – 15.20</span><span>Role of adjuvant therapy for high-risk stage I NSCLC – pros and cons</span></li>
+<li><span class="t">15.20 – 15.30</span><span>Panel discussion – Q &amp; A</span></li>
+</ul>
+</div>
+<div class="prog-break "><span class="prog-time">15.30 – 15.45</span><span><strong>Coffee, exhibition and poster viewing</strong></span></div>
+<div class="prog-break prog-industry"><span class="prog-time">15.45 – 17.00</span><span><strong>Industry symposium</strong></span></div>
+<div class="prog-break prog-social"><span class="prog-time">17.00 – 18.00</span><span><strong>Welcome reception at the venue</strong><span class="prog-note">A drink and light snacks. No meal is served.</span></span></div>
+<div class="prog-break prog-social"><span class="prog-time">18.30</span><span><strong>Optional networking dinner</strong><span class="prog-note">Restaurant Tight, Hyskenstræde 10 (20 min walk from the venue). Optional – add it when you register.</span></span></div>
+<div class="prog-break prog-social"><span class="prog-time">Time TBC</span><span><strong>Speakers’ dinner</strong></span></div>
+</section>
+<section class="prog-day" id="friday" aria-labelledby="friday-h">
+<h2 id="friday-h">Friday 14 May</h2>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">08.30 – 10.00</span><span class="prog-kind">Plenary session</span></p>
+<h3>Locally advanced disease – implementation of neoadjuvant treatment and surgery</h3>
+<ul class="prog-list">
+<li><span class="t">08.30 – 08.40</span><span>Danish experience</span></li>
+<li><span class="t">08.40 – 08.50</span><span>Norwegian experience</span></li>
+<li><span class="t">08.50 – 09.00</span><span>Swedish experience</span></li>
+<li><span class="t">09.00 – 09.10</span><span>Finnish experience</span></li>
+<li><span class="t">09.10 – 09.20</span><span>ADIL trial</span></li>
+<li><span class="t">09.20 – 09.50</span><span>Radio-chemotherapy vs. neoadjuvant therapy + surgery, stage IIIB – pros and cons</span></li>
+<li><span class="t">09.50 – 10.00</span><span>Panel discussion – Q &amp; A</span></li>
+</ul>
+</div>
+<div class="prog-break "><span class="prog-time">10.00 – 10.30</span><span><strong>Coffee, exhibition and poster viewing</strong></span></div>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">10.30 – 12.30</span><span class="prog-kind">Plenary session</span></p>
+<h3>Stage IV NSCLC</h3>
+<ul class="prog-list">
+<li><span class="t">10.30 – 11.00</span><span>State of the art – non-oncogene-driven metastatic NSCLC</span></li>
+<li><span class="t">11.00 – 11.30</span><span>State of the art – oncogene-driven metastatic NSCLC</span></li>
+<li><span class="t">11.30 – 12.00</span><span>De-escalation of immunotherapy</span></li>
+<li><span class="t">12.00 – 12.15</span><span>Management of oligometastatic disease / oligoprogression</span></li>
+<li><span class="t">12.15 – 12.30</span><span>Role of surgery in oligometastatic disease</span></li>
+</ul>
+</div>
+<div class="prog-break prog-industry"><span class="prog-time">12.30 – 13.30</span><span><strong>Industry lunch symposium (30 min), exhibition and poster viewing</strong></span></div>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">13.30 – 15.30</span><span class="prog-kind">Plenary session</span></p>
+<h3>Boosting patient recruitment into academic and industry-supported trials across the Nordics</h3>
+<ul class="prog-list">
+<li class="prog-sub">13.30 – 14.00 · Nordic collaborative trials</li>
+<li><span class="t">13.30 – 13.40</span><span>Trial I</span></li>
+<li><span class="t">13.40 – 13.50</span><span>Trial II</span></li>
+<li><span class="t">13.50 – 14.00</span><span>Trial III</span></li>
+<li class="prog-sub">14.00 – 15.30 · Nordic trial collaboration networks</li>
+<li><span class="t">14.00 – 14.10</span><span>Nortrials (TBC)</span></li>
+<li><span class="t">14.10 – 14.20</span><span>Trial Nation (TBC)</span></li>
+<li><span class="t">14.20 – 14.30</span><span>Nordic Trial Alliance (TBC)</span></li>
+<li><span class="t">14.30 – 14.40</span><span>Nordic Molecular Tumor Board (TBC)</span></li>
+<li><span class="t">14.40 – 14.50</span><span>Industry perspective (TBC)</span></li>
+<li><span class="t">14.50 – 15.05</span><span>A transatlantic perspective</span></li>
+<li><span class="t">15.05 – 15.30</span><span>Panel discussion – Q &amp; A</span></li>
+</ul>
+</div>
+<div class="prog-break "><span class="prog-time">15.30 – 16.00</span><span><strong>Coffee, exhibition and poster viewing</strong></span></div>
+<p class="prog-meta prog-tracks-head"><span class="prog-time">16.00 – 17.30</span><span class="prog-kind">Parallel tracks</span></p>
+<div class="row g-3">
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track A</span></p>
+<h3>Advancing lung cancer nursing across the Nordic countries</h3>
+<ul class="prog-list">
+<li><span class="t">16.00 – 16.05</span><span>Introduction – how can nursing research and clinical interventions improve the quality and continuity of lung cancer care?</span></li>
+<li><span class="t">16.05 – 16.20</span><span>Nurse-led navigation and personalised supportive care for vulnerable patients with lung cancer</span></li>
+<li><span class="t">16.20 – 16.35</span><span>Living with symptom clusters during lung cancer treatment and implications for person-centred supportive care</span></li>
+<li><span class="t">16.35 – 16.50</span><span>From nursing research to clinical practice: implementing digital symptom monitoring in lung cancer care</span></li>
+<li><span class="t">16.50 – 17.10</span><span>Discussion – what are the key opportunities for advancing lung cancer nursing across the Nordic countries?</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track B</span></p>
+<h3>Diagnostic session – the frontiers in endoscopic diagnosis</h3>
+<ul class="prog-list">
+<li><span class="t">16.00 – 16.15</span><span>Navigation bronchoscopy with and without robot assistance</span></li>
+<li><span class="t">16.15 – 16.30</span><span>Thin-convex-probe EBUS</span></li>
+<li><span class="t">16.30 – 16.45</span><span>Cryo-EBUS</span></li>
+<li><span class="t">16.45 – 17.00</span><span>EUS-B</span></li>
+<li><span class="t">17.00 – 17.15</span><span>Discussion – how can we improve Nordic collaboration?</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track C</span></p>
+<h3>Pathology session</h3>
+<ul class="prog-list">
+<li><span class="t">16.00 – 17.30</span><span>Programme pending</span></li>
+</ul>
+</div></div>
+</div>
+<div class="prog-break prog-social"><span class="prog-time">19.00</span><span><strong>Conference dinner at the venue</strong></span></div>
+</section>
+<section class="prog-day" id="saturday" aria-labelledby="saturday-h">
+<h2 id="saturday-h">Saturday 15 May</h2>
+<p class="prog-meta prog-tracks-head"><span class="prog-time">08.30 – 10.00</span><span class="prog-kind">Parallel tracks</span></p>
+<div class="row g-3">
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track A</span></p>
+<h3>Pleural mesothelioma</h3>
+<ul class="prog-list">
+<li><span class="t">08.30 – 08.50</span><span>Pleural mesothelioma in the Nordic countries: an occupational medicine perspective</span></li>
+<li><span class="t">08.50 – 09.10</span><span>Diagnosis – challenges and advances</span></li>
+<li><span class="t">09.10 – 09.30</span><span>Medical treatment strategies and checkpoint inhibitors</span></li>
+<li><span class="t">09.30 – 09.50</span><span>Surgical treatment strategies and outcomes</span></li>
+<li><span class="t">09.50 – 10.00</span><span>Discussion – how can we collaborate in the Nordics?</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track B</span></p>
+<h3>Beyond treatment: patient perspectives and supportive care</h3>
+<ul class="prog-list">
+<li><span class="t">08.30 – 08.35</span><span>Introduction – why do patient perspectives matter in contemporary lung cancer care?</span></li>
+<li><span class="t">08.35 – 08.50</span><span>Patient experiences, uncertainty and navigation of the diagnostic pathway – implications for nursing care</span></li>
+<li><span class="t">08.50 – 09.05</span><span>Longing to get back on track: patients’ experiences and supportive care needs after lung cancer surgery</span></li>
+<li><span class="t">09.05 – 09.20</span><span>Living with lung cancer and patient experiences of nurse-led person-centred supportive care</span></li>
+<li><span class="t">09.20 – 10.00</span><span>Discussion – what can we learn from each other across the Nordic countries?</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track C</span></p>
+<h3>Neuroendocrine tumors</h3>
+<ul class="prog-list">
+<li><span class="t">08.30 – 08.50</span><span>SCLC – systemic therapy and new frontiers</span></li>
+<li><span class="t">08.50 – 09.10</span><span>State of the art – SCLC radiation therapy and new frontiers</span></li>
+<li><span class="t">09.10 – 09.20</span><span>Discussion – bringing Nordic SCLC research forward – Q &amp; A</span></li>
+<li><span class="t">09.20 – 09.30</span><span>LCNEC – treatment options and recent advances</span></li>
+<li><span class="t">09.30 – 09.45</span><span>NET tumors – overview and treatment options</span></li>
+<li><span class="t">09.45 – 10.00</span><span>Discussion – Q &amp; A</span></li>
+</ul>
+</div></div>
+</div>
+<div class="prog-break "><span class="prog-time">10.00 – 10.30</span><span><strong>Coffee break, exhibition and poster viewing</strong></span></div>
+<p class="prog-meta prog-tracks-head"><span class="prog-time">10.30 – 12.30</span><span class="prog-kind">Parallel tracks</span></p>
+<div class="row g-3">
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track A</span></p>
+<h3>Nordic real-world data (RWD)</h3>
+<ul class="prog-list">
+<li><span class="t">10.30 – 10.50</span><span>ONCOVALUE</span></li>
+<li><span class="t">10.50 – 11.10</span><span>Danish RWD, TKI</span></li>
+<li><span class="t">11.10 – 11.30</span><span>Danish RWD, Aarhus</span></li>
+<li><span class="t">11.30 – 11.50</span><span>Swedish RWD, I-O Optimise</span></li>
+<li><span class="t">11.50 – 12.10</span><span>Finnish RWD</span></li>
+<li><span class="t">12.10 – 12.30</span><span>Discussion – how can we use real-world data for Nordic collaboration?</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track B</span></p>
+<h3>Biomarkers and AI</h3>
+<ul class="prog-list">
+<li><span class="t">10.30 – 10.50</span><span>Risk prediction biomarkers</span></li>
+<li><span class="t">10.50 – 11.10</span><span>Treatment-specific biomarkers</span></li>
+<li><span class="t">11.10 – 11.30</span><span>Biomarkers in post-treatment surveillance</span></li>
+<li><span class="t">11.30 – 11.50</span><span>AI nodule detection – where are we?</span></li>
+<li><span class="t">11.50 – 12.10</span><span>AI in post-treatment surveillance</span></li>
+<li><span class="t">12.10 – 12.30</span><span>Discussion</span></li>
+</ul>
+</div></div>
+<div class="col-lg-4"><div class="prog-block prog-track h-100">
+<p class="prog-meta"><span class="prog-kind">Track C</span></p>
+<h3>Nordic perspectives on exercise in lung cancer care</h3>
+<ul class="prog-list">
+<li><span class="t">10.30 – 10.50</span><span>Exercise in lung cancer: why, when and for whom?</span></li>
+<li><span class="t">10.50 – 11.10</span><span>Prehabilitation and precision: predicting who needs exercise most</span></li>
+<li><span class="t">11.10 – 11.30</span><span>Exercise during neoadjuvant treatment: building physical reserve before lung cancer surgery</span></li>
+<li><span class="t">11.30 – 11.50</span><span>Getting patients moving after lung cancer surgery</span></li>
+<li><span class="t">11.50 – 12.30</span><span>Panel discussion – from evidence to clinical practice – how do we make exercise part of the lung cancer treatment pathway?</span></li>
+</ul>
+</div></div>
+</div>
+<div class="prog-break "><span class="prog-time">12.30 – 13.30</span><span><strong>Lunch, exhibition and poster viewing</strong></span></div>
+<div class="prog-block ">
+<p class="prog-meta"><span class="prog-time">13.30 – 14.45</span><span class="prog-kind">Plenary session</span></p>
+<h3>Abstracts, awards and wrap-up</h3>
+<ul class="prog-list">
+<li><span class="t">13.30 – 14.15</span><span>Oral presentation of selected abstracts. Awards for best posters</span></li>
+<li><span class="t">14.15 – 14.45</span><span>Highlights from the discussions and wrap-up</span></li>
+</ul>
+</div>
+</section>
+        <p class="muted-note mt-4 mb-0">The scientific programme is supported by the pharmaceutical industry. Preliminary programme, updated 25 November 2026.</p>
       </div>
     </section>
   </main>
