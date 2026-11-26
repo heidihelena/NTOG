@@ -184,6 +184,7 @@
     "lt.furtherInvestigations.biopsy_metastasis": { en: "Biopsy of suspected metastasis" },
     "lt.furtherInvestigations.pft": { en: "Pulmonary function tests" },
     "lt.furtherInvestigations.molecular_testing": { en: "Complete molecular testing" },
+    "lt.furtherInvestigations.geriatric_assessment": { en: "Geriatric assessment" },
     "lt.w.why": { en: "Why" },
     "lt.w.whyText": { en: "Main reason for the decision" },
     "lt.f.decisionRationale": { en: "Rationale" },
