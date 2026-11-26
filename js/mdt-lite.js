@@ -129,13 +129,33 @@
     if (!e || !e.value) return "";
     return e.options[e.selectedIndex].textContent.trim();
   }
+  // surgery is one dropdown in the form; it is exported as a v3.1 "treatments" code
+  function treatmentValues() {
+    var s = document.getElementById("surgeryType").value;
+    return (s ? [s] : []).concat(checkedValues("treatments"));
+  }
+  function treatmentLabels() {
+    var s = document.getElementById("surgeryType");
+    return (s.value ? [s.options[s.selectedIndex].textContent.trim()] : []).concat(checkedLabels("treatments"));
+  }
+  // short wording for the report; falls back to the option label
+  function short(name) {
+    var val = v(name);
+    if (!val) return "";
+    var key = "lt.s." + name + "." + val, text = L(key);
+    return text === key ? selLabel(name) : text;
+  }
   function any(list, values) { return list.some(function (x) { return values.indexOf(x) >= 0; }); }
 
   function show(id, visible, namesToClear) {
     var wrap = document.getElementById(id);
     if (wrap.hidden === !visible) return;
     wrap.hidden = !visible;
-    if (!visible) (namesToClear || []).forEach(function (n) { el(n).value = ""; });
+    if (!visible) (namesToClear || []).forEach(function (n) {
+      var boxes = f.querySelectorAll('input[type="checkbox"][name="' + n + '"]');
+      if (boxes.length) Array.prototype.forEach.call(boxes, function (b) { b.checked = false; });
+      else el(n).value = "";
+    });
   }
 
   function requiredFilled(name) {
@@ -149,7 +169,7 @@
     function add(key, fields) { w.push(L(key)); (fields || []).forEach(function (x) { flagged.push(x); }); }
 
     var size = num("tumourTSizeMm");
-    var treatments = checkedValues("treatments");
+    var treatments = treatmentValues();
     var invest = checkedValues("furtherInvestigations");
     var intent = v("treatmentIntent");
     var status = v("mdtDecisionStatus");
@@ -163,12 +183,13 @@
     if (hasSurgery && v("n2Bulky") === "yes") add("lt.v.surgeryBulkyN2", ["n2Bulky"]);
     if ((n === "N2a" || n === "N2b") && hasSurgery && !v("n2Bulky")) add("lt.v.bulkyMissing", ["n2Bulky"]);
     if (any(treatments, RADICAL_LOCAL) && (m === "Mx" || n === "NX")) add("lt.v.radicalStagingIncomplete", ["nCategory", "metastasisPattern"]);
-    if (treatments.indexOf("none_selected") >= 0 && treatments.length > 1) add("lt.v.noneWithTreatment");
-    if (invest.indexOf("none") >= 0 && invest.length > 1) add("lt.v.noneWithInvestigation");
-    if (status === "decision_made" && (treatments.length === 0 || (treatments.length === 1 && treatments[0] === "none_selected"))) add("lt.v.decisionNoTreatment", ["mdtDecisionStatus"]);
-    if (status === "conditional_on_tests" && (invest.length === 0 || (invest.length === 1 && invest[0] === "none"))) add("lt.v.conditionalNoTests", ["mdtDecisionStatus"]);
+    if (status === "decision_made" && treatments.length === 0) add("lt.v.decisionNoTreatment", ["mdtDecisionStatus"]);
+    if (status === "conditional_on_tests" && invest.length === 0) add("lt.v.conditionalNoTests", ["mdtDecisionStatus"]);
     if (v("decisionRationale") === "other" && !v("decisionRationaleNote")) add("lt.v.otherNeedsNote", ["decisionRationaleNote"]);
     if (v("nextActionDue") && v("meetingDate") && v("nextActionDue") < v("meetingDate")) add("lt.v.dueBeforeMeeting", ["nextActionDue", "meetingDate"]);
+    var drivers = checkedValues("driverAlteration");
+    if (drivers.indexOf("none_detected") >= 0 && drivers.length > 1) add("lt.v.noneWithDriver");
+    if (drivers.filter(function (x) { return x.indexOf("egfr_") === 0; }).length > 1) add("lt.v.twoEgfr");
     if (stage === "Manual review") add("lt.v.manualReview");
 
     Array.prototype.forEach.call(f.querySelectorAll(".field-warning"), function (x) { x.classList.remove("field-warning"); });
@@ -178,7 +199,7 @@
 
   function update() {
     var nSel = v("nCategory");
-    var treatments = checkedValues("treatments");
+    var treatments = treatmentValues();
     show("n2BulkyWrap", nSel === "N2a" || nSel === "N2b", ["n2Bulky"]);
     show("driverWrap", v("molecularStatus") === "complete", ["driverAlteration"]);
     show("lungFnWrap", any(treatments, RADICAL_LOCAL), ["fev1Percent", "dlcoPercent"]);
@@ -232,8 +253,12 @@
         data[e.name] = e.value;
       }
     });
-    var map = DRIVER_MAP[data.driverAlteration];
-    if (map) data[map[0]] = map[1];
+    // one status per gene in v3.1: the first ticked subtype of a gene is exported
+    data.treatments = treatmentValues();
+    (data.driverAlteration || []).forEach(function (code) {
+      var map = DRIVER_MAP[code];
+      if (map && !data[map[0]]) data[map[0]] = map[1];
+    });
     data.nCategorySource = "direct_entry";
     data.derived = latest.derived;
     data.exportedAt = new Date().toISOString();
@@ -246,48 +271,37 @@
     update();
     var d = latest.derived;
     function join(parts, sep) { return parts.filter(Boolean).join(sep || ", "); }
-    function pair(key, val) { return val ? L(key) + ": " + val : ""; }
     var nr = L("lt.sum.notRecorded");
+    var drivers = checkedLabels("driverAlteration");
 
-    var lines = [
-      L("lt.sum.title"),
-      L("lt.sum.note"),
-      "",
-      L("lt.sum.decided") + ": " + join([
-        selLabel("mdtDecisionStatus") || nr,
-        pair("lt.f.treatmentIntent", selLabel("treatmentIntent"))
-      ], ". "),
-      "  " + L("lt.sum.treatment") + ": " + (join(checkedLabels("treatments"), "; ") || nr),
-      "  " + L("lt.sum.investigations") + ": " + (join(checkedLabels("furtherInvestigations"), "; ") || nr),
-      L("lt.sum.why") + ": " + (join([selLabel("decisionRationale"), v("decisionRationaleNote")], " — ") || nr),
-      L("lt.sum.who") + ": " + (selLabel("attendingSpecialist") || nr),
-      L("lt.sum.when") + ": " + (v("nextActionDue") || nr),
-      "",
-      L("lt.sum.meeting") + ": " + (join([v("meetingDate"), v("hospitalCentre"), selLabel("mdtPurpose"), selLabel("mdtQuestion")], " | ") || nr),
+    var lines = [join([L("lt.sum.title"), join([v("meetingDate"), v("hospitalCentre")])], " ")];
+    if (v("mdtPurpose")) lines.push(L("lt.f.mdtPurpose") + ": " + selLabel("mdtPurpose"));
+    lines.push("",
       L("lt.sum.patient") + ": " + (join([
-        v("age") ? v("age") + " " + L("lt.sum.years") : "",
-        selLabel("sex"),
+        join([v("age") ? v("age") + " " + L("lt.sum.y") : "", short("sex")], " "),
         v("ecog") ? "ECOG " + v("ecog") : "",
-        selLabel("smokingStatus")
+        short("smokingStatus")
       ]) || nr),
-      L("lt.sum.disease") + ": " + join([
-        selLabel("histology"),
-        d.cTNM + " (" + L("lt.sum.edition") + ")",
-        L("lt.d.stage") + " " + L("lt.stage." + d.stageGroup),
-        v("tumourTSizeMm") ? v("tumourTSizeMm") + " mm" : "",
-        pair("lt.f.n2Bulky", selLabel("n2Bulky")),
-        pair("lt.f.oligometastaticStatus", selLabel("oligometastaticStatus"))
-      ]),
-      L("lt.sum.biomarkers") + ": " + (join([
-        v("pdl1Tps") ? "PD-L1 TPS " + v("pdl1Tps") + " %" : "",
-        pair("lt.f.molecularStatus", selLabel("molecularStatus")),
-        pair("lt.f.driverAlteration", selLabel("driverAlteration"))
-      ]) || nr)
-    ];
-    var lung = join([v("fev1Percent") ? "FEV1 " + v("fev1Percent") + " %" : "", v("dlcoPercent") ? "DLCO " + v("dlcoPercent") + " %" : ""]);
-    if (lung) lines.push(L("lt.sum.lungFunction") + ": " + lung);
+      L("lt.sum.diagnosis") + ": " + join([
+        join([selLabel("histology"), d.cTNM], " "),
+        L("lt.sum.stage") + " " + L("lt.stage." + d.stageGroup) + " (" + L("lt.sum.edition") + ")"
+      ]));
+    [
+      join([v("tumourTSizeMm") ? v("tumourTSizeMm") + " mm" : "", short("n2Bulky"), short("oligometastaticStatus")]),
+      join([v("pdl1Tps") ? "PD-L1 " + v("pdl1Tps") + " %" : "", drivers.length ? join(drivers) : short("molecularStatus")]),
+      join([v("fev1Percent") ? "FEV1 " + v("fev1Percent") + " %" : "", v("dlcoPercent") ? "DLCO " + v("dlcoPercent") + " %" : ""])
+    ].forEach(function (x) { if (x) lines.push("  " + x); });
+
+    lines.push("",
+      L("lt.sum.decision") + ": " + (join([short("treatmentIntent"), short("mdtDecisionStatus")]) || nr),
+      L("lt.sum.plan") + ": " + (join(treatmentLabels()) || nr),
+      L("lt.sum.before") + ": " + (join(checkedLabels("furtherInvestigations")) || L("lt.sum.none")),
+      L("lt.sum.reason") + ": " + (join([selLabel("decisionRationale"), v("decisionRationaleNote")], " — ") || nr),
+      L("lt.sum.responsible") + ": " + (selLabel("attendingSpecialist") || nr),
+      L("lt.sum.nextBy") + ": " + (v("nextActionDue") || nr));
     if (v("patientPreferenceStatus")) lines.push(L("lt.f.patientPreferenceStatus") + ": " + selLabel("patientPreferenceStatus"));
     if (checked("participants").length) lines.push(L("lt.sum.present") + ": " + join(checkedLabels("participants")));
+
     if (d.missingRequiredFields.length) {
       lines.push("", L("lt.msg.missing") + " " + d.missingRequiredFields.map(function (k) { return L("lt.req." + k); }).join(", "));
     }
@@ -295,6 +309,7 @@
       lines.push("", L("lt.msg.flags"));
       latest.warnings.forEach(function (x) { lines.push("  - " + x); });
     }
+    lines.push("", L("lt.sum.note"));
     return lines.join("\n");
   }
 

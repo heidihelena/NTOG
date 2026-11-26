@@ -30,6 +30,7 @@
   input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #ffbf47; outline-offset: 1px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .2em 1em; }
   .row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: .2em 1em; }
+  .row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .2em 1em; }
   .hint { font-size: .86em; color: var(--muted); font-weight: 400; }
   .intro-text { margin-top: .2em; }
   .privacy, .disclaimer { background: var(--ntog-warning-bg); border: 1px solid var(--ntog-warning-border); padding: .8em; border-radius: 8px; margin-bottom: .8em; font-size: .92em; }
@@ -60,7 +61,7 @@
   footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid var(--ntog-border); font-size: .85em; color: var(--muted); }
   footer a { color: var(--ntog-blue); margin-right: 1em; }
   .span2 { grid-column: span 2; }
-  @media (max-width: 760px) { .row2, .row4 { grid-template-columns: 1fr; } .span2 { grid-column: auto; } .derived { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 760px) { .row2, .row3, .row4 { grid-template-columns: 1fr; } .span2 { grid-column: auto; } .derived { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 761px) and (max-width: 900px) { .row4 { grid-template-columns: 1fr 1fr; } }
   @media print {
     form > fieldset, form > h2, .privacy, .disclaimer, .button-row, #warnings, .topbar, .intro-text, footer, .derived { display: none; }
@@ -85,9 +86,9 @@
 
 <form id="mdtForm" autocomplete="off" novalidate>
 
-  <h2 data-i18n="lt.sec.meeting">1. Meeting and question</h2>
+  <h2 data-i18n="lt.sec.meeting">1. Meeting</h2>
   <fieldset>
-    <div class="row4">
+    <div class="row3">
       <div><label for="meetingDate" data-i18n="lt.f.meetingDate">Meeting date</label><input type="date" id="meetingDate" name="meetingDate"></div>
       <div><label for="hospitalCentre" data-i18n="lt.f.hospitalCentre">Hospital / centre</label><input type="text" id="hospitalCentre" name="hospitalCentre"></div>
       <div><label for="mdtPurpose" data-i18n="lt.f.mdtPurpose">MDT purpose</label>
@@ -99,18 +100,6 @@
           <option value="postoperative_review" data-i18n="lt.mdtPurpose.postoperative_review">Postoperative review</option>
           <option value="recurrence_progression" data-i18n="lt.mdtPurpose.recurrence_progression">Recurrence or progression</option>
           <option value="re_discussion_after_tests" data-i18n="lt.mdtPurpose.re_discussion_after_tests">Re-discussion after further tests</option>
-        </select>
-      </div>
-      <div><label for="mdtQuestion" data-i18n="lt.f.mdtQuestion">Clinical question</label>
-        <select id="mdtQuestion" name="mdtQuestion">
-          <option value="" data-i18n="lt.o.select">Select</option>
-          <option value="confirm_stage" data-i18n="lt.mdtQuestion.confirm_stage">Confirm stage</option>
-          <option value="choose_biopsy_target" data-i18n="lt.mdtQuestion.choose_biopsy_target">Choose biopsy target</option>
-          <option value="operability" data-i18n="lt.mdtQuestion.operability">Operability</option>
-          <option value="radical_rt_eligibility" data-i18n="lt.mdtQuestion.radical_rt_eligibility">Radical radiotherapy eligibility</option>
-          <option value="systemic_treatment" data-i18n="lt.mdtQuestion.systemic_treatment">Systemic treatment</option>
-          <option value="oligometastatic_pathway" data-i18n="lt.mdtQuestion.oligometastatic_pathway">Oligometastatic pathway</option>
-          <option value="supportive_care" data-i18n="lt.mdtQuestion.supportive_care">Supportive care pathway</option>
         </select>
       </div>
     </div>
@@ -279,23 +268,23 @@
           <option value="not_indicated" data-i18n="lt.molecularStatus.not_indicated">Not indicated</option>
         </select>
       </div>
-      <div class="span2" id="driverWrap" hidden><label for="driverAlteration" data-i18n="lt.f.driverAlteration">Driver alteration found</label>
-        <select id="driverAlteration" name="driverAlteration">
-          <option value="" data-i18n="lt.o.select">Select</option>
-          <option value="none_detected" data-i18n="lt.driverAlteration.none_detected">None detected</option>
-          <option value="egfr_exon_19_del" data-i18n="lt.driverAlteration.egfr_exon_19_del">EGFR exon 19 deletion</option>
-          <option value="egfr_l858r" data-i18n="lt.driverAlteration.egfr_l858r">EGFR L858R</option>
-          <option value="egfr_exon_20_insertion" data-i18n="lt.driverAlteration.egfr_exon_20_insertion">EGFR exon 20 insertion</option>
-          <option value="egfr_other_positive" data-i18n="lt.driverAlteration.egfr_other_positive">EGFR, other</option>
-          <option value="alk_positive" data-i18n="lt.driverAlteration.alk_positive">ALK</option>
-          <option value="ros1_positive" data-i18n="lt.driverAlteration.ros1_positive">ROS1</option>
-          <option value="braf_v600e" data-i18n="lt.driverAlteration.braf_v600e">BRAF V600E</option>
-          <option value="kras_g12c" data-i18n="lt.driverAlteration.kras_g12c">KRAS G12C</option>
-          <option value="met_exon_14_skipping" data-i18n="lt.driverAlteration.met_exon_14_skipping">MET exon 14 skipping</option>
-          <option value="ret_positive" data-i18n="lt.driverAlteration.ret_positive">RET</option>
-          <option value="ntrk_positive" data-i18n="lt.driverAlteration.ntrk_positive">NTRK</option>
-          <option value="other" data-i18n="lt.driverAlteration.other">Other alteration</option>
-        </select>
+    </div>
+    <div id="driverWrap" hidden>
+      <p class="group-head"><span data-i18n="lt.f.driverAlteration">Driver alterations found</span> <span class="hint" data-i18n="lt.h.driverAlteration">tick all that apply</span></p>
+      <div class="check-grid">
+        <label><input type="checkbox" name="driverAlteration" value="none_detected"><span data-i18n="lt.driverAlteration.none_detected">None detected</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_exon_19_del"><span data-i18n="lt.driverAlteration.egfr_exon_19_del">EGFR exon 19 deletion</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_l858r"><span data-i18n="lt.driverAlteration.egfr_l858r">EGFR L858R</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_exon_20_insertion"><span data-i18n="lt.driverAlteration.egfr_exon_20_insertion">EGFR exon 20 insertion</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_other_positive"><span data-i18n="lt.driverAlteration.egfr_other_positive">EGFR, other</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="alk_positive"><span data-i18n="lt.driverAlteration.alk_positive">ALK</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ros1_positive"><span data-i18n="lt.driverAlteration.ros1_positive">ROS1</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="braf_v600e"><span data-i18n="lt.driverAlteration.braf_v600e">BRAF V600E</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="kras_g12c"><span data-i18n="lt.driverAlteration.kras_g12c">KRAS G12C</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="met_exon_14_skipping"><span data-i18n="lt.driverAlteration.met_exon_14_skipping">MET exon 14 skipping</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ret_positive"><span data-i18n="lt.driverAlteration.ret_positive">RET</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ntrk_positive"><span data-i18n="lt.driverAlteration.ntrk_positive">NTRK</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="other"><span data-i18n="lt.driverAlteration.other">Other alteration</span></label>
       </div>
     </div>
   </fieldset>
@@ -326,41 +315,31 @@
       </div>
     </div>
 
-    <p class="group-head" data-i18n="lt.g.surgery">Treatment: surgery and procedures</p>
-    <div class="check-grid">
-      <label><input type="checkbox" name="treatments" value="surgery_lobectomy"><span data-i18n="lt.treatments.surgery_lobectomy">Lobectomy</span></label>
-      <label><input type="checkbox" name="treatments" value="surgery_segmentectomy"><span data-i18n="lt.treatments.surgery_segmentectomy">Segmentectomy</span></label>
-      <label><input type="checkbox" name="treatments" value="surgery_wedge"><span data-i18n="lt.treatments.surgery_wedge">Wedge resection</span></label>
-      <label><input type="checkbox" name="treatments" value="surgery_pneumonectomy"><span data-i18n="lt.treatments.surgery_pneumonectomy">Pneumonectomy</span></label>
-      <label><input type="checkbox" name="treatments" value="therapeutic_bronchoscopy"><span data-i18n="lt.treatments.therapeutic_bronchoscopy">Therapeutic bronchoscopy</span></label>
-      <label><input type="checkbox" name="treatments" value="pleural_procedure"><span data-i18n="lt.treatments.pleural_procedure">Pleural procedure</span></label>
+    <div class="row2">
+      <div><label for="surgeryType" data-i18n="lt.f.surgery">Surgery</label>
+        <select id="surgeryType">
+          <option value="" data-i18n="lt.surgery.none">No surgery</option>
+          <option value="surgery_lobectomy" data-i18n="lt.treatments.surgery_lobectomy">Lobectomy</option>
+          <option value="surgery_segmentectomy" data-i18n="lt.treatments.surgery_segmentectomy">Segmentectomy</option>
+          <option value="surgery_wedge" data-i18n="lt.treatments.surgery_wedge">Wedge resection</option>
+          <option value="surgery_pneumonectomy" data-i18n="lt.treatments.surgery_pneumonectomy">Pneumonectomy</option>
+        </select>
+      </div>
     </div>
-    <p class="group-head" data-i18n="lt.g.radiotherapy">Treatment: radiotherapy</p>
+    <p class="group-head" data-i18n="lt.g.treatments">Other treatment</p>
     <div class="check-grid">
       <label><input type="checkbox" name="treatments" value="definitive_chemoradiotherapy"><span data-i18n="lt.treatments.definitive_chemoradiotherapy">Definitive chemoradiotherapy</span></label>
       <label><input type="checkbox" name="treatments" value="sabr_sbrt"><span data-i18n="lt.treatments.sabr_sbrt">SABR / SBRT</span></label>
       <label><input type="checkbox" name="treatments" value="palliative_radiotherapy"><span data-i18n="lt.treatments.palliative_radiotherapy">Palliative radiotherapy</span></label>
-    </div>
-    <p class="group-head" data-i18n="lt.g.systemic">Treatment: systemic</p>
-    <div class="check-grid">
       <label><input type="checkbox" name="treatments" value="neoadjuvant_systemic"><span data-i18n="lt.treatments.neoadjuvant_systemic">Neoadjuvant systemic therapy</span></label>
       <label><input type="checkbox" name="treatments" value="adjuvant_systemic"><span data-i18n="lt.treatments.adjuvant_systemic">Adjuvant systemic therapy</span></label>
-      <label><input type="checkbox" name="treatments" value="platinum_doublet_chemo"><span data-i18n="lt.treatments.platinum_doublet_chemo">Platinum doublet chemotherapy</span></label>
       <label><input type="checkbox" name="treatments" value="chemo_immunotherapy"><span data-i18n="lt.treatments.chemo_immunotherapy">Chemo-immunotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="platinum_doublet_chemo"><span data-i18n="lt.treatments.platinum_doublet_chemo">Platinum doublet chemotherapy</span></label>
       <label><input type="checkbox" name="treatments" value="immunotherapy_monotherapy"><span data-i18n="lt.treatments.immunotherapy_monotherapy">Immunotherapy monotherapy</span></label>
       <label><input type="checkbox" name="treatments" value="targeted_therapy"><span data-i18n="lt.treatments.targeted_therapy">Targeted therapy</span></label>
-      <label><input type="checkbox" name="treatments" value="durvalumab_consolidation"><span data-i18n="lt.treatments.durvalumab_consolidation">Durvalumab consolidation</span></label>
       <label><input type="checkbox" name="treatments" value="clinical_trial"><span data-i18n="lt.treatments.clinical_trial">Clinical trial screening</span></label>
-    </div>
-    <p class="group-head" data-i18n="lt.g.supportive">Supportive care, or no treatment yet</p>
-    <div class="check-grid">
       <label><input type="checkbox" name="treatments" value="palliative_care_referral"><span data-i18n="lt.treatments.palliative_care_referral">Palliative care referral</span></label>
       <label><input type="checkbox" name="treatments" value="best_supportive_care"><span data-i18n="lt.treatments.best_supportive_care">Best supportive care</span></label>
-      <label><input type="checkbox" name="treatments" value="smoking_cessation"><span data-i18n="lt.treatments.smoking_cessation">Smoking cessation support</span></label>
-      <label><input type="checkbox" name="treatments" value="prehabilitation"><span data-i18n="lt.treatments.prehabilitation">Prehabilitation</span></label>
-      <label><input type="checkbox" name="treatments" value="nutrition_support"><span data-i18n="lt.treatments.nutrition_support">Nutrition support</span></label>
-      <label><input type="checkbox" name="treatments" value="oxygen_assessment"><span data-i18n="lt.treatments.oxygen_assessment">Oxygen assessment</span></label>
-      <label><input type="checkbox" name="treatments" value="none_selected"><span data-i18n="lt.treatments.none_selected">None selected yet</span></label>
     </div>
 
     <div class="row2" id="lungFnWrap" hidden>
@@ -368,20 +347,15 @@
       <div><label for="dlcoPercent" data-i18n="lt.f.dlcoPercent">DLCO, % predicted</label><input type="number" id="dlcoPercent" name="dlcoPercent" min="0" max="200" step="1" inputmode="numeric"></div>
     </div>
 
-    <p class="group-head" data-i18n="lt.g.furtherInvestigations">Further investigations before treatment</p>
+    <p class="group-head"><span data-i18n="lt.g.furtherInvestigations">Further investigations before treatment</span> <span class="hint" data-i18n="lt.h.furtherInvestigations">leave empty if none</span></p>
     <div class="check-grid">
-      <label><input type="checkbox" name="furtherInvestigations" value="none"><span data-i18n="lt.furtherInvestigations.none">None</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="pet_ct"><span data-i18n="lt.furtherInvestigations.pet_ct">PET-CT</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="mri_brain"><span data-i18n="lt.furtherInvestigations.mri_brain">MRI brain</span></label>
-      <label><input type="checkbox" name="furtherInvestigations" value="bronchoscopy"><span data-i18n="lt.furtherInvestigations.bronchoscopy">Bronchoscopy</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="ebus_eus"><span data-i18n="lt.furtherInvestigations.ebus_eus">EBUS / EUS</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="ct_guided_lung_biopsy"><span data-i18n="lt.furtherInvestigations.ct_guided_lung_biopsy">CT-guided lung biopsy</span></label>
-      <label><input type="checkbox" name="furtherInvestigations" value="biopsy_metastasis"><span data-i18n="lt.furtherInvestigations.biopsy_metastasis">Biopsy suspected metastasis</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="biopsy_metastasis"><span data-i18n="lt.furtherInvestigations.biopsy_metastasis">Biopsy of suspected metastasis</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="pft"><span data-i18n="lt.furtherInvestigations.pft">Pulmonary function tests</span></label>
-      <label><input type="checkbox" name="furtherInvestigations" value="cpet"><span data-i18n="lt.furtherInvestigations.cpet">CPET</span></label>
-      <label><input type="checkbox" name="furtherInvestigations" value="cardiology_review"><span data-i18n="lt.furtherInvestigations.cardiology_review">Cardiology review</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="molecular_testing"><span data-i18n="lt.furtherInvestigations.molecular_testing">Complete molecular testing</span></label>
-      <label><input type="checkbox" name="furtherInvestigations" value="geriatric_assessment"><span data-i18n="lt.furtherInvestigations.geriatric_assessment">Geriatric assessment</span></label>
     </div>
 
     <p class="group-head"><span class="wwww" data-i18n="lt.w.why">Why</span><span data-i18n="lt.w.whyText">Main reason for the decision</span></p>
@@ -418,7 +392,14 @@
     </div>
 
     <details>
-      <summary data-i18n="lt.more.summary">Patient preference and who was present (optional)</summary>
+      <summary data-i18n="lt.more.summary">Supportive measures, patient preference, who was present (optional)</summary>
+      <p class="group-head" data-i18n="lt.g.supportive">Supportive measures</p>
+      <div class="check-grid">
+        <label><input type="checkbox" name="treatments" value="smoking_cessation"><span data-i18n="lt.treatments.smoking_cessation">Smoking cessation support</span></label>
+        <label><input type="checkbox" name="treatments" value="prehabilitation"><span data-i18n="lt.treatments.prehabilitation">Prehabilitation</span></label>
+        <label><input type="checkbox" name="treatments" value="nutrition_support"><span data-i18n="lt.treatments.nutrition_support">Nutrition support</span></label>
+        <label><input type="checkbox" name="treatments" value="oxygen_assessment"><span data-i18n="lt.treatments.oxygen_assessment">Oxygen assessment</span></label>
+      </div>
       <label for="patientPreferenceStatus" data-i18n="lt.f.patientPreferenceStatus">Patient preference</label>
       <select id="patientPreferenceStatus" name="patientPreferenceStatus">
         <option value="" data-i18n="lt.o.select">Select</option>

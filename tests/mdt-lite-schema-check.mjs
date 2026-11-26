@@ -36,6 +36,10 @@ for (const [name, codes] of liteFields) {
   if (!fullFields.has(name)) { fail(`key "${name}" is not in v3.1 and not declared lite-only`); continue; }
   for (const c of codes) if (!fullFields.get(name).has(c)) fail(`code "${name}=${c}" is not in v3.1`);
 }
+// the surgery dropdown has no field name; its options must be v3.1 treatment codes
+const surgery = /<select id="surgeryType">([\s\S]*?)<\/select>/.exec(liteHtml);
+if (!surgery) fail('surgery dropdown not found');
+else for (const o of surgery[1].matchAll(/value="([^"]+)"/g)) if (!fullFields.get('treatments').has(o[1])) fail(`surgery code "${o[1]}" is not a v3.1 treatment`);
 for (const k of lite.LITE_ONLY_KEYS) if (!liteFields.has(k)) fail(`lite-only key "${k}" is declared but not in the form`);
 
 // 2. driver mapping points at real v3.1 gene keys and codes, and covers the select
