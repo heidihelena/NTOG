@@ -180,6 +180,7 @@
     if (v("metastasisPattern") && v("metastasisPattern") !== m) add("lt.v.mEscalated", ["metastasisPattern"]);
     if (intent === "curative" && (m === "M1c1" || m === "M1c2")) add("lt.v.curativeM1c", ["treatmentIntent", "metastasisPattern"]);
     if (hasSurgery && n === "N3") add("lt.v.surgeryN3", ["nCategory"]);
+    if (hasSurgery && n === "N2b") add("lt.v.surgeryN2b", ["nCategory"]);
     if (hasSurgery && v("n2Bulky") === "yes") add("lt.v.surgeryBulkyN2", ["n2Bulky"]);
     if ((n === "N2a" || n === "N2b") && hasSurgery && !v("n2Bulky")) add("lt.v.bulkyMissing", ["n2Bulky"]);
     if (any(treatments, RADICAL_LOCAL) && (m === "Mx" || n === "NX")) add("lt.v.radicalStagingIncomplete", ["nCategory", "metastasisPattern"]);
