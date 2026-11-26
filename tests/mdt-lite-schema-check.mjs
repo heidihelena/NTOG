@@ -30,17 +30,28 @@ function fields(html) {
 }
 const liteFields = fields(liteHtml), fullFields = fields(fullHtml);
 
-// 1. every lite key and code exists in v3.1, except the declared lite-only keys
+// 1. every lite key and code exists in v3.1; two keys are derived in the v3.1 export instead of entered
 for (const [name, codes] of liteFields) {
-  if (lite.LITE_ONLY_KEYS.includes(name)) continue;
-  if (!fullFields.has(name)) { fail(`key "${name}" is not in v3.1 and not declared lite-only`); continue; }
+  if (lite.DERIVED_IN_V31.includes(name)) {
+    if (!fullHtml.includes(`data.${name} = `)) fail(`key "${name}" is not written by the v3.1 export`);
+    continue;
+  }
+  if (!fullFields.has(name)) { fail(`key "${name}" is not in v3.1`); continue; }
   for (const c of codes) if (!fullFields.get(name).has(c)) fail(`code "${name}=${c}" is not in v3.1`);
 }
 // the surgery dropdown has no field name; its options must be v3.1 treatment codes
 const surgery = /<select id="surgeryType">([\s\S]*?)<\/select>/.exec(liteHtml);
 if (!surgery) fail('surgery dropdown not found');
 else for (const o of surgery[1].matchAll(/value="([^"]+)"/g)) if (!fullFields.get('treatments').has(o[1])) fail(`surgery code "${o[1]}" is not a v3.1 treatment`);
-for (const k of lite.LITE_ONLY_KEYS) if (!liteFields.has(k)) fail(`lite-only key "${k}" is declared but not in the form`);
+for (const k of lite.DERIVED_IN_V31) if (!liteFields.has(k)) fail(`key "${k}" is declared as derived in v3.1 but is not in the lite form`);
+if (!fullHtml.includes("data.nCategorySource = ")) fail('v3.1 export does not write nCategorySource');
+// driver codes that v3.1 derives must be options in the lite form
+const derive = /function deriveDriverAlteration\(\) \{[\s\S]*?\n\}/.exec(fullHtml);
+if (!derive) fail('v3.1 deriveDriverAlteration not found');
+else for (const m of derive[0].matchAll(/:'([a-z0-9_]+)'|\['(none_detected)'\]/g)) {
+  const code = m[1] || m[2];
+  if (!liteFields.get('driverAlteration').has(code)) fail(`v3.1 derives driver code "${code}" that is not a lite option`);
+}
 
 // 2. driver mapping points at real v3.1 gene keys and codes, and covers the select
 for (const [code, [key, value]] of Object.entries(lite.DRIVER_MAP)) {
@@ -94,6 +105,6 @@ for (const m of logic.matchAll(/(?:L|add|pair)\("(lt\.[a-zA-Z0-9_.]+)"/g)) if (!
 for (const r of lite.REQUIRED) used.add('lt.req.' + r);
 for (const k of used) if (!dict.includes(JSON.stringify(k) + ':')) fail(`string key "${k}" is not in the dictionary`);
 
-console.log(`${liteFields.size} lite fields, ${lite.LITE_ONLY_KEYS.length} lite-only; ${stageCases} stage and ${tCases} T cases compared with v3.1; ${used.size} string keys.`);
+console.log(`${liteFields.size} lite fields, ${lite.DERIVED_IN_V31.length} derived in v3.1; ${stageCases} stage and ${tCases} T cases compared with v3.1; ${used.size} string keys.`);
 console.log(failures ? `${failures} FAILED` : 'All checks passed');
 process.exit(failures ? 1 : 0);

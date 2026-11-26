@@ -449,7 +449,7 @@
     "alternateName": "NTOG",
     "url": "https://ntog.org"
   },
-  "dateModified": "2026-06-10",
+  "dateModified": "2026-11-27",
   "about": {
     "@type": "MedicalCondition",
     "name": "Lung cancer"
@@ -1177,6 +1177,17 @@
         </select>
       </div>
     </div>
+    <div class="row4">
+      <div><label>Bulky N2 <span class="registry-key">n2_bulky</span></label>
+        <select name="n2Bulky">
+          <option value="">Not applicable / not recorded</option>
+          <option value="no">No, non-bulky</option>
+          <option value="yes">Yes, bulky</option>
+          <option value="not_assessed">Not assessed</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint">Bulky N2: nodes over 2 cm or grouped nodes. Multiple N2 stations are counted as N2b from the station table.</p>
     <p class="hint">Select the strongest status per station. Positive imaging is counted for clinical N; positive cytology and histology set higher evidence levels.</p>
     <div class="node-table" id="nodeTable"></div>
   </fieldset>
@@ -1378,6 +1389,22 @@
         <option value="refer_to_other_mdt">Refer to other MDT</option>
       </select>
     </div>
+  </div>
+
+  <div class="row3">
+    <div><label>Decision rationale <span class="registry-key">decision_rationale</span></label>
+      <select name="decisionRationale">
+        <option value="">Select</option>
+        <option value="guideline_concordant">Follows guideline for this stage and fitness</option>
+        <option value="deviation_patient_preference">Differs from guideline: patient preference</option>
+        <option value="deviation_fitness_comorbidity">Differs from guideline: fitness or comorbidity</option>
+        <option value="deviation_incomplete_staging">Staging or diagnosis incomplete</option>
+        <option value="clinical_trial">Clinical trial</option>
+        <option value="other">Other (write in the note)</option>
+      </select>
+    </div>
+    <div><label>Rationale note, no patient identifiers <span class="registry-key">decision_rationale_note</span></label><input type="text" name="decisionRationaleNote" maxlength="200" autocomplete="off"></div>
+    <div><label>Next step due by <span class="registry-key">next_action_due</span></label><input type="date" name="nextActionDue"></div>
   </div>
 
   <fieldset class="submodule">
@@ -2043,10 +2070,35 @@ function collectData() {
   });
   data.nodeStations = {};
   getNodeData().forEach(n => data.nodeStations[n.station] = {status:n.status, anatomicGroup:n.group});
+  // Keys shared with the lite form (mdt-structured-lite.html). The lite form
+  // collects N directly and drivers as one list; here both come from the detailed fields.
+  data.nCategory = latestDerived.cN;
+  data.nCategorySource = 'node_station_map';
+  data.driverAlteration = deriveDriverAlteration();
   data.derived = latestDerived;
   data.exportedAt = new Date().toISOString();
   data.schemaVersion = 'ntog_lung_mdt_structured_v3_1';
   return data;
+}
+
+function deriveDriverAlteration() {
+  const map = [
+    ['egfrStatus', {exon_19_del:'egfr_exon_19_del', l858r:'egfr_l858r', exon_20_insertion:'egfr_exon_20_insertion', other_positive:'egfr_other_positive'}],
+    ['alkStatus', {positive:'alk_positive'}],
+    ['ros1Status', {positive:'ros1_positive'}],
+    ['brafStatus', {v600e:'braf_v600e', other_positive:'other'}],
+    ['krasStatus', {g12c:'kras_g12c', other_positive:'other'}],
+    ['metStatus', {exon_14_skipping:'met_exon_14_skipping', amplification:'other', other_positive:'other'}],
+    ['retStatus', {positive:'ret_positive'}],
+    ['ntrkStatus', {positive:'ntrk_positive'}]
+  ];
+  const found = [];
+  map.forEach(([field, codes]) => {
+    const code = codes[valueOf(field)];
+    if (code && !found.includes(code)) found.push(code);
+  });
+  if (!found.length && valueOf('molecularStatus') === 'complete' && map.every(([field]) => valueOf(field) === 'negative')) return ['none_detected'];
+  return found;
 }
 
 function fmtArray(arr) { return Array.isArray(arr) && arr.length ? arr.join(', ') : 'none'; }
@@ -2097,7 +2149,7 @@ function generateSummary() {
     '',
     'DIAGNOSTIC PROCEDURES AND PATHOLOGY',
     `Bronchoscopy: ${displayValue(d.bronchoscopyStatus)} ${d.bronchoscopyDate || ''} | visual ${displayValue(d.bronchoscopyVisual)} | result ${displayValue(d.bronchoscopyResult)} | methods ${fmtArray(d.bronchoscopyMethods)}`,
-    `EBUS: ${displayValue(d.ebusStatus)} ${d.ebusDate || ''} | EUS ${displayValue(d.eusStatus)} | N0 basis ${displayValue(d.clinicalN0Basis)}`,
+    `EBUS: ${displayValue(d.ebusStatus)} ${d.ebusDate || ''} | EUS ${displayValue(d.eusStatus)} | N0 basis ${displayValue(d.clinicalN0Basis)} | Bulky N2 ${displayValue(d.n2Bulky)}`,
     `Sampled or suspicious nodes: ${sampledNodesText()}`,
     `Positive nodes: ${positiveNodesText()}`,
     `CT-guided biopsy: ${displayValue(d.ctBiopsyStatus)} ${d.ctBiopsyDate || ''} | site ${displayValue(d.ctBiopsySite)} | result ${displayValue(d.ctBiopsyResult)}`,
@@ -2113,6 +2165,7 @@ function generateSummary() {
     `Participants: ${fmtArray(d.participants)}`,
     `Further investigations: ${fmtArray(d.furtherInvestigations)}`,
     `Treatments selected: ${fmtArray(d.treatments)}`,
+    `Rationale: ${displayValue(d.decisionRationale)}${d.decisionRationaleNote ? ' (' + d.decisionRationaleNote + ')' : ''} | Next step due by: ${d.nextActionDue || 'not recorded'}`,
     '',
     `Completeness: ${d.derived.completenessPercent}% | Missing: ${d.derived.missingRequiredFields.join(', ') || 'none'}`,
     `Review flags: ${d.derived.validationWarnings.join(' ') || 'none'}`

@@ -2,8 +2,8 @@
  * NTOG lung cancer MDT — structured (lite).
  *
  * Field names and option codes are a subset of mdt-structured-v3_1.html so a
- * lite export can be read next to a v3.1 export. Lite-only keys are listed in
- * LITE_ONLY_KEYS. T is calculated from size and descriptors with the same
+ * lite export can be read next to a v3.1 export. The two keys in DERIVED_IN_V31
+ * are entered directly here and derived from detailed fields in v3.1. T is calculated from size and descriptors with the same
  * rules as v3.1; N is entered directly (nCategorySource: "direct_entry").
  *
  * The staging functions are pure and exported for Node so they can be
@@ -14,7 +14,7 @@
 
   var SCHEMA_VERSION = "ntog_lung_mdt_structured_lite_v1";
   var PARENT_SCHEMA = "ntog_lung_mdt_structured_v3_1";
-  var LITE_ONLY_KEYS = ["nCategory", "n2Bulky", "driverAlteration", "decisionRationale", "decisionRationaleNote", "nextActionDue"];
+  var DERIVED_IN_V31 = ["nCategory", "driverAlteration"];
 
   var T_RANK = { Tx: 0, T0: 1, Tis: 2, T1mi: 3, T1a: 4, T1b: 5, T1c: 6, T2a: 7, T2b: 8, T3: 9, T4: 10 };
   var M_RANK = { Mx: 0, M0: 1, M1a: 2, M1b: 3, M1c1: 4, M1c2: 5 };
@@ -96,7 +96,7 @@
   }
 
   var api = {
-    SCHEMA_VERSION: SCHEMA_VERSION, PARENT_SCHEMA: PARENT_SCHEMA, LITE_ONLY_KEYS: LITE_ONLY_KEYS,
+    SCHEMA_VERSION: SCHEMA_VERSION, PARENT_SCHEMA: PARENT_SCHEMA, DERIVED_IN_V31: DERIVED_IN_V31,
     DRIVER_MAP: DRIVER_MAP, REQUIRED: REQUIRED,
     calcTCategory: calcTCategory, calcMCategory: calcMCategory, calcStageGroup: calcStageGroup
   };
