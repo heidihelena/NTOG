@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lung Cancer MDT — Structured (lite) | NTOG</title>
+<meta name="description" content="Short structured lung cancer MDT form for clinical use: about 20 core items, coded like the NTOG v3.1 research form. Runs locally in your browser; no data is stored.">
+<!-- noindex until the form is linked from the Tools navigation -->
+<meta name="robots" content="noindex">
+<meta name="author" content="Heidi Andersén (Vahtian)">
+<link rel="canonical" href="https://ntog.org/mdt-structured-lite.html">
+
+<link rel="icon" href="/ntog-logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --ntog-blue: #003580; --ntog-blue-dark: #00264d; --ntog-light: #f5f8fb;
+    --ntog-border: #cfd8e3; --ntog-warning-bg: #fff7d6; --ntog-warning-border: #e0c200;
+    --text: #222; --muted: #5f6d80;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; max-width: 980px; margin: 1.5em auto; padding: 0 1em; color: var(--text); line-height: 1.5; background: #fff; }
+  h1 { color: var(--ntog-blue); margin-bottom: .15em; font-size: 1.7em; }
+  h2 { border-bottom: 2px solid var(--ntog-blue); padding-bottom: 4px; margin-top: 1.6em; color: var(--ntog-blue-dark); font-size: 1.25em; }
+  fieldset { border: 1px solid var(--ntog-border); margin: 0 0 1em; padding: 1em; border-radius: 8px; background: #fff; min-width: 0; }
+  fieldset.decision { border: 2px solid var(--ntog-blue); }
+  legend { font-weight: 700; padding: 0 .5em; color: var(--ntog-blue-dark); }
+  label { display: block; margin: .4em 0 .15em; font-weight: 600; }
+  input, select, textarea { width: 100%; box-sizing: border-box; padding: .5em; font-size: 1em; border: 1px solid #8a94a3; border-radius: 4px; background: #fff; color: var(--text); }
+  input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #ffbf47; outline-offset: 1px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .2em 1em; }
+  .row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: .2em 1em; }
+  .row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .2em 1em; }
+  .hint { font-size: .86em; color: var(--muted); font-weight: 400; }
+  .intro-text { margin-top: .2em; }
+  .privacy, .disclaimer { background: var(--ntog-warning-bg); border: 1px solid var(--ntog-warning-border); padding: .8em; border-radius: 8px; margin-bottom: .8em; font-size: .92em; }
+  .disclaimer { background: #eef6fb; border-color: #b9d6e8; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1em; flex-wrap: wrap; border-bottom: 3px solid var(--ntog-blue); padding-bottom: .6em; margin-bottom: 1em; }
+  .topbar .brand { font-weight: 800; color: var(--ntog-blue); font-size: 1.1em; text-decoration: none; }
+  .topbar a.other { font-size: .9em; color: var(--ntog-blue); }
+  .check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: .1em .9em; margin: .2em 0 .5em; }
+  .check-grid label { font-weight: 400; display: flex; align-items: flex-start; gap: .5em; margin: 0; padding: .3em 0; }
+  .check-grid input { width: 1.15em; height: 1.15em; flex: none; margin-top: .2em; }
+  .group-head { font-weight: 700; color: var(--ntog-blue-dark); font-size: .88em; margin: .7em 0 0; }
+  .wwww { font-size: .78em; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--ntog-blue); border-radius: 3px; padding: .1em .5em; margin-right: .5em; }
+  details { border: 1px dashed var(--ntog-border); border-radius: 6px; padding: .5em .8em; margin: .7em 0 0; background: var(--ntog-light); }
+  details summary { cursor: pointer; font-weight: 600; color: var(--ntog-blue-dark); }
+  .derived { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6em; margin: 1em 0 0; }
+  .derived div { background: var(--ntog-light); border: 1px solid var(--ntog-border); border-radius: 6px; padding: .5em .7em; }
+  .derived .k { display: block; font-size: .78em; color: var(--muted); font-weight: 600; }
+  .derived .v { font-size: 1.2em; font-weight: 700; color: var(--ntog-blue-dark); }
+  .field-warning { border-color: #b00 !important; box-shadow: 0 0 0 2px #f3c2c2; }
+  .warn { color: #a40000; font-size: .92em; margin-top: .75em; font-weight: 600; }
+  .warn ul { margin: .3em 0 0; padding-left: 1.2em; font-weight: 400; }
+  .button-row { margin-top: 1.2em; display: flex; flex-wrap: wrap; gap: .5em; }
+  button { padding: .65em 1.1em; font-size: 1em; border-radius: 6px; border: 1px solid var(--ntog-blue); background: var(--ntog-blue); color: #fff; cursor: pointer; }
+  button.secondary { background: #fff; color: var(--ntog-blue); }
+  #summary { white-space: pre-wrap; background: #f5f5f5; padding: 1em; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; margin-top: 1em; border: 1px solid #ddd; }
+  #summary:empty { display: none; }
+  [hidden] { display: none !important; }
+  footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid var(--ntog-border); font-size: .85em; color: var(--muted); }
+  footer a { color: var(--ntog-blue); margin-right: 1em; }
+  .span2 { grid-column: span 2; }
+  @media (max-width: 760px) { .row2, .row3, .row4 { grid-template-columns: 1fr; } .span2 { grid-column: auto; } .derived { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 761px) and (max-width: 900px) { .row4 { grid-template-columns: 1fr 1fr; } }
+  @media print {
+    form > fieldset, form > h2, .privacy, .disclaimer, .button-row, #warnings, .topbar, .intro-text, footer, .derived { display: none; }
+    body { margin: 1em; max-width: none; font-size: 11pt; }
+    #summary { background: #fff; border: none; padding: 0; font-size: 10pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" role="navigation" aria-label="Site">
+  <a class="brand" href="/">NTOG</a>
+  <a class="other" href="/mdt-structured-v3_1.html" data-i18n="lt.app.fullLink">Full research form (v3.1)</a>
+</div>
+
+<main>
+<h1 data-i18n="lt.app.title">Lung cancer MDT — structured (lite)</h1>
+<p class="hint intro-text" data-i18n="lt.app.intro">Short form for the MDT meeting: about 20 core items. Records what was decided, why, who will act, and when. Same codes as the full v3.1 research form.</p>
+
+<div class="privacy"><span data-i18n="app.privacy">Privacy: This form runs entirely in your browser. No data is sent anywhere. Refreshing the page clears all fields. Do not share content containing identifiable patient information outside approved clinical systems.</span></div>
+<div class="disclaimer"><span data-i18n="lt.app.disclaimer">Use: This is a structured documentation aid for MDT discussion. It does not replace national guidelines, local protocols, clinical judgment, or formal MDT documentation systems. The form records the MDT decision; it does not recommend treatment.</span></div>
+
+<form id="mdtForm" autocomplete="off" novalidate>
+
+  <h2 data-i18n="lt.sec.meeting">1. Meeting</h2>
+  <fieldset>
+    <div class="row3">
+      <div><label for="meetingDate" data-i18n="lt.f.meetingDate">Meeting date</label><input type="date" id="meetingDate" name="meetingDate"></div>
+      <div><label for="hospitalCentre" data-i18n="lt.f.hospitalCentre">Hospital / centre</label><input type="text" id="hospitalCentre" name="hospitalCentre"></div>
+      <div><label for="mdtPurpose" data-i18n="lt.f.mdtPurpose">MDT purpose</label>
+        <select id="mdtPurpose" name="mdtPurpose">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="diagnostic_workup" data-i18n="lt.mdtPurpose.diagnostic_workup">Diagnostic workup</option>
+          <option value="initial_staging" data-i18n="lt.mdtPurpose.initial_staging">Initial staging</option>
+          <option value="treatment_selection" data-i18n="lt.mdtPurpose.treatment_selection">Treatment selection</option>
+          <option value="postoperative_review" data-i18n="lt.mdtPurpose.postoperative_review">Postoperative review</option>
+          <option value="recurrence_progression" data-i18n="lt.mdtPurpose.recurrence_progression">Recurrence or progression</option>
+          <option value="re_discussion_after_tests" data-i18n="lt.mdtPurpose.re_discussion_after_tests">Re-discussion after further tests</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <h2 data-i18n="lt.sec.patient">2. Patient</h2>
+  <fieldset>
+    <div class="row4">
+      <div><label for="age" data-i18n="lt.f.age">Age</label><input type="number" id="age" name="age" min="0" max="120" step="1" inputmode="numeric"></div>
+      <div><label for="sex" data-i18n="lt.f.sex">Sex</label>
+        <select id="sex" name="sex">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="female" data-i18n="lt.sex.female">Female</option>
+          <option value="male" data-i18n="lt.sex.male">Male</option>
+          <option value="other_not_specified" data-i18n="lt.sex.other_not_specified">Other / not specified</option>
+        </select>
+      </div>
+      <div><label for="ecog" data-i18n="lt.f.ecog">WHO / ECOG performance status</label>
+        <select id="ecog" name="ecog">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="0" data-i18n="lt.ecog.0">0, fully active</option>
+          <option value="1" data-i18n="lt.ecog.1">1, restricted strenuous activity</option>
+          <option value="2" data-i18n="lt.ecog.2">2, ambulatory and self-care</option>
+          <option value="3" data-i18n="lt.ecog.3">3, limited self-care</option>
+          <option value="4" data-i18n="lt.ecog.4">4, completely disabled</option>
+        </select>
+      </div>
+      <div><label for="smokingStatus" data-i18n="lt.f.smokingStatus">Smoking status</label>
+        <select id="smokingStatus" name="smokingStatus">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="never" data-i18n="lt.smokingStatus.never">Never smoker</option>
+          <option value="former" data-i18n="lt.smokingStatus.former">Former smoker</option>
+          <option value="current" data-i18n="lt.smokingStatus.current">Current smoker</option>
+          <option value="unknown" data-i18n="lt.smokingStatus.unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <h2 data-i18n="lt.sec.disease">3. Disease</h2>
+  <fieldset>
+    <div class="row4">
+      <div><label for="histology" data-i18n="lt.f.histology">Histology / cytology</label>
+        <select id="histology" name="histology">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="adenocarcinoma" data-i18n="lt.histology.adenocarcinoma">Adenocarcinoma</option>
+          <option value="squamous_cell_carcinoma" data-i18n="lt.histology.squamous_cell_carcinoma">Squamous cell carcinoma</option>
+          <option value="nsclc_nos" data-i18n="lt.histology.nsclc_nos">NSCLC NOS</option>
+          <option value="small_cell_lung_cancer" data-i18n="lt.histology.small_cell_lung_cancer">Small cell lung cancer</option>
+          <option value="large_cell_neuroendocrine" data-i18n="lt.histology.large_cell_neuroendocrine">Large cell neuroendocrine carcinoma</option>
+          <option value="typical_carcinoid" data-i18n="lt.histology.typical_carcinoid">Typical carcinoid</option>
+          <option value="atypical_carcinoid" data-i18n="lt.histology.atypical_carcinoid">Atypical carcinoid</option>
+          <option value="metastasis_to_lung" data-i18n="lt.histology.metastasis_to_lung">Metastasis to lung</option>
+          <option value="benign_or_no_malignancy" data-i18n="lt.histology.benign_or_no_malignancy">Benign / no malignancy</option>
+          <option value="pending" data-i18n="lt.histology.pending">Pending</option>
+          <option value="other_coded" data-i18n="lt.histology.other_coded">Other coded histology</option>
+        </select>
+      </div>
+      <div><label for="tumourTSizeMm"><span data-i18n="lt.f.tumourTSizeMm">Tumour size, mm</span> <span class="hint" data-i18n="lt.h.tumourTSizeMm">solid / invasive part; gives T</span></label><input type="number" id="tumourTSizeMm" name="tumourTSizeMm" min="0" step="0.1" inputmode="decimal"></div>
+      <div><label for="nCategory" data-i18n="lt.f.nCategory">N category</label>
+        <select id="nCategory" name="nCategory">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="N0" data-i18n="lt.nCategory.N0">N0, no regional node involvement</option>
+          <option value="N1" data-i18n="lt.nCategory.N1">N1, ipsilateral hilar / peribronchial / intrapulmonary</option>
+          <option value="N2a" data-i18n="lt.nCategory.N2a">N2a, single ipsilateral mediastinal or subcarinal station</option>
+          <option value="N2b" data-i18n="lt.nCategory.N2b">N2b, multiple ipsilateral mediastinal stations</option>
+          <option value="N3" data-i18n="lt.nCategory.N3">N3, contralateral, scalene or supraclavicular</option>
+          <option value="NX" data-i18n="lt.nCategory.NX">NX, nodes cannot be assessed</option>
+        </select>
+      </div>
+      <div><label for="metastasisPattern" data-i18n="lt.f.metastasisPattern">M category</label>
+        <select id="metastasisPattern" name="metastasisPattern">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="M0" data-i18n="lt.metastasisPattern.M0">M0, no distant metastasis documented</option>
+          <option value="M1a" data-i18n="lt.metastasisPattern.M1a">M1a, pleural/pericardial disease or contralateral lung nodule</option>
+          <option value="M1b" data-i18n="lt.metastasisPattern.M1b">M1b, single extrathoracic metastasis</option>
+          <option value="M1c1" data-i18n="lt.metastasisPattern.M1c1">M1c1, multiple metastases in one organ system</option>
+          <option value="M1c2" data-i18n="lt.metastasisPattern.M1c2">M1c2, metastases in multiple organ systems</option>
+          <option value="Mx" data-i18n="lt.metastasisPattern.Mx">Mx, metastasis cannot be assessed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row2" id="n2BulkyWrap" hidden>
+      <div><label for="n2Bulky"><span data-i18n="lt.f.n2Bulky">Bulky N2</span> <span class="hint" data-i18n="lt.h.n2Bulky">nodes over 2 cm or grouped nodes; multiple stations are recorded as N2b</span></label>
+        <select id="n2Bulky" name="n2Bulky">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="no" data-i18n="lt.n2Bulky.no">No, non-bulky</option>
+          <option value="yes" data-i18n="lt.n2Bulky.yes">Yes, bulky</option>
+          <option value="not_assessed" data-i18n="lt.n2Bulky.not_assessed">Not assessed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row2" id="oligoWrap" hidden>
+      <div><label for="oligometastaticStatus" data-i18n="lt.f.oligometastaticStatus">Oligometastatic status</label>
+        <select id="oligometastaticStatus" name="oligometastaticStatus">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="yes_potential_local_therapy" data-i18n="lt.oligometastaticStatus.yes_potential_local_therapy">Yes, potential local therapy</option>
+          <option value="yes_not_for_local_therapy" data-i18n="lt.oligometastaticStatus.yes_not_for_local_therapy">Yes, not for local therapy</option>
+          <option value="no_polymetastatic" data-i18n="lt.oligometastaticStatus.no_polymetastatic">No, polymetastatic</option>
+          <option value="unclear" data-i18n="lt.oligometastaticStatus.unclear">Unclear</option>
+        </select>
+      </div>
+    </div>
+
+    <details id="tDetails">
+      <summary data-i18n="lt.t.summary">T is more than size alone: special descriptor, invasion or separate nodule (open only if present)</summary>
+      <div class="row2">
+        <div><label for="tSpecial" data-i18n="lt.f.tSpecial">Special T descriptor</label>
+          <select id="tSpecial" name="tSpecial">
+            <option value="" data-i18n="lt.tSpecial.none">None</option>
+            <option value="Tx" data-i18n="lt.tSpecial.Tx">Tx, primary tumour cannot be assessed</option>
+            <option value="T0" data-i18n="lt.tSpecial.T0">T0, no evidence of primary tumour</option>
+            <option value="Tis" data-i18n="lt.tSpecial.Tis">Tis, carcinoma in situ</option>
+            <option value="T1mi" data-i18n="lt.tSpecial.T1mi">T1mi, minimally invasive adenocarcinoma</option>
+          </select>
+        </div>
+        <div><label for="separateNodulePattern" data-i18n="lt.f.separateNodulePattern">Separate tumour nodules</label>
+          <select id="separateNodulePattern" name="separateNodulePattern">
+            <option value="none" data-i18n="lt.separateNodulePattern.none">None documented</option>
+            <option value="same_lobe" data-i18n="lt.separateNodulePattern.same_lobe">Same lobe as primary (T3)</option>
+            <option value="different_ipsilateral_lobe" data-i18n="lt.separateNodulePattern.different_ipsilateral_lobe">Different ipsilateral lobe (T4)</option>
+            <option value="contralateral_lobe" data-i18n="lt.separateNodulePattern.contralateral_lobe">Contralateral lobe (M1a)</option>
+            <option value="synchronous_primary_suspected" data-i18n="lt.separateNodulePattern.synchronous_primary_suspected">Synchronous primary suspected</option>
+            <option value="multifocal_ground_glass" data-i18n="lt.separateNodulePattern.multifocal_ground_glass">Multifocal ground-glass / lepidic</option>
+            <option value="diffuse_pneumonic_type" data-i18n="lt.separateNodulePattern.diffuse_pneumonic_type">Diffuse pneumonic-type malignancy (T4)</option>
+          </select>
+        </div>
+      </div>
+      <p class="group-head" id="grp1" data-i18n="lt.f.tFeatures">Local invasion</p>
+      <div class="check-grid" role="group" aria-labelledby="grp1">
+        <label><input type="checkbox" name="tFeatures" value="visceral_pleura" data-t="T2a"><span data-i18n="lt.tFeatures.visceral_pleura">Visceral pleura (T2a)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="adjacent_lobe" data-t="T2a"><span data-i18n="lt.tFeatures.adjacent_lobe">Adjacent lobe (T2a)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="main_bronchus_no_carina" data-t="T2a"><span data-i18n="lt.tFeatures.main_bronchus_no_carina">Main bronchus, no carina (T2a)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="atelectasis_pneumonitis_hilum" data-t="T2a"><span data-i18n="lt.tFeatures.atelectasis_pneumonitis_hilum">Atelectasis or pneumonitis to hilum (T2a)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="parietal_pleura_chest_wall" data-t="T3"><span data-i18n="lt.tFeatures.parietal_pleura_chest_wall">Parietal pleura or chest wall (T3)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="pericardium" data-t="T3"><span data-i18n="lt.tFeatures.pericardium">Pericardium (T3)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="phrenic_nerve" data-t="T3"><span data-i18n="lt.tFeatures.phrenic_nerve">Phrenic nerve (T3)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="azygos_vein" data-t="T3"><span data-i18n="lt.tFeatures.azygos_vein">Azygos vein (T3)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="thoracic_roots_stellate" data-t="T3"><span data-i18n="lt.tFeatures.thoracic_roots_stellate">Thoracic roots or stellate ganglion (T3)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="mediastinum_or_thymus" data-t="T4"><span data-i18n="lt.tFeatures.mediastinum_or_thymus">Mediastinum or thymus (T4)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="trachea_or_carina" data-t="T4"><span data-i18n="lt.tFeatures.trachea_or_carina">Trachea or carina (T4)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="recurrent_laryngeal_or_vagus" data-t="T4"><span data-i18n="lt.tFeatures.recurrent_laryngeal_or_vagus">Recurrent laryngeal or vagus nerve (T4)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="esophagus_or_diaphragm" data-t="T4"><span data-i18n="lt.tFeatures.esophagus_or_diaphragm">Esophagus or diaphragm (T4)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="heart_or_great_vessels" data-t="T4"><span data-i18n="lt.tFeatures.heart_or_great_vessels">Heart, great vessels, intrapericardial vessels (T4)</span></label>
+        <label><input type="checkbox" name="tFeatures" value="spine_or_brachial_plexus" data-t="T4"><span data-i18n="lt.tFeatures.spine_or_brachial_plexus">Vertebra, spinal canal, cervical roots, brachial plexus (T4)</span></label>
+      </div>
+    </details>
+
+    <div class="derived" aria-live="polite">
+      <div><span class="k" data-i18n="lt.d.tnm">cTNM (9th edition)</span><span class="v" id="tnmDisplay">—</span></div>
+      <div><span class="k" data-i18n="lt.d.stage">Stage group</span><span class="v" id="stageDisplay">—</span></div>
+      <div><span class="k" data-i18n="lt.d.complete">Core items filled</span><span class="v" id="completeDisplay">—</span></div>
+    </div>
+
+    <div class="row4" style="margin-top:.8em">
+      <div><label for="pdl1Tps" data-i18n="lt.f.pdl1Tps">PD-L1 TPS, %</label><input type="number" id="pdl1Tps" name="pdl1Tps" min="0" max="100" step="1" inputmode="numeric"></div>
+      <div><label for="molecularStatus" data-i18n="lt.f.molecularStatus">Molecular testing status</label>
+        <select id="molecularStatus" name="molecularStatus">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="not_done" data-i18n="lt.molecularStatus.not_done">Not done</option>
+          <option value="pending" data-i18n="lt.molecularStatus.pending">Pending</option>
+          <option value="complete" data-i18n="lt.molecularStatus.complete">Complete</option>
+          <option value="insufficient_tissue" data-i18n="lt.molecularStatus.insufficient_tissue">Insufficient tissue</option>
+          <option value="not_indicated" data-i18n="lt.molecularStatus.not_indicated">Not indicated</option>
+        </select>
+      </div>
+    </div>
+    <div id="driverWrap" hidden>
+      <p class="group-head" id="grp2"><span data-i18n="lt.f.driverAlteration">Driver alterations found</span> <span class="hint" data-i18n="lt.h.driverAlteration">tick all that apply</span></p>
+      <div class="check-grid" role="group" aria-labelledby="grp2">
+        <label><input type="checkbox" name="driverAlteration" value="none_detected"><span data-i18n="lt.driverAlteration.none_detected">None detected</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_exon_19_del"><span data-i18n="lt.driverAlteration.egfr_exon_19_del">EGFR exon 19 deletion</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_l858r"><span data-i18n="lt.driverAlteration.egfr_l858r">EGFR L858R</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_exon_20_insertion"><span data-i18n="lt.driverAlteration.egfr_exon_20_insertion">EGFR exon 20 insertion</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="egfr_other_positive"><span data-i18n="lt.driverAlteration.egfr_other_positive">EGFR, other</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="alk_positive"><span data-i18n="lt.driverAlteration.alk_positive">ALK</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ros1_positive"><span data-i18n="lt.driverAlteration.ros1_positive">ROS1</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="braf_v600e"><span data-i18n="lt.driverAlteration.braf_v600e">BRAF V600E</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="kras_g12c"><span data-i18n="lt.driverAlteration.kras_g12c">KRAS G12C</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="met_exon_14_skipping"><span data-i18n="lt.driverAlteration.met_exon_14_skipping">MET exon 14 skipping</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ret_positive"><span data-i18n="lt.driverAlteration.ret_positive">RET</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="ntrk_positive"><span data-i18n="lt.driverAlteration.ntrk_positive">NTRK</span></label>
+        <label><input type="checkbox" name="driverAlteration" value="other"><span data-i18n="lt.driverAlteration.other">Other alteration</span></label>
+      </div>
+    </div>
+  </fieldset>
+
+  <h2 data-i18n="lt.sec.decision">4. MDT decision</h2>
+  <fieldset class="decision">
+    <p class="group-head" style="margin-top:0"><span class="wwww" data-i18n="lt.w.what">What</span><span data-i18n="lt.w.whatText">What was decided</span></p>
+    <div class="row2">
+      <div><label for="mdtDecisionStatus" data-i18n="lt.f.mdtDecisionStatus">Decision status</label>
+        <select id="mdtDecisionStatus" name="mdtDecisionStatus">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="decision_made" data-i18n="lt.mdtDecisionStatus.decision_made">Decision made</option>
+          <option value="conditional_on_tests" data-i18n="lt.mdtDecisionStatus.conditional_on_tests">Conditional on further tests</option>
+          <option value="deferred" data-i18n="lt.mdtDecisionStatus.deferred">Deferred</option>
+          <option value="refer_to_other_mdt" data-i18n="lt.mdtDecisionStatus.refer_to_other_mdt">Refer to other MDT</option>
+        </select>
+      </div>
+      <div><label for="treatmentIntent" data-i18n="lt.f.treatmentIntent">Treatment intent</label>
+        <select id="treatmentIntent" name="treatmentIntent">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="curative" data-i18n="lt.treatmentIntent.curative">Curative</option>
+          <option value="potentially_curative_after_staging" data-i18n="lt.treatmentIntent.potentially_curative_after_staging">Potentially curative after further staging</option>
+          <option value="life_prolonging_palliative" data-i18n="lt.treatmentIntent.life_prolonging_palliative">Life-prolonging palliative</option>
+          <option value="symptom_directed_palliative" data-i18n="lt.treatmentIntent.symptom_directed_palliative">Symptom-directed palliative</option>
+          <option value="best_supportive_care" data-i18n="lt.treatmentIntent.best_supportive_care">Best supportive care</option>
+          <option value="unclear_further_information_needed" data-i18n="lt.treatmentIntent.unclear_further_information_needed">Unclear, further information needed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div><label for="surgeryType" data-i18n="lt.f.surgery">Surgery</label>
+        <select id="surgeryType">
+          <option value="" data-i18n="lt.surgery.none">No surgery</option>
+          <option value="surgery_lobectomy" data-i18n="lt.treatments.surgery_lobectomy">Lobectomy</option>
+          <option value="surgery_segmentectomy" data-i18n="lt.treatments.surgery_segmentectomy">Segmentectomy</option>
+          <option value="surgery_wedge" data-i18n="lt.treatments.surgery_wedge">Wedge resection</option>
+          <option value="surgery_pneumonectomy" data-i18n="lt.treatments.surgery_pneumonectomy">Pneumonectomy</option>
+        </select>
+      </div>
+    </div>
+    <p class="group-head" id="grp3" data-i18n="lt.g.treatments">Other treatment</p>
+    <div class="check-grid" role="group" aria-labelledby="grp3">
+      <label><input type="checkbox" name="treatments" value="definitive_chemoradiotherapy"><span data-i18n="lt.treatments.definitive_chemoradiotherapy">Definitive chemoradiotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="sabr_sbrt"><span data-i18n="lt.treatments.sabr_sbrt">SABR / SBRT</span></label>
+      <label><input type="checkbox" name="treatments" value="palliative_radiotherapy"><span data-i18n="lt.treatments.palliative_radiotherapy">Palliative radiotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="neoadjuvant_systemic"><span data-i18n="lt.treatments.neoadjuvant_systemic">Neoadjuvant systemic therapy</span></label>
+      <label><input type="checkbox" name="treatments" value="adjuvant_systemic"><span data-i18n="lt.treatments.adjuvant_systemic">Adjuvant systemic therapy</span></label>
+      <label><input type="checkbox" name="treatments" value="chemo_immunotherapy"><span data-i18n="lt.treatments.chemo_immunotherapy">Chemo-immunotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="platinum_doublet_chemo"><span data-i18n="lt.treatments.platinum_doublet_chemo">Platinum doublet chemotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="immunotherapy_monotherapy"><span data-i18n="lt.treatments.immunotherapy_monotherapy">Immunotherapy monotherapy</span></label>
+      <label><input type="checkbox" name="treatments" value="targeted_therapy"><span data-i18n="lt.treatments.targeted_therapy">Targeted therapy</span></label>
+      <label><input type="checkbox" name="treatments" value="clinical_trial"><span data-i18n="lt.treatments.clinical_trial">Clinical trial screening</span></label>
+      <label><input type="checkbox" name="treatments" value="palliative_care_referral"><span data-i18n="lt.treatments.palliative_care_referral">Palliative care referral</span></label>
+      <label><input type="checkbox" name="treatments" value="best_supportive_care"><span data-i18n="lt.treatments.best_supportive_care">Best supportive care</span></label>
+    </div>
+
+    <div class="row2" id="lungFnWrap" hidden>
+      <div><label for="fev1Percent"><span data-i18n="lt.f.fev1Percent">FEV1, % predicted</span> <span class="hint" data-i18n="lt.h.lungFn">for surgery or radical radiotherapy</span></label><input type="number" id="fev1Percent" name="fev1Percent" min="0" max="200" step="1" inputmode="numeric"></div>
+      <div><label for="dlcoPercent" data-i18n="lt.f.dlcoPercent">DLCO, % predicted</label><input type="number" id="dlcoPercent" name="dlcoPercent" min="0" max="200" step="1" inputmode="numeric"></div>
+    </div>
+
+    <p class="group-head" id="grp4"><span data-i18n="lt.g.furtherInvestigations">Further investigations before treatment</span> <span class="hint" data-i18n="lt.h.furtherInvestigations">leave empty if none</span></p>
+    <div class="check-grid" role="group" aria-labelledby="grp4">
+      <label><input type="checkbox" name="furtherInvestigations" value="pet_ct"><span data-i18n="lt.furtherInvestigations.pet_ct">PET-CT</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="mri_brain"><span data-i18n="lt.furtherInvestigations.mri_brain">MRI brain</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="ebus_eus"><span data-i18n="lt.furtherInvestigations.ebus_eus">EBUS / EUS</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="ct_guided_lung_biopsy"><span data-i18n="lt.furtherInvestigations.ct_guided_lung_biopsy">CT-guided lung biopsy</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="biopsy_metastasis"><span data-i18n="lt.furtherInvestigations.biopsy_metastasis">Biopsy of suspected metastasis</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="pft"><span data-i18n="lt.furtherInvestigations.pft">Pulmonary function tests</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="molecular_testing"><span data-i18n="lt.furtherInvestigations.molecular_testing">Complete molecular testing</span></label>
+    </div>
+
+    <p class="group-head"><span class="wwww" data-i18n="lt.w.why">Why</span><span data-i18n="lt.w.whyText">Main reason for the decision</span></p>
+    <div class="row2">
+      <div><label for="decisionRationale" data-i18n="lt.f.decisionRationale">Rationale</label>
+        <select id="decisionRationale" name="decisionRationale">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="guideline_concordant" data-i18n="lt.decisionRationale.guideline_concordant">Follows guideline for this stage and fitness</option>
+          <option value="deviation_patient_preference" data-i18n="lt.decisionRationale.deviation_patient_preference">Differs from guideline: patient preference</option>
+          <option value="deviation_fitness_comorbidity" data-i18n="lt.decisionRationale.deviation_fitness_comorbidity">Differs from guideline: fitness or comorbidity</option>
+          <option value="deviation_incomplete_staging" data-i18n="lt.decisionRationale.deviation_incomplete_staging">Staging or diagnosis incomplete</option>
+          <option value="clinical_trial" data-i18n="lt.decisionRationale.clinical_trial">Clinical trial</option>
+          <option value="other" data-i18n="lt.decisionRationale.other">Other (write below)</option>
+        </select>
+      </div>
+      <div><label for="decisionRationaleNote"><span data-i18n="lt.f.decisionRationaleNote">Reason in one line</span> <span class="hint" data-i18n="lt.h.optionalNoId">optional; no patient identifiers</span></label><input type="text" id="decisionRationaleNote" name="decisionRationaleNote" maxlength="200"></div>
+    </div>
+
+    <p class="group-head"><span class="wwww" data-i18n="lt.w.who">Who</span><span class="wwww" data-i18n="lt.w.when">When</span><span data-i18n="lt.w.whoWhenText">Who acts next, and by when</span></p>
+    <div class="row2">
+      <div><label for="attendingSpecialist" data-i18n="lt.f.attendingSpecialist">Responsible specialist after MDT</label>
+        <select id="attendingSpecialist" name="attendingSpecialist">
+          <option value="" data-i18n="lt.o.select">Select</option>
+          <option value="pulmonologist" data-i18n="lt.attendingSpecialist.pulmonologist">Pulmonologist</option>
+          <option value="thoracic_surgeon" data-i18n="lt.attendingSpecialist.thoracic_surgeon">Thoracic surgeon</option>
+          <option value="medical_oncologist" data-i18n="lt.attendingSpecialist.medical_oncologist">Medical oncologist</option>
+          <option value="radiation_oncologist" data-i18n="lt.attendingSpecialist.radiation_oncologist">Radiation oncologist</option>
+          <option value="palliative_care" data-i18n="lt.attendingSpecialist.palliative_care">Palliative care specialist</option>
+          <option value="geriatrician" data-i18n="lt.attendingSpecialist.geriatrician">Geriatrician</option>
+          <option value="primary_care_after_bsc" data-i18n="lt.attendingSpecialist.primary_care_after_bsc">Primary care after BSC decision</option>
+        </select>
+      </div>
+      <div><label for="nextActionDue"><span data-i18n="lt.f.nextActionDue">Next step due by</span> <span class="hint" data-i18n="lt.h.nextActionDue">treatment start, test, or re-discussion</span></label><input type="date" id="nextActionDue" name="nextActionDue"></div>
+    </div>
+
+    <details>
+      <summary data-i18n="lt.more.summary">Supportive measures, patient preference, who was present (optional)</summary>
+      <p class="group-head" id="grp5" data-i18n="lt.g.supportive">Supportive measures</p>
+      <div class="check-grid" role="group" aria-labelledby="grp5">
+        <label><input type="checkbox" name="treatments" value="smoking_cessation"><span data-i18n="lt.treatments.smoking_cessation">Smoking cessation support</span></label>
+        <label><input type="checkbox" name="treatments" value="prehabilitation"><span data-i18n="lt.treatments.prehabilitation">Prehabilitation</span></label>
+        <label><input type="checkbox" name="treatments" value="nutrition_support"><span data-i18n="lt.treatments.nutrition_support">Nutrition support</span></label>
+        <label><input type="checkbox" name="treatments" value="oxygen_assessment"><span data-i18n="lt.treatments.oxygen_assessment">Oxygen assessment</span></label>
+      </div>
+      <label for="patientPreferenceStatus" data-i18n="lt.f.patientPreferenceStatus">Patient preference</label>
+      <select id="patientPreferenceStatus" name="patientPreferenceStatus">
+        <option value="" data-i18n="lt.o.select">Select</option>
+        <option value="not_discussed" data-i18n="lt.patientPreferenceStatus.not_discussed">Not discussed</option>
+        <option value="curative_treatment_if_possible" data-i18n="lt.patientPreferenceStatus.curative_treatment_if_possible">Curative treatment if possible</option>
+        <option value="prefers_non_surgical_treatment" data-i18n="lt.patientPreferenceStatus.prefers_non_surgical_treatment">Prefers non-surgical treatment</option>
+        <option value="prioritises_quality_of_life" data-i18n="lt.patientPreferenceStatus.prioritises_quality_of_life">Prioritises quality of life</option>
+        <option value="undecided" data-i18n="lt.patientPreferenceStatus.undecided">Undecided</option>
+        <option value="declines_active_treatment" data-i18n="lt.patientPreferenceStatus.declines_active_treatment">Declines active treatment</option>
+      </select>
+      <p class="group-head" id="grp6" data-i18n="lt.f.participants">MDT participants present</p>
+      <div class="check-grid" role="group" aria-labelledby="grp6">
+        <label><input type="checkbox" name="participants" value="pulmonologist"><span data-i18n="lt.participants.pulmonologist">Pulmonologist</span></label>
+        <label><input type="checkbox" name="participants" value="thoracic_surgeon"><span data-i18n="lt.participants.thoracic_surgeon">Thoracic surgeon</span></label>
+        <label><input type="checkbox" name="participants" value="medical_oncologist"><span data-i18n="lt.participants.medical_oncologist">Medical oncologist</span></label>
+        <label><input type="checkbox" name="participants" value="radiation_oncologist"><span data-i18n="lt.participants.radiation_oncologist">Radiation oncologist</span></label>
+        <label><input type="checkbox" name="participants" value="radiologist"><span data-i18n="lt.participants.radiologist">Radiologist</span></label>
+        <label><input type="checkbox" name="participants" value="pathologist"><span data-i18n="lt.participants.pathologist">Pathologist</span></label>
+        <label><input type="checkbox" name="participants" value="nurse_coordinator"><span data-i18n="lt.participants.nurse_coordinator">Nurse coordinator</span></label>
+        <label><input type="checkbox" name="participants" value="palliative_care"><span data-i18n="lt.participants.palliative_care">Palliative care</span></label>
+        <label><input type="checkbox" name="participants" value="geriatrician"><span data-i18n="lt.participants.geriatrician">Geriatrician</span></label>
+      </div>
+    </details>
+  </fieldset>
+
+  <div id="warnings" class="warn" aria-live="polite"></div>
+
+  <div class="button-row">
+    <button type="button" id="btnSummary" data-i18n="lt.btn.summary">Generate summary</button>
+    <button type="button" class="secondary" id="btnCopy" data-i18n="lt.btn.copy">Copy summary</button>
+    <button type="button" class="secondary" id="btnJson" data-i18n="lt.btn.json">Download JSON</button>
+    <button type="button" class="secondary" id="btnCsv" data-i18n="lt.btn.csv">Download CSV</button>
+    <button type="button" class="secondary" id="btnPrint" data-i18n="lt.btn.print">Print / save PDF</button>
+    <button type="button" class="secondary" id="btnClear" data-i18n="lt.btn.clear">Clear all</button>
+  </div>
+  <div id="status" class="hint" aria-live="polite"></div>
+  <pre id="summary"></pre>
+</form>
+</main>
+
+<footer>
+  <p>Tools &copy; 2026 Heidi Andersén / Vahtian. Hosted by NTOG for educational use.</p>
+  <p>
+    <a href="/copyright.html">Copyright &amp; Licensing</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-of-service.html">Terms of Service</a>
+    <a href="/accessibility.html">Accessibility</a>
+  </p>
+</footer>
+
+<script src="/js/mdt-i18n.js"></script>
+<script src="/js/mdt-lite-i18n.js"></script>
+<script src="/js/mdt-lite.js"></script>
+</body>
+</html>
