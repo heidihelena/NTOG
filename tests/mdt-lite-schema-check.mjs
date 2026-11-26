@@ -105,6 +105,15 @@ for (const m of logic.matchAll(/(?:L|add|pair)\("(lt\.[a-zA-Z0-9_.]+)"/g)) if (!
 for (const r of lite.REQUIRED) used.add('lt.req.' + r);
 for (const k of used) if (!dict.includes(JSON.stringify(k) + ':')) fail(`string key "${k}" is not in the dictionary`);
 
-console.log(`${liteFields.size} lite fields, ${lite.DERIVED_IN_V31.length} derived in v3.1; ${stageCases} stage and ${tCases} T cases compared with v3.1; ${used.size} string keys.`);
+// 6. every string has a translation in each language the form offers
+const langs = JSON.parse(/var LITE_LANGS = (\[[^\]]*\]);/.exec(logic)[1]);
+const win = { MDTI18N: { strings: {} } };
+new Function('window', fs.readFileSync('js/mdt-lite-i18n.js', 'utf8'))(win);
+for (const [key, entry] of Object.entries(win.MDTI18N.strings)) {
+  if (/^lt\.stage\.(0|I)/.test(key)) continue; // stage groups are the same in every language
+  for (const l of langs) if (l !== 'en' && !entry[l]) fail(`string "${key}" has no ${l} translation`);
+}
+
+console.log(`${liteFields.size} lite fields, ${lite.DERIVED_IN_V31.length} derived in v3.1; ${stageCases} stage and ${tCases} T cases compared with v3.1; ${used.size} string keys; languages ${langs.join(', ')}.`);
 console.log(failures ? `${failures} FAILED` : 'All checks passed');
 process.exit(failures ? 1 : 0);

@@ -37,6 +37,9 @@
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1em; flex-wrap: wrap; border-bottom: 3px solid var(--ntog-blue); padding-bottom: .6em; margin-bottom: 1em; }
   .topbar .brand { font-weight: 800; color: var(--ntog-blue); font-size: 1.1em; text-decoration: none; }
   .topbar a.other { font-size: .9em; color: var(--ntog-blue); }
+  .lang-wrap { display: flex; align-items: center; gap: .5em; }
+  .lang-wrap label { margin: 0; font-size: .9em; }
+  .lang-wrap select { width: auto; padding: .35em .5em; }
   .check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: .1em .9em; margin: .2em 0 .5em; }
   .check-grid label { font-weight: 400; display: flex; align-items: flex-start; gap: .5em; margin: 0; padding: .3em 0; }
   .check-grid input { width: 1.15em; height: 1.15em; flex: none; margin-top: .2em; }
@@ -74,12 +77,17 @@
 <div class="topbar" role="navigation" aria-label="Site">
   <a class="brand" href="/">NTOG</a>
   <a class="other" href="/mdt-structured-v3_1.html" data-i18n="lt.app.fullLink">Full research form (v3.1)</a>
+  <div class="lang-wrap">
+    <label for="langSelect" data-i18n="app.langLabel">Language</label>
+    <select id="langSelect"></select>
+  </div>
 </div>
 
 <main>
 <h1 data-i18n="lt.app.title">Lung Cancer MDT | Structured Lite</h1>
 <p class="hint intro-text" data-i18n="lt.app.intro">A simple tool to record MDT decisions, clinical reasoning, responsibilities, and next steps. Uses the same data structure as the full v3.1 version.</p>
 
+<div class="disclaimer" id="provisional" hidden><span data-i18n="lt.app.provisional">Translation is provisional: clinical terms have not yet been checked.</span></div>
 <div class="privacy"><span data-i18n="lt.app.privacy">Privacy: Runs entirely in your browser. No data is uploaded or stored. Refreshing clears all entries.</span></div>
 <div class="disclaimer"><span data-i18n="lt.app.disclaimer">Clinical use: Supports MDT documentation but does not recommend treatment or replace clinical judgment, guidelines, or official patient records.</span></div>
 
@@ -355,6 +363,7 @@
       <label><input type="checkbox" name="furtherInvestigations" value="biopsy_metastasis"><span data-i18n="lt.furtherInvestigations.biopsy_metastasis">Biopsy of suspected metastasis</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="pft"><span data-i18n="lt.furtherInvestigations.pft">Pulmonary function tests</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="molecular_testing"><span data-i18n="lt.furtherInvestigations.molecular_testing">Complete molecular testing</span></label>
+      <label><input type="checkbox" name="furtherInvestigations" value="geriatric_assessment"><span data-i18n="lt.furtherInvestigations.geriatric_assessment">Geriatric assessment</span></label>
     </div>
 
     <p class="group-head"><span class="wwww" data-i18n="lt.w.why">Why</span><span data-i18n="lt.w.whyText">Main reason for the decision</span></p>
