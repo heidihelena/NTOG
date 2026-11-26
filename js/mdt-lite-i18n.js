@@ -11,9 +11,10 @@
   if (!global.MDTI18N) return;
   var S = {
     "lt.app.fullLink": { en: "Full research form (v3.1)" },
-    "lt.app.title": { en: "Lung cancer MDT — structured (lite)" },
-    "lt.app.intro": { en: "Short form for the MDT meeting: about 20 core items. Records what was decided, why, who will act, and when. Same codes as the full v3.1 research form." },
-    "lt.app.disclaimer": { en: "Use: This is a structured documentation aid for MDT discussion. It does not replace national guidelines, local protocols, clinical judgment, or formal MDT documentation systems. The form records the MDT decision; it does not recommend treatment." },
+    "lt.app.title": { en: "Lung Cancer MDT | Structured Lite" },
+    "lt.app.intro": { en: "A simple tool to record MDT decisions, clinical reasoning, responsibilities, and next steps. Uses the same data structure as the full v3.1 version." },
+    "lt.app.privacy": { en: "Privacy: Runs entirely in your browser. No data is uploaded or stored. Refreshing clears all entries." },
+    "lt.app.disclaimer": { en: "Clinical use: Supports MDT documentation but does not recommend treatment or replace clinical judgment, guidelines, or official patient records." },
     "lt.sec.meeting": { en: "1. Meeting" },
     "lt.f.meetingDate": { en: "Meeting date" },
     "lt.f.hospitalCentre": { en: "Hospital / centre" },

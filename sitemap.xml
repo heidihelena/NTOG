@@ -86,6 +86,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ntog.org/mdt-structured-lite.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ntog.org/mdt-structured-mini.html</loc>
     <lastmod>2026-06-25</lastmod>
     <priority>0.6</priority>
