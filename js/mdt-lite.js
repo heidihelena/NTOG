@@ -108,7 +108,7 @@
 
   // Languages this form is translated into. Other languages saved by the
   // sibling MDT forms fall back to English here.
-  var LITE_LANGS = ["en", "fi"];
+  var LITE_LANGS = ["en", "fi", "sv"];
   var LANG = "en";
   var I18N = global.MDTI18N;
   function L(key) { return I18N ? I18N.t(key, LANG) : key; }
