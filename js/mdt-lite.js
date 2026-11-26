@@ -254,8 +254,8 @@
         data[e.name] = e.value;
       }
     });
-    // one status per gene in v3.1: the first ticked subtype of a gene is exported
     data.treatments = treatmentValues();
+    // one status per gene in v3.1: the first listed subtype of a gene is exported
     (data.driverAlteration || []).forEach(function (code) {
       var map = DRIVER_MAP[code];
       if (map && !data[map[0]]) data[map[0]] = map[1];
@@ -274,6 +274,9 @@
     function join(parts, sep) { return parts.filter(Boolean).join(sep || ", "); }
     var nr = L("lt.sum.notRecorded");
     var drivers = checkedLabels("driverAlteration");
+    var driverCodes = checkedValues("driverAlteration");
+    var driverText = !drivers.length ? short("molecularStatus")
+      : (driverCodes.length === 1 && driverCodes[0] === "none_detected") ? L("lt.sum.noDriver") : join(drivers);
 
     var lines = [join([L("lt.sum.title"), join([v("meetingDate"), v("hospitalCentre")])], " ")];
     if (v("mdtPurpose")) lines.push(L("lt.f.mdtPurpose") + ": " + selLabel("mdtPurpose"));
@@ -285,11 +288,11 @@
       ]) || nr),
       L("lt.sum.diagnosis") + ": " + join([
         join([selLabel("histology"), d.cTNM], " "),
-        L("lt.sum.stage") + " " + L("lt.stage." + d.stageGroup) + " (" + L("lt.sum.edition") + ")"
+        (/^(0|I)/.test(d.stageGroup) ? L("lt.sum.stage") + " " : "") + L("lt.stage." + d.stageGroup) + " (" + L("lt.sum.edition") + ")"
       ]));
     [
       join([v("tumourTSizeMm") ? v("tumourTSizeMm") + " mm" : "", short("n2Bulky"), short("oligometastaticStatus")]),
-      join([v("pdl1Tps") ? "PD-L1 " + v("pdl1Tps") + " %" : "", drivers.length ? join(drivers) : short("molecularStatus")]),
+      join([v("pdl1Tps") ? "PD-L1 " + v("pdl1Tps") + " %" : "", driverText]),
       join([v("fev1Percent") ? "FEV1 " + v("fev1Percent") + " %" : "", v("dlcoPercent") ? "DLCO " + v("dlcoPercent") + " %" : ""])
     ].forEach(function (x) { if (x) lines.push("  " + x); });
 

@@ -275,6 +275,7 @@
     "lt.sum.responsible": { en: "Responsible" },
     "lt.sum.nextBy": { en: "Next step by" },
     "lt.sum.present": { en: "Present" },
+    "lt.sum.noDriver": { en: "no driver alteration detected" },
     "lt.sum.notRecorded": { en: "not recorded" },
     "lt.s.sex.female": { en: "female" },
     "lt.s.sex.male": { en: "male" },

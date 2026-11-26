@@ -230,8 +230,8 @@
           </select>
         </div>
       </div>
-      <p class="group-head" data-i18n="lt.f.tFeatures">Local invasion</p>
-      <div class="check-grid">
+      <p class="group-head" id="grp1" data-i18n="lt.f.tFeatures">Local invasion</p>
+      <div class="check-grid" role="group" aria-labelledby="grp1">
         <label><input type="checkbox" name="tFeatures" value="visceral_pleura" data-t="T2a"><span data-i18n="lt.tFeatures.visceral_pleura">Visceral pleura (T2a)</span></label>
         <label><input type="checkbox" name="tFeatures" value="adjacent_lobe" data-t="T2a"><span data-i18n="lt.tFeatures.adjacent_lobe">Adjacent lobe (T2a)</span></label>
         <label><input type="checkbox" name="tFeatures" value="main_bronchus_no_carina" data-t="T2a"><span data-i18n="lt.tFeatures.main_bronchus_no_carina">Main bronchus, no carina (T2a)</span></label>
@@ -270,8 +270,8 @@
       </div>
     </div>
     <div id="driverWrap" hidden>
-      <p class="group-head"><span data-i18n="lt.f.driverAlteration">Driver alterations found</span> <span class="hint" data-i18n="lt.h.driverAlteration">tick all that apply</span></p>
-      <div class="check-grid">
+      <p class="group-head" id="grp2"><span data-i18n="lt.f.driverAlteration">Driver alterations found</span> <span class="hint" data-i18n="lt.h.driverAlteration">tick all that apply</span></p>
+      <div class="check-grid" role="group" aria-labelledby="grp2">
         <label><input type="checkbox" name="driverAlteration" value="none_detected"><span data-i18n="lt.driverAlteration.none_detected">None detected</span></label>
         <label><input type="checkbox" name="driverAlteration" value="egfr_exon_19_del"><span data-i18n="lt.driverAlteration.egfr_exon_19_del">EGFR exon 19 deletion</span></label>
         <label><input type="checkbox" name="driverAlteration" value="egfr_l858r"><span data-i18n="lt.driverAlteration.egfr_l858r">EGFR L858R</span></label>
@@ -326,8 +326,8 @@
         </select>
       </div>
     </div>
-    <p class="group-head" data-i18n="lt.g.treatments">Other treatment</p>
-    <div class="check-grid">
+    <p class="group-head" id="grp3" data-i18n="lt.g.treatments">Other treatment</p>
+    <div class="check-grid" role="group" aria-labelledby="grp3">
       <label><input type="checkbox" name="treatments" value="definitive_chemoradiotherapy"><span data-i18n="lt.treatments.definitive_chemoradiotherapy">Definitive chemoradiotherapy</span></label>
       <label><input type="checkbox" name="treatments" value="sabr_sbrt"><span data-i18n="lt.treatments.sabr_sbrt">SABR / SBRT</span></label>
       <label><input type="checkbox" name="treatments" value="palliative_radiotherapy"><span data-i18n="lt.treatments.palliative_radiotherapy">Palliative radiotherapy</span></label>
@@ -347,8 +347,8 @@
       <div><label for="dlcoPercent" data-i18n="lt.f.dlcoPercent">DLCO, % predicted</label><input type="number" id="dlcoPercent" name="dlcoPercent" min="0" max="200" step="1" inputmode="numeric"></div>
     </div>
 
-    <p class="group-head"><span data-i18n="lt.g.furtherInvestigations">Further investigations before treatment</span> <span class="hint" data-i18n="lt.h.furtherInvestigations">leave empty if none</span></p>
-    <div class="check-grid">
+    <p class="group-head" id="grp4"><span data-i18n="lt.g.furtherInvestigations">Further investigations before treatment</span> <span class="hint" data-i18n="lt.h.furtherInvestigations">leave empty if none</span></p>
+    <div class="check-grid" role="group" aria-labelledby="grp4">
       <label><input type="checkbox" name="furtherInvestigations" value="pet_ct"><span data-i18n="lt.furtherInvestigations.pet_ct">PET-CT</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="mri_brain"><span data-i18n="lt.furtherInvestigations.mri_brain">MRI brain</span></label>
       <label><input type="checkbox" name="furtherInvestigations" value="ebus_eus"><span data-i18n="lt.furtherInvestigations.ebus_eus">EBUS / EUS</span></label>
@@ -393,8 +393,8 @@
 
     <details>
       <summary data-i18n="lt.more.summary">Supportive measures, patient preference, who was present (optional)</summary>
-      <p class="group-head" data-i18n="lt.g.supportive">Supportive measures</p>
-      <div class="check-grid">
+      <p class="group-head" id="grp5" data-i18n="lt.g.supportive">Supportive measures</p>
+      <div class="check-grid" role="group" aria-labelledby="grp5">
         <label><input type="checkbox" name="treatments" value="smoking_cessation"><span data-i18n="lt.treatments.smoking_cessation">Smoking cessation support</span></label>
         <label><input type="checkbox" name="treatments" value="prehabilitation"><span data-i18n="lt.treatments.prehabilitation">Prehabilitation</span></label>
         <label><input type="checkbox" name="treatments" value="nutrition_support"><span data-i18n="lt.treatments.nutrition_support">Nutrition support</span></label>
@@ -410,8 +410,8 @@
         <option value="undecided" data-i18n="lt.patientPreferenceStatus.undecided">Undecided</option>
         <option value="declines_active_treatment" data-i18n="lt.patientPreferenceStatus.declines_active_treatment">Declines active treatment</option>
       </select>
-      <p class="group-head" data-i18n="lt.f.participants">MDT participants present</p>
-      <div class="check-grid">
+      <p class="group-head" id="grp6" data-i18n="lt.f.participants">MDT participants present</p>
+      <div class="check-grid" role="group" aria-labelledby="grp6">
         <label><input type="checkbox" name="participants" value="pulmonologist"><span data-i18n="lt.participants.pulmonologist">Pulmonologist</span></label>
         <label><input type="checkbox" name="participants" value="thoracic_surgeon"><span data-i18n="lt.participants.thoracic_surgeon">Thoracic surgeon</span></label>
         <label><input type="checkbox" name="participants" value="medical_oncologist"><span data-i18n="lt.participants.medical_oncologist">Medical oncologist</span></label>
