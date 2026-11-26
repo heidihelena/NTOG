@@ -72,7 +72,7 @@
     "lt.metastasisPattern.M1c2": { en: "M1c2, metastases in multiple organ systems" },
     "lt.metastasisPattern.Mx": { en: "Mx, metastasis cannot be assessed" },
     "lt.f.n2Bulky": { en: "Bulky N2" },
-    "lt.h.n2Bulky": { en: "by local definition, e.g. node short axis 3 cm or more, or confluent nodal mass" },
+    "lt.h.n2Bulky": { en: "often defined as nodes over 2 cm, grouped nodes, or multiple stations; makes upfront surgery less certain" },
     "lt.n2Bulky.no": { en: "No, non-bulky" },
     "lt.n2Bulky.yes": { en: "Yes, bulky" },
     "lt.n2Bulky.not_assessed": { en: "Not assessed" },
