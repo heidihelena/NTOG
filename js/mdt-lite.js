@@ -106,7 +106,9 @@
 
   // ---------- page ----------
 
-  // English only until the translations are added; then switch to MDTI18N.init().
+  // Languages this form is translated into. Other languages saved by the
+  // sibling MDT forms fall back to English here.
+  var LITE_LANGS = ["en", "fi"];
   var LANG = "en";
   var I18N = global.MDTI18N;
   function L(key) { return I18N ? I18N.t(key, LANG) : key; }
@@ -381,9 +383,29 @@
   f.addEventListener("input", update);
   f.addEventListener("change", update);
   global.addEventListener("mdt:langchange", function () {
+    applyLangUi();
     update();
     if (document.getElementById("summary").textContent) showSummary();
   });
+
+  // language: the shared engine translates every [data-i18n] element
+  function applyLangUi() {
+    document.documentElement.lang = LANG;
+    document.getElementById("provisional").hidden = LANG === "en"; // English is the source text
+  }
+  var langSelect = document.getElementById("langSelect");
+  if (I18N) {
+    I18N.init(null);
+    if (LITE_LANGS.indexOf(I18N.current) >= 0) LANG = I18N.current;
+    LITE_LANGS.forEach(function (code) {
+      var o = document.createElement("option");
+      o.value = code; o.textContent = I18N.names[code] || code;
+      langSelect.appendChild(o);
+    });
+    langSelect.value = LANG;
+    langSelect.addEventListener("change", function () { LANG = langSelect.value; I18N.apply(LANG); });
+  }
+  applyLangUi();
 
   api.collectData = collectData;
   api.buildSummary = buildSummary;
