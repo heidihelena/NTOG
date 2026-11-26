@@ -162,7 +162,7 @@
     "lt.treatments.surgery_wedge": { en: "Wedge resection", fi: "Kiilaresektio", sv: "Kilresektion" },
     "lt.treatments.surgery_pneumonectomy": { en: "Pneumonectomy", fi: "Pneumonektomia", sv: "Pneumonektomi" },
     "lt.g.treatments": { en: "Other treatment", fi: "Muu hoito", sv: "Övrig behandling" },
-    "lt.treatments.definitive_chemoradiotherapy": { en: "Definitive chemoradiotherapy", fi: "Definitiivinen kemosädehoito", sv: "Definitiv radiokemoterapi" },
+    "lt.treatments.definitive_chemoradiotherapy": { en: "Definitive chemoradiotherapy", fi: "Definitiivinen kemosädehoito", sv: "Definitiv kemoradioterapi" },
     "lt.treatments.sabr_sbrt": { en: "SABR / SBRT", fi: "Stereotaktinen sädehoito (SABR / SBRT)", sv: "Stereotaktisk strålbehandling (SABR / SBRT)" },
     "lt.treatments.palliative_radiotherapy": { en: "Palliative radiotherapy", fi: "Palliatiivinen sädehoito", sv: "Palliativ strålbehandling" },
     "lt.treatments.neoadjuvant_systemic": { en: "Neoadjuvant systemic therapy", fi: "Neoadjuvanttilääkehoito", sv: "Neoadjuvant läkemedelsbehandling" },
